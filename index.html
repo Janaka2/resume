@@ -875,15 +875,23 @@
     }
 
     // Toggle for long work history
-    document.getElementById("toggleLongHistory").addEventListener("click", function() {
-      const longHistory = document.getElementById("longHistory");
-      if (longHistory.classList.contains("hidden")) {
-        longHistory.classList.remove("hidden");
-        this.textContent = "Show less";
-      } else {
-        longHistory.classList.add("hidden");
-        this.textContent = "Read more";
-      }
+    document.getElementById("toggleLongHistory").addEventListener("click", function () {
+    const longHistory = document.getElementById("longHistory");
+    const container = document.getElementById("workHistoryContent");
+
+    const willOpen = longHistory.classList.contains("hidden");
+    if (willOpen) {
+      longHistory.classList.remove("hidden");
+    } else {
+      longHistory.classList.add("hidden");
+    }
+
+    // Recalculate the collapsible container's height after layout updates
+    requestAnimationFrame(() => {
+      container.style.maxHeight = container.scrollHeight + "px";
+    });
+
+    this.textContent = willOpen ? "Show less" : "Read more";
     });
 
 </script>
