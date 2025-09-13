@@ -58,6 +58,13 @@
             overflow: hidden;
             transition: max-height 0.3s ease-out;
         }
+        #longHistory {
+          opacity: 0;
+          transition: opacity 0.4s ease;
+        }
+        #longHistory:not(.hidden) {
+          opacity: 1;
+        }
     </style>
 </head>
 <body class="font-sans bg-gray-50 text-gray-800">
@@ -281,80 +288,55 @@
             </div>
             <div class="collapsible-content" id="workHistoryContent">
                 <div class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                        <div class="font-semibold">Company & Role</div>
-                        <div class="font-semibold">Location</div>
-                        <div class="font-semibold">Duration</div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
-                        <div>University of Sri Jayewardenepura - Computer Science & Statistics Instructor</div>
-                        <div>Sri Jayawardenepura Kotte, Sri Lanka</div>
-                        <div>Feb 2004 – May 2004 (4 months)</div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
-                        <div>Union Bank of Colombo Ltd - Senior Software Engineer (Java/JEE, Banking & Finance)</div>
-                        <div>Colombo, Sri Lanka</div>
-                        <div>May 2004 – May 2006 (2 years 1 month)</div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
-                        <div>ABSI.BE - Java/JEE Developer (Healthcare industry)</div>
-                        <div>Brussels, Belgium</div>
-                        <div>May 2006 – Mar 2007 (11 months)</div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
-                        <div>Roomsnet.com - Java/JEE Developer & Technical Lead (Hotel Reservation domain)</div>
-                        <div>Brussels, Belgium</div>
-                        <div>Mar 2007 – Oct 2008 (1 year 8 months)</div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
-                        <div>Simbios (Client: Van Genechten Packaging) - Senior Java/JEE Developer</div>
-                        <div>Belgium</div>
-                        <div>Jan 2009 – Jul 2010 (1 year 7 months)</div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
-                        <div>Simbios (Client: Nokia Siemens Networks, Devoteam, USG) - Java/JEE Developer</div>
-                        <div>Belgium</div>
-                        <div>Aug 2009 – Jul 2010 (1 year)</div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
-                        <div>Simbios (Client: Johnson & Johnson, Cronos) - Java/JEE Developer</div>
-                        <div>Belgium</div>
-                        <div>Jul 2010 – Jan 2011 (7 months)</div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
-                        <div>Simbios (Client: Centric IT Solutions) - Java/JEE Developer</div>
-                        <div>Belgium</div>
-                        <div>Feb 2011 – Jun 2011 (5 months)</div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
-                        <div>European Commission – DIGIT Division - Sr. Java/JEE Developer (E-Procurement Solutions)</div>
-                        <div>Brussels, Belgium</div>
-                        <div>Jun 2011 – Mar 2014 (2 years 10 months)</div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
-                        <div>European Commission – DIGIT Division - Sr. Java/JEE Developer (E-Procurement, Specialist)</div>
-                        <div>Brussels, Belgium</div>
-                        <div>Mar 2014 – Feb 2016 (2 years)</div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
-                        <div>European Commission – DIGIT Division - Sr. Full-Stack Java/JEE Developer</div>
-                        <div>Brussels, Belgium</div>
-                        <div>Feb 2016 – Jan 2018 (2 years)</div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
-                        <div>UBS (via Cognizant) - Sr. Software Developer (Banking Products & Services)</div>
-                        <div>Zurich, Switzerland</div>
-                        <div>Jan 2018 – May 2019 (1 year 5 months)</div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
-                        <div>Credit Suisse (via Cognizant) - Sr. Full-Stack Solution Engineer</div>
-                        <div>Zurich, Switzerland</div>
-                        <div>May 2019 – Jan 2024 (4 years 9 months)</div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div>UBS (via Cognizant) - Sr. Full-Stack Solution Engineer</div>
-                        <div>Greater Zurich Area, Switzerland</div>
-                        <div>Jan 2024 – Present (1 year 9 months so far)</div>
+                    <!-- Work History Summary -->
+                    <div class="mb-6 text-gray-700 leading-relaxed text-lg bg-blue-50 p-6 rounded-lg shadow-sm">
+                        <!-- Short summary (always visible) -->
+                        <p>
+                            After beginning my career in Sri Lanka, I spent over a decade in Belgium working with
+                            <strong>ABSI</strong>, <strong>Roomsnet.com</strong>, and <strong>Simbios</strong> on projects
+                            for clients including <strong>Van Genechten Packaging</strong>, <strong>Nokia Siemens Networks</strong>,
+                            and <strong>Johnson & Johnson</strong>. This period gave me broad exposure across healthcare,
+                            hospitality, and enterprise IT, before I joined the <strong>European Commission – DIGIT Division</strong>
+                            to deliver large-scale e-procurement systems. Since 2018, I’ve continued my journey in Switzerland,
+                            leading full-stack engineering and AI integration at <strong>Credit Suisse</strong> and <strong>UBS</strong>.
+                        </p>
+
+                        <!-- Toggle button -->
+                        <button id="toggleLongHistory"
+                                class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                            Read more
+                        </button>
+
+                        <!-- Long story (hidden by default) -->
+                        <div id="longHistory" class="hidden mt-6 italic text-gray-700 bg-white border-l-4 border-blue-300 p-5 rounded-md shadow-inner space-y-4">
+                            <p>
+                                My journey began in Sri Lanka, where I started as a Computer Science instructor
+                                and soon entered the banking world at Union Bank. In 2006, I moved to Belgium,
+                                which became a transformative decade of growth in my career.
+                            </p>
+                            <p>
+                                I worked with <strong>ABSI</strong> in the healthcare sector, later joined
+                                <strong>Roomsnet.com</strong> as a Java/JEE Developer and Technical Lead in the
+                                hospitality domain, and collaborated with <strong>Simbios</strong> on projects for
+                                clients such as <strong>Van Genechten Packaging</strong>, <strong>Nokia Siemens
+                                Networks</strong>, <strong>Johnson & Johnson</strong>, and <strong>Centric IT
+                                Solutions</strong>. Each role broadened my expertise across industries and sharpened
+                                my ability to deliver enterprise-grade solutions under real-world pressure.
+                            </p>
+                            <p>
+                                In 2011, I joined the <strong>European Commission – DIGIT Division</strong>,
+                                leading development of robust e-procurement systems and complex workflows for the EU.
+                                This was a defining stage where I gained deep exposure to large-scale, regulated
+                                environments and the discipline of delivering systems that impact millions.
+                            </p>
+                            <p>
+                                Since 2018, Switzerland has been my base — with <strong>UBS</strong> and
+                                <strong>Credit Suisse</strong> at the center of my journey, where I’ve focused on
+                                high-performance full-stack engineering, system migrations, and the integration of
+                                AI-driven automation. Today, I combine this global experience to design resilient,
+                                intelligent systems that create measurable business impact.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -891,6 +873,19 @@
         document.getElementById('chatPopup').classList.add('hidden');
         document.body.style.overflow = 'auto';
     }
+
+    // Toggle for long work history
+    document.getElementById("toggleLongHistory").addEventListener("click", function() {
+      const longHistory = document.getElementById("longHistory");
+      if (longHistory.classList.contains("hidden")) {
+        longHistory.classList.remove("hidden");
+        this.textContent = "Show less";
+      } else {
+        longHistory.classList.add("hidden");
+        this.textContent = "Read more";
+      }
+    });
+
 </script>
 </body>
 </html>
