@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Janaka Premathilaka | Senior Full-Stack Java Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+    <style>
+        .skill-meter {
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #3b82f6 0%, #3b82f6 var(--percentage), #e5e7eb var(--percentage), #e5e7eb 100%);
+        }
+        #vanta-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #3b82f6;
+            border: 3px solid white;
+        }
+        .section-divider {
+            position: relative;
+            height: 80px;
+            overflow: hidden;
+        }
+        .section-divider svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+<div id="vanta-bg"></div>
+
+<!-- Header -->
+<header class="relative bg-white shadow-sm">
+    <div class="container mx-auto px-6 py-12">
+        <div class="flex flex-col md:flex-row items-center">
+            <div class="md:w-2/5 flex flex-col items-center md:items-start mb-8 md:mb-0">
+                <img src="https://media.licdn.com/dms/image/v2/D4E03AQHinJJ1aGKdbg/profile-displayphoto-crop_800_800/B4EZk6h77jIIAM-/0/1757623601818?e=1760572800&v=beta&t=8pN7_sUpFLjJrvpzWC5INBqGY9X6f-kldFDUKqVRSeE" alt="Janaka Premathilaka" class="w-40 h-40 rounded-full object-cover border-4 border-white shadow-xl mb-6">
+                <h1 class="text-4xl font-bold text-gray-900 tracking-tight">Janaka Premathilaka</h1>
+                <h2 class="text-2xl text-blue-600 mt-3 font-medium">Senior Full-Stack Java Engineer</h2>
+                <p class="text-gray-600 mt-2 text-lg">Zug, Switzerland</p>
+            </div>
+            <div class="md:w-3/5">
+                <div class="bg-gray-50 p-8 rounded-xl shadow-inner border border-gray-100">
+                    <p class="text-gray-700 leading-relaxed text-lg">
+                        I build enterprise-grade Java systems and bring them into the AI era. After 18+ years shipping mission-critical software,
+                        I'm now focused on turning intelligent automation into real business outcomes—LLMs, RAG, LangChain/LlamaIndex with
+                        Spring Boot and n8n, wired into solid DevOps.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="container mx-auto px-6 py-8">
+    <!-- Contact & Skills -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16" data-aos="fade-up">
+        <!-- Contact -->
+        <div class="bg-white p-8 rounded-xl shadow border border-gray-100">
+            <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                <i data-feather="mail" class="mr-3 text-blue-600"></i> Contact
+            </h3>
+            <ul class="space-y-4">
+                <li class="flex items-center">
+                    <i data-feather="phone" class="mr-4 text-blue-600 w-5 h-5"></i>
+                    <span class="text-lg">+41 762248445</span>
+                </li>
+                <li class="flex items-center">
+                    <i data-feather="mail" class="mr-4 text-blue-600 w-5 h-5"></i>
+                    <a href="mailto:janaka2@gmail.com" class="text-lg hover:underline">janaka2@gmail.com</a>
+                </li>
+                <li class="flex items-center">
+                    <i data-feather="linkedin" class="mr-4 text-blue-600 w-5 h-5"></i>
+                    <a href="https://linkedin.com/in/janakapremathilaka" target="_blank" class="text-lg hover:underline">in/janakapremathilaka</a>
+                </li>
+                <li class="flex items-center">
+                    <i data-feather="globe" class="mr-4 text-blue-600 w-5 h-5"></i>
+                    <a href="https://javawithme.wordpress.com" target="_blank" class="text-lg hover:underline">javawithme.wordpress.com</a>
+                </li>
+                <li class="flex items-center">
+                    <i data-feather="github" class="mr-4 text-blue-600 w-5 h-5"></i>
+                    <a href="https://github.com/Janaka2" target="_blank" class="text-lg hover:underline">github.com/Janaka2</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Top Skills -->
+        <div class="bg-white p-8 rounded-xl shadow border border-gray-100">
+            <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                <i data-feather="award" class="mr-3 text-blue-600"></i> Top Skills
+            </h3>
+            <div class="space-y-5">
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-lg">Creativity & Innovation</span>
+                        <span class="text-blue-600 text-lg">95%</span>
+                    </div>
+                    <div class="skill-meter" style="--percentage: 95%"></div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-lg">Architecture</span>
+                        <span class="text-blue-600 text-lg">90%</span>
+                    </div>
+                    <div class="skill-meter" style="--percentage: 90%"></div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-lg">Contract Development</span>
+                        <span class="text-blue-600 text-lg">85%</span>
+                    </div>
+                    <div class="skill-meter" style="--percentage: 85%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="bg-white p-8 rounded-xl shadow border border-gray-100">
+            <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                <i data-feather="globe" class="mr-3 text-blue-600"></i> Languages
+            </h3>
+            <div class="space-y-4">
+                <div>
+                    <div class="flex justify-between">
+                        <span class="text-lg">English</span>
+                        <span class="text-blue-600 text-lg">Professional</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between">
+                        <span class="text-lg">Dutch</span>
+                        <span class="text-blue-600 text-lg">Working</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between">
+                        <span class="text-lg">French</span>
+                        <span class="text-blue-600 text-lg">Elementary</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between">
+                        <span class="text-lg">German</span>
+                        <span class="text-blue-600 text-lg">Elementary</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between">
+                        <span class="text-lg">Sinhalese</span>
+                        <span class="text-blue-600 text-lg">Native</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="mb-12" data-aos="fade-up">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold flex items-center">
+                <i data-feather="briefcase" class="mr-3"></i> Experience
+            </h2>
+            <button class="text-blue-600 hover:underline flex items-center cursor-pointer" onclick="showWorkHistory()">
+                More details <i data-feather="arrow-right" class="ml-1"></i>
+            </button>
+        </div>
+
+        <div class="relative">
+            <!-- Timeline -->
+            <div class="border-l-2 border-blue-200 pl-8 space-y-8">
+                <!-- UBS -->
+                <div class="timeline-item relative pl-4">
+                    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                            <h3 class="text-xl font-semibold">UBS</h3>
+                            <span class="text-blue-600">Jan 2024 - Present</span>
+                        </div>
+                        <h4 class="text-lg text-gray-700 mb-3">Sr. Full-Stack Solution Engineer</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                            <li>Experimented with running local LLMs (e.g. Llama 3) and fine-tuned inference pipelines</li>
+                            <li>Designed Java backend for high-volume FX trading platform</li>
+                            <li>Boosted system responsiveness by 20% through optimization</li>
+                        </ul>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Java</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Spring Boot</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">LLMs</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Kubernetes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Credit Suisse -->
+                <div class="timeline-item relative pl-4">
+                    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                            <h3 class="text-xl font-semibold">Credit Suisse</h3>
+                            <span class="text-blue-600">May 2019 - Jan 2024</span>
+                        </div>
+                        <h4 class="text-lg text-gray-700 mb-3">Sr. Full-Stack Solution Engineer</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                            <li>Developed high-performance Master Data Management Tool from scratch</li>
+                            <li>Created web application for building dynamic consumer endpoints</li>
+                            <li>Implemented multiple case management tools with streaming integration</li>
+                        </ul>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">React</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Java 17</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Kafka</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">GraphQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- European Commission -->
+                <div class="timeline-item relative pl-4">
+                    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                            <h3 class="text-xl font-semibold">European Commission</h3>
+                            <span class="text-blue-600">Feb 2016 - Jan 2018</span>
+                        </div>
+                        <h4 class="text-lg text-gray-700 mb-3">Sr. Full-Stack Java/JEE Developer</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                            <li>Provided functional and technical support for e-procurement system</li>
+                            <li>Developed microservices using enterprise integration patterns</li>
+                            <li>Implemented JBPM workflows for various business processes</li>
+                        </ul>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">JEE</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Angular</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">JBPM</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">SOA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Work History Section -->
+        <div class="mt-12 bg-white p-8 rounded-xl shadow border border-gray-100">
+            <div class="flex justify-between items-center mb-6 cursor-pointer" onclick="toggleWorkHistory()">
+                <h3 class="text-2xl font-semibold flex items-center">
+                    <i data-feather="clock" class="mr-3 text-blue-600"></i> Work History (Chronological)
+                </h3>
+                <i data-feather="chevron-down" id="workHistoryChevron" class="text-blue-600 transition-transform"></i>
+            </div>
+            <div class="collapsible-content" id="workHistoryContent">
+                <div class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="font-semibold">Company & Role</div>
+                        <div class="font-semibold">Location</div>
+                        <div class="font-semibold">Duration</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
+                        <div>University of Sri Jayewardenepura - Computer Science & Statistics Instructor</div>
+                        <div>Sri Jayawardenepura Kotte, Sri Lanka</div>
+                        <div>Feb 2004 – May 2004 (4 months)</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
+                        <div>Union Bank of Colombo Ltd - Senior Software Engineer (Java/JEE, Banking & Finance)</div>
+                        <div>Colombo, Sri Lanka</div>
+                        <div>May 2004 – May 2006 (2 years 1 month)</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
+                        <div>ABSI.BE - Java/JEE Developer (Healthcare industry)</div>
+                        <div>Brussels, Belgium</div>
+                        <div>May 2006 – Mar 2007 (11 months)</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
+                        <div>Roomsnet.com - Java/JEE Developer & Technical Lead (Hotel Reservation domain)</div>
+                        <div>Brussels, Belgium</div>
+                        <div>Mar 2007 – Oct 2008 (1 year 8 months)</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
+                        <div>Simbios (Client: Van Genechten Packaging) - Senior Java/JEE Developer</div>
+                        <div>Belgium</div>
+                        <div>Jan 2009 – Jul 2010 (1 year 7 months)</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
+                        <div>Simbios (Client: Nokia Siemens Networks, Devoteam, USG) - Java/JEE Developer</div>
+                        <div>Belgium</div>
+                        <div>Aug 2009 – Jul 2010 (1 year)</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
+                        <div>Simbios (Client: Johnson & Johnson, Cronos) - Java/JEE Developer</div>
+                        <div>Belgium</div>
+                        <div>Jul 2010 – Jan 2011 (7 months)</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
+                        <div>Simbios (Client: Centric IT Solutions) - Java/JEE Developer</div>
+                        <div>Belgium</div>
+                        <div>Feb 2011 – Jun 2011 (5 months)</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
+                        <div>European Commission – DIGIT Division - Sr. Java/JEE Developer (E-Procurement Solutions)</div>
+                        <div>Brussels, Belgium</div>
+                        <div>Jun 2011 – Mar 2014 (2 years 10 months)</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
+                        <div>European Commission – DIGIT Division - Sr. Java/JEE Developer (E-Procurement, Specialist)</div>
+                        <div>Brussels, Belgium</div>
+                        <div>Mar 2014 – Feb 2016 (2 years)</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
+                        <div>European Commission – DIGIT Division - Sr. Full-Stack Java/JEE Developer</div>
+                        <div>Brussels, Belgium</div>
+                        <div>Feb 2016 – Jan 2018 (2 years)</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
+                        <div>UBS (via Cognizant) - Sr. Software Developer (Banking Products & Services)</div>
+                        <div>Zurich, Switzerland</div>
+                        <div>Jan 2018 – May 2019 (1 year 5 months)</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
+                        <div>Credit Suisse (via Cognizant) - Sr. Full-Stack Solution Engineer</div>
+                        <div>Zurich, Switzerland</div>
+                        <div>May 2019 – Jan 2024 (4 years 9 months)</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>UBS (via Cognizant) - Sr. Full-Stack Solution Engineer</div>
+                        <div>Greater Zurich Area, Switzerland</div>
+                        <div>Jan 2024 – Present (1 year 9 months so far)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications" class="mb-12" data-aos="fade-up">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold flex items-center">
+                <i data-feather="certificate" class="mr-3"></i> Certifications
+            </h2>
+            <button class="text-blue-600 hover:underline flex items-center cursor-pointer" onclick="showAllCertifications()">
+                View all <i data-feather="arrow-right" class="ml-1"></i>
+            </button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+                <h3 class="font-semibold text-lg mb-2">ChatGPT: Complete ChatGPT Course For Work 2023</h3>
+                <p class="text-gray-600">Ethically certified AI course</p>
+            </div>
+            <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+                <h3 class="font-semibold text-lg mb-2">Life Mastery - Happiness, Health & Success</h3>
+                <p class="text-gray-600">Personal development certification</p>
+            </div>
+            <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+                <h3 class="font-semibold text-lg mb-2">Spring Certified Professional 2024</h3>
+                <p class="text-gray-600">In progress</p>
+            </div>
+            <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+                <h3 class="font-semibold text-lg mb-2">Mental Health First Aid Skills</h3>
+                <p class="text-gray-600">Wellbeing certification</p>
+            </div>
+            <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+                <h3 class="font-semibold text-lg mb-2">Goal Setting at Work: Plan for Success</h3>
+                <p class="text-gray-600">Professional development</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="mb-12" data-aos="fade-up">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold flex items-center">
+                <i data-feather="book" class="mr-3"></i> Education
+            </h2>
+            <button class="text-blue-600 hover:underline flex items-center cursor-pointer" onclick="showEducationDetails()">
+                Details <i data-feather="arrow-right" class="ml-1"></i>
+            </button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+                <h3 class="text-xl font-semibold mb-2">University of Sri Jayewardenepura</h3>
+                <p class="text-gray-700 mb-1">BSc, Computer Science, Statistics, Mathematics</p>
+                <p class="text-gray-500">1999 - 2003</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+                <h3 class="text-xl font-semibold mb-2">University of Colombo</h3>
+                <p class="text-gray-700 mb-1">BIT (Bachelor of Information Technology)</p>
+                <p class="text-gray-500">1999 - 2004 (6 semesters completed)</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+                <h3 class="text-xl font-semibold mb-2">University of Moratuwa</h3>
+                <p class="text-gray-700 mb-1">Masters in Computer Engineering</p>
+                <p class="text-gray-500">2017 - Present (In Progress)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Life Journey Tabs -->
+    <section class="mb-12" data-aos="fade-up">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+            <i data-feather="map" class="mr-3"></i> My Life Journey
+        </h2>
+
+        <!-- Tab Navigation -->
+        <div class="flex overflow-x-auto mb-6 border-b border-gray-200">
+            <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="early-years">
+                👶 Early Years
+            </button>
+            <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="education">
+                🎓 Education
+            </button>
+            <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="career-start">
+                💼 Career Start
+            </button>
+            <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="belgium-era">
+                🇧🇪 Belgium Era
+            </button>
+            <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="switzerland-era">
+                🇨🇭 Switzerland Era
+            </button>
+            <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="future-dreams">
+                🌟 Future Dreams
+            </button>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="bg-white rounded-lg shadow">
+            <!-- Early Years -->
+            <div class="tab-content p-6" id="early-years">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">👶</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Born</h3>
+                            <p class="text-gray-600">February 1980</p>
+                            <p class="text-gray-500">Galle, Sri Lanka</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">🏫</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">School Years</h3>
+                            <p class="text-gray-600">1985-1998</p>
+                            <p class="text-gray-500">Southern Sri Lanka</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="tab-content p-6 hidden" id="education">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">🎓</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Bachelor's Degree</h3>
+                            <p class="text-gray-600">1999-2004</p>
+                            <p class="text-gray-500">University of Sri Jayewardenepura</p>
+                            <p class="text-gray-500">BSc in Computer Science, Statistics, Mathematics</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">🎓</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Second Bachelor's</h3>
+                            <p class="text-gray-600">1999-2004</p>
+                            <p class="text-gray-500">University of Colombo</p>
+                            <p class="text-gray-500">BIT (6 semesters completed)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">📚</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Master's Degree</h3>
+                            <p class="text-gray-600">2017-Present</p>
+                            <p class="text-gray-500">University of Moratuwa</p>
+                            <p class="text-gray-500">Computer Engineering (In Progress)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">📜</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Certifications</h3>
+                            <p class="text-gray-600">2005-2006</p>
+                            <p class="text-gray-500">Sun Java Certifications (SCJP, SCBCD, SCEA1, SCWCD)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Career Start -->
+            <div class="tab-content p-6 hidden" id="career-start">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">💼</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">First Job</h3>
+                            <p class="text-gray-600">2004</p>
+                            <p class="text-gray-500">Union Bank of Colombo Ltd</p>
+                            <p class="text-gray-500">Banking Software Engineer</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">🏢</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Early Career</h3>
+                            <p class="text-gray-600">2006-2008</p>
+                            <p class="text-gray-500">Multiple companies in Sri Lanka</p>
+                            <p class="text-gray-500">Java/JEE Developer roles</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Belgium Era -->
+            <div class="tab-content p-6 hidden" id="belgium-era">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">✈️</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Moved to Belgium</h3>
+                            <p class="text-gray-600">August 2008</p>
+                            <p class="text-gray-500">Brussels Area</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">💍</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Got Married</h3>
+                            <p class="text-gray-600">2010</p>
+                            <p class="text-gray-500">Belgium</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">👦</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">First Child</h3>
+                            <p class="text-gray-600">January 2012</p>
+                            <p class="text-gray-500">Son</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">👧</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Second Child</h3>
+                            <p class="text-gray-600">December 2013</p>
+                            <p class="text-gray-500">Daughter</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">🏠</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Bought First Home</h3>
+                            <p class="text-gray-600">December 2015</p>
+                            <p class="text-gray-500">Belgium</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">👧</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Third Child</h3>
+                            <p class="text-gray-600">December 2016</p>
+                            <p class="text-gray-500">Daughter</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">🏛️</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">European Commission</h3>
+                            <p class="text-gray-600">2014-2018</p>
+                            <p class="text-gray-500">Sr. Full-Stack Java Developer</p>
+                            <p class="text-gray-500">E-procurement systems</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Switzerland Era -->
+            <div class="tab-content p-6 hidden" id="switzerland-era">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">🏔️</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Moved to Switzerland</h3>
+                            <p class="text-gray-600">January 2018</p>
+                            <p class="text-gray-500">Zürich Area</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">🇬🇧</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Remote in UK</h3>
+                            <p class="text-gray-600">2019-2020</p>
+                            <p class="text-gray-500">Liverpool, UK</p>
+                            <p class="text-gray-500">Remote work for Swiss clients</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">🏦</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Credit Suisse</h3>
+                            <p class="text-gray-600">2019-2024</p>
+                            <p class="text-gray-500">Sr. Full-Stack Solution Engineer</p>
+                            <p class="text-gray-500">Banking systems & FX trading</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">🔷</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">UBS</h3>
+                            <p class="text-gray-600">2024-Present</p>
+                            <p class="text-gray-500">Sr. Full-Stack Solution Engineer</p>
+                            <p class="text-gray-500">AI integration & LLMs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Future Dreams -->
+            <div class="tab-content p-6 hidden" id="future-dreams">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">🎓</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Complete Master's Degree</h3>
+                            <p class="text-gray-600">Ongoing</p>
+                            <p class="text-gray-500">University of Moratuwa</p>
+                            <p class="text-gray-500">Computer Engineering</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">🤖</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">AI Research & Development</h3>
+                            <p class="text-gray-600">Future Goal</p>
+                            <p class="text-gray-500">Advanced AI Systems</p>
+                            <p class="text-gray-500">LLM optimization & deployment</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">🌍</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Global Impact Projects</h3>
+                            <p class="text-gray-600">Long-term Vision</p>
+                            <p class="text-gray-500">Enterprise AI Solutions</p>
+                            <p class="text-gray-500">Scalable intelligent systems</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-4xl mr-4">🚀</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Technology Leadership</h3>
+                            <p class="text-gray-600">Career Aspiration</p>
+                            <p class="text-gray-500">Architectural Excellence</p>
+                            <p class="text-gray-500">Mentoring next-generation engineers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <style>
+        .tab-btn.active {
+            color: #3b82f6;
+            border-bottom-color: #3b82f6;
+        }
+
+        .tab-content {
+            min-height: 300px;
+        }
+
+        .tab-btn {
+            transition: all 0.3s ease;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            // Show first tab by default
+            tabBtns[0].classList.add('active');
+            tabContents[0].classList.remove('hidden');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+
+                    // Remove active class from all buttons
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    // Hide all tab contents
+                    tabContents.forEach(content => content.classList.add('hidden'));
+
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    // Show corresponding tab content
+                    document.getElementById(tabId).classList.remove('hidden');
+                });
+            });
+        });
+    </script>
+
+    <!-- Key Metrics -->
+    <section class="mb-12" data-aos="fade-up">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+            <i data-feather="bar-chart-2" class="mr-3"></i> Key Metrics
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow text-center">
+                <div class="text-4xl font-bold text-blue-600 mb-2">18+</div>
+                <div class="text-gray-600">Years Experience</div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow text-center">
+                <div class="text-4xl font-bold text-blue-600 mb-2">20+</div>
+                <div class="text-gray-600">Enterprise Projects</div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow text-center">
+                <div class="text-4xl font-bold text-blue-600 mb-2">95%</div>
+                <div class="text-gray-600">Project Success Rate</div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow text-center">
+                <div class="text-4xl font-bold text-blue-600 mb-2">30%</div>
+                <div class="text-gray-600">Avg. Performance Gain</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Assistant -->
+    <section class="mb-12" data-aos="fade-up">
+        <div class="bg-white p-6 rounded-lg shadow">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-3/4 mb-4 md:mb-0">
+                    <h3 class="text-xl font-semibold mb-2">Want to know more?</h3>
+                    <p class="text-gray-600">Chat with my AI assistant about my experience, skills, or availability.</p>
+                </div>
+                <div class="md:w-1/4 text-center md:text-right">
+                    <button onclick="openChatPopup()" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors cursor-pointer">
+                        <i data-feather="message-square" class="inline mr-2"></i> Chat Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Popup -->
+    <div id="chatPopup" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl h-5/6 flex flex-col">
+            <div class="flex justify-between items-center border-b p-4">
+                <h3 class="text-lg font-semibold">Chat with Janaka's AI Assistant</h3>
+                <button onclick="closeChatPopup()" class="text-gray-500 hover:text-gray-700">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="flex-1">
+                <iframe src="https://janaka2.github.io/gh-pages-frontend/pa/" class="w-full h-full border-0" id="chatIframe"></iframe>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <h2 class="text-xl font-bold">Janaka Premathilaka</h2>
+                <p class="text-gray-400">Senior Full-Stack Java Engineer</p>
+            </div>
+            <div class="flex space-x-4">
+                <a href="https://linkedin.com/in/janakapremathilaka" target="_blank" class="hover:text-blue-400 transition-colors">
+                    <i data-feather="linkedin"></i>
+                </a>
+                <a href="https://github.com/Janaka2" target="_blank" class="hover:text-blue-400 transition-colors">
+                    <i data-feather="github"></i>
+                </a>
+                <a href="mailto:janaka2@gmail.com" class="hover:text-blue-400 transition-colors">
+                    <i data-feather="mail"></i>
+                </a>
+                <a href="https://javawithme.wordpress.com" target="_blank" class="hover:text-blue-400 transition-colors">
+                    <i data-feather="globe"></i>
+                </a>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
+            <p>© 2024 Janaka Premathilaka. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true
+    });
+
+    VANTA.GLOBE({
+        el: "#vanta-bg",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0x3b82f6,
+        backgroundColor: 0xf8fafc,
+        size: 0.8
+    });
+
+    feather.replace();
+
+    function toggleWorkHistory() {
+        const content = document.getElementById('workHistoryContent');
+        const chevron = document.getElementById('workHistoryChevron');
+
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+            chevron.style.transform = 'rotate(0deg)';
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+            chevron.style.transform = 'rotate(180deg)';
+        }
+    }
+
+    function showWorkHistory() {
+        const content = document.getElementById('workHistoryContent');
+        const chevron = document.getElementById('workHistoryChevron');
+
+        content.style.maxHeight = content.scrollHeight + "px";
+        chevron.style.transform = 'rotate(180deg)';
+        content.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function closeWorkHistory() {
+        document.getElementById('workHistorySection').classList.add('hidden');
+    }
+
+    function showAllCertifications() {
+        const certificationsSection = document.getElementById('certifications');
+        if (certificationsSection) {
+            certificationsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    function showEducationDetails() {
+        const educationSection = document.getElementById('education');
+        if (educationSection) {
+            educationSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    function openChatPopup() {
+        document.getElementById('chatPopup').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeChatPopup() {
+        document.getElementById('chatPopup').classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+</script>
+</body>
+</html>
