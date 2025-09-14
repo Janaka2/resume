@@ -1,0 +1,33 @@
+/* Global */
+:root {
+  --brand-blue: #3b82f6;
+}
+body { background-color: #f9fafb; color: #1f2937; }
+/* Background Vanta canvas */
+#vanta-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -1; opacity: 0.15;
+}
+/* Skill meter */
+.skill-meter {
+  height: 8px; border-radius: 4px;
+  background: linear-gradient(90deg, var(--brand-blue) 0%, var(--brand-blue) var(--percentage), #e5e7eb var(--percentage), #e5e7eb 100%);
+}
+/* Timeline bullets */
+.timeline-item:before {
+  content: ''; position: absolute; left: -28px; top: 0;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--brand-blue); border: 3px solid white;
+}
+/* Collapsible */
+.collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+#longHistory { opacity: 0; transition: opacity 0.4s ease; }
+#longHistory:not(.hidden) { opacity: 1; }
+/* Tabs */
+.tab-btn.active { color: var(--brand-blue); border-bottom-color: var(--brand-blue); }
+.tab-content { min-height: 300px; }
+.tab-btn { transition: all 0.3s ease; }
+/* Footer tweaks */
+footer a:hover { color: #60a5fa; }
