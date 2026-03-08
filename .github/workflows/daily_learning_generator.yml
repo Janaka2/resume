@@ -4,36 +4,33 @@ name: Daily Learning Generator
 on:
   workflow_dispatch:
     inputs:
-        title:
-          description: "Page title"
-          required: false
+      title:
+        description: "Page title"
+        required: false
         default: ""
       topic:
         description: "Topic slug, e.g. linux-cli or spring-boot"
         required: false
         default: ""
   schedule:
-    # Runs every day at 06:17 UTC
+    # Runs every day at 05:17 UTC
     - cron: "17 5 * * *"
 
 permissions:
   contents: write
 
 jobs:
-        generate-daily-page:
-     es: actions/setup-python@v5
-      with:
-        python-version: "3.11"
-        - name: Checkout repository
-          
-    
-           steps:
+  generate-daily-page:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
       - name: Checkout repository
-        uses: actions/checkout@v4 uses: actions/checkout@v4
+        uses: actions/checkout@v4
 
       - name: Generate daily page and update navigation
         env:
