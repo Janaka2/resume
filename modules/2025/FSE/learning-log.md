@@ -1,1 +1,1 @@
-# FSE Daily Learning Log\n\n- [2026-03-08 - Java Core Refresh](2026-03-08-java-core.html)\n\n- [2026-03-08 - Java Core Refresh](2026-03-08-java-core.html)\n\n- [2026-03-08 - Java Core Refresh](2026-03-08-java-core.html)\n
+# FSE Daily Learning Log\n\n- [2026-03-08 - Java Core Refresh](2026-03-08-java-core.html)\n\n- [2026-03-08 - Java Core Refresh](2026-03-08-java-core.html)\n\n- [2026-03-08 - Java Core Refresh](2026-03-08-java-core.html)\n\n- [2026-03-08 - linux-cli](2026-03-08-vi-editor.html)\n
