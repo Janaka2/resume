@@ -14,7 +14,7 @@ on:
         default: ""
   schedule:
     # Runs every day at 06:17 UTC
-    - cron: "17 6 * * *"
+    - cron: "17 5 * * *"
 
 permissions:
   contents: write
