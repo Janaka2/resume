@@ -1,41 +1,233 @@
-name: Daily Academy Update
-
-# This GitHub Actions workflow runs every day and commits a new page to the
-# `modules/2025/FSE` directory. It serves as a template—you can adjust
-# the schedule, file location, or content generation logic as needed.
+# .github/workflows/daily_learning_generator.yml
+name: Daily Learning Generator
 
 on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: "Page title"
+        required: false
+        default: ""
+      topic:
+        description: "Topic slug, e.g. linux-cli or spring-boot"
+        required: false
+        default: ""
   schedule:
-    # Cron syntax: minute hour day-of-month month day-of-week
-    # This example runs every day at 07:00 UTC. Adjust to your timezone if needed.
-    - cron: '0 7 * * *'
+    # Runs every day at 06:17 UTC
+    - cron: "17 6 * * *"
+
+permissions:
+  contents: write
 
 jobs:
-  add_page:
+  generate-daily-page:
     runs-on: ubuntu-latest
 
     steps:
-      # Check out the repository so that the workflow can read and write files
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      # Set up Git configuration. Replace the email with your GitHub account email
-      - name: Configure Git identity
+      - name: Generate daily page and update navigation
+        env:
+          INPUT_TITLE: ${{ inputs.title }}
+          INPUT_TOPIC: ${{ inputs.topic }}
         run: |
-          git config user.name "Janaka Academy Bot"
-          git config user.email "janaka2@gmail.com"
+          python <<'PY'
+          import os
+          import re
+          from datetime import datetime, timezone
+          from pathlib import Path
 
-      # Generate or copy today’s page. This example creates a simple HTML file
-      # with the current date in the filename. Replace this step with your own
-      # content generation logic (e.g., copying from another folder or running a script).
-      - name: Generate new page
-        run: |
-          TODAY=$(date +'%Y-%m-%d')
-          FILE_PATH="modules/2025/FSE/${TODAY}-note.html"
-          echo "<html><body><h1>Notes for ${TODAY}</h1><p>Add your content here.</p></body></html>" > "$FILE_PATH"
+          ROOT = Path(".")
+          FSE_DIR = ROOT / "modules" / "2025" / "FSE"
+          FSE_DIR.mkdir(parents=True, exist_ok=True)
 
-      # Add the new file to Git, commit, and push it back to the repository
-      - name: Commit and push changes
+          today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+          title = (os.getenv("INPUT_TITLE") or "").strip()
+          topic = (os.getenv("INPUT_TOPIC") or "").strip()
+
+          # Fallback topics if no manual input is provided
+          topic_pool = [
+              ("Linux CLI Mastery", "linux-cli"),
+              ("Spring Boot Deep Dive", "spring-boot"),
+              ("Microservices Design", "microservices"),
+              ("React Patterns", "react"),
+              ("Kafka Fundamentals", "kafka"),
+              ("AI Integration", "ai-integration"),
+              ("DevOps and Cloud", "devops-cloud"),
+              ("Java Core Refresh", "java-core"),
+          ]
+
+          if not title or not topic:
+              day_num = int(datetime.now(timezone.utc).strftime("%d"))
+              auto_title, auto_topic = topic_pool[(day_num - 1) % len(topic_pool)]
+              if not title:
+                  title = auto_title
+              if not topic:
+                  topic = auto_topic
+
+          def slugify(text: str) -> str:
+              text = text.strip().lower()
+              text = re.sub(r"[^a-z0-9]+", "-", text)
+              text = re.sub(r"-+", "-", text).strip("-")
+              return text or "daily-note"
+
+          topic_slug = slugify(topic)
+          page_title = f"{title} - {today}"
+          file_name = f"{today}-{topic_slug}.html"
+          page_path = FSE_DIR / file_name
+          relative_link = file_name
+
+          html = f"""<!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>{page_title}</title>
+            <style>
+              body {{
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                max-width: 900px;
+                margin: 40px auto;
+                padding: 0 20px;
+                color: #222;
+              }}
+              h1, h2 {{ color: #0f172a; }}
+              .meta {{
+                color: #555;
+                margin-bottom: 24px;
+              }}
+              .box {{
+                background: #f8fafc;
+                border-left: 4px solid #2563eb;
+                padding: 16px;
+                margin: 20px 0;
+              }}
+              code {{
+                background: #f1f5f9;
+                padding: 2px 6px;
+                border-radius: 4px;
+              }}
+              a {{
+                color: #2563eb;
+                text-decoration: none;
+              }}
+            </style>
+          </head>
+          <body>
+            <p><a href="./Elite-Full-Stack-Engineering-2025-Edition.html">← Back to FSE main page</a></p>
+            <h1>{title}</h1>
+            <p class="meta"><strong>Date:</strong> {today} | <strong>Topic:</strong> {topic_slug}</p>
+
+            <div class="box">
+              <strong>Purpose:</strong> Capture one useful thing learned today in a way that is easy to revisit later.
+            </div>
+
+            <h2>What I learned</h2>
+            <p>Add today's learning notes here.</p>
+
+            <h2>Key commands / examples</h2>
+            <pre><code># Add examples here</code></pre>
+
+            <h2>Practical takeaways</h2>
+            <ul>
+              <li>Add the first takeaway.</li>
+              <li>Add the second takeaway.</li>
+              <li>Add the third takeaway.</li>
+            </ul>
+          </body>
+          </html>
+          """
+
+          if not page_path.exists():
+              page_path.write_text(html, encoding="utf-8")
+
+          # Update learning-log.md
+          log_path = FSE_DIR / "learning-log.md"
+          entry = f"- [{today} - {title}]({relative_link})"
+          if log_path.exists():
+              lines = log_path.read_text(encoding="utf-8").splitlines()
+          else:
+              lines = ["# FSE Daily Learning Log", ""]
+          if entry not in lines:
+              insert_at = 2 if len(lines) >= 2 else len(lines)
+              lines.insert(insert_at, entry)
+              log_path.write_text("\\n".join(lines) + "\\n", encoding="utf-8")
+
+          # Update main FSE page between markers
+          main_page = FSE_DIR / "Elite-Full-Stack-Engineering-2025-Edition.html"
+          start_marker = "<!-- DAILY_LINKS_START -->"
+          end_marker = "<!-- DAILY_LINKS_END -->"
+
+          if main_page.exists():
+              content = main_page.read_text(encoding="utf-8")
+
+              if start_marker not in content or end_marker not in content:
+                  block = f"""
+          {start_marker}
+          <section>
+            <h2>Daily Learning Pages</h2>
+            <ul>
+              <li><a href="{relative_link}">{today} - {title}</a></li>
+            </ul>
+          </section>
+          {end_marker}
+          """
+                  if "</body>" in content:
+                      content = content.replace("</body>", block + "\\n</body>")
+                  else:
+                      content += "\\n" + block
+              else:
+                  pattern = re.compile(
+                      re.escape(start_marker) + r"(.*?)" + re.escape(end_marker),
+                      re.DOTALL
+                  )
+                  match = pattern.search(content)
+                  old_block = match.group(1)
+
+                  new_item = f'  <li><a href="{relative_link}">{today} - {title}</a></li>'
+                  if relative_link not in old_block:
+                      ul_match = re.search(r"<ul>(.*?)</ul>", old_block, re.DOTALL)
+                      if ul_match:
+                          inner = ul_match.group(1).strip("\\n")
+                          updated_inner = new_item + "\\n" + inner if inner.strip() else new_item
+                          new_block = re.sub(
+                              r"<ul>.*?</ul>",
+                              "<ul>\\n" + updated_inner + "\\n</ul>",
+                              old_block,
+                              flags=re.DOTALL,
+                          )
+                      else:
+                          new_block = f"""
+          <section>
+            <h2>Daily Learning Pages</h2>
+            <ul>
+          {new_item}
+            </ul>
+          </section>
+          """
+                      content = content[:match.start(1)] + new_block + content[match.end(1):]
+
+              main_page.write_text(content, encoding="utf-8")
+
+          print(f"Generated: {page_path}")
+          print(f"Updated: {log_path}")
+          print(f"Updated: {main_page}")
+          PY
+
+      - name: Commit and push
         run: |
-          git add modules/2025/FSE
-          git commit -m "Add daily page for ${TODAY}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add modules/2025/FSE .github/workflows/daily_learning_generator.yml
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "Add daily learning page"
           git push
