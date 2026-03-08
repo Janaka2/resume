@@ -1,0 +1,41 @@
+name: Daily Academy Update
+
+# This GitHub Actions workflow runs every day and commits a new page to the
+# `modules/2025/FSE` directory. It serves as a template—you can adjust
+# the schedule, file location, or content generation logic as needed.
+
+on:
+  schedule:
+    # Cron syntax: minute hour day-of-month month day-of-week
+    # This example runs every day at 07:00 UTC. Adjust to your timezone if needed.
+    - cron: '0 7 * * *'
+
+jobs:
+  add_page:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the repository so that the workflow can read and write files
+      - uses: actions/checkout@v3
+
+      # Set up Git configuration. Replace the email with your GitHub account email
+      - name: Configure Git identity
+        run: |
+          git config user.name "Janaka Academy Bot"
+          git config user.email "janaka2@gmail.com"
+
+      # Generate or copy today’s page. This example creates a simple HTML file
+      # with the current date in the filename. Replace this step with your own
+      # content generation logic (e.g., copying from another folder or running a script).
+      - name: Generate new page
+        run: |
+          TODAY=$(date +'%Y-%m-%d')
+          FILE_PATH="modules/2025/FSE/${TODAY}-note.html"
+          echo "<html><body><h1>Notes for ${TODAY}</h1><p>Add your content here.</p></body></html>" > "$FILE_PATH"
+
+      # Add the new file to Git, commit, and push it back to the repository
+      - name: Commit and push changes
+        run: |
+          git add modules/2025/FSE
+          git commit -m "Add daily page for ${TODAY}"
+          git push
