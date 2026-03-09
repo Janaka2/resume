@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt Engineering Playbook for Senior Software Engineers</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <div class="badges">
+        <span class="badge">Easy English</span>
+        <span class="badge">Senior Software Engineer Focus</span>
+        <span class="badge">Reusable Prompt Templates</span>
+        <span class="badge">GPT-5.4 + Gemini</span>
+      </div>
+      <h1>Prompt Engineering Playbook for Senior Software Engineers</h1>
+      <p>This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting patterns, with templates you can copy and adapt fast.</p>
+    </div>
+    <div class="layout">
+      <aside class="sidebar">
+        <h3>Pages</h3>
+        <nav class="nav"><a class="active" href="index.html">Home</a>
+<a class="" href="foundations.html">Foundations</a>
+<a class="" href="gpt54.html">GPT-5.4 Guide</a>
+<a class="" href="gemini.html">Gemini Guide</a>
+<a class="" href="templates.html">Prompt Templates</a>
+<a class="" href="developer-tasks.html">Developer Tasks</a>
+<a class="" href="debugging.html">Debugging & Safety</a>
+<a class="" href="comparison.html">GPT vs Gemini</a>
+<a class="" href="glossary.html">Glossary</a>
+<a class="" href="references.html">References</a></nav>
+      </aside>
+      <main>
+<div class="card">
+  <h2>What this site gives you</h2>
+  <div class="grid">
+    <div class="tile"><h3>1. Simple mental model</h3><p>Modern prompting is not about magic words. It is about giving the model a clear contract: goal, context, rules, output shape, and done criteria.</p></div>
+    <div class="tile"><h3>2. GPT-5.4 alignment</h3><p>Use clear blocks, explicit completion criteria, structured outputs, and tool-use expectations. Let the model reason internally instead of forcing chain-of-thought.</p></div>
+    <div class="tile"><h3>3. Gemini alignment</h3><p>Keep prompts concise, use system instructions carefully, use function calling and structured outputs, and place the exact question after long context when needed.</p></div>
+    <div class="tile"><h3>4. Developer templates</h3><p>Ready-to-reuse prompts for debugging, code review, refactoring, API design, SQL, test generation, docs, incident analysis, and more.</p></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Fast start</h2>
+  <ol>
+    <li>Read <a href="foundations.html">Foundations</a> to understand the new mental model.</li>
+    <li>Read <a href="gpt54.html">GPT-5.4 Guide</a> and <a href="gemini.html">Gemini Guide</a> to learn the differences.</li>
+    <li>Copy templates from <a href="templates.html">Prompt Templates</a>.</li>
+    <li>Use <a href="developer-tasks.html">Developer Tasks</a> for daily engineering work.</li>
+    <li>Use <a href="debugging.html">Debugging & Safety</a> when outputs are weak, wrong, or risky.</li>
+  </ol>
+</div>
+
+<div class="card">
+  <h2>The shortest useful summary</h2>
+  <div class="note">
+    <strong>Old way:</strong> “Try clever wording.”<br>
+    <strong>New way:</strong> “Design a reliable interface between you and the model.”
+  </div>
+  <ul>
+    <li>Separate <strong>instructions</strong> from <strong>data</strong>.</li>
+    <li>State what the model must do, must not do, and what to do when data is missing.</li>
+    <li>Prefer <strong>JSON schema / structured outputs</strong> when software will parse the result.</li>
+    <li>For fresh or private facts, use <strong>tools / RAG / search</strong> instead of asking the model to guess.</li>
+    <li>Ask for <strong>verification artifacts</strong>: tests, citations, diffs, commands, assumptions, confidence.</li>
+    <li>Treat prompts as versioned engineering assets, not one-off chat text.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>Best page for each need</h2>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Your need</th><th>Go here</th></tr>
+      <tr><td>Understand the core ideas clearly</td><td><a href="foundations.html">Foundations</a></td></tr>
+      <tr><td>Prompt OpenAI models better</td><td><a href="gpt54.html">GPT-5.4 Guide</a></td></tr>
+      <tr><td>Prompt Gemini models better</td><td><a href="gemini.html">Gemini Guide</a></td></tr>
+      <tr><td>Copy reusable prompt formats</td><td><a href="templates.html">Prompt Templates</a></td></tr>
+      <tr><td>Daily software engineering work</td><td><a href="developer-tasks.html">Developer Tasks</a></td></tr>
+      <tr><td>Fix bad outputs / hallucinations / tool issues</td><td><a href="debugging.html">Debugging & Safety</a></td></tr>
+      <tr><td>See provider differences quickly</td><td><a href="comparison.html">GPT vs Gemini</a></td></tr>
+    </table>
+  </div>
+</div>
+</main>
+    </div>
+    <div class="footer">Built as a downloadable HTML collection for study and daily engineering use.</div>
+  </div>
+</body>
+</html>

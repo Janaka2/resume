@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reusable Prompt Templates</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <div class="badges">
+        <span class="badge">Easy English</span>
+        <span class="badge">Senior Software Engineer Focus</span>
+        <span class="badge">Reusable Prompt Templates</span>
+        <span class="badge">GPT-5.4 + Gemini</span>
+      </div>
+      <h1>Reusable Prompt Templates</h1>
+      <p>This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting patterns, with templates you can copy and adapt fast.</p>
+    </div>
+    <div class="layout">
+      <aside class="sidebar">
+        <h3>Pages</h3>
+        <nav class="nav"><a class="" href="index.html">Home</a>
+<a class="" href="foundations.html">Foundations</a>
+<a class="" href="gpt54.html">GPT-5.4 Guide</a>
+<a class="" href="gemini.html">Gemini Guide</a>
+<a class="active" href="templates.html">Prompt Templates</a>
+<a class="" href="developer-tasks.html">Developer Tasks</a>
+<a class="" href="debugging.html">Debugging & Safety</a>
+<a class="" href="comparison.html">GPT vs Gemini</a>
+<a class="" href="glossary.html">Glossary</a>
+<a class="" href="references.html">References</a></nav>
+      </aside>
+      <main>
+<div class="card">
+  <h2>Universal master template</h2>
+  <pre><code>ROLE
+You are a senior &lt;role&gt;.
+
+OBJECTIVE
+Complete: &lt;task&gt;
+
+CONTEXT (trusted)
+- Environment:
+- Requirements:
+- Constraints:
+- Success criteria:
+
+INPUT (untrusted)
+&lt;&lt;&lt;
+&lt;user text / logs / docs / code&gt;
+&gt;&gt;&gt;
+
+RULES
+- Do not invent facts or APIs.
+- State assumptions clearly.
+- If information is missing, say what is missing.
+- Keep output easy to scan.
+
+OUTPUT
+1. Short answer
+2. Key findings
+3. Recommended action
+4. Verification steps
+5. Risks / assumptions</code></pre>
+</div>
+
+<div class="card">
+  <h2>Structured output template</h2>
+  <pre><code>Return JSON matching this schema exactly:
+{
+  "status": "ok | insufficient_data | error",
+  "summary": "string",
+  "findings": ["string"],
+  "actions": ["string"],
+  "assumptions": ["string"]
+}
+
+Rules:
+- Unknown => null
+- Never invent values
+- If evidence is weak, set status to "insufficient_data"</code></pre>
+</div>
+
+<div class="card">
+  <h2>Planner → Executor template</h2>
+  <pre><code>PHASE 1: PLAN
+- Goal
+- Constraints
+- Unknowns
+- Step list
+- Which steps require tools
+- Done criteria
+
+PHASE 2: EXECUTE
+- Execute one step at a time
+- Validate outputs before moving on
+- Report blockers immediately
+
+FINAL OUTPUT
+- Result
+- What was verified
+- Remaining risks</code></pre>
+</div>
+
+<div class="card">
+  <h2>Self-critique template</h2>
+  <pre><code>Create the first draft.
+Then review it for:
+1. factual weakness
+2. missing requirement
+3. over-claiming
+4. unclear wording
+5. risky assumption
+
+Rewrite the final answer after the review.
+Return both:
+- final answer
+- short list of fixes made</code></pre>
+</div>
+
+<div class="card">
+  <h2>Anti-hallucination template</h2>
+  <pre><code>Answer only from the provided context.
+If the answer is not supported, say: "Not found in provided context."
+Cite the exact evidence snippets used.
+Do not guess.</code></pre>
+</div>
+
+<div class="card">
+  <h2>Code patch template</h2>
+  <pre><code>You are a senior software engineer.
+
+Task:
+Fix the issue in the provided code.
+
+Return:
+1. root cause
+2. minimal patch
+3. tests
+4. commands to verify
+5. risks
+
+Rules:
+- no invented imports or APIs
+- preserve existing behavior where possible
+- explain any breaking change clearly</code></pre>
+</div>
+</main>
+    </div>
+    <div class="footer">Built as a downloadable HTML collection for study and daily engineering use.</div>
+  </div>
+</body>
+</html>

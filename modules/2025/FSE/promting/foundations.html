@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Foundations: How Modern Prompting Really Works</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <div class="badges">
+        <span class="badge">Easy English</span>
+        <span class="badge">Senior Software Engineer Focus</span>
+        <span class="badge">Reusable Prompt Templates</span>
+        <span class="badge">GPT-5.4 + Gemini</span>
+      </div>
+      <h1>Foundations: How Modern Prompting Really Works</h1>
+      <p>This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting patterns, with templates you can copy and adapt fast.</p>
+    </div>
+    <div class="layout">
+      <aside class="sidebar">
+        <h3>Pages</h3>
+        <nav class="nav"><a class="" href="index.html">Home</a>
+<a class="active" href="foundations.html">Foundations</a>
+<a class="" href="gpt54.html">GPT-5.4 Guide</a>
+<a class="" href="gemini.html">Gemini Guide</a>
+<a class="" href="templates.html">Prompt Templates</a>
+<a class="" href="developer-tasks.html">Developer Tasks</a>
+<a class="" href="debugging.html">Debugging & Safety</a>
+<a class="" href="comparison.html">GPT vs Gemini</a>
+<a class="" href="glossary.html">Glossary</a>
+<a class="" href="references.html">References</a></nav>
+      </aside>
+      <main>
+<div class="card">
+  <h2>Core mental model</h2>
+  <p>Prompt engineering today is interface engineering. You are not only asking a question. You are defining:</p>
+  <ul>
+    <li>the job,</li>
+    <li>the allowed inputs,</li>
+    <li>the rules,</li>
+    <li>the output contract,</li>
+    <li>and how correctness will be checked.</li>
+  </ul>
+  <div class="note">
+    A good prompt should feel like a small technical spec, not a vague request.
+  </div>
+</div>
+
+<div class="card">
+  <h2>The 5 building blocks</h2>
+  <div class="grid">
+    <div class="tile"><h3>Role</h3><p>Who the model should act like in this task. Example: “Senior Java architect.”</p></div>
+    <div class="tile"><h3>Goal</h3><p>What success looks like. Example: “Find the root cause and produce the smallest safe patch.”</p></div>
+    <div class="tile"><h3>Context</h3><p>Trusted facts, code, rules, schemas, requirements, logs, or business constraints.</p></div>
+    <div class="tile"><h3>Constraints</h3><p>Hard boundaries. Example: “No invented APIs. Keep changes backward compatible.”</p></div>
+    <div class="tile"><h3>Output contract</h3><p>Exact structure expected. Example: JSON, diff, checklist, ADR, or table.</p></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Instruction hierarchy</h2>
+  <p>Modern model families use instruction hierarchy. Higher-priority instructions override lower-priority ones. That is why your app-level rules should live in higher-authority messages, while untrusted content should be treated as data, not as instructions.</p>
+  <pre><code>Higher authority
+- Platform / root rules
+- Developer / system instructions
+- User request
+- Tool outputs, retrieved docs, pasted content
+Lower authority</code></pre>
+  <div class="warn">
+    Never mix user text or retrieved text into the same block as your trusted rules. That increases prompt injection risk.
+  </div>
+</div>
+
+<div class="card">
+  <h2>Why hallucinations happen</h2>
+  <ul>
+    <li><strong>Missing data:</strong> the model has no real evidence.</li>
+    <li><strong>Rewarded guessing:</strong> your prompt forces an answer instead of allowing “unknown”.</li>
+    <li><strong>Retrieval noise:</strong> RAG returns irrelevant chunks.</li>
+    <li><strong>Schema pressure:</strong> the model tries to fill all fields even when evidence is missing.</li>
+    <li><strong>Long-context failure:</strong> important facts are buried in the middle and get missed.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>Best general template</h2>
+  <pre><code>ROLE
+You are a senior software engineer working in &lt;stack&gt;.
+
+GOAL
+Solve: &lt;clear task&gt;.
+
+CONTEXT (trusted)
+- Environment:
+- Constraints:
+- Existing behavior:
+- Success criteria:
+
+INPUT (untrusted)
+&lt;&lt;&lt;
+paste user text / logs / docs / code here
+&gt;&gt;&gt;
+
+RULES
+- Do not invent facts, APIs, files, endpoints, or commands.
+- If information is missing, say exactly what is missing.
+- Keep assumptions explicit and testable.
+
+OUTPUT
+1. Brief answer
+2. Findings
+3. Proposed fix / plan
+4. Verification steps
+5. Risks / assumptions</code></pre>
+</div>
+</main>
+    </div>
+    <div class="footer">Built as a downloadable HTML collection for study and daily engineering use.</div>
+  </div>
+</body>
+</html>
