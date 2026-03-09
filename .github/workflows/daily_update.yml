@@ -1,5 +1,4 @@
 name: Daily Academy Update
-
 # This GitHub Actions workflow runs every day and commits a new page to the
 # `modules/2025/FSE` directory. It serves as a template—you can adjust
 # the schedule, file location, or content generation logic as needed.
