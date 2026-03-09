@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering CSV Operations with Shell Scripting</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --code-bg: #1e1e1e;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            margin: 0;
+            display: flex;
+        }
+        nav {
+            width: 280px;
+            height: 100vh;
+            background: #fff;
+            border-right: 1px solid #e2e8f0;
+            position: fixed;
+            padding: 2rem 1rem;
+            overflow-y: auto;
+        }
+        main {
+            margin-left: 300px;
+            padding: 2rem 4rem;
+            max-width: 900px;
+        }
+        h1 { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 10px; }
+        h2 { color: #334155; margin-top: 2rem; border-left: 4px solid var(--primary); padding-left: 15px; }
+        .code-block {
+            background: var(--code-bg);
+            color: #dcdcdc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            position: relative;
+            margin: 1rem 0;
+        }
+        .comment { color: #6a9955; }
+        .command { color: #4fc1ff; }
+        .variable { color: #9cdcfe; }
+        .note {
+            background: #dbeafe;
+            border-left: 5px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { border: 1px solid #cbd5e1; padding: 12px; text-align: left; }
+        th { background: #f1f5f9; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h3>Contents</h3>
+    <ul>
+        <li><a href="#counting">Counting Records</a></li>
+        <li><a href="#columns">Column Validation</a></li>
+        <li><a href="#syntax">Syntax Validation</a></li>
+        <li><a href="#operations">Content Operations</a></li>
+        <li><a href="#advanced">Advanced Use Cases</a></li>
+    </ul>
+</nav>
+
+<main>
+    <h1>CSV Manipulation via Shell Scripting</h1>
+    <p>Using Linux standard tools like <code>awk</code>, <code>sed</code>, and <code>grep</code> allows for lightning-fast CSV processing without external dependencies.</p>
+
+    <section id="counting">
+        <h2>1. Counting Records</h2>
+        <p>To count records while excluding the header row:</p>
+        <div class="code-block">
+            <span class="comment"># Method 1: Using wc (includes header)</span><br>
+            wc -l data.csv<br><br>
+            <span class="comment"># Method 2: Excluding the header (best practice)</span><br>
+            <span class="variable">count</span>=$(tail -n +2 data.csv | wc -l)<br>
+            echo "Total records: $<span class="variable">count</span>"
+        </div>
+    </section>
+
+    <section id="columns">
+        <h2>2. Validating Column Count</h2>
+        <p>Ensure every row has the same number of columns (e.g., 5 columns).</p>
+        <div class="code-block">
+            awk -F',' '{ if (NF != 5) print "Error at line " NR ": has " NF " columns" }' data.csv
+        </div>
+        <p><em>Note: <code>-F','</code> sets the field separator to a comma.</em></p>
+    </section>
+
+    <section id="syntax">
+        <h2>3. CSV Syntax Validation</h2>
+        <p>Basic check for empty lines or trailing commas which often break parsers.</p>
+        <div class="code-block">
+            <span class="comment"># Find empty lines</span><br>
+            grep -n "^$" data.csv<br><br>
+            <span class="comment"># Find lines with trailing commas</span><br>
+            grep -n ",$" data.csv
+        </div>
+    </section>
+
+    <section id="operations">
+        <h2>4. File Content Operations</h2>
+        <h3>Extracting Specific Columns</h3>
+        <p>Extract only the 1st and 3rd columns:</p>
+        <div class="code-block">
+            cut -d',' -f1,3 data.csv > extracted.csv
+        </div>
+
+        <h3>Searching for Data</h3>
+        <p>Find all records where the 2nd column matches "Completed":</p>
+        <div class="code-block">
+            awk -F',' '$2 == "Completed" { print $0 }' data.csv
+        </div>
+    </section>
+
+    <section id="advanced">
+        <h2>5. Advanced Use Cases</h2>
+
+        <table>
+            <tr>
+                <th>Task</th>
+                <th>Command</th>
+            </tr>
+            <tr>
+                <td><b>Sort by Column 2</b></td>
+                <td><code>sort -t',' -k2,2 data.csv</code></td>
+            </tr>
+            <tr>
+                <td><b>Remove Duplicates</b></td>
+                <td><code>sort -u data.csv > clean.csv</code></td>
+            </tr>
+            <tr>
+                <td><b>Sum a Column</b></td>
+                <td><code>awk -F',' '{sum+=$3} END {print sum}' data.csv</code></td>
+            </tr>
+        </table>
+
+        <div class="note">
+            <strong>Pro Tip:</strong> If your CSV contains commas <em>inside</em> quoted strings (e.g., "New York, NY"), standard <code>awk</code> might fail. In those cases, use <code>csvkit</code> or <code>python</code>'s csv module for parsing.
+        </div>
+    </section>
+</main>
+
+</body>
+</html>
