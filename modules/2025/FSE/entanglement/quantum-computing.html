@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Quantum Computing Inside and Out</title><link rel="stylesheet" href="style.css"></head><body><div class="container"><div class="hero"><span class="pill">From inside out</span><h1>Quantum computing inside and out</h1><p>This page explains quantum computing clearly and precisely: what it is, how it works internally, how it differs from classical computing, and where it fits in real systems.</p></div><nav class="nav"><a href="index.html">Home</a><a href="entanglement.html">Entanglement</a><a href="use-cases.html">Use Cases</a><a href="career-roadmap.html">Career Roadmap</a><a href="references.html">References</a></nav>
+<h2>Outside view: what quantum computing is</h2>
+<div class="card"><p>Quantum computing is a form of computing that uses quantum-mechanical effects to process information. Instead of only using classical bits, it uses <strong>qubits</strong>. Quantum computers are best understood as special-purpose engines for certain kinds of hard problems, usually in combination with classical computers.</p></div>
+<h2>Inside view: what happens during a computation</h2>
+<div class="card"><ol>
+<li><strong>Initialize qubits</strong> into known states.</li>
+<li><strong>Apply quantum gates</strong> to shape amplitudes.</li>
+<li><strong>Create superposition and entanglement</strong> where needed.</li>
+<li><strong>Use interference</strong> so wrong answers cancel and useful answers become more likely.</li>
+<li><strong>Measure</strong> the qubits to get classical bits.</li>
+<li><strong>Repeat many times</strong> because results are probabilistic.</li>
+<li><strong>Use classical post-processing</strong> to interpret results.</li>
+</ol></div>
+<h2>Bits vs qubits</h2>
+<table class="table"><tr><th>Topic</th><th>Classical computing</th><th>Quantum computing</th></tr><tr><td>Basic unit</td><td>Bit</td><td>Qubit</td></tr><tr><td>State</td><td>0 or 1</td><td>Combination of 0 and 1 until measured</td></tr><tr><td>Operations</td><td>Logic gates</td><td>Quantum gates (unitary transformations)</td></tr><tr><td>Output</td><td>Deterministic or pseudo-random</td><td>Probabilistic by measurement</td></tr><tr><td>Strength</td><td>General-purpose, reliable, mature</td><td>Specialized advantage for selected problem types</td></tr></table>
+<h2>The three ideas that matter most</h2>
+<div class="grid"><div class="card"><h3>Superposition</h3><p>A qubit can be in a weighted combination of basis states. This is not “doing everything at once” in a simplistic sense; the usable power comes only when algorithms shape amplitudes correctly.</p></div><div class="card"><h3>Entanglement</h3><p>Qubits can become linked through a joint quantum state, enabling correlations beyond classical systems.</p></div><div class="card"><h3>Interference</h3><p>Amplitude patterns can reinforce useful outcomes and suppress bad ones. This is one of the real algorithmic levers.</p></div></div>
+<h2>Why quantum is hard</h2>
+<div class="card"><ul>
+<li><strong>Noise:</strong> qubits are fragile.</li>
+<li><strong>Decoherence:</strong> interaction with the environment damages the quantum state.</li>
+<li><strong>Error correction cost:</strong> fault tolerance needs many physical qubits for fewer logical qubits.</li>
+<li><strong>Algorithm narrowness:</strong> only some problems show meaningful advantage.</li>
+</ul></div>
+<h2>Main hardware families</h2>
+<div class="card"><ul>
+<li><strong>Superconducting qubits</strong> — fast gates, widely used by major platforms.</li>
+<li><strong>Trapped ions</strong> — high fidelity, slower operations, strong research value.</li>
+<li><strong>Neutral atoms</strong> — promising scaling path for some workloads.</li>
+<li><strong>Photonic approaches</strong> — attractive for communication and some computing models.</li>
+<li><strong>Topological ambitions</strong> — long-term path focused on better stability if achieved.</li>
+</ul></div>
+<h2>Where quantum fits in real architecture</h2>
+<div class="card"><p>The normal pattern is:</p><div class="code">Application -> Classical pre-processing -> Quantum job / circuit / sampler -> Classical post-processing -> Decision / result</div><p>This means your software-engineering value stays high. APIs, orchestration, data flow, cost control, observability, experiment tracking, and result interpretation are all important.</p></div>
+<h2>What quantum computing is good at</h2>
+<div class="card"><ul>
+<li>Some chemistry and materials simulations</li>
+<li>Sampling and probability-heavy research problems</li>
+<li>Selected optimization heuristics and exploration</li>
+<li>Quantum-native communication and networking tasks</li>
+</ul></div>
+<h2>What it is not good at</h2>
+<div class="card"><ul>
+<li>Normal web backends</li>
+<li>CRUD systems</li>
+<li>Most enterprise APIs</li>
+<li>General database processing</li>
+<li>Replacing GPUs for all AI workloads</li>
+</ul></div>
+<div class="footer">Think of quantum as a specialized co-processor, not a universal replacement for classical systems.</div></div></body></html>
