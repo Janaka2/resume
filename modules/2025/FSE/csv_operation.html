@@ -3,152 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mastering CSV Operations with Shell Scripting</title>
+    <title>CLI Data Mastery: CSV & Shell Scripting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #2563eb;
-            --bg: #f8fafc;
-            --text: #1e293b;
-            --code-bg: #1e1e1e;
+        :root { --accent: #3b82f6; }
+        pre { position: relative; }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
         }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background-color: var(--bg);
-            margin: 0;
-            display: flex;
-        }
-        nav {
-            width: 280px;
-            height: 100vh;
-            background: #fff;
-            border-right: 1px solid #e2e8f0;
-            position: fixed;
-            padding: 2rem 1rem;
-            overflow-y: auto;
-        }
-        main {
-            margin-left: 300px;
-            padding: 2rem 4rem;
-            max-width: 900px;
-        }
-        h1 { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 10px; }
-        h2 { color: #334155; margin-top: 2rem; border-left: 4px solid var(--primary); padding-left: 15px; }
-        .code-block {
-            background: var(--code-bg);
-            color: #dcdcdc;
-            padding: 1.5rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            position: relative;
-            margin: 1rem 0;
-        }
-        .comment { color: #6a9955; }
-        .command { color: #4fc1ff; }
-        .variable { color: #9cdcfe; }
-        .note {
-            background: #dbeafe;
-            border-left: 5px solid var(--primary);
-            padding: 1rem;
-            margin: 1rem 0;
-        }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
-        th, td { border: 1px solid #cbd5e1; padding: 12px; text-align: left; }
-        th { background: #f1f5f9; }
+        .copy-btn:hover { background: var(--accent); color: white; }
+        .sidebar-link.active { border-right: 4px solid var(--accent); background: #eff6ff; color: var(--accent); }
+        html { scroll-behavior: smooth; }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans">
 
-<nav>
-    <h3>Contents</h3>
-    <ul>
-        <li><a href="#counting">Counting Records</a></li>
-        <li><a href="#columns">Column Validation</a></li>
-        <li><a href="#syntax">Syntax Validation</a></li>
-        <li><a href="#operations">Content Operations</a></li>
-        <li><a href="#advanced">Advanced Use Cases</a></li>
-    </ul>
-</nav>
+<aside class="fixed left-0 top-0 h-screen w-72 bg-white border-r border-slate-200 hidden lg:block overflow-y-auto">
+    <div class="p-6">
+        <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+            <i class="fas fa-terminal text-blue-600"></i> CSV Pro Guide
+        </h2>
+        <div class="mt-6">
+            <input type="text" id="sidebarSearch" placeholder="Search operations..." class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+    </div>
+    <nav class="px-4 space-y-1" id="navLinks">
+        <a href="#basics" class="sidebar-link block px-4 py-2 rounded-md text-slate-600 hover:bg-slate-100">Counting Records</a>
+        <a href="#validation" class="sidebar-link block px-4 py-2 rounded-md text-slate-600 hover:bg-slate-100">Column Validation</a>
+        <a href="#syntax" class="sidebar-link block px-4 py-2 rounded-md text-slate-600 hover:bg-slate-100">Syntax Checks</a>
+        <a href="#transform" class="sidebar-link block px-4 py-2 rounded-md text-slate-600 hover:bg-slate-100">Data Transformation</a>
+        <a href="#merging" class="sidebar-link block px-4 py-2 rounded-md text-slate-600 hover:bg-slate-100">Merging Files (Joins)</a>
+        <a href="#advanced" class="sidebar-link block px-4 py-2 rounded-md text-slate-600 hover:bg-slate-100">One-Liner Cheatsheet</a>
+    </nav>
+</aside>
 
-<main>
-    <h1>CSV Manipulation via Shell Scripting</h1>
-    <p>Using Linux standard tools like <code>awk</code>, <code>sed</code>, and <code>grep</code> allows for lightning-fast CSV processing without external dependencies.</p>
+<main class="lg:ml-72 p-6 md:p-12 max-w-5xl">
+    <header class="mb-12">
+        <span class="text-blue-600 font-semibold tracking-wide uppercase text-sm">Linux Shell Operations</span>
+        <h1 class="text-4xl font-extrabold text-slate-900 mt-2">The Ultimate CSV Scripting Guide</h1>
+        <p class="text-lg text-slate-600 mt-4">Automate data validation, cleaning, and reporting using standard Unix utilities like <code>awk</code>, <code>sed</code>, and <code>join</code>.</p>
+    </header>
 
-    <section id="counting">
-        <h2>1. Counting Records</h2>
-        <p>To count records while excluding the header row:</p>
-        <div class="code-block">
-            <span class="comment"># Method 1: Using wc (includes header)</span><br>
-            wc -l data.csv<br><br>
-            <span class="comment"># Method 2: Excluding the header (best practice)</span><br>
-            <span class="variable">count</span>=$(tail -n +2 data.csv | wc -l)<br>
-            echo "Total records: $<span class="variable">count</span>"
+    <section id="basics" class="mb-16 scroll-mt-10">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+            <i class="fas fa-list-ol text-blue-500"></i> Counting Records
+        </h2>
+        <p class="mb-4">Standard counting often includes the header row. Use these methods to get accurate data counts.</p>
+        <div class="bg-slate-900 rounded-xl p-5 text-slate-300">
+<pre><code><span class="text-green-500"># Count lines including header</span>
+wc -l data.csv
+
+<span class="text-green-500"># Count data rows only (Excludes line 1)</span>
+awk 'NR > 1' data.csv | wc -l
+
+<span class="text-green-500"># Count using variable for scripts</span>
+ROW_COUNT=$(tail -n +2 data.csv | grep -c .)</code></pre>
         </div>
     </section>
 
-    <section id="columns">
-        <h2>2. Validating Column Count</h2>
-        <p>Ensure every row has the same number of columns (e.g., 5 columns).</p>
-        <div class="code-block">
-            awk -F',' '{ if (NF != 5) print "Error at line " NR ": has " NF " columns" }' data.csv
-        </div>
-        <p><em>Note: <code>-F','</code> sets the field separator to a comma.</em></p>
-    </section>
+    <section id="validation" class="mb-16 scroll-mt-10">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+            <i class="fas fa-check-double text-emerald-500"></i> Column & Field Validation
+        </h2>
+        <p class="mb-4">Check if every row adheres to the expected schema (e.g., exactly 8 columns).</p>
+        <div class="bg-slate-900 rounded-xl p-5 text-slate-300">
+<pre><code><span class="text-green-500"># Find rows that DO NOT have exactly 8 columns</span>
+awk -F',' 'NF != 8 { print "Error: Line " NR " has " NF " fields" }' data.csv
 
-    <section id="syntax">
-        <h2>3. CSV Syntax Validation</h2>
-        <p>Basic check for empty lines or trailing commas which often break parsers.</p>
-        <div class="code-block">
-            <span class="comment"># Find empty lines</span><br>
-            grep -n "^$" data.csv<br><br>
-            <span class="comment"># Find lines with trailing commas</span><br>
-            grep -n ",$" data.csv
+<span class="text-green-500"># Validate that Column 3 is always numeric</span>
+awk -F',' '$3 !~ /^[0-9]+$/ { print "Non-numeric ID at line " NR ": " $3 }' data.csv</code></pre>
         </div>
     </section>
 
-    <section id="operations">
-        <h2>4. File Content Operations</h2>
-        <h3>Extracting Specific Columns</h3>
-        <p>Extract only the 1st and 3rd columns:</p>
-        <div class="code-block">
-            cut -d',' -f1,3 data.csv > extracted.csv
-        </div>
+    <section id="transform" class="mb-16 scroll-mt-10">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+            <i class="fas fa-random text-purple-500"></i> Data Transformation
+        </h2>
+        <p class="mb-4">Convert case, replace delimiters, or calculate new fields on the fly.</p>
+        <div class="bg-slate-900 rounded-xl p-5 text-slate-300">
+<pre><code><span class="text-green-500"># Convert CSV to Pipe-Delimited (|)</span>
+sed 's/,/|/g' data.csv > output.psv
 
-        <h3>Searching for Data</h3>
-        <p>Find all records where the 2nd column matches "Completed":</p>
-        <div class="code-block">
-            awk -F',' '$2 == "Completed" { print $0 }' data.csv
+<span class="text-green-500"># Uppercase the names in Column 2</span>
+awk -F',' 'BEGIN{OFS=","} {$2=toupper($2); print}' data.csv
+
+<span class="text-green-500"># Add a "Total" column (Col4 = Col2 + Col3)</span>
+awk -F',' 'BEGIN{OFS=","} {if(NR>1) $4=$2+$3; else $4="Total"; print}' data.csv</code></pre>
         </div>
     </section>
 
-    <section id="advanced">
-        <h2>5. Advanced Use Cases</h2>
+    <section id="merging" class="mb-16 scroll-mt-10">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+            <i class="fas fa-object-group text-orange-500"></i> Merging Files (Relational Joins)
+        </h2>
+        <p class="mb-4">Use the <code>join</code> command to combine two CSVs on a common ID column.</p>
+        <div class="bg-slate-900 rounded-xl p-5 text-slate-300">
+<pre><code><span class="text-green-500"># Sort files first (Join requires sorted input)</span>
+sort -t',' -k1,1 users.csv > users_sorted.csv
+sort -t',' -k1,1 orders.csv > orders_sorted.csv
 
-        <table>
-            <tr>
-                <th>Task</th>
-                <th>Command</th>
-            </tr>
-            <tr>
-                <td><b>Sort by Column 2</b></td>
-                <td><code>sort -t',' -k2,2 data.csv</code></td>
-            </tr>
-            <tr>
-                <td><b>Remove Duplicates</b></td>
-                <td><code>sort -u data.csv > clean.csv</code></td>
-            </tr>
-            <tr>
-                <td><b>Sum a Column</b></td>
-                <td><code>awk -F',' '{sum+=$3} END {print sum}' data.csv</code></td>
-            </tr>
-        </table>
+<span class="text-green-500"># Join on Column 1 (ID)</span>
+join -t',' -1 1 -2 1 users_sorted.csv orders_sorted.csv > joined_data.csv</code></pre>
+        </div>
+        <div class="bg-amber-50 border-l-4 border-amber-400 p-4 mt-4">
+            <p class="text-sm text-amber-800 italic"><strong>Note:</strong> The <code>-1 1 -2 1</code> flags tell join to use Column 1 of File 1 and Column 1 of File 2 as the keys.</p>
+        </div>
+    </section>
 
-        <div class="note">
-            <strong>Pro Tip:</strong> If your CSV contains commas <em>inside</em> quoted strings (e.g., "New York, NY"), standard <code>awk</code> might fail. In those cases, use <code>csvkit</code> or <code>python</code>'s csv module for parsing.
+    <section id="advanced" class="mb-16 scroll-mt-10">
+        <h2 class="text-2xl font-bold mb-6">Common One-Liners</h2>
+        <div class="overflow-hidden border border-slate-200 rounded-xl bg-white">
+            <table class="w-full text-left text-sm">
+                <thead class="bg-slate-50 border-b border-slate-200">
+                <tr>
+                    <th class="px-6 py-4 font-semibold">Requirement</th>
+                    <th class="px-6 py-4 font-semibold">Command</th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                <tr>
+                    <td class="px-6 py-4">Remove Header Row</td>
+                    <td class="px-6 py-4"><code>sed '1d' file.csv</code></td>
+                </tr>
+                <tr>
+                    <td class="px-6 py-4">Sum values in Col 5</td>
+                    <td class="px-6 py-4"><code>awk -F, '{s+=$5} END{print s}' file.csv</code></td>
+                </tr>
+                <tr>
+                    <td class="px-6 py-4">Unique values in Col 1</td>
+                    <td class="px-6 py-4"><code>cut -d, -f1 file.csv | sort -u</code></td>
+                </tr>
+                <tr>
+                    <td class="px-6 py-4">Filter by Date (regex)</td>
+                    <td class="px-6 py-4"><code>grep "2023-12-.." file.csv</code></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </section>
 </main>
 
+<script>
+    // Simple search functionality
+    document.getElementById('sidebarSearch').addEventListener('input', function(e) {
+        const term = e.target.value.toLowerCase();
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            const text = link.textContent.toLowerCase();
+            link.style.display = text.includes(term) ? 'block' : 'none';
+        });
+    });
+
+    // Highlight active sidebar link on scroll
+    window.addEventListener('scroll', () => {
+        let current = '';
+        document.querySelectorAll('section').forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 60) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Add copy buttons to code blocks
+    document.querySelectorAll('pre').forEach(block => {
+        const button = document.createElement('button');
+        button.className = 'copy-btn';
+        button.innerText = 'Copy';
+        button.addEventListener('click', () => {
+            const text = block.innerText.replace('Copy', '');
+            navigator.clipboard.writeText(text);
+            button.innerText = 'Copied!';
+            setTimeout(() => button.innerText = 'Copy', 2000);
+        });
+        block.appendChild(button);
+    });
+</script>
 </body>
 </html>
