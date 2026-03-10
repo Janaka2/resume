@@ -1,36 +1,56 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Entanglement Explained</title><link rel="stylesheet" href="style.css"></head><body><div class="container"><div class="hero"><span class="pill">Core concept</span><h1>Entanglement explained clearly</h1><p>Entanglement is one of the most important ideas in quantum computing. It is not just “two particles talking magically.” It means the combined quantum state of two or more qubits cannot be described fully as separate independent states.</p></div><nav class="nav"><a href="index.html">Home</a><a href="quantum-computing.html">Quantum Computing</a><a href="use-cases.html">Use Cases</a><a href="career-roadmap.html">Career Roadmap</a><a href="references.html">References</a></nav>
-<h2>Simple meaning</h2>
-<div class="card"><p>When two qubits are entangled, you cannot fully describe qubit A alone and qubit B alone as if they were separate. Their relationship is part of the information. Measuring one affects what you can say about the other.</p><div class="note">Important: entanglement does <strong>not</strong> let you send usable information faster than light. It creates strong correlations, not faster-than-light messaging.</div></div>
-<h2>Easy analogy — but with a warning</h2>
-<div class="card"><p>A common analogy is a pair of gloves in two boxes: if you open one box and see the left glove, you know the other box has the right glove. That analogy is useful only at the surface. Real entanglement is stronger because before measurement the system is in a quantum state, not just hiding a pre-decided classical answer.</p></div>
-<h2>Why entanglement matters in computing</h2>
-<div class="card"><ul>
-<li>It lets quantum systems represent correlations that are difficult for classical systems to model directly.</li>
-<li>It is a key ingredient in many quantum algorithms and communication protocols.</li>
-<li>It supports teleportation, superdense coding, quantum networking, and many error-correction ideas.</li>
-</ul></div>
-<h2>What entanglement is not</h2>
-<div class="card"><ul>
-<li>It is not ordinary correlation like “rain and umbrellas.”</li>
-<li>It is not proof that quantum computers are automatically fast at everything.</li>
-<li>It is not enough by itself; useful algorithms also need interference, circuit structure, and repeated measurement.</li>
-</ul></div>
-<h2>Very small technical picture</h2>
-<div class="card"><p>A famous entangled state is the Bell state:</p><div class="code">(|00⟩ + |11⟩) / √2</div><p>This means the pair is in a joint superposition of both being 0 and both being 1. If you measure one qubit and get 0, the other will also be 0. If you get 1, the other will also be 1. The key point is that the pair is described as one combined state.</p></div>
-<h2>How entanglement is created in circuits</h2>
-<div class="card"><ol>
-<li>Start with two qubits in |00⟩.</li>
-<li>Apply a Hadamard gate to the first qubit. Now the first qubit is in a superposition.</li>
-<li>Apply a CNOT gate using the first qubit as control and the second as target.</li>
-<li>The two qubits become entangled.</li>
-</ol><div class="code">|00⟩ --H----●--
-           |
-|00⟩ ------X--</div></div>
-<h2>Practical meaning for your career</h2>
-<div class="card"><p>As a software engineer, the main career value is not “becoming a physicist.” It is learning how to think about:</p><ul>
-<li>state spaces that grow exponentially,</li>
-<li>hybrid classical-quantum workflows,</li>
-<li>probabilistic computation and sampling,</li>
-<li>future-facing research platforms and scientific applications.</li>
-</ul></div>
-<div class="footer">Entanglement is a quantum resource. It is one of the reasons quantum systems can behave in ways classical systems cannot easily imitate.</div></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entanglement Explained</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header><div class="container nav"><a class="brand" href="index.html">Quantum Guide</a><nav class="nav-links"><a href="entanglement.html">Entanglement</a><a href="quantum-computing.html">Quantum Computing</a><a href="use-cases.html">Use Cases</a><a href="career-roadmap.html">Career Roadmap</a><a href="references.html">References</a></nav></div></header>
+<main><div class="container">
+  <section class="section">
+    <h1>Quantum Entanglement in Simple Words</h1>
+    <p class="lead">Entanglement means two or more quantum objects become linked in a way that their measurement results are correlated beyond what normal classical rules can explain.</p>
+  </section>
+
+  <section class="two-col">
+    <div class="card">
+      <h2>Simple picture</h2>
+      <p>Imagine two sealed boxes sent far apart. In a normal classical system, each box already contains a fixed answer inside. You only do not know it yet.</p>
+      <p>In an entangled quantum system, the situation is deeper. The full system has a joint state, and when you measure one part, the possible results for the other part are strongly linked to that joint state.</p>
+      <p>This does <strong>not</strong> mean useful information travels faster than light. It means the measurement outcomes show a kind of connection that classical hidden-answer thinking cannot fully reproduce.</p>
+    </div>
+    <div class="card">
+      <h2>Why it matters</h2>
+      <ul class="clean">
+        <li>It is one of the main reasons quantum computing is powerful.</li>
+        <li>It helps create states that classical computers struggle to describe efficiently.</li>
+        <li>It is important in quantum communication, quantum error correction, and some quantum algorithms.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="card">
+      <h2>What entanglement is not</h2>
+      <table>
+        <tr><th>Wrong idea</th><th>Better understanding</th></tr>
+        <tr><td>It sends messages instantly.</td><td>No. It does not let you send usable information faster than light.</td></tr>
+        <tr><td>It is just two unknown but fixed values.</td><td>No. The joint state can have correlations stronger than classical fixed-value models.</td></tr>
+        <tr><td>It is magic.</td><td>No. It is a real and measurable feature of quantum theory and experiments.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="card">
+      <h2>Practical engineer view</h2>
+      <p>Think of entanglement as a special resource. In normal software engineering, resources might be CPU, memory, bandwidth, or transactions. In quantum systems, entanglement is one of the resources that can enable useful behavior.</p>
+      <p>When you learn a quantum algorithm, ask: <em>Where is the entanglement created? Why is it needed? What would fail without it?</em></p>
+    </div>
+  </section>
+</div></main>
+<footer><div class="container">Next: read how entanglement fits into the full quantum computing model.</div></footer>
+</body>
+</html>
