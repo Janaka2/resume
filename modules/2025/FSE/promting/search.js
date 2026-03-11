@@ -1,10 +1,9 @@
 
-function searchContent(){
-var input = document.getElementById("searchBox").value.toLowerCase();
-var links = document.querySelectorAll(".sidebar ul li");
-
-links.forEach(function(li){
-var text = li.innerText.toLowerCase();
-li.style.display = text.includes(input) ? "" : "none";
-});
+function filterNav(){
+  const value = document.getElementById('searchBox').value.toLowerCase().trim();
+  const items = document.querySelectorAll('[data-nav-item]');
+  items.forEach(item => {
+    const text = item.innerText.toLowerCase();
+    item.style.display = text.includes(value) ? '' : 'none';
+  });
 }

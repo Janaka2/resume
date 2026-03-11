@@ -1,6 +1,13 @@
 
 function copyText(id){
-var text = document.getElementById(id).innerText;
-navigator.clipboard.writeText(text);
-alert("Prompt copied");
+  const el = document.getElementById(id);
+  if(!el) return;
+  navigator.clipboard.writeText(el.innerText).then(() => {
+    const btn = document.querySelector('[data-copy="'+id+'"]');
+    if(btn){
+      const old = btn.innerText;
+      btn.innerText = 'Copied';
+      setTimeout(() => btn.innerText = old, 1200);
+    }
+  });
 }

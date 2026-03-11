@@ -1,44 +1,90 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Developer Prompts</title>
 <link rel="stylesheet" href="styles.css">
+<script src="search.js"></script>
+<script src="copy.js"></script>
 </head>
 <body>
-
 <div class="layout">
+  <aside class="sidebar">
+    <h2 class="brand">Prompt Engineering Handbook</h2>
+    <p class="tagline">Clean white documentation layout for senior engineers.</p>
+    <input id="searchBox" class="search" type="text" placeholder="Search navigation..." onkeyup="filterNav()">
+    <div class="nav-section-title">Sections</div>
+    <ul>
+      <li data-nav-item><a href="index.html">Home</a></li>
+<li data-nav-item><a href="foundations.html">Foundations</a></li>
+<li data-nav-item><a href="templates.html">Templates</a></li>
+<li data-nav-item><a href="strategies.html">Strategies</a></li>
+<li data-nav-item><a href="developer.html" class="active">Developer Prompts</a></li>
+<li data-nav-item><a href="rag.html">RAG Prompting</a></li>
+<li data-nav-item><a href="agents.html">Agent Prompting</a></li>
+<li data-nav-item><a href="debugging.html">Debugging Playbook</a></li>
+<li data-nav-item><a href="cheatsheet.html">Cheat Sheet</a></li>
+    </ul>
+  </aside>
+  <main class="content">
+    <div class="container">
 
-<nav class="sidebar">
-<a href="index.html">← Back</a>
-</nav>
+<section class="hero">
+  <div class="kicker">Developer Library</div>
+  <h1>Prompt Patterns for Daily Engineering Work</h1>
+  <p>This section is tuned for senior developers who want fast, reusable prompts for real project work.</p>
+</section>
 
-<main class="content">
+<div class="panel">
+  <h2>Generate unit tests</h2>
+  <pre id="dev1"><code>Act as a senior test engineer.
 
-<h1>Developer Prompt Library</h1>
+Generate tests for the following method.
 
-<h2>Generate Unit Tests</h2>
+Requirements:
+- include happy path
+- include edge cases
+- include failure cases
+- explain what each test protects against
 
-<pre>
-Act as a senior test engineer.
+Code:
+{method_here}</code></pre>
+  <button class="copy-btn" data-copy="dev1" onclick="copyText('dev1')">Copy template</button>
 
-Generate JUnit tests for the following method.
-Include edge cases and negative tests.
-</pre>
+  <h2>Review pull request risk</h2>
+  <pre id="dev2"><code>Act as a senior reviewer.
 
-<h2>Refactor Code</h2>
+Analyse this code change for:
+- correctness
+- regression risk
+- security issues
+- performance impact
+- missing tests
 
-<pre>
-Act as a senior software architect.
+Then provide:
+1. overall risk level
+2. review comments
+3. suggested improvements</code></pre>
+  <button class="copy-btn" data-copy="dev2" onclick="copyText('dev2')">Copy template</button>
 
-Refactor the following code for readability,
-performance, and maintainability.
-</pre>
+  <h2>API design prompt</h2>
+  <pre id="dev3"><code>Act as an API architect.
 
-</main>
+Design a REST API for the following use case.
 
+Include:
+- endpoints
+- request and response examples
+- validation rules
+- error handling
+- versioning notes
+- security considerations</code></pre>
+  <button class="copy-btn" data-copy="dev3" onclick="copyText('dev3')">Copy template</button>
 </div>
 
+    </div>
+  </main>
+</div>
 </body>
 </html>

@@ -1,60 +1,107 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Prompt Templates</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Templates</title>
 <link rel="stylesheet" href="styles.css">
+<script src="search.js"></script>
 <script src="copy.js"></script>
 </head>
 <body>
-
 <div class="layout">
+  <aside class="sidebar">
+    <h2 class="brand">Prompt Engineering Handbook</h2>
+    <p class="tagline">Clean white documentation layout for senior engineers.</p>
+    <input id="searchBox" class="search" type="text" placeholder="Search navigation..." onkeyup="filterNav()">
+    <div class="nav-section-title">Sections</div>
+    <ul>
+      <li data-nav-item><a href="index.html">Home</a></li>
+<li data-nav-item><a href="foundations.html">Foundations</a></li>
+<li data-nav-item><a href="templates.html" class="active">Templates</a></li>
+<li data-nav-item><a href="strategies.html">Strategies</a></li>
+<li data-nav-item><a href="developer.html">Developer Prompts</a></li>
+<li data-nav-item><a href="rag.html">RAG Prompting</a></li>
+<li data-nav-item><a href="agents.html">Agent Prompting</a></li>
+<li data-nav-item><a href="debugging.html">Debugging Playbook</a></li>
+<li data-nav-item><a href="cheatsheet.html">Cheat Sheet</a></li>
+    </ul>
+  </aside>
+  <main class="content">
+    <div class="container">
 
-<nav class="sidebar">
-<a href="index.html">← Back</a>
-</nav>
+<section class="hero">
+  <div class="kicker">Templates</div>
+  <h1>Reusable Prompt Templates</h1>
+  <p>These are written so you can copy and adapt them quickly. They are practical, simple, and designed for day-to-day engineering work.</p>
+</section>
 
-<main class="content">
+<div class="panel">
+  <h2>Architecture Review Template</h2>
+  <pre id="tmpl1"><code>Act as a senior software architect.
 
-<h1>Prompt Templates</h1>
-
-<h2>Research Prompt</h2>
-
-<pre id="p1">
-Role: AI Research Analyst
+Context:
+{system_context}
 
 Task:
-Explain the topic clearly.
+Review the following design and identify:
+1. strengths
+2. risks
+3. scaling concerns
+4. security concerns
+5. maintainability issues
 
-Output:
-1. Concept explanation
-2. Practical examples
-3. Use cases
-4. Pitfalls
-</pre>
+Constraints:
+- stay within the given stack
+- avoid unnecessary rewrites
+- prefer practical improvements
 
-<button class="copy" onclick="copyText('p1')">Copy Prompt</button>
-
-<h2>Architecture Prompt</h2>
-
-<pre id="p2">
-Role: Senior AI Architect
-
-Design a system architecture for the following system.
-
-Include:
-- Components
-- Data flow
-- Technology stack
-- Risks
-</pre>
-
-<button class="copy" onclick="copyText('p2')">Copy Prompt</button>
-
-</main>
-
+Output format:
+- executive summary
+- detailed findings
+- recommended changes
+- priority order</code></pre>
+  <button class="copy-btn" data-copy="tmpl1" onclick="copyText('tmpl1')">Copy template</button>
 </div>
 
+<div class="panel">
+  <h2>Code Refactoring Template</h2>
+  <pre id="tmpl2"><code>Act as a senior engineer focused on readability and maintainability.
+
+Task:
+Refactor the following code.
+
+Requirements:
+- preserve behaviour
+- improve naming
+- reduce duplication
+- explain why each change helps
+- mention any hidden risks
+
+Code:
+{code_here}</code></pre>
+  <button class="copy-btn" data-copy="tmpl2" onclick="copyText('tmpl2')">Copy template</button>
+</div>
+
+<div class="panel">
+  <h2>Deep Research Template</h2>
+  <pre id="tmpl3"><code>Act as an AI research analyst.
+
+Goal:
+Explain {topic} in a way a senior engineer can apply.
+
+Include:
+- core concept
+- why it matters
+- practical examples
+- common mistakes
+- how to use it at work
+- short glossary of important terms</code></pre>
+  <button class="copy-btn" data-copy="tmpl3" onclick="copyText('tmpl3')">Copy template</button>
+</div>
+
+    </div>
+  </main>
+</div>
 </body>
 </html>

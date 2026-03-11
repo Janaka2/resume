@@ -1,123 +1,72 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Foundations: How Modern Prompting Really Works</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foundations</title>
+<link rel="stylesheet" href="styles.css">
+<script src="search.js"></script>
+<script src="copy.js"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="hero">
-      <div class="badges">
-        <span class="badge">Easy English</span>
-        <span class="badge">Senior Software Engineer Focus</span>
-        <span class="badge">Reusable Prompt Templates</span>
-        <span class="badge">GPT-5.4 + Gemini</span>
-      </div>
-      <h1>Foundations: How Modern Prompting Really Works</h1>
-      <p>This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting patterns, with templates you can copy and adapt fast.</p>
+<div class="layout">
+  <aside class="sidebar">
+    <h2 class="brand">Prompt Engineering Handbook</h2>
+    <p class="tagline">Clean white documentation layout for senior engineers.</p>
+    <input id="searchBox" class="search" type="text" placeholder="Search navigation..." onkeyup="filterNav()">
+    <div class="nav-section-title">Sections</div>
+    <ul>
+      <li data-nav-item><a href="index.html">Home</a></li>
+<li data-nav-item><a href="foundations.html" class="active">Foundations</a></li>
+<li data-nav-item><a href="templates.html">Templates</a></li>
+<li data-nav-item><a href="strategies.html">Strategies</a></li>
+<li data-nav-item><a href="developer.html">Developer Prompts</a></li>
+<li data-nav-item><a href="rag.html">RAG Prompting</a></li>
+<li data-nav-item><a href="agents.html">Agent Prompting</a></li>
+<li data-nav-item><a href="debugging.html">Debugging Playbook</a></li>
+<li data-nav-item><a href="cheatsheet.html">Cheat Sheet</a></li>
+    </ul>
+  </aside>
+  <main class="content">
+    <div class="container">
+
+<section class="hero">
+  <div class="kicker">Foundation</div>
+  <h1>Core Principles of Prompt Engineering</h1>
+  <p>Good prompting is not about magic wording. It is about reducing ambiguity, giving the model the right working context, and shaping the output so it is useful inside a real engineering workflow.</p>
+</section>
+
+<div class="panel">
+  <h2>1. Define the model’s job clearly</h2>
+  <p>Tell the model what role it should play and what kind of output you expect. A weak prompt says “explain this code.” A strong prompt says “act as a senior Java reviewer and explain the code’s behavior, risks, and possible refactoring opportunities.”</p>
+
+  <h2>2. Give useful context, not random detail</h2>
+  <p>The model performs better when it has the right constraints and background. Include framework, language version, business rules, target audience, and expected output format.</p>
+
+  <h2>3. Ask for structured output</h2>
+  <p>Structured output is easier to verify and reuse. Prefer headings, tables, JSON, checklists, or side-by-side comparisons instead of a loose paragraph.</p>
+
+  <h2>4. Separate thinking stages</h2>
+  <p>For bigger tasks, split prompts into phases such as analyse → plan → implement → validate. This often produces more reliable results than asking for everything in one shot.</p>
+
+  <h2>5. Add a quality bar</h2>
+  <p>Ask the model to check assumptions, mention uncertainty, or list trade-offs. This reduces shallow “looks correct” answers.</p>
+</div>
+
+<div class="panel">
+  <h2>Good prompt anatomy</h2>
+  <table>
+    <tr><th>Part</th><th>Purpose</th><th>Example</th></tr>
+    <tr><td>Role</td><td>Sets the perspective</td><td>Act as a senior Spring Boot architect.</td></tr>
+    <tr><td>Context</td><td>Provides the situation</td><td>This service handles payment reconciliation in batch mode.</td></tr>
+    <tr><td>Task</td><td>States what to do</td><td>Find design issues and propose a safer structure.</td></tr>
+    <tr><td>Constraints</td><td>Prevents drift</td><td>Keep the solution compatible with Java 21 and PostgreSQL.</td></tr>
+    <tr><td>Output shape</td><td>Makes the answer reusable</td><td>Return: summary, risks, improved code, and migration steps.</td></tr>
+  </table>
+</div>
+
     </div>
-    <div class="layout">
-      <aside class="sidebar">
-        <h3>Pages</h3>
-        <nav class="nav"><a class="" href="index.html">Home</a>
-<a class="active" href="foundations.html">Foundations</a>
-<a class="" href="gpt54.html">GPT-5.4 Guide</a>
-<a class="" href="gemini.html">Gemini Guide</a>
-<a class="" href="templates.html">Prompt Templates</a>
-<a class="" href="developer-tasks.html">Developer Tasks</a>
-<a class="" href="debugging.html">Debugging & Safety</a>
-<a class="" href="comparison.html">GPT vs Gemini</a>
-<a class="" href="glossary.html">Glossary</a>
-<a class="" href="references.html">References</a></nav>
-      </aside>
-      <main>
-<div class="card">
-  <h2>Core mental model</h2>
-  <p>Prompt engineering today is interface engineering. You are not only asking a question. You are defining:</p>
-  <ul>
-    <li>the job,</li>
-    <li>the allowed inputs,</li>
-    <li>the rules,</li>
-    <li>the output contract,</li>
-    <li>and how correctness will be checked.</li>
-  </ul>
-  <div class="note">
-    A good prompt should feel like a small technical spec, not a vague request.
-  </div>
+  </main>
 </div>
-
-<div class="card">
-  <h2>The 5 building blocks</h2>
-  <div class="grid">
-    <div class="tile"><h3>Role</h3><p>Who the model should act like in this task. Example: “Senior Java architect.”</p></div>
-    <div class="tile"><h3>Goal</h3><p>What success looks like. Example: “Find the root cause and produce the smallest safe patch.”</p></div>
-    <div class="tile"><h3>Context</h3><p>Trusted facts, code, rules, schemas, requirements, logs, or business constraints.</p></div>
-    <div class="tile"><h3>Constraints</h3><p>Hard boundaries. Example: “No invented APIs. Keep changes backward compatible.”</p></div>
-    <div class="tile"><h3>Output contract</h3><p>Exact structure expected. Example: JSON, diff, checklist, ADR, or table.</p></div>
-  </div>
-</div>
-
-<div class="card">
-  <h2>Instruction hierarchy</h2>
-  <p>Modern model families use instruction hierarchy. Higher-priority instructions override lower-priority ones. That is why your app-level rules should live in higher-authority messages, while untrusted content should be treated as data, not as instructions.</p>
-  <pre><code>Higher authority
-- Platform / root rules
-- Developer / system instructions
-- User request
-- Tool outputs, retrieved docs, pasted content
-Lower authority</code></pre>
-  <div class="warn">
-    Never mix user text or retrieved text into the same block as your trusted rules. That increases prompt injection risk.
-  </div>
-</div>
-
-<div class="card">
-  <h2>Why hallucinations happen</h2>
-  <ul>
-    <li><strong>Missing data:</strong> the model has no real evidence.</li>
-    <li><strong>Rewarded guessing:</strong> your prompt forces an answer instead of allowing “unknown”.</li>
-    <li><strong>Retrieval noise:</strong> RAG returns irrelevant chunks.</li>
-    <li><strong>Schema pressure:</strong> the model tries to fill all fields even when evidence is missing.</li>
-    <li><strong>Long-context failure:</strong> important facts are buried in the middle and get missed.</li>
-  </ul>
-</div>
-
-<div class="card">
-  <h2>Best general template</h2>
-  <pre><code>ROLE
-You are a senior software engineer working in &lt;stack&gt;.
-
-GOAL
-Solve: &lt;clear task&gt;.
-
-CONTEXT (trusted)
-- Environment:
-- Constraints:
-- Existing behavior:
-- Success criteria:
-
-INPUT (untrusted)
-&lt;&lt;&lt;
-paste user text / logs / docs / code here
-&gt;&gt;&gt;
-
-RULES
-- Do not invent facts, APIs, files, endpoints, or commands.
-- If information is missing, say exactly what is missing.
-- Keep assumptions explicit and testable.
-
-OUTPUT
-1. Brief answer
-2. Findings
-3. Proposed fix / plan
-4. Verification steps
-5. Risks / assumptions</code></pre>
-</div>
-</main>
-    </div>
-    <div class="footer">Built as a downloadable HTML collection for study and daily engineering use.</div>
-  </div>
 </body>
 </html>

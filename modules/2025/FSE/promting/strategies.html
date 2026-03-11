@@ -1,38 +1,71 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Prompt Strategies</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategies</title>
 <link rel="stylesheet" href="styles.css">
+<script src="search.js"></script>
+<script src="copy.js"></script>
 </head>
 <body>
-
 <div class="layout">
+  <aside class="sidebar">
+    <h2 class="brand">Prompt Engineering Handbook</h2>
+    <p class="tagline">Clean white documentation layout for senior engineers.</p>
+    <input id="searchBox" class="search" type="text" placeholder="Search navigation..." onkeyup="filterNav()">
+    <div class="nav-section-title">Sections</div>
+    <ul>
+      <li data-nav-item><a href="index.html">Home</a></li>
+<li data-nav-item><a href="foundations.html">Foundations</a></li>
+<li data-nav-item><a href="templates.html">Templates</a></li>
+<li data-nav-item><a href="strategies.html" class="active">Strategies</a></li>
+<li data-nav-item><a href="developer.html">Developer Prompts</a></li>
+<li data-nav-item><a href="rag.html">RAG Prompting</a></li>
+<li data-nav-item><a href="agents.html">Agent Prompting</a></li>
+<li data-nav-item><a href="debugging.html">Debugging Playbook</a></li>
+<li data-nav-item><a href="cheatsheet.html">Cheat Sheet</a></li>
+    </ul>
+  </aside>
+  <main class="content">
+    <div class="container">
 
-<nav class="sidebar">
-<a href="index.html">← Back</a>
-</nav>
+<section class="hero">
+  <div class="kicker">Strategies</div>
+  <h1>High-Value Prompting Strategies</h1>
+  <p>The best prompt pattern depends on the job. Below are the main strategies that matter most in real engineering usage.</p>
+</section>
 
-<main class="content">
+<div class="panel">
+  <h2>Role prompting</h2>
+  <p>Use this when expertise matters. It helps set the right perspective, vocabulary, and level of analysis.</p>
 
-<h1>Prompt Strategies</h1>
+  <h2>Few-shot prompting</h2>
+  <p>Give one or two examples when you want consistency. This is useful for code review formats, naming conventions, JSON structure, and data extraction tasks.</p>
 
-<h2>Role Prompting</h2>
-<p>Assign the model an expert role.</p>
+  <h2>Constraint prompting</h2>
+  <p>Use explicit limits like framework version, security rules, budget, response length, or forbidden approaches. Constraints reduce creative drift.</p>
 
-<h2>Chain of Thought</h2>
-<p>Ask the model to reason step by step.</p>
+  <h2>Planning then execution</h2>
+  <p>Best for multi-step tasks. Ask for a plan first, then implementation. This improves control and helps you catch bad assumptions early.</p>
 
-<h2>Structured Output</h2>
-<p>Request JSON or tables.</p>
-
-<h2>Constraint Prompting</h2>
-<p>Define strict limits.</p>
-
-</main>
-
+  <h2>Self-check prompting</h2>
+  <p>Ask the model to review its own output for missing assumptions, edge cases, and contradictions. This is useful, but do not blindly trust the self-check.</p>
 </div>
 
+<div class="panel">
+  <h2>When to use which strategy</h2>
+  <table>
+    <tr><th>Situation</th><th>Best strategy</th><th>Why</th></tr>
+    <tr><td>Code review</td><td>Role + structured output</td><td>Produces review comments in a predictable format.</td></tr>
+    <tr><td>Transforming data</td><td>Few-shot + constraints</td><td>Examples strongly improve consistency.</td></tr>
+    <tr><td>Large feature design</td><td>Plan then execute</td><td>Lets you validate direction before implementation.</td></tr>
+    <tr><td>Production incident analysis</td><td>Role + self-check</td><td>Encourages root-cause thinking and caution.</td></tr>
+  </table>
+</div>
+
+    </div>
+  </main>
+</div>
 </body>
 </html>
