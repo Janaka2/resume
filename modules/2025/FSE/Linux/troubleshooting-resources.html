@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.">
+  <title>Disk Memory CPU Troubleshooting</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+<a href="index.html">Home</a>
+<a href="top-100-linux-commands.html">Top 100 Linux Commands</a>
+<a href="top-50-debugging-commands.html">Top 50 Debugging</a>
+<a href="log-investigation-techniques.html">Log Investigation</a>
+<a href="troubleshooting-resources.html">Disk / CPU / Memory</a>
+<a href="awk-sed-mastery.html">awk + sed</a>
+<a href="production-one-liners.html">One-Liners</a>
+<a href="file-handling.html">File Handling</a>
+<a href="vi-editor-complete.html">VI Editor</a>
+</nav>
+  </div>
+</header>
+<main class="container">
+
+
+<section class="hero">
+  <h1>Disk / Memory / CPU Troubleshooting</h1>
+  <p>This page gives the fastest commands for capacity and performance issues. Each command includes a short one-line explanation for quick lookup.</p>
+</section>
+<section class="card">
+  <h2>Disk</h2><table><tr><th>Command</th><th>What it does</th><th>Example</th></tr><tr><td><code>df -h</code></td><td>Shows free and used disk space on filesystems.</td><td><code>df -h</code></td></tr><tr><td><code>du -sh /var/log/*</code></td><td>Shows sizes of log directories.</td><td><code>du -sh /var/log/*</code></td></tr><tr><td><code>find /var/log -type f -size +100M</code></td><td>Finds very large log files.</td><td><code>find /var/log -type f -size +100M</code></td></tr><tr><td><code>iostat -xz 1 3</code></td><td>Shows disk IO utilization and wait stats.</td><td><code>iostat -xz 1 3</code></td></tr><tr><td><code>lsof | grep deleted</code></td><td>Finds deleted files still held open by processes.</td><td><code>lsof | grep deleted</code></td></tr></table>
+  <p><strong>Use cases:</strong> disk full, growing logs, deleted-but-still-open files, slow storage, container volume issues.</p>
+  <h2>Memory</h2><table><tr><th>Command</th><th>What it does</th><th>Example</th></tr><tr><td><code>free -h</code></td><td>Shows RAM and swap usage in human-readable form.</td><td><code>free -h</code></td></tr><tr><td><code>vmstat 1 5</code></td><td>Shows memory, CPU and IO activity over time.</td><td><code>vmstat 1 5</code></td></tr><tr><td><code>top</code></td><td>Shows live process and memory usage.</td><td><code>top</code></td></tr><tr><td><code>ps aux --sort=-%mem | head</code></td><td>Shows the highest memory-using processes.</td><td><code>ps aux --sort=-%mem | head</code></td></tr><tr><td><code>pmap -x PID | tail -20</code></td><td>Shows detailed memory map for a process.</td><td><code>pmap -x PID | tail -20</code></td></tr></table>
+  <p><strong>Use cases:</strong> RAM pressure, swap activity, large Java process, leak suspicion, runaway cache.</p>
+  <h2>CPU</h2><table><tr><th>Command</th><th>What it does</th><th>Example</th></tr><tr><td><code>top</code></td><td>Shows live CPU usage by process.</td><td><code>top</code></td></tr><tr><td><code>htop</code></td><td>Shows a more readable live CPU view.</td><td><code>htop</code></td></tr><tr><td><code>mpstat -P ALL 1 3</code></td><td>Shows CPU usage per core.</td><td><code>mpstat -P ALL 1 3</code></td></tr><tr><td><code>ps aux --sort=-%cpu | head</code></td><td>Shows the highest CPU-using processes.</td><td><code>ps aux --sort=-%cpu | head</code></td></tr><tr><td><code>uptime</code></td><td>Shows system load averages and uptime.</td><td><code>uptime</code></td></tr></table>
+  <p><strong>Use cases:</strong> high CPU, one hot core, thread contention, busy container, load spikes.</p>
+  <h2>Fast Triage Sequence</h2>
+  <ol>
+    <li>Check <code>uptime</code> and <code>top</code>.</li>
+    <li>Check free disk with <code>df -h</code>.</li>
+    <li>Check biggest directories with <code>du -sh *</code>.</li>
+    <li>Check memory with <code>free -h</code> and <code>vmstat</code>.</li>
+    <li>Check per-core CPU with <code>mpstat -P ALL 1 3</code>.</li>
+    <li>Check application process ownership of ports and files.</li>
+  </ol>
+</section>
+
+
+  <div class="footer">Built as a practical Linux mastery reference for senior engineers.</div>
+</main>
+</body>
+</html>
