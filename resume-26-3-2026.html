@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss IT CV Template</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Adding html2pdf.js library to bypass iframe print restrictions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        /* A4 Print Optimization */
+        @media print {
+            body { background-color: white !important; }
+            .no-print { display: none !important; }
+            .page-container {
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+            }
+        }
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 py-8 text-gray-800 tracking-normal">
+
+    <!-- Action Bar (Hidden on Print) -->
+    <div class="max-w-[21cm] mx-auto mb-4 no-print flex justify-between items-center px-4">
+        <p class="text-sm text-gray-500">Edit the text directly in the code, then export.</p>
+        <button onclick="exportToPDF()" id="exportBtn" class="bg-slate-800 hover:bg-slate-700 text-white text-sm font-semibold py-2 px-4 rounded shadow transition">
+            Export to PDF
+        </button>
+    </div>
+
+    <!-- A4 Document Container -->
+    <div class="page-container max-w-[21cm] mx-auto bg-white p-12 shadow-xl border border-gray-200">
+        
+        <!-- Header Section -->
+        <header class="flex justify-between items-start border-b-2 border-slate-800 pb-6 mb-6">
+            <div>
+                <h1 class="text-4xl font-bold uppercase tracking-wider text-slate-900 mb-1">Janaka Premathilaka</h1>
+                <h2 class="text-xl text-slate-600 font-medium">Senior Java Developer</h2>
+            </div>
+            <!-- Professional Photo Placeholder -->
+            <img src="https://janaka.me/assets/janaka2.jpg" class="w-28 h-32 object-cover border border-gray-300" alt="Profile Photo">
+        </header>
+
+        <!-- Personal Information Data Grid (CRUCIAL FOR SWITZERLAND) -->
+        <section class="grid grid-cols-2 gap-4 text-sm mb-8 border-b border-gray-200 pb-6">
+            <div class="space-y-1">
+                <p><span class="font-semibold w-32 inline-block">Address:</span> Zug 6300, Switzerland</p>
+                <p><span class="font-semibold w-32 inline-block">Phone:</span> +41 76 224 84 45</p>
+                <p><span class="font-semibold w-32 inline-block">Email:</span> <a href="mailto:janaka2@gmail.com" class="hover:text-slate-600 hover:underline transition">janaka2@gmail.com</a></p>
+                <p><span class="font-semibold w-32 inline-block">LinkedIn:</span> <a href="https://linkedin.com/in/janakapremathilaka" target="_blank" class="hover:text-slate-600 hover:underline transition">in/janakapremathilaka</a></p>
+            </div>
+            <div class="space-y-1">
+                <p><span class="font-semibold w-32 inline-block">Date of Birth:</span> 15.02.1980</p>
+                <p><span class="font-semibold w-32 inline-block">Nationality:</span> Belgian (Swiss C Permit)</p>
+                <p><span class="font-semibold w-32 inline-block">Availability:</span> 2 Months Notice</p>
+                <p><span class="font-semibold w-32 inline-block">On-Call(Pikett):</span> Yes</p>
+            </div>
+        </section>
+
+        <!-- Professional Summary -->
+        <section class="mb-8">
+            <h3 class="text-lg font-bold uppercase text-slate-800 border-b border-gray-300 pb-1 mb-3">Professional Profile</h3>
+            <p class="text-sm leading-relaxed text-gray-700 text-justify">
+                Senior Full Stack Java Developer with 22+ years of experience engineering high-volume, low-latency distributed applications for mission-critical banking systems. Highly proficient in <strong>Java 11-17</strong>, Spring Boot, and cloud-native microservices architectures. Recently spearheaded data-driven automation using LLMs and Agentic RAG, perfectly aligning with the development of next-generation recommendation engines. Strong advocate for DevOps culture, TDD, code quality, and active mentoring in Agile/SAFe environments. Fully willing to participate in application support and on-call duties (Pikettdienst).
+            </p>
+        </section>
+
+        <!-- Professional Experience -->
+        <section class="mb-8">
+            <h3 class="text-lg font-bold uppercase text-slate-800 border-b border-gray-300 pb-1 mb-4">Professional Experience</h3>
+            
+            <!-- Job 1 -->
+            <div class="mb-5 flex break-inside-avoid">
+                <div class="w-1/4 pt-1">
+                    <p class="text-sm font-semibold text-slate-600">01.2024 – Present</p>
+                    <p class="text-xs text-gray-500">Zurich, Switzerland</p>
+                </div>
+                <div class="w-3/4">
+                    <h4 class="text-md font-bold text-slate-900">Senior Full-Stack Java Developer (Lead)</h4>
+                    <p class="text-sm font-medium text-slate-700 mb-2">UBS / Cognizant</p>
+                    <ul class="list-disc list-outside ml-4 text-sm text-gray-700 space-y-1">
+                        <li>Took full ownership of 6 complex enterprise applications during the Credit Suisse to UBS merger, ensuring system stability and zero operational interruptions.</li>
+                        <li>Spearheaded a high-pressure application archiving initiative, taking 100% ownership of on-time delivery. Engineered robust Linux scripts to interface with Oracle DBs via CLI, successfully extracting and formatting multi-gigabyte datasets with attachments for target feeds, resulting in exceptional client satisfaction and formal commendations.</li>
+                        <li>Implemented robust, data-driven solutions utilizing <strong>RPA with LLMs and Agentic RAG</strong>, driving intelligent automation and insights.</li>
+                        <li>Acted as a technical driver for standardization, actively mentoring junior developers and instilling a strong engineering culture and code quality pride.</li>
+                        <li>Managed mission-critical production incidents, demonstrating strong capacity for application support and observability.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Job 2 -->
+            <div class="mb-5 flex break-inside-avoid">
+                <div class="w-1/4 pt-1">
+                    <p class="text-sm font-semibold text-slate-600">05.2019 – 01.2024</p>
+                    <p class="text-xs text-gray-500">Zurich, Switzerland</p>
+                </div>
+                <div class="w-3/4">
+                    <h4 class="text-md font-bold text-slate-900">IT Solution Developer</h4>
+                    <p class="text-sm font-medium text-slate-700 mb-2">Credit Suisse / Cognizant</p>
+                    <ul class="list-disc list-outside ml-4 text-sm text-gray-700 space-y-1">
+                        <li>Took 100% ownership of the end-to-end design, development, and deployment of a mission-critical <strong>Master Data Management (MDM)</strong> tool. Functioned as the golden data source, efficiently preparing and feeding data to big data endpoints for advanced searching and reporting.</li>
+                        <li>Independently established the complete CI/CD deployment pipeline for the MDM and rapidly adopted <strong>Angular</strong> to deliver the UI, demonstrating a strong self-starter mindset and earning widespread client appreciation.</li>
+                        <li>Spearheaded the greenfield development of a Client Lifecycle Management and Event Management suite. Architected and delivered three robust, scalable applications within a <strong>cloud-native environment</strong>, leveraging a <strong>microservices architecture</strong> with Spring Boot, React, and Oracle.</li>
+                        <li>Engineered a scalable, low-latency <strong>Front-Office FX trading platform</strong> using <strong>Java 11-17</strong>, optimizing trade executions and boosting system responsiveness by 20%.</li>
+                        <li>Applied deep knowledge of <strong>multi-threading and memory management</strong> to ensure robust performance under high-volume transaction loads.</li>
+                        <li>Fostered a DevOps culture by building and maintaining deployment pipelines using Kubernetes, Docker, Splunk, and <strong>Grafana</strong>.</li>
+                        <li>Championed Test-Driven Development (TDD) utilizing <strong>JUnit and Mockito</strong>, actively participating in collaborative code reviews and pair programming in a Scrum setup.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Job 3 -->
+            <div class="mb-5 flex break-inside-avoid">
+                <div class="w-1/4 pt-1">
+                    <p class="text-sm font-semibold text-slate-600">01.2018 – 05.2019</p>
+                    <p class="text-xs text-gray-500">Zurich, Switzerland</p>
+                </div>
+                <div class="w-3/4">
+                    <h4 class="text-md font-bold text-slate-900">IT Solution Development Specialist</h4>
+                    <p class="text-sm font-medium text-slate-700 mb-2">UBS / Cognizant</p>
+                    <ul class="list-disc list-outside ml-4 text-sm text-gray-700 space-y-1">
+                        <li>Modernized over 20 legacy components to Spring Boot microservices, factoring non-functional requirements into robust solution architectures.</li>
+                        <li>Automated delivery pipelines using <strong>Jenkins</strong> for static code analysis, deployments, and custom reporting.</li>
+                        <li>Enhanced testing capabilities utilizing Cucumber BDD, ensuring high functional and technical quality before deployment.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Job 4 (European Commission) -->
+            <div class="mb-5 flex break-inside-avoid">
+                <div class="w-1/4 pt-1">
+                    <p class="text-sm font-semibold text-slate-600">06.2011 – 01.2018</p>
+                    <p class="text-xs text-gray-500">Brussels, Belgium</p>
+                </div>
+                <div class="w-3/4">
+                    <h4 class="text-md font-bold text-slate-900">Senior Full-Stack Java Developer</h4>
+                    <p class="text-sm font-medium text-slate-700 mb-2">European Commission (DIGIT Division)</p>
+                    <ul class="list-disc list-outside ml-4 text-sm text-gray-700 space-y-1">
+                        <li>Engineered and maintained the core e-procurement system, a mission-critical European public sector application, delivering high-quality front-end and back-end solutions over a 6.5-year tenure.</li>
+                        <li>Developed scalable microservices and integrated distributed systems utilizing Spring Integration for message routing, transformation, and synchronization.</li>
+                        <li>Streamlined complex business logic by implementing robust JBPM workflows.</li>
+                        <li>Ensured rigorous code quality through extensive unit and integration testing (JUnit, Mockito), managing continuous software releases via Jenkins.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Job 5 (Consulting & Earlier Roles) -->
+            <div class="mb-5 flex break-inside-avoid">
+                <div class="w-1/4 pt-1">
+                    <p class="text-sm font-semibold text-slate-600">05.2004 – 06.2011</p>
+                    <p class="text-xs text-gray-500">Belgium & Sri Lanka</p>
+                </div>
+                <div class="w-3/4">
+                    <h4 class="text-md font-bold text-slate-900">Senior Java/JEE Consultant & Engineer</h4>
+                    <p class="text-sm font-medium text-slate-700 mb-2">Johnson & Johnson, Nokia Siemens, Union Bank of Colombo</p>
+                    <ul class="list-disc list-outside ml-4 text-sm text-gray-700 space-y-1">
+                        <li>Acted as a core technical consultant across Healthcare, Telecommunications, and Banking sectors, designing and implementing enterprise-grade Java/JEE solutions.</li>
+                        <li>Collaborated within Agile/Scrum environments to modernize architectures, integrating complex SOAP/REST web services and optimizing Oracle/MySQL database interactions.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section class="mb-8">
+            <h3 class="text-lg font-bold uppercase text-slate-800 border-b border-gray-300 pb-1 mb-4">Education & Certifications</h3>
+            
+            <div class="mb-4 flex break-inside-avoid">
+                <div class="w-1/4 pt-1">
+                    <p class="text-sm font-semibold text-slate-600">1999 – 2003</p>
+                    <p class="text-xs text-gray-500">Sri Lanka</p>
+                </div>
+                <div class="w-3/4">
+                    <h4 class="text-md font-bold text-slate-900">BSc in Computer Science, Statistics, Mathematics</h4>
+                    <p class="text-sm text-slate-700">University of Sri Jayewardenepura</p>
+                    <p class="text-sm text-gray-600 mt-1">Certifications: Spring Certified Professional (In Progress), Sun Java Certifications (SCJP, SCBCD, SCEA1, SCWCD), AI & ChatGPT Completions (2023)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills & Languages (Side by side for space efficiency) -->
+        <section class="grid grid-cols-2 gap-8 mb-4 break-inside-avoid">
+            
+            <!-- Technical Skills -->
+            <div>
+                <h3 class="text-lg font-bold uppercase text-slate-800 border-b border-gray-300 pb-1 mb-3">Technical Skills</h3>
+                <ul class="text-sm text-gray-700 space-y-2">
+                    <li><span class="font-semibold text-slate-800">Languages:</span> Java (11-17), SQL, TypeScript, Python</li>
+                    <li><span class="font-semibold text-slate-800">Architecture:</span> Microservices, Multi-threading, GraphQL, REST</li>
+                    <li><span class="font-semibold text-slate-800">Frameworks:</span> Spring Boot, Hibernate, React, Angular</li>
+                    <li><span class="font-semibold text-slate-800">DevOps & Cloud:</span> Kubernetes, Jenkins, Grafana, Docker</li>
+                    <li><span class="font-semibold text-slate-800">Testing & Agile:</span> TDD, JUnit, Mockito, Jira, Scrum/SAFe</li>
+                </ul>
+            </div>
+
+            <!-- Languages -->
+            <div>
+                <h3 class="text-lg font-bold uppercase text-slate-800 border-b border-gray-300 pb-1 mb-3">Languages</h3>
+                <ul class="text-sm text-gray-700 space-y-2">
+                    <li class="flex justify-between">
+                        <span class="font-semibold">English</span> 
+                        <span>Full Professional (C1/C2)</span>
+                    </li>
+                    <li class="flex justify-between">
+                        <span class="font-semibold">German</span> 
+                        <span>Intermediate (B1)</span>
+                    </li>
+                    <li class="flex justify-between">
+                        <span class="font-semibold">French & Dutch</span> 
+                        <span>Basic Knowledge</span>
+                    </li>
+                     <li class="flex justify-between">
+                        <span class="font-semibold">Sinhalese</span> 
+                        <span>Native</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- References Note -->
+        <section class="mt-8 pt-4 break-inside-avoid">
+            <p class="text-sm text-gray-500 italic">Excellent references from UBS, Credit Suisse, and European Commission available upon request.</p>
+        </section>
+
+    </div>
+
+    <!-- PDF Export Script -->
+    <script>
+        function exportToPDF() {
+            const btn = document.getElementById('exportBtn');
+            const originalText = btn.innerText;
+            btn.innerText = 'Generating PDF...';
+            btn.disabled = true;
+
+            const element = document.querySelector('.page-container');
+            
+            // Options for PDF generation
+            const opt = {
+                margin:       [15, 0, 15, 0], // Top, Left, Bottom, Right margins added here!
+                filename:     'Janaka_Premathilaka_CV.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true }, 
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] } // This prevents slicing elements in half
+            };
+
+            // Generate and download PDF
+            html2pdf().set(opt).from(element).save().then(() => {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }).catch(err => {
+                console.error('PDF Export Error:', err);
+                btn.innerText = 'Error! Try Ctrl+P';
+                btn.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>
