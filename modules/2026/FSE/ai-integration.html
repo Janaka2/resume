@@ -1,259 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Janaka Academy &ndash; Coming Soon</title>
-    <style>
-        /* Simple reset and typography */
-        body {
-          margin: 0;
-          padding: 0;
-          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          min-height: 100vh;
-          background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
-          color: #333;
-        }
-
-        h1 {
-          font-size: 2.4rem;
-          margin-bottom: 0.5rem;
-          text-align: center;
-        }
-
-        p {
-          max-width: 700px;
-          margin: 0 1rem 1rem;
-          font-size: 1.1rem;
-          text-align: center;
-          line-height: 1.4;
-        }
-
-        /* Game container styles */
-        #gameContainer {
-          position: relative;
-          width: 90%;
-          max-width: 600px;
-          height: 200px;
-          border: 2px solid #90caf9;
-          border-radius: 12px;
-          background-color: #ffffff;
-          overflow: hidden;
-          margin-top: 1.5rem;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-         #player {
-            position: absolute;
-            bottom: 0;
-            left: 50px;
-            width: 60px;
-            height: 60px;
-            font-size: 48px;
-            line-height: 60px; /* keeps the kangaroo centered vertically */
-            transform: scaleX(-1); /* flips the kangaroo to face forward */
-         }
-
-        .obstacle {
-          position: absolute;
-          bottom: 0;
-          right: -40px;
-          width: 40px;
-          height: 40px;
-          /* Rounded shapes for a softer, abstract obstacle */
-          border-radius: 50%;
-          background-color: #ef5350;
-        }
-
-        #score {
-          margin-top: 0.5rem;
-          font-weight: 600;
-        }
-
-        #instructions {
-          margin-top: 0.25rem;
-          font-size: 0.9rem;
-          color: #555;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Integration for Enterprise Java Systems | Janaka Academy</title>
+  <style>
+    :root { --accent: #4f46e5; --bg:#f8fafc; --text:#0f172a; --muted:#475569; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--text); background:linear-gradient(180deg,#fff, var(--bg)); }
+    .container { max-width: 980px; margin:0 auto; padding: 2rem 1rem 4rem; }
+    .badge { display:inline-block; border:1px solid color-mix(in srgb, var(--accent) 35%, #fff); background: color-mix(in srgb, var(--accent) 10%, #fff); color: var(--accent); border-radius: 999px; padding: .25rem .75rem; font-weight: 600; font-size: .8rem; }
+    h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: .5rem 0 1rem; }
+    p { color: var(--muted); line-height: 1.65; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; margin-top:1.25rem; }
+    .card { background:#fff; border:1px solid #e2e8f0; border-radius:14px; padding:1rem 1.1rem; box-shadow:0 1px 2px rgba(15,23,42,.04); }
+    ul { margin:.5rem 0 0 1.2rem; color:var(--muted); }
+    li { margin:.5rem 0; }
+    table { width:100%; border-collapse: collapse; margin-top: .75rem; }
+    td { border-top:1px solid #e2e8f0; padding: .7rem; vertical-align: top; color:var(--muted); }
+    td:first-child { font-weight:600; color:#0f172a; width: 150px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .actions { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1.4rem; }
+    .btn { display:inline-block; background:var(--accent); color:white; padding:.65rem 1rem; border-radius:10px; font-weight:600; }
+    .btn.secondary { background:white; color:var(--accent); border:1px solid color-mix(in srgb, var(--accent) 45%, #fff); }
+  </style>
 </head>
 <body>
-<h1>Janaka Academy is Coming Soon!</h1>
-<p>
-    We're hard at work building something extraordinary for you. While you wait,
-    enjoy this little game! Just jump over the obstacles to rack up points &ndash;
-    nothing too serious, simply a playful distraction to put a smile on your
-    face. Press the spacebar or tap/click inside the game area to jump.
-</p>
-<!-- Game area -->
-<div id="gameContainer" style="display: none;">
-    <!-- Player now displays a kangaroo emoji -->
-    <div id="player">🦘</div>
-</div>
-<!-- Score and instructions -->
-<div id="score" style="display: none;">Score: 0</div>
-<div id="instructions" style="display: none;">Press spacebar or tap/click to jump</div>
-<!-- Start screen -->
-<div id="startScreen">
-    <button id="startButton" style="padding: 0.8rem 1.6rem; font-size: 1rem; border: none; border-radius: 8px; background-color: #42a5f5; color: #fff; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">Start Game</button>
-</div>
-<!-- Result screen -->
-<div id="resultScreen" style="display: none; flex-direction: column; align-items: center;">
-    <h2 style="margin-bottom: 0.5rem;">Game Over!</h2>
-    <p id="finalScore" style="margin-bottom: 1rem;"></p>
-    <div>
-        <button id="playAgainButton" style="margin-right: 0.5rem; padding: 0.6rem 1.2rem; font-size: 1rem; border: none; border-radius: 8px; background-color: #66bb6a; color: #fff; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">Play Again</button>
-        <a id="backButton" href="#" style="padding: 0.6rem 1.2rem; font-size: 1rem; border-radius: 8px; background-color: #ef5350; color: #fff; text-decoration: none; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">Go Back</a>
+  <main class="container">
+    <span class="badge">AI Engineering</span>
+    <h1>AI Integration for Enterprise Java Systems</h1>
+    <p>
+      This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured,
+      and where to find guided day-by-day deep dives.
+    </p>
+
+    <section class="grid" aria-label="Module highlights">
+      <article class="card">
+        <h2>Learning outcomes</h2>
+        <ul>
+          <li>Integrate LLM capabilities into Java services with safe prompt orchestration.</li>
+          <li>Build retrieval-augmented flows with embeddings, chunking, and vector search.</li>
+          <li>Apply guardrails for privacy, policy, hallucination control, and auditability.</li>
+          <li>Measure quality/cost/latency and run iterative evaluation loops in production.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h2>Study plan</h2>
+        <table>
+          <tr><td>Week 1</td><td>LLM integration patterns, prompt design, tool calling, model selection.</td></tr>
+          <tr><td>Week 2</td><td>RAG pipelines, indexing strategies, document lifecycle and relevance tuning.</td></tr>
+          <tr><td>Week 3</td><td>Safety controls, PII handling, secure architecture, fallback strategies.</td></tr>
+          <tr><td>Week 4</td><td>Evaluation harnesses, observability, cost controls, production operations.</td></tr>
+        </table>
+      </article>
+    </section>
+
+    <section class="card" style="margin-top:1rem;">
+      <h2>Recommended daily deep dives</h2>
+      <ul>
+          <li><a href="./2026-03-14-ai-integration.html">2026 03 14 ai integration</a></li>
+          <li><a href="./2026-03-22-ai-integration.html">2026 03 22 ai integration</a></li>
+          <li><a href="./2026-03-30-ai-integration.html">2026 03 30 ai integration</a></li>
+          <li><a href="./2026-04-06-ai-integration.html">2026 04 06 ai integration</a></li>
+      </ul>
+    </section>
+
+    <div class="actions">
+      <a class="btn" href="./Elite-Full‑Stack-Engineering-2026-Edition.html">Back to 2026 Curriculum</a>
+      <a class="btn secondary" href="./index.html">Open Academy Index</a>
     </div>
-</div>
-
-<script>
-    /*
-      Simple endless runner game with start and result screens.
-      The player jumps over moving obstacles. Score increases
-      over time. When the player hits an obstacle, a result panel
-      is displayed instead of using alert boxes.
-    */
-    const gameContainer = document.getElementById('gameContainer');
-    const player = document.getElementById('player');
-    const scoreDisplay = document.getElementById('score');
-    const instructions = document.getElementById('instructions');
-    const startScreen = document.getElementById('startScreen');
-    const startButton = document.getElementById('startButton');
-    const resultScreen = document.getElementById('resultScreen');
-    const finalScoreEl = document.getElementById('finalScore');
-    const playAgainButton = document.getElementById('playAgainButton');
-
-    let obstacles = [];
-    let isJumping = false;
-    let jumpVelocity = 0;
-    const gravity = 0.6;
-    let playerY = 0;
-    let score = 0;
-    let gameLoopInterval;
-    let obstacleInterval;
-    let gameActive = false;
-
-    function startGame() {
-      gameActive = true;
-      // Show game elements
-      gameContainer.style.display = 'block';
-      scoreDisplay.style.display = 'block';
-      instructions.style.display = 'block';
-      // Hide start and result screens
-      startScreen.style.display = 'none';
-      resultScreen.style.display = 'none';
-      // Reset state
-      obstacles.forEach((o) => gameContainer.removeChild(o));
-      obstacles = [];
-      isJumping = false;
-      jumpVelocity = 0;
-      playerY = 0;
-      score = 0;
-      player.style.bottom = '0px';
-      scoreDisplay.innerText = 'Score: 0';
-      clearInterval(gameLoopInterval);
-      clearInterval(obstacleInterval);
-      gameLoopInterval = setInterval(gameLoop, 20);
-      obstacleInterval = setInterval(createObstacle, 1500);
-    }
-
-    function createObstacle() {
-      const obs = document.createElement('div');
-      obs.classList.add('obstacle');
-      const size = 20 + Math.random() * 20;
-      obs.style.width = size + 'px';
-      obs.style.height = size + 'px';
-      obs.style.right = '-40px';
-      gameContainer.appendChild(obs);
-      obstacles.push(obs);
-    }
-
-    function jump() {
-      if (!gameActive) return;
-      if (!isJumping && playerY === 0) {
-        isJumping = true;
-        jumpVelocity = 11;
-      }
-    }
-
-    function gameLoop() {
-      // Player jump physics
-      if (isJumping) {
-        playerY += jumpVelocity;
-        jumpVelocity -= gravity;
-        if (playerY <= 0) {
-          playerY = 0;
-          isJumping = false;
-        }
-        player.style.bottom = playerY + 'px';
-      }
-      // Move obstacles and check for collisions
-      for (let i = 0; i < obstacles.length; i++) {
-        const obs = obstacles[i];
-        const currentRight = parseFloat(obs.style.right);
-        obs.style.right = currentRight + 4 + 'px';
-        if (currentRight > gameContainer.offsetWidth + 50) {
-          gameContainer.removeChild(obs);
-          obstacles.splice(i, 1);
-          i--;
-          continue;
-        }
-        const playerRect = player.getBoundingClientRect();
-        const obsRect = obs.getBoundingClientRect();
-        if (
-          playerRect.right > obsRect.left &&
-          playerRect.left < obsRect.right &&
-          playerRect.bottom > obsRect.top &&
-          playerRect.top < obsRect.bottom
-        ) {
-          endGame();
-          return;
-        }
-      }
-      score++;
-      scoreDisplay.innerText = 'Score: ' + score;
-    }
-
-    function endGame() {
-      gameActive = false;
-      clearInterval(gameLoopInterval);
-      clearInterval(obstacleInterval);
-      // Hide game area elements
-      gameContainer.style.display = 'none';
-      scoreDisplay.style.display = 'none';
-      instructions.style.display = 'none';
-      // Show result screen with score
-      finalScoreEl.innerText = 'Your score: ' + score;
-      resultScreen.style.display = 'flex';
-    }
-
-    // Event listeners
-    document.addEventListener('keydown', (e) => {
-      if (e.code === 'Space') {
-        jump();
-      }
-    });
-    gameContainer.addEventListener('click', () => {
-      jump();
-    });
-    gameContainer.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      jump();
-    });
-    startButton.addEventListener('click', () => {
-      startGame();
-    });
-    playAgainButton.addEventListener('click', () => {
-      startGame();
-    });
-
-    // Optional: Set backButton href to your desired location
-    // backButton href is set in HTML; you can modify its attribute there.
-</script>
+  </main>
 </body>
 </html>
