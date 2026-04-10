@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Design Patterns & Architecture Playground · Janaka Academy</title>
+  <meta name="description" content="A simple, practical blog-style guide to choosing Java design patterns for real business situations." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    html, body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="border-b border-gray-200 bg-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8">
+      <a href="./Elite-Full‑Stack-Engineering-2026-Edition.html#modules" class="text-sm text-blue-700 hover:underline">← Back to Curriculum Modules</a>
+      <h1 class="mt-3 text-3xl md:text-4xl font-extrabold tracking-tight">Java Design Patterns & Architecture Playground</h1>
+      <p class="mt-4 text-lg text-gray-600">A practical guide for one important question: <span class="font-semibold">“In this business situation, which pattern should I choose, and why?”</span></p>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-10">
+    <section class="bg-white border rounded-2xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold">Why this module matters</h2>
+      <p class="mt-4 text-gray-700">Most developers learn design patterns as theory. In real projects, the challenge is different: you must pick the right pattern quickly, explain trade-offs clearly, and deliver maintainable code. This module helps you do exactly that with simple examples, tests, and decision guides.</p>
+      <ul class="mt-4 list-disc pl-6 text-gray-700 space-y-2">
+        <li>Learn by reading concise Java implementations.</li>
+        <li>Learn by running JUnit tests that show behavior.</li>
+        <li>Use a practical decision flow for business problems.</li>
+      </ul>
+    </section>
+
+    <section class="bg-white border rounded-2xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold">Quick pattern-selection playbook</h2>
+      <p class="mt-3 text-gray-700">Use this simple shortlist when facing common business needs:</p>
+      <div class="mt-4 grid md:grid-cols-2 gap-4 text-sm">
+        <div class="rounded-xl border p-4"><span class="font-semibold">Object creation flexibility:</span> Factory Method, Abstract Factory, Builder.</div>
+        <div class="rounded-xl border p-4"><span class="font-semibold">Legacy/vendor integration:</span> Adapter, Facade, Anti-Corruption Layer.</div>
+        <div class="rounded-xl border p-4"><span class="font-semibold">Runtime behavior changes:</span> Strategy, State, Command.</div>
+        <div class="rounded-xl border p-4"><span class="font-semibold">Distributed reliability:</span> Retry, Circuit Breaker, Bulkhead, Timeout, Saga, Transactional Outbox.</div>
+        <div class="rounded-xl border p-4"><span class="font-semibold">Scalable architecture boundaries:</span> Hexagonal, Clean Architecture, Strangler Fig.</div>
+        <div class="rounded-xl border p-4"><span class="font-semibold">Event/audit-heavy workflows:</span> Observer, CQRS, Event Sourcing.</div>
+      </div>
+      <p class="mt-5 text-gray-700">Then validate your choice with 3 checks: <span class="font-semibold">Fit</span> (solves core need), <span class="font-semibold">Cost</span> (acceptable complexity), and <span class="font-semibold">Evolvability</span> (still useful as your domain grows).</p>
+    </section>
+
+    <section class="bg-white border rounded-2xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold">What you will find inside</h2>
+      <div class="mt-4 space-y-3 text-gray-700">
+        <p><span class="font-semibold">Classic pattern families:</span> Creational, Structural, Behavioral, and SOLID principles.</p>
+        <p><span class="font-semibold">Enterprise patterns:</span> resilience, data consistency, architecture boundaries, and integration styles used in production systems.</p>
+        <p><span class="font-semibold">Modern additions:</span> cloud-native observability and AI application patterns (prompt building, retrieval orchestration, tool/agent facade, fallback strategy, safety wrappers, and evaluation harness).</p>
+      </div>
+    </section>
+
+    <section class="bg-white border rounded-2xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold">Simple learning path (industry-first)</h2>
+      <ol class="mt-4 list-decimal pl-6 text-gray-700 space-y-2">
+        <li>Start with SOLID and Strategy.</li>
+        <li>Then learn Factory Method, Abstract Factory, and Builder.</li>
+        <li>Add Observer, Adapter, Decorator, and Facade.</li>
+        <li>Move to Command, Chain of Responsibility, and State.</li>
+        <li>Finally, go deeper with CQRS, Event Sourcing, and architecture patterns.</li>
+      </ol>
+      <p class="mt-4 text-gray-700">This order gives strong practical value for backend and platform engineering work.</p>
+    </section>
+
+    <section class="bg-white border rounded-2xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold">How to run locally</h2>
+      <div class="mt-4 rounded-xl border bg-gray-50 p-4 text-sm font-mono">
+        <p>mvn test</p>
+        <p>mvn verify</p>
+        <p>mvn -Dtest=SingletonTest test</p>
+      </div>
+      <p class="mt-4 text-gray-700">Prerequisites: <span class="font-semibold">JDK 21+</span> and <span class="font-semibold">Maven 3.9+</span>. If you are in a corporate environment, configure proxy or mirror settings in <code>~/.m2/settings.xml</code>.</p>
+    </section>
+
+    <section class="bg-blue-50 border border-blue-200 rounded-2xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold text-blue-900">Final takeaway</h2>
+      <p class="mt-3 text-blue-900">Design patterns are not just interview topics. They are decision tools for shipping reliable software in real business systems. Use this module as your playbook whenever you need a fast, explainable, and scalable design choice.</p>
+      <a href="https://github.com/Janaka2/DesignPatterns" target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-2 rounded-xl bg-blue-700 px-4 py-2 text-white text-sm font-medium hover:bg-blue-800">Open GitHub Repository<span aria-hidden>↗</span></a>
+    </section>
+  </main>
+</body>
+</html>
