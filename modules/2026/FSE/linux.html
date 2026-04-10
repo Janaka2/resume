@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Linux & CLI Mastery for Java Developers</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          line-height: 1.6;
+          margin: 0;
+          padding: 0 1rem;
+          background: #f9f9f9;
+          color: #333;
+        }
+        header {
+          background: #24292e;
+          color: white;
+          padding: 1rem;
+          text-align: center;
+        }
+        nav {
+          background: #eee;
+          padding: 1rem;
+          margin-bottom: 1rem;
+        }
+        nav a {
+          display: block;
+          color: #0366d6;
+          margin: 0.5rem 0;
+          text-decoration: none;
+        }
+        section {
+          margin-bottom: 2rem;
+          padding: 1rem;
+          background: white;
+          border-radius: 5px;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+          color: #2c3e50;
+        }
+        h3 {
+          margin-top: 1.5rem;
+          color: #444;
+        }
+        pre, code {
+          background: #f4f4f4;
+          padding: 0.5rem;
+          overflow-x: auto;
+          display: block;
+          white-space: pre-wrap;
+          border-left: 4px solid #ccc;
+          margin: 1rem 0;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 1rem;
+        }
+        table, th, td {
+          border: 1px solid #ddd;
+        }
+        th, td {
+          padding: 0.5rem;
+          text-align: left;
+        }
+        th {
+          background: #f0f0f0;
+        }
+        ul {
+          padding-left: 1.2rem;
+        }
+        ul li {
+          margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Essential Linux & CLI Mastery for Senior Java Engineers</h1>
+    <p>Complete Practical Guide + Cheat Sheet</p>
+</header>
+<nav>
+    <a href="#foundations">A. Foundations of Linux</a>
+    <a href="#file-ops">B. File & Directory Operations</a>
+    <a href="#search-filter">C. Search & Filtering</a>
+    <a href="#text-processing">D. Text Processing</a>
+    <a href="#processes">E. Working With Processes</a>
+    <a href="#networking">F. Networking Tools</a>
+    <a href="#permissions">G. Permissions & Users</a>
+    <a href="#bash">H. Bash Shell Essentials</a>
+    <a href="#ssh">I. SSH, SFTP & rsync</a>
+    <a href="#systemd">J. Systemd & Services</a>
+    <a href="#docker">K. Docker & Container CLI</a>
+    <a href="#git">L. Git Bash Essentials</a>
+    <a href="#cheatsheet">M. Final Cheat Sheet</a>
+    <a href="#scenarios">N. 20 Real Java Scenarios</a>
+</nav>
+<section id="foundations">
+    <h2>A. Foundations of Linux</h2>
+    <h3>Filesystem Hierarchy</h3>
+    <ul>
+        <li><strong>/etc</strong> – config files</li>
+        <li><strong>/var/log</strong> – logs</li>
+        <li><strong>/opt</strong> – optional software (great for JARs)</li>
+    </ul>
+    <h3>Paths</h3>
+    <pre><code>cd /opt/apps     # absolute path
+cd ../logs       # relative path</code></pre>
+    <h3>Navigation Commands</h3>
+    <pre><code>ls -la
+pwd
+tree -L 2</code></pre>
+</section>
+<section id="file-ops">
+    <h2>B. File & Directory Operations</h2>
+    <h3>Copy, Move, Remove</h3>
+    <pre><code>cp -rv target/*.jar /opt/apps/
+mv app.log logs/
+rm -rf temp/</code></pre>
+    <h3>Compression</h3>
+    <pre><code>tar -czvf backup.tar.gz /opt/apps/
+</code></pre>
+    <h3>Compare</h3>
+    <pre><code>diff application.yml application-prod.yml
+vimdiff settings.xml settings-dev.xml</code></pre>
+</section>
+<section id="search-filter">
+    <h2>C. Search & Filtering</h2>
+    <h3>Find Stacktraces, Configs, Keys</h3>
+    <pre><code>grep -i exception logs/app.log
+find /var -name "*.yml"
+locate application.properties
+xargs -a services.txt grep -H 'timeout'</code></pre>
+    <h3>Pipelines</h3>
+    <pre><code>cat log.txt | grep ERROR | cut -d' ' -f5- | sort | uniq -c</code></pre>
+</section>
+<section id="text-processing">
+    <h2>D. Text Processing</h2>
+    <h3>Practical Usage</h3>
+    <pre><code>cut -d":" -f1 /etc/passwd
+awk '{print $2, $5}' performance.csv
+sed 's/localhost/127.0.0.1/g' config.yml</code></pre>
+    <h3>Tail Logs Live</h3>
+    <pre><code>tail -f /var/log/spring.log | grep WARN</code></pre>
+</section>
+<section id="processes">
+    <h2>E. Working With Processes</h2>
+    <h3>List and Kill</h3>
+    <pre><code>ps aux | grep java
+kill -9 &lt;PID&gt;
+lsof -i :8080</code></pre>
+</section>
+<section id="networking">
+    <h2>F. Networking Tools</h2>
+    <h3>API Testing</h3>
+    <pre><code>curl -X POST http://localhost:8080/api -d '{"test":true}'
+wget https://repo.maven.org/artifact.jar</code></pre>
+    <h3>Ports & DNS</h3>
+    <pre><code>netstat -tulnp
+ping google.com
+traceroute github.com</code></pre>
+</section>
+<section id="permissions">
+    <h2>G. Permissions & Users</h2>
+    <pre><code>chmod +x deploy.sh
+chown appuser:app logs/
+sudo ./restart.sh</code></pre>
+</section>
+<section id="bash">
+    <h2>H. Bash Shell Essentials</h2>
+    <pre><code>alias mvnclean='mvn clean install'
+export JAVA_HOME=/opt/jdk
+export PATH=$JAVA_HOME/bin:$PATH
+echo $PATH</code></pre>
+</section>
+<section id="ssh">
+    <h2>I. SSH, SFTP & rsync</h2>
+    <pre><code>ssh user@server
+scp build/libs/app.jar user@server:/opt/apps
+rsync -avz /var/log/ user@host:/data/logs</code></pre>
+</section>
+<section id="systemd">
+    <h2>J. Systemd & Services</h2>
+    <pre><code>sudo systemctl start spring-app
+sudo systemctl stop spring-app
+journalctl -u spring-app -f</code></pre>
+</section>
+<section id="docker">
+    <h2>K. Docker & Container CLI</h2>
+    <pre><code>docker ps
+docker logs container
+docker exec -it container bash
+docker inspect container
+</code></pre>
+</section>
+<section id="git">
+    <h2>L. Git Bash Essentials</h2>
+    <pre><code>git log --oneline
+git diff
+
+git stash
+git checkout -b feature-x
+git mergetool</code></pre>
+</section>
+<section id="cheatsheet">
+    <h2>M. Final Cheat Sheet</h2>
+    <table>
+        <tr><th>Command</th><th>Purpose</th><th>Example</th></tr>
+        <tr><td>lsof -i :8080</td><td>Check which PID uses port</td><td>lsof -i :8080</td></tr>
+        <tr><td>tail -f app.log | grep ERROR</td><td>Live error logs</td><td>tail -f /var/log/app.log</td></tr>
+        <tr><td>find / -name "*.jar"</td><td>Find all JARs</td><td>find /opt -name "*.jar"</td></tr>
+    </table>
+</section>
+<section id="scenarios">
+    <h2>N. 20 Real Java Scenarios</h2>
+    <ul>
+        <li>Find what’s using port 8080 → <code>lsof -i :8080</code></li>
+        <li>Tail Spring logs live → <code>tail -f spring.log</code></li>
+        <li>Search huge log without loading → <code>grep Exception big.log</code></li>
+        <li>Copy logs between servers → <code>rsync -avz /logs user@host:/backup</code></li>
+        <li>Kill hung Spring app → <code>pkill -f spring</code></li>
+        <li>Check memory usage → <code>free -h</code></li>
+        <li>View running containers → <code>docker ps</code></li>
+        <li>View CPU usage → <code>top</code></li>
+    </ul>
+</section>
+</body>
+</html>

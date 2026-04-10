@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VI Editor Complete</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+<a href="day-01.html">Home</a>
+<a href="top-100-linux-commands.html">Top 100 Linux Commands</a>
+<a href="top-50-debugging-commands.html">Top 50 Debugging</a>
+<a href="log-investigation-techniques.html">Log Investigation</a>
+<a href="troubleshooting-resources.html">Disk / CPU / Memory</a>
+<a href="awk-sed-mastery.html">awk + sed</a>
+<a href="production-one-liners.html">One-Liners</a>
+<a href="file-handling.html">File Handling</a>
+<a href="vi-editor-complete.html">VI Editor</a>
+</nav>
+  </div>
+</header>
+<main class="container">
+
+<section class="hero">
+  <h1>VI Editor Complete Command Set</h1>
+  <p>VI/VIM is often the only editor available on Linux servers. This page focuses on the commands engineers really use in production.</p>
+</section>
+<section class="card">
+  <h2>Modes</h2>
+  <table>
+    <tr><th>Mode</th><th>Purpose</th></tr>
+    <tr><td>Normal mode</td><td>Navigation and editing commands</td></tr>
+    <tr><td>Insert mode</td><td>Typing text</td></tr>
+    <tr><td>Command mode</td><td>Save, quit, search, replace</td></tr>
+  </table>
+
+  <h2>Open Files</h2>
+  <pre>vi file.txt
+vi +100 app.log
+vi -R config.yml</pre>
+
+  <h2>Insert Mode</h2>
+  <table>
+    <tr><th>Key</th><th>Brief Description</th></tr>
+    <tr><td><code>i</code></td><td>Insert before cursor</td></tr>
+    <tr><td><code>I</code></td><td>Insert at beginning of line</td></tr>
+    <tr><td><code>a</code></td><td>Append after cursor</td></tr>
+    <tr><td><code>A</code></td><td>Append at end of line</td></tr>
+    <tr><td><code>o</code></td><td>Open new line below</td></tr>
+    <tr><td><code>O</code></td><td>Open new line above</td></tr>
+    <tr><td><code>Esc</code></td><td>Leave insert mode</td></tr>
+  </table>
+
+  <h2>Save and Exit</h2>
+  <pre>:w      save
+:q      quit
+:wq     save and quit
+:x      save and quit
+:q!     quit without saving</pre>
+
+  <h2>Navigation</h2>
+  <pre>h j k l        left down up right
+gg             go to top
+G              go to bottom
+:100           go to line 100
+Ctrl+d         half page down
+Ctrl+u         half page up
+0              start of line
+$              end of line
+w              next word
+b              previous word</pre>
+
+  <h2>Search</h2>
+  <pre>/ERROR
+?ERROR
+n
+N</pre>
+
+  <h2>Edit</h2>
+  <pre>dd      delete line
+5dd     delete 5 lines
+dw      delete word
+x       delete character
+u       undo
+Ctrl+r  redo</pre>
+
+  <h2>Copy and Paste</h2>
+  <pre>yy      copy line
+5yy     copy 5 lines
+p       paste below
+P       paste above</pre>
+
+  <h2>Replace</h2>
+  <pre>r
+:s/old/new/g
+:%s/old/new/g
+:%s/localhost/127.0.0.1/g</pre>
+
+  <h2>Visual Mode</h2>
+  <pre>v       visual character mode
+V       visual line mode
+d       delete selection
+y       copy selection</pre>
+
+  <h2>Very Practical Log Use</h2>
+  <pre>vi app.log
+G
+/Exception
+n
+:set number</pre>
+
+  <h2>Minimal Survival Set</h2>
+  <pre>i
+Esc
+:wq
+:q!
+/text
+n
+dd
+yy
+p</pre>
+</section>
+
+  <div class="footer">Built as a practical Linux mastery reference for senior engineers.</div>
+</main>
+</body>
+</html>
