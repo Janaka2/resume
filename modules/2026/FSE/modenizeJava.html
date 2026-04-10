@@ -59,6 +59,24 @@
         </p>
     </header>
 
+    <!-- API Key Configuration -->
+    <div class="mb-8 bg-slate-100 p-5 rounded-xl border border-slate-300 shadow-sm flex flex-col md:flex-row items-start md:items-center gap-4 justify-between">
+        <div class="flex items-center gap-3">
+            <div class="p-2 bg-white rounded-lg shadow-sm">
+                <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4v-5.257A6 6 0 0110.5 2.257 6.6 6.6 0 0115 7zm-3 0a1 1 0 100-2 1 1 0 000 2z"></path></svg>
+            </div>
+            <div>
+                <span class="block text-sm font-bold text-slate-800">Gemini API Key Needed</span>
+                <span class="block text-xs text-slate-500">Required for the AI Summary and AI Tutor features.</span>
+            </div>
+        </div>
+        <div class="flex-grow flex items-center gap-2 w-full md:w-auto">
+            <input type="password" id="api-key-input" placeholder="Enter your API Key..." class="flex-grow w-full border border-slate-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-inner" />
+            <button onclick="saveApiKey()" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg text-sm font-semibold transition whitespace-nowrap shadow-sm">Save</button>
+        </div>
+        <span id="api-key-status" class="text-xs text-green-600 font-bold hidden px-2">Saved!</span>
+    </div>
+
     <!-- AI Summary Feature -->
     <div class="mb-12 bg-orange-50 p-6 rounded-xl border border-orange-200 shadow-sm relative overflow-hidden">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -357,6 +375,22 @@
 
 <!-- Scripts -->
 <script>
+    // Load API Key from local storage on startup
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedKey = localStorage.getItem('gemini_api_key');
+        if (savedKey) {
+            document.getElementById('api-key-input').value = savedKey;
+        }
+    });
+
+    function saveApiKey() {
+        const key = document.getElementById('api-key-input').value.trim();
+        localStorage.setItem('gemini_api_key', key);
+        const status = document.getElementById('api-key-status');
+        status.classList.remove('hidden');
+        setTimeout(() => status.classList.add('hidden'), 2000);
+    }
+
     function toggleAnswers() {
         const answerKey = document.getElementById('answerKey');
         const btn = document.getElementById('toggleAnswersBtn');
@@ -377,10 +411,6 @@
 
     // --- Gemini API Integrations ---
 
-    const apiKey = ""; // API key is injected automatically by the environment
-    const modelName = "gemini-2.5-flash-preview-09-2025";
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
-
     // Utility: Fetch with Exponential Backoff
     async function fetchWithRetry(url, options, retries = 5) {
         const delays = [1000, 2000, 4000, 8000, 16000];
@@ -398,6 +428,18 @@
 
     // Core API Call Wrapper
     async function callGemini(prompt, systemInstruction = "") {
+        const apiKey = document.getElementById('api-key-input').value.trim();
+
+        if (!apiKey) {
+            return `<div class="text-red-500 font-semibold p-3 bg-red-50 rounded border border-red-200">
+                        ⚠️ Error: Please enter your Gemini API key in the configuration section above to use this feature.
+                    </div>`;
+        }
+
+        // Using the standard public flash model for external keys
+        const modelName = "gemini-1.5-flash";
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+
         const payload = {
             contents: [{ parts: [{ text: prompt }] }],
         };
@@ -416,7 +458,9 @@
             return result.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
         } catch (error) {
             console.error("Gemini API Error:", error);
-            return "Sorry, an error occurred while connecting to the AI. Please try again later.";
+            return `<div class="text-red-500 font-semibold p-3 bg-red-50 rounded border border-red-200">
+                        ❌ Sorry, an error occurred while connecting to the AI. Please verify your API key is correct.
+                    </div>`;
         }
     }
 
@@ -456,7 +500,7 @@
         if (!userAnswer.trim()) {
             // Flash an alert if they try to submit an empty answer
             const alertDiv = document.createElement('div');
-            alertDiv.className = "text-red-400 text-sm mt-2";
+            alertDiv.className = "text-red-400 text-sm mt-2 font-semibold";
             alertDiv.innerText = "Please write an answer before evaluating!";
             btn.parentElement.appendChild(alertDiv);
             setTimeout(() => alertDiv.remove(), 3000);
