@@ -4,72 +4,89 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agentic AI &amp; Agents – Janaka</title>
-    <meta name="description" content="Production patterns for building safe and scalable AI agents." />
+    <meta name="description" content="Production patterns for building safe, scalable, and motivating AI agent systems." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Favicon set (optional paths; place your files in assets/icons if needed) -->
     <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg?v=1" />
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png?v=1" />
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16.png?v=1" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png?v=1" />
     <style>
         body { font-family: 'Inter', sans-serif; }
+        .glass {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(12px);
+        }
     </style>
 </head>
-<body class="bg-gray-100 leading-relaxed text-gray-800">
-<!-- Primary navigation matching the CV & Lab style -->
-<nav class="bg-white shadow sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
-        <div class="flex space-x-4 text-sm">
-            <!-- Home link with icon -->
-            <a href="https://janaka.me" class="flex items-center space-x-2 text-blue-600">
-                <span>Home</span>
-            </a>
-            <!-- Blog link with icon -->
-            <a href="https://blog.janaka.me" class="flex items-center space-x-2 text-blue-600">
-                <span>Blog</span>
-            </a>
-            <!-- Labs link with icon -->
-            <a href="https://lab.janaka.me" class="flex items-center space-x-2 text-blue-600">
-                <span>Labs</span>
-            </a>
-            <!-- AI/Agents link with icon -->
-            <a href="#" class="flex items-center space-x-2 text-blue-600 font-semibold border-b-2 border-blue-600">
-                <span>AI / Agents</span>
-            </a>
-            <!-- CV link with icon -->
-            <a href="https://cv.janaka.me" class="flex items-center space-x-2 text-blue-600">
-                <span>CV</span>
-            </a>
-            <a href="https://academy.janaka.me" class="text-blue-600 opacity-70 hover:opacity-100"><span>Academy</span></a>
+<body class="bg-slate-950 text-slate-100 leading-relaxed">
+<nav class="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex flex-wrap gap-4 justify-between items-center">
+        <a href="#" class="font-extrabold tracking-wide text-lg text-cyan-300">Janaka AI / Agents</a>
+        <div class="flex flex-wrap gap-4 text-sm">
+            <a href="https://janaka.me" class="text-slate-200 hover:text-cyan-300">Home</a>
+            <a href="https://blog.janaka.me" class="text-slate-200 hover:text-cyan-300">Blog</a>
+            <a href="https://lab.janaka.me" class="text-slate-200 hover:text-cyan-300">Labs</a>
+            <a href="#" class="text-cyan-300 font-semibold border-b-2 border-cyan-300">AI / Agents</a>
+            <a href="https://cv.janaka.me" class="text-slate-200 hover:text-cyan-300">CV</a>
+            <a href="https://academy.janaka.me" class="text-slate-200 hover:text-cyan-300">Academy</a>
         </div>
     </div>
 </nav>
 
-<!-- Hero section with gradient background analogous to the CV page -->
-<header class="bg-gradient-to-r from-blue-50 to-indigo-100 py-12 px-4">
-    <img src="./assets/icons/ai-icon.png" alt="Janaka Academy Icon" class="w-24 h-24 md:w-28 md:h-28 mx-auto mb-6" />
-    <div class="max-w-6xl mx-auto text-center">
-        <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Agentic AI &amp; Agents</h1>
-        <p class="text-xl font-semibold text-blue-700 mb-4">Production patterns for building safe and scalable AI agents</p>
-        <p class="text-gray-700 max-w-3xl mx-auto">
-            Explore patterns such as retrieval‑augmented generation, multi‑capability prompts, guardrails, distribution, monitoring and more. These examples illustrate how to build reliable, enterprise‑ready AI systems.
-        </p>
+<header class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(34,211,238,0.35),transparent_40%),radial-gradient(circle_at_80%_10%,rgba(96,165,250,0.25),transparent_35%),linear-gradient(to_bottom,rgba(15,23,42,1),rgba(2,6,23,1))]"></div>
+    <div class="relative max-w-6xl mx-auto px-4 py-20">
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div>
+                <p class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-400/15 text-cyan-300 border border-cyan-300/30 mb-5">🚀 AI Trends 2026 • Build for Real Impact</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Design AI agents that look <span class="text-cyan-300">professional</span>, run reliably, and keep teams motivated.</h1>
+                <p class="text-slate-300 mb-8 max-w-xl">This page is a practical blueprint for modern agentic systems: crisp UX, safer workflows, faster iteration loops, and clear development direction for high-energy teams.</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#blueprint" class="px-5 py-3 rounded-lg bg-cyan-400 text-slate-900 font-semibold hover:bg-cyan-300">Explore Blueprint</a>
+                    <a href="#trend-roadmap" class="px-5 py-3 rounded-lg border border-slate-400/40 text-slate-100 hover:border-cyan-300 hover:text-cyan-300">See Trend Roadmap</a>
+                </div>
+            </div>
+            <div class="glass rounded-2xl border border-white/20 p-6 shadow-2xl shadow-cyan-500/10">
+                <img src="./assets/icons/ai-icon.png" alt="Janaka AI Icon" class="w-20 h-20 mb-4" />
+                <h2 class="text-xl font-bold text-slate-900 mb-3">Mission Control: Agent Program</h2>
+                <div class="space-y-3 text-sm text-slate-700">
+                    <div class="flex justify-between"><span>Reliability score</span><span class="font-bold text-emerald-600">92%</span></div>
+                    <div class="w-full h-2 rounded bg-slate-200"><div class="h-2 rounded bg-emerald-500" style="width: 92%"></div></div>
+                    <div class="flex justify-between"><span>Release velocity</span><span class="font-bold text-cyan-600">+34%</span></div>
+                    <div class="w-full h-2 rounded bg-slate-200"><div class="h-2 rounded bg-cyan-500" style="width: 78%"></div></div>
+                    <div class="flex justify-between"><span>Team motivation</span><span class="font-bold text-indigo-600">High</span></div>
+                </div>
+            </div>
+        </div>
     </div>
 </header>
 
-<main class="max-w-6xl mx-auto py-12 px-4">
-    <!-- Minimal agent skeleton section -->
-    <section class="mb-8">
-        <div class="bg-white rounded-lg shadow p-6">
-            <h2 class="text-2xl font-semibold text-gray-900 mb-2">MCP‑Enabled Agent Skeleton</h2>
-            <p class="mb-4 text-gray-700">
-                A minimal pattern to structure your agents around explicit capabilities. Define your functions, embed them into a prompt, and implement handlers that enforce schema and safety.
-            </p>
-            <pre class="bg-gray-100 p-4 rounded-md overflow-x-auto text-sm text-gray-800"><code>// Capabilities definition
-const capabilities = [
+<main class="max-w-6xl mx-auto px-4 py-14 space-y-8">
+    <section class="grid md:grid-cols-3 gap-4">
+        <article class="rounded-xl border border-cyan-400/30 bg-slate-900 p-5">
+            <p class="text-cyan-300 text-sm font-semibold mb-2">01 • Product Direction</p>
+            <h3 class="font-bold text-lg mb-2">AI-first experience</h3>
+            <p class="text-slate-300 text-sm">Build interfaces that communicate confidence: clear next actions, instant feedback, and visible progress across every workflow.</p>
+        </article>
+        <article class="rounded-xl border border-indigo-400/30 bg-slate-900 p-5">
+            <p class="text-indigo-300 text-sm font-semibold mb-2">02 • Engineering Direction</p>
+            <h3 class="font-bold text-lg mb-2">Capability-driven architecture</h3>
+            <p class="text-slate-300 text-sm">Model every action as a typed capability. Add policy checks, structured logs, and rollback paths for safer production automation.</p>
+        </article>
+        <article class="rounded-xl border border-emerald-400/30 bg-slate-900 p-5">
+            <p class="text-emerald-300 text-sm font-semibold mb-2">03 • Team Direction</p>
+            <h3 class="font-bold text-lg mb-2">Momentum loops</h3>
+            <p class="text-slate-300 text-sm">Use weekly wins, monthly demos, and clear KPI dashboards to keep energy high and continuously motivate meaningful delivery.</p>
+        </article>
+    </section>
+
+    <section id="blueprint" class="rounded-2xl border border-white/10 bg-slate-900 p-6 md:p-8">
+        <h2 class="text-2xl font-bold mb-3">MCP-Enabled Agent Skeleton</h2>
+        <p class="text-slate-300 mb-4">A clean starter pattern for robust orchestration: explicit capabilities, strict I/O contracts, and policy-aware handlers.</p>
+        <pre class="bg-slate-950 border border-white/10 p-4 rounded-lg overflow-x-auto text-sm text-slate-200"><code>const capabilities = [
   {
     name: 'searchDocs',
     description: 'Search company knowledge base',
@@ -77,84 +94,72 @@ const capabilities = [
   },
   {
     name: 'createTicket',
-    description: 'File a support ticket',
+    description: 'Create support ticket',
     parameters: { title: 'string', body: 'string' }
   }
 ];
 
-// Prompt template
 const mcpPrompt = `
-You are an assistant with two capabilities: searchDocs and createTicket.
-Use searchDocs to find information; use createTicket only when instructed.
-Return the JSON for the appropriate capability when needed.
-`;
-
-// Handler functions...
-</code></pre>
-        </div>
+You can call: searchDocs, createTicket.
+Prefer searchDocs for evidence, createTicket on explicit request.
+Return strict JSON payload for selected capability.
+`;</code></pre>
     </section>
 
-    <!-- Production patterns list -->
-    <section class="mb-8">
-        <div class="bg-white rounded-lg shadow p-6">
-            <h2 class="text-2xl font-semibold text-gray-900 mb-2">Production Patterns</h2>
-            <ul class="list-disc ml-6 space-y-2 text-gray-700">
-                <li><span class="font-medium">RAG &amp; Summarization:</span> Use retrieval‑augmented generation to ground responses in trusted data. Summarize results before passing back to the user.</li>
-                <li><span class="font-medium">Dead Letter Queue &amp; Safety:</span> Capture failures and unexpected outputs in a dead letter queue. Use monitoring and alerts to handle them gracefully.</li>
-                <li><span class="font-medium">Streaming &amp; Progress Updates:</span> Stream partial outputs for long‑running tasks and provide progress bars via websockets or SSE.</li>
-                <li><span class="font-medium">Distribution &amp; Tuners:</span> Distribute agent workloads across microservices; tune prompts and models per capability for optimal performance.</li>
-                <li><span class="font-medium">Observability &amp; Monitoring:</span> Instrument your agents with structured logs, metrics and traces. Visualize in dashboards and set up anomaly detection.</li>
+    <section class="grid lg:grid-cols-2 gap-6">
+        <div class="rounded-2xl border border-white/10 bg-slate-900 p-6">
+            <h2 class="text-2xl font-bold mb-3">Production Patterns</h2>
+            <ul class="space-y-3 text-slate-300 text-sm">
+                <li><span class="text-cyan-300 font-semibold">RAG + Verification:</span> Ground every answer in trusted internal context and verify assumptions before action.</li>
+                <li><span class="text-cyan-300 font-semibold">DLQ + Guardrails:</span> Route malformed outputs to dead-letter queues with auto triage and alerting.</li>
+                <li><span class="text-cyan-300 font-semibold">Streaming UX:</span> Show partial response and phase-level progress for long-running operations.</li>
+                <li><span class="text-cyan-300 font-semibold">Observability:</span> Add traces, metrics, prompt versions, and user feedback loops to close quality gaps.</li>
             </ul>
         </div>
-    </section>
-
-
-    <!-- Research tracking quick-start -->
-    <section class="mb-8">
-        <div class="bg-white rounded-lg shadow p-6">
-            <h2 class="text-2xl font-semibold text-gray-900 mb-2">Research Tracker: Step-by-Step</h2>
-            <p class="text-gray-700 mb-3">Use a simple cadence to stay current without burnout.</p>
-            <ol class="list-decimal ml-6 space-y-2 text-gray-700">
-                <li><span class="font-medium">Weekly scan:</span> capture 3-5 high-signal updates.</li>
-                <li><span class="font-medium">Score signals:</span> impact + maturity + relevance.</li>
-                <li><span class="font-medium">Monthly synthesis:</span> summarize changes and pick one build idea.</li>
-                <li><span class="font-medium">Quarterly reset:</span> refine priorities and remove stale themes.</li>
+        <div class="rounded-2xl border border-white/10 bg-slate-900 p-6">
+            <h2 class="text-2xl font-bold mb-3">Research Tracker</h2>
+            <ol class="space-y-3 text-slate-300 text-sm list-decimal ml-5">
+                <li><span class="font-semibold">Weekly signal scan:</span> collect 3–5 meaningful updates.</li>
+                <li><span class="font-semibold">Score by impact:</span> prioritize by relevance, maturity, and ROI.</li>
+                <li><span class="font-semibold">Monthly synthesis:</span> turn learning into one focused implementation.</li>
+                <li><span class="font-semibold">Quarterly reset:</span> remove noise and sharpen roadmap themes.</li>
             </ol>
-            <p class="mt-4 text-sm text-gray-600">Repo guides: <code>README.md</code>, <code>research/README.md</code>, <code>research/trend-map-2026.md</code></p>
+            <p class="mt-4 text-xs text-slate-400">Related docs: <code>README.md</code>, <code>research/README.md</code>, <code>research/trend-map-2026.md</code></p>
         </div>
     </section>
 
-    <!-- Trend map snapshot -->
-    <section class="mb-8">
-        <div class="bg-white rounded-lg shadow p-6">
-            <h2 class="text-2xl font-semibold text-gray-900 mb-4">2026 Trend Areas to Track</h2>
-            <div class="grid md:grid-cols-2 gap-4 text-gray-700">
-                <div class="bg-blue-50 rounded p-4"><span class="font-semibold">Tier 1:</span> Agent reliability, eval/observability, multimodal production, retrieval quality, safety.</div>
-                <div class="bg-indigo-50 rounded p-4"><span class="font-semibold">Tier 2:</span> Small/open model optimization, coding agents, enterprise platform patterns.</div>
-                <div class="bg-purple-50 rounded p-4 md:col-span-2"><span class="font-semibold">Tier 3:</span> Embodied agents, science agents, regulatory/economic shifts.</div>
+    <section id="trend-roadmap" class="rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900 to-slate-950 p-6">
+        <h2 class="text-2xl font-bold mb-4">2026 Trend Roadmap</h2>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+            <div class="rounded-lg bg-cyan-400/10 border border-cyan-300/20 p-4">
+                <p class="text-cyan-300 font-bold mb-2">Tier 1 (Now)</p>
+                <p class="text-slate-200">Reliability, evals/observability, multimodal production, retrieval quality, and safety engineering.</p>
+            </div>
+            <div class="rounded-lg bg-indigo-400/10 border border-indigo-300/20 p-4">
+                <p class="text-indigo-300 font-bold mb-2">Tier 2 (Next)</p>
+                <p class="text-slate-200">Open-model optimization, coding agents, and enterprise agent platform standards.</p>
+            </div>
+            <div class="rounded-lg bg-emerald-400/10 border border-emerald-300/20 p-4">
+                <p class="text-emerald-300 font-bold mb-2">Tier 3 (Explore)</p>
+                <p class="text-slate-200">Embodied systems, AI-for-science, and global regulatory/economic shifts.</p>
             </div>
         </div>
     </section>
 
-        <!-- Case study section -->
-    <section class="mb-8">
-        <div class="bg-white rounded-lg shadow p-6">
-            <h2 class="text-2xl font-semibold text-gray-900 mb-2">Case Study: Job Research Agent</h2>
-            <p class="text-gray-700 mb-4">
-                This internal tool uses MCPs to orchestrate job search, email summarization and application submission. It runs on a serverless stack with event streaming and RAG for company data. <a href="https://lab.janaka.me" class="text-blue-600 hover:underline">See Labs</a> for details.
-            </p>
+    <section class="rounded-2xl border border-cyan-300/30 bg-cyan-400/10 p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+            <h2 class="text-2xl font-bold">Build something meaningful this week.</h2>
+            <p class="text-slate-300 text-sm">Pick one trend, one workflow, and one measurable outcome. Progress beats perfection.</p>
         </div>
+        <a href="https://lab.janaka.me" class="inline-flex items-center justify-center px-5 py-3 rounded-lg bg-cyan-400 text-slate-900 font-semibold hover:bg-cyan-300">Launch in Labs →</a>
     </section>
 </main>
 
-<!-- Footer matching the CV site -->
-<footer class="bg-gray-800 text-gray-400 py-4">
-    <div class="max-w-6xl mx-auto text-center text-sm">
-        © <span id="year"></span> Janaka Premathilaka. Built with ♥ and Tailwind CSS.
-    </div>
+<footer class="border-t border-white/10 py-5 text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 text-center text-sm">© <span id="year"></span> Janaka Premathilaka. Built for modern AI builders.</div>
 </footer>
+
 <script>
-    // Insert current year into the footer
     document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
