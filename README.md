@@ -39,3 +39,10 @@ A lightweight repo to track **latest AI research and development activity** in a
 ---
 
 If you want, I can next help you with **Phase 2**: auto-collecting papers from arXiv + model release notes into this structure.
+
+## MCP-enabled Agent Skeleton
+
+A complete reusable MCP starter has been added at `mcp-agent-skeleton/` with code + playbook documentation for rapid implementation.
+
+- Start here: `mcp-agent-skeleton/README.md`
+- Deep dive: `mcp-agent-skeleton/docs/MCP_PLAYBOOK.md`
