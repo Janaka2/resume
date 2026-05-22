@@ -203,6 +203,34 @@
     to { opacity: 1; transform: translateX(0); }
   }
 
+
+  .back-nav {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 120;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    background: rgba(250, 247, 240, 0.9);
+    color: var(--ink);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    backdrop-filter: blur(4px);
+    transition: all 0.25s var(--ease-soft);
+  }
+  .back-nav:hover {
+    background: var(--bg-deep);
+    border-color: var(--accent-line);
+    color: var(--accent-deep);
+  }
+
   /* Shared elements */
   .eyebrow {
     font-family: 'JetBrains Mono', monospace;
@@ -946,6 +974,7 @@
 </style>
 </head>
 <body>
+<a class="back-nav" href="../index.html" onclick="if (window.history.length > 1) { event.preventDefault(); history.back(); }">← Back</a>
 
 <div class="cinema">
 
