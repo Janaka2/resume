@@ -4,6 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Janaka Premathilaka — A Visual Resume · v3</title>
+<link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg?v=1" />
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png?v=1" />
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16.png?v=1" />
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png?v=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,200;9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -74,8 +78,8 @@
     align-items: center;
     justify-content: space-between;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
     color: var(--ink-dim);
     text-transform: uppercase;
   }
@@ -324,7 +328,7 @@
   }
   .identity-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
+    font-size: 0.76rem;
     letter-spacing: 0.5em;
     color: var(--ink-dim);
     text-transform: uppercase;
@@ -632,9 +636,9 @@
   }
   .sig-card-num {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
+    font-size: 0.76rem;
     color: var(--accent);
-    letter-spacing: 0.2em;
+    letter-spacing: 0.14em;
     margin-bottom: 14px;
   }
   .sig-card-title {
@@ -677,7 +681,7 @@
   }
   .cluster-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem;
+    font-size: 0.72rem;
     letter-spacing: 0.3em;
     color: var(--ink-dim);
     text-transform: uppercase;
@@ -872,7 +876,7 @@
   .contact-item { text-align: left; }
   .contact-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem;
+    font-size: 0.72rem;
     letter-spacing: 0.28em;
     color: var(--ink-dim);
     text-transform: uppercase;
@@ -952,11 +956,68 @@
   .ctrl-hint {
     text-align: right;
     line-height: 1.7;
-    font-size: 0.62rem;
+    font-size: 0.72rem;
   }
   .ctrl-hint strong {
     color: var(--ink);
     font-weight: 500;
+  }
+
+
+
+  .read-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 120;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    background: rgba(250, 247, 240, 0.9);
+    color: var(--ink);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    backdrop-filter: blur(4px);
+    transition: all 0.25s var(--ease-soft);
+  }
+  .read-mode-toggle:hover {
+    background: var(--bg-deep);
+    border-color: var(--accent-line);
+    color: var(--accent-deep);
+  }
+
+  .ctrl-btn:focus-visible, .progress-segment:focus-visible, .read-mode-toggle:focus-visible, .back-nav:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+    body.read-mode { overflow: auto; }
+  body.read-mode .cinema { position: relative; min-height: 100%; overflow: visible; }
+  body.read-mode .stage { position: relative; display: grid; gap: 14px; padding: 120px 0 120px; }
+  body.read-mode .scene {
+    position: relative;
+    opacity: 1 !important;
+    visibility: visible !important;
+    min-height: auto;
+    padding: 48px clamp(24px, 6vw, 100px);
+    transition: none;
+  }
+  body.read-mode .progress-rail, body.read-mode .hud-top { position: sticky; }
+  body.read-mode .progress-rail { top: 70px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .brand-dot { animation: none; }
   }
 
   @media (max-width: 900px) {
@@ -975,6 +1036,7 @@
 </head>
 <body>
 <a class="back-nav" href="../index.html" onclick="if (window.history.length > 1) { event.preventDefault(); history.back(); }">← Back</a>
+<button class="read-mode-toggle" id="readModeToggle" type="button" aria-pressed="false">Read Mode</button>
 
 <div class="cinema">
 
@@ -1017,7 +1079,7 @@
     </section>
 
     <!-- ============ SCENE 2: IDENTITY ============ -->
-    <section class="scene scene-identity" data-duration="13000">
+    <section class="scene scene-identity" data-duration="10000">
       <div class="identity-label reveal-fade">Professional Identity</div>
       <p class="identity-statement reveal-slow" style="animation-delay: 0.4s">
         I build the <em>reliable enterprise systems</em> that banks, governments, and high-stakes institutions <em>cannot afford to fail</em> — and I bring practical <em>AI automation</em> with me.
@@ -1034,7 +1096,7 @@
     </section>
 
     <!-- ============ SCENE 3: CORE STRENGTHS ============ -->
-    <section class="scene scene-core" data-duration="15000">
+    <section class="scene scene-core" data-duration="11000">
       <div class="core-header">
         <div class="eyebrow reveal-fade">Chapter 03 — Core Strengths</div>
         <h2 class="h2 reveal" style="animation-delay: 0.3s; margin-top: 16px;">Three things I do <em>exceptionally well.</em></h2>
@@ -1062,7 +1124,7 @@
     </section>
 
     <!-- ============ SCENE 4: CAREER JOURNEY ============ -->
-    <section class="scene scene-journey" data-duration="14000">
+    <section class="scene scene-journey" data-duration="10000">
       <div class="journey-header">
         <div class="eyebrow reveal-fade">Chapter 04 — The Journey</div>
         <h2 class="h2 reveal" style="animation-delay: 0.3s; margin-top: 16px;">Five institutions. <em>One discipline.</em></h2>
@@ -1104,7 +1166,7 @@
     </section>
 
     <!-- ============ SCENE 5: BUSINESS IMPACT ============ -->
-    <section class="scene scene-impact" data-duration="17000">
+    <section class="scene scene-impact" data-duration="11000">
       <div class="impact-header">
         <div class="eyebrow reveal-fade">Chapter 05 — Business Impact</div>
         <h2 class="h2 reveal" style="animation-delay: 0.3s; margin-top: 16px;">Three moments that <em>moved the number.</em></h2>
@@ -1169,7 +1231,7 @@
     </section>
 
     <!-- ============ SCENE 6: SIGNATURE STRENGTHS ============ -->
-    <section class="scene scene-signature" data-duration="14000">
+    <section class="scene scene-signature" data-duration="10000">
       <div class="eyebrow reveal-fade">Chapter 06 — What Sets Me Apart</div>
       <p class="sig-statement reveal-slow" style="animation-delay: 0.4s">
         Plenty of engineers can write Java. <em>Fewer</em> can carry a merger, modernize a legacy, mentor a team, and ship AI — <em>at the same time.</em>
@@ -1199,7 +1261,7 @@
     </section>
 
     <!-- ============ SCENE 7: TECHNOLOGY STACK ============ -->
-    <section class="scene scene-stack" data-duration="13000">
+    <section class="scene scene-stack" data-duration="10000">
       <div class="stack-header">
         <div class="eyebrow reveal-fade">Chapter 07 — The Stack</div>
         <h2 class="h2 reveal" style="animation-delay: 0.3s; margin-top: 16px;">Engineered for <em>banking-grade</em> systems.</h2>
@@ -1233,7 +1295,7 @@
     </section>
 
     <!-- ============ SCENE 8: WORK STYLE ============ -->
-    <section class="scene scene-style" data-duration="13000">
+    <section class="scene scene-style" data-duration="10000">
       <div>
         <div class="eyebrow reveal-fade">Chapter 08 — Work Style</div>
         <h2 class="h2 reveal" style="animation-delay: 0.3s; margin-top: 16px;">How I show up <em>every day.</em></h2>
@@ -1267,7 +1329,7 @@
     </section>
 
     <!-- ============ SCENE 9: FUTURE DIRECTION ============ -->
-    <section class="scene scene-future" data-duration="13000">
+    <section class="scene scene-future" data-duration="10000">
       <div class="future-left">
         <div class="future-arrow reveal" style="animation-delay: 0.2s">→</div>
         <div class="eyebrow reveal-fade" style="animation-delay: 0.6s">Chapter 09 — What's Next</div>
@@ -1362,6 +1424,7 @@
   const prevBtn = document.querySelector('.ctrl-btn.prev');
   const nextBtn = document.querySelector('.ctrl-btn.next');
   const replayBtn = document.getElementById('replayBtn');
+  const readModeToggle = document.getElementById('readModeToggle');
 
   const chapterNames = [
     'The Opening',
@@ -1381,6 +1444,7 @@
   let timeoutId = null;
   let startTime = 0;
   let remaining = 0;
+  let readMode = false;
 
   scenes.forEach(() => {
     const seg = document.createElement('div');
@@ -1391,6 +1455,11 @@
   const segments = rail.querySelectorAll('.progress-segment');
 
   function updateHud() {
+    if (readModeToggle) {
+      readModeToggle.textContent = readMode ? 'Cinema Mode' : 'Read Mode';
+      readModeToggle.setAttribute('aria-pressed', readMode ? 'true' : 'false');
+    }
+
     const n = (current + 1).toString().padStart(2, '0');
     chapterNumEl.textContent = `${n} / 10`;
     chapterNameEl.textContent = chapterNames[current];
@@ -1439,7 +1508,28 @@
     current--;
     showScene(current);
   }
+  function setPlayState(playing) {
+    isPlaying = playing;
+    playIcon.style.display = playing ? 'none' : 'block';
+    pauseIcon.style.display = playing ? 'block' : 'none';
+  }
+
+  function toggleReadMode() {
+    readMode = !readMode;
+    document.body.classList.toggle('read-mode', readMode);
+    if (readMode) {
+      clearTimeout(timeoutId);
+      setPlayState(false);
+      segments[current]?.classList.add('paused');
+    } else {
+      setPlayState(true);
+      showScene(current);
+    }
+    updateHud();
+  }
+
   function togglePlay() {
+    if (readMode) return;
     isPlaying = !isPlaying;
     const seg = segments[current];
     const fill = seg.querySelector('.fill');
@@ -1462,9 +1552,11 @@
   }
   function replay() {
     current = 0;
-    isPlaying = true;
-    playIcon.style.display = 'none';
-    pauseIcon.style.display = 'block';
+    setPlayState(true);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setPlayState(false);
+      isPlaying = false;
+    }
     showScene(0);
   }
 
@@ -1472,6 +1564,7 @@
   nextBtn.addEventListener('click', () => { if (current < scenes.length - 1) { current++; showScene(current); } });
   prevBtn.addEventListener('click', () => { if (current > 0) { current--; showScene(current); } });
   replayBtn.addEventListener('click', replay);
+  readModeToggle.addEventListener('click', toggleReadMode);
 
   document.addEventListener('keydown', (e) => {
     if (e.code === 'Space') { e.preventDefault(); togglePlay(); }
@@ -1489,6 +1582,10 @@
     });
   });
 
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setPlayState(false);
+    isPlaying = false;
+  }
   showScene(0);
 </script>
 
