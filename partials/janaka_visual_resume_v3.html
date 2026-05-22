@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Janaka Premathilaka — A Visual Resume · v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,200;9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --phi: 1.618;
+
+    /* Editorial light palette */
+    --bg: #faf7f0;
+    --bg-deep: #f3eee2;
+    --ink: #0a0a0a;
+    --ink-soft: #3a3a36;
+    --ink-mid: #6b6862;
+    --ink-dim: #9a9690;
+    --ink-ghost: #d8d4c8;
+    --accent: #b8842a;
+    --accent-bright: #d4a043;
+    --accent-deep: #7a5618;
+    --line: rgba(10, 10, 10, 0.1);
+    --line-soft: rgba(10, 10, 10, 0.05);
+    --line-strong: rgba(10, 10, 10, 0.2);
+    --accent-line: rgba(184, 132, 42, 0.35);
+
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Manrope', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ==================== STAGE FRAME ==================== */
+  .cinema {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    overflow: hidden;
+  }
+
+  /* Very subtle warm atmospheric tint */
+  .cinema::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(184, 132, 42, 0.04), transparent 60%),
+      radial-gradient(circle at 80% 80%, rgba(184, 132, 42, 0.03), transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ==================== TOP HUD ==================== */
+  .hud-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    padding: clamp(28px, 3.5vh, 40px) clamp(36px, 4.5vw, 64px) 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+  }
+  .hud-brand { display: flex; align-items: center; gap: 12px; }
+  .brand-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .hud-chapter {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--ink-mid);
+  }
+  .hud-chapter strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ==================== PROGRESS RAIL ==================== */
+  .progress-rail {
+    position: absolute;
+    top: clamp(64px, 7vh, 84px);
+    left: clamp(36px, 4.5vw, 64px);
+    right: clamp(36px, 4.5vw, 64px);
+    height: 1px;
+    background: var(--line-soft);
+    z-index: 50;
+    display: flex;
+    gap: 6px;
+  }
+  .progress-segment {
+    flex: 1;
+    height: 1px;
+    background: var(--line-soft);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .progress-segment::after {
+    content: "";
+    position: absolute;
+    inset: -8px 0;
+  }
+  .progress-segment .fill {
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+  .progress-segment.done .fill { transform: scaleX(1); }
+  .progress-segment.active .fill {
+    animation: fillSeg var(--dur, 14s) linear forwards;
+  }
+  .progress-segment.paused .fill {
+    animation-play-state: paused;
+  }
+  @keyframes fillSeg {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  /* ==================== STAGE & SCENES ==================== */
+  .stage {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+  }
+  .scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.5s ease, visibility 1.5s;
+    padding: clamp(120px, 14vh, 160px) clamp(60px, 8vw, 120px) clamp(100px, 11vh, 140px);
+  }
+  .scene.active { opacity: 1; visibility: visible; }
+
+  .scene.active .reveal {
+    animation: rise 1.6s var(--ease-out) both;
+  }
+  .scene.active .reveal-slow {
+    animation: rise 2s var(--ease-out) both;
+  }
+  .scene.active .reveal-fade {
+    animation: fadeIn 1.8s ease both;
+  }
+  .scene.active .reveal-letters span {
+    animation: letterIn 1s var(--ease-out) both;
+  }
+  .scene.active .reveal-line {
+    animation: drawLine 2s var(--ease-out) both;
+  }
+  .scene.active .reveal-x {
+    animation: slideX 1.6s var(--ease-out) both;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes letterIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes drawLine {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes slideX {
+    from { opacity: 0; transform: translateX(-24px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Shared elements */
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.45em;
+    color: var(--accent);
+    text-transform: uppercase;
+    padding-left: 0.45em;
+  }
+  .h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4.2vw, 3.6rem);
+    font-weight: 300;
+    color: var(--ink);
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+  }
+  .h2 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .accent-line {
+    height: 1px;
+    background: var(--accent);
+    transform-origin: left;
+  }
+
+  /* ===================== SCENE 1: OPENING ===================== */
+  .scene-title {
+    flex-direction: column;
+    text-align: center;
+    gap: clamp(22px, 3.5vh, 44px);
+    max-width: 1500px;
+  }
+  .title-overline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.6em;
+    color: var(--accent);
+    text-transform: uppercase;
+    padding-left: 0.6em;
+  }
+  .title-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(3rem, 9vw, 8rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+  .title-name span { display: inline-block; }
+  .title-name .accent {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .title-flourish {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    margin-top: 4px;
+  }
+  .title-flourish .line {
+    width: 80px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .title-flourish .diamond {
+    width: 7px; height: 7px;
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
+  .title-role {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 1.6vw, 1.4rem);
+    color: var(--ink-soft);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+  }
+
+  /* ===================== SCENE 2: IDENTITY ===================== */
+  .scene-identity {
+    flex-direction: column;
+    text-align: center;
+    gap: clamp(24px, 3.5vh, 44px);
+    max-width: 1400px;
+  }
+  .identity-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.5em;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    padding-left: 0.5em;
+  }
+  .identity-statement {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 3.4rem);
+    line-height: 1.18;
+    font-weight: 300;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    max-width: 1200px;
+  }
+  .identity-statement em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .identity-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    color: var(--ink-mid);
+    text-transform: uppercase;
+  }
+  .identity-meta .dot {
+    width: 4px; height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  /* ===================== SCENE 3: CORE STRENGTHS ===================== */
+  .scene-core {
+    flex-direction: column;
+    gap: clamp(36px, 5vh, 56px);
+    max-width: 1500px;
+    width: 100%;
+  }
+  .core-header {
+    text-align: center;
+  }
+  .core-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(28px, 4vw, 60px);
+    width: 100%;
+  }
+  .pillar {
+    text-align: left;
+  }
+  .pillar-num {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(3rem, 5.5vw, 4.8rem);
+    font-style: italic;
+    color: var(--accent);
+    line-height: 0.9;
+    font-weight: 300;
+    margin-bottom: 18px;
+    letter-spacing: -0.04em;
+  }
+  .pillar-mark {
+    width: 36px; height: 2px;
+    background: var(--accent);
+    margin-bottom: 18px;
+  }
+  .pillar-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 14px;
+    letter-spacing: -0.012em;
+  }
+  .pillar-desc {
+    font-size: clamp(0.88rem, 1vw, 1.02rem);
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  /* ===================== SCENE 4: CAREER JOURNEY ===================== */
+  .scene-journey {
+    flex-direction: column;
+    gap: clamp(40px, 5vh, 64px);
+    max-width: 1600px;
+    width: 100%;
+  }
+  .journey-header { text-align: center; }
+  .timeline-track {
+    position: relative;
+    width: 100%;
+    padding: 56px 0 36px;
+  }
+  .timeline-line {
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    height: 1px;
+    background: var(--line);
+  }
+  .timeline-line-active {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  .scene.active .timeline-line-active {
+    animation: drawTimeline 2.5s var(--ease-out) 0.5s both;
+  }
+  @keyframes drawTimeline {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  .timeline-stops {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    position: relative;
+  }
+  .stop {
+    position: relative;
+    text-align: center;
+    padding-top: 32px;
+  }
+  .stop::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px; height: 12px;
+    background: var(--bg);
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+  }
+  .stop.active::before {
+    background: var(--accent);
+    box-shadow: 0 0 0 5px rgba(184, 132, 42, 0.18);
+  }
+  .stop-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    margin-bottom: 8px;
+    letter-spacing: 0.12em;
+  }
+  .stop-company {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  .stop-role {
+    font-size: 0.75rem;
+    color: var(--ink-mid);
+    line-height: 1.4;
+  }
+  .stop:nth-child(even) {
+    padding-top: 0;
+    padding-bottom: 32px;
+    transform: translateY(-100%);
+  }
+  .stop:nth-child(even)::before {
+    top: auto;
+    bottom: -7px;
+  }
+  .journey-summary {
+    text-align: center;
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.5;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .journey-summary .num {
+    color: var(--accent);
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  /* ===================== SCENE 5: BUSINESS IMPACT ===================== */
+  .scene-impact {
+    flex-direction: column;
+    gap: clamp(30px, 4.5vh, 50px);
+    max-width: 1600px;
+    width: 100%;
+  }
+  .impact-header { text-align: center; }
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 2.5vw, 36px);
+  }
+  .impact-card {
+    padding: clamp(24px, 3vh, 32px) clamp(20px, 2vw, 28px);
+    background: rgba(255,255,255,0.5);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .impact-result {
+    text-align: left;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .result-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.32em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .result-number {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(3rem, 5.5vw, 4.8rem);
+    line-height: 0.9;
+    color: var(--accent);
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    font-style: italic;
+  }
+  .result-sub {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(0.78rem, 0.92vw, 0.9rem);
+    color: var(--ink-mid);
+    margin-top: 8px;
+    letter-spacing: 0.04em;
+  }
+  .car-block {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .car-row {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 12px;
+    align-items: baseline;
+  }
+  .car-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.25em;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    padding-top: 3px;
+  }
+  .car-value {
+    font-size: clamp(0.82rem, 0.95vw, 0.94rem);
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .car-value strong { color: var(--ink); font-weight: 500; }
+
+  /* ===================== SCENE 6: SIGNATURE STRENGTHS ===================== */
+  .scene-signature {
+    flex-direction: column;
+    gap: clamp(36px, 5vh, 56px);
+    max-width: 1500px;
+    width: 100%;
+    text-align: center;
+  }
+  .sig-statement {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.6rem, 3.2vw, 2.8rem);
+    line-height: 1.2;
+    font-weight: 300;
+    color: var(--ink);
+    max-width: 1200px;
+    margin: 0 auto;
+    letter-spacing: -0.018em;
+  }
+  .sig-statement em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .sig-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(20px, 2.4vw, 36px);
+    text-align: left;
+  }
+  .sig-card {
+    border-top: 1px solid var(--ink);
+    padding-top: 22px;
+  }
+  .sig-card-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 14px;
+  }
+  .sig-card-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .sig-card-desc {
+    font-size: clamp(0.78rem, 0.9vw, 0.9rem);
+    color: var(--ink-mid);
+    line-height: 1.55;
+  }
+
+  /* ===================== SCENE 7: TECHNOLOGY STACK ===================== */
+  .scene-stack {
+    flex-direction: column;
+    gap: clamp(32px, 4.5vh, 50px);
+    max-width: 1600px;
+    width: 100%;
+  }
+  .stack-header { text-align: center; }
+  .stack-clusters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: clamp(18px, 2vw, 28px);
+  }
+  .cluster {
+    padding: clamp(18px, 2.2vh, 24px) clamp(20px, 2vw, 28px);
+    background: rgba(255,255,255,0.55);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+  .cluster.featured {
+    border-color: var(--accent);
+    background: rgba(184, 132, 42, 0.04);
+  }
+  .cluster-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .cluster.featured .cluster-label { color: var(--accent); }
+  .cluster-items {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(0.95rem, 1.15vw, 1.1rem);
+    color: var(--ink);
+    line-height: 1.55;
+    font-weight: 400;
+  }
+  .cluster-items .em { color: var(--accent); font-style: italic; font-weight: 500; }
+
+  /* ===================== SCENE 8: WORK STYLE ===================== */
+  .scene-style {
+    flex-direction: column;
+    gap: clamp(36px, 5vh, 56px);
+    max-width: 1400px;
+    width: 100%;
+    text-align: center;
+  }
+  .style-traits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .trait {
+    background: var(--bg);
+    padding: clamp(24px, 3.5vh, 36px) clamp(20px, 2.2vw, 30px);
+    text-align: left;
+  }
+  .trait-word {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    font-weight: 400;
+    color: var(--accent);
+    font-style: italic;
+    margin-bottom: 12px;
+    letter-spacing: -0.012em;
+    line-height: 1;
+  }
+  .trait-desc {
+    font-size: clamp(0.82rem, 0.95vw, 0.92rem);
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  /* ===================== SCENE 9: FUTURE DIRECTION ===================== */
+  .scene-future {
+    display: grid;
+    grid-template-columns: 1fr 1.618fr;
+    gap: clamp(40px, 5vw, 90px);
+    align-items: center;
+    max-width: 1500px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .future-left { text-align: left; }
+  .future-arrow {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(5rem, 11vw, 9.5rem);
+    font-style: italic;
+    color: var(--accent);
+    line-height: 0.8;
+    font-weight: 200;
+    margin-bottom: 18px;
+    letter-spacing: -0.06em;
+  }
+  .future-headline {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.018em;
+    margin-top: 22px;
+  }
+  .future-headline em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .future-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding-left: clamp(24px, 3.5vw, 60px);
+    border-left: 1px solid var(--line);
+  }
+  .future-item {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 16px;
+    align-items: baseline;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .future-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .future-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+  .future-text {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.1rem, 1.4vw, 1.3rem);
+    color: var(--ink);
+    line-height: 1.25;
+    font-weight: 500;
+  }
+  .future-text .dim {
+    color: var(--ink-soft);
+    font-size: 0.72em;
+    display: block;
+    margin-top: 6px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 300;
+    line-height: 1.55;
+  }
+
+  /* ===================== SCENE 10: CLOSING ===================== */
+  .scene-closing {
+    flex-direction: column;
+    text-align: center;
+    gap: clamp(28px, 4vh, 50px);
+    max-width: 1200px;
+  }
+  .closing-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.55em;
+    color: var(--accent);
+    text-transform: uppercase;
+    padding-left: 0.55em;
+  }
+  .closing-quote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: clamp(1.7rem, 3.6vw, 3.2rem);
+    line-height: 1.22;
+    color: var(--ink);
+    font-weight: 300;
+    max-width: 1100px;
+    margin: 0 auto;
+    letter-spacing: -0.015em;
+  }
+  .closing-quote em {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .closing-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 32px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    text-decoration: none;
+    margin-top: 12px;
+    border: none;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  .closing-cta:hover {
+    background: var(--ink);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+  .closing-cta svg {
+    width: 14px; height: 14px;
+    fill: currentColor;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    width: 100%;
+    padding-top: 36px;
+    border-top: 1px solid var(--line);
+  }
+  .contact-item { text-align: left; }
+  .contact-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .contact-value {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(0.9rem, 1.05vw, 1.05rem);
+    color: var(--ink);
+    word-break: break-word;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+  .contact-value a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .contact-value a:hover { border-bottom-color: var(--accent); }
+
+  /* ==================== CONTROLS ==================== */
+  .controls {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    z-index: 50;
+    padding: 0 clamp(36px, 4.5vw, 64px) clamp(28px, 3.5vh, 40px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+  }
+  .ctrl-cluster {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ctrl-btn {
+    width: 34px; height: 34px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--ink-soft);
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+  .ctrl-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: scale(1.08);
+  }
+  .ctrl-btn svg {
+    width: 11px; height: 11px;
+    fill: currentColor;
+  }
+  .ctrl-btn.play-pause {
+    width: 46px; height: 46px;
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+  .ctrl-btn.play-pause:hover {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .ctrl-btn.play-pause svg { width: 13px; height: 13px; }
+
+  .ctrl-hint {
+    text-align: right;
+    line-height: 1.7;
+    font-size: 0.62rem;
+  }
+  .ctrl-hint strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  @media (max-width: 900px) {
+    .scene { padding: 90px 24px 80px; }
+    .scene-future { grid-template-columns: 1fr; gap: 28px; }
+    .future-list { border-left: none; border-top: 1px solid var(--line); padding-left: 0; padding-top: 22px; }
+    .core-grid, .impact-grid, .sig-grid, .stack-clusters, .style-traits, .contact-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .timeline-stops { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .stop:nth-child(even) { transform: none; padding-top: 32px; padding-bottom: 0; }
+    .stop:nth-child(even)::before { top: -7px; bottom: auto; }
+    .hud-top, .progress-rail, .controls { padding-left: 20px; padding-right: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cinema">
+
+  <!-- TOP HUD -->
+  <div class="hud-top">
+    <div class="hud-brand">
+      <span class="brand-dot"></span>
+      <span>A Visual Resume</span>
+    </div>
+    <div class="hud-chapter">
+      <span id="chapter-num">01 / 10</span>
+      <span>·</span>
+      <strong id="chapter-name">The Opening</strong>
+    </div>
+  </div>
+
+  <!-- PROGRESS RAIL -->
+  <div class="progress-rail" id="progress-rail"></div>
+
+  <!-- STAGE -->
+  <div class="stage">
+
+    <!-- ============ SCENE 1: OPENING ============ -->
+    <section class="scene scene-title active" data-duration="11000">
+      <div class="title-overline reveal-fade" style="animation-delay: 0.3s">Twenty-Two Years of Engineering</div>
+      <h1 class="title-name reveal-letters">
+        <span style="animation-delay: 0.6s">J</span><span style="animation-delay: 0.68s">A</span><span style="animation-delay: 0.76s">N</span><span style="animation-delay: 0.84s">A</span><span style="animation-delay: 0.92s">K</span><span style="animation-delay: 1.0s">A</span>
+        <br>
+        <span class="accent" style="animation-delay: 1.4s">P</span><span class="accent" style="animation-delay: 1.48s">r</span><span class="accent" style="animation-delay: 1.56s">e</span><span class="accent" style="animation-delay: 1.64s">m</span><span class="accent" style="animation-delay: 1.72s">a</span><span class="accent" style="animation-delay: 1.8s">t</span><span class="accent" style="animation-delay: 1.88s">h</span><span class="accent" style="animation-delay: 1.96s">i</span><span class="accent" style="animation-delay: 2.04s">l</span><span class="accent" style="animation-delay: 2.12s">a</span><span class="accent" style="animation-delay: 2.2s">k</span><span class="accent" style="animation-delay: 2.28s">a</span>
+      </h1>
+      <div class="title-flourish reveal-fade" style="animation-delay: 2.8s">
+        <span class="line"></span>
+        <span class="diamond"></span>
+        <span class="line"></span>
+      </div>
+      <p class="title-role reveal-fade" style="animation-delay: 3.1s">
+        Senior Java / Spring Boot Engineer<br>
+        Legacy Modernization · Production Stability · AI Automation
+      </p>
+    </section>
+
+    <!-- ============ SCENE 2: IDENTITY ============ -->
+    <section class="scene scene-identity" data-duration="13000">
+      <div class="identity-label reveal-fade">Professional Identity</div>
+      <p class="identity-statement reveal-slow" style="animation-delay: 0.4s">
+        I build the <em>reliable enterprise systems</em> that banks, governments, and high-stakes institutions <em>cannot afford to fail</em> — and I bring practical <em>AI automation</em> with me.
+      </p>
+      <div class="identity-meta reveal-fade" style="animation-delay: 1.8s">
+        <span>22+ Years</span>
+        <span class="dot"></span>
+        <span>Zug, Switzerland</span>
+        <span class="dot"></span>
+        <span>Swiss C Permit</span>
+        <span class="dot"></span>
+        <span>Available · 2 Months</span>
+      </div>
+    </section>
+
+    <!-- ============ SCENE 3: CORE STRENGTHS ============ -->
+    <section class="scene scene-core" data-duration="15000">
+      <div class="core-header">
+        <div class="eyebrow reveal-fade">Chapter 03 — Core Strengths</div>
+        <h2 class="h2 reveal" style="animation-delay: 0.3s; margin-top: 16px;">Three things I do <em>exceptionally well.</em></h2>
+      </div>
+      <div class="core-grid">
+        <div class="pillar reveal" style="animation-delay: 0.9s">
+          <div class="pillar-num">i.</div>
+          <div class="pillar-mark"></div>
+          <h3 class="pillar-title">Modernization</h3>
+          <p class="pillar-desc">Turning legacy weight into living systems. 20+ legacy components migrated to Spring Boot microservices, greenfield CI/CD pipelines, and rapid frontend pickup — the systems holding teams back become the systems that propel them.</p>
+        </div>
+        <div class="pillar reveal" style="animation-delay: 1.3s">
+          <div class="pillar-num">ii.</div>
+          <div class="pillar-mark"></div>
+          <h3 class="pillar-title">Production Stability</h3>
+          <p class="pillar-desc">Carrying mission-critical production. FX trading, e-procurement, master data — high-volume, low-latency Java where downtime is unacceptable. Calm on-call. Strong observability. Zero-drama incidents.</p>
+        </div>
+        <div class="pillar reveal" style="animation-delay: 1.7s">
+          <div class="pillar-num">iii.</div>
+          <div class="pillar-mark"></div>
+          <h3 class="pillar-title">AI Automation</h3>
+          <p class="pillar-desc">Already shipping with LLMs and Agentic RAG in production. Aligned with next-generation recommendation engines and intelligent automation — not a buzzword on the CV, an active engineering practice.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SCENE 4: CAREER JOURNEY ============ -->
+    <section class="scene scene-journey" data-duration="14000">
+      <div class="journey-header">
+        <div class="eyebrow reveal-fade">Chapter 04 — The Journey</div>
+        <h2 class="h2 reveal" style="animation-delay: 0.3s; margin-top: 16px;">Five institutions. <em>One discipline.</em></h2>
+      </div>
+      <div class="timeline-track reveal-fade" style="animation-delay: 0.8s">
+        <div class="timeline-line"></div>
+        <div class="timeline-line-active"></div>
+        <div class="timeline-stops">
+          <div class="stop">
+            <div class="stop-year">2004 → 2011</div>
+            <div class="stop-company">J&amp;J · Nokia Siemens · UBC</div>
+            <div class="stop-role">Senior Java/JEE Consultant</div>
+          </div>
+          <div class="stop">
+            <div class="stop-year">2011 → 2018</div>
+            <div class="stop-company">European Commission</div>
+            <div class="stop-role">Full-Stack Engineer · DIGIT</div>
+          </div>
+          <div class="stop">
+            <div class="stop-year">2018 → 2019</div>
+            <div class="stop-company">UBS</div>
+            <div class="stop-role">Solution Specialist</div>
+          </div>
+          <div class="stop">
+            <div class="stop-year">2019 → 2024</div>
+            <div class="stop-company">Credit Suisse</div>
+            <div class="stop-role">IT Solution Developer · FX</div>
+          </div>
+          <div class="stop active">
+            <div class="stop-year">2024 → Now</div>
+            <div class="stop-company">UBS</div>
+            <div class="stop-role">Senior Lead · CS → UBS Merger</div>
+          </div>
+        </div>
+      </div>
+      <p class="journey-summary reveal-fade" style="animation-delay: 2.5s">
+        <span class="num">22+</span> years across <span class="num">5</span> institutions. Deep tenures, never a job-hopper — always the engineer who stays for the hard part.
+      </p>
+    </section>
+
+    <!-- ============ SCENE 5: BUSINESS IMPACT ============ -->
+    <section class="scene scene-impact" data-duration="17000">
+      <div class="impact-header">
+        <div class="eyebrow reveal-fade">Chapter 05 — Business Impact</div>
+        <h2 class="h2 reveal" style="animation-delay: 0.3s; margin-top: 16px;">Three moments that <em>moved the number.</em></h2>
+      </div>
+      <div class="impact-grid">
+
+        <div class="impact-card reveal" style="animation-delay: 1s">
+          <div class="impact-result">
+            <span class="result-label">Result</span>
+            <div class="result-number">Zero.</div>
+            <div class="result-sub">operational interruptions</div>
+          </div>
+          <div class="car-block">
+            <div class="car-row">
+              <span class="car-label">Challenge</span>
+              <p class="car-value">CS → UBS merger threatens <strong>6 enterprise apps</strong>.</p>
+            </div>
+            <div class="car-row">
+              <span class="car-label">Action</span>
+              <p class="car-value">Took <strong>full ownership</strong> of all 6 across the transition.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="impact-card reveal" style="animation-delay: 1.4s">
+          <div class="impact-result">
+            <span class="result-label">Result</span>
+            <div class="result-number">+20%</div>
+            <div class="result-sub">system responsiveness</div>
+          </div>
+          <div class="car-block">
+            <div class="car-row">
+              <span class="car-label">Challenge</span>
+              <p class="car-value">Front-office <strong>FX trading platform</strong> hurting executions under load.</p>
+            </div>
+            <div class="car-row">
+              <span class="car-label">Action</span>
+              <p class="car-value">Re-engineered with Java 11–17 — deep <strong>multi-threading and memory work</strong>.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="impact-card reveal" style="animation-delay: 1.8s">
+          <div class="impact-result">
+            <span class="result-label">Result</span>
+            <div class="result-number">2024 →</div>
+            <div class="result-sub">already shipping AI in production</div>
+          </div>
+          <div class="car-block">
+            <div class="car-row">
+              <span class="car-label">Challenge</span>
+              <p class="car-value">Repetitive ops draining engineering bandwidth.</p>
+            </div>
+            <div class="car-row">
+              <span class="car-label">Action</span>
+              <p class="car-value">Implemented <strong>RPA + LLMs + Agentic RAG</strong> in production.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ SCENE 6: SIGNATURE STRENGTHS ============ -->
+    <section class="scene scene-signature" data-duration="14000">
+      <div class="eyebrow reveal-fade">Chapter 06 — What Sets Me Apart</div>
+      <p class="sig-statement reveal-slow" style="animation-delay: 0.4s">
+        Plenty of engineers can write Java. <em>Fewer</em> can carry a merger, modernize a legacy, mentor a team, and ship AI — <em>at the same time.</em>
+      </p>
+      <div class="sig-grid">
+        <div class="sig-card reveal" style="animation-delay: 1.6s">
+          <div class="sig-card-num">— I —</div>
+          <h4 class="sig-card-title">Deep Enterprise DNA</h4>
+          <p class="sig-card-desc">Two decades inside banking, EU government, telecom. I speak the language of regulated, audited systems.</p>
+        </div>
+        <div class="sig-card reveal" style="animation-delay: 1.9s">
+          <div class="sig-card-num">— II —</div>
+          <h4 class="sig-card-title">Outcome Ownership</h4>
+          <p class="sig-card-desc">When something must not break, I take 100% of the responsibility — not 60%. Formally commended by UBS clients.</p>
+        </div>
+        <div class="sig-card reveal" style="animation-delay: 2.2s">
+          <div class="sig-card-num">— III —</div>
+          <h4 class="sig-card-title">Modernization Mindset</h4>
+          <p class="sig-card-desc">I don't just patch legacy. I migrate, refactor, rebuild — turning old liabilities into modern assets.</p>
+        </div>
+        <div class="sig-card reveal" style="animation-delay: 2.5s">
+          <div class="sig-card-num">— IV —</div>
+          <h4 class="sig-card-title">AI-Native Already</h4>
+          <p class="sig-card-desc">Shipping LLM and RAG workloads in 2024–2026. Not learning the future — already inside it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SCENE 7: TECHNOLOGY STACK ============ -->
+    <section class="scene scene-stack" data-duration="13000">
+      <div class="stack-header">
+        <div class="eyebrow reveal-fade">Chapter 07 — The Stack</div>
+        <h2 class="h2 reveal" style="animation-delay: 0.3s; margin-top: 16px;">Engineered for <em>banking-grade</em> systems.</h2>
+      </div>
+      <div class="stack-clusters">
+        <div class="cluster featured reveal" style="animation-delay: 0.9s">
+          <div class="cluster-label">Backend Core</div>
+          <p class="cluster-items"><span class="em">Java 11–17</span> · Spring Boot · Hibernate · Spring Integration · JBPM</p>
+        </div>
+        <div class="cluster reveal" style="animation-delay: 1.1s">
+          <div class="cluster-label">Architecture</div>
+          <p class="cluster-items">Microservices · Multi-threading · GraphQL · REST · SOAP</p>
+        </div>
+        <div class="cluster featured reveal" style="animation-delay: 1.3s">
+          <div class="cluster-label">AI / Automation</div>
+          <p class="cluster-items"><span class="em">LLMs · Agentic RAG · RPA</span></p>
+        </div>
+        <div class="cluster reveal" style="animation-delay: 1.5s">
+          <div class="cluster-label">Cloud / DevOps</div>
+          <p class="cluster-items">Kubernetes · Docker · Jenkins · Grafana · Splunk</p>
+        </div>
+        <div class="cluster reveal" style="animation-delay: 1.7s">
+          <div class="cluster-label">Frontend &amp; Data</div>
+          <p class="cluster-items">React · Angular · TypeScript · Oracle · SQL</p>
+        </div>
+        <div class="cluster reveal" style="animation-delay: 1.9s">
+          <div class="cluster-label">Quality &amp; Way of Working</div>
+          <p class="cluster-items">TDD · JUnit · Mockito · Cucumber · Scrum / SAFe</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SCENE 8: WORK STYLE ============ -->
+    <section class="scene scene-style" data-duration="13000">
+      <div>
+        <div class="eyebrow reveal-fade">Chapter 08 — Work Style</div>
+        <h2 class="h2 reveal" style="animation-delay: 0.3s; margin-top: 16px;">How I show up <em>every day.</em></h2>
+      </div>
+      <div class="style-traits">
+        <div class="trait reveal" style="animation-delay: 1s">
+          <div class="trait-word">Reliable.</div>
+          <p class="trait-desc">Pikettdienst-ready. Calm on-call. Strong observability — production incidents handled, not panicked.</p>
+        </div>
+        <div class="trait reveal" style="animation-delay: 1.2s">
+          <div class="trait-word">Owner.</div>
+          <p class="trait-desc">I take 100%, not 60%. Whether it's a merger, an archive deadline, or a flaky service at 2am.</p>
+        </div>
+        <div class="trait reveal" style="animation-delay: 1.4s">
+          <div class="trait-word">Self-Starter.</div>
+          <p class="trait-desc">Built MDM CI/CD pipelines alone. Picked up Angular under deadline. Earned widespread client appreciation.</p>
+        </div>
+        <div class="trait reveal" style="animation-delay: 1.6s">
+          <div class="trait-word">Mentor.</div>
+          <p class="trait-desc">Active code reviews, pair programming, instilling engineering culture. I multiply the team, not just myself.</p>
+        </div>
+        <div class="trait reveal" style="animation-delay: 1.8s">
+          <div class="trait-word">Business-Fluent.</div>
+          <p class="trait-desc">EN C1/C2, German B1, French &amp; Dutch basics, Sinhalese native. I work across geographies and stakeholders.</p>
+        </div>
+        <div class="trait reveal" style="animation-delay: 2.0s">
+          <div class="trait-word">Future-Ready.</div>
+          <p class="trait-desc">Already producing with LLMs and Agentic RAG. Continuous learner — completed AI / ChatGPT programs in 2023.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SCENE 9: FUTURE DIRECTION ============ -->
+    <section class="scene scene-future" data-duration="13000">
+      <div class="future-left">
+        <div class="future-arrow reveal" style="animation-delay: 0.2s">→</div>
+        <div class="eyebrow reveal-fade" style="animation-delay: 0.6s">Chapter 09 — What's Next</div>
+        <h2 class="future-headline reveal" style="animation-delay: 0.9s">Heading <em>toward</em> the work the market <em>actually needs.</em></h2>
+      </div>
+      <div class="future-list">
+        <div class="future-item reveal-x" style="animation-delay: 1.4s">
+          <span class="future-num">01</span>
+          <p class="future-text">AI-enabled engineering<span class="dim">RAG, agentic systems, recommendation engines — built on enterprise-grade Java.</span></p>
+        </div>
+        <div class="future-item reveal-x" style="animation-delay: 1.65s">
+          <span class="future-num">02</span>
+          <p class="future-text">Enterprise architecture &amp; technical leadership<span class="dim">Scalable platform engineering for institutions where reliability is non-negotiable.</span></p>
+        </div>
+        <div class="future-item reveal-x" style="animation-delay: 1.9s">
+          <span class="future-num">03</span>
+          <p class="future-text">Cloud modernization at scale<span class="dim">Turning legacy estates into cloud-native microservice landscapes — the work I've been doing for years.</span></p>
+        </div>
+        <div class="future-item reveal-x" style="animation-delay: 2.15s">
+          <span class="future-num">04</span>
+          <p class="future-text">High-trust on-call ownership<span class="dim">Pikettdienst, mission-critical incident management, and quietly excellent production support.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SCENE 10: CLOSING ============ -->
+    <section class="scene scene-closing" data-duration="9999999">
+      <div class="closing-eyebrow reveal-fade">Final Chapter — Let's Talk</div>
+      <p class="closing-quote reveal-slow" style="animation-delay: 0.3s">
+        Twenty-two years of <em>showing up</em> for systems that matter.<br>
+        Now ready for <em>your hardest problem.</em>
+      </p>
+      <a href="mailto:janaka2@gmail.com?subject=Let%27s%20talk" class="closing-cta reveal-fade" style="animation-delay: 1.5s">
+        Start a Conversation
+        <svg viewBox="0 0 24 24"><path d="M5 12h13l-5-5 1-1 7 7-7 7-1-1 5-5H5v-2z"/></svg>
+      </a>
+      <div class="contact-grid">
+        <div class="contact-item reveal" style="animation-delay: 1.9s">
+          <div class="contact-label">Phone</div>
+          <div class="contact-value"><a href="tel:+41762248445">+41 76 224 84 45</a></div>
+        </div>
+        <div class="contact-item reveal" style="animation-delay: 2.05s">
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:janaka2@gmail.com">janaka2@gmail.com</a></div>
+        </div>
+        <div class="contact-item reveal" style="animation-delay: 2.2s">
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value"><a href="https://linkedin.com/in/janakapremathilaka" target="_blank" rel="noopener">in/janakapremathilaka</a></div>
+        </div>
+        <div class="contact-item reveal" style="animation-delay: 2.35s">
+          <div class="contact-label">References</div>
+          <div class="contact-value">UBS · Credit Suisse · European Commission</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <div class="ctrl-cluster">
+      <button class="ctrl-btn prev" aria-label="Previous">
+        <svg viewBox="0 0 24 24"><path d="M6 4v16h2V4H6zm14 0L10 12l10 8V4z"/></svg>
+      </button>
+      <button class="ctrl-btn play-pause" id="playPauseBtn" aria-label="Play/Pause">
+        <svg id="pauseIcon" viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+        <svg id="playIcon" viewBox="0 0 24 24" style="display:none"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <button class="ctrl-btn next" aria-label="Next">
+        <svg viewBox="0 0 24 24"><path d="M16 4v16h2V4h-2zM4 4l10 8L4 20V4z"/></svg>
+      </button>
+      <button class="ctrl-btn replay" id="replayBtn" aria-label="Replay" title="Replay">
+        <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.3 0 6 2.7 6 6s-2.7 6-6 6-6-2.7-6-6H4c0 4.4 3.6 8 8 8s8-3.6 8-8-3.6-8-8-8z"/></svg>
+      </button>
+    </div>
+    <div class="ctrl-hint">
+      <strong>Janaka Premathilaka</strong> · A Visual Resume · v3 · 2 min<br>
+      <strong>SPACE</strong> pause · <strong>← →</strong> navigate · <strong>R</strong> replay
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const scenes = document.querySelectorAll('.scene');
+  const rail = document.getElementById('progress-rail');
+  const chapterNumEl = document.getElementById('chapter-num');
+  const chapterNameEl = document.getElementById('chapter-name');
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  const playIcon = document.getElementById('playIcon');
+  const pauseIcon = document.getElementById('pauseIcon');
+  const prevBtn = document.querySelector('.ctrl-btn.prev');
+  const nextBtn = document.querySelector('.ctrl-btn.next');
+  const replayBtn = document.getElementById('replayBtn');
+
+  const chapterNames = [
+    'The Opening',
+    'Identity',
+    'Core Strengths',
+    'The Journey',
+    'Business Impact',
+    'What Sets Me Apart',
+    'The Stack',
+    'Work Style',
+    'What\u2019s Next',
+    'Let\u2019s Talk'
+  ];
+
+  let current = 0;
+  let isPlaying = true;
+  let timeoutId = null;
+  let startTime = 0;
+  let remaining = 0;
+
+  scenes.forEach(() => {
+    const seg = document.createElement('div');
+    seg.className = 'progress-segment';
+    seg.innerHTML = '<div class="fill"></div>';
+    rail.appendChild(seg);
+  });
+  const segments = rail.querySelectorAll('.progress-segment');
+
+  function updateHud() {
+    const n = (current + 1).toString().padStart(2, '0');
+    chapterNumEl.textContent = `${n} / 10`;
+    chapterNameEl.textContent = chapterNames[current];
+  }
+
+  function showScene(idx) {
+    scenes.forEach((s, i) => s.classList.toggle('active', i === idx));
+    segments.forEach((s, i) => {
+      s.classList.remove('active', 'done', 'paused');
+      const fill = s.querySelector('.fill');
+      fill.style.animation = 'none';
+      void fill.offsetWidth;
+      fill.style.animation = '';
+      if (i < idx) s.classList.add('done');
+    });
+
+    const dur = parseInt(scenes[idx].dataset.duration, 10);
+    const seg = segments[idx];
+    const fill = seg.querySelector('.fill');
+    seg.classList.add('active');
+    fill.style.setProperty('--dur', dur + 'ms');
+    fill.style.animationDuration = dur + 'ms';
+
+    updateHud();
+
+    if (isPlaying) {
+      startTime = Date.now();
+      remaining = dur;
+      scheduleNext(dur);
+    } else {
+      seg.classList.add('paused');
+    }
+  }
+
+  function scheduleNext(ms) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => next(), ms);
+  }
+  function next() {
+    if (current >= scenes.length - 1) return;
+    current++;
+    showScene(current);
+  }
+  function prev() {
+    if (current <= 0) return;
+    current--;
+    showScene(current);
+  }
+  function togglePlay() {
+    isPlaying = !isPlaying;
+    const seg = segments[current];
+    const fill = seg.querySelector('.fill');
+    if (isPlaying) {
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'block';
+      seg.classList.remove('paused');
+      fill.style.animationPlayState = 'running';
+      startTime = Date.now();
+      scheduleNext(remaining);
+    } else {
+      playIcon.style.display = 'block';
+      pauseIcon.style.display = 'none';
+      seg.classList.add('paused');
+      fill.style.animationPlayState = 'paused';
+      const elapsed = Date.now() - startTime;
+      remaining = Math.max(0, remaining - elapsed);
+      clearTimeout(timeoutId);
+    }
+  }
+  function replay() {
+    current = 0;
+    isPlaying = true;
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'block';
+    showScene(0);
+  }
+
+  playPauseBtn.addEventListener('click', togglePlay);
+  nextBtn.addEventListener('click', () => { if (current < scenes.length - 1) { current++; showScene(current); } });
+  prevBtn.addEventListener('click', () => { if (current > 0) { current--; showScene(current); } });
+  replayBtn.addEventListener('click', replay);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') { e.preventDefault(); togglePlay(); }
+    if (e.code === 'ArrowRight') { if (current < scenes.length - 1) { current++; showScene(current); } }
+    if (e.code === 'ArrowLeft') { if (current > 0) { current--; showScene(current); } }
+    if (e.code === 'KeyR') { replay(); }
+    if (e.code === 'Home') { current = 0; showScene(current); }
+    if (e.code === 'End') { current = scenes.length - 1; showScene(current); }
+  });
+
+  segments.forEach((seg, i) => {
+    seg.addEventListener('click', () => {
+      current = i;
+      showScene(current);
+    });
+  });
+
+  showScene(0);
+</script>
+
+</body>
+</html>
