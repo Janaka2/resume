@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Janaka Premathilaka — Senior Java Engineer & Solution Architect</title>
+<meta name="description" content="22+ years of banking-grade Java engineering — UBS, Credit Suisse, the European Commission — now bringing LLM, RAG and agentic automation inside the bank's perimeter. Zug, Switzerland.">
+<meta property="og:title" content="Janaka Premathilaka — Senior Java Engineer & Solution Architect">
+<meta property="og:description" content="Banking-grade Java + practical AI in regulated environments. 22+ years. Zug, Switzerland.">
+<meta property="og:type" content="profile">
+<!-- Update this canonical to the final address once published (e.g. on janaka.me) -->
+<link rel="canonical" href="https://janaka2.github.io/resume/partials/janaka_visual_resume_v3.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Janaka Premathilaka",
+  "jobTitle": "Senior Java Engineer & Solution Architect",
+  "address": {"@type": "PostalAddress", "addressLocality": "Zug", "addressCountry": "CH"},
+  "email": "mailto:janaka2@gmail.com",
+  "url": "https://janaka.me",
+  "sameAs": [
+    "https://www.linkedin.com/in/janakapremathilaka/",
+    "https://github.com/Janaka2",
+    "https://javawithme.wordpress.com/"
+  ],
+  "knowsLanguage": ["en", "de", "si", "fr", "nl"],
+  "knowsAbout": ["Java", "Spring Boot", "Kubernetes", "Apache Kafka", "LLM integration", "RAG", "Banking systems", "Solution architecture"]
+}
+</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect fill='%2310243E' width='64' height='64' rx='12'/%3E%3Ctext x='32' y='43' font-family='Arial' font-size='26' font-weight='700' fill='%232EB596' text-anchor='middle'%3EJP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ tokens ============ */
+:root{
+  --bg:#FAFBFD; --bg2:#FFFFFF; --tx:#10243E; --tx2:#5B6B7F;
+  --ln:#DCE3EB; --ac:#0E7C66; --ok:#18A36C; --chip:#F1F5F9;
+  --shadow:0 1px 2px rgba(16,36,62,.05),0 8px 24px rgba(16,36,62,.06);
+  --r:12px;
+}
+html[data-theme="dark"]{
+  --bg:#0B1626; --bg2:#101E33; --tx:#E6EDF6; --tx2:#93A4BA;
+  --ln:#233650; --ac:#2EB596; --ok:#2ECB87; --chip:#16263D;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
+}
+/* ============ base ============ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--tx);
+  font:400 1rem/1.65 "IBM Plex Sans",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  transition:background .25s ease,color .25s ease;
+}
+section{scroll-margin-top:84px}
+.wrap{max-width:1020px;margin:0 auto;padding:0 24px}
+a{color:var(--ac)}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:4px}
+.mono{font-family:"IBM Plex Mono",monospace}
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:10px;
+}
+h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(1.45rem,3vw,1.9rem);letter-spacing:-.01em;margin-bottom:18px}
+.sec{padding:72px 0 0}
+.lede{color:var(--tx2);max-width:62ch}
+/* ============ top bar ============ */
+.topbar{
+  position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--ln);
+}
+.topbar .wrap{display:flex;align-items:center;gap:18px;height:56px}
+.logo{font-family:"Archivo",sans-serif;font-weight:800;font-size:1.05rem;color:var(--tx);text-decoration:none;letter-spacing:-.02em}
+.logo b{color:var(--ac)}
+nav{margin-left:auto;display:flex;gap:18px;align-items:center}
+nav a{
+  font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--tx2);text-decoration:none;
+}
+nav a:hover{color:var(--ac)}
+#themeBtn{
+  border:1px solid var(--ln);background:var(--bg2);color:var(--tx);border-radius:8px;
+  width:34px;height:34px;cursor:pointer;font-size:.95rem;line-height:1;
+}
+#themeBtn:hover{border-color:var(--ac)}
+@media(max-width:680px){nav a.navlink{display:none}}
+/* ============ hero ============ */
+.hero{padding:64px 0 0}
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:start}
+.status{
+  font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--tx2);
+  display:flex;align-items:center;gap:8px;margin-bottom:18px;min-height:1.3em;
+}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);flex:0 0 auto;animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 45%,transparent)}55%{box-shadow:0 0 0 7px transparent}}
+.cursor{display:inline-block;width:7px;height:1em;background:var(--ac);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+h1{font-family:"Archivo",sans-serif;font-weight:800;font-size:clamp(2.3rem,6vw,3.9rem);line-height:1.02;letter-spacing:-.025em}
+.role{font-family:"Archivo",sans-serif;font-weight:600;font-size:clamp(1.05rem,2.4vw,1.35rem);color:var(--ac);margin:12px 0 4px}
+.hook{font-size:clamp(1rem,2vw,1.12rem);color:var(--tx2);max-width:54ch;margin-top:10px}
+.hook b{color:var(--tx);font-weight:600}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.badge{
+  font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--tx2);
+  border:1px solid var(--ln);border-radius:999px;padding:5px 11px;background:var(--bg2);
+}
+.badge.hot{color:var(--ac);border-color:color-mix(in srgb,var(--ac) 40%,var(--ln))}
+.photo-card{text-align:center}
+.photo-card img{
+  width:172px;height:auto;border-radius:14px;display:block;
+  border:1px solid var(--ln);box-shadow:var(--shadow);
+}
+.photo-card figcaption{font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--tx2);margin-top:10px;letter-spacing:.08em}
+@media(max-width:680px){
+  .hero-grid{grid-template-columns:1fr}
+  .photo-card{order:-1}
+  .photo-card img{width:128px;margin:0}
+  .photo-card{text-align:left}
+}
+/* ============ buttons ============ */
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer;
+  font:500 .86rem/1 "IBM Plex Sans",sans-serif;border-radius:10px;padding:11px 16px;
+  border:1px solid var(--ln);background:var(--bg2);color:var(--tx);
+  transition:transform .12s ease,border-color .12s ease,background .12s ease;
+}
+.btn:hover{transform:translateY(-1px);border-color:var(--ac)}
+.btn.primary{background:var(--ac);border-color:var(--ac);color:#fff}
+html[data-theme="dark"] .btn.primary{color:#06121F}
+.btn.primary:hover{filter:brightness(1.06)}
+/* ============ listen panel ============ */
+.listen{
+  display:none;margin-top:18px;border:1px solid var(--ln);border-radius:var(--r);
+  background:var(--bg2);padding:18px 20px;box-shadow:var(--shadow);
+}
+.listen.open{display:block}
+.listen .label{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx2);display:flex;justify-content:space-between;gap:10px;margin-bottom:10px}
+#transcript{font-size:.95rem;line-height:1.8;color:var(--tx2)}
+#transcript span{border-radius:4px;padding:0 1px;transition:background .15s,color .15s}
+#transcript span.on{background:color-mix(in srgb,var(--ac) 18%,transparent);color:var(--tx)}
+#stopBtn{background:none;border:none;color:var(--ac);font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.1em;cursor:pointer;text-transform:uppercase}
+.note{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--tx2);margin-top:12px;opacity:.8}
+/* ============ stats ============ */
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:44px;
+  border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);
+}
+.stat{padding:20px 18px 22px;border-left:1px solid var(--ln)}
+.stat:first-child{border-left:none;padding-left:0}
+.stat b{font-family:"Archivo",sans-serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);letter-spacing:-.02em;display:block}
+.stat span{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.06em;color:var(--tx2);display:block;margin-top:4px}
+@media(max-width:680px){
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{padding-left:0;border-left:none;border-top:1px solid var(--ln)}
+  .stat:nth-child(-n+2){border-top:none}
+}
+/* ============ perimeter diagram ============ */
+.peri{
+  position:relative;display:grid;grid-template-columns:1fr 120px 1.25fr;gap:0;
+  margin-top:30px;align-items:stretch;
+}
+.zone{border-radius:var(--r);padding:22px;background:var(--bg2)}
+.zone .zlabel{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--tx2);margin-bottom:8px}
+.zone h3{font-family:"Archivo",sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.zone ul{list-style:none}
+.zone li{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--tx2);padding:3px 0}
+.zone.outside{border:1.5px dashed var(--ln)}
+.zone.inside{border:1.5px solid color-mix(in srgb,var(--tx) 35%,var(--ln));background:color-mix(in srgb,var(--chip) 70%,var(--bg2))}
+.gate{display:flex;align-items:center;justify-content:center;position:relative}
+.gate::before,.gate::after{
+  content:"";position:absolute;left:50%;width:2px;background:var(--ln);transform:translateX(-50%);
+}
+.gate::before{top:0;height:calc(50% - 56px)}
+.gate::after{bottom:0;height:calc(50% - 56px)}
+.gatebox{
+  position:relative;z-index:2;border:1.5px solid var(--ac);background:var(--bg2);
+  border-radius:10px;padding:12px 10px;text-align:center;width:104px;box-shadow:var(--shadow);
+}
+.gatebox .zlabel{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);display:block;margin-bottom:6px}
+.gatebox div{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--tx2);line-height:1.7}
+.packet{
+  position:absolute;top:50%;left:4%;width:11px;height:11px;border-radius:50%;
+  background:var(--tx2);transform:translate(-50%,-50%);z-index:3;
+  animation:travel 6.5s cubic-bezier(.45,0,.4,1) infinite;
+}
+@keyframes travel{
+  0%{left:4%;background:var(--tx2);opacity:0}
+  6%{opacity:1}
+  44%{background:var(--tx2)}
+  50%{left:50%;background:var(--ac)}
+  56%{background:var(--ok)}
+  94%{opacity:1}
+  100%{left:96%;background:var(--ok);opacity:0}
+}
+.peri-cap{margin-top:22px;color:var(--tx2);max-width:68ch}
+.peri-cap b{color:var(--tx);font-weight:600}
+@media(max-width:680px){
+  .peri{grid-template-columns:1fr;gap:0}
+  .gate{min-height:120px}
+  .gate::before,.gate::after{left:50%;width:2px}
+  .gate::before{top:0;height:calc(50% - 50px)}
+  .gate::after{bottom:0;height:calc(50% - 50px)}
+  .packet{left:50%;top:4%;animation:travelV 6.5s cubic-bezier(.45,0,.4,1) infinite}
+  @keyframes travelV{
+    0%{top:4%;background:var(--tx2);opacity:0}
+    6%{opacity:1}
+    50%{top:50%;background:var(--ac)}
+    56%{background:var(--ok)}
+    94%{opacity:1}
+    100%{top:96%;background:var(--ok);opacity:0}
+  }
+}
+/* ============ timeline ============ */
+.tl{list-style:none;margin-top:8px;position:relative;padding-left:26px}
+.tl::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:2px;background:var(--ln)}
+.tl>li{position:relative;padding:0 0 38px}
+.tl>li::before{
+  content:"";position:absolute;left:-26px;top:7px;width:12px;height:12px;border-radius:50%;
+  background:var(--bg);border:2.5px solid var(--tx2);
+}
+.tl>li.live::before{border-color:var(--ok);background:var(--ok);animation:pulse 2.4s infinite}
+.tl .when{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.06em;color:var(--tx2)}
+.tl .when b{color:var(--ac);font-weight:500}
+.tl h3{font-family:"Archivo",sans-serif;font-weight:700;font-size:1.12rem;margin:6px 0 2px;letter-spacing:-.01em}
+.tl .org{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--tx2);margin-bottom:10px}
+.tl ul.points{list-style:none;display:grid;gap:7px;max-width:72ch}
+.tl ul.points li{padding-left:18px;position:relative;color:color-mix(in srgb,var(--tx) 88%,var(--tx2))}
+.tl ul.points li::before{content:"—";position:absolute;left:0;color:var(--ac)}
+.stack{
+  font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--tx2);
+  margin-top:12px;padding:9px 12px;border:1px solid var(--ln);border-radius:8px;background:var(--bg2);
+  max-width:72ch;line-height:1.7;
+}
+.stack b{color:var(--ac);font-weight:500}
+details{max-width:72ch}
+details summary{
+  cursor:pointer;font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--ac);
+  letter-spacing:.08em;text-transform:uppercase;margin-top:4px;list-style:none;
+}
+details summary::before{content:"▸ "}
+details[open] summary::before{content:"▾ "}
+details .points{margin-top:10px}
+/* ============ skills ============ */
+.skillgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px;margin-top:8px}
+.skillcard{border:1px solid var(--ln);border-radius:var(--r);background:var(--bg2);padding:18px;box-shadow:var(--shadow)}
+.skillcard .zlabel{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ac);margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--tx);
+  background:var(--chip);border:1px solid var(--ln);border-radius:7px;padding:5px 9px;
+}
+/* ============ education / languages ============ */
+.cards2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+.card{border:1px solid var(--ln);border-radius:var(--r);background:var(--bg2);padding:20px;box-shadow:var(--shadow)}
+.card h3{font-family:"Archivo",sans-serif;font-weight:700;font-size:1.02rem;margin-bottom:4px}
+.card .sub{font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:var(--tx2)}
+.card ul{list-style:none;margin-top:12px;display:grid;gap:8px}
+.card li{padding-left:18px;position:relative;font-size:.95rem;color:color-mix(in srgb,var(--tx) 88%,var(--tx2))}
+.card li::before{content:"—";position:absolute;left:0;color:var(--ac)}
+.card li small{font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--tx2);display:block}
+@media(max-width:680px){.cards2{grid-template-columns:1fr}}
+.langs{margin-top:8px;display:grid;gap:0;border-top:1px solid var(--ln)}
+.lang{display:grid;grid-template-columns:1fr auto auto;gap:18px;align-items:center;padding:14px 0;border-bottom:1px solid var(--ln)}
+.lang .nm{font-weight:600}
+.lang .lvl{font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--tx2)}
+.lang .lvl b{color:var(--ac);font-weight:500}
+.meter{display:flex;gap:4px}
+.seg{width:18px;height:7px;border-radius:3px;background:var(--chip);border:1px solid var(--ln)}
+.seg.f{background:var(--ac);border-color:var(--ac)}
+@media(max-width:520px){.lang{grid-template-columns:1fr auto}.lang .lvl{grid-column:1;order:3}}
+/* ============ contact / footer ============ */
+.contact{margin-top:72px;border-top:1px solid var(--ln);padding:56px 0 28px;background:var(--bg2)}
+.contact h2{margin-bottom:8px}
+.refs{font-style:italic;color:var(--tx2);font-size:.9rem;margin-top:22px}
+.foot{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;
+  margin-top:40px;padding-top:18px;border-top:1px solid var(--ln);
+  font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--tx2);
+}
+/* ============ how I work ============ */
+.quote{margin-top:26px;border-left:3px solid var(--ac);padding:8px 0 8px 26px;max-width:64ch}
+.quote p{font-family:"Archivo",sans-serif;font-weight:600;font-size:clamp(1.12rem,2.6vw,1.45rem);line-height:1.5;letter-spacing:-.01em}
+.quote .who{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:400;color:var(--tx2);margin-top:16px;letter-spacing:.12em;text-transform:uppercase}
+.deline{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--ac);margin-top:12px}
+/* ============ motion & print ============ */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+@media print{
+  .topbar,.actions,.listen,.packet,#themeBtn{display:none!important}
+  body{background:#fff;color:#000}
+  .sec{padding-top:28px}
+  .tl>li,.card,.skillcard{break-inside:avoid}
+  a{color:#000;text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="logo" href="#top">Janaka<b>.</b></a>
+    <nav aria-label="Sections">
+      <a class="navlink" href="#perimeter">The Perimeter</a>
+      <a class="navlink" href="#experience">Experience</a>
+      <a class="navlink" href="#skills">Skills</a>
+      <a class="navlink" href="#contact">Contact</a>
+      <button id="themeBtn" type="button" aria-label="Switch between light and dark theme">◐</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="status" aria-label="Status: production, stable since 2004, pager carried, audits passed">
+          <span class="dot" aria-hidden="true"></span>
+          <span id="statusText"></span><span class="cursor" id="statusCursor" aria-hidden="true"></span>
+        </p>
+        <h1>Janaka<br>Premathilaka</h1>
+        <p class="role">Senior Java Engineer &amp; Solution Architect</p>
+        <p class="hook"><b>I write Java for banks — and bring AI inside the perimeter.</b><br>
+        Mission-critical, regulated, audited, and not allowed to fall over. 22+ years across UBS, Credit Suisse, the European Commission and Union Bank of Colombo.</p>
+        <div class="badges">
+          <span class="badge">Zug, Switzerland 🇨🇭</span>
+          <span class="badge">Swiss Permit C</span>
+          <span class="badge hot">German B1 ↗</span>
+          <span class="badge">2 months’ notice</span>
+          <span class="badge">On-call (Pikett): yes</span>
+        </div>
+        <div class="actions">
+          <button class="btn primary" id="listenBtn" type="button">▶&nbsp; Listen — 60-sec briefing</button>
+          <a class="btn" href="mailto:janaka2@gmail.com">Email</a>
+          <a class="btn" href="https://www.linkedin.com/in/janakapremathilaka/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/Janaka2" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="Janaka_Premathilaka_CV_2026.pdf" download id="pdfBtn">PDF CV</a>
+        </div>
+        <div class="listen" id="listenPanel" aria-live="polite">
+          <div class="label"><span>Audio briefing — transcript</span><button id="stopBtn" type="button">■ stop</button></div>
+          <p id="transcript"></p>
+          <p class="note" id="listenNote">Uses your browser’s built-in voice. No audio file, no tracking.</p>
+        </div>
+      </div>
+      <figure class="photo-card">
+        <img src="data:image/jpeg;base64,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" alt="Portrait photo of Janaka Premathilaka" width="172" height="195">
+        <figcaption>ZUG · SWITZERLAND</figcaption>
+      </figure>
+    </div>
+
+    <div class="stats" role="list">
+      <div class="stat" role="listitem"><b>22+</b><span>years of production Java</span></div>
+      <div class="stat" role="listitem"><b>6</b><span>apps owned through the CS–UBS merger</span></div>
+      <div class="stat" role="listitem"><b>≈20%</b><span>FX platform latency cut</span></div>
+      <div class="stat" role="listitem"><b>3+1</b><span>banks + the EU served</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PERIMETER ================= -->
+<section class="sec" id="perimeter">
+  <div class="wrap">
+    <p class="eyebrow">The Perimeter</p>
+    <h2>AI inside the bank, safely.</h2>
+    <p class="lede">Outside the bank, AI moves fast. Inside, every system is regulated, audited and 20 years deep. Very few engineers work comfortably on both sides of that wall. I work in the gate.</p>
+
+    <div class="peri" aria-label="Diagram: public AI passes through risk review into the bank's Java estate">
+      <div class="zone outside">
+        <p class="zlabel">Outside</p>
+        <h3>Public AI</h3>
+        <ul>
+          <li>frontier models</li>
+          <li>LLM APIs</li>
+          <li>open weights</li>
+        </ul>
+      </div>
+      <div class="gate">
+        <div class="gatebox">
+          <span class="zlabel">The Gate</span>
+          <div>risk review<br>guardrails<br>evals · audit</div>
+        </div>
+      </div>
+      <div class="zone inside">
+        <p class="zlabel">Inside the bank</p>
+        <h3>A 20-year Java estate</h3>
+        <ul>
+          <li>golden-source data</li>
+          <li>Oracle · Kafka · Spring</li>
+          <li>on-call · Pikett · 2 am</li>
+        </ul>
+      </div>
+      <span class="packet" aria-hidden="true"></span>
+    </div>
+
+    <p class="peri-cap"><b>My job is the gate:</b> LLM and agentic-RAG automation that passes a risk review and still works on Monday morning, integrated with existing Java services. And when the data can’t go to the model, the model comes to the data — <b>local Llama&nbsp;3 inference inside the perimeter.</b></p>
+  </div>
+</section>
+
+<!-- ================= HOW I WORK ================= -->
+<section class="sec" id="how">
+  <div class="wrap">
+    <p class="eyebrow">How I work</p>
+    <div class="quote">
+      <p>I’m not the loudest person in the room. I’m the one who’s still there when things go wrong at 2 am, the one who finishes what they said they’d finish, and the one who mentors the junior dev instead of rewriting their code in silence.</p>
+      <p class="who">Quiet leadership · finished work · no shortcuts</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section class="sec" id="experience">
+  <div class="wrap">
+    <p class="eyebrow">Experience</p>
+    <h2>22 years, production-grade.</h2>
+    <ul class="tl">
+      <li class="live">
+        <p class="when"><b>01.2024 — present</b> · Zurich, Switzerland</p>
+        <h3>Senior Full-Stack Solution Engineer (Lead)</h3>
+        <p class="org">UBS / Cognizant</p>
+        <ul class="points">
+          <li>Full ownership of 6 enterprise applications through the Credit Suisse–UBS merger — system stability, zero operational interruptions.</li>
+          <li>Led the application-archiving initiative to 100% on-time delivery under audit-grade deadlines; built Linux + Oracle CLI pipelines for multi-gigabyte regulated data feeds.</li>
+          <li>Designed and shipped LLM and agentic-RAG automations for internal banking workflows, integrated with existing Java services.</li>
+          <li>Ran local Llama 3 inference for data that cannot leave the bank’s perimeter.</li>
+          <li>Mentor junior engineers, lead code reviews, carry the on-call (Pikett) pager.</li>
+        </ul>
+        <p class="stack"><b>stack:</b> Java 17 · Spring Boot · Kafka · Oracle · OpenShift/Kubernetes · Splunk · Grafana · Jenkins · n8n · LangChain · LlamaIndex · RAG/CAG · local + API LLMs</p>
+      </li>
+      <li>
+        <p class="when"><b>05.2019 — 01.2024</b> · Zurich, Switzerland</p>
+        <h3>IT Solution Developer</h3>
+        <p class="org">Credit Suisse / Cognizant</p>
+        <ul class="points">
+          <li>100% ownership of the mission-critical Master Data Management tool — the bank’s golden data source for search and reporting.</li>
+          <li>Architected and delivered three cloud-native applications end-to-end (Spring Boot, React, Oracle, microservices).</li>
+          <li>Low-latency Front-Office FX trading platform (Java 11–17): ≈20% responsiveness gain through multithreading and memory tuning.</li>
+          <li>Built the team’s CI/CD, Kubernetes/Docker and observability pipelines; championed TDD with JUnit and Mockito.</li>
+        </ul>
+        <p class="stack"><b>stack:</b> Java 11–17 · Spring Boot · React · GraphQL · Kafka · Liquibase · Oracle/PL-SQL · OpenShift · Helm · Jenkins · Splunk · Grafana</p>
+      </li>
+      <li>
+        <p class="when"><b>01.2018 — 05.2019</b> · Zurich, Switzerland</p>
+        <h3>IT Solution Development Specialist</h3>
+        <p class="org">UBS / Cognizant</p>
+        <ul class="points">
+          <li>Modernized 20+ legacy components into Spring Boot microservices with robust solution architectures.</li>
+          <li>Automated Jenkins delivery pipelines; migrated the codebase from SVN to Git.</li>
+          <li>Strengthened testing with JUnit, integration tests and Cucumber BDD.</li>
+        </ul>
+      </li>
+      <li>
+        <p class="when"><b>06.2011 — 01.2018</b> · Brussels, Belgium</p>
+        <h3>Senior Full-Stack Java Developer</h3>
+        <p class="org">European Commission (DIGIT Division)</p>
+        <details>
+          <summary>Detail</summary>
+          <ul class="points">
+            <li>Engineered and maintained the EU’s core e-procurement system — mission-critical, multi-language, public-sector — over a 6.5-year tenure.</li>
+            <li>Distributed integration flows with Spring Integration; JBPM workflows for approvals, escalations and audit trails.</li>
+            <li>Full stack delivery (Angular, Spring/Hibernate, EJB3, Oracle, WebLogic); release ownership and L3 production support.</li>
+          </ul>
+        </details>
+      </li>
+      <li>
+        <p class="when"><b>05.2004 — 06.2011</b> · Belgium &amp; Sri Lanka</p>
+        <h3>Senior Java/JEE Consultant &amp; Engineer</h3>
+        <p class="org">Johnson &amp; Johnson · Nokia Siemens · Union Bank of Colombo · and others</p>
+        <details>
+          <summary>Detail</summary>
+          <ul class="points">
+            <li>Core technical consultant across healthcare, telecom, banking and e-commerce — enterprise-grade Java/JEE solutions.</li>
+            <li>Union Bank of Colombo: core banking modules — loan system, lease schedules, cheque and passbook printing (EJB2, JSP, DB2 on AS/400).</li>
+            <li>Modernized architectures in Agile/Scrum settings; SOAP/REST integration; Oracle/MySQL optimization.</li>
+          </ul>
+        </details>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section class="sec" id="skills">
+  <div class="wrap">
+    <p class="eyebrow">Skills</p>
+    <h2>The stack I reach for.</h2>
+    <div class="skillgrid">
+      <div class="skillcard">
+        <p class="zlabel">Languages</p>
+        <div class="chips"><span class="chip">Java 11–17</span><span class="chip">SQL</span><span class="chip">TypeScript</span><span class="chip">Python</span></div>
+      </div>
+      <div class="skillcard">
+        <p class="zlabel">AI / LLM engineering</p>
+        <div class="chips"><span class="chip">LangChain</span><span class="chip">LlamaIndex</span><span class="chip">RAG / CAG</span><span class="chip">agentic workflows · n8n</span><span class="chip">local LLMs · Llama 3</span><span class="chip">prompt &amp; parameter tuning</span></div>
+      </div>
+      <div class="skillcard">
+        <p class="zlabel">Architecture</p>
+        <div class="chips"><span class="chip">microservices</span><span class="chip">solution architecture</span><span class="chip">event-driven · Kafka</span><span class="chip">multithreading</span><span class="chip">GraphQL</span><span class="chip">REST</span></div>
+      </div>
+      <div class="skillcard">
+        <p class="zlabel">Frameworks</p>
+        <div class="chips"><span class="chip">Spring Boot</span><span class="chip">Hibernate</span><span class="chip">React</span><span class="chip">Angular</span></div>
+      </div>
+      <div class="skillcard">
+        <p class="zlabel">DevOps &amp; cloud</p>
+        <div class="chips"><span class="chip">Kubernetes / OpenShift</span><span class="chip">Docker</span><span class="chip">Jenkins</span><span class="chip">Grafana</span><span class="chip">Splunk</span></div>
+      </div>
+      <div class="skillcard">
+        <p class="zlabel">Testing &amp; agile</p>
+        <div class="chips"><span class="chip">TDD</span><span class="chip">JUnit</span><span class="chip">Mockito</span><span class="chip">Cucumber</span><span class="chip">Jira</span><span class="chip">Scrum / SAFe</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section class="sec" id="education">
+  <div class="wrap">
+    <p class="eyebrow">Education &amp; Certifications</p>
+    <h2>Credentials.</h2>
+    <div class="cards2">
+      <div class="card">
+        <h3>BSc — Computer Science, Statistics &amp; Mathematics</h3>
+        <p class="sub">University of Sri Jayewardenepura · 1999 — 2003</p>
+      </div>
+      <div class="card">
+        <h3>Certifications</h3>
+        <ul>
+          <li>Sun Certified Enterprise Architect (SCEA)<small>architect credential held since 2006 · plus SCJP, SCBCD, SCWCD</small></li>
+          <li>Spring Certified Professional<small>in progress · 2026</small></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LANGUAGES ================= -->
+<section class="sec" id="languages">
+  <div class="wrap">
+    <p class="eyebrow">Languages</p>
+    <h2>Spoken languages.</h2>
+    <div class="langs">
+      <div class="lang"><span class="nm">English</span><span class="lvl">Full professional · <b>C1/C2</b></span><span class="meter" aria-hidden="true"><span class="seg f"></span><span class="seg f"></span><span class="seg f"></span><span class="seg f"></span><span class="seg f"></span></span></div>
+      <div class="lang"><span class="nm">German</span><span class="lvl">Intermediate · <b>B1 ↗ improving</b></span><span class="meter" aria-hidden="true"><span class="seg f"></span><span class="seg f"></span><span class="seg f"></span><span class="seg"></span><span class="seg"></span></span></div>
+      <div class="lang"><span class="nm">Sinhalese</span><span class="lvl">Native</span><span class="meter" aria-hidden="true"><span class="seg f"></span><span class="seg f"></span><span class="seg f"></span><span class="seg f"></span><span class="seg f"></span></span></div>
+      <div class="lang"><span class="nm">French &amp; Dutch</span><span class="lvl">Basic knowledge</span><span class="meter" aria-hidden="true"><span class="seg f"></span><span class="seg f"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h2>My inbox is open.</h2>
+    <p class="lede">If banking-grade engineering plus practical AI is the problem on your desk — in Switzerland, or remote/hybrid across Europe — let’s talk.</p>
+    <p class="deline">PS — Schreiben Sie mir gerne auch auf Deutsch. Ich antworte gerne und übe dabei.</p>
+    <div class="actions">
+      <a class="btn primary" href="mailto:janaka2@gmail.com">janaka2@gmail.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/janakapremathilaka/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/Janaka2" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://javawithme.wordpress.com/" target="_blank" rel="noopener">Blog</a>
+    </div>
+    <p class="refs">Excellent references from UBS, Credit Suisse, and the European Commission available upon request.</p>
+    <div class="foot">
+      <span>© <span id="year"></span> Janaka Premathilaka · Zug 🇨🇭</span>
+      <span>built by hand — no frameworks, no build step. view source.</span>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- theme ---------- */
+  var root = document.documentElement;
+  function getStored(){ try { return localStorage.getItem("jp-theme"); } catch(e){ return null; } }
+  function setStored(v){ try { localStorage.setItem("jp-theme", v); } catch(e){} }
+  var stored = getStored();
+  if (stored === "dark" || (!stored && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+    root.setAttribute("data-theme","dark");
+  }
+  var themeBtn = document.getElementById("themeBtn");
+  if (themeBtn) themeBtn.addEventListener("click", function(){
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    setStored(next);
+  });
+
+  /* ---------- year ---------- */
+  var y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
+
+  /* ---------- PDF button: self-healing ---------- */
+  // To use a fixed location, paste any full URL here (e.g. "https://janaka.me/cv.pdf").
+  // Otherwise: just upload the PDF into the SAME folder as this HTML file.
+  var PDF_URL = "Janaka_Premathilaka_CV_2026.pdf";
+  var pdfBtn = document.getElementById("pdfBtn");
+  function pdfFallbackToPrint(){
+    if (!pdfBtn || pdfBtn.dataset.mode === "print") return;
+    pdfBtn.dataset.mode = "print";
+    pdfBtn.textContent = "Print / save as PDF";
+    pdfBtn.removeAttribute("download");
+    pdfBtn.setAttribute("href", "#");
+    pdfBtn.setAttribute("title", "Opens the print dialog — choose ‘Save as PDF’.");
+    pdfBtn.addEventListener("click", function(ev){ ev.preventDefault(); window.print(); });
+  }
+  if (pdfBtn) {
+    pdfBtn.setAttribute("href", PDF_URL);
+    var isAbsolute = /^https?:\/\//i.test(PDF_URL);
+    var onWeb = (location.protocol === "http:" || location.protocol === "https:");
+    if (isAbsolute) {
+      // A full URL was configured on purpose — trust it.
+    } else if (onWeb) {
+      // Relative file on a website: verify it exists; if not, become a print button.
+      try {
+        fetch(PDF_URL, { method: "HEAD" })
+          .then(function(r){ if (!r.ok) pdfFallbackToPrint(); })
+          .catch(pdfFallbackToPrint);
+      } catch(e){ pdfFallbackToPrint(); }
+    } else {
+      // Opened from disk (file://): no way to verify — use the always-working print mode.
+      pdfFallbackToPrint();
+    }
+  }
+
+  /* ---------- typed status line ---------- */
+  var statusText = "prod · stable since 2004 · pager: carried · audits: passed";
+  var statusEl = document.getElementById("statusText");
+  var cursorEl = document.getElementById("statusCursor");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (statusEl) {
+    if (reduce) {
+      statusEl.textContent = statusText;
+      if (cursorEl) cursorEl.style.display = "none";
+    } else {
+      var i = 0;
+      (function type(){
+        if (i <= statusText.length) {
+          statusEl.textContent = statusText.slice(0, i++);
+          setTimeout(type, 26);
+        } else if (cursorEl) {
+          setTimeout(function(){ cursorEl.style.display = "none"; }, 2600);
+        }
+      })();
+    }
+  }
+
+  /* ---------- audio briefing (Web Speech API) ---------- */
+  var SCRIPT = "Hello — I'm Janaka Premathilaka. I write Java for banks, and I have for more than twenty-two years: Union Bank of Colombo, the European Commission in Brussels, then Credit Suisse and UBS here in Switzerland. During the Credit Suisse–UBS merger I took ownership of six enterprise applications and delivered audited archiving on time. Since 2023, I have been bringing large language models, RAG, and agentic automation into that same regulated world — including local model inference, where data is not allowed to leave the bank. My work is mission-critical, audited, and not allowed to fall over. I'm based in Zug, I hold a Swiss Permit C, and my German is at B1 and improving. If banking-grade engineering plus practical AI is the problem on your desk — my inbox is open.";
+
+  var listenBtn = document.getElementById("listenBtn");
+  var panel = document.getElementById("listenPanel");
+  var transcript = document.getElementById("transcript");
+  var stopBtn = document.getElementById("stopBtn");
+  var note = document.getElementById("listenNote");
+  var IDLE = "▶\u00A0 Listen — 60-sec briefing", PAUSE = "❚❚\u00A0 Pause", RESUME = "▶\u00A0 Resume";
+
+  // Build word spans with character offsets for highlight-as-it-speaks
+  var tokens = [], spans = [];
+  (function build(){
+    if (!transcript) return;
+    var pos = 0;
+    SCRIPT.split(" ").forEach(function(word, idx){
+      tokens.push({ start: pos, word: word });
+      pos += word.length + 1;
+      var s = document.createElement("span");
+      s.textContent = word;
+      transcript.appendChild(s);
+      transcript.appendChild(document.createTextNode(" "));
+      spans.push(s);
+    });
+  })();
+
+  function clearHighlight(){ spans.forEach(function(s){ s.classList.remove("on"); }); }
+  function highlightAt(charIndex){
+    var k = 0;
+    for (var j = 0; j < tokens.length; j++) { if (tokens[j].start <= charIndex) k = j; else break; }
+    clearHighlight();
+    if (spans[k]) spans[k].classList.add("on");
+  }
+
+  var supported = ("speechSynthesis" in window) && ("SpeechSynthesisUtterance" in window);
+  var speaking = false, paused = false, keepAlive = null;
+
+  function pickVoice(){
+    try {
+      var voices = window.speechSynthesis.getVoices() || [];
+      var prefs = ["Google UK English Male","Google UK English Female","Google US English","Microsoft","Samantha","Daniel"];
+      for (var p = 0; p < prefs.length; p++) {
+        for (var v = 0; v < voices.length; v++) {
+          if (voices[v].name && voices[v].name.indexOf(prefs[p]) !== -1 && /en/i.test(voices[v].lang)) return voices[v];
+        }
+      }
+      for (var w = 0; w < voices.length; w++) { if (/^en/i.test(voices[w].lang)) return voices[w]; }
+    } catch(e){}
+    return null;
+  }
+
+  function resetUI(){
+    speaking = false; paused = false;
+    if (listenBtn) listenBtn.textContent = IDLE;
+    clearHighlight();
+    if (keepAlive) { clearInterval(keepAlive); keepAlive = null; }
+  }
+
+  function startSpeech(){
+    try {
+      window.speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(SCRIPT);
+      var v = pickVoice();
+      if (v) u.voice = v;
+      u.rate = 1; u.pitch = 1;
+      u.onboundary = function(ev){
+        if (ev && (ev.name === "word" || ev.charIndex != null)) highlightAt(ev.charIndex || 0);
+      };
+      u.onend = resetUI;
+      u.onerror = resetUI;
+      window.speechSynthesis.speak(u);
+      speaking = true; paused = false;
+      if (listenBtn) listenBtn.textContent = PAUSE;
+      // Chrome quirk: long utterances can stall — keep the engine awake.
+      keepAlive = setInterval(function(){
+        try { if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) { window.speechSynthesis.pause(); window.speechSynthesis.resume(); } } catch(e){}
+      }, 12000);
+    } catch(e){ resetUI(); }
+  }
+
+  if (listenBtn) listenBtn.addEventListener("click", function(){
+    if (panel && !panel.classList.contains("open")) panel.classList.add("open");
+    if (!supported) {
+      if (note) note.textContent = "Audio isn't supported in this browser — the full transcript is above.";
+      return;
+    }
+    if (!speaking) { startSpeech(); return; }
+    try {
+      if (!paused) { window.speechSynthesis.pause(); paused = true; listenBtn.textContent = RESUME; }
+      else { window.speechSynthesis.resume(); paused = false; listenBtn.textContent = PAUSE; }
+    } catch(e){ resetUI(); }
+  });
+
+  if (stopBtn) stopBtn.addEventListener("click", function(){
+    try { window.speechSynthesis.cancel(); } catch(e){}
+    resetUI();
+    if (panel) panel.classList.remove("open");
+  });
+
+  window.addEventListener("pagehide", function(){ try { window.speechSynthesis.cancel(); } catch(e){} });
+
+  /* ---------- print: open collapsed details ---------- */
+  window.addEventListener("beforeprint", function(){
+    document.querySelectorAll("details").forEach(function(d){ d.setAttribute("open",""); });
+  });
+})();
+</script>
+</body>
+</html>
