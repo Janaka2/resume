@@ -1,141 +1,96 @@
-<section id="experience" class="mb-12" data-aos="fade-up">
-  <div class="flex justify-between items-center mb-6">
-    <h2 class="text-2xl font-bold flex items-center">
-      <i data-feather="briefcase" class="mr-3"></i> Experience
-    </h2>
-    <button class="text-blue-600 hover:underline flex items-center cursor-pointer" onclick="showWorkHistory()">
-      More details <i data-feather="arrow-right" class="ml-1"></i>
-    </button>
-  </div>
-
-  <div class="relative">
-    <div class="border-l-2 border-blue-200 pl-8 space-y-8">
-      <!-- UBS -->
-      <div class="timeline-item relative pl-4">
-        <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-          <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
-            <h3 class="text-xl font-semibold">UBS</h3>
-            <span class="text-blue-600">Jan 2018 - Present</span>
-          </div>
-          <h4 class="text-lg text-gray-700 mb-3">Sr. Full-Stack Solution Engineer</h4>
-            <p class="text-gray-700 mb-4">
-                As a Senior and Lead Developer, I took full responsibility for six complex enterprise applications during the highly challenging
-                <strong>Credit Suisse to UBS merger</strong>. This role demanded exceptional technical leadership, calm decision-making, and
-                a deep commitment to ensuring uninterrupted business operations under extreme pressure.
-            </p>
-
-            <p class="text-gray-700 mb-4">
-                I led teams through <strong>multi-platform migrations</strong> and <strong>technology decommissioning</strong>, maintaining system
-                stability while resolving numerous high-priority production incidents. My ability to stay composed, act decisively, and deliver
-                timely solutions helped the business remain confident and calm throughout the transition.
-            </p>
-
-            <p class="text-gray-700 mb-4">
-                This period truly tested my <strong>technical depth and leadership mindset</strong> — managing people, systems, and stress —
-                while achieving zero major interruptions and ensuring long-term system reliability.
-            </p>
-
-            <h5 class="text-md font-semibold text-gray-800 mt-6 mb-2">AI & OpenAI SDK Expertise</h5>
-            <p class="text-gray-700 mb-4">
-                Fully up to date with the <strong>OpenAI SDK v0.33 (latest release)</strong> and a proven expert in <strong>agentic AI development</strong>,
-                including multi-tool orchestration, guardrails, scalable distribution, and <strong>Model Context Protocol (MCP)</strong>.
-                Designed and deployed multiple <strong>RAG-powered enterprise applications</strong> in Python, demonstrating deep conceptual
-                and hands-on mastery of modern AI frameworks and architectures.
-            </p>
-          <div class="mt-4 flex flex-wrap gap-2">
-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Java 17</span>
-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Spring Boot</span>
-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Oracle SQL</span>
-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">DevOps</span>
-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Kafka</span>
-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">React</span>
-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">GraphQL</span>
-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Incident Management</span>
-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Leadership</span>
-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Post-Merger Integration</span>
-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">LLMs / Agentic RAG</span>
-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">OpenAI SDK</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Credit Suisse -->
-      <div class="timeline-item relative pl-4">
-        <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-          <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
-            <h3 class="text-xl font-semibold">Credit Suisse</h3>
-            <span class="text-blue-600">May 2019 - Jan 2024</span>
-          </div>
-          <h4 class="text-lg text-gray-700 mb-3">Sr. Full-Stack Solution Engineer</h4>
-          <ul class="list-disc pl-5 space-y-2 text-gray-600">
-            <li>Developed high-performance Master Data Management Tool from scratch</li>
-            <li>Created web application for building dynamic consumer endpoints</li>
-            <li>Implemented multiple case management tools with streaming integration</li>
-          </ul>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">React</span>
-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Java 17</span>
-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Kafka</span>
-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">GraphQL</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- European Commission -->
-      <div class="timeline-item relative pl-4">
-        <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
-          <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
-            <h3 class="text-xl font-semibold">European Commission</h3>
-            <span class="text-blue-600">Feb 2016 - Jan 2018</span>
-          </div>
-          <h4 class="text-lg text-gray-700 mb-3">Sr. Full-Stack Java/JEE Developer</h4>
-          <ul class="list-disc pl-5 space-y-2 text-gray-600">
-            <li>Designed and developed an e-procurement system that contributed to <b>40%</b> of the department’s total revenue.</li>
-            <li>Developed microservices using enterprise integration patterns</li>
-            <li>Implemented JBPM workflows for various business processes</li>
-          </ul>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">JEE</span>
-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Angular</span>
-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">JBPM</span>
-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">SOA</span>
-          </div>
-        </div>
-      </div>
+<section class="sec" id="experience">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="expEyebrow">Experience</p>
+    <div class="sec-head">
+      <h2 data-i18n="expH2">22 years, production-grade.</h2>
+      <button class="linkbtn" type="button" onclick="showWorkHistory()" data-i18n="expMoreBtn">More details ↓</button>
     </div>
-  </div>
 
-  <!-- Work History Collapsible -->
-  <div class="mt-12 bg-white p-8 rounded-xl shadow border border-gray-100">
-    <div class="flex justify-between items-center mb-6 cursor-pointer" onclick="toggleWorkHistory()">
-      <h3 class="text-2xl font-semibold flex items-center">
-        <i data-feather="clock" class="mr-3 text-blue-600"></i> Work History (Chronological)
-      </h3>
-      <i data-feather="chevron-down" id="workHistoryChevron" class="text-blue-600 transition-transform"></i>
-    </div>
-    <div class="collapsible-content" id="workHistoryContent">
-      <div class="space-y-6">
-        <div class="mb-6 text-gray-700 leading-relaxed text-lg bg-blue-50 p-6 rounded-lg shadow-sm">
-          <p>
+    <ul class="tl">
+      <li class="live">
+        <p class="when" data-i18n="x1when"><b>01.2024 — present</b> · Zurich, Switzerland</p>
+        <h3>Senior Full-Stack Solution Engineer (Lead)</h3>
+        <p class="org">UBS / Cognizant</p>
+        <ul class="points" data-i18n="x1pts">
+          <li>Full ownership of six enterprise applications through the Credit Suisse–UBS merger — system stability and zero operational interruptions under extreme pressure.</li>
+          <li>Led teams through multi-platform migrations and technology decommissioning, resolving high-priority production incidents with calm, decisive execution.</li>
+          <li>Led the application-archiving initiative to 100% on-time delivery under audit-grade deadlines; built Linux + Oracle CLI pipelines for multi-gigabyte regulated data feeds.</li>
+          <li>Designed and shipped LLM and agentic-RAG automations for internal banking workflows, integrated with existing Java services — including local Llama 3 inference for data that cannot leave the bank’s perimeter.</li>
+          <li>Hands-on with the OpenAI Agents SDK and Model Context Protocol (MCP): multi-tool orchestration, guardrails, and RAG-powered enterprise applications in Python.</li>
+          <li>Mentor junior engineers, lead code reviews, carry the on-call (Pikett) pager.</li>
+        </ul>
+        <div class="chips"><span class="chip">Java 17</span><span class="chip">Spring Boot</span><span class="chip">Kafka</span><span class="chip">Oracle</span><span class="chip">OpenShift / Kubernetes</span><span class="chip">React</span><span class="chip">GraphQL</span><span class="chip">Jenkins</span><span class="chip">n8n</span><span class="chip">LangChain</span><span class="chip">LlamaIndex</span><span class="chip">RAG / CAG</span><span class="chip">OpenAI Agents SDK</span><span class="chip">MCP</span></div>
+      </li>
+      <li>
+        <p class="when" data-i18n="x2when"><b>05.2019 — 01.2024</b> · Zurich, Switzerland</p>
+        <h3>IT Solution Developer</h3>
+        <p class="org">Credit Suisse / Cognizant</p>
+        <ul class="points" data-i18n="x2pts">
+          <li>100% ownership of the mission-critical Master Data Management tool, built from scratch — the bank’s golden data source for search and reporting.</li>
+          <li>Architected and delivered three cloud-native applications end-to-end (Spring Boot, React, Oracle, microservices), including a web application for dynamic consumer endpoints and case-management tools with streaming integration.</li>
+          <li>Low-latency Front-Office FX trading platform (Java 11–17): ≈20% responsiveness gain through multithreading and memory tuning.</li>
+          <li>Built the team’s CI/CD, Kubernetes/Docker and observability pipelines; championed TDD with JUnit and Mockito.</li>
+        </ul>
+        <div class="chips"><span class="chip">Java 11–17</span><span class="chip">Spring Boot</span><span class="chip">React</span><span class="chip">GraphQL</span><span class="chip">Kafka</span><span class="chip">Liquibase</span><span class="chip">Oracle / PL-SQL</span><span class="chip">OpenShift</span><span class="chip">Helm</span><span class="chip">Splunk</span><span class="chip">Grafana</span></div>
+      </li>
+      <li>
+        <p class="when" data-i18n="x3when"><b>01.2018 — 05.2019</b> · Zurich, Switzerland</p>
+        <h3>IT Solution Development Specialist</h3>
+        <p class="org">UBS / Cognizant</p>
+        <ul class="points" data-i18n="x3pts">
+          <li>Modernized 20+ legacy components into Spring Boot microservices with robust solution architectures.</li>
+          <li>Automated Jenkins delivery pipelines; migrated the codebase from SVN to Git.</li>
+          <li>Strengthened testing with JUnit, integration tests and Cucumber BDD.</li>
+        </ul>
+      </li>
+      <li>
+        <p class="when" data-i18n="x4when"><b>06.2011 — 01.2018</b> · Brussels, Belgium</p>
+        <h3>Senior Full-Stack Java/JEE Developer</h3>
+        <p class="org">European Commission (DIGIT Division)</p>
+        <ul class="points" data-i18n="x4pts">
+          <li>Engineered and maintained the EU’s core e-procurement system — mission-critical, multi-language, public-sector — over a 6.5-year tenure; the system contributed about 40% of the department’s total revenue.</li>
+          <li>Distributed integration flows with Spring Integration; JBPM workflows for approvals, escalations and audit trails.</li>
+          <li>Full-stack delivery (Angular, Spring/Hibernate, EJB3, Oracle, WebLogic); release ownership and L3 production support.</li>
+        </ul>
+        <div class="chips"><span class="chip">JEE</span><span class="chip">Angular</span><span class="chip">JBPM</span><span class="chip">SOA</span></div>
+      </li>
+      <li>
+        <p class="when" data-i18n="x5when"><b>05.2004 — 06.2011</b> · Belgium &amp; Sri Lanka</p>
+        <h3>Senior Java/JEE Consultant &amp; Engineer</h3>
+        <p class="org">Johnson &amp; Johnson · Nokia Siemens · Union Bank of Colombo · and others</p>
+        <ul class="points" data-i18n="x5pts">
+          <li>Core technical consultant across healthcare, telecom, banking and e-commerce — enterprise-grade Java/JEE solutions.</li>
+          <li>Union Bank of Colombo: core banking modules — loan system, lease schedules, cheque and passbook printing (EJB2, JSP, DB2 on AS/400).</li>
+          <li>Modernized architectures in Agile/Scrum settings; SOAP/REST integration; Oracle/MySQL optimization.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <!-- Work History Collapsible -->
+    <div class="fold" id="workHistory">
+      <button class="fold-head" type="button" onclick="toggleWorkHistory()" aria-expanded="false" aria-controls="workHistoryContent">
+        <h3 data-i18n="whH">Work history — the full story</h3>
+        <svg id="workHistoryChevron" class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="collapsible-content" id="workHistoryContent">
+        <div class="fold-body">
+          <p data-i18n="whIntro">
             After beginning my career in Sri Lanka, I spent over a decade in Belgium working with
             <strong>ABSI</strong>, <strong>Roomsnet.com</strong>, and <strong>Simbios</strong> on projects
             for clients including <strong>Van Genechten Packaging</strong>, <strong>Nokia Siemens Networks</strong>,
-            and <strong>Johnson & Johnson</strong>. This period gave me broad exposure across healthcare,
+            and <strong>Johnson &amp; Johnson</strong>. This period gave me broad exposure across healthcare,
             hospitality, and enterprise IT, before I joined the <strong>European Commission – DIGIT Division</strong>
             to deliver large-scale e-procurement systems. Since 2018, I’ve continued my journey in Switzerland,
             leading full-stack engineering and AI integration at <strong>Credit Suisse</strong> and <strong>UBS</strong>.
           </p>
-
-          <button id="toggleLongHistory"
-                  class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
-            Read more
-          </button>
-
-          <div id="longHistory" class="hidden mt-6 italic text-gray-700 bg-white border-l-4 border-blue-300 p-5 rounded-md shadow-inner space-y-4">
-            <p>My journey began in Sri Lanka, where I started as a Computer Science instructor and soon entered the banking world at Union Bank. In 2006, I moved to Belgium, which became a transformative decade of growth in my career.</p>
-            <p>I worked with <strong>ABSI</strong> in the healthcare sector, later joined <strong>Roomsnet.com</strong> as a Java/JEE Developer and Technical Lead in the hospitality domain, and collaborated with <strong>Simbios</strong> on projects for clients such as <strong>Van Genechten Packaging</strong>, <strong>Nokia Siemens Networks</strong>, <strong>Johnson & Johnson</strong>, and <strong>Centric IT Solutions</strong>.</p>
-            <p>In 2011, I joined the <strong>European Commission – DIGIT Division</strong>, leading development of robust e-procurement systems and complex workflows for the EU.</p>
-            <p>Since 2018, Switzerland has been my base — with <strong>UBS</strong> and <strong>Credit Suisse</strong> at the center of my journey, where I’ve focused on high-performance full-stack engineering, system migrations, and the integration of AI-driven automation.</p>
+          <p style="margin-top:16px">
+            <button id="toggleLongHistory" class="btn" type="button">Read more</button>
+          </p>
+          <div id="longHistory" class="hidden">
+            <p data-i18n="whL1">My journey began in Sri Lanka, where I started as a Computer Science instructor and soon entered the banking world at Union Bank. In 2006, I moved to Belgium, which became a transformative decade of growth in my career.</p>
+            <p data-i18n="whL2">I worked with <strong>ABSI</strong> in the healthcare sector, later joined <strong>Roomsnet.com</strong> as a Java/JEE Developer and Technical Lead in the hospitality domain, and collaborated with <strong>Simbios</strong> on projects for clients such as <strong>Van Genechten Packaging</strong>, <strong>Nokia Siemens Networks</strong>, <strong>Johnson &amp; Johnson</strong>, and <strong>Centric IT Solutions</strong>.</p>
+            <p data-i18n="whL3">In 2011, I joined the <strong>European Commission – DIGIT Division</strong>, leading development of robust e-procurement systems and complex workflows for the EU.</p>
+            <p data-i18n="whL4">Since 2018, Switzerland has been my base — with <strong>UBS</strong> and <strong>Credit Suisse</strong> at the center of my journey, where I’ve focused on high-performance full-stack engineering, system migrations, and the integration of AI-driven automation.</p>
           </div>
         </div>
       </div>
