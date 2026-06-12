@@ -1,82 +1,74 @@
-<section class="mb-12" data-aos="fade-up">
-  <h2 class="text-2xl font-bold mb-6 flex items-center">
-    <i data-feather="map" class="mr-3"></i> My Life Journey
-  </h2>
+<section class="sec" id="journey">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="jEyebrow">My Life Journey</p>
+    <h2 data-i18n="jH2">From Galle to Zug.</h2>
 
-  <div class="flex overflow-x-auto mb-6 border-b border-gray-200">
-    <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="early-years">👶 Early Years</button>
-    <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="educationJourney">🎓 Education</button>
-    <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="career-start">💼 Career Start</button>
-    <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="belgium-era">🇧🇪 Belgium Era</button>
-    <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="switzerland-era">🇨🇭 Switzerland Era</button>
-    <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="future-dreams">🌟 Future Dreams</button>
-  </div>
-
-  <div class="bg-white rounded-lg shadow">
-    <div class="tab-content p-6 hidden" id="early-years">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="flex items-start"><div class="text-4xl mr-4">👶</div><div><h3 class="font-semibold text-lg">Born</h3><p class="text-gray-600">February 1980</p><p class="text-gray-500">Galle, Sri Lanka</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">🏫</div><div><h3 class="font-semibold text-lg">School Years</h3><p class="text-gray-600">1985-1998</p><p class="text-gray-500">Southern Sri Lanka</p></div></div>
-      </div>
+    <div class="tabbar" aria-label="Life journey periods">
+      <button class="tab-btn" type="button" data-tab="early-years" data-i18n="jTab1">👶 Early Years</button>
+      <button class="tab-btn" type="button" data-tab="educationJourney" data-i18n="jTab2">🎓 Education</button>
+      <button class="tab-btn" type="button" data-tab="career-start" data-i18n="jTab3">💼 Career Start</button>
+      <button class="tab-btn" type="button" data-tab="belgium-era" data-i18n="jTab4">🇧🇪 Belgium Era</button>
+      <button class="tab-btn" type="button" data-tab="switzerland-era" data-i18n="jTab5">🇨🇭 Switzerland Era</button>
+      <button class="tab-btn" type="button" data-tab="future-dreams" data-i18n="jTab6">🌟 Future Dreams</button>
     </div>
 
-    <div class="tab-content p-6" id="educationJourney">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="flex items-start"><div class="text-4xl mr-4">🎓</div><div><h3 class="font-semibold text-lg">Bachelor's Degree</h3><p class="text-gray-600">1999-2004</p><p class="text-gray-500">University of Sri Jayewardenepura</p><p class="text-gray-500">BSc in Computer Science, Statistics, Mathematics</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">🎓</div><div><h3 class="font-semibold text-lg">Second Bachelor's</h3><p class="text-gray-600">1999-2004</p><p class="text-gray-500">University of Colombo</p><p class="text-gray-500">BIT (6 semesters completed)</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">📚</div><div><h3 class="font-semibold text-lg">Master's Degree</h3><p class="text-gray-600">2007-Present</p><p class="text-gray-500">University of Moratuwa</p><p class="text-gray-500">Computer Engineering (In Progress)</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">📜</div><div><h3 class="font-semibold text-lg">Certifications</h3><p class="text-gray-600">2005-2006</p><p class="text-gray-500">Sun Java Certifications (SCJP, SCBCD, SCEA1, SCWCD)</p></div></div>
+    <div class="tabpanes">
+      <div class="tab-content hidden" id="early-years">
+        <div class="jgrid">
+          <div class="jitem"><span class="emo" aria-hidden="true">👶</span><div data-i18n="j1a"><h3>Born</h3><p class="jw">February 1980</p><p>Galle, Sri Lanka</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">🏫</span><div data-i18n="j1b"><h3>School Years</h3><p class="jw">1985 — 1998</p><p>Southern Sri Lanka</p></div></div>
+        </div>
       </div>
-    </div>
 
-    <div class="tab-content p-6 hidden" id="career-start">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="flex items-start"><div class="text-4xl mr-4">💼</div><div><h3 class="font-semibold text-lg">First Job</h3><p class="text-gray-600">2004</p><p class="text-gray-500">Union Bank of Colombo Ltd</p><p class="text-gray-500">Banking Software Engineer</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">🏢</div><div><h3 class="font-semibold text-lg">Early Career</h3><p class="text-gray-600">2006-2008</p><p class="text-gray-500">Multiple companies in Sri Lanka</p><p class="text-gray-500">Java/JEE Developer roles</p></div></div>
+      <div class="tab-content" id="educationJourney">
+        <div class="jgrid">
+          <div class="jitem"><span class="emo" aria-hidden="true">🎓</span><div data-i18n="j2a"><h3>Bachelor’s Degree</h3><p class="jw">1999 — 2004</p><p>University of Sri Jayewardenepura</p><p>BSc in Computer Science, Statistics, Mathematics</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">🎓</span><div data-i18n="j2b"><h3>Second Bachelor’s</h3><p class="jw">1999 — 2004</p><p>University of Colombo</p><p>BIT (6 semesters completed)</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">📚</span><div data-i18n="j2c"><h3>Master’s Degree</h3><p class="jw">2007 — present</p><p>University of Moratuwa</p><p>Computer Engineering (in progress)</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">📜</span><div data-i18n="j2d"><h3>Certifications</h3><p class="jw">2005 — 2006</p><p>Sun Java Certifications (SCJP, SCBCD, SCEA, SCWCD)</p></div></div>
+        </div>
       </div>
-    </div>
 
-    <div class="tab-content p-6 hidden" id="belgium-era">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="flex items-start"><div class="text-4xl mr-4">✈️</div><div><h3 class="font-semibold text-lg">Moved to Belgium</h3><p class="text-gray-600">August 2008</p><p class="text-gray-500">Brussels Area</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">💍</div><div><h3 class="font-semibold text-lg">Got Married</h3><p class="text-gray-600">2010</p><p class="text-gray-500">Belgium</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">👦</div><div><h3 class="font-semibold text-lg">First Child</h3><p class="text-gray-600">January 2012</p><p class="text-gray-500">Son</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">👧</div><div><h3 class="font-semibold text-lg">Second Child</h3><p class="text-gray-600">December 2013</p><p class="text-gray-500">Daughter</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">🏠</div><div><h3 class="font-semibold text-lg">Bought First Home</h3><p class="text-gray-600">December 2015</p><p class="text-gray-500">Belgium</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">👧</div><div><h3 class="font-semibold text-lg">Third Child</h3><p class="text-gray-600">December 2016</p><p class="text-gray-500">Daughter</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">🏛️</div><div><h3 class="font-semibold text-lg">European Commission</h3><p class="text-gray-600">2011-2018</p><p class="text-gray-500">Sr. Full-Stack Java Developer</p><p class="text-gray-500">E-procurement systems</p></div></div>
+      <div class="tab-content hidden" id="career-start">
+        <div class="jgrid">
+          <div class="jitem"><span class="emo" aria-hidden="true">💼</span><div data-i18n="j3a"><h3>First Job</h3><p class="jw">2004</p><p>Union Bank of Colombo Ltd</p><p>Banking Software Engineer</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">🏢</span><div data-i18n="j3b"><h3>Early Career</h3><p class="jw">2006 — 2008</p><p>Multiple companies in Sri Lanka</p><p>Java/JEE Developer roles</p></div></div>
+        </div>
       </div>
-    </div>
 
-    <div class="tab-content p-6 hidden" id="switzerland-era">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="flex items-start"><div class="text-4xl mr-4">🏔️</div><div><h3 class="font-semibold text-lg">Moved to Switzerland</h3><p class="text-gray-600">January 2018</p><p class="text-gray-500">Zürich Area</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">🔷</div><div><h3 class="font-semibold text-lg">UBS</h3><p class="text-gray-600">2018-2019</p><p class="text-gray-500">Sr. Full-Stack Solution Engineer</p><p class="text-gray-500">Banking systems</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">🇬🇧</div><div><h3 class="font-semibold text-lg">Remote in UK</h3><p class="text-gray-600">2019-2020</p><p class="text-gray-500">Liverpool, UK</p><p class="text-gray-500">Remote work for Swiss clients</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">🏦</div><div><h3 class="font-semibold text-lg">Credit Suisse</h3><p class="text-gray-600">2019-2024</p><p class="text-gray-500">Sr. Full-Stack Solution Engineer</p><p class="text-gray-500">Banking systems & FX trading</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">🔷</div><div><h3 class="font-semibold text-lg">UBS</h3><p class="text-gray-600">2024-Present</p><p class="text-gray-500">Sr. Full-Stack Solution Engineer</p><p class="text-gray-500">AI integration & LLMs</p></div></div>
+      <div class="tab-content hidden" id="belgium-era">
+        <div class="jgrid">
+          <div class="jitem"><span class="emo" aria-hidden="true">✈️</span><div data-i18n="j4a"><h3>Moved to Belgium</h3><p class="jw">August 2008</p><p>Brussels Area</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">💍</span><div data-i18n="j4b"><h3>Got Married</h3><p class="jw">2010</p><p>Belgium</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">👦</span><div data-i18n="j4c"><h3>First Child</h3><p class="jw">January 2012</p><p>Son</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">👧</span><div data-i18n="j4d"><h3>Second Child</h3><p class="jw">December 2013</p><p>Daughter</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">🏠</span><div data-i18n="j4e"><h3>Bought First Home</h3><p class="jw">December 2015</p><p>Belgium</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">👧</span><div data-i18n="j4f"><h3>Third Child</h3><p class="jw">December 2016</p><p>Daughter</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">🏛️</span><div data-i18n="j4g"><h3>European Commission</h3><p class="jw">2011 — 2018</p><p>Sr. Full-Stack Java Developer</p><p>E-procurement systems</p></div></div>
+        </div>
       </div>
-    </div>
 
-    <div class="tab-content p-6 hidden" id="future-dreams">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="flex items-start"><div class="text-4xl mr-4">🎓</div><div><h3 class="font-semibold text-lg">Complete Master's Degree</h3><p class="text-gray-600">Ongoing</p><p class="text-gray-500">University of Moratuwa</p><p class="text-gray-500">Computer Engineering</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">🤖</div><div><h3 class="font-semibold text-lg">AI Research & Development</h3><p class="text-gray-600">Future Goal</p><p class="text-gray-500">Advanced AI Systems</p><p class="text-gray-500">LLM optimization & deployment</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">🌍</div><div><h3 class="font-semibold text-lg">Global Impact Projects</h3><p class="text-gray-600">Long-term Vision</p><p class="text-gray-500">Enterprise AI Solutions</p><p class="text-gray-500">Scalable intelligent systems</p></div></div>
-        <div class="flex items-start"><div class="text-4xl mr-4">🚀</div><div><h3 class="font-semibold text-lg">Technology Leadership</h3><p class="text-gray-600">Career Aspiration</p><p class="text-gray-500">Architectural Excellence</p><p class="text-gray-500">Mentoring next-generation engineers</p></div></div>
-          <div class="flex items-start space-x-4 bg-white p-4 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <div class="text-5xl">🌱❤🎓</div>
-              <div>
-                  <h3 class="font-semibold text-xl text-gray-800">Launch Janaka Academy</h3>
-                  <p class="text-gray-600">02-11-2025</p>
-                  <p class="text-gray-500">Empower 1,000+ engineers worldwide</p>
-                  <p class="text-gray-500">Step‑by‑step training to help others surpass me—technically and ethically</p>
-              </div>
-              <a href="https://janaka2.github.io/academy/" target="_blank"
-                 class="inline-block bg-gradient-to-r from-orange-500 via-red-500 to-pink-600 hover:from-orange-600 hover:via-red-600 hover:to-pink-700 text-white font-bold py-3 px-6 rounded-full shadow-xl transform transition-all duration-300 hover:scale-105">
-                  Join
-              </a>
-          </div>
+      <div class="tab-content hidden" id="switzerland-era">
+        <div class="jgrid">
+          <div class="jitem"><span class="emo" aria-hidden="true">🏔️</span><div data-i18n="j5a"><h3>Moved to Switzerland</h3><p class="jw">January 2018</p><p>Zurich Area</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">🔷</span><div data-i18n="j5b"><h3>UBS</h3><p class="jw">2018 — 2019</p><p>IT Solution Development Specialist</p><p>Banking systems</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">🇬🇧</span><div data-i18n="j5c"><h3>Remote in UK</h3><p class="jw">2019 — 2020</p><p>Liverpool, UK</p><p>Remote work for Swiss clients</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">🏦</span><div data-i18n="j5d"><h3>Credit Suisse</h3><p class="jw">2019 — 2024</p><p>IT Solution Developer</p><p>Banking systems &amp; FX trading</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">🔷</span><div data-i18n="j5e"><h3>UBS</h3><p class="jw">2024 — present</p><p>Senior Full-Stack Solution Engineer (Lead)</p><p>AI integration &amp; LLMs</p></div></div>
+        </div>
+      </div>
+
+      <div class="tab-content hidden" id="future-dreams">
+        <div class="jgrid">
+          <div class="jitem"><span class="emo" aria-hidden="true">🎓</span><div data-i18n="j6a"><h3>Complete Master’s Degree</h3><p class="jw">Ongoing</p><p>University of Moratuwa</p><p>Computer Engineering</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">🤖</span><div data-i18n="j6b"><h3>AI Research &amp; Development</h3><p class="jw">Future goal</p><p>Advanced AI systems</p><p>LLM optimization &amp; deployment</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">🌍</span><div data-i18n="j6c"><h3>Global Impact Projects</h3><p class="jw">Long-term vision</p><p>Enterprise AI solutions</p><p>Scalable intelligent systems</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">🚀</span><div data-i18n="j6d"><h3>Technology Leadership</h3><p class="jw">Career aspiration</p><p>Architectural excellence</p><p>Mentoring next-generation engineers</p></div></div>
+          <div class="jitem"><span class="emo" aria-hidden="true">🌱</span><div>
+            <div data-i18n="j6e"><h3>Launch Janaka Academy</h3><p class="jw">02.11.2025</p><p>Empower 1,000+ engineers worldwide</p><p>Step-by-step training to help others surpass me — technically and ethically</p></div>
+            <p style="margin-top:10px"><a class="btn" href="https://janaka2.github.io/academy/" target="_blank" rel="noopener" data-i18n="j6btn">Join ↗</a></p>
+          </div></div>
+        </div>
       </div>
     </div>
   </div>

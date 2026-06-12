@@ -1,0 +1,2110 @@
+From 468d8c34b3de5c607718c3fd0913569558000894 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Fri, 12 Jun 2026 16:44:35 +0000
+Subject: [PATCH] Unify site design with the visual CV (v3_3) design system
+
+- New shared assets/css/theme.css: design tokens, light/dark themes,
+  typography (Archivo + IBM Plex), cards, chips, timeline, tabs, modal
+  extracted from partials/janaka_visual_resume_v3_3.html
+- Rebuild index.html + all section partials on that system; drop
+  Tailwind CDN, Vanta, AOS and Feather (no external JS dependencies)
+- Add EN/DE language switch (data-i18n + assets/js/i18n.js); language
+  and theme persist via the same localStorage keys as the visual CV
+- Language-aware PDF link (EN CV / DE Lebenslauf)
+- Align experience timeline, metrics and language levels with the
+  visual CV as source of truth; keep all narrative content
+- Preserve all features: chat popup (now lazy-loaded, Esc to close),
+  work-history collapsible, journey tabs, Academy CTA, footer links
+- Fix broken absolute photo path, stray markup, and footer year script
+  that never executed when injected via innerHTML
+- Accessibility: aria labels/states, focus management in modal,
+  reduced-motion and print styles; semantic heading order
+- Document repo structure and conventions in README
+
+https://claude.ai/code/session_015iH1dR2Ak44ozNrMSgrQvK
+---
+ README.md                              |  38 +++-
+ assets/css/theme.css                   | 286 +++++++++++++++++++++++++
+ assets/js/i18n.js                      | 195 +++++++++++++++++
+ assets/js/includes.js                  |  24 +--
+ assets/js/main.js                      | 252 +++++++++++++++-------
+ index.html                             | 144 +++++++++----
+ partials/ai-assistant-cta.html         |  18 +-
+ partials/certifications.html           | 213 +++++++++---------
+ partials/chat-popup.html               |  16 +-
+ partials/contact-skills-languages.html | 100 +++------
+ partials/education.html                |  44 ++--
+ partials/experience.html               | 213 ++++++++----------
+ partials/footer.html                   |  95 +++-----
+ partials/header.html                   | 101 +++++----
+ partials/key-metrics.html              |  29 +--
+ partials/life-journey-tabs.html        | 126 +++++------
+ 16 files changed, 1199 insertions(+), 695 deletions(-)
+ create mode 100644 assets/css/theme.css
+ create mode 100644 assets/js/i18n.js
+
+diff --git a/README.md b/README.md
+index 71bd855..69c6737 100644
+--- a/README.md
++++ b/README.md
+@@ -1,2 +1,36 @@
+-# resume
+-resume
++# janaka.me — resume website
++
++Personal resume website of **Janaka Premathilaka** — Senior Java Engineer & Solution Architect, Zug 🇨🇭.
++
++Plain HTML/CSS/JavaScript. No frameworks, no build step — host it anywhere (GitHub Pages works as-is).
++
++## Structure
++
++| Path | Purpose |
++|---|---|
++| `index.html` | Main landing page. Assembles the sections below via `data-include` partials. |
++| `partials/*.html` | Page sections (hero, experience, certifications, education, life journey, metrics, AI-assistant CTA, chat popup, contact/footer). |
++| `partials/janaka_visual_resume_v3_3.html` | Standalone one-page visual CV — the **design source of truth**. Self-contained, zero dependencies. |
++| `assets/css/theme.css` | Shared design system (CSS custom properties, light/dark themes) extracted from the visual CV. |
++| `assets/js/includes.js` | Tiny partial loader (`fetch` → fires `partials:loaded`). |
++| `assets/js/i18n.js` | EN/DE translations (`data-i18n` keys; English is captured from the markup, German lives in the dictionary). |
++| `assets/js/main.js` | Theme switch, language switch, tabs, collapsible work history, chat popup. |
++| `partials/*.pdf` | Downloadable CV (EN) and Lebenslauf (DE). |
++| `resume-26-3-2026.html` | Separate A4 print/PDF-export CV template (intentionally print-styled, not themed). |
++| `chatbot/` | Python backend powering the AI assistant (deployed separately; the site embeds it from `janaka2.github.io/pa/`). |
++| `indexBK.html`, `partials/*BK.html`, `partials/janaka_visual_resume_v3.html`, `…v3_1.html` | Archived older versions, kept for reference. |
++
++## Conventions
++
++- **Theme**: stored in `localStorage` under `jp-theme` (`light`/`dark`), defaults to the OS preference. Shared between the main page and the visual CV.
++- **Language**: stored under `jp-lang` (`en`/`de`), defaults to the browser language (English otherwise). Shared between pages too.
++- **Design tokens** live at the top of `assets/css/theme.css` (`--bg`, `--bg2`, `--tx`, `--tx2`, `--ln`, `--ac`, `--ok`, `--chip`, `--shadow`, `--r`). Use them instead of hard-coded colors.
++
++## Local preview
++
++The partials are loaded with `fetch()`, so open the site through a local server, not `file://`:
++
++```bash
++python3 -m http.server 8000
++# then open http://localhost:8000/
++```
+diff --git a/assets/css/theme.css b/assets/css/theme.css
+new file mode 100644
+index 0000000..1005a48
+--- /dev/null
++++ b/assets/css/theme.css
+@@ -0,0 +1,286 @@
++/* =====================================================================
++   Janaka Premathilaka — shared design system
++   Extracted from partials/janaka_visual_resume_v3_3.html (source of truth)
++   Plain CSS, no frameworks, no build step.
++   ===================================================================== */
++
++/* ============ tokens ============ */
++:root{
++  --bg:#FAFBFD; --bg2:#FFFFFF; --tx:#10243E; --tx2:#5B6B7F;
++  --ln:#DCE3EB; --ac:#0E7C66; --ok:#18A36C; --chip:#F1F5F9;
++  --shadow:0 1px 2px rgba(16,36,62,.05),0 8px 24px rgba(16,36,62,.06);
++  --r:12px;
++  --font-sans:"IBM Plex Sans",system-ui,sans-serif;
++  --font-mono:"IBM Plex Mono",monospace;
++  --font-head:"Archivo",sans-serif;
++}
++html[data-theme="dark"]{
++  --bg:#0B1626; --bg2:#101E33; --tx:#E6EDF6; --tx2:#93A4BA;
++  --ln:#233650; --ac:#2EB596; --ok:#2ECB87; --chip:#16263D;
++  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
++}
++
++/* ============ base ============ */
++*{box-sizing:border-box;margin:0;padding:0}
++html{scroll-behavior:smooth}
++body{
++  background:var(--bg);color:var(--tx);
++  font:400 1rem/1.65 var(--font-sans);
++  -webkit-font-smoothing:antialiased;
++  transition:background .25s ease,color .25s ease;
++}
++section{scroll-margin-top:84px}
++.wrap{max-width:1020px;margin:0 auto;padding:0 24px}
++a{color:var(--ac)}
++img{max-width:100%}
++:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:4px}
++.mono{font-family:var(--font-mono)}
++.eyebrow{
++  font-family:var(--font-mono);font-size:.72rem;font-weight:500;
++  letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:10px;
++}
++h2{font-family:var(--font-head);font-weight:700;font-size:clamp(1.45rem,3vw,1.9rem);letter-spacing:-.01em;margin-bottom:18px}
++.sec{padding:72px 0 0}
++.lede{color:var(--tx2);max-width:62ch}
++
++/* ============ top bar ============ */
++.topbar{
++  position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);
++  backdrop-filter:blur(10px);border-bottom:1px solid var(--ln);
++}
++.topbar .wrap{display:flex;align-items:center;gap:18px;height:56px}
++.logo{font-family:var(--font-head);font-weight:800;font-size:1.05rem;color:var(--tx);text-decoration:none;letter-spacing:-.02em}
++.logo b{color:var(--ac)}
++.topbar nav{margin-left:auto;display:flex;gap:14px;align-items:center}
++.topbar nav a{
++  font-family:var(--font-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
++  color:var(--tx2);text-decoration:none;
++}
++.topbar nav a:hover{color:var(--ac)}
++.iconbtn{
++  border:1px solid var(--ln);background:var(--bg2);color:var(--tx);border-radius:8px;
++  height:34px;cursor:pointer;line-height:1;
++}
++.iconbtn:hover{border-color:var(--ac)}
++#themeBtn{width:34px;font-size:.95rem}
++#langBtn{padding:0 10px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;font-weight:500}
++@media(max-width:760px){.topbar nav a.navlink{display:none}}
++
++/* ============ hero ============ */
++.hero{padding:64px 0 0}
++.hero-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:start}
++.status{
++  font-family:var(--font-mono);font-size:.78rem;color:var(--tx2);
++  display:flex;align-items:center;gap:8px;margin-bottom:18px;min-height:1.3em;
++}
++.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);flex:0 0 auto;animation:pulse 2.4s infinite}
++@keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 45%,transparent)}55%{box-shadow:0 0 0 7px transparent}}
++h1{font-family:var(--font-head);font-weight:800;font-size:clamp(2.3rem,6vw,3.9rem);line-height:1.02;letter-spacing:-.025em}
++.role{font-family:var(--font-head);font-weight:600;font-size:clamp(1.05rem,2.4vw,1.35rem);color:var(--ac);margin:12px 0 4px}
++.hook{font-size:clamp(1rem,2vw,1.12rem);color:var(--tx2);max-width:54ch;margin-top:10px}
++.hook b{color:var(--tx);font-weight:600}
++.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
++.badge{
++  font-family:var(--font-mono);font-size:.72rem;color:var(--tx2);
++  border:1px solid var(--ln);border-radius:999px;padding:5px 11px;background:var(--bg2);
++}
++.badge.hot{color:var(--ac);border-color:color-mix(in srgb,var(--ac) 40%,var(--ln))}
++.photo-card{text-align:center}
++.photo-card img{
++  width:172px;height:auto;border-radius:14px;display:block;
++  border:1px solid var(--ln);box-shadow:var(--shadow);
++}
++.photo-card figcaption{font-family:var(--font-mono);font-size:.7rem;color:var(--tx2);margin-top:10px;letter-spacing:.08em}
++@media(max-width:680px){
++  .hero-grid{grid-template-columns:1fr}
++  .photo-card{order:-1;text-align:left}
++  .photo-card img{width:128px;margin:0}
++}
++
++/* ============ buttons ============ */
++.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
++.btn{
++  display:inline-flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer;
++  font:500 .86rem/1 var(--font-sans);border-radius:10px;padding:11px 16px;
++  border:1px solid var(--ln);background:var(--bg2);color:var(--tx);
++  transition:transform .12s ease,border-color .12s ease,background .12s ease;
++}
++.btn:hover{transform:translateY(-1px);border-color:var(--ac)}
++.btn.primary{background:var(--ac);border-color:var(--ac);color:#fff}
++html[data-theme="dark"] .btn.primary{color:#06121F}
++.btn.primary:hover{filter:brightness(1.06)}
++.linkbtn{
++  background:none;border:none;cursor:pointer;color:var(--ac);
++  font-family:var(--font-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;padding:0;
++}
++.linkbtn:hover{text-decoration:underline}
++
++/* ============ stats band ============ */
++.stats{
++  display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:44px;
++  border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);
++}
++.stat{padding:20px 18px 22px;border-left:1px solid var(--ln)}
++.stat:first-child{border-left:none;padding-left:0}
++.stat b{font-family:var(--font-head);font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);letter-spacing:-.02em;display:block}
++.stat span{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;color:var(--tx2);display:block;margin-top:4px}
++@media(max-width:680px){
++  .stats{grid-template-columns:1fr 1fr}
++  .stat{padding-left:0;border-left:none;border-top:1px solid var(--ln)}
++  .stat:nth-child(-n+2){border-top:none}
++}
++
++/* ============ cards ============ */
++.card{border:1px solid var(--ln);border-radius:var(--r);background:var(--bg2);padding:20px;box-shadow:var(--shadow)}
++.card:hover{border-color:color-mix(in srgb,var(--ac) 35%,var(--ln))}
++.card h3{font-family:var(--font-head);font-weight:700;font-size:1.02rem;margin-bottom:4px}
++.card .sub{font-family:var(--font-mono);font-size:.76rem;color:var(--tx2)}
++.card ul{list-style:none;margin-top:12px;display:grid;gap:8px}
++.card li{padding-left:18px;position:relative;font-size:.95rem;color:color-mix(in srgb,var(--tx) 88%,var(--tx2))}
++.card li::before{content:"—";position:absolute;left:0;color:var(--ac)}
++.card li small{font-family:var(--font-mono);font-size:.7rem;color:var(--tx2);display:block}
++.zlabel{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ac);margin-bottom:12px}
++.cards2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
++.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px;margin-top:8px}
++@media(max-width:680px){.cards2{grid-template-columns:1fr}}
++
++/* ============ chips ============ */
++.chips{display:flex;flex-wrap:wrap;gap:7px}
++.chip{
++  font-family:var(--font-mono);font-size:.74rem;color:var(--tx);
++  background:var(--chip);border:1px solid var(--ln);border-radius:7px;padding:5px 9px;
++}
++
++/* ============ contact list (profile card) ============ */
++.clist{list-style:none;display:grid;gap:10px}
++.clist li{display:flex;gap:10px;align-items:baseline;font-size:.95rem}
++.clist .k{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tx2);min-width:74px}
++.clist a{color:var(--tx);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--ac) 45%,transparent)}
++.clist a:hover{color:var(--ac)}
++
++/* ============ language meter ============ */
++.langs{display:grid;gap:0;border-top:1px solid var(--ln);margin-top:4px}
++.lang{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid var(--ln)}
++.lang .nm{font-weight:600;font-size:.95rem}
++.lang .lvl{font-family:var(--font-mono);font-size:.72rem;color:var(--tx2);grid-column:1}
++.lang .lvl b{color:var(--ac);font-weight:500}
++.lang .meter{grid-row:span 2;display:flex;gap:4px}
++.seg{width:18px;height:7px;border-radius:3px;background:var(--chip);border:1px solid var(--ln)}
++.seg.f{background:var(--ac);border-color:var(--ac)}
++
++/* ============ timeline ============ */
++.tl{list-style:none;margin-top:8px;position:relative;padding-left:26px}
++.tl::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:2px;background:var(--ln)}
++.tl>li{position:relative;padding:0 0 38px}
++.tl>li::before{
++  content:"";position:absolute;left:-26px;top:7px;width:12px;height:12px;border-radius:50%;
++  background:var(--bg);border:2.5px solid var(--tx2);
++}
++.tl>li.live::before{border-color:var(--ok);background:var(--ok);animation:pulse 2.4s infinite}
++.tl .when{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.06em;color:var(--tx2)}
++.tl .when b{color:var(--ac);font-weight:500}
++.tl h3{font-family:var(--font-head);font-weight:700;font-size:1.12rem;margin:6px 0 2px;letter-spacing:-.01em}
++.tl .org{font-family:var(--font-mono);font-size:.8rem;color:var(--tx2);margin-bottom:10px}
++.tl ul.points{list-style:none;display:grid;gap:7px;max-width:72ch}
++.tl ul.points li{padding-left:18px;position:relative;color:color-mix(in srgb,var(--tx) 88%,var(--tx2))}
++.tl ul.points li::before{content:"—";position:absolute;left:0;color:var(--ac)}
++.tl .chips{margin-top:12px;max-width:72ch}
++
++/* ============ collapsible (work history) ============ */
++.fold{border:1px solid var(--ln);border-radius:var(--r);background:var(--bg2);box-shadow:var(--shadow);margin-top:26px}
++.fold-head{
++  display:flex;justify-content:space-between;align-items:center;gap:12px;
++  width:100%;padding:18px 20px;cursor:pointer;background:none;border:none;color:var(--tx);text-align:left;
++}
++.fold-head h3{font-family:var(--font-head);font-weight:700;font-size:1.05rem}
++.fold-head .chev{color:var(--ac);transition:transform .25s ease;flex:0 0 auto}
++.collapsible-content{max-height:0;overflow:hidden;transition:max-height .3s ease-out}
++.fold-body{padding:0 20px 20px;color:color-mix(in srgb,var(--tx) 88%,var(--tx2))}
++.fold-body p+p{margin-top:12px}
++.fold-body b,.fold-body strong{color:var(--tx);font-weight:600}
++#longHistory{opacity:0;transition:opacity .4s ease;border-left:3px solid var(--ac);padding:4px 0 4px 18px;margin-top:16px;display:grid;gap:12px}
++#longHistory:not(.hidden){opacity:1}
++
++/* ============ tabs (life journey) ============ */
++.tabbar{display:flex;overflow-x:auto;gap:2px;border-bottom:1px solid var(--ln);margin-bottom:0;scrollbar-width:thin}
++.tab-btn{
++  font-family:var(--font-mono);font-size:.74rem;letter-spacing:.06em;white-space:nowrap;
++  background:none;border:none;border-bottom:2px solid transparent;color:var(--tx2);
++  padding:12px 14px;cursor:pointer;transition:color .15s ease,border-color .15s ease;
++}
++.tab-btn:hover{color:var(--ac)}
++.tab-btn.active{color:var(--ac);border-bottom-color:var(--ac)}
++.tabpanes{border:1px solid var(--ln);border-top:none;border-radius:0 0 var(--r) var(--r);background:var(--bg2);box-shadow:var(--shadow)}
++.tab-content{padding:22px;min-height:240px}
++.tab-content.hidden{display:none}
++.jgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
++@media(max-width:680px){.jgrid{grid-template-columns:1fr}}
++.jitem{display:flex;gap:14px;align-items:flex-start}
++.jitem .emo{font-size:1.7rem;line-height:1.2;flex:0 0 auto}
++.jitem h3{font-family:var(--font-head);font-weight:700;font-size:.98rem}
++.jitem p{font-size:.88rem;color:var(--tx2)}
++.jitem .jw{font-family:var(--font-mono);font-size:.74rem;color:var(--ac)}
++
++/* ============ CTA banner ============ */
++.cta{
++  display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;
++  border:1px solid color-mix(in srgb,var(--ac) 40%,var(--ln));border-radius:var(--r);
++  background:linear-gradient(135deg,color-mix(in srgb,var(--ac) 7%,var(--bg2)),var(--bg2) 60%);
++  padding:24px;box-shadow:var(--shadow);margin-top:8px;
++}
++.cta h3{font-family:var(--font-head);font-weight:700;font-size:1.15rem;margin-bottom:4px}
++.cta p{color:var(--tx2);max-width:52ch}
++
++/* ============ chat modal ============ */
++.modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:16px;
++  background:color-mix(in srgb,var(--tx) 45%,transparent);backdrop-filter:blur(3px)}
++.modal.hidden{display:none}
++.modal-card{
++  display:flex;flex-direction:column;width:100%;max-width:920px;height:min(82vh,760px);
++  background:var(--bg2);border:1px solid var(--ln);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;
++}
++.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--ln)}
++.modal-head h3{font-family:var(--font-head);font-weight:700;font-size:1rem}
++.modal-close{background:none;border:1px solid var(--ln);border-radius:8px;color:var(--tx2);width:32px;height:32px;cursor:pointer;font-size:1rem;line-height:1}
++.modal-close:hover{border-color:var(--ac);color:var(--ac)}
++.modal-card iframe{flex:1;width:100%;border:0;background:var(--bg)}
++
++/* ============ quote ============ */
++.quote{margin-top:26px;border-left:3px solid var(--ac);padding:8px 0 8px 26px;max-width:64ch}
++.quote p{font-family:var(--font-head);font-weight:600;font-size:clamp(1.12rem,2.6vw,1.45rem);line-height:1.5;letter-spacing:-.01em}
++.quote .who{font-family:var(--font-mono);font-size:.72rem;font-weight:400;color:var(--tx2);margin-top:16px;letter-spacing:.12em;text-transform:uppercase}
++
++/* ============ section head with side action ============ */
++.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
++.sec-head h2{margin-bottom:0}
++.sec-head+*{margin-top:18px}
++
++/* ============ contact / footer ============ */
++.contact{margin-top:72px;border-top:1px solid var(--ln);padding:56px 0 28px;background:var(--bg2)}
++.contact h2{margin-bottom:8px}
++.deline{font-family:var(--font-mono);font-size:.78rem;color:var(--ac);margin-top:12px}
++.refs{font-style:italic;color:var(--tx2);font-size:.9rem;margin-top:22px}
++.sitelinks{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:28px}
++.sitelinks .k{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx2);margin-right:6px}
++.foot{
++  display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;
++  margin-top:40px;padding-top:18px;border-top:1px solid var(--ln);
++  font-family:var(--font-mono);font-size:.7rem;color:var(--tx2);
++}
++
++/* ============ utility ============ */
++.hidden{display:none}
++
++/* ============ motion & print ============ */
++@media(prefers-reduced-motion:reduce){
++  *,*::before,*::after{animation:none!important;transition:none!important}
++  html{scroll-behavior:auto}
++}
++@media print{
++  .topbar,.actions,.modal,.cta,#themeBtn,#langBtn{display:none!important}
++  body{background:#fff;color:#000}
++  .sec{padding-top:28px}
++  .tl>li,.card{break-inside:avoid}
++  a{color:#000;text-decoration:none}
++  .collapsible-content{max-height:none!important}
++}
+diff --git a/assets/js/i18n.js b/assets/js/i18n.js
+new file mode 100644
+index 0000000..14a7e43
+--- /dev/null
++++ b/assets/js/i18n.js
+@@ -0,0 +1,195 @@
++/**
++ * EN/DE translations for the main page.
++ * English is the default and is captured from the markup itself at boot;
++ * German lives in the DE dictionary below, keyed by data-i18n attributes.
++ * Same mechanism (and same localStorage keys) as partials/janaka_visual_resume_v3_3.html.
++ */
++window.JP_I18N = (function () {
++  'use strict';
++
++  var DE = {
++    /* ---- top bar ---- */
++    navExp: 'Erfahrung',
++    navCerts: 'Zertifizierungen',
++    navEdu: 'Ausbildung',
++    navJourney: 'Werdegang',
++    navContact: 'Kontakt',
++
++    /* ---- hero ---- */
++    heroStatus: 'prod · stabil seit 2004 · pikett: getragen · audits: bestanden',
++    heroRole: 'Senior Java Engineer &amp; Solution Architect',
++    heroHook: '<b>Ich baue grundsolide Enterprise-Java-Systeme — und führe sie ins KI-Zeitalter.</b><br>Über 22 Jahre geschäftskritische Software für Banken und den öffentlichen Sektor — UBS, Credit Suisse und die Europäische Kommission.',
++    heroBadges: '<span class="badge">Zug, Schweiz 🇨🇭</span><span class="badge">Niederlassung C</span><span class="badge hot">Deutsch B1 ↗</span><span class="badge">Banking-IT · regulierte Systeme</span><span class="badge hot">KI · LLM · Agentic RAG</span>',
++    btnViewCv: 'Mein aktueller Lebenslauf',
++    btnEmail: 'E-Mail',
++    btnPdf: 'PDF-Lebenslauf',
++    heroFigcap: 'ZUG · SCHWEIZ',
++
++    /* ---- about ---- */
++    aboutEyebrow: 'Profil',
++    aboutH2: 'Bewährte Enterprise-Technologie, praktische KI.',
++    aboutP1: 'Ich baue grundsolide Enterprise-Java-Systeme und führe sie ins KI-Zeitalter. Seit über 22 Jahren liefere ich geschäftskritische Software für Banken und den öffentlichen Sektor — mit Fokus auf Automatisierung, die wirklich etwas bewegt: LLMs, RAG, LangChain, CrewAI, LangGraph, AutoGen und das OpenAI Agents SDK mit Spring Boot. Man kennt mich für ruhige, verlässliche Umsetzung: Ich gebe Teams Halt, schaffe Klarheit und liefere Ergebnisse. Von der Modernisierung von Legacy-Systemen bis zur Performance-Optimierung von Handelsplattformen: Ich bringe zu Ende, was ich beginne — ohne Abkürzungen. Heute verbinde ich bewährte Enterprise-Technologie mit praktischer KI zu Lösungen, die in der echten Welt funktionieren. Mein Prinzip ist einfach: Finde einen Weg — oder schaffe einen.',
++    aboutP2: '<b>Werte:</b> Innovation, Zusammenarbeit, Verlässlichkeit, kontinuierliches Lernen — und Resultate. Ich verwandle Ideen in skalierbare Lösungen, die das Geschäft voranbringen.',
++    academyBtn: 'Janaka Academy beitreten ↗',
++    academyP: 'Meine Mission ist es, den Riesen in tausend Herzen zu wecken — und jeden so zu begleiten, dass er mich übertrifft: nicht nur im Engineering, sondern auch in geistiger Tiefe und ethischer Integrität. Schritt für Schritt entsteht so eine Gruppe technischer Vordenker, die mit Mitgefühl innovieren, nach Prinzipien leben und die Welt für alle einfacher machen.',
++
++    /* ---- contact / skills / languages cards ---- */
++    cContactH: 'Kontakt',
++    cPhone: 'Telefon',
++    cSkillsH: 'Kernkompetenzen',
++    cSkG1: 'Engineering',
++    cSkG2: 'KI / LLM-Engineering',
++    cSkC2: '<span class="chip">LangChain</span><span class="chip">LlamaIndex</span><span class="chip">RAG / CAG</span><span class="chip">Agentic Workflows</span><span class="chip">lokale LLMs</span>',
++    cSkG3: 'DevOps &amp; Cloud',
++    cLangsH: 'Sprachen',
++    lgEnN: 'Englisch', lgEnL: 'Verhandlungssicher · <b>C1/C2</b>',
++    lgDeN: 'Deutsch', lgDeL: 'Gut · <b>B1 ↗ in aktiver Weiterbildung</b>',
++    lgSiN: 'Singhalesisch', lgSiL: 'Muttersprache',
++    lgFrN: 'Französisch', lgFrL: 'Grundkenntnisse',
++    lgNlN: 'Niederländisch', lgNlL: 'Grundkenntnisse',
++
++    /* ---- experience ---- */
++    expEyebrow: 'Erfahrung',
++    expH2: '22 Jahre, Production-Grade.',
++    expMoreBtn: 'Mehr Details ↓',
++    x1when: '<b>01.2024 — heute</b> · Zürich, Schweiz',
++    x1pts: '<li>Vollständige Verantwortung für sechs Enterprise-Applikationen durch die Credit-Suisse-UBS-Fusion — Systemstabilität ohne Betriebsunterbrüche, unter hohem Druck.</li><li>Führung der Teams durch Multi-Plattform-Migrationen und Technologie-Decommissioning; Lösung hochpriorisierter Produktionsincidents mit ruhiger, entschlossener Hand.</li><li>Leitung der Archivierungsinitiative: 100 % termingerecht unter auditpflichtigen Fristen; Linux- und Oracle-CLI-Pipelines für regulierte Multi-Gigabyte-Datenfeeds.</li><li>Konzeption und Produktivsetzung von LLM- und Agentic-RAG-Automatisierungen für interne Bankprozesse, integriert in bestehende Java-Services — inklusive lokaler Llama-3-Inferenz für Daten, welche die Bank nicht verlassen dürfen.</li><li>Praxiserfahrung mit dem OpenAI Agents SDK und Model Context Protocol (MCP): Multi-Tool-Orchestrierung, Guardrails und RAG-gestützte Enterprise-Applikationen in Python.</li><li>Mentoring von Junior-Engineers, Leitung von Code-Reviews, Pikettdienst.</li>',
++    x2when: '<b>05.2019 — 01.2024</b> · Zürich, Schweiz',
++    x2pts: '<li>100 % Ownership für das geschäftskritische Master-Data-Management-Tool, von Grund auf neu gebaut — die Golden Source der Bank für Suche und Reporting.</li><li>Architektur und End-to-End-Lieferung von drei Cloud-native-Applikationen (Spring Boot, React, Oracle, Microservices), darunter eine Web-Applikation für dynamische Consumer-Endpoints und Case-Management-Tools mit Streaming-Integration.</li><li>Front-Office-FX-Handelsplattform mit niedriger Latenz (Java 11–17): ≈20 % mehr Responsiveness durch Multithreading und Memory-Tuning.</li><li>Aufbau der CI/CD-, Kubernetes/Docker- und Observability-Pipelines des Teams; TDD mit JUnit und Mockito.</li>',
++    x3when: '<b>01.2018 — 05.2019</b> · Zürich, Schweiz',
++    x3pts: '<li>Modernisierung von über 20 Legacy-Komponenten zu Spring-Boot-Microservices mit robusten Lösungsarchitekturen.</li><li>Automatisierung der Jenkins-Pipelines; Migration von SVN zu Git.</li><li>Ausbau der Tests mit JUnit, Integrationstests und Cucumber BDD.</li>',
++    x4when: '<b>06.2011 — 01.2018</b> · Brüssel, Belgien',
++    x4pts: '<li>Entwicklung und Betrieb des zentralen E-Procurement-Systems der EU — geschäftskritisch, mehrsprachig, öffentlicher Sektor — über 6,5 Jahre; das System trug rund 40 % zum Gesamtumsatz der Abteilung bei.</li><li>Verteilte Integrationsflüsse mit Spring Integration; JBPM-Workflows für Freigaben, Eskalationen und Audit-Trails.</li><li>Full-Stack-Lieferung (Angular, Spring/Hibernate, EJB3, Oracle, WebLogic); Release-Verantwortung und L3-Produktionssupport.</li>',
++    x5when: '<b>05.2004 — 06.2011</b> · Belgien &amp; Sri Lanka',
++    x5pts: '<li>Technischer Berater in Healthcare, Telekom, Banking und E-Commerce — Enterprise-Java/JEE-Lösungen.</li><li>Union Bank of Colombo: Kernbankenmodule — Kreditsystem, Leasing-Zahlungspläne, Scheck- und Sparbuchdruck (EJB2, JSP, DB2 auf AS/400).</li><li>Architektur-Modernisierung in Agile/Scrum; SOAP/REST-Integration; Optimierung von Oracle/MySQL.</li>',
++    whH: 'Berufsweg — die ganze Geschichte',
++    whIntro: 'Nach dem Karrierestart in Sri Lanka habe ich über ein Jahrzehnt in Belgien gearbeitet — mit <strong>ABSI</strong>, <strong>Roomsnet.com</strong> und <strong>Simbios</strong> an Projekten für Kunden wie <strong>Van Genechten Packaging</strong>, <strong>Nokia Siemens Networks</strong> und <strong>Johnson &amp; Johnson</strong>. Diese Zeit gab mir breite Erfahrung in Healthcare, Hospitality und Enterprise-IT, bevor ich zur <strong>Europäischen Kommission (DIGIT)</strong> wechselte, um grosse E-Procurement-Systeme zu liefern. Seit 2018 geht meine Reise in der Schweiz weiter — mit Full-Stack-Engineering und KI-Integration bei <strong>Credit Suisse</strong> und <strong>UBS</strong>.',
++    whL1: 'Meine Reise begann in Sri Lanka: zuerst als Informatik-Dozent, bald darauf in der Bankenwelt bei der Union Bank. 2006 zog ich nach Belgien — ein prägendes Jahrzehnt des Wachstums in meiner Karriere.',
++    whL2: 'Ich arbeitete mit <strong>ABSI</strong> im Gesundheitswesen, später bei <strong>Roomsnet.com</strong> als Java/JEE-Entwickler und Technical Lead in der Hotellerie, und mit <strong>Simbios</strong> an Projekten für Kunden wie <strong>Van Genechten Packaging</strong>, <strong>Nokia Siemens Networks</strong>, <strong>Johnson &amp; Johnson</strong> und <strong>Centric IT Solutions</strong>.',
++    whL3: '2011 wechselte ich zur <strong>Europäischen Kommission (DIGIT)</strong> und leitete die Entwicklung robuster E-Procurement-Systeme und komplexer Workflows für die EU.',
++    whL4: 'Seit 2018 ist die Schweiz meine Basis — mit <strong>UBS</strong> und <strong>Credit Suisse</strong> im Zentrum: hochperformantes Full-Stack-Engineering, Systemmigrationen und die Integration KI-gestützter Automatisierung.',
++
++    /* ---- certifications ---- */
++    certEyebrow: 'Zertifizierungen &amp; Kurse',
++    certH2: 'Immer am Lernen.',
++    certG1: 'Cloud, KI &amp; Automation',
++    certG2: 'Java, Spring &amp; Produktivität',
++    certG3: 'Daten &amp; SQL',
++    certG4: 'Sprachen &amp; Soft Skills',
++    certG5: 'Sun-Zertifizierungen (seit 2006)',
++    lblInstructor: 'Kursleitung:',
++    lblInstructors: 'Kursleitung:',
++    lblIssuer: 'Aussteller:',
++    lblDone: '✓ 100 % abgeschlossen',
++    lblDone98: '98 % abgeschlossen',
++    lblDoneDate: 'Abgeschlossen am 21.09.2025',
++    lblIssued2006: 'Ausgestellt Jan. 2006',
++
++    /* ---- education ---- */
++    eduEyebrow: 'Ausbildung',
++    eduH2: 'Qualifikationen.',
++    edu1d: 'BSc — Informatik, Statistik &amp; Mathematik',
++    edu2d: 'BIT — Bachelor of Information Technology',
++    edu2s: '1999 — 2004 · 6 Semester abgeschlossen',
++    edu3d: 'Master in Computer Engineering',
++    edu3s: '2007 — heute · laufend',
++
++    /* ---- life journey ---- */
++    jEyebrow: 'Mein Lebensweg',
++    jH2: 'Von Galle nach Zug.',
++    jTab1: '👶 Frühe Jahre', jTab2: '🎓 Ausbildung', jTab3: '💼 Karrierestart',
++    jTab4: '🇧🇪 Belgien', jTab5: '🇨🇭 Schweiz', jTab6: '🌟 Zukunftspläne',
++    j1a: '<h3>Geboren</h3><p class="jw">Februar 1980</p><p>Galle, Sri Lanka</p>',
++    j1b: '<h3>Schulzeit</h3><p class="jw">1985 — 1998</p><p>Süden Sri Lankas</p>',
++    j2a: '<h3>Bachelor-Abschluss</h3><p class="jw">1999 — 2004</p><p>University of Sri Jayewardenepura</p><p>BSc in Informatik, Statistik, Mathematik</p>',
++    j2b: '<h3>Zweiter Bachelor</h3><p class="jw">1999 — 2004</p><p>University of Colombo</p><p>BIT (6 Semester abgeschlossen)</p>',
++    j2c: '<h3>Masterstudium</h3><p class="jw">2007 — heute</p><p>University of Moratuwa</p><p>Computer Engineering (laufend)</p>',
++    j2d: '<h3>Zertifizierungen</h3><p class="jw">2005 — 2006</p><p>Sun-Java-Zertifizierungen (SCJP, SCBCD, SCEA, SCWCD)</p>',
++    j3a: '<h3>Erste Stelle</h3><p class="jw">2004</p><p>Union Bank of Colombo Ltd</p><p>Banking Software Engineer</p>',
++    j3b: '<h3>Frühe Karriere</h3><p class="jw">2006 — 2008</p><p>Mehrere Unternehmen in Sri Lanka</p><p>Java/JEE-Entwickler</p>',
++    j4a: '<h3>Umzug nach Belgien</h3><p class="jw">August 2008</p><p>Raum Brüssel</p>',
++    j4b: '<h3>Hochzeit</h3><p class="jw">2010</p><p>Belgien</p>',
++    j4c: '<h3>Erstes Kind</h3><p class="jw">Januar 2012</p><p>Sohn</p>',
++    j4d: '<h3>Zweites Kind</h3><p class="jw">Dezember 2013</p><p>Tochter</p>',
++    j4e: '<h3>Erstes Eigenheim</h3><p class="jw">Dezember 2015</p><p>Belgien</p>',
++    j4f: '<h3>Drittes Kind</h3><p class="jw">Dezember 2016</p><p>Tochter</p>',
++    j4g: '<h3>Europäische Kommission</h3><p class="jw">2011 — 2018</p><p>Sr. Full-Stack Java Developer</p><p>E-Procurement-Systeme</p>',
++    j5a: '<h3>Umzug in die Schweiz</h3><p class="jw">Januar 2018</p><p>Raum Zürich</p>',
++    j5b: '<h3>UBS</h3><p class="jw">2018 — 2019</p><p>IT Solution Development Specialist</p><p>Bankensysteme</p>',
++    j5c: '<h3>Remote aus UK</h3><p class="jw">2019 — 2020</p><p>Liverpool, UK</p><p>Remote-Arbeit für Schweizer Kunden</p>',
++    j5d: '<h3>Credit Suisse</h3><p class="jw">2019 — 2024</p><p>IT Solution Developer</p><p>Bankensysteme &amp; FX-Handel</p>',
++    j5e: '<h3>UBS</h3><p class="jw">2024 — heute</p><p>Senior Full-Stack Solution Engineer (Lead)</p><p>KI-Integration &amp; LLMs</p>',
++    j6a: '<h3>Master abschliessen</h3><p class="jw">laufend</p><p>University of Moratuwa</p><p>Computer Engineering</p>',
++    j6b: '<h3>KI-Forschung &amp; Entwicklung</h3><p class="jw">Zukunftsziel</p><p>Fortgeschrittene KI-Systeme</p><p>LLM-Optimierung &amp; Deployment</p>',
++    j6c: '<h3>Projekte mit globaler Wirkung</h3><p class="jw">Langfristige Vision</p><p>Enterprise-KI-Lösungen</p><p>Skalierbare intelligente Systeme</p>',
++    j6d: '<h3>Technologie-Leadership</h3><p class="jw">Karriereziel</p><p>Architektur-Exzellenz</p><p>Mentoring der nächsten Engineer-Generation</p>',
++    j6e: '<h3>Start der Janaka Academy</h3><p class="jw">02.11.2025</p><p>1’000+ Engineers weltweit stärken</p><p>Schritt-für-Schritt-Training, damit andere mich übertreffen — technisch und ethisch</p>',
++    j6btn: 'Beitreten ↗',
++
++    /* ---- key metrics ---- */
++    kmEyebrow: 'Kennzahlen',
++    kmH2: 'Zahlen, die halten.',
++    km1: 'Jahre Produktions-Java',
++    km2: 'Apps durch die CS–UBS-Fusion geführt',
++    km3: 'FX-Plattform-Latenz reduziert',
++    km4: 'Banken + die EU',
++
++    /* ---- AI assistant CTA + chat ---- */
++    ctaH: 'Möchten Sie mehr erfahren?',
++    ctaP: 'Chatten Sie mit meinem KI-Assistenten über meine Erfahrung, meine Skills oder meine Verfügbarkeit.',
++    ctaBtn: '💬&nbsp; Jetzt chatten',
++    chatTitle: 'Chat mit Janakas KI-Assistent',
++
++    /* ---- contact / footer ---- */
++    ctEyebrow: 'Kontakt',
++    ctH2: 'Mein Postfach ist offen.',
++    ctLede: 'Wenn Banking-Grade-Engineering plus praktische KI das Problem auf Ihrem Tisch ist — in der Schweiz oder remote/hybrid in Europa — sprechen wir.',
++    ctPS: 'PS — You are very welcome to write in English, too.',
++    ctRefs: 'Ausgezeichnete Referenzen von UBS, Credit Suisse und der Europäischen Kommission auf Anfrage.',
++    ctExplore: 'Entdecken',
++    ctMailBadge: 'Kontakt',
++    ctRights: 'Alle Rechte vorbehalten.',
++    footRight: 'von Hand gebaut — keine Frameworks, kein Build-Step. Quelltext ansehen.'
++  };
++
++  /* Strings used by JS-driven UI (not tied to a data-i18n node) */
++  var STR = {
++    en: {
++      title: 'Janaka Premathilaka — Senior Java Engineer & Solution Architect',
++      langBtnAria: 'Auf Deutsch wechseln',
++      themeBtnAria: 'Switch between light and dark theme',
++      readMore: 'Read more',
++      showLess: 'Show less',
++      chatClose: 'Close chat',
++      pdf: 'partials/Janaka_Premathilaka_CV_2026.pdf'
++    },
++    de: {
++      title: 'Janaka Premathilaka — Senior Java Engineer & Solution Architect (Lebenslauf)',
++      langBtnAria: 'Switch to English',
++      themeBtnAria: 'Zwischen hellem und dunklem Design wechseln',
++      readMore: 'Mehr lesen',
++      showLess: 'Weniger anzeigen',
++      chatClose: 'Chat schliessen',
++      pdf: 'partials/Janaka_Premathilaka_Lebenslauf_2026_DE.pdf'
++    }
++  };
++
++  /* English is captured from the markup the first time we see each key. */
++  var EN = {};
++  function capture() {
++    document.querySelectorAll('[data-i18n]').forEach(function (el) {
++      var k = el.dataset.i18n;
++      if (!(k in EN)) EN[k] = el.innerHTML;
++    });
++  }
++  function apply(lang) {
++    capture(); // pick up any nodes added since the last run (partials load async)
++    document.querySelectorAll('[data-i18n]').forEach(function (el) {
++      var k = el.dataset.i18n;
++      if (lang === 'de' && DE[k] !== undefined) el.innerHTML = DE[k];
++      else if (EN[k] !== undefined) el.innerHTML = EN[k];
++    });
++  }
++
++  return { apply: apply, STR: STR };
++})();
+diff --git a/assets/js/includes.js b/assets/js/includes.js
+index da92e6b..13a3b7d 100644
+--- a/assets/js/includes.js
++++ b/assets/js/includes.js
+@@ -1,6 +1,7 @@
+ /**
+  * Simple HTML includes: load partials into any element with data-include="partials/xxx.html".
+  * Emits a 'partials:loaded' event on window when all includes finish.
++ * (Needs to be served over http(s) — fetch() does not work from file://.)
+  */
+ async function loadPartials() {
+   const slots = Array.from(document.querySelectorAll('[data-include]'));
+@@ -18,26 +19,3 @@ async function loadPartials() {
+   window.dispatchEvent(new Event('partials:loaded'));
+ }
+ document.addEventListener('DOMContentLoaded', loadPartials);
+-document.addEventListener('DOMContentLoaded', () => {
+-  const buttons  = document.querySelectorAll('.tab-btn');
+-  const panels   = document.querySelectorAll('.tab-content');
+-
+-  function setActive(tabId) {
+-    // hide all panels
+-    panels.forEach(p => p.classList.add('hidden'));
+-    // remove active styles from all buttons
+-    buttons.forEach(b => b.classList.remove('active','text-blue-600','border-b-2','border-blue-400'));
+-    // show selected panel
+-    const panel = document.getElementById(tabId);
+-    if (panel) panel.classList.remove('hidden');
+-    // style the selected button
+-    const btn = Array.from(buttons).find(b => b.dataset.tab === tabId);
+-    if (btn) btn.classList.add('active','text-blue-600','border-b-2','border-blue-400');
+-  }
+-
+-  // default: Education
+-  setActive('educationJourney');
+-
+-  // clicks
+-  buttons.forEach(b => b.addEventListener('click', () => setActive(b.dataset.tab)));
+-});
+\ No newline at end of file
+diff --git a/assets/js/main.js b/assets/js/main.js
+index 3f0f2fc..399b63c 100644
+--- a/assets/js/main.js
++++ b/assets/js/main.js
+@@ -1,89 +1,177 @@
+-function initAOS() {
+-  if (window.AOS) AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
+-}
+-function initVanta() {
+-  if (window.VANTA && document.getElementById('vanta-bg')) {
+-    VANTA.GLOBE({
+-      el: "#vanta-bg",
+-      mouseControls: true, touchControls: true, gyroControls: false,
+-      minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00,
+-      color: 0x3b82f6, backgroundColor: 0xf8fafc, size: 0.8
++/**
++ * Main page behaviour: theme switch, EN/DE language switch, tabs,
++ * collapsible work history, chat popup. Plain JS, no dependencies.
++ * Everything boots after the partials have been injected (partials:loaded).
++ */
++(function () {
++  'use strict';
++
++  function getStore(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
++  function setStore(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
++
++  var STR = window.JP_I18N.STR;
++
++  /* ---------- language state (shared key with the visual CV page) ---------- */
++  var lang = getStore('jp-lang');
++  if (lang !== 'en' && lang !== 'de') {
++    lang = ((navigator.language || '').toLowerCase().indexOf('de') === 0) ? 'de' : 'en';
++  }
++
++  /* ---------- theme (initial value is set pre-paint in <head>) ---------- */
++  function setupTheme() {
++    var root = document.documentElement;
++    var themeBtn = document.getElementById('themeBtn');
++    if (!themeBtn) return;
++    themeBtn.addEventListener('click', function () {
++      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
++      root.setAttribute('data-theme', next);
++      setStore('jp-theme', next);
+     });
+   }
+-}
+-function initFeather() { if (window.feather) feather.replace(); }
+-
+-// Tabs
+-function setupTabs() {
+-  const tabBtns = document.querySelectorAll('.tab-btn');
+-  const tabContents = document.querySelectorAll('.tab-content');
+-  if (!tabBtns.length || !tabContents.length) return;
+-  tabBtns[0].classList.add('active');
+-  tabContents[0].classList.remove('hidden');
+-  tabBtns.forEach(btn => {
+-    btn.addEventListener('click', function() {
+-      const tabId = this.getAttribute('data-tab');
+-      tabBtns.forEach(b => b.classList.remove('active'));
+-      tabContents.forEach(c => c.classList.add('hidden'));
+-      this.classList.add('active');
+-      const target = document.getElementById(tabId);
+-      if (target) target.classList.remove('hidden');
++
++  /* ---------- language ---------- */
++  function applyLang() {
++    document.documentElement.setAttribute('lang', lang);
++    document.title = STR[lang].title;
++    window.JP_I18N.apply(lang);
++
++    var langBtn = document.getElementById('langBtn');
++    if (langBtn) {
++      langBtn.textContent = (lang === 'en') ? 'DE' : 'EN';
++      langBtn.setAttribute('aria-label', STR[lang].langBtnAria);
++    }
++    var themeBtn = document.getElementById('themeBtn');
++    if (themeBtn) themeBtn.setAttribute('aria-label', STR[lang].themeBtnAria);
++
++    /* language-aware PDF link */
++    var pdfBtn = document.getElementById('pdfBtn');
++    if (pdfBtn) pdfBtn.setAttribute('href', STR[lang].pdf);
++
++    /* "Read more" button label depends on its open/closed state */
++    var longHistory = document.getElementById('longHistory');
++    var toggleBtn = document.getElementById('toggleLongHistory');
++    if (toggleBtn && longHistory) {
++      toggleBtn.textContent = longHistory.classList.contains('hidden') ? STR[lang].readMore : STR[lang].showLess;
++    }
++    var chatClose = document.querySelector('#chatPopup .modal-close');
++    if (chatClose) chatClose.setAttribute('aria-label', STR[lang].chatClose);
++
++    /* translated text can change heights: refresh the open collapsible */
++    var content = document.getElementById('workHistoryContent');
++    if (content && content.style.maxHeight) {
++      content.style.maxHeight = content.scrollHeight + 'px';
++    }
++  }
++  function setupLang() {
++    var langBtn = document.getElementById('langBtn');
++    if (!langBtn) return;
++    langBtn.addEventListener('click', function () {
++      lang = (lang === 'en') ? 'de' : 'en';
++      setStore('jp-lang', lang);
++      applyLang();
+     });
+-  });
+-}
+-
+-// Collapsibles (Work History)
+-function setupWorkHistory() {
+-  const content = document.getElementById('workHistoryContent');
+-  const chevron = document.getElementById('workHistoryChevron');
+-  const toggleBtn = document.getElementById('toggleLongHistory');
+-  if (!content) return;
+-
+-  window.toggleWorkHistory = function() {
+-    if (content.style.maxHeight) { content.style.maxHeight = null; chevron && (chevron.style.transform = 'rotate(0deg)'); }
+-    else { content.style.maxHeight = content.scrollHeight + "px"; chevron && (chevron.style.transform = 'rotate(180deg)'); }
+-  };
+-  window.showWorkHistory = function() {
+-    content.style.maxHeight = content.scrollHeight + "px";
+-    chevron && (chevron.style.transform = 'rotate(180deg)');
+-    content.scrollIntoView({ behavior: 'smooth' });
+-  };
+-  if (toggleBtn) {
+-    toggleBtn.addEventListener('click', function () {
+-      const longHistory = document.getElementById('longHistory');
+-      const container = document.getElementById('workHistoryContent');
+-      const willOpen = longHistory.classList.contains('hidden');
+-      if (willOpen) longHistory.classList.remove('hidden'); else longHistory.classList.add('hidden');
+-      requestAnimationFrame(() => { container.style.maxHeight = container.scrollHeight + 'px'; });
+-      this.textContent = willOpen ? 'Show less' : 'Read more';
++  }
++
++  /* ---------- footer year ---------- */
++  function setupYear() {
++    var y = document.getElementById('year');
++    if (y) y.textContent = new Date().getFullYear();
++  }
++
++  /* ---------- life journey tabs ---------- */
++  function setupTabs() {
++    var buttons = document.querySelectorAll('.tab-btn');
++    var panels = document.querySelectorAll('.tab-content');
++    if (!buttons.length || !panels.length) return;
++
++    function setActive(tabId) {
++      panels.forEach(function (p) { p.classList.toggle('hidden', p.id !== tabId); });
++      buttons.forEach(function (b) {
++        var on = b.dataset.tab === tabId;
++        b.classList.toggle('active', on);
++        b.setAttribute('aria-pressed', on ? 'true' : 'false');
++      });
++    }
++    buttons.forEach(function (b) {
++      b.addEventListener('click', function () { setActive(b.dataset.tab); });
+     });
++    setActive('educationJourney'); // default tab, as before
+   }
+-  window.showAllCertifications = function() {
+-    const el = document.getElementById('certifications'); el && el.scrollIntoView({ behavior: 'smooth' });
+-  };
+-  window.showEducationDetails = function() {
+-    const el = document.getElementById('education'); el && el.scrollIntoView({ behavior: 'smooth' });
+-  };
+-}
+-
+-// Chat popup
+-function setupChatPopup() {
+-  window.openChatPopup = function() {
+-    const el = document.getElementById('chatPopup');
+-    if (el) { el.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
++
++  /* ---------- collapsible work history ---------- */
++  function setupWorkHistory() {
++    var content = document.getElementById('workHistoryContent');
++    var chevron = document.getElementById('workHistoryChevron');
++    var head = document.querySelector('#workHistory .fold-head');
++    var toggleBtn = document.getElementById('toggleLongHistory');
++    if (!content) return;
++
++    function setOpen(open) {
++      content.style.maxHeight = open ? content.scrollHeight + 'px' : null;
++      if (chevron) chevron.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
++      if (head) head.setAttribute('aria-expanded', open ? 'true' : 'false');
++    }
++    window.toggleWorkHistory = function () { setOpen(!content.style.maxHeight); };
++    window.showWorkHistory = function () {
++      setOpen(true);
++      content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
++    };
++
++    if (toggleBtn) {
++      toggleBtn.addEventListener('click', function () {
++        var longHistory = document.getElementById('longHistory');
++        if (!longHistory) return;
++        var willOpen = longHistory.classList.contains('hidden');
++        longHistory.classList.toggle('hidden', !willOpen);
++        this.textContent = willOpen ? STR[lang].showLess : STR[lang].readMore;
++        requestAnimationFrame(function () {
++          if (content.style.maxHeight) content.style.maxHeight = content.scrollHeight + 'px';
++        });
++      });
++    }
+   }
+-  window.closeChatPopup = function() {
+-    const el = document.getElementById('chatPopup');
+-    if (el) { el.classList.add('hidden'); document.body.style.overflow = 'auto'; }
++
++  /* ---------- chat popup ---------- */
++  function setupChatPopup() {
++    var popup = document.getElementById('chatPopup');
++    var lastFocus = null;
++
++    window.openChatPopup = function () {
++      if (!popup) return;
++      var iframe = document.getElementById('chatIframe');
++      if (iframe && !iframe.getAttribute('src')) {
++        iframe.setAttribute('src', iframe.getAttribute('data-src')); // load on first open only
++      }
++      lastFocus = document.activeElement;
++      popup.classList.remove('hidden');
++      document.body.style.overflow = 'hidden';
++      var closeBtn = popup.querySelector('.modal-close');
++      if (closeBtn) closeBtn.focus();
++    };
++    window.closeChatPopup = function () {
++      if (!popup) return;
++      popup.classList.add('hidden');
++      document.body.style.overflow = 'auto';
++      if (lastFocus && lastFocus.focus) lastFocus.focus();
++    };
++    if (popup) {
++      popup.addEventListener('click', function (ev) {
++        if (ev.target === popup) window.closeChatPopup(); // click on the backdrop closes
++      });
++      document.addEventListener('keydown', function (ev) {
++        if (ev.key === 'Escape' && !popup.classList.contains('hidden')) window.closeChatPopup();
++      });
++    }
+   }
+-}
+-
+-// Bootstrap everything *after* partials are loaded
+-window.addEventListener('partials:loaded', () => {
+-  initAOS();
+-  initVanta();
+-  initFeather();
+-  setupTabs();
+-  setupWorkHistory();
+-  setupChatPopup();
+-});
++
++  /* ---------- boot after partials are in the DOM ---------- */
++  window.addEventListener('partials:loaded', function () {
++    setupTheme();
++    setupLang();
++    setupYear();
++    setupTabs();
++    setupWorkHistory();
++    setupChatPopup();
++    applyLang();
++  });
++})();
+diff --git a/index.html b/index.html
+index 8026748..329611f 100644
+--- a/index.html
++++ b/index.html
+@@ -1,52 +1,102 @@
+ <!DOCTYPE html>
+-<html lang="en">
++<html lang="en" data-theme="light">
+ <head>
+-  <meta charset="UTF-8" />
+-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-  <title>Janaka Premathilaka | Senior Full-Stack Java Engineer</title>
+-
+-  <!-- Tailwind + vendor CSS -->
+-  <script src="https://cdn.tailwindcss.com"></script>
+-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+-
+-  <!-- Icons + Vanta -->
+-  <script src="https://unpkg.com/feather-icons"></script>
+-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+-
+-  <!-- Favicon set (optional paths; place your files in assets/icons if needed) -->
+-  <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg?v=1" />
+-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png?v=1" />
+-  <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16.png?v=1" />
+-  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png?v=1" />
+-
+-  <!-- Our styles -->
+-  <link rel="stylesheet" href="assets/css/styles.css" />
++  <meta charset="UTF-8">
++  <meta name="viewport" content="width=device-width, initial-scale=1.0">
++  <title>Janaka Premathilaka — Senior Java Engineer &amp; Solution Architect</title>
++  <meta name="description" content="22+ years of banking-grade Java engineering — UBS, Credit Suisse, the European Commission — now bringing LLM, RAG and agentic automation inside the bank's perimeter. Zug, Switzerland. English & Deutsch.">
++  <meta property="og:title" content="Janaka Premathilaka — Senior Java Engineer &amp; Solution Architect">
++  <meta property="og:description" content="Banking-grade Java + practical AI in regulated environments. 22+ years. Zug, Switzerland.">
++  <meta property="og:type" content="profile">
++  <script type="application/ld+json">
++  {
++    "@context": "https://schema.org",
++    "@type": "Person",
++    "name": "Janaka Premathilaka",
++    "jobTitle": "Senior Java Engineer & Solution Architect",
++    "address": {"@type": "PostalAddress", "addressLocality": "Zug", "addressCountry": "CH"},
++    "email": "mailto:janaka2@gmail.com",
++    "url": "https://janaka.me",
++    "sameAs": [
++      "https://www.linkedin.com/in/janakapremathilaka/",
++      "https://github.com/Janaka2",
++      "https://javawithme.wordpress.com/"
++    ],
++    "knowsLanguage": ["en", "de", "si", "fr", "nl"],
++    "knowsAbout": ["Java", "Spring Boot", "Kubernetes", "Apache Kafka", "LLM integration", "RAG", "Banking systems", "Solution architecture"]
++  }
++  </script>
++
++  <!-- Favicons -->
++  <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg?v=1">
++  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png?v=1">
++  <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16.png?v=1">
++  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png?v=1">
++
++  <!-- Apply the stored theme before first paint to avoid a flash -->
++  <script>
++    (function(){
++      try {
++        var t = localStorage.getItem("jp-theme");
++        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
++          document.documentElement.setAttribute("data-theme", "dark");
++        }
++      } catch (e) {}
++    })();
++  </script>
++
++  <!-- Fonts (same set as the visual CV) -->
++  <link rel="preconnect" href="https://fonts.googleapis.com">
++  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
++
++  <!-- Shared design system -->
++  <link rel="stylesheet" href="assets/css/theme.css">
+ </head>
+-<body class="font-sans bg-gray-50 text-gray-800">
+-  <div id="vanta-bg"></div>
+-
+-  <!-- Header -->
+-  <header class="relative bg-white shadow-sm" data-include="partials/header.html"></header>
+-
+-  <main class="container mx-auto px-6 py-8">
+-    <div data-include="partials/contact-skills-languages.html"></div>
+-    <div data-include="partials/experience.html"></div>
+-    <div data-include="partials/certifications.html"></div>
+-    <div data-include="partials/education.html"></div>
+-    <div data-include="partials/life-journey-tabs.html"></div>
+-    <div data-include="partials/key-metrics.html"></div>
+-    <div data-include="partials/ai-assistant-cta.html"></div>
+-    <div data-include="partials/chat-popup.html"></div>
+-  </main>
+-
+-  <!-- Footer -->
+-  <footer class="bg-gray-800 text-white py-8" data-include="partials/footer.html"></footer>
+-
+-  <!-- Vendor JS -->
+-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+-
+-  <!-- App JS -->
+-  <script src="assets/js/includes.js"></script>
+-  <script src="assets/js/main.js"></script>
++<body>
++
++<header class="topbar">
++  <div class="wrap">
++    <a class="logo" href="#top">Janaka<b>.</b></a>
++    <nav aria-label="Sections">
++      <a class="navlink" href="#experience" data-i18n="navExp">Experience</a>
++      <a class="navlink" href="#certifications" data-i18n="navCerts">Certifications</a>
++      <a class="navlink" href="#education" data-i18n="navEdu">Education</a>
++      <a class="navlink" href="#journey" data-i18n="navJourney">Journey</a>
++      <a class="navlink" href="#contact" data-i18n="navContact">Contact</a>
++      <button id="langBtn" class="iconbtn" type="button" aria-label="Auf Deutsch wechseln">DE</button>
++      <button id="themeBtn" class="iconbtn" type="button" aria-label="Switch between light and dark theme">◐</button>
++    </nav>
++  </div>
++</header>
++
++<noscript>
++  <div class="wrap" style="padding:24px">
++    <p>This page needs JavaScript to assemble its sections.
++    You can view the full CV directly here:
++    <a href="partials/janaka_visual_resume_v3_3.html">visual resume</a> ·
++    <a href="partials/Janaka_Premathilaka_CV_2026.pdf">PDF (EN)</a> ·
++    <a href="partials/Janaka_Premathilaka_Lebenslauf_2026_DE.pdf">PDF (DE)</a></p>
++  </div>
++</noscript>
++
++<main>
++  <div data-include="partials/header.html"></div>
++  <div data-include="partials/contact-skills-languages.html"></div>
++  <div data-include="partials/experience.html"></div>
++  <div data-include="partials/certifications.html"></div>
++  <div data-include="partials/education.html"></div>
++  <div data-include="partials/life-journey-tabs.html"></div>
++  <div data-include="partials/key-metrics.html"></div>
++  <div data-include="partials/ai-assistant-cta.html"></div>
++  <div data-include="partials/chat-popup.html"></div>
++</main>
++
++<footer data-include="partials/footer.html"></footer>
++
++<!-- App JS -->
++<script src="assets/js/includes.js"></script>
++<script src="assets/js/i18n.js"></script>
++<script src="assets/js/main.js"></script>
+ </body>
+ </html>
+diff --git a/partials/ai-assistant-cta.html b/partials/ai-assistant-cta.html
+index f8a019a..e6a89ee 100644
+--- a/partials/ai-assistant-cta.html
++++ b/partials/ai-assistant-cta.html
+@@ -1,15 +1,11 @@
+-<section class="mb-12" data-aos="fade-up">
+-  <div class="bg-white p-6 rounded-lg shadow">
+-    <div class="flex flex-col md:flex-row items-center">
+-      <div class="md:w-3/4 mb-4 md:mb-0">
+-        <h3 class="text-xl font-semibold mb-2">Want to know more?</h3>
+-        <p class="text-gray-600">Chat with my AI assistant about my experience, skills, or availability.</p>
+-      </div>
+-      <div class="md:w-1/4 text-center md:text-right">
+-        <button onclick="openChatPopup()" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors cursor-pointer">
+-          <i data-feather="message-square" class="inline mr-2"></i> Chat Now
+-        </button>
++<section class="sec" id="assistant">
++  <div class="wrap">
++    <div class="cta">
++      <div>
++        <h3 data-i18n="ctaH">Want to know more?</h3>
++        <p data-i18n="ctaP">Chat with my AI assistant about my experience, skills, or availability.</p>
+       </div>
++      <button class="btn primary" type="button" onclick="openChatPopup()" data-i18n="ctaBtn">💬&nbsp; Chat now</button>
+     </div>
+   </div>
+ </section>
+diff --git a/partials/certifications.html b/partials/certifications.html
+index 51179c6..bdcfeeb 100644
+--- a/partials/certifications.html
++++ b/partials/certifications.html
+@@ -1,115 +1,112 @@
+-<section id="certifications" class="mb-12" data-aos="fade-up">
+-  <div class="flex justify-between items-center mb-6">
+-    <h2 class="text-2xl font-bold flex items-center">
+-      <i data-feather="certificate" class="mr-3"></i> Certifications
+-    </h2>
+-    <button class="text-blue-600 hover:underline flex items-center cursor-pointer" onclick="showAllCertifications()">
+-      View all <i data-feather="arrow-right" class="ml-1"></i>
+-    </button>
+-  </div>
+-new    <!-- Cloud, AI & Automation -->
+-    <h3 class="text-xl font-semibold mb-3 flex items-center">
+-        <i data-feather="cpu" class="mr-2 text-blue-600"></i> Cloud, AI & Automation
+-    </h3>
+-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+-        <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+-            <h4 class="font-semibold text-lg mb-1">AI Automation: Build LLM Apps & AI-Agents with n8n & APIs</h4>
+-            <p class="text-gray-600">Instructor: Arnold Oberleiter</p>
+-            <span class="inline-block mt-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">100% complete</span>
+-        </div>
+-        <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+-            <h4 class="font-semibold text-lg mb-1">AZ-900: Microsoft Azure Fundamentals Exam test 2025 (480Q)</h4>
+-            <p class="text-gray-600">Instructor: Global Edtech</p>
+-            <span class="inline-block mt-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">100% complete</span>
+-        </div>
+-        <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+-            <h4 class="font-semibold text-lg mb-1">Helm 3 - Package Manager For Kubernetes</h4>
+-            <p class="text-gray-600">Instructor: Himanshu Sharma</p>
+-            <span class="inline-block mt-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">100% complete</span>
+-        </div>
+-        <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+-            <h4 class="font-semibold text-lg mb-1">The Complete Agentic AI Engineering Course (2025)</h4>
+-            <p class="text-gray-600">Instructors: Ed Donner, Ligency Team</p>
+-            <p class="text-gray-500 text-sm">Completed Sept 21, 2025</p>
+-            <span class="inline-block mt-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+-      100% complete
+-    </span>
+-        </div>
++<section class="sec" id="certifications">
++  <div class="wrap">
++    <p class="eyebrow" data-i18n="certEyebrow">Certifications &amp; Courses</p>
++    <h2 data-i18n="certH2">Always learning.</h2>
++
++    <!-- Cloud, AI & Automation -->
++    <p class="zlabel" style="margin-top:24px" data-i18n="certG1">Cloud, AI &amp; Automation</p>
++    <div class="cards3">
++      <div class="card">
++        <h3>AI Automation: Build LLM Apps &amp; AI-Agents with n8n &amp; APIs</h3>
++        <p class="sub"><span data-i18n="lblInstructor">Instructor:</span> Arnold Oberleiter</p>
++        <p class="sub" style="margin-top:8px;color:var(--ok)" data-i18n="lblDone">✓ 100% complete</p>
++      </div>
++      <div class="card">
++        <h3>AZ-900: Microsoft Azure Fundamentals Exam test 2025 (480Q)</h3>
++        <p class="sub"><span data-i18n="lblInstructor">Instructor:</span> Global Edtech</p>
++        <p class="sub" style="margin-top:8px;color:var(--ok)" data-i18n="lblDone">✓ 100% complete</p>
++      </div>
++      <div class="card">
++        <h3>Helm 3 — Package Manager For Kubernetes</h3>
++        <p class="sub"><span data-i18n="lblInstructor">Instructor:</span> Himanshu Sharma</p>
++        <p class="sub" style="margin-top:8px;color:var(--ok)" data-i18n="lblDone">✓ 100% complete</p>
++      </div>
++      <div class="card">
++        <h3>The Complete Agentic AI Engineering Course (2025)</h3>
++        <p class="sub"><span data-i18n="lblInstructors">Instructors:</span> Ed Donner, Ligency Team</p>
++        <p class="sub" data-i18n="lblDoneDate">Completed Sept 21, 2025</p>
++        <p class="sub" style="margin-top:8px;color:var(--ok)" data-i18n="lblDone">✓ 100% complete</p>
++      </div>
+     </div>
++
+     <!-- Java, Spring & Dev Productivity -->
+-  <h3 class="text-xl font-semibold mb-3 flex items-center"><i data-feather="code" class="mr-2 text-blue-600"></i> Java, Spring & Dev Productivity</h3>
+-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+-    <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+-      <h4 class="font-semibold text-lg mb-1">IntelliJ IDEA Tricks to Boost Productivity for Java Devs</h4>
+-      <p class="text-gray-600">Instructors: Tao W., James Lee, Jiarui Zhou</p>
+-      <span class="inline-block mt-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">100% complete</span>
+-    </div>
+-    <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+-      <h4 class="font-semibold text-lg mb-1">Ready for Production with Spring Boot Actuator</h4>
+-      <p class="text-gray-600">Instructors: John Thompson, Spring Ahead Code Academy</p>
+-      <span class="inline-block mt-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">100% complete</span>
+-    </div>
+-    <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+-      <h4 class="font-semibold text-lg mb-1">Escalate Scala Training - Setup Instructions</h4>
+-      <p class="text-gray-600">Instructor: Dick Wall</p>
+-      <span class="inline-block mt-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">100% complete</span>
+-    </div>
+-  </div>
+-  <!-- Data & SQL -->
+-  <h3 class="text-xl font-semibold mb-3 flex items-center"><i data-feather="database" class="mr-2 text-blue-600"></i> Data & SQL</h3>
+-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+-    <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+-      <h4 class="font-semibold text-lg mb-1">SQL Programming Basics</h4>
+-      <p class="text-gray-600">Instructor: Global Academy</p>
+-      <span class="inline-block mt-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">100% complete</span>
+-    </div>
+-  </div>
+-  <!-- Languages & Soft Skills -->
+-  <h3 class="text-xl font-semibold mb-3 flex items-center"><i data-feather="message-circle" class="mr-2 text-blue-600"></i> Languages & Soft Skills</h3>
+-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+-    <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+-      <h4 class="font-semibold text-lg mb-1">Communication & Social Skills</h4>
+-      <p class="text-gray-600">Instructor: MicroLearn Ltd</p>
+-      <span class="inline-block mt-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">100% complete</span>
+-    </div>
+-    <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+-      <h4 class="font-semibold text-lg mb-1">Remember the German Articles der, die, das (Mini-Course)</h4>
+-      <p class="text-gray-600">Instructor: Anja Winter</p>
+-      <span class="inline-block mt-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">100% complete</span>
+-    </div>
+-    <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+-      <h4 class="font-semibold text-lg mb-1">Mental Health First Aid Skills</h4>
+-      <p class="text-gray-600">Instructor: Mark Paddock</p>
+-      <span class="inline-block mt-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">100% complete</span>
++    <p class="zlabel" style="margin-top:28px" data-i18n="certG2">Java, Spring &amp; Dev Productivity</p>
++    <div class="cards3">
++      <div class="card">
++        <h3>IntelliJ IDEA Tricks to Boost Productivity for Java Devs</h3>
++        <p class="sub"><span data-i18n="lblInstructors">Instructors:</span> Tao W., James Lee, Jiarui Zhou</p>
++        <p class="sub" style="margin-top:8px;color:var(--ok)" data-i18n="lblDone">✓ 100% complete</p>
++      </div>
++      <div class="card">
++        <h3>Ready for Production with Spring Boot Actuator</h3>
++        <p class="sub"><span data-i18n="lblInstructors">Instructors:</span> John Thompson, Spring Ahead Code Academy</p>
++        <p class="sub" style="margin-top:8px;color:var(--ok)" data-i18n="lblDone">✓ 100% complete</p>
++      </div>
++      <div class="card">
++        <h3>Escalate Scala Training — Setup Instructions</h3>
++        <p class="sub"><span data-i18n="lblInstructor">Instructor:</span> Dick Wall</p>
++        <p class="sub" style="margin-top:8px;color:var(--ok)" data-i18n="lblDone">✓ 100% complete</p>
++      </div>
+     </div>
+-    <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+-      <h4 class="font-semibold text-lg mb-1">Mastering Success: Achieve Happiness, Wealth & Health</h4>
+-      <p class="text-gray-600">Instructors: Chris Croft, CRFT Productions</p>
+-      <span class="inline-block mt-2 text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">98% complete</span>
+-    </div>
+-    <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+-      <h4 class="font-semibold text-lg mb-1">First Aid</h4>
+-      <p class="text-gray-600">Instructor: Arthur Jackson</p>
+-      <span class="inline-block mt-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">100% complete</span>
+-    </div>
+-  </div>
+-  <!-- Legacy Sun Certifications -->
+-  <h3 class="text-xl font-semibold mb-3 flex items-center"><i data-feather="award" class="mr-2 text-blue-600"></i> Legacy Sun Certifications</h3>
+-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+-    <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+-      <h4 class="font-semibold text-lg mb-1">Sun Certified Business Component Developer (SCBCD)</h4>
+-      <p class="text-gray-600">Issuer: Sun Microsystems</p>
+-      <p class="text-gray-500 text-sm">Issued Jan 2006</p>
++
++    <!-- Data & SQL -->
++    <p class="zlabel" style="margin-top:28px" data-i18n="certG3">Data &amp; SQL</p>
++    <div class="cards3">
++      <div class="card">
++        <h3>SQL Programming Basics</h3>
++        <p class="sub"><span data-i18n="lblInstructor">Instructor:</span> Global Academy</p>
++        <p class="sub" style="margin-top:8px;color:var(--ok)" data-i18n="lblDone">✓ 100% complete</p>
++      </div>
+     </div>
+-    <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+-      <h4 class="font-semibold text-lg mb-1">Sun Certified Enterprise Architect (SCEA1)</h4>
+-      <p class="text-gray-600">Issuer: Sun Microsystems</p>
+-      <p class="text-gray-500 text-sm">Issued Jan 2006</p>
++
++    <!-- Languages & Soft Skills -->
++    <p class="zlabel" style="margin-top:28px" data-i18n="certG4">Languages &amp; Soft Skills</p>
++    <div class="cards3">
++      <div class="card">
++        <h3>Communication &amp; Social Skills</h3>
++        <p class="sub"><span data-i18n="lblInstructor">Instructor:</span> MicroLearn Ltd</p>
++        <p class="sub" style="margin-top:8px;color:var(--ok)" data-i18n="lblDone">✓ 100% complete</p>
++      </div>
++      <div class="card">
++        <h3>Remember the German Articles der, die, das (Mini-Course)</h3>
++        <p class="sub"><span data-i18n="lblInstructor">Instructor:</span> Anja Winter</p>
++        <p class="sub" style="margin-top:8px;color:var(--ok)" data-i18n="lblDone">✓ 100% complete</p>
++      </div>
++      <div class="card">
++        <h3>Mental Health First Aid Skills</h3>
++        <p class="sub"><span data-i18n="lblInstructor">Instructor:</span> Mark Paddock</p>
++        <p class="sub" style="margin-top:8px;color:var(--ok)" data-i18n="lblDone">✓ 100% complete</p>
++      </div>
++      <div class="card">
++        <h3>Mastering Success: Achieve Happiness, Wealth &amp; Health</h3>
++        <p class="sub"><span data-i18n="lblInstructors">Instructors:</span> Chris Croft, CRFT Productions</p>
++        <p class="sub" style="margin-top:8px" data-i18n="lblDone98">98% complete</p>
++      </div>
++      <div class="card">
++        <h3>First Aid</h3>
++        <p class="sub"><span data-i18n="lblInstructor">Instructor:</span> Arthur Jackson</p>
++        <p class="sub" style="margin-top:8px;color:var(--ok)" data-i18n="lblDone">✓ 100% complete</p>
++      </div>
+     </div>
+-    <div class="bg-white p-5 rounded-lg shadow hover:shadow-md transition-shadow">
+-      <h4 class="font-semibold text-lg mb-1">Sun Certified Java Programmer (SCJP)</h4>
+-      <p class="text-gray-600">Issuer: Sun Microsystems</p>
+-      <p class="text-gray-500 text-sm">Issued Jan 2006</p>
++
++    <!-- Legacy Sun Certifications -->
++    <p class="zlabel" style="margin-top:28px" data-i18n="certG5">Sun Certifications (since 2006)</p>
++    <div class="cards3">
++      <div class="card">
++        <h3>Sun Certified Enterprise Architect (SCEA)</h3>
++        <p class="sub"><span data-i18n="lblIssuer">Issuer:</span> Sun Microsystems</p>
++        <p class="sub" data-i18n="lblIssued2006">Issued Jan 2006</p>
++      </div>
++      <div class="card">
++        <h3>Sun Certified Business Component Developer (SCBCD)</h3>
++        <p class="sub"><span data-i18n="lblIssuer">Issuer:</span> Sun Microsystems</p>
++        <p class="sub" data-i18n="lblIssued2006">Issued Jan 2006</p>
++      </div>
++      <div class="card">
++        <h3>Sun Certified Java Programmer (SCJP)</h3>
++        <p class="sub"><span data-i18n="lblIssuer">Issuer:</span> Sun Microsystems</p>
++        <p class="sub" data-i18n="lblIssued2006">Issued Jan 2006</p>
++      </div>
+     </div>
+   </div>
+-</section>
+\ No newline at end of file
++</section>
+diff --git a/partials/chat-popup.html b/partials/chat-popup.html
+index 1a3a093..393a347 100644
+--- a/partials/chat-popup.html
++++ b/partials/chat-popup.html
+@@ -1,13 +1,9 @@
+-<div id="chatPopup" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+-  <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl h-5/6 flex flex-col">
+-    <div class="flex justify-between items-center border-b p-4">
+-      <h3 class="text-lg font-semibold">Chat with Janaka's AI Assistant</h3>
+-      <button onclick="closeChatPopup()" class="text-gray-500 hover:text-gray-700">
+-        <i data-feather="x"></i>
+-      </button>
+-    </div>
+-    <div class="flex-1">
+-      <iframe src="https://janaka2.github.io/pa/" class="w-full h-full border-0" id="chatIframe"></iframe>
++<div id="chatPopup" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="chatPopupTitle">
++  <div class="modal-card">
++    <div class="modal-head">
++      <h3 id="chatPopupTitle" data-i18n="chatTitle">Chat with Janaka’s AI Assistant</h3>
++      <button class="modal-close" type="button" onclick="closeChatPopup()" aria-label="Close chat">✕</button>
+     </div>
++    <iframe data-src="https://janaka2.github.io/pa/" title="Janaka's AI assistant chat" id="chatIframe"></iframe>
+   </div>
+ </div>
+diff --git a/partials/contact-skills-languages.html b/partials/contact-skills-languages.html
+index 230e617..046d2b2 100644
+--- a/partials/contact-skills-languages.html
++++ b/partials/contact-skills-languages.html
+@@ -1,74 +1,40 @@
+-<section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16" data-aos="fade-up">
+-  <!-- Contact -->
+-  <div class="bg-white p-8 rounded-xl shadow border border-gray-100">
+-    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+-      <i data-feather="mail" class="mr-3 text-blue-600"></i> Contact
+-    </h3>
+-    <ul class="space-y-4">
+-      <li class="flex items-center">
+-        <i data-feather="phone" class="mr-4 text-blue-600 w-5 h-5"></i>
+-        <a href="tel:+41762248445" class="text-lg hover:underline">+41 76 224 8445</a>
+-      </li>
+-      <li class="flex items-center">
+-        <i data-feather="mail" class="mr-4 text-blue-600 w-5 h-5"></i>
+-        <a href="mailto:janaka2@gmail.com" class="text-lg hover:underline">janaka2@gmail.com</a>
+-      </li>
+-      <li class="flex items-center">
+-        <i data-feather="linkedin" class="mr-4 text-blue-600 w-5 h-5"></i>
+-        <a href="https://linkedin.com/in/janakapremathilaka" target="_blank" class="text-lg hover:underline">in/janakapremathilaka</a>
+-      </li>
+-      <li class="flex items-center">
+-        <i data-feather="globe" class="mr-4 text-blue-600 w-5 h-5"></i>
+-        <a href="https://javawithme.wordpress.com" target="_blank" class="text-lg hover:underline">javawithme.wordpress.com</a>
+-      </li>
+-      <li class="flex items-center">
+-        <i data-feather="github" class="mr-4 text-blue-600 w-5 h-5"></i>
+-        <a href="https://github.com/Janaka2" target="_blank" class="text-lg hover:underline">github.com/Janaka2</a>
+-      </li>
+-    </ul>
+-  </div>
+-
+-  <!-- Top Skills -->
+-  <div class="bg-white p-8 rounded-xl shadow border border-gray-100">
+-    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+-      <i data-feather="award" class="mr-3 text-blue-600"></i> Top Skills
+-    </h3>
+-    <div class="space-y-5">
+-      <div>
+-        <div class="flex justify-between mb-2">
+-          <span class="text-lg">Creativity & Innovation</span>
+-          <span class="text-blue-600 text-lg">95%</span>
+-        </div>
+-        <div class="skill-meter" style="--percentage: 95%"></div>
++<section class="sec" id="profile-cards">
++  <div class="wrap">
++    <div class="cards3">
++      <!-- Contact -->
++      <div class="card">
++        <p class="zlabel" data-i18n="cContactH">Contact</p>
++        <ul class="clist">
++          <li><span class="k" data-i18n="cPhone">Phone</span><a href="tel:+41762248445">+41 76 224 84 45</a></li>
++          <li><span class="k">Email</span><a href="mailto:janaka2@gmail.com">janaka2@gmail.com</a></li>
++          <li><span class="k">LinkedIn</span><a href="https://linkedin.com/in/janakapremathilaka" target="_blank" rel="noopener">in/janakapremathilaka</a></li>
++          <li><span class="k">Blog</span><a href="https://javawithme.wordpress.com" target="_blank" rel="noopener">javawithme.wordpress.com</a></li>
++          <li><span class="k">GitHub</span><a href="https://github.com/Janaka2" target="_blank" rel="noopener">github.com/Janaka2</a></li>
++        </ul>
+       </div>
+-      <div>
+-        <div class="flex justify-between mb-2">
+-          <span class="text-lg">Architecture</span>
+-          <span class="text-blue-600 text-lg">90%</span>
+-        </div>
+-        <div class="skill-meter" style="--percentage: 90%"></div>
++
++      <!-- Core skills -->
++      <div class="card">
++        <p class="zlabel" data-i18n="cSkillsH">Core skills</p>
++        <p class="sub" data-i18n="cSkG1">Engineering</p>
++        <div class="chips" style="margin:8px 0 14px"><span class="chip">Java 11–17</span><span class="chip">Spring Boot</span><span class="chip">Kafka</span><span class="chip">Oracle</span><span class="chip">React</span></div>
++        <p class="sub" data-i18n="cSkG2">AI / LLM engineering</p>
++        <div class="chips" style="margin:8px 0 14px" data-i18n="cSkC2"><span class="chip">LangChain</span><span class="chip">LlamaIndex</span><span class="chip">RAG / CAG</span><span class="chip">agentic workflows</span><span class="chip">local LLMs</span></div>
++        <p class="sub" data-i18n="cSkG3">DevOps &amp; cloud</p>
++        <div class="chips" style="margin-top:8px"><span class="chip">Kubernetes / OpenShift</span><span class="chip">Docker</span><span class="chip">Jenkins</span><span class="chip">CI/CD</span></div>
+       </div>
+-      <div>
+-        <div class="flex justify-between mb-2">
+-          <span class="text-lg">Contract Development</span>
+-          <span class="text-blue-600 text-lg">85%</span>
++
++      <!-- Languages -->
++      <div class="card">
++        <p class="zlabel" data-i18n="cLangsH">Languages</p>
++        <div class="langs">
++          <div class="lang"><span class="nm" data-i18n="lgEnN">English</span><span class="meter" aria-hidden="true"><span class="seg f"></span><span class="seg f"></span><span class="seg f"></span><span class="seg f"></span><span class="seg f"></span></span><span class="lvl" data-i18n="lgEnL">Full professional · <b>C1/C2</b></span></div>
++          <div class="lang"><span class="nm" data-i18n="lgDeN">German</span><span class="meter" aria-hidden="true"><span class="seg f"></span><span class="seg f"></span><span class="seg f"></span><span class="seg"></span><span class="seg"></span></span><span class="lvl" data-i18n="lgDeL">Intermediate · <b>B1 ↗ improving</b></span></div>
++          <div class="lang"><span class="nm" data-i18n="lgSiN">Sinhalese</span><span class="meter" aria-hidden="true"><span class="seg f"></span><span class="seg f"></span><span class="seg f"></span><span class="seg f"></span><span class="seg f"></span></span><span class="lvl" data-i18n="lgSiL">Native</span></div>
++          <div class="lang"><span class="nm" data-i18n="lgFrN">French</span><span class="meter" aria-hidden="true"><span class="seg f"></span><span class="seg f"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></span><span class="lvl" data-i18n="lgFrL">Basic knowledge</span></div>
++          <div class="lang"><span class="nm" data-i18n="lgNlN">Dutch</span><span class="meter" aria-hidden="true"><span class="seg f"></span><span class="seg f"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></span><span class="lvl" data-i18n="lgNlL">Basic knowledge</span></div>
+         </div>
+-        <div class="skill-meter" style="--percentage: 85%"></div>
+       </div>
+     </div>
+   </div>
+-
+-  <!-- Languages -->
+-  <div class="bg-white p-8 rounded-xl shadow border border-gray-100">
+-    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+-      <i data-feather="globe" class="mr-3 text-blue-600"></i> Languages
+-    </h3>
+-    <div class="space-y-4">
+-      <div class="flex justify-between"><span class="text-lg">English</span><span class="text-blue-600 text-lg">Professional</span></div>
+-      <div class="flex justify-between"><span class="text-lg">Dutch</span><span class="text-blue-600 text-lg">Elementary</span></div>
+-      <div class="flex justify-between"><span class="text-lg">French</span><span class="text-blue-600 text-lg">Elementary</span></div>
+-      <div class="flex justify-between"><span class="text-lg">German</span><span class="text-blue-600 text-lg">A2</span></div>
+-      <div class="flex justify-between"><span class="text-lg">Sinhalese</span><span class="text-blue-600 text-lg">Native</span></div>
+-    </div>
+-  </div>
+ </section>
+diff --git a/partials/education.html b/partials/education.html
+index 72b46e2..1216f5e 100644
+--- a/partials/education.html
++++ b/partials/education.html
+@@ -1,27 +1,23 @@
+-<section id="education" class="mb-12" data-aos="fade-up">
+-  <div class="flex justify-between items-center mb-6">
+-    <h2 class="text-2xl font-bold flex items-center">
+-      <i data-feather="book" class="mr-3"></i> Education
+-    </h2>
+-    <button class="text-blue-600 hover:underline flex items-center cursor-pointer" onclick="showEducationDetails()">
+-      Details <i data-feather="arrow-right" class="ml-1"></i>
+-    </button>
+-  </div>
+-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+-    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+-      <h3 class="text-xl font-semibold mb-2">University of Sri Jayewardenepura</h3>
+-      <p class="text-gray-700 mb-1">BSc, Computer Science, Statistics, Mathematics</p>
+-      <p class="text-gray-500">1999 - 2003</p>
+-    </div>
+-    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+-      <h3 class="text-xl font-semibold mb-2">University of Colombo</h3>
+-      <p class="text-gray-700 mb-1">BIT (Bachelor of Information Technology)</p>
+-      <p class="text-gray-500">1999 - 2004 (6 semesters completed)</p>
+-    </div>
+-    <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+-      <h3 class="text-xl font-semibold mb-2">University of Moratuwa</h3>
+-      <p class="text-gray-700 mb-1">Masters in Computer Engineering</p>
+-      <p class="text-gray-500">2007 - Present (In Progress)</p>
++<section class="sec" id="education">
++  <div class="wrap">
++    <p class="eyebrow" data-i18n="eduEyebrow">Education</p>
++    <h2 data-i18n="eduH2">Credentials.</h2>
++    <div class="cards3">
++      <div class="card">
++        <h3>University of Sri Jayewardenepura</h3>
++        <p data-i18n="edu1d">BSc — Computer Science, Statistics &amp; Mathematics</p>
++        <p class="sub">1999 — 2003</p>
++      </div>
++      <div class="card">
++        <h3>University of Colombo</h3>
++        <p data-i18n="edu2d">BIT — Bachelor of Information Technology</p>
++        <p class="sub" data-i18n="edu2s">1999 — 2004 · 6 semesters completed</p>
++      </div>
++      <div class="card">
++        <h3>University of Moratuwa</h3>
++        <p data-i18n="edu3d">Masters in Computer Engineering</p>
++        <p class="sub" data-i18n="edu3s">2007 — present · in progress</p>
++      </div>
+     </div>
+   </div>
+ </section>
+diff --git a/partials/experience.html b/partials/experience.html
+index 148d48c..eff13d8 100644
+--- a/partials/experience.html
++++ b/partials/experience.html
+@@ -1,141 +1,96 @@
+-<section id="experience" class="mb-12" data-aos="fade-up">
+-  <div class="flex justify-between items-center mb-6">
+-    <h2 class="text-2xl font-bold flex items-center">
+-      <i data-feather="briefcase" class="mr-3"></i> Experience
+-    </h2>
+-    <button class="text-blue-600 hover:underline flex items-center cursor-pointer" onclick="showWorkHistory()">
+-      More details <i data-feather="arrow-right" class="ml-1"></i>
+-    </button>
+-  </div>
+-
+-  <div class="relative">
+-    <div class="border-l-2 border-blue-200 pl-8 space-y-8">
+-      <!-- UBS -->
+-      <div class="timeline-item relative pl-4">
+-        <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+-          <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+-            <h3 class="text-xl font-semibold">UBS</h3>
+-            <span class="text-blue-600">Jan 2018 - Present</span>
+-          </div>
+-          <h4 class="text-lg text-gray-700 mb-3">Sr. Full-Stack Solution Engineer</h4>
+-            <p class="text-gray-700 mb-4">
+-                As a Senior and Lead Developer, I took full responsibility for six complex enterprise applications during the highly challenging
+-                <strong>Credit Suisse to UBS merger</strong>. This role demanded exceptional technical leadership, calm decision-making, and
+-                a deep commitment to ensuring uninterrupted business operations under extreme pressure.
+-            </p>
+-
+-            <p class="text-gray-700 mb-4">
+-                I led teams through <strong>multi-platform migrations</strong> and <strong>technology decommissioning</strong>, maintaining system
+-                stability while resolving numerous high-priority production incidents. My ability to stay composed, act decisively, and deliver
+-                timely solutions helped the business remain confident and calm throughout the transition.
+-            </p>
+-
+-            <p class="text-gray-700 mb-4">
+-                This period truly tested my <strong>technical depth and leadership mindset</strong> — managing people, systems, and stress —
+-                while achieving zero major interruptions and ensuring long-term system reliability.
+-            </p>
+-
+-            <h5 class="text-md font-semibold text-gray-800 mt-6 mb-2">AI & OpenAI SDK Expertise</h5>
+-            <p class="text-gray-700 mb-4">
+-                Fully up to date with the <strong>OpenAI SDK v0.33 (latest release)</strong> and a proven expert in <strong>agentic AI development</strong>,
+-                including multi-tool orchestration, guardrails, scalable distribution, and <strong>Model Context Protocol (MCP)</strong>.
+-                Designed and deployed multiple <strong>RAG-powered enterprise applications</strong> in Python, demonstrating deep conceptual
+-                and hands-on mastery of modern AI frameworks and architectures.
+-            </p>
+-          <div class="mt-4 flex flex-wrap gap-2">
+-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Java 17</span>
+-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Spring Boot</span>
+-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Oracle SQL</span>
+-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">DevOps</span>
+-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Kafka</span>
+-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">React</span>
+-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">GraphQL</span>
+-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Incident Management</span>
+-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Leadership</span>
+-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Post-Merger Integration</span>
+-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">LLMs / Agentic RAG</span>
+-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">OpenAI SDK</span>
+-          </div>
+-        </div>
+-      </div>
+-
+-      <!-- Credit Suisse -->
+-      <div class="timeline-item relative pl-4">
+-        <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+-          <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+-            <h3 class="text-xl font-semibold">Credit Suisse</h3>
+-            <span class="text-blue-600">May 2019 - Jan 2024</span>
+-          </div>
+-          <h4 class="text-lg text-gray-700 mb-3">Sr. Full-Stack Solution Engineer</h4>
+-          <ul class="list-disc pl-5 space-y-2 text-gray-600">
+-            <li>Developed high-performance Master Data Management Tool from scratch</li>
+-            <li>Created web application for building dynamic consumer endpoints</li>
+-            <li>Implemented multiple case management tools with streaming integration</li>
+-          </ul>
+-          <div class="mt-4 flex flex-wrap gap-2">
+-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">React</span>
+-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Java 17</span>
+-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Kafka</span>
+-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">GraphQL</span>
+-          </div>
+-        </div>
+-      </div>
+-
+-      <!-- European Commission -->
+-      <div class="timeline-item relative pl-4">
+-        <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
+-          <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+-            <h3 class="text-xl font-semibold">European Commission</h3>
+-            <span class="text-blue-600">Feb 2016 - Jan 2018</span>
+-          </div>
+-          <h4 class="text-lg text-gray-700 mb-3">Sr. Full-Stack Java/JEE Developer</h4>
+-          <ul class="list-disc pl-5 space-y-2 text-gray-600">
+-            <li>Designed and developed an e-procurement system that contributed to <b>40%</b> of the department’s total revenue.</li>
+-            <li>Developed microservices using enterprise integration patterns</li>
+-            <li>Implemented JBPM workflows for various business processes</li>
+-          </ul>
+-          <div class="mt-4 flex flex-wrap gap-2">
+-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">JEE</span>
+-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Angular</span>
+-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">JBPM</span>
+-            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">SOA</span>
+-          </div>
+-        </div>
+-      </div>
++<section class="sec" id="experience">
++  <div class="wrap">
++    <p class="eyebrow" data-i18n="expEyebrow">Experience</p>
++    <div class="sec-head">
++      <h2 data-i18n="expH2">22 years, production-grade.</h2>
++      <button class="linkbtn" type="button" onclick="showWorkHistory()" data-i18n="expMoreBtn">More details ↓</button>
+     </div>
+-  </div>
+ 
+-  <!-- Work History Collapsible -->
+-  <div class="mt-12 bg-white p-8 rounded-xl shadow border border-gray-100">
+-    <div class="flex justify-between items-center mb-6 cursor-pointer" onclick="toggleWorkHistory()">
+-      <h3 class="text-2xl font-semibold flex items-center">
+-        <i data-feather="clock" class="mr-3 text-blue-600"></i> Work History (Chronological)
+-      </h3>
+-      <i data-feather="chevron-down" id="workHistoryChevron" class="text-blue-600 transition-transform"></i>
+-    </div>
+-    <div class="collapsible-content" id="workHistoryContent">
+-      <div class="space-y-6">
+-        <div class="mb-6 text-gray-700 leading-relaxed text-lg bg-blue-50 p-6 rounded-lg shadow-sm">
+-          <p>
++    <ul class="tl">
++      <li class="live">
++        <p class="when" data-i18n="x1when"><b>01.2024 — present</b> · Zurich, Switzerland</p>
++        <h3>Senior Full-Stack Solution Engineer (Lead)</h3>
++        <p class="org">UBS / Cognizant</p>
++        <ul class="points" data-i18n="x1pts">
++          <li>Full ownership of six enterprise applications through the Credit Suisse–UBS merger — system stability and zero operational interruptions under extreme pressure.</li>
++          <li>Led teams through multi-platform migrations and technology decommissioning, resolving high-priority production incidents with calm, decisive execution.</li>
++          <li>Led the application-archiving initiative to 100% on-time delivery under audit-grade deadlines; built Linux + Oracle CLI pipelines for multi-gigabyte regulated data feeds.</li>
++          <li>Designed and shipped LLM and agentic-RAG automations for internal banking workflows, integrated with existing Java services — including local Llama 3 inference for data that cannot leave the bank’s perimeter.</li>
++          <li>Hands-on with the OpenAI Agents SDK and Model Context Protocol (MCP): multi-tool orchestration, guardrails, and RAG-powered enterprise applications in Python.</li>
++          <li>Mentor junior engineers, lead code reviews, carry the on-call (Pikett) pager.</li>
++        </ul>
++        <div class="chips"><span class="chip">Java 17</span><span class="chip">Spring Boot</span><span class="chip">Kafka</span><span class="chip">Oracle</span><span class="chip">OpenShift / Kubernetes</span><span class="chip">React</span><span class="chip">GraphQL</span><span class="chip">Jenkins</span><span class="chip">n8n</span><span class="chip">LangChain</span><span class="chip">LlamaIndex</span><span class="chip">RAG / CAG</span><span class="chip">OpenAI Agents SDK</span><span class="chip">MCP</span></div>
++      </li>
++      <li>
++        <p class="when" data-i18n="x2when"><b>05.2019 — 01.2024</b> · Zurich, Switzerland</p>
++        <h3>IT Solution Developer</h3>
++        <p class="org">Credit Suisse / Cognizant</p>
++        <ul class="points" data-i18n="x2pts">
++          <li>100% ownership of the mission-critical Master Data Management tool, built from scratch — the bank’s golden data source for search and reporting.</li>
++          <li>Architected and delivered three cloud-native applications end-to-end (Spring Boot, React, Oracle, microservices), including a web application for dynamic consumer endpoints and case-management tools with streaming integration.</li>
++          <li>Low-latency Front-Office FX trading platform (Java 11–17): ≈20% responsiveness gain through multithreading and memory tuning.</li>
++          <li>Built the team’s CI/CD, Kubernetes/Docker and observability pipelines; championed TDD with JUnit and Mockito.</li>
++        </ul>
++        <div class="chips"><span class="chip">Java 11–17</span><span class="chip">Spring Boot</span><span class="chip">React</span><span class="chip">GraphQL</span><span class="chip">Kafka</span><span class="chip">Liquibase</span><span class="chip">Oracle / PL-SQL</span><span class="chip">OpenShift</span><span class="chip">Helm</span><span class="chip">Splunk</span><span class="chip">Grafana</span></div>
++      </li>
++      <li>
++        <p class="when" data-i18n="x3when"><b>01.2018 — 05.2019</b> · Zurich, Switzerland</p>
++        <h3>IT Solution Development Specialist</h3>
++        <p class="org">UBS / Cognizant</p>
++        <ul class="points" data-i18n="x3pts">
++          <li>Modernized 20+ legacy components into Spring Boot microservices with robust solution architectures.</li>
++          <li>Automated Jenkins delivery pipelines; migrated the codebase from SVN to Git.</li>
++          <li>Strengthened testing with JUnit, integration tests and Cucumber BDD.</li>
++        </ul>
++      </li>
++      <li>
++        <p class="when" data-i18n="x4when"><b>06.2011 — 01.2018</b> · Brussels, Belgium</p>
++        <h3>Senior Full-Stack Java/JEE Developer</h3>
++        <p class="org">European Commission (DIGIT Division)</p>
++        <ul class="points" data-i18n="x4pts">
++          <li>Engineered and maintained the EU’s core e-procurement system — mission-critical, multi-language, public-sector — over a 6.5-year tenure; the system contributed about 40% of the department’s total revenue.</li>
++          <li>Distributed integration flows with Spring Integration; JBPM workflows for approvals, escalations and audit trails.</li>
++          <li>Full-stack delivery (Angular, Spring/Hibernate, EJB3, Oracle, WebLogic); release ownership and L3 production support.</li>
++        </ul>
++        <div class="chips"><span class="chip">JEE</span><span class="chip">Angular</span><span class="chip">JBPM</span><span class="chip">SOA</span></div>
++      </li>
++      <li>
++        <p class="when" data-i18n="x5when"><b>05.2004 — 06.2011</b> · Belgium &amp; Sri Lanka</p>
++        <h3>Senior Java/JEE Consultant &amp; Engineer</h3>
++        <p class="org">Johnson &amp; Johnson · Nokia Siemens · Union Bank of Colombo · and others</p>
++        <ul class="points" data-i18n="x5pts">
++          <li>Core technical consultant across healthcare, telecom, banking and e-commerce — enterprise-grade Java/JEE solutions.</li>
++          <li>Union Bank of Colombo: core banking modules — loan system, lease schedules, cheque and passbook printing (EJB2, JSP, DB2 on AS/400).</li>
++          <li>Modernized architectures in Agile/Scrum settings; SOAP/REST integration; Oracle/MySQL optimization.</li>
++        </ul>
++      </li>
++    </ul>
++
++    <!-- Work History Collapsible -->
++    <div class="fold" id="workHistory">
++      <button class="fold-head" type="button" onclick="toggleWorkHistory()" aria-expanded="false" aria-controls="workHistoryContent">
++        <h3 data-i18n="whH">Work history — the full story</h3>
++        <svg id="workHistoryChevron" class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
++      </button>
++      <div class="collapsible-content" id="workHistoryContent">
++        <div class="fold-body">
++          <p data-i18n="whIntro">
+             After beginning my career in Sri Lanka, I spent over a decade in Belgium working with
+             <strong>ABSI</strong>, <strong>Roomsnet.com</strong>, and <strong>Simbios</strong> on projects
+             for clients including <strong>Van Genechten Packaging</strong>, <strong>Nokia Siemens Networks</strong>,
+-            and <strong>Johnson & Johnson</strong>. This period gave me broad exposure across healthcare,
++            and <strong>Johnson &amp; Johnson</strong>. This period gave me broad exposure across healthcare,
+             hospitality, and enterprise IT, before I joined the <strong>European Commission – DIGIT Division</strong>
+             to deliver large-scale e-procurement systems. Since 2018, I’ve continued my journey in Switzerland,
+             leading full-stack engineering and AI integration at <strong>Credit Suisse</strong> and <strong>UBS</strong>.
+           </p>
+-
+-          <button id="toggleLongHistory"
+-                  class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+-            Read more
+-          </button>
+-
+-          <div id="longHistory" class="hidden mt-6 italic text-gray-700 bg-white border-l-4 border-blue-300 p-5 rounded-md shadow-inner space-y-4">
+-            <p>My journey began in Sri Lanka, where I started as a Computer Science instructor and soon entered the banking world at Union Bank. In 2006, I moved to Belgium, which became a transformative decade of growth in my career.</p>
+-            <p>I worked with <strong>ABSI</strong> in the healthcare sector, later joined <strong>Roomsnet.com</strong> as a Java/JEE Developer and Technical Lead in the hospitality domain, and collaborated with <strong>Simbios</strong> on projects for clients such as <strong>Van Genechten Packaging</strong>, <strong>Nokia Siemens Networks</strong>, <strong>Johnson & Johnson</strong>, and <strong>Centric IT Solutions</strong>.</p>
+-            <p>In 2011, I joined the <strong>European Commission – DIGIT Division</strong>, leading development of robust e-procurement systems and complex workflows for the EU.</p>
+-            <p>Since 2018, Switzerland has been my base — with <strong>UBS</strong> and <strong>Credit Suisse</strong> at the center of my journey, where I’ve focused on high-performance full-stack engineering, system migrations, and the integration of AI-driven automation.</p>
++          <p style="margin-top:16px">
++            <button id="toggleLongHistory" class="btn" type="button">Read more</button>
++          </p>
++          <div id="longHistory" class="hidden">
++            <p data-i18n="whL1">My journey began in Sri Lanka, where I started as a Computer Science instructor and soon entered the banking world at Union Bank. In 2006, I moved to Belgium, which became a transformative decade of growth in my career.</p>
++            <p data-i18n="whL2">I worked with <strong>ABSI</strong> in the healthcare sector, later joined <strong>Roomsnet.com</strong> as a Java/JEE Developer and Technical Lead in the hospitality domain, and collaborated with <strong>Simbios</strong> on projects for clients such as <strong>Van Genechten Packaging</strong>, <strong>Nokia Siemens Networks</strong>, <strong>Johnson &amp; Johnson</strong>, and <strong>Centric IT Solutions</strong>.</p>
++            <p data-i18n="whL3">In 2011, I joined the <strong>European Commission – DIGIT Division</strong>, leading development of robust e-procurement systems and complex workflows for the EU.</p>
++            <p data-i18n="whL4">Since 2018, Switzerland has been my base — with <strong>UBS</strong> and <strong>Credit Suisse</strong> at the center of my journey, where I’ve focused on high-performance full-stack engineering, system migrations, and the integration of AI-driven automation.</p>
+           </div>
+         </div>
+       </div>
+diff --git a/partials/footer.html b/partials/footer.html
+index cff08a0..a865f5d 100644
+--- a/partials/footer.html
++++ b/partials/footer.html
+@@ -1,67 +1,34 @@
+-<!-- Footer -->
+-<footer class="bg-transparent py-8">
+-    <div class="container mx-auto px-6">
+-        <!-- top row: name + socials (unchanged look) -->
+-        <div class="flex flex-col md:flex-row justify-between items-center">
+-            <div class="mb-4 md:mb-0 text-center md:text-left">
+-                <h2 class="text-xl font-bold">Janaka Premathilaka</h2>
+-                <p class="text-gray-400">Senior Full-Stack Java Engineer</p>
+-            </div>
+-
+-            <div class="flex items-center space-x-4">
+-                <a href="https://linkedin.com/in/janakapremathilaka" target="_blank" class="hover:text-blue-400 transition-colors" aria-label="LinkedIn"><i data-feather="linkedin"></i></a>
+-                <a href="https://github.com/Janaka2" target="_blank" class="hover:text-blue-400 transition-colors" aria-label="GitHub"><i data-feather="github"></i></a>
+-                <a href="mailto:janaka2@gmail.com" class="hover:text-blue-400 transition-colors" aria-label="Email"><i data-feather="mail"></i></a>
+-                <a href="https://javawithme.wordpress.com" target="_blank" class="hover:text-blue-400 transition-colors" aria-label="WordPress"><i data-feather="globe"></i></a>
+-
+-                <!-- WhatsApp -->
+-                <a href="https://wa.me/41762248445?text=Hi%20Janaka%2C%20I%20saw%20your%20portfolio.%20Let%27s%20chat!"
+-                   target="_blank" rel="noopener"
+-                   class="hover:text-green-400 transition-colors"
+-                   aria-label="WhatsApp" title="Chat on WhatsApp">
+-                    <svg viewBox="0 0 32 32" class="w-6 h-6" fill="currentColor" aria-hidden="true">
+-                        <path d="M19.1 17.2c-.3-.2-1.7-.8-1.9-.9-.2-.1-.4-.1-.6.1l-.9 1.1c-.2.2-.3.2-.6.1-1.2-.6-2.2-1.4-3-2.4-.3-.3-.5-.7-.2-1.1l.9-1.1c.1-.2.2-.4.1-.6-.1-.3-.6-1.6-.8-2.1-.2-.5-.4-.5-.6-.5h-1.2c-.4 0-.8.1-1.1.4-.5.5-1 1.2-1 2.7 0 1.5 1.1 3 1.3 3.3 1.5 2.1 3.6 3.8 5.9 4.7.6.3 1.3.5 1.9.6.8.2 1.6.2 2.3.1.7-.1 2.1-.8 2.4-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.5zM16 3C9.9 3 5 7.9 5 14c0 1.8.5 3.6 1.4 5.1L5 28l9-1.3c1.5.8 3.2 1.2 4.9 1.2 6.1 0 11-4.9 11-11S22.1 3 16 3z"/>
+-                    </svg>
+-                </a>
+-            </div>
+-        </div>
++<section class="contact" id="contact">
++  <div class="wrap">
++    <p class="eyebrow" data-i18n="ctEyebrow">Contact</p>
++    <h2 data-i18n="ctH2">My inbox is open.</h2>
++    <p class="lede" data-i18n="ctLede">If banking-grade engineering plus practical AI is the problem on your desk — in Switzerland, or remote/hybrid across Europe — let’s talk.</p>
++    <p class="deline" data-i18n="ctPS">PS — Schreiben Sie mir gerne auch auf Deutsch. Ich antworte gerne und übe dabei.</p>
++    <div class="actions">
++      <a class="btn primary" href="mailto:janaka2@gmail.com">janaka2@gmail.com</a>
++      <a class="btn" href="https://linkedin.com/in/janakapremathilaka" target="_blank" rel="noopener">LinkedIn</a>
++      <a class="btn" href="https://github.com/Janaka2" target="_blank" rel="noopener">GitHub</a>
++      <a class="btn" href="https://wa.me/41762248445?text=Hi%20Janaka%2C%20I%20saw%20your%20portfolio.%20Let%27s%20chat!" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
++        <svg viewBox="0 0 32 32" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M19.1 17.2c-.3-.2-1.7-.8-1.9-.9-.2-.1-.4-.1-.6.1l-.9 1.1c-.2.2-.3.2-.6.1-1.2-.6-2.2-1.4-3-2.4-.3-.3-.5-.7-.2-1.1l.9-1.1c.1-.2.2-.4.1-.6-.1-.3-.6-1.6-.8-2.1-.2-.5-.4-.5-.6-.5h-1.2c-.4 0-.8.1-1.1.4-.5.5-1 1.2-1 2.7 0 1.5 1.1 3 1.3 3.3 1.5 2.1 3.6 3.8 5.9 4.7.6.3 1.3.5 1.9.6.8.2 1.6.2 2.3.1.7-.1 2.1-.8 2.4-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.5zM16 3C9.9 3 5 7.9 5 14c0 1.8.5 3.6 1.4 5.1L5 28l9-1.3c1.5.8 3.2 1.2 4.9 1.2 6.1 0 11-4.9 11-11S22.1 3 16 3z"/></svg>
++        WhatsApp
++      </a>
++      <a class="btn" href="tel:+41762248445">+41 76 224 84 45</a>
++    </div>
++    <p class="refs" data-i18n="ctRefs">Excellent references from UBS, Credit Suisse, and the European Commission available upon request.</p>
+ 
+-        <!-- NEW: subtle site links to subdomains (same visual vibe) -->
+-        <nav class="mt-5 flex flex-wrap items-center justify-center md:justify-between gap-2 text-sm">
+-            <span class="text-gray-400 hidden md:inline">Explore:</span>
+-            <div class="flex flex-wrap gap-2">
+-                <a href="https://blog.janaka.me"
+-                   class="px-3 py-1 rounded-full border border-gray-700 text-gray-300 hover:text-blue-400 hover:border-blue-400 transition-colors">
+-                    Blog
+-                </a>
+-                <a href="https://lab.janaka.me"
+-                   class="px-3 py-1 rounded-full border border-gray-700 text-gray-300 hover:text-blue-400 hover:border-blue-400 transition-colors">
+-                    Labs
+-                </a>
+-                <a href="https://ai.janaka.me"
+-                   class="px-3 py-1 rounded-full border border-gray-700 text-gray-300 hover:text-blue-400 hover:border-blue-400 transition-colors">
+-                    AI / Agents
+-                </a>
+-                <a href="https://cv.janaka.me"
+-                   class="px-3 py-1 rounded-full border border-gray-700 text-gray-300 hover:text-blue-400 hover:border-blue-400 transition-colors">
+-                    CV
+-                </a>
+-                <a href="mailto:janaka2@gmail.com"
+-                   class="px-3 py-1 rounded-full border border-gray-700 text-gray-300 hover:text-blue-400 hover:border-blue-400 transition-colors">
+-                    Contact
+-                </a>
+-            </div>
+-        </nav>
++    <nav class="sitelinks" aria-label="More from janaka.me">
++      <span class="k" data-i18n="ctExplore">Explore</span>
++      <a class="badge" href="https://blog.janaka.me">Blog</a>
++      <a class="badge" href="https://lab.janaka.me">Labs</a>
++      <a class="badge" href="https://ai.janaka.me">AI / Agents</a>
++      <a class="badge" href="https://cv.janaka.me">CV</a>
++      <a class="badge" href="https://javawithme.wordpress.com" target="_blank" rel="noopener">javawithme</a>
++      <a class="badge" href="mailto:janaka2@gmail.com" data-i18n="ctMailBadge">Contact</a>
++    </nav>
+ 
+-        <!-- copyright row (unchanged, but auto-year) -->
+-        <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
+-            <p>© <span id="year"></span> Janaka Premathilaka. All rights reserved.</p>
+-        </div>
++    <div class="foot">
++      <span>© <span id="year"></span> Janaka Premathilaka · Zug 🇨🇭 · <span data-i18n="ctRights">All rights reserved.</span></span>
++      <span data-i18n="footRight">built by hand — no frameworks, no build step. view source.</span>
+     </div>
+-</footer>
+-
+-<!-- If you use feather icons elsewhere, ensure this script runs once -->
+-<script>
+-    document.getElementById('year').textContent = new Date().getFullYear();
+-    if (window.feather && typeof feather.replace === 'function') feather.replace();
+-</script>
++  </div>
++</section>
+diff --git a/partials/header.html b/partials/header.html
+index 38ed9e6..989ffcb 100644
+--- a/partials/header.html
++++ b/partials/header.html
+@@ -1,46 +1,65 @@
+-<div class="container mx-auto px-6 py-12">
+-  <div class="flex flex-col md:flex-row items-center">
+-    <div class="md:w-2/5 flex flex-col items-center md:items-start mb-8 md:mb-0">
+-      <img src="/assets/janaka2.jpg"
+-           alt="Janaka"
+-           class="rounded-full object-cover border-4 border-white shadow-xl mb-6">
+-      <h1 class="text-4xl font-bold text-gray-900 tracking-tight">Janaka Premathilaka</h1>
+-      <h2 class="text-2xl text-blue-600 mt-3 font-medium">Senior Full-Stack Java Engineer</h2>
+-      <p class="text-gray-600 mt-2 text-lg">Zug, Switzerland</p>
+-    </div>
+-    <div class="md:w-3/5">
+-      <div class="bg-gray-50 p-8 rounded-xl shadow-inner border border-gray-100">
+-        <p class="text-gray-700 leading-relaxed text-lg">
+-            I build rock-solid enterprise Java systems and lead them into the AI era.
+-            With 21+ years delivering mission-critical banking and public-sector software, I focus on automation that moves the needle—LLMs, RAG, LangChain, Crew AI, LangGraph, AutoGen, OpenAI Agent SDK with Spring Boot.
+-            I’m known for calm, dependable execution: I steady teams, cut through noise, and get results.
+-            From modernizing legacy stacks to boosting trading-platform performance, I finish what I start—no shortcuts.
+-            Today I bridge proven enterprise tech with practical AI to deliver solutions that work in the real world.
+-            My principle is simple: find a way—or make one.
++<section class="hero" id="top">
++  <div class="wrap">
++    <div class="hero-grid">
++      <div>
++        <p class="status">
++          <span class="dot" aria-hidden="true"></span>
++          <span data-i18n="heroStatus">prod · stable since 2004 · pager: carried · audits: passed</span>
+         </p>
+-            <p class="text-gray-700 leading-relaxed text-lg mt-4">
+-      <strong>Core Values:</strong> Innovation, collaboration, reliability, continuous learning, and delivering results. I strive to transform ideas into scalable solutions that drive business success.
+-    </p>
+-          <!-- Existing CV button -->
+-          <div class="mt-6">
+-              <a href="partials/janaka_visual_resume_v3_3.html"
+-                 class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full shadow-lg transition-colors duration-200">
+-                  View My Latest CV
+-              </a>
+-          </div>
++        <h1>Janaka<br>Premathilaka</h1>
++        <p class="role" data-i18n="heroRole">Senior Java Engineer &amp; Solution Architect</p>
++        <p class="hook" data-i18n="heroHook"><b>I build rock-solid enterprise Java systems — and lead them into the AI era.</b><br>
++        22+ years of mission-critical banking and public-sector software for UBS, Credit Suisse and the European Commission.</p>
++        <div class="badges" data-i18n="heroBadges">
++          <span class="badge">Zug, Switzerland 🇨🇭</span>
++          <span class="badge">Swiss Permit C</span>
++          <span class="badge hot">German B1 ↗</span>
++          <span class="badge">Banking IT · regulated systems</span>
++          <span class="badge hot">AI · LLM · agentic RAG</span>
++        </div>
++        <div class="actions">
++          <a class="btn primary" href="partials/janaka_visual_resume_v3_3.html" data-i18n="btnViewCv">View My Latest CV</a>
++          <a class="btn" href="mailto:janaka2@gmail.com" data-i18n="btnEmail">Email</a>
++          <a class="btn" href="https://www.linkedin.com/in/janakapremathilaka/" target="_blank" rel="noopener">LinkedIn</a>
++          <a class="btn" href="https://github.com/Janaka2" target="_blank" rel="noopener">GitHub</a>
++          <a class="btn" href="partials/Janaka_Premathilaka_CV_2026.pdf" download id="pdfBtn" data-i18n="btnPdf">PDF CV</a>
++        </div>
++      </div>
++      <figure class="photo-card">
++        <img src="assets/janaka2.jpg" alt="Portrait photo of Janaka Premathilaka" width="172" height="195">
++        <figcaption data-i18n="heroFigcap">ZUG · SWITZERLAND</figcaption>
++      </figure>
++    </div>
++  </div>
++</section>
+ 
+-          <!-- New Academy CTA -->
+-          <div class="mt-4">
+-              <a href="https://janaka2.github.io/academy/" target="_blank"
+-                 class="inline-block bg-gradient-to-r from-orange-500 via-red-500 to-pink-600 hover:from-orange-600 hover:via-red-600 hover:to-pink-700 text-white font-bold py-3 px-6 rounded-full shadow-xl transform transition-all duration-300 hover:scale-105">
+-                  Join Janaka Academy
+-              </a>
+-              <p class="text-gray-700 mt-2 text-sm">
+-                  My mission is to empower the giant within a thousand hearts — guiding each to surpass me not just in engineering skill, but in spiritual depth and ethical integrity. Together, step by step, we’ll create an elite group of technical master minds who innovate with compassion, live by principle, and make the world easier for everyone.
+-              </p>
+-          </div>
++<section class="sec" id="about">
++  <div class="wrap">
++    <p class="eyebrow" data-i18n="aboutEyebrow">Profile</p>
++    <h2 data-i18n="aboutH2">Proven enterprise tech, practical AI.</h2>
++    <div class="card">
++      <p data-i18n="aboutP1">
++        I build rock-solid enterprise Java systems and lead them into the AI era.
++        With 22+ years delivering mission-critical banking and public-sector software, I focus on automation that
++        moves the needle — LLMs, RAG, LangChain, CrewAI, LangGraph, AutoGen and the OpenAI Agents SDK with Spring Boot.
++        I’m known for calm, dependable execution: I steady teams, cut through noise, and get results.
++        From modernizing legacy stacks to boosting trading-platform performance, I finish what I start — no shortcuts.
++        Today I bridge proven enterprise tech with practical AI to deliver solutions that work in the real world.
++        My principle is simple: find a way — or make one.
++      </p>
++      <p style="margin-top:14px" data-i18n="aboutP2">
++        <b>Core values:</b> innovation, collaboration, reliability, continuous learning — and delivering results.
++        I strive to transform ideas into scalable solutions that drive business success.
++      </p>
++      <div class="actions" style="margin-top:20px">
++        <a class="btn" href="https://janaka2.github.io/academy/" target="_blank" rel="noopener" data-i18n="academyBtn">Join Janaka Academy ↗</a>
+       </div>
++      <p class="sub" style="margin-top:12px;max-width:72ch" data-i18n="academyP">
++        My mission is to empower the giant within a thousand hearts — guiding each to surpass me not just in
++        engineering skill, but in spiritual depth and ethical integrity. Together, step by step, we’ll create an
++        elite group of technical master minds who innovate with compassion, live by principle, and make the world
++        easier for everyone.
++      </p>
+     </div>
+   </div>
+-</div>
+-</div>
++</section>
+diff --git a/partials/key-metrics.html b/partials/key-metrics.html
+index d2591f3..bda3f2d 100644
+--- a/partials/key-metrics.html
++++ b/partials/key-metrics.html
+@@ -1,23 +1,12 @@
+-<section class="mb-12" data-aos="fade-up">
+-  <h2 class="text-2xl font-bold mb-6 flex items-center">
+-    <i data-feather="bar-chart-2" class="mr-3"></i> Key Metrics
+-  </h2>
+-  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+-    <div class="bg-white p-6 rounded-lg shadow text-center">
+-      <div class="text-4xl font-bold text-blue-600 mb-2">21+</div>
+-      <div class="text-gray-600">Years Experience</div>
+-    </div>
+-    <div class="bg-white p-6 rounded-lg shadow text-center">
+-      <div class="text-4xl font-bold text-blue-600 mb-2">40+</div>
+-      <div class="text-gray-600">Enterprise Projects</div>
+-    </div>
+-    <div class="bg-white p-6 rounded-lg shadow text-center">
+-      <div class="text-4xl font-bold text-blue-600 mb-2">100%</div>
+-      <div class="text-gray-600">Project Success Rate</div>
+-    </div>
+-    <div class="bg-white p-6 rounded-lg shadow text-center">
+-      <div class="text-4xl font-bold text-blue-600 mb-2">30%</div>
+-      <div class="text-gray-600">Avg. Performance Gain</div>
++<section class="sec" id="metrics">
++  <div class="wrap">
++    <p class="eyebrow" data-i18n="kmEyebrow">Key Metrics</p>
++    <h2 data-i18n="kmH2">Numbers that hold up.</h2>
++    <div class="stats" role="list" style="margin-top:8px">
++      <div class="stat" role="listitem"><b>22+</b><span data-i18n="km1">years of production Java</span></div>
++      <div class="stat" role="listitem"><b>6</b><span data-i18n="km2">apps owned through the CS–UBS merger</span></div>
++      <div class="stat" role="listitem"><b>≈20%</b><span data-i18n="km3">FX platform latency cut</span></div>
++      <div class="stat" role="listitem"><b>3+1</b><span data-i18n="km4">banks + the EU served</span></div>
+     </div>
+   </div>
+ </section>
+diff --git a/partials/life-journey-tabs.html b/partials/life-journey-tabs.html
+index efab89c..bdab876 100644
+--- a/partials/life-journey-tabs.html
++++ b/partials/life-journey-tabs.html
+@@ -1,82 +1,74 @@
+-<section class="mb-12" data-aos="fade-up">
+-  <h2 class="text-2xl font-bold mb-6 flex items-center">
+-    <i data-feather="map" class="mr-3"></i> My Life Journey
+-  </h2>
++<section class="sec" id="journey">
++  <div class="wrap">
++    <p class="eyebrow" data-i18n="jEyebrow">My Life Journey</p>
++    <h2 data-i18n="jH2">From Galle to Zug.</h2>
+ 
+-  <div class="flex overflow-x-auto mb-6 border-b border-gray-200">
+-    <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="early-years">👶 Early Years</button>
+-    <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="educationJourney">🎓 Education</button>
+-    <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="career-start">💼 Career Start</button>
+-    <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="belgium-era">🇧🇪 Belgium Era</button>
+-    <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="switzerland-era">🇨🇭 Switzerland Era</button>
+-    <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap border-b-2 border-transparent hover:border-blue-400" data-tab="future-dreams">🌟 Future Dreams</button>
+-  </div>
++    <div class="tabbar" aria-label="Life journey periods">
++      <button class="tab-btn" type="button" data-tab="early-years" data-i18n="jTab1">👶 Early Years</button>
++      <button class="tab-btn" type="button" data-tab="educationJourney" data-i18n="jTab2">🎓 Education</button>
++      <button class="tab-btn" type="button" data-tab="career-start" data-i18n="jTab3">💼 Career Start</button>
++      <button class="tab-btn" type="button" data-tab="belgium-era" data-i18n="jTab4">🇧🇪 Belgium Era</button>
++      <button class="tab-btn" type="button" data-tab="switzerland-era" data-i18n="jTab5">🇨🇭 Switzerland Era</button>
++      <button class="tab-btn" type="button" data-tab="future-dreams" data-i18n="jTab6">🌟 Future Dreams</button>
++    </div>
+ 
+-  <div class="bg-white rounded-lg shadow">
+-    <div class="tab-content p-6 hidden" id="early-years">
+-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+-        <div class="flex items-start"><div class="text-4xl mr-4">👶</div><div><h3 class="font-semibold text-lg">Born</h3><p class="text-gray-600">February 1980</p><p class="text-gray-500">Galle, Sri Lanka</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">🏫</div><div><h3 class="font-semibold text-lg">School Years</h3><p class="text-gray-600">1985-1998</p><p class="text-gray-500">Southern Sri Lanka</p></div></div>
++    <div class="tabpanes">
++      <div class="tab-content hidden" id="early-years">
++        <div class="jgrid">
++          <div class="jitem"><span class="emo" aria-hidden="true">👶</span><div data-i18n="j1a"><h3>Born</h3><p class="jw">February 1980</p><p>Galle, Sri Lanka</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">🏫</span><div data-i18n="j1b"><h3>School Years</h3><p class="jw">1985 — 1998</p><p>Southern Sri Lanka</p></div></div>
++        </div>
+       </div>
+-    </div>
+ 
+-    <div class="tab-content p-6" id="educationJourney">
+-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+-        <div class="flex items-start"><div class="text-4xl mr-4">🎓</div><div><h3 class="font-semibold text-lg">Bachelor's Degree</h3><p class="text-gray-600">1999-2004</p><p class="text-gray-500">University of Sri Jayewardenepura</p><p class="text-gray-500">BSc in Computer Science, Statistics, Mathematics</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">🎓</div><div><h3 class="font-semibold text-lg">Second Bachelor's</h3><p class="text-gray-600">1999-2004</p><p class="text-gray-500">University of Colombo</p><p class="text-gray-500">BIT (6 semesters completed)</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">📚</div><div><h3 class="font-semibold text-lg">Master's Degree</h3><p class="text-gray-600">2007-Present</p><p class="text-gray-500">University of Moratuwa</p><p class="text-gray-500">Computer Engineering (In Progress)</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">📜</div><div><h3 class="font-semibold text-lg">Certifications</h3><p class="text-gray-600">2005-2006</p><p class="text-gray-500">Sun Java Certifications (SCJP, SCBCD, SCEA1, SCWCD)</p></div></div>
++      <div class="tab-content" id="educationJourney">
++        <div class="jgrid">
++          <div class="jitem"><span class="emo" aria-hidden="true">🎓</span><div data-i18n="j2a"><h3>Bachelor’s Degree</h3><p class="jw">1999 — 2004</p><p>University of Sri Jayewardenepura</p><p>BSc in Computer Science, Statistics, Mathematics</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">🎓</span><div data-i18n="j2b"><h3>Second Bachelor’s</h3><p class="jw">1999 — 2004</p><p>University of Colombo</p><p>BIT (6 semesters completed)</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">📚</span><div data-i18n="j2c"><h3>Master’s Degree</h3><p class="jw">2007 — present</p><p>University of Moratuwa</p><p>Computer Engineering (in progress)</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">📜</span><div data-i18n="j2d"><h3>Certifications</h3><p class="jw">2005 — 2006</p><p>Sun Java Certifications (SCJP, SCBCD, SCEA, SCWCD)</p></div></div>
++        </div>
+       </div>
+-    </div>
+ 
+-    <div class="tab-content p-6 hidden" id="career-start">
+-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+-        <div class="flex items-start"><div class="text-4xl mr-4">💼</div><div><h3 class="font-semibold text-lg">First Job</h3><p class="text-gray-600">2004</p><p class="text-gray-500">Union Bank of Colombo Ltd</p><p class="text-gray-500">Banking Software Engineer</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">🏢</div><div><h3 class="font-semibold text-lg">Early Career</h3><p class="text-gray-600">2006-2008</p><p class="text-gray-500">Multiple companies in Sri Lanka</p><p class="text-gray-500">Java/JEE Developer roles</p></div></div>
++      <div class="tab-content hidden" id="career-start">
++        <div class="jgrid">
++          <div class="jitem"><span class="emo" aria-hidden="true">💼</span><div data-i18n="j3a"><h3>First Job</h3><p class="jw">2004</p><p>Union Bank of Colombo Ltd</p><p>Banking Software Engineer</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">🏢</span><div data-i18n="j3b"><h3>Early Career</h3><p class="jw">2006 — 2008</p><p>Multiple companies in Sri Lanka</p><p>Java/JEE Developer roles</p></div></div>
++        </div>
+       </div>
+-    </div>
+ 
+-    <div class="tab-content p-6 hidden" id="belgium-era">
+-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+-        <div class="flex items-start"><div class="text-4xl mr-4">✈️</div><div><h3 class="font-semibold text-lg">Moved to Belgium</h3><p class="text-gray-600">August 2008</p><p class="text-gray-500">Brussels Area</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">💍</div><div><h3 class="font-semibold text-lg">Got Married</h3><p class="text-gray-600">2010</p><p class="text-gray-500">Belgium</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">👦</div><div><h3 class="font-semibold text-lg">First Child</h3><p class="text-gray-600">January 2012</p><p class="text-gray-500">Son</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">👧</div><div><h3 class="font-semibold text-lg">Second Child</h3><p class="text-gray-600">December 2013</p><p class="text-gray-500">Daughter</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">🏠</div><div><h3 class="font-semibold text-lg">Bought First Home</h3><p class="text-gray-600">December 2015</p><p class="text-gray-500">Belgium</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">👧</div><div><h3 class="font-semibold text-lg">Third Child</h3><p class="text-gray-600">December 2016</p><p class="text-gray-500">Daughter</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">🏛️</div><div><h3 class="font-semibold text-lg">European Commission</h3><p class="text-gray-600">2011-2018</p><p class="text-gray-500">Sr. Full-Stack Java Developer</p><p class="text-gray-500">E-procurement systems</p></div></div>
++      <div class="tab-content hidden" id="belgium-era">
++        <div class="jgrid">
++          <div class="jitem"><span class="emo" aria-hidden="true">✈️</span><div data-i18n="j4a"><h3>Moved to Belgium</h3><p class="jw">August 2008</p><p>Brussels Area</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">💍</span><div data-i18n="j4b"><h3>Got Married</h3><p class="jw">2010</p><p>Belgium</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">👦</span><div data-i18n="j4c"><h3>First Child</h3><p class="jw">January 2012</p><p>Son</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">👧</span><div data-i18n="j4d"><h3>Second Child</h3><p class="jw">December 2013</p><p>Daughter</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">🏠</span><div data-i18n="j4e"><h3>Bought First Home</h3><p class="jw">December 2015</p><p>Belgium</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">👧</span><div data-i18n="j4f"><h3>Third Child</h3><p class="jw">December 2016</p><p>Daughter</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">🏛️</span><div data-i18n="j4g"><h3>European Commission</h3><p class="jw">2011 — 2018</p><p>Sr. Full-Stack Java Developer</p><p>E-procurement systems</p></div></div>
++        </div>
+       </div>
+-    </div>
+ 
+-    <div class="tab-content p-6 hidden" id="switzerland-era">
+-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+-        <div class="flex items-start"><div class="text-4xl mr-4">🏔️</div><div><h3 class="font-semibold text-lg">Moved to Switzerland</h3><p class="text-gray-600">January 2018</p><p class="text-gray-500">Zürich Area</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">🔷</div><div><h3 class="font-semibold text-lg">UBS</h3><p class="text-gray-600">2018-2019</p><p class="text-gray-500">Sr. Full-Stack Solution Engineer</p><p class="text-gray-500">Banking systems</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">🇬🇧</div><div><h3 class="font-semibold text-lg">Remote in UK</h3><p class="text-gray-600">2019-2020</p><p class="text-gray-500">Liverpool, UK</p><p class="text-gray-500">Remote work for Swiss clients</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">🏦</div><div><h3 class="font-semibold text-lg">Credit Suisse</h3><p class="text-gray-600">2019-2024</p><p class="text-gray-500">Sr. Full-Stack Solution Engineer</p><p class="text-gray-500">Banking systems & FX trading</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">🔷</div><div><h3 class="font-semibold text-lg">UBS</h3><p class="text-gray-600">2024-Present</p><p class="text-gray-500">Sr. Full-Stack Solution Engineer</p><p class="text-gray-500">AI integration & LLMs</p></div></div>
++      <div class="tab-content hidden" id="switzerland-era">
++        <div class="jgrid">
++          <div class="jitem"><span class="emo" aria-hidden="true">🏔️</span><div data-i18n="j5a"><h3>Moved to Switzerland</h3><p class="jw">January 2018</p><p>Zurich Area</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">🔷</span><div data-i18n="j5b"><h3>UBS</h3><p class="jw">2018 — 2019</p><p>IT Solution Development Specialist</p><p>Banking systems</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">🇬🇧</span><div data-i18n="j5c"><h3>Remote in UK</h3><p class="jw">2019 — 2020</p><p>Liverpool, UK</p><p>Remote work for Swiss clients</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">🏦</span><div data-i18n="j5d"><h3>Credit Suisse</h3><p class="jw">2019 — 2024</p><p>IT Solution Developer</p><p>Banking systems &amp; FX trading</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">🔷</span><div data-i18n="j5e"><h3>UBS</h3><p class="jw">2024 — present</p><p>Senior Full-Stack Solution Engineer (Lead)</p><p>AI integration &amp; LLMs</p></div></div>
++        </div>
+       </div>
+-    </div>
+ 
+-    <div class="tab-content p-6 hidden" id="future-dreams">
+-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+-        <div class="flex items-start"><div class="text-4xl mr-4">🎓</div><div><h3 class="font-semibold text-lg">Complete Master's Degree</h3><p class="text-gray-600">Ongoing</p><p class="text-gray-500">University of Moratuwa</p><p class="text-gray-500">Computer Engineering</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">🤖</div><div><h3 class="font-semibold text-lg">AI Research & Development</h3><p class="text-gray-600">Future Goal</p><p class="text-gray-500">Advanced AI Systems</p><p class="text-gray-500">LLM optimization & deployment</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">🌍</div><div><h3 class="font-semibold text-lg">Global Impact Projects</h3><p class="text-gray-600">Long-term Vision</p><p class="text-gray-500">Enterprise AI Solutions</p><p class="text-gray-500">Scalable intelligent systems</p></div></div>
+-        <div class="flex items-start"><div class="text-4xl mr-4">🚀</div><div><h3 class="font-semibold text-lg">Technology Leadership</h3><p class="text-gray-600">Career Aspiration</p><p class="text-gray-500">Architectural Excellence</p><p class="text-gray-500">Mentoring next-generation engineers</p></div></div>
+-          <div class="flex items-start space-x-4 bg-white p-4 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300">
+-              <div class="text-5xl">🌱❤🎓</div>
+-              <div>
+-                  <h3 class="font-semibold text-xl text-gray-800">Launch Janaka Academy</h3>
+-                  <p class="text-gray-600">02-11-2025</p>
+-                  <p class="text-gray-500">Empower 1,000+ engineers worldwide</p>
+-                  <p class="text-gray-500">Step‑by‑step training to help others surpass me—technically and ethically</p>
+-              </div>
+-              <a href="https://janaka2.github.io/academy/" target="_blank"
+-                 class="inline-block bg-gradient-to-r from-orange-500 via-red-500 to-pink-600 hover:from-orange-600 hover:via-red-600 hover:to-pink-700 text-white font-bold py-3 px-6 rounded-full shadow-xl transform transition-all duration-300 hover:scale-105">
+-                  Join
+-              </a>
+-          </div>
++      <div class="tab-content hidden" id="future-dreams">
++        <div class="jgrid">
++          <div class="jitem"><span class="emo" aria-hidden="true">🎓</span><div data-i18n="j6a"><h3>Complete Master’s Degree</h3><p class="jw">Ongoing</p><p>University of Moratuwa</p><p>Computer Engineering</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">🤖</span><div data-i18n="j6b"><h3>AI Research &amp; Development</h3><p class="jw">Future goal</p><p>Advanced AI systems</p><p>LLM optimization &amp; deployment</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">🌍</span><div data-i18n="j6c"><h3>Global Impact Projects</h3><p class="jw">Long-term vision</p><p>Enterprise AI solutions</p><p>Scalable intelligent systems</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">🚀</span><div data-i18n="j6d"><h3>Technology Leadership</h3><p class="jw">Career aspiration</p><p>Architectural excellence</p><p>Mentoring next-generation engineers</p></div></div>
++          <div class="jitem"><span class="emo" aria-hidden="true">🌱</span><div>
++            <div data-i18n="j6e"><h3>Launch Janaka Academy</h3><p class="jw">02.11.2025</p><p>Empower 1,000+ engineers worldwide</p><p>Step-by-step training to help others surpass me — technically and ethically</p></div>
++            <p style="margin-top:10px"><a class="btn" href="https://janaka2.github.io/academy/" target="_blank" rel="noopener" data-i18n="j6btn">Join ↗</a></p>
++          </div></div>
++        </div>
+       </div>
+     </div>
+   </div>
+-- 
+2.43.0
+

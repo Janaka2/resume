@@ -1,46 +1,65 @@
-<div class="container mx-auto px-6 py-12">
-  <div class="flex flex-col md:flex-row items-center">
-    <div class="md:w-2/5 flex flex-col items-center md:items-start mb-8 md:mb-0">
-      <img src="/assets/janaka2.jpg"
-           alt="Janaka"
-           class="rounded-full object-cover border-4 border-white shadow-xl mb-6">
-      <h1 class="text-4xl font-bold text-gray-900 tracking-tight">Janaka Premathilaka</h1>
-      <h2 class="text-2xl text-blue-600 mt-3 font-medium">Senior Full-Stack Java Engineer</h2>
-      <p class="text-gray-600 mt-2 text-lg">Zug, Switzerland</p>
-    </div>
-    <div class="md:w-3/5">
-      <div class="bg-gray-50 p-8 rounded-xl shadow-inner border border-gray-100">
-        <p class="text-gray-700 leading-relaxed text-lg">
-            I build rock-solid enterprise Java systems and lead them into the AI era.
-            With 21+ years delivering mission-critical banking and public-sector software, I focus on automation that moves the needle—LLMs, RAG, LangChain, Crew AI, LangGraph, AutoGen, OpenAI Agent SDK with Spring Boot.
-            I’m known for calm, dependable execution: I steady teams, cut through noise, and get results.
-            From modernizing legacy stacks to boosting trading-platform performance, I finish what I start—no shortcuts.
-            Today I bridge proven enterprise tech with practical AI to deliver solutions that work in the real world.
-            My principle is simple: find a way—or make one.
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="status">
+          <span class="dot" aria-hidden="true"></span>
+          <span data-i18n="heroStatus">prod · stable since 2004 · pager: carried · audits: passed</span>
         </p>
-            <p class="text-gray-700 leading-relaxed text-lg mt-4">
-      <strong>Core Values:</strong> Innovation, collaboration, reliability, continuous learning, and delivering results. I strive to transform ideas into scalable solutions that drive business success.
-    </p>
-          <!-- Existing CV button -->
-          <div class="mt-6">
-              <a href="partials/janaka_visual_resume_v3_3.html"
-                 class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full shadow-lg transition-colors duration-200">
-                  View My Latest CV
-              </a>
-          </div>
-
-          <!-- New Academy CTA -->
-          <div class="mt-4">
-              <a href="https://janaka2.github.io/academy/" target="_blank"
-                 class="inline-block bg-gradient-to-r from-orange-500 via-red-500 to-pink-600 hover:from-orange-600 hover:via-red-600 hover:to-pink-700 text-white font-bold py-3 px-6 rounded-full shadow-xl transform transition-all duration-300 hover:scale-105">
-                  Join Janaka Academy
-              </a>
-              <p class="text-gray-700 mt-2 text-sm">
-                  My mission is to empower the giant within a thousand hearts — guiding each to surpass me not just in engineering skill, but in spiritual depth and ethical integrity. Together, step by step, we’ll create an elite group of technical master minds who innovate with compassion, live by principle, and make the world easier for everyone.
-              </p>
-          </div>
+        <h1>Janaka<br>Premathilaka</h1>
+        <p class="role" data-i18n="heroRole">Senior Java Engineer &amp; Solution Architect</p>
+        <p class="hook" data-i18n="heroHook"><b>I build rock-solid enterprise Java systems — and lead them into the AI era.</b><br>
+        22+ years of mission-critical banking and public-sector software for UBS, Credit Suisse and the European Commission.</p>
+        <div class="badges" data-i18n="heroBadges">
+          <span class="badge">Zug, Switzerland 🇨🇭</span>
+          <span class="badge">Swiss Permit C</span>
+          <span class="badge hot">German B1 ↗</span>
+          <span class="badge">Banking IT · regulated systems</span>
+          <span class="badge hot">AI · LLM · agentic RAG</span>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="partials/janaka_visual_resume_v3_3.html" data-i18n="btnViewCv">View My Latest CV</a>
+          <a class="btn" href="mailto:janaka2@gmail.com" data-i18n="btnEmail">Email</a>
+          <a class="btn" href="https://www.linkedin.com/in/janakapremathilaka/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/Janaka2" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="partials/Janaka_Premathilaka_CV_2026.pdf" download id="pdfBtn" data-i18n="btnPdf">PDF CV</a>
+        </div>
       </div>
+      <figure class="photo-card">
+        <img src="assets/janaka2.jpg" alt="Portrait photo of Janaka Premathilaka" width="172" height="195">
+        <figcaption data-i18n="heroFigcap">ZUG · SWITZERLAND</figcaption>
+      </figure>
     </div>
   </div>
-</div>
-</div>
+</section>
+
+<section class="sec" id="about">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="aboutEyebrow">Profile</p>
+    <h2 data-i18n="aboutH2">Proven enterprise tech, practical AI.</h2>
+    <div class="card">
+      <p data-i18n="aboutP1">
+        I build rock-solid enterprise Java systems and lead them into the AI era.
+        With 22+ years delivering mission-critical banking and public-sector software, I focus on automation that
+        moves the needle — LLMs, RAG, LangChain, CrewAI, LangGraph, AutoGen and the OpenAI Agents SDK with Spring Boot.
+        I’m known for calm, dependable execution: I steady teams, cut through noise, and get results.
+        From modernizing legacy stacks to boosting trading-platform performance, I finish what I start — no shortcuts.
+        Today I bridge proven enterprise tech with practical AI to deliver solutions that work in the real world.
+        My principle is simple: find a way — or make one.
+      </p>
+      <p style="margin-top:14px" data-i18n="aboutP2">
+        <b>Core values:</b> innovation, collaboration, reliability, continuous learning — and delivering results.
+        I strive to transform ideas into scalable solutions that drive business success.
+      </p>
+      <div class="actions" style="margin-top:20px">
+        <a class="btn" href="https://janaka2.github.io/academy/" target="_blank" rel="noopener" data-i18n="academyBtn">Join Janaka Academy ↗</a>
+      </div>
+      <p class="sub" style="margin-top:12px;max-width:72ch" data-i18n="academyP">
+        My mission is to empower the giant within a thousand hearts — guiding each to surpass me not just in
+        engineering skill, but in spiritual depth and ethical integrity. Together, step by step, we’ll create an
+        elite group of technical master minds who innovate with compassion, live by principle, and make the world
+        easier for everyone.
+      </p>
+    </div>
+  </div>
+</section>
