@@ -66,6 +66,63 @@ th, td {
 }
 th, td:first-child { font-weight: 600; color: var(--tx); }
 
+/* ---- inline icons on academy pages ----
+   These SVGs were sized only by Tailwind's w-N/h-N utilities. Without the CDN
+   an SVG carrying no width attribute expands to fill its container, so the few
+   size utilities actually used are defined here, with a safe fallback. */
+svg:not([width]) { width: 1.25rem; height: 1.25rem; flex: 0 0 auto; }
+/* stacked labels relied on Tailwind's .block; without it they ran together */
+.block { display: block; }
+.inline-block { display: inline-block; }
+.w-4 { width: 1rem; }    .h-4 { height: 1rem; }
+.w-5 { width: 1.25rem; } .h-5 { height: 1.25rem; }
+.w-6 { width: 1.5rem; }  .h-6 { height: 1.5rem; }
+.w-8 { width: 2rem; }    .h-8 { height: 2rem; }
+.animate-spin { animation: spin 1s linear infinite; }
+
+/* every button inside a module page gets the shared button treatment */
+.container button {
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  font: 500 .86rem/1 var(--font-sans);
+  border: 1px solid var(--ac); background: var(--ac); color: #fff;
+  border-radius: 10px; padding: 11px 16px;
+  transition: transform .12s ease, filter .12s ease;
+}
+html[data-theme="dark"] .container button { color: #06121F; }
+.container button:hover { transform: translateY(-1px); filter: brightness(1.06); }
+.container button[disabled] { opacity: .5; cursor: not-allowed; transform: none; }
+
+/* ---- form controls on academy pages ----
+   These pages styled their inputs with Tailwind utilities. With the CDN gone
+   the controls would fall back to browser defaults, so give them the tokens. */
+select, textarea,
+input[type="text"], input[type="password"], input[type="search"], input[type="email"] {
+  font: 400 .95rem var(--font-sans); color: var(--tx);
+  background: var(--bg2); border: 1px solid var(--ln);
+  border-radius: 9px; padding: 10px 12px; max-width: 100%;
+}
+textarea { width: 100%; line-height: 1.6; resize: vertical; }
+select:focus, textarea:focus, input:focus { outline: 2px solid var(--ac); outline-offset: 1px; }
+
+/* the three action buttons on the Java modernization guide */
+#toggleAnswersBtn, #btn-grade, #btn-summary, #saveKeyBtn {
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  font: 500 .86rem/1 var(--font-sans);
+  border: 1px solid var(--ac); background: var(--ac); color: #fff;
+  border-radius: 10px; padding: 11px 16px;
+  transition: transform .12s ease, filter .12s ease;
+}
+html[data-theme="dark"] #toggleAnswersBtn,
+html[data-theme="dark"] #btn-grade,
+html[data-theme="dark"] #btn-summary,
+html[data-theme="dark"] #saveKeyBtn { color: #06121F; }
+#toggleAnswersBtn:hover, #btn-grade:hover, #btn-summary:hover, #saveKeyBtn:hover {
+  transform: translateY(-1px); filter: brightness(1.06);
+}
+#btn-grade { background: var(--bg2); color: var(--tx); border-color: var(--ln); }
+html[data-theme="dark"] #btn-grade { color: var(--tx); }
+button[disabled] { opacity: .5; cursor: not-allowed; transform: none; }
+
 /* ---- filter toolbar (academy curriculum) ---- */
 .toolbar { display: flex; align-items: flex-end; justify-content: space-between;
            flex-wrap: wrap; gap: 14px; }
