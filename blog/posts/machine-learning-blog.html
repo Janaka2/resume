@@ -1,111 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Machine Learning: A Comprehensive Top-Down Guide</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Configure Tailwind to use Inter font -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                },
-            },
-        }
-    </script>
-    <!-- Basic styles for readability -->
-    <style>
-        body {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        /* Style for code blocks */
-        .code-inline {
-            background-color: #f3f4f6; /* gray-100 */
-            color: #db2777; /* pink-600 */
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.9em;
-        }
-        /* Style for asides/notes */
-        .aside-note {
-            background-color: #f3f4f6; /* gray-100 */
-            border-left: 4px solid #60a5fa; /* blue-400 */
-            padding: 16px;
-            margin: 16px 0;
-            border-radius: 4px;
-            font-style: italic;
-            color: #374151; /* gray-700 */
-        }
-        /* Style for new AI buttons */
-        .ai-btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 16px;
-            border: 1px solid transparent;
-            font-size: 0.875rem; /* 14px */
-            font-weight: 500;
-            border-radius: 0.375rem; /* 6px */
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            color: white;
-            transition: background-color 0.2s;
-            cursor: pointer;
-        }
-        .ai-btn:focus {
-            outline: 2px solid transparent;
-            outline-offset: 2px;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* focus ring */
-        }
-        .summarize-btn {
-            background-color: #2563eb; /* blue-600 */
-        }
-        .summarize-btn:hover {
-            background-color: #1d4ed8; /* blue-700 */
-        }
-        .quiz-btn {
-            background-color: #059669; /* green-600 */
-        }
-        .quiz-btn:hover {
-            background-color: #047857; /* green-700 */
-        }
-        /* Style for new INLINE AI buttons */
-        .ai-btn-inline {
-            display: inline-flex;
-            align-items: center;
-            padding: 2px 8px;
-            border: 1px solid #d1d5db; /* gray-300 */
-            font-size: 0.75rem; /* 12px */
-            font-weight: 500;
-            border-radius: 9999px; /* pill shape */
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            color: #374151; /* gray-700 */
-            background-color: #f9fafb; /* gray-50 */
-            transition: all 0.2s;
-            cursor: pointer;
-            margin-left: 8px;
-            vertical-align: middle; /* Align with text */
-        }
-        .ai-btn-inline:hover {
-            background-color: #f3f4f6; /* gray-100 */
-            border-color: #9ca3af; /* gray-400 */
-        }
-        .ai-btn-inline:focus {
-            outline: 2px solid transparent;
-            outline-offset: 2px;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* focus ring */
-        }
-    </style>
-</head>
-<body class="bg-white text-gray-800 font-sans leading-relaxed">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine Learning: A Comprehensive Top-Down Guide</title>
+  <meta name="description" content="A top-down introduction to machine learning: the workflow, the algorithms and the evaluation.">
+  <link rel="canonical" href="https://janaka.me/blog/posts/machine-learning-blog.html">
 
-<!-- Main Content Container -->
-<div class="max-w-3xl mx-auto px-4 py-12">
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png?v=1">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/subsite.css">
+</head>
+<body>
+
+<div data-include="/partials/site-nav.html"></div>
+
+<main>
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/blog/" style="color:inherit;text-decoration:none">&larr; Blog</a></p>
+      <div class="prose">
+
 
     <!-- Article Header -->
     <header class="mb-8">
@@ -689,187 +623,189 @@
 
     </article>
 
-</div> <!-- /end main container -->
-
-<!-- Gemini Modal -->
-<div id="geminiModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
-    <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] flex flex-col">
-        <div class="flex justify-between items-center p-4 border-b">
-            <h3 class="text-xl font-semibold text-gray-900">✨ AI Assistant</h3>
-            <button id="closeModal" class="text-gray-400 hover:text-gray-600">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-        <div id="modalContent" class="p-6 text-gray-700 leading-relaxed overflow-y-auto whitespace-pre-wrap">
-            <!-- Content will be injected here -->
-        </div>
+      </div>
     </div>
+  </section>
+</main>
+
+<!-- AI helper output -->
+<div id="geminiModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="geminiModalTitle">
+  <div class="modal-card" style="height:auto;max-height:80vh;max-width:640px">
+    <div class="modal-head">
+      <h3 id="geminiModalTitle">&#10024; AI assistant</h3>
+      <button class="modal-close" type="button" id="closeModal" aria-label="Close">&#10005;</button>
+    </div>
+    <div id="modalContent" class="modal-body"></div>
+  </div>
 </div>
 
-<!-- Loading Spinner -->
-<div id="loadingSpinner" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-[60] hidden">
-    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+<!-- API key prompt -->
+<div id="apiKeyModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="apiKeyTitle">
+  <div class="modal-card" style="height:auto;max-width:420px">
+    <div class="modal-head">
+      <h3 id="apiKeyTitle">Enter API key</h3>
+      <button class="modal-close" type="button" id="cancelApiKeyBtn" aria-label="Close">&#10005;</button>
+    </div>
+    <div class="modal-body" style="white-space:normal">
+      <p class="sub">These helpers call the Gemini API from your browser. The key stays in this tab's session storage and is gone when you close it.</p>
+      <label class="field" for="apiKeyInput"><span>Gemini API key</span>
+        <input type="password" id="apiKeyInput" placeholder="Paste your key" autocomplete="off">
+      </label>
+    </div>
+    <div class="modal-foot">
+      <button class="btn primary" type="button" id="saveApiKeyBtn">Save and continue</button>
+    </div>
+  </div>
 </div>
+
+<div id="loadingSpinner" class="spinner hidden"><i></i></div>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Premathilaka &middot; Zug &#127464;&#127469;</span>
+    <span><a href="/blog/">All articles</a> &middot; <a href="mailto:janaka2@gmail.com">janaka2@gmail.com</a></span>
+  </div>
+</footer>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const modal = document.getElementById('geminiModal');
-        const closeModal = document.getElementById('closeModal');
-        const modalContent = document.getElementById('modalContent');
-        const loadingSpinner = document.getElementById('loadingSpinner');
-        const summarizeButtons = document.querySelectorAll('.summarize-btn');
-        const quizButton = document.getElementById('quiz-btn');
-        const eli5Buttons = document.querySelectorAll('.eli5-btn');
-        const codeExplainButtons = document.querySelectorAll('.code-explain-btn');
+document.addEventListener('DOMContentLoaded', () => {
+  const modal          = document.getElementById('geminiModal');
+  const closeModal     = document.getElementById('closeModal');
+  const modalContent   = document.getElementById('modalContent');
+  const loadingSpinner = document.getElementById('loadingSpinner');
+  const apiKeyModal    = document.getElementById('apiKeyModal');
+  const apiKeyInput    = document.getElementById('apiKeyInput');
+  const saveApiKeyBtn  = document.getElementById('saveApiKeyBtn');
+  const cancelApiKeyBtn = document.getElementById('cancelApiKeyBtn');
 
-        // --- Modal Controls ---
-        const showModal = (content) => {
-            modalContent.innerHTML = content.replace(/\n/g, '<br>'); // Preserve line breaks
-            modal.classList.remove('hidden');
-        };
+  const summarizeButtons   = document.querySelectorAll('.summarize-btn');
+  const quizButton         = document.getElementById('quiz-btn');
+  const eli5Buttons        = document.querySelectorAll('.eli5-btn');
+  const codeExplainButtons = document.querySelectorAll('.code-explain-btn');
 
-        const hideModal = () => {
-            modal.classList.add('hidden');
-        };
+  let pending = null;
 
-        closeModal.addEventListener('click', hideModal);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                hideModal();
-            }
-        });
+  const showModal = (content) => { modalContent.textContent = content; modal.classList.remove('hidden'); };
+  const hideModal = () => modal.classList.add('hidden');
+  closeModal.addEventListener('click', hideModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) hideModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    hideModal(); apiKeyModal.classList.add('hidden');
+  });
 
-        // --- Loading Spinner Controls ---
-        const showLoading = () => loadingSpinner.classList.remove('hidden');
-        const hideLoading = () => loadingSpinner.classList.add('hidden');
+  const showLoading = () => loadingSpinner.classList.remove('hidden');
+  const hideLoading = () => loadingSpinner.classList.add('hidden');
 
-        // --- Gemini API Call Function ---
-        const callGeminiAPI = async (userQuery, systemInstruction, retries = 3, delay = 1000) => {
-            showLoading();
-            const apiKey = ""; // API key will be injected by the environment
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+  // The original hard-coded an empty apiKey with a note that "the environment"
+  // would inject one. Nothing does on GitHub Pages, so every button 400'd.
+  // The key is now asked for once and kept in sessionStorage for the tab.
+  const callGeminiAPI = async (apiKey, userQuery, systemInstruction, retries = 3, delay = 1000) => {
+    showLoading();
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+    const payload = {
+      contents: [{ parts: [{ text: userQuery }] }],
+      systemInstruction: { parts: [{ text: systemInstruction }] },
+    };
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) {
+        if (response.status === 429 && retries > 0) {
+          await new Promise(r => setTimeout(r, delay));
+          return callGeminiAPI(apiKey, userQuery, systemInstruction, retries - 1, delay * 2);
+        }
+        throw new Error(`API Error: ${response.status} ${response.statusText}`);
+      }
+      const result = await response.json();
+      const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!text) throw new Error('Invalid response structure from API.');
+      hideLoading();
+      showModal(text);
+    } catch (error) {
+      console.error('Error calling Gemini API:', error);
+      hideLoading();
+      if (error.message.includes('400') || error.message.includes('API key not valid')) {
+        sessionStorage.removeItem('geminiApiKey');
+        showModal('That API key was not accepted. Try again with a valid key.');
+      } else {
+        showModal('Sorry, that request could not be completed. Please try again later.');
+      }
+    }
+  };
 
-            const payload = {
-                contents: [{ parts: [{ text: userQuery }] }],
-                systemInstruction: {
-                    parts: [{ text: systemInstruction }]
-                },
-            };
+  const ask = (userQuery, systemInstruction) => {
+    const key = sessionStorage.getItem('geminiApiKey');
+    if (key) { callGeminiAPI(key, userQuery, systemInstruction); return; }
+    pending = { userQuery, systemInstruction };
+    apiKeyModal.classList.remove('hidden');
+    apiKeyInput.focus();
+  };
 
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
+  saveApiKeyBtn.addEventListener('click', () => {
+    const key = apiKeyInput.value.trim();
+    if (!key) return;
+    sessionStorage.setItem('geminiApiKey', key);
+    apiKeyModal.classList.add('hidden');
+    apiKeyInput.value = '';
+    if (pending) { callGeminiAPI(key, pending.userQuery, pending.systemInstruction); pending = null; }
+  });
+  apiKeyInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') saveApiKeyBtn.click(); });
+  cancelApiKeyBtn.addEventListener('click', () => { apiKeyModal.classList.add('hidden'); pending = null; });
 
-                if (!response.ok) {
-                    // Handle rate limiting (429) or other errors
-                    if (response.status === 429 && retries > 0) {
-                        // Exponential backoff
-                        await new Promise(resolve => setTimeout(resolve, delay));
-                        return callGeminiAPI(userQuery, systemInstruction, retries - 1, delay * 2);
-                    }
-                    throw new Error(`API Error: ${response.status} ${response.statusText}`);
-                }
-
-                const result = await response.json();
-                const candidate = result.candidates?.[0];
-
-                if (candidate && candidate.content?.parts?.[0]?.text) {
-                    const text = candidate.content.parts[0].text;
-                    hideLoading();
-                    showModal(text);
-                } else {
-                    throw new Error("Invalid response structure from API.");
-                }
-            } catch (error) {
-                console.error("Error calling Gemini API:", error);
-                hideLoading();
-                showModal("Sorry, I couldn't process that request. Please try again later.");
-            }
-        };
-
-        // --- Event Listeners ---
-
-        // Summarize Buttons
-        summarizeButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const section = button.closest('section');
-                if (section) {
-                    // Clone the section to manipulate it without affecting the page
-                    const contentClone = section.cloneNode(true);
-                    // Remove the button from the cloned content
-                    contentClone.querySelector('.ai-btn')?.remove();
-                    // Get the text
-                    const sectionText = contentClone.innerText || contentClone.textContent;
-
-                    const systemPrompt = "You are a helpful assistant. Summarize the following text about machine learning in a single, concise paragraph of 2-3 sentences.";
-
-                    callGeminiAPI(sectionText, systemPrompt);
-                }
-            });
-        });
-
-        // Quiz Button
-        quizButton.addEventListener('click', () => {
-            const article = document.querySelector('article');
-            if (article) {
-                // Clone the article to manipulate it
-                const contentClone = article.cloneNode(true);
-                // Remove buttons and sources
-                contentClone.querySelectorAll('.ai-btn, .ai-btn-inline, #sources, .aside-note').forEach(el => el.remove());
-                // Get the text
-                const articleText = contentClone.innerText || contentClone.textContent;
-
-                const systemPrompt = "You are an AI quiz master. Based on the provided article about machine learning, generate one multiple-choice question with four options (A, B, C, D). Clearly indicate the correct answer and provide a brief, one-sentence explanation for why it is correct.";
-
-                callGeminiAPI(articleText, systemPrompt);
-            }
-        });
-
-        // ELI5 Buttons
-        eli5Buttons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevent any parent click listeners
-                const header = button.closest('h3, h4');
-                let content = header.innerText.replace('✨ ELI5', '').trim();
-
-                // Find the next paragraph to add context
-                let nextElement = header.nextElementSibling;
-                while(nextElement && nextElement.tagName !== 'P') {
-                    nextElement = nextElement.nextElementSibling;
-                }
-                if (nextElement && nextElement.tagName === 'P') {
-                    // Get first sentence of paragraph for context
-                    const pText = nextElement.innerText || nextElement.textContent;
-                    const firstSentence = pText.split('. ')[0] + '.';
-                    content += "\n\nContext: " + firstSentence;
-                }
-
-                const systemPrompt = "You are a helpful assistant. Explain the following machine learning concept like I'm 5 years old, in 2-3 simple sentences. Be very simple and use an analogy if possible.";
-                callGeminiAPI(content, systemPrompt);
-            });
-        });
-
-        // Code Explain Buttons
-        codeExplainButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const codeToExplain = button.dataset.code;
-                const context = button.closest('p').innerText.replace(/✨ Explain Code/g, '').trim();
-
-                const userQuery = `Explain the following code snippet(s): \n\n${codeToExplain}\n\nHere is the paragraph they appeared in for context:\n${context}`;
-                const systemPrompt = "You are a helpful code explainer. Briefly explain what the provided Python code snippet(s) do, focusing on their purpose in machine learning. Keep it concise (2-4 sentences).";
-
-                callGeminiAPI(userQuery, systemPrompt);
-            });
-        });
-
+  summarizeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const section = button.closest('section');
+      if (!section) return;
+      const clone = section.cloneNode(true);
+      clone.querySelectorAll('.ai-btn, .ai-btn-inline').forEach(el => el.remove());
+      ask(clone.innerText || clone.textContent,
+          'Summarize the following text about machine learning in a single concise paragraph of two or three sentences.');
     });
+  });
+
+  if (quizButton) quizButton.addEventListener('click', () => {
+    const article = document.querySelector('.prose');
+    if (!article) return;
+    const clone = article.cloneNode(true);
+    clone.querySelectorAll('.ai-btn, .ai-btn-inline, #sources, .aside-note').forEach(el => el.remove());
+    ask(clone.innerText || clone.textContent,
+        'You are a quiz master. From the provided article about machine learning, write one multiple-choice question with four options (A, B, C, D). State the correct answer and give a one-sentence explanation.');
+  });
+
+  eli5Buttons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const header = button.closest('h3, h4');
+      if (!header) return;
+      let content = header.innerText.replace('✨ ELI5', '').trim();
+      let next = header.nextElementSibling;
+      while (next && next.tagName !== 'P') next = next.nextElementSibling;
+      if (next) {
+        const pText = next.innerText || next.textContent;
+        content += '\n\nContext: ' + pText.split('. ')[0] + '.';
+      }
+      ask(content, "Explain the following machine learning concept as you would to a five-year-old, in two or three simple sentences. Use an analogy if one fits.");
+    });
+  });
+
+  codeExplainButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const codeToExplain = button.dataset.code;
+      const host = button.closest('p');
+      const context = host ? host.innerText.replace(/✨ Explain Code/g, '').trim() : '';
+      ask(`Explain the following code snippet(s):\n\n${codeToExplain}\n\nThe paragraph they appeared in, for context:\n${context}`,
+          'Briefly explain what the provided Python snippet does and why it matters in machine learning. Two to four sentences.');
+    });
+  });
+});
 </script>
 
+<script src="/assets/js/includes.js"></script>
+<script src="/assets/js/site-nav.js"></script>
 </body>
 </html>

@@ -1,55 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evals – Designing, Implementing, and Interpreting AI Evaluation Frameworks</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Inter font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evals — Designing, Implementing and Interpreting AI Evaluation Frameworks</title>
+  <meta name="description" content="Building and reading AI evaluation pipelines: metrics, tooling and agentic behaviour.">
+  <link rel="canonical" href="https://janaka.me/blog/posts/ai-evaluation-frameworks.html">
 
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png?v=1">
 
-        /* Custom styles for code blocks to add a language label */
-        pre[class*="language-"] {
-            position: relative;
-            margin-top: 1.5rem;
-            margin-bottom: 1.5rem;
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
         }
-        pre[class*="language-"]::before {
-            position: absolute;
-            top: -1.25rem;
-            right: 1rem;
-            background-color: #374151; /* gray-700 */
-            color: #d1d5db; /* gray-300 */
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.375rem 0.375rem 0 0; /* rounded-t-md */
-            font-size: 0.75rem; /* text-xs */
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        pre.language-yaml::before { content: 'yaml'; }
-        pre.language-python::before { content: 'python'; }
-        pre.language-bash::before { content: 'bash'; }
+      } catch (e) {}
+    })();
+  </script>
 
-        /* Style for nested lists */
-        ul ul {
-            list-style-type: circle;
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-    </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/subsite.css">
 </head>
-<body class="bg-gray-100 text-gray-800 antialiased">
+<body>
 
-<!-- Main Content Container -->
-<div class="max-w-4xl mx-auto p-6 md:p-12 bg-white shadow-lg rounded-lg my-12">
+<div data-include="/partials/site-nav.html"></div>
+
+<main>
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/blog/" style="color:inherit;text-decoration:none">&larr; Blog</a></p>
+      <div class="prose">
+
 
     <!-- Header -->
     <header class="mb-8">
@@ -857,7 +847,19 @@ print("Estimated factual rate:", factual_rate)
         </div>
     </section>
 
-</div> <!-- /Main Content Container -->
+      </div>
+    </div>
+  </section>
+</main>
 
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Premathilaka &middot; Zug &#127464;&#127469;</span>
+    <span><a href="/blog/">All articles</a> &middot; <a href="mailto:janaka2@gmail.com">janaka2@gmail.com</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js"></script>
+<script src="/assets/js/site-nav.js"></script>
 </body>
 </html>
