@@ -21,18 +21,7 @@
     </style>
 </head>
 <body class="bg-gray-100 leading-relaxed text-gray-800">
-  <nav class="bg-white shadow sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
-      <div class="flex space-x-4 text-sm">
-        <a href="https://janaka.me" class="text-blue-600 font-semibold">Home</a>
-        <a href="https://blog.janaka.me" class="text-blue-600">Blog</a>
-        <a href="https://lab.janaka.me" class="text-blue-600">Labs</a>
-        <a href="https://ai.janaka.me" class="text-blue-600">AI / Agents</a>
-        <a href="#" class="text-blue-600 font-semibold border-b-2 border-blue-600">CV</a>
-        <a href="https://academy.janaka.me" class="text-blue-600 opacity-70 hover:opacity-100">Academy</a>
-      </div>
-    </div>
-  </nav>
+  <div data-include="/partials/site-nav.html"></div>
 
   <header class="bg-gradient-to-r from-blue-50 to-indigo-100 py-12 px-4">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
@@ -224,7 +213,7 @@
           <p class="text-gray-700 mb-2">Share deep dives into Java, Spring Boot, AI & microservices on my blog, demystifying complex topics.</p>
           <p class="text-gray-600 mb-2 text-sm">Role: Author</p>
           <p class="text-gray-600 text-sm mb-3">Tech: Hugo, Markdown, Netlify.</p>
-          <a href="https://blog.janaka.me" class="text-blue-600 text-sm underline">Read Blog</a>
+          <a href="/blog/" class="text-blue-600 text-sm underline">Read Blog</a>
         </div>
       </div>
     </div>
@@ -332,5 +321,7 @@
       © 2025 Janaka Premathilaka. Built with ♥ and Tailwind CSS. Last updated October 2025.
     </div>
   </footer>
+<script src="/assets/js/includes.js"></script>
+<script src="/assets/js/site-nav.js"></script>
 </body>
 </html>

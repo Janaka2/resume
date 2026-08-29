@@ -31,7 +31,7 @@ window.JP_I18N = (function () {
     aboutH2: 'Bewährte Enterprise-Technologie, praktische KI.',
     aboutP1: 'Ich baue grundsolide Enterprise-Java-Systeme und führe sie ins KI-Zeitalter. Seit über 22 Jahren liefere ich geschäftskritische Software für Banken und den öffentlichen Sektor — mit Fokus auf Automatisierung, die wirklich etwas bewegt: LLMs, RAG, LangChain, CrewAI, LangGraph, AutoGen und das OpenAI Agents SDK mit Spring Boot. Man kennt mich für ruhige, verlässliche Umsetzung: Ich gebe Teams Halt, schaffe Klarheit und liefere Ergebnisse. Von der Modernisierung von Legacy-Systemen bis zur Performance-Optimierung von Handelsplattformen: Ich bringe zu Ende, was ich beginne — ohne Abkürzungen. Heute verbinde ich bewährte Enterprise-Technologie mit praktischer KI zu Lösungen, die in der echten Welt funktionieren. Mein Prinzip ist einfach: Finde einen Weg — oder schaffe einen.',
     aboutP2: '<b>Werte:</b> Innovation, Zusammenarbeit, Verlässlichkeit, kontinuierliches Lernen — und Resultate. Ich verwandle Ideen in skalierbare Lösungen, die das Geschäft voranbringen.',
-    academyBtn: 'Janaka Academy beitreten ↗',
+    academyBtn: 'Janaka Academy beitreten',
     academyP: 'Meine Mission ist es, den Riesen in tausend Herzen zu wecken — und jeden so zu begleiten, dass er mich übertrifft: nicht nur im Engineering, sondern auch in geistiger Tiefe und ethischer Integrität. Schritt für Schritt entsteht so eine Gruppe technischer Vordenker, die mit Mitgefühl innovieren, nach Prinzipien leben und die Welt für alle einfacher machen.',
 
     /* ---- contact / skills / languages cards ---- */
@@ -148,7 +148,7 @@ window.JP_I18N = (function () {
     j6c: '<h3>Projekte mit globaler Wirkung</h3><p class="jw">Langfristige Vision</p><p>Enterprise-KI-Lösungen</p><p>Skalierbare intelligente Systeme</p>',
     j6d: '<h3>Technologie-Leadership</h3><p class="jw">Karriereziel</p><p>Architektur-Exzellenz</p><p>Mentoring der nächsten Engineer-Generation</p>',
     j6e: '<h3>Start der Janaka Academy</h3><p class="jw">02.11.2025</p><p>1’000+ Engineers weltweit stärken</p><p>Schritt-für-Schritt-Training, damit andere mich übertreffen — technisch und ethisch</p>',
-    j6btn: 'Beitreten ↗',
+    j6btn: 'Beitreten',
 
     /* ---- key metrics ---- */
     kmEyebrow: 'Kennzahlen',

@@ -23,19 +23,7 @@
     </style>
 </head>
 <body class="bg-white text-slate-800 leading-relaxed">
-<nav class="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
-    <div class="max-w-[var(--golden-wide)] mx-auto px-5 py-4 flex flex-wrap gap-4 justify-between items-center">
-        <a href="#" class="font-extrabold tracking-wide text-lg text-amber-700">Janaka AI / Agents</a>
-        <div class="flex flex-wrap gap-4 text-sm">
-            <a href="https://janaka.me" class="text-slate-600 hover:text-amber-700">Home</a>
-            <a href="https://blog.janaka.me" class="text-slate-600 hover:text-amber-700">Blog</a>
-            <a href="https://lab.janaka.me" class="text-slate-600 hover:text-amber-700">Labs</a>
-            <a href="#" class="text-amber-700 font-semibold border-b-2 border-amber-600">AI / Agents</a>
-            <a href="https://cv.janaka.me" class="text-slate-600 hover:text-amber-700">CV</a>
-            <a href="https://academy.janaka.me" class="text-slate-600 hover:text-amber-700">Academy</a>
-        </div>
-    </div>
-</nav>
+<div data-include="/partials/site-nav.html"></div>
 
 <header class="border-b border-slate-200 bg-gradient-to-b from-amber-50 to-white">
     <div class="max-w-[var(--golden-wide)] mx-auto px-5 py-16">
@@ -171,7 +159,7 @@ Return strict JSON payload for selected capability.
             <h2 class="text-2xl font-bold text-slate-900">Build something meaningful this week.</h2>
             <p class="text-slate-700 text-sm">Pick one trend, one workflow, and one measurable outcome. Progress beats perfection.</p>
         </div>
-        <a href="https://lab.janaka.me" class="inline-flex items-center justify-center px-5 py-3 rounded-lg bg-amber-600 text-white font-semibold hover:bg-amber-700">Launch in Labs →</a>
+        <a href="/lab/" class="inline-flex items-center justify-center px-5 py-3 rounded-lg bg-amber-600 text-white font-semibold hover:bg-amber-700">Launch in Labs →</a>
     </section>
 </main>
 
@@ -182,5 +170,7 @@ Return strict JSON payload for selected capability.
 <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 </script>
+<script src="/assets/js/includes.js"></script>
+<script src="/assets/js/site-nav.js"></script>
 </body>
 </html>
