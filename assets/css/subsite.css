@@ -38,6 +38,57 @@
 }
 .card.item .links a:hover { text-decoration: underline; }
 
+/* ---- academy module pages ----
+   These already used .container/.card/.grid/.badge/.btn/.actions with their
+   own inline stylesheet. Dropping that sheet and defining the few names
+   theme.css does not carry lets the existing markup work unchanged. */
+.container { max-width: 1020px; margin: 0 auto; padding: 8px 24px 64px; }
+.container h1 {
+  font-family: var(--font-head); font-weight: 800;
+  font-size: clamp(1.85rem, 4.2vw, 2.6rem);
+  line-height: 1.07; letter-spacing: -.022em; margin: 12px 0 14px;
+}
+.container > p { color: var(--tx2); max-width: 68ch; }
+.container section { margin-top: 28px; }
+.container h2 { font-family: var(--font-head); font-weight: 700; font-size: 1.15rem; margin-bottom: 8px; }
+.container h3 { font-family: var(--font-head); font-weight: 700; font-size: 1rem; margin: 16px 0 4px; }
+.container ul, .container ol {
+  margin: 8px 0 0 20px; display: grid; gap: 6px;
+  color: color-mix(in srgb, var(--tx) 88%, var(--tx2));
+}
+.card h2 { font-family: var(--font-head); font-weight: 700; font-size: 1.02rem; margin-bottom: 4px; }
+.btn.secondary { background: var(--bg2); color: var(--tx); border-color: var(--ln); }
+
+table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: .95rem; }
+th, td {
+  border-top: 1px solid var(--ln); padding: 10px 12px; text-align: left;
+  vertical-align: top; color: color-mix(in srgb, var(--tx) 88%, var(--tx2));
+}
+th, td:first-child { font-weight: 600; color: var(--tx); }
+
+/* ---- filter toolbar (academy curriculum) ---- */
+.toolbar { display: flex; align-items: flex-end; justify-content: space-between;
+           flex-wrap: wrap; gap: 14px; }
+.toolbar h2 { margin-bottom: 0; }
+input.filter {
+  width: 260px; max-width: 100%;
+  font: 400 .92rem var(--font-sans); color: var(--tx);
+  background: var(--bg2); border: 1px solid var(--ln);
+  border-radius: 9px; padding: 9px 12px;
+}
+input.filter:focus { outline: 2px solid var(--ac); outline-offset: 1px; }
+.card.item .tag {
+  font-family: var(--font-mono); font-size: .66rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ac);
+}
+.card.item .daynum {
+  font-family: var(--font-mono); font-size: .66rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--tx2);
+}
+a.card { text-decoration: none; color: inherit; display: block; }
+a.card:hover h3 { color: var(--ac); }
+.empty { color: var(--tx2); font-size: .95rem; padding: 18px 0; }
+
 /* ---- post list (blog) ---- */
 .posts { list-style: none; display: grid; gap: 0; margin-top: 4px;
          border-top: 1px solid var(--ln); }

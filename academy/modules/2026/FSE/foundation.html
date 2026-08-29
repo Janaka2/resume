@@ -1,195 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foundation: Engineering Mindset & Setup</title>
-    <style>
-        :root {
-            --accent: #2563eb;
-            --accent-soft: #dbeafe;
-            --bg: #f8fafc;
-            --surface: #ffffff;
-            --text: #0f172a;
-            --muted: #475569;
-            --border: #e2e8f0;
-            --success: #16a34a;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foundation: Engineering Mindset & Setup</title>
+  <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/foundation.html">
 
-        * {
-            box-sizing: border-box;
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
         }
+      } catch (e) {}
+    })();
+  </script>
 
-        body {
-            margin: 0;
-            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-            line-height: 1.65;
-            color: var(--text);
-            background: linear-gradient(180deg, #ffffff, var(--bg));
-        }
-
-        .container {
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 2rem 1rem 4rem;
-        }
-
-        .hero,
-        .card,
-        details {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
-        }
-
-        .hero {
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .badge {
-            display: inline-block;
-            border: 1px solid #93c5fd;
-            background: var(--accent-soft);
-            color: var(--accent);
-            border-radius: 999px;
-            padding: .2rem .75rem;
-            font-size: .8rem;
-            font-weight: 600;
-            margin-bottom: .6rem;
-        }
-
-        h1 {
-            margin: 0;
-            font-size: clamp(1.9rem, 4vw, 2.6rem);
-        }
-
-        h2 {
-            margin-top: 0;
-            margin-bottom: .5rem;
-            color: #1e3a8a;
-        }
-
-        h3 {
-            margin: 0;
-            font-size: 1rem;
-        }
-
-        p {
-            color: var(--muted);
-            margin: .5rem 0;
-        }
-
-        section.card {
-            padding: 1.2rem;
-            margin-top: 1rem;
-        }
-
-        ul {
-            margin: .4rem 0 0 1.25rem;
-            color: var(--muted);
-        }
-
-        li {
-            margin: .45rem 0;
-        }
-
-        .checklist {
-            list-style: none;
-            margin-left: 0;
-            padding-left: 0;
-        }
-
-        .checklist li {
-            display: flex;
-            align-items: start;
-            gap: .55rem;
-            padding: .25rem 0;
-        }
-
-        input[type="checkbox"] {
-            margin-top: .25rem;
-            accent-color: var(--accent);
-        }
-
-        details {
-            margin-top: .9rem;
-            padding: .85rem 1rem;
-            background: #f8fbff;
-        }
-
-        summary {
-            cursor: pointer;
-            font-weight: 600;
-            color: #1d4ed8;
-        }
-
-        .progress-wrap {
-            margin-top: .9rem;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            background: #eef2ff;
-        }
-
-        .progress {
-            background: linear-gradient(90deg, #2563eb, #1d4ed8);
-            height: 22px;
-            color: #fff;
-            font-size: .8rem;
-            font-weight: 600;
-            text-align: center;
-            line-height: 22px;
-            white-space: nowrap;
-        }
-
-        .progress.day {
-            width: 10%;
-            min-width: 190px;
-        }
-
-        .progress.week {
-            width: 20%;
-            min-width: 200px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .quote {
-            border-left: 4px solid var(--accent);
-            background: #eff6ff;
-            color: #1e3a8a;
-            padding: .85rem 1rem;
-            border-radius: 10px;
-            font-weight: 500;
-            margin-top: .8rem;
-        }
-
-        code {
-            background: #f1f5f9;
-            border: 1px solid #e2e8f0;
-            padding: .1rem .35rem;
-            border-radius: 6px;
-            font-size: .92em;
-        }
-
-        .final-note {
-            margin-top: 1rem;
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 12px;
-            padding: 1rem;
-            color: #166534;
-        }
-    </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/subsite.css">
 </head>
 <body>
+
+<div data-include="/partials/site-nav.html"></div>
 <main class="container">
     <section class="hero">
         <span class="badge">Foundation Module</span>
@@ -277,5 +114,14 @@
         <p class="final-note">The future engineer you’re becoming starts now. Let's do this! 🚀</p>
     </section>
 </main>
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js"></script>
+<script src="/assets/js/site-nav.js"></script>
 </body>
 </html>

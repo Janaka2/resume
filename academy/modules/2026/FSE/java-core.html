@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Core Java Mastery (Java 22) | Janaka Academy</title>
-  <style>
-    :root { --accent: #2563eb; --bg:#f8fafc; --text:#0f172a; --muted:#475569; }
-    * { box-sizing: border-box; }
-    body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--text); background:linear-gradient(180deg,#fff, var(--bg)); }
-    .container { max-width: 980px; margin:0 auto; padding: 2rem 1rem 4rem; }
-    .badge { display:inline-block; border:1px solid color-mix(in srgb, var(--accent) 35%, #fff); background: color-mix(in srgb, var(--accent) 10%, #fff); color: var(--accent); border-radius: 999px; padding: .25rem .75rem; font-weight: 600; font-size: .8rem; }
-    h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: .5rem 0 1rem; }
-    p { color: var(--muted); line-height: 1.65; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; margin-top:1.25rem; }
-    .card { background:#fff; border:1px solid #e2e8f0; border-radius:14px; padding:1rem 1.1rem; box-shadow:0 1px 2px rgba(15,23,42,.04); }
-    ul { margin:.5rem 0 0 1.2rem; color:var(--muted); }
-    li { margin:.5rem 0; }
-    table { width:100%; border-collapse: collapse; margin-top: .75rem; }
-    td { border-top:1px solid #e2e8f0; padding: .7rem; vertical-align: top; color:var(--muted); }
-    td:first-child { font-weight:600; color:#0f172a; width: 150px; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .actions { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1.4rem; }
-    .btn { display:inline-block; background:var(--accent); color:white; padding:.65rem 1rem; border-radius:10px; font-weight:600; }
-    .btn.secondary { background:white; color:var(--accent); border:1px solid color-mix(in srgb, var(--accent) 45%, #fff); }
-  </style>
+  <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/java-core.html">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/subsite.css">
 </head>
 <body>
+
+<div data-include="/partials/site-nav.html"></div>
   <main class="container">
     <span class="badge">Backend Core</span>
     <h1>Core Java Mastery (Java 22)</h1>
@@ -71,5 +71,14 @@
       <a class="btn secondary" href="./index.html">Open Academy Index</a>
     </div>
   </main>
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js"></script>
+<script src="/assets/js/site-nav.js"></script>
 </body>
 </html>

@@ -1,17 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Design Patterns & Architecture Playground · Janaka Academy</title>
-  <meta name="description" content="A simple, practical blog-style guide to choosing Java design patterns for real business situations." />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    html, body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-  </style>
+  <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/design-patterns-architecture-playbook.html">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/subsite.css">
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body>
+
+<div data-include="/partials/site-nav.html"></div>
   <header class="border-b border-gray-200 bg-white">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8">
       <a href="./Elite-Full%E2%80%91Stack-Engineering-2026-Edition.html#modules" class="text-sm text-blue-700 hover:underline">← Back to Curriculum Modules</a>
@@ -82,5 +97,14 @@
       <a href="https://github.com/Janaka2/DesignPatterns" target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-2 rounded-xl bg-blue-700 px-4 py-2 text-white text-sm font-medium hover:bg-blue-800">Open GitHub Repository<span aria-hidden>↗</span></a>
     </section>
   </main>
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js"></script>
+<script src="/assets/js/site-nav.js"></script>
 </body>
 </html>
