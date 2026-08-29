@@ -1,0 +1,167 @@
+name: Daily Academy Note
+
+# Creates one dated note page per day under academy/modules/<year>/FSE/ and
+# links it from that year's note index.
+#
+# This lives at the repository root because GitHub only runs workflows from
+# .github/workflows/ at the root — under academy/.github/workflows/ it was
+# inert. It is separate from Daily Learning Generator: that one produces the
+# topic-rotating pages (<date>-<topic>.html), this one produces the free-form
+# daily note (<date>-note.html).
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Note date as YYYY-MM-DD. Defaults to today (UTC)."
+        required: false
+        default: ""
+  schedule:
+    # 07:00 UTC daily
+    - cron: "0 7 * * *"
+
+# Without this the default GITHUB_TOKEN is read-only and the push fails.
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-academy-note
+  cancel-in-progress: false
+
+jobs:
+  add_note:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Create today's note
+        id: note
+        env:
+          INPUT_DATE: ${{ inputs.date }}
+        run: |
+          python <<'PY'
+          import os, re
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          raw = (os.getenv("INPUT_DATE") or "").strip()
+          if raw:
+              if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", raw):
+                  raise SystemExit(f"date must be YYYY-MM-DD, got {raw!r}")
+              today = raw
+          else:
+              today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+          # Derive the year from the note's own date. The previous version had
+          # 2025 hard-coded, so every 2026 note landed in the 2025 folder.
+          year = today[:4]
+          fse = Path("academy") / "modules" / year / "FSE"
+          fse.mkdir(parents=True, exist_ok=True)
+
+          page = fse / f"{today}-note.html"
+          index = fse / "notes-index.html"
+
+          html = f"""<!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Daily note — {today}</title>
+            <link rel="canonical" href="https://janaka.me/academy/modules/{year}/FSE/{today}-note.html" />
+            <style>
+              body {{ font-family: system-ui, Arial, sans-serif; line-height: 1.6;
+                     max-width: 900px; margin: 40px auto; padding: 0 20px; color: #222; }}
+              h1, h2 {{ color: #0f172a; }}
+              .meta {{ color: #555; margin-bottom: 24px; }}
+              .box {{ background: #f8fafc; border-left: 4px solid #2563eb;
+                     padding: 16px; margin: 20px 0; }}
+              code, pre {{ background: #f1f5f9; padding: 2px 6px; border-radius: 4px; }}
+              pre {{ padding: 12px; overflow-x: auto; }}
+              a {{ color: #2563eb; }}
+            </style>
+          </head>
+          <body>
+            <p><a href="/academy/">&larr; Back to Academy</a></p>
+            <h1>Daily note — {today}</h1>
+            <p class="meta">Free-form log for {today}. Written by hand; the file is
+               scaffolded automatically so the day always has somewhere to go.</p>
+
+            <div class="box">
+              <strong>Purpose:</strong> capture one thing worth remembering, in
+              enough detail that it is still useful in six months.
+            </div>
+
+            <h2>What I worked on</h2>
+            <p><em>Replace with the day's work.</em></p>
+
+            <h2>What I learned</h2>
+            <p><em>One idea, stated plainly.</em></p>
+
+            <h2>Commands and snippets</h2>
+            <pre><code># worth keeping</code></pre>
+
+            <h2>Open questions</h2>
+            <ul><li><em>What is still unclear?</em></li></ul>
+          </body>
+          </html>
+          """
+
+          created = False
+          if page.exists():
+              print(f"note already exists, leaving it alone: {page}")
+          else:
+              page.write_text(html, encoding="utf-8")
+              created = True
+              print(f"created {page}")
+
+          # Keep a per-year index so notes are never orphaned. Newest first.
+          entry = f'    <li><a href="{page.name}">{today}</a></li>'
+          if index.exists():
+              lines = index.read_text(encoding="utf-8").splitlines()
+          else:
+              lines = [
+                  "<!DOCTYPE html>", '<html lang="en">', "<head>",
+                  '  <meta charset="UTF-8" />',
+                  '  <meta name="viewport" content="width=device-width, initial-scale=1.0" />',
+                  f"  <title>Daily notes — {year}</title>", "</head>", "<body>",
+                  '  <p><a href="/academy/">&larr; Back to Academy</a></p>',
+                  f"  <h1>Daily notes — {year}</h1>", "  <ul>", "  </ul>",
+                  "</body>", "</html>",
+              ]
+
+          # Compare on the href, not the whole line, so re-runs cannot double up.
+          if f'href="{page.name}"' not in "\n".join(lines):
+              lines.insert(lines.index("  <ul>") + 1, entry)
+              index.write_text("\n".join(lines) + "\n", encoding="utf-8")
+              print(f"indexed in {index}")
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
+              fh.write(f"date={today}\n")
+              fh.write(f"created={'true' if created else 'false'}\n")
+          PY
+
+      - name: Commit and push
+        env:
+          # Read from the step output — shell variables do not survive between
+          # steps, which is why the old commit message was always empty.
+          NOTE_DATE: ${{ steps.note.outputs.date }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add academy/modules
+
+          if git diff --cached --quiet; then
+            echo "nothing to commit"
+            exit 0
+          fi
+
+          git commit -m "Add daily academy note for ${NOTE_DATE}"
+          git push
