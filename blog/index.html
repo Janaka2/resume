@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog – Janaka Premathilaka</title>
+    <meta name="description"
+          content="Technical notes on Java, Spring Boot, Kafka, RAG, OpenAI SDK, and agentic architectures.">
+    <link rel="canonical" href="https://blog.janaka.me/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let pendingApiCall = null; // Store pending request while asking for key
+
+            const whyReadBtn = document.getElementById('whyReadBtn');
+            const generateTweetBtn = document.getElementById('generateTweetBtn');
+            const getKeyConceptsBtn = document.getElementById('getKeyConceptsBtn');
+            const modal = document.getElementById('geminiModal');
+            const closeModal = document.getElementById('closeModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+
+            // API Key Modal elements
+            const apiKeyModal = document.getElementById('apiKeyModal');
+            const apiKeyInput = document.getElementById('apiKeyInput');
+            const saveApiKeyBtn = document.getElementById('saveApiKeyBtn');
+            const cancelApiKeyBtn = document.getElementById('cancelApiKeyBtn');
+
+
+            // --- Modal Controls ---
+            const showModal = (title, content) => {
+                modalTitle.innerText = title;
+                modalContent.innerHTML = content.replace(/\n/g, '<br>'); // Preserve line breaks
+                modal.classList.remove('hidden');
+            };
+
+            const hideModal = () => {
+                modal.classList.add('hidden');
+            };
+
+            closeModal.addEventListener('click', hideModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    hideModal();
+                }
+            });
+
+            // --- Loading Spinner Controls ---
+            const showLoading = () => loadingSpinner.classList.remove('hidden');
+            const hideLoading = () => loadingSpinner.classList.add('hidden');
+
+            // --- Gemini API Call Function ---
+            const callGeminiAPI = async (apiKey, userQuery, systemInstruction, modalTitleText, retries = 3, delay = 1000) => {
+                showLoading();
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: userQuery }] }],
+                    systemInstruction: {
+                        parts: [{ text: systemInstruction }]
+                    },
+                };
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        if (response.status === 429 && retries > 0) {
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                            return callGeminiAPI(userQuery, systemInstruction, modalTitleText, retries - 1, delay * 2);
+                        }
+                        throw new Error(`API Error: ${response.status} ${response.statusText}`);
+                    }
+
+                    const result = await response.json();
+                    const candidate = result.candidates?.[0];
+
+                    if (candidate && candidate.content?.parts?.[0]?.text) {
+                        const text = candidate.content.parts[0].text;
+                        hideLoading();
+                        showModal(modalTitleText, text);
+                    } else {
+                        throw new Error("Invalid response structure from API.");
+                    }
+                } catch (error) {
+                    console.error("Error calling Gemini API:", error);
+                    hideLoading();
+                    // Check if error is due to invalid API key
+                    if (error.message.includes("400") || error.message.includes("API key not valid")) {
+                        sessionStorage.removeItem('geminiApiKey'); // Clear bad key
+                        showModal("Error", "Your API key appears to be invalid. Please refresh and try again.");
+                    } else {
+                        showModal("Error", "Sorry, I couldn't process that request. Please try again later.");
+                    }
+                }
+            };
+
+            // --- New function to handle API calls and check for key ---
+            const handleApiCall = (userQuery, systemInstruction, modalTitleText) => {
+                const apiKey = sessionStorage.getItem('geminiApiKey');
+
+                if (apiKey) {
+                    callGeminiAPI(apiKey, userQuery, systemInstruction, modalTitleText);
+                } else {
+                    // No key found, store the request and show the API modal
+                    pendingApiCall = { userQuery, systemInstruction, modalTitleText };
+                    apiKeyModal.classList.remove('hidden');
+                    apiKeyInput.focus();
+                }
+            };
+
+            // --- API Key Modal Listeners ---
+            saveApiKeyBtn.addEventListener('click', () => {
+                const key = apiKeyInput.value.trim();
+                if (key) {
+                    sessionStorage.setItem('geminiApiKey', key);
+                    apiKeyModal.classList.add('hidden');
+                    apiKeyInput.value = ""; // Clear input
+
+                    if (pendingApiCall) {
+                        // If a call was pending, execute it now with the new key
+                        callGeminiAPI(key, pendingApiCall.userQuery, pendingApiCall.systemInstruction, pendingApiCall.modalTitleText);
+                        pendingApiCall = null; // Clear pending call
+                    }
+                }
+            });
+
+            cancelApiKeyBtn.addEventListener('click', () => {
+                apiKeyModal.classList.add('hidden');
+                pendingApiCall = null; // Cancel any pending call
+            });
+
+
+            // --- Event Listener for "Why Read" button ---
+            whyReadBtn.addEventListener('click', () => {
+                const title = document.getElementById('articleTitle').innerText;
+                const summary = document.getElementById('articleSummary').innerText;
+
+                const userQuery = `Based on the following article title and summary, please generate a few compelling bullet points about why someone (like a developer, student, or tech enthusiast) should read this article.\n\nTitle: ${title}\nSummary: ${summary}`;
+
+                const systemPrompt = "You are a marketing assistant for a tech blog. Your job is to generate concise, exciting, and benefit-oriented bullet points (3-4) to convince a user to read an article. Use asterisks for bullet points.";
+
+                handleApiCall(userQuery, systemPrompt, "✨ Why You Should Read This");
+            });
+
+            // --- Event Listener for "Generate Tweet" button ---
+            generateTweetBtn.addEventListener('click', () => {
+                const title = document.getElementById('articleTitle').innerText;
+                const summary = document.getElementById('articleSummary').innerText;
+
+                const userQuery = `Generate a short, engaging tweet (under 280 characters) to promote the following blog post. Include the title, a brief hook from the summary, and the placeholder URL "[YOUR_BLOG_URL]".\n\nTitle: ${title}\nSummary: ${summary}`;
+
+                const systemPrompt = "You are a social media marketing expert for a tech blog. Your job is to generate a concise and catchy tweet to encourage clicks. Use 1-2 relevant hashtags (like #MachineLearning, #AI).";
+
+                handleApiCall(userQuery, systemPrompt, "✨ Share on X (Twitter)");
+            });
+
+            // --- Event Listener for "Key Concepts" button ---
+            getKeyConceptsBtn.addEventListener('click', () => {
+                const title = document.getElementById('articleTitle').innerText;
+                const summary = document.getElementById('articleSummary').innerText;
+
+                const userQuery = `Based on the following article title and summary, please extract the key technical concepts and topics mentioned. List them as bullet points.\n\nTitle: ${title}\nSummary: ${summary}`;
+
+                const systemPrompt = "You are a helpful AI assistant. Your job is to extract the main technical topics from a text. List them clearly using asterisk bullet points.";
+
+                handleApiCall(userQuery, systemPrompt, "✨ Key Concepts");
+            });
+
+        });
+    </script>
+
+    <!-- Favicon set (optional paths; place your files in assets/icons if needed) -->
+    <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg?v=1"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png?v=1"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16.png?v=1"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png?v=1"/>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 leading-relaxed text-gray-800">
+<nav class="bg-white shadow sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto flex justify-between items-center py-4 px-6">
+    <div class="flex space-x-4 text-sm">
+      <a href="https://janaka.me" class="text-blue-600 font-semibold">Home</a>
+      <a href="https://blog.janaka.me" class="text-indigo-600 font-semibold border-b-2 border-indigo-600">Blog</a>
+      <a href="https://lab.janaka.me" class="text-blue-600 hover:text-indigo-600">Lab</a>
+      <a href="https://ai.janaka.me" class="text-blue-600 hover:text-indigo-600">AI / Agents</a>
+      <a href="https://cv.janaka.me" class="text-blue-600 hover:text-indigo-600">CV</a>
+      <a href="https://academy.janaka.me" class="text-blue-600 opacity-70 hover:opacity-100">Academy</a>
+    </div>
+  </div>
+</nav>
+
+<header class="bg-gradient-to-r from-blue-50 to-indigo-100 py-12 text-center">
+  <img src="./assets/icons/blog-icon.png" alt="Janaka Academy Icon" class="w-24 h-24 md:w-28 md:h-28 mx-auto mb-6" />
+  <div class="max-w-6xl mx-auto">
+    <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Blog</h1>
+    <p class="text-xl text-gray-700 mb-6">Clear, hands-on articles with diagrams and code.</p>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto py-12 px-4">
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- The blog summary card -->
+      <article class="bg-white rounded-lg shadow p-6 flex flex-col max-w-md mx-auto">
+          <h2 class="font-semibold text-blue-700 mb-2">
+              <!-- The link points to your main article file -->
+              <a class="hover:underline" href="./posts/machine-learning-blog.html" id="articleTitle">
+                  Machine Learning: A Comprehensive Top-Down Guide
+              </a>
+          </h2>
+          <p class="text-sm text-gray-500 mb-4">Oct 2025 • 60 min read</p>
+
+          <!-- This is the updated summary text based on your article -->
+          <p class="text-gray-700 flex-grow" id="articleSummary">
+              A comprehensive, top-down introduction to core machine learning concepts. This guide explores the complete ML workflow, from data analysis (stats, visualization) and preprocessing to fundamental algorithms like regression, classification, and clustering.
+          </p>
+
+          <div class="mt-4 flex flex-wrap gap-2 justify-between items-center">
+              <!-- The link points to your main article file -->
+              <a class="text-indigo-600 text-sm hover:underline" href="./posts/machine-learning-blog.html">Read more →</a>
+
+              <div class="flex gap-2">
+                  <!-- GEMINI FEATURE BUTTON 1 -->
+                  <button id="whyReadBtn" class="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                      ✨ Why read this?
+                  </button>
+                  <!-- NEW GEMINI FEATURE BUTTON 2 -->
+                  <button id="generateTweetBtn" class="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                      ✨ Generate Tweet
+                  </button>
+                  <!-- NEW GEMINI FEATURE BUTTON 3 -->
+                  <button id="getKeyConceptsBtn" class="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                      ✨ Key Concepts
+                  </button>
+              </div>
+          </div>
+      </article>
+
+
+
+
+
+      <article class="bg-white rounded-lg shadow p-6 flex flex-col">
+          <h2 class="font-semibold text-blue-700 mb-2">
+              <!-- The link points to your main article file -->
+              <a class="hover:underline" href="./posts/machine-learning-blog.html">
+                  Machine Learning: A Comprehensive Top-Down Guide
+              </a>
+          </h2>
+          <p class="text-sm text-gray-500 mb-4">Oct 2025 • 60 min read</p>
+
+          <!-- This is the updated summary text based on your article -->
+          <p class="text-gray-700 flex-grow">
+              A comprehensive, top-down introduction to core machine learning concepts. This guide explores the complete ML workflow, from data analysis (stats, visualization) and preprocessing to fundamental algorithms like regression, classification, and clustering.
+          </p>
+
+          <!-- The link points to your main article file -->
+          <a class="mt-4 text-indigo-600 text-sm hover:underline" href="./posts/machine-learning-blog.html">Read more
+              →</a>
+      </article>
+
+      <article class="bg-white rounded-lg shadow p-6 flex flex-col">
+          <h2 class="font-semibold text-blue-700 mb-2">
+              <a class="hover:underline" href="./posts/ai-evaluation-frameworks.html">
+                  Evals – Designing, Implementing, and Interpreting AI Evaluation Frameworks
+              </a>
+          </h2>
+          <p class="text-sm text-gray-500 mb-4">Oct 2025 • 60 min read</p>
+          <p class="text-gray-700 flex-grow">
+              A deep technical guide to building and interpreting AI evaluation pipelines—from model accuracy to agentic
+              behavior, metrics, tools, code, and future trends.
+          </p>
+          <a class="mt-4 text-indigo-600 text-sm hover:underline" href="./posts/ai-evaluation-frameworks.html">Read more
+              →</a>
+      </article>
+    <article class="bg-white rounded-lg shadow p-6 flex flex-col">
+      <h2 class="font-semibold text-blue-700 mb-2"><a href="./posts/mcp-agent-integration.html" class="hover:underline">MCP for Agent Integrations</a></h2>
+      <p class="text-sm text-gray-500 mb-4">Oct 2025 • 10 min read</p>
+      <p class="text-gray-700 flex-grow">Understand multi-capability prompts and integrate external tools safely (schema, capabilities, auth, guardrails).</p>
+      <a href="./posts/mcp-agent-integration.html" class="mt-4 text-indigo-600 text-sm hover:underline">Read more →</a>
+    </article>
+    <article class="bg-white rounded-lg shadow p-6 flex flex-col">
+      <h2 class="font-semibold text-blue-700 mb-2"><a href="./posts/rag-faiss-patterns.html" class="hover:underline">RAG with FAISS: Chunking, MMR, Re-ranking</a></h2>
+      <p class="text-sm text-gray-500 mb-4">Learn production-ready retrieval patterns with parameters explained and code you can copy.</p>
+      <p class="text-gray-700 flex-grow">Deep dive into vector search, chunk sizing and re-ranking strategies to get high-quality retrieval results.</p>
+      <a href="./posts/rag-faiss-patterns.html" class="mt-4 text-indigo-600 text-sm hover:underline">Read more →</a>
+    </article>
+    <article class="bg-white rounded-lg shadow p-6 flex flex-col">
+      <h2 class="font-semibold text-blue-700 mb-2"><a href="./posts/spring-kafka-deadletter.html" class="hover:underline">Spring Boot + Kafka: Dead Letter Strategy That Scales</a></h2>
+      <p class="text-sm text-gray-500 mb-4">Design fault-tolerant consumers and observability to keep business calm during incidents.</p>
+      <p class="text-gray-700 flex-grow">Use DLQ patterns, redrive policies and monitoring to handle failures at scale.</p>
+      <a href="./posts/spring-kafka-deadletter.html" class="mt-4 text-indigo-600 text-sm hover:underline">Read more →</a>
+    </article>
+  </div>
+    <!-- Gemini Modal -->
+    <div id="geminiModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl max-w-lg w-full max-h-[80vh] flex flex-col">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h3 id="modalTitle" class="text-xl font-semibold text-gray-900">✨ AI Assistant</h3>
+                <button id="closeModal" class="text-gray-400 hover:text-gray-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div id="modalContent" class="p-6 text-gray-700 leading-relaxed overflow-y-auto whitespace-pre-wrap">
+                <!-- Content will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- API Key Modal (NEW) -->
+    <div id="apiKeyModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-[70] hidden">
+        <div class="bg-white rounded-lg shadow-xl max-w-sm w-full flex flex-col">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h3 class="text-xl font-semibold text-gray-900">Enter API Key</h3>
+                <button id="cancelApiKeyBtn" class="text-gray-400 hover:text-gray-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <p class="text-sm text-gray-600">To use this feature, please provide your Gemini API key. Your key will be stored in session storage.</p>
+                <div>
+                    <label for="apiKeyInput" class="block text-sm font-medium text-gray-700">Gemini API Key</label>
+                    <input type="password" id="apiKeyInput" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm" placeholder="Enter your key...">
+                </div>
+            </div>
+            <div class="flex justify-end p-4 bg-gray-50 border-t rounded-b-lg">
+                <button id="saveApiKeyBtn" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                    Save and Continue
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-[60] hidden">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-purple-500"></div>
+    </div>
+</main>
+
+<footer class="border-t mt-12 pt-6 text-sm text-gray-500">
+  <div class="max-w-6xl mx-auto text-center">
+    <p>© 2025 Janaka Premathilaka. Built with passion | <a href="mailto:janaka2@gmail.com" class="text-indigo-600 hover:underline">Contact</a></p>
+  </div>
+</footer>
+</body>
+</html>
