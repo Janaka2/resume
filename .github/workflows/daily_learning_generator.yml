@@ -1,0 +1,222 @@
+name: Daily Learning Generator
+
+# Generates the topic-rotating daily page under academy/modules/<year>/FSE/,
+# appends it to that year's learning-log.md, and links it from the year's
+# "Elite Full-Stack Engineering" page between the DAILY_LINKS markers.
+#
+# Lives at the repository root: GitHub only runs workflows from
+# .github/workflows/ at the root, so under academy/ this never fired.
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: "Page title"
+        required: false
+        default: ""
+      topic:
+        description: "Topic slug, e.g. linux-cli or spring-boot"
+        required: false
+        default: ""
+  schedule:
+    # Runs every day at 05:17 UTC
+    - cron: "17 5 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-learning-generator
+  cancel-in-progress: false
+
+jobs:
+  generate-daily-page:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate daily page and update navigation
+        env:
+          INPUT_TITLE: ${{ inputs.title }}
+          INPUT_TOPIC: ${{ inputs.topic }}
+        run: |
+          python <<'PY'
+          import os
+          import re
+          from datetime import datetime, timezone
+          from pathlib import Path
+          from urllib.parse import quote
+
+          today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+          # The year comes from the date. This used to be hard-coded to 2025,
+          # so every 2026 page was written into the 2025 folder.
+          year = today[:4]
+          FSE_DIR = Path("academy") / "modules" / year / "FSE"
+          FSE_DIR.mkdir(parents=True, exist_ok=True)
+
+          title = (os.getenv("INPUT_TITLE") or "").strip()
+          topic = (os.getenv("INPUT_TOPIC") or "").strip()
+
+          topic_pool = [
+              ("Linux CLI Mastery", "linux-cli"),
+              ("Spring Boot Deep Dive", "spring-boot"),
+              ("Microservices Design", "microservices"),
+              ("React Patterns", "react"),
+              ("Kafka Fundamentals", "kafka"),
+              ("AI Integration", "ai-integration"),
+              ("DevOps and Cloud", "devops-cloud"),
+              ("Java Core Refresh", "java-core"),
+          ]
+
+          if not title or not topic:
+              day_num = int(datetime.now(timezone.utc).strftime("%d"))
+              auto_title, auto_topic = topic_pool[(day_num - 1) % len(topic_pool)]
+              title = title or auto_title
+              topic = topic or auto_topic
+
+          def slugify(text):
+              text = re.sub(r"[^a-z0-9]+", "-", text.strip().lower())
+              return re.sub(r"-+", "-", text).strip("-") or "daily-note"
+
+          topic_slug = slugify(topic)
+          file_name = f"{today}-{topic_slug}.html"
+          page_path = FSE_DIR / file_name
+
+          # Resolve the year's main page by globbing. Its real filename contains
+          # a NON-BREAKING HYPHEN (U+2011); the old literal used a plain "-", so
+          # it never matched: the back-link 404'd and the nav block never updated.
+          candidates = sorted(FSE_DIR.glob("Elite-Full*Stack-Engineering-*-Edition.html"))
+          main_page = candidates[0] if candidates else None
+          back_href = quote(main_page.name) if main_page else "/academy/"
+          back_text = "Back to FSE main page" if main_page else "Back to Academy"
+
+          html = f"""<!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>{title} - {today}</title>
+            <link rel="canonical" href="https://janaka.me/academy/modules/{year}/FSE/{quote(file_name)}" />
+            <style>
+              body {{ font-family: system-ui, Arial, sans-serif; line-height: 1.6;
+                     max-width: 900px; margin: 40px auto; padding: 0 20px; color: #222; }}
+              h1, h2 {{ color: #0f172a; }}
+              .meta {{ color: #555; margin-bottom: 24px; }}
+              .box {{ background: #f8fafc; border-left: 4px solid #2563eb;
+                     padding: 16px; margin: 20px 0; }}
+              code, pre {{ background: #f1f5f9; padding: 2px 6px; border-radius: 4px; }}
+              pre {{ padding: 12px; overflow-x: auto; }}
+              a {{ color: #2563eb; }}
+            </style>
+          </head>
+          <body>
+            <p><a href="./{back_href}">&larr; {back_text}</a></p>
+            <h1>{title}</h1>
+            <p class="meta"><strong>Date:</strong> {today} | <strong>Topic:</strong> {topic_slug}</p>
+
+            <div class="box">
+              <strong>Purpose:</strong> capture one useful thing learned today, in a
+              way that is easy to revisit later.
+            </div>
+
+            <h2>What I learned</h2>
+            <p><em>Add today's learning notes here.</em></p>
+
+            <h2>Key commands / examples</h2>
+            <pre><code># add examples here</code></pre>
+
+            <h2>Practical takeaways</h2>
+            <ul>
+              <li><em>First takeaway.</em></li>
+              <li><em>Second takeaway.</em></li>
+            </ul>
+          </body>
+          </html>
+          """
+
+          if page_path.exists():
+              print(f"page already exists, leaving it alone: {page_path}")
+          else:
+              page_path.write_text(html, encoding="utf-8")
+              print(f"generated {page_path}")
+
+          # ---- learning log -------------------------------------------------
+          # These joins previously used "\\n", which Python reads as a literal
+          # backslash-n. The log became one long line, its duplicate check could
+          # never match, and every entry was appended again on each run.
+          log_path = FSE_DIR / "learning-log.md"
+          entry = f"- [{today} - {title}]({file_name})"
+
+          if log_path.exists():
+              lines = log_path.read_text(encoding="utf-8").splitlines()
+          else:
+              lines = ["# FSE Daily Learning Log", ""]
+
+          if not any(f"({file_name})" in line for line in lines):
+              insert_at = 2 if len(lines) >= 2 else len(lines)
+              lines.insert(insert_at, entry)
+              log_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+              print(f"logged in {log_path}")
+
+          # ---- main page nav block -----------------------------------------
+          START, END = "<!-- DAILY_LINKS_START -->", "<!-- DAILY_LINKS_END -->"
+          item = f'      <li><a href="{quote(file_name)}">{today} - {title}</a></li>'
+
+          if main_page is None:
+              print("no Elite main page in this folder; skipped nav update")
+          else:
+              content = main_page.read_text(encoding="utf-8")
+
+              if START not in content or END not in content:
+                  block = (
+                      f"{START}\n"
+                      "    <section>\n"
+                      "      <h2>Daily Learning Pages</h2>\n"
+                      "      <ul>\n"
+                      f"{item}\n"
+                      "      </ul>\n"
+                      "    </section>\n"
+                      f"{END}\n"
+                  )
+                  if "</body>" in content:
+                      content = content.replace("</body>", block + "</body>", 1)
+                  else:
+                      content = content + "\n" + block
+                  main_page.write_text(content, encoding="utf-8")
+                  print(f"created nav block in {main_page.name}")
+              elif quote(file_name) not in content:
+                  # Insert newest-first, immediately after the block's <ul>.
+                  block = content[content.index(START):content.index(END)]
+                  if "<ul>" in block:
+                      new_block = block.replace("<ul>", "<ul>\n" + item, 1)
+                      content = content.replace(block, new_block, 1)
+                      main_page.write_text(content, encoding="utf-8")
+                      print(f"linked from {main_page.name}")
+                  else:
+                      print("markers present but no <ul>; left alone")
+              else:
+                  print("already linked from main page")
+          PY
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add academy/modules
+
+          if git diff --cached --quiet; then
+            echo "nothing to commit"
+            exit 0
+          fi
+
+          git commit -m "Add daily learning page"
+          git push
