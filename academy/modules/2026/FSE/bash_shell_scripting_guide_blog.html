@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bash Shell Scripting Guide</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --soft: #f8fafc;
+      --code-bg: #f1f5f9;
+      --accent: #0f172a;
+      --link: #0f766e;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.72;
+    }
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 32px 20px 72px;
+    }
+    .hero {
+      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 44px 36px;
+      margin-bottom: 28px;
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--soft);
+      border: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    h1, h2, h3, h4 { color: var(--accent); line-height: 1.25; }
+    h1 { font-size: 2.6rem; margin: 0 0 12px; }
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 46px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    h3 { font-size: 1.2rem; margin-top: 28px; }
+    p { margin: 12px 0; }
+    .lead { font-size: 1.08rem; color: #334155; max-width: 900px; }
+    .meta {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+    .toc {
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 26px;
+      margin: 28px 0 10px;
+    }
+    .toc h2 {
+      border: 0;
+      margin: 0 0 12px;
+      padding: 0;
+      font-size: 1.25rem;
+    }
+    .toc ol {
+      margin: 0;
+      padding-left: 22px;
+      columns: 2;
+      gap: 40px;
+    }
+    .toc li { margin: 8px 0; }
+    .toc a { color: var(--link); text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 22px 24px;
+      margin: 18px 0;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.03);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 18px 0;
+    }
+    .mini {
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 18px;
+    }
+    .mini strong { display: block; margin-bottom: 6px; }
+    ul, ol { padding-left: 22px; }
+    li { margin: 6px 0; }
+    pre {
+      background: var(--code-bg);
+      color: #0f172a;
+      padding: 18px;
+      border-radius: 16px;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      line-height: 1.55;
+      font-size: 0.94rem;
+    }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 0.12rem 0.35rem;
+      font-size: 0.92em;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      padding: 0;
+      border-radius: 0;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 12px 16px;
+      border-left: 4px solid #cbd5e1;
+      background: #f8fafc;
+      color: #334155;
+      border-radius: 10px;
+    }
+    .qa {
+      border-top: 1px dashed var(--border);
+      margin-top: 18px;
+      padding-top: 14px;
+    }
+    .footer {
+      margin-top: 52px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: var(--soft);
+    }
+    .tag {
+      display: inline-block;
+      padding: 4px 10px;
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      font-size: 0.88rem;
+      color: #334155;
+    }
+    @media (max-width: 720px) {
+      h1 { font-size: 2rem; }
+      .hero { padding: 30px 22px; }
+      .toc ol { columns: 1; }
+      .page { padding: 18px 14px 48px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="eyebrow">Linux • Bash • Tutorial</div>
+      <h1>Bash Shell Scripting Guide</h1>
+      <p class="lead">
+        This is a clean, blog-ready learning guide inspired by a Bash shell scripting tutorial page. It keeps the same full learning journey and topic coverage in an original rewritten format: what Bash is, how to write scripts, variables, arguments, input, arrays, conditionals, loops, functions, debugging, and practical scripting habits.
+      </p>
+      <div class="meta">Readable white theme • Single-file HTML • Good for blog embedding or direct publishing</div>
+    </header>
+
+    <nav class="toc">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#intro">Introduction to Bash</a></li>
+        <li><a href="#first-script">Getting Started: Your First Script</a></li>
+        <li><a href="#variables">Variables</a></li>
+        <li><a href="#parameters">Parameters and Arguments</a></li>
+        <li><a href="#input">User Input</a></li>
+        <li><a href="#arrays">Arrays</a></li>
+        <li><a href="#conditionals">Conditionals</a></li>
+        <li><a href="#loops">Loops</a></li>
+        <li><a href="#functions">Functions</a></li>
+        <li><a href="#best-practices">Best Practices</a></li>
+      </ol>
+    </nav>
+
+    <section id="intro">
+      <h2>1. Introduction to Bash</h2>
+      <p>
+        Bash, short for <strong>Bourne Again Shell</strong>, is both a command interpreter and a scripting language. It was created as a free GNU replacement for the original Bourne shell and is commonly used on Linux, Unix-like systems, macOS, and Windows environments that provide a Unix-style shell layer.
+      </p>
+      <div class="grid">
+        <div class="mini"><strong>What it is</strong>A shell plus a scripting language for running commands and automating tasks.</div>
+        <div class="mini"><strong>Why it matters</strong>It is ideal for file work, text processing, system administration, and repeatable automation.</div>
+        <div class="mini"><strong>Where it runs</strong>Linux, Unix, macOS, and Windows through compatible tools such as WSL.</div>
+      </div>
+      <h3>What is a shell?</h3>
+      <p>
+        A shell is the layer between you and the operating system. You type instructions into the shell, and it interprets them, runs programs, and returns results. In practice, it is both an interactive command environment and a programmable automation tool.
+      </p>
+      <h3>Common uses of Bash</h3>
+      <ul>
+        <li>System administration and maintenance</li>
+        <li>Backups, deployments, and scheduled jobs</li>
+        <li>Searching, sorting, and transforming data</li>
+        <li>Working with large sets of files</li>
+        <li>DevOps and CI/CD style automation</li>
+      </ul>
+    </section>
+
+    <section id="first-script">
+      <h2>2. Getting Started: Your First Script</h2>
+      <h3>The shebang line</h3>
+      <p>
+        A Bash script should begin with a shebang so the system knows which interpreter should execute it.
+      </p>
+      <pre><code>#!/bin/bash</code></pre>
+      <p>
+        The <code>#!</code> marker introduces the interpreter path. Using a shebang makes script behavior more predictable across environments.
+      </p>
+      <h3>Create, edit, make executable, and run</h3>
+      <pre><code>touch hello.sh
+chmod +x hello.sh
+nano hello.sh
+./hello.sh</code></pre>
+      <div class="card">
+        <strong>What each step does</strong>
+        <ul>
+          <li><code>touch</code> creates an empty file if it does not exist.</li>
+          <li><code>chmod +x</code> adds execute permission.</li>
+          <li>An editor such as <code>nano</code>, <code>vim</code>, or VS Code is used to add the script content.</li>
+          <li><code>./hello.sh</code> runs the file from the current directory.</li>
+        </ul>
+      </div>
+      <h3>First example</h3>
+      <pre><code>#!/bin/bash
+
+# A simple first script
+echo "Hello World!"</code></pre>
+      <p>
+        Comments begin with <code>#</code> and are ignored by the interpreter. The <code>echo</code> command prints text to the terminal.
+      </p>
+      <h3>Running normal system commands inside a script</h3>
+      <pre><code>#!/bin/bash
+
+echo "Hello World!"
+whoami
+id
+ls -la
+pwd
+uname -a</code></pre>
+      <p>
+        Bash scripts can run normal terminal commands just like you would type them manually.
+      </p>
+      <h3>Comments</h3>
+      <pre><code># A single-line comment
+echo "This executes"  # Inline comment
+
+: '
+A common multi-line comment workaround.
+Useful for temporarily disabling a block.
+'</code></pre>
+      <div class="qa">
+        <strong>Quick check</strong>
+        <p><strong>Q:</strong> What symbol comments out a line? <strong>A:</strong> <code>#</code></p>
+        <p><strong>Q:</strong> What does <code>echo "BishBashBosh"</code> print? <strong>A:</strong> <code>BishBashBosh</code></p>
+      </div>
+    </section>
+
+    <section id="variables">
+      <h2>3. Variables</h2>
+      <p>
+        Variables act as named storage for values. In Bash, they are often used for strings, numbers, command results, file paths, and reusable settings across a script.
+      </p>
+      <h3>Naming rules</h3>
+      <ul>
+        <li>Use letters, numbers, and underscores.</li>
+        <li>Start with a letter or underscore, not a number.</li>
+        <li>Names are case-sensitive.</li>
+        <li>Choose descriptive names.</li>
+      </ul>
+      <pre><code># Valid examples
+name="John"
+user_name="john_doe"
+USER1="admin"
+_temp="tmp"
+
+# Invalid examples
+# 1user="john"
+# user-name="john"
+# user name="john"</code></pre>
+      <h3>Assignment rule: no spaces around <code>=</code></h3>
+      <pre><code># Correct
+name="Enes"
+age=24
+city="Istanbul"
+
+# Incorrect
+# name = "Enes"
+# age= 24
+# city ="Istanbul"</code></pre>
+      <h3>Using variables</h3>
+      <pre><code>name="Enes"
+echo $name
+echo "My name is $name"</code></pre>
+      <h3>Interpolation inside strings</h3>
+      <pre><code>name="Enes"
+age=24
+echo "$name is $age years old"</code></pre>
+      <h3>Use curly braces for clarity</h3>
+      <pre><code>WORD="script"
+echo "${WORD}ing is fun"</code></pre>
+      <p>
+        Braces are helpful when text appears directly after the variable name or when an expression is more complex.
+      </p>
+      <h3>Command substitution</h3>
+      <pre><code>user=$(whoami)
+current_dir=$(pwd)
+today=$(date)
+file_count=$(ls -1 | wc -l)
+
+echo "Hello $user"
+echo "Current directory: $current_dir"
+echo "Today is: $today"
+echo "Files here: $file_count"</code></pre>
+      <div class="card">
+        <strong>Main variable ideas</strong>
+        <ul>
+          <li>You can reassign variables later in the script.</li>
+          <li>Variables are frequently used in conditions, loops, and functions.</li>
+          <li>Quoting variables usually prevents unwanted word splitting.</li>
+        </ul>
+      </div>
+      <div class="qa">
+        <p><strong>Q:</strong> What will <code>echo "$name is $age years old"</code> output if <code>name="Jammy"</code> and <code>age="21"</code>? <strong>A:</strong> <code>Jammy is 21 years old</code></p>
+      </div>
+    </section>
+
+    <section id="parameters">
+      <h2>4. Parameters and Arguments</h2>
+      <p>
+        Script arguments are values passed when a script runs. They let one script behave differently depending on the input you provide.
+      </p>
+      <pre><code>./greet.sh John</code></pre>
+      <p>
+        Inside the script, the first argument is available as <code>$1</code>, the second as <code>$2</code>, and so on.
+      </p>
+      <h3>Special parameter variables</h3>
+      <div class="grid">
+        <div class="mini"><strong><code>$0</code></strong>The script name itself.</div>
+        <div class="mini"><strong><code>$1</code> to <code>$9</code></strong>Individual positional arguments.</div>
+        <div class="mini"><strong><code>$#</code></strong>Total number of arguments.</div>
+        <div class="mini"><strong><code>$@</code></strong>All arguments, individually preserved when quoted.</div>
+        <div class="mini"><strong><code>$*</code></strong>All arguments as one combined string.</div>
+        <div class="mini"><strong><code>$?</code></strong>Exit status of the last command.</div>
+      </div>
+      <h3>Simple example</h3>
+      <pre><code>#!/bin/bash
+
+echo "Script name: $0"
+echo "First argument: $1"
+echo "Second argument: $2"
+echo "Argument count: $#"
+echo "All arguments: $@"</code></pre>
+      <h3>Validate required arguments</h3>
+      <pre><code>#!/bin/bash
+
+if [[ $# -eq 0 ]]; then
+  echo "Error: No name provided"
+  echo "Usage: $0 &lt;name&gt;"
+  exit 1
+fi
+
+name=$1
+echo "Hello, $name!"</code></pre>
+      <p>
+        This style prevents a script from running with missing input and provides a clear usage message.
+      </p>
+      <div class="qa">
+        <p><strong>Q:</strong> How do you get the number of supplied arguments? <strong>A:</strong> <code>$#</code></p>
+        <p><strong>Q:</strong> How do you get the script filename? <strong>A:</strong> <code>$0</code></p>
+        <p><strong>Q:</strong> What does <code>echo $1 $3</code> print if the script was run with <code>./script.sh hello hola aloha</code>? <strong>A:</strong> <code>hello aloha</code></p>
+      </div>
+    </section>
+
+    <section id="input">
+      <h2>5. User Input</h2>
+      <p>
+        Bash scripts can pause and collect interactive input from the user. This is commonly done with the <code>read</code> command.
+      </p>
+      <h3>Basic input</h3>
+      <pre><code>#!/bin/bash
+
+read name
+echo "Hello, $name"</code></pre>
+      <h3>Prompt while reading</h3>
+      <pre><code>read -p "Enter your name: " name
+echo "Welcome, $name"</code></pre>
+      <h3>Read silently for passwords</h3>
+      <pre><code>read -s -p "Enter password: " password
+echo
+# Continue processing</code></pre>
+      <h3>Read multiple values</h3>
+      <pre><code>read -p "Enter first and last name: " first last
+echo "First: $first"
+echo "Last: $last"</code></pre>
+      <h3>Validation idea</h3>
+      <p>
+        Input should be validated before it is trusted. Examples include checking whether a response is empty, verifying file names, and making sure numeric values really are numbers.
+      </p>
+      <pre><code>read -p "Enter age: " age
+
+if [[ ! $age =~ ^[0-9]+$ ]]; then
+  echo "Please enter a valid number"
+  exit 1
+fi</code></pre>
+      <div class="qa">
+        <p><strong>Q:</strong> If a script asks for input, how do you store it in a variable named <code>test</code>? <strong>A:</strong> <code>read test</code></p>
+      </div>
+    </section>
+
+    <section id="arrays">
+      <h2>6. Arrays</h2>
+      <p>
+        Arrays allow one variable name to hold many values. In standard indexed arrays, each item has a numeric position starting at <code>0</code>.
+      </p>
+      <pre><code>transport=("car" "train" "bike" "bus")</code></pre>
+      <h3>Accessing items</h3>
+      <pre><code>echo "First item: ${transport[0]}"
+echo "Second item: ${transport[1]}"
+echo "All items: ${transport[@]}"
+echo "Number of items: ${#transport[@]}"</code></pre>
+      <h3>Adding and changing values</h3>
+      <pre><code>transport+=("tram")
+transport[2]="bicycle"
+unset transport[1]</code></pre>
+      <h3>Loop through an array</h3>
+      <pre><code>for item in "${transport[@]}"; do
+  echo "$item"
+done</code></pre>
+      <h3>Slicing and copying</h3>
+      <pre><code>numbers=(1 2 3 4 5 6 7 8 9 10)
+echo "${numbers[@]:2:4}"   # 3 4 5 6
+echo "${numbers[@]:5}"     # 6 7 8 9 10
+
+copy=("${numbers[@]}")</code></pre>
+      <h3>Combining arrays</h3>
+      <pre><code>fruits=("apple" "banana")
+vegetables=("carrot" "broccoli")
+food=("${fruits[@]}" "${vegetables[@]}")
+echo "${food[@]}"</code></pre>
+      <h3>Associative arrays</h3>
+      <p>
+        Bash 4+ supports associative arrays, where values are stored under string keys instead of numeric indexes.
+      </p>
+      <pre><code>declare -A person
+person[name]="John"
+person[age]=30
+person[city]="New York"
+
+echo "${person[name]}"
+echo "Keys: ${!person[@]}"
+echo "Values: ${person[@]}"</code></pre>
+    </section>
+
+    <section id="conditionals">
+      <h2>7. Conditionals</h2>
+      <p>
+        Conditionals let your script decide what to do based on whether a test succeeds or fails.
+      </p>
+      <h3>Basic forms</h3>
+      <pre><code>if [[ condition ]]; then
+  # true branch
+fi
+
+if [[ condition ]]; then
+  # true branch
+else
+  # false branch
+fi
+
+if [[ condition1 ]]; then
+  # branch 1
+elif [[ condition2 ]]; then
+  # branch 2
+else
+  # fallback
+fi</code></pre>
+      <h3>String comparisons</h3>
+      <pre><code>if [[ "$a" == "$b" ]]; then
+  echo "Strings are equal"
+fi
+
+if [[ -z "$name" ]]; then
+  echo "Empty string"
+fi</code></pre>
+      <h3>Numeric comparisons</h3>
+      <pre><code>if [[ $age -gt 17 ]]; then
+  echo "Adult"
+fi</code></pre>
+      <div class="card">
+        <strong>Common numeric operators</strong>
+        <ul>
+          <li><code>-eq</code> equal to</li>
+          <li><code>-ne</code> not equal to</li>
+          <li><code>-gt</code> greater than</li>
+          <li><code>-ge</code> greater than or equal to</li>
+          <li><code>-lt</code> less than</li>
+          <li><code>-le</code> less than or equal to</li>
+        </ul>
+      </div>
+      <h3>File tests</h3>
+      <pre><code>if [[ -e "$file" ]]; then echo "Exists"; fi
+if [[ -f "$file" ]]; then echo "Regular file"; fi
+if [[ -d "$dir" ]]; then echo "Directory"; fi
+if [[ -r "$file" ]]; then echo "Readable"; fi
+if [[ -w "$file" ]]; then echo "Writable"; fi
+if [[ -x "$file" ]]; then echo "Executable"; fi</code></pre>
+      <h3>Exit codes and command success</h3>
+      <pre><code>cp "$source" "$dest"
+if [[ $? -eq 0 ]]; then
+  echo "Copy successful"
+else
+  echo "Copy failed"
+fi</code></pre>
+      <h3>Case statements</h3>
+      <pre><code>read -p "Enter a command (start/stop/restart): " cmd
+
+case $cmd in
+  start)
+    echo "Starting service..."
+    ;;
+  stop)
+    echo "Stopping service..."
+    ;;
+  restart)
+    echo "Restarting service..."
+    ;;
+  *)
+    echo "Unknown command"
+    ;;
+esac</code></pre>
+      <p>
+        Use <code>case</code> when you are checking many possible values of the same variable. It is often cleaner than a long <code>if/elif</code> chain.
+      </p>
+    </section>
+
+    <section id="loops">
+      <h2>8. Loops</h2>
+      <p>
+        Loops repeat an action. Bash commonly uses <code>for</code>, <code>while</code>, and <code>until</code> loops.
+      </p>
+      <h3>For loops</h3>
+      <pre><code>for name in Alice Bob Charlie; do
+  echo "Hello, $name"
+done
+
+for i in {1..5}; do
+  echo "Number: $i"
+done</code></pre>
+      <h3>Loop through an array</h3>
+      <pre><code>items=("apple" "banana" "orange")
+for item in "${items[@]}"; do
+  echo "$item"
+done</code></pre>
+      <h3>Nested loops</h3>
+      <pre><code>for i in {1..3}; do
+  for j in {1..3}; do
+    echo "$i x $j = $((i * j))"
+  done
+done</code></pre>
+      <h3>While loops</h3>
+      <pre><code>counter=1
+while [[ $counter -le 5 ]]; do
+  echo "Count: $counter"
+  ((counter++))
+done</code></pre>
+      <h3>Reading a file line by line</h3>
+      <pre><code>while read line; do
+  echo "Line: $line"
+done &lt; input.txt</code></pre>
+      <h3>Infinite loops</h3>
+      <pre><code>while true; do
+  echo "Press Ctrl+C to stop"
+  sleep 1
+done</code></pre>
+      <h3>Until loops</h3>
+      <pre><code>counter=1
+until [[ $counter -gt 5 ]]; do
+  echo "Count: $counter"
+  ((counter++))
+done</code></pre>
+      <p>
+        A <code>while</code> loop keeps going while the condition is true. An <code>until</code> loop keeps going until the condition becomes true.
+      </p>
+    </section>
+
+    <section id="functions">
+      <h2>9. Functions</h2>
+      <p>
+        Functions package reusable logic into named blocks. They improve organization, reduce repetition, and make scripts easier to maintain.
+      </p>
+      <h3>Basic function syntax</h3>
+      <pre><code>function greet {
+  echo "Hello from a function"
+}
+
+greet</code></pre>
+      <h3>Functions with parameters</h3>
+      <pre><code>function greet_user {
+  local name=$1
+  echo "Hello, $name!"
+}
+
+greet_user "John"
+greet_user "Alice"</code></pre>
+      <h3>Returning status codes</h3>
+      <pre><code>function is_even {
+  local number=$1
+  if (( number % 2 == 0 )); then
+    return 0
+  else
+    return 1
+  fi
+}
+
+if is_even 10; then
+  echo "Even"
+fi</code></pre>
+      <h3>Practical example: file check</h3>
+      <pre><code>function check_file {
+  local path=$1
+  if [[ -e "$path" ]]; then
+    echo "Exists"
+  else
+    echo "Not found"
+  fi
+}</code></pre>
+      <h3>Practical example: calculator helpers</h3>
+      <pre><code>function add_numbers {
+  echo $(($1 + $2))
+}
+
+function divide_numbers {
+  if [[ $# -ne 2 ]]; then
+    echo "Need exactly 2 arguments"
+    return 1
+  fi
+  if [[ $2 -eq 0 ]]; then
+    echo "Division by zero is not allowed"
+    return 1
+  fi
+  echo $(($1 / $2))
+}</code></pre>
+      <h3>Practical example: backup function</h3>
+      <pre><code>function backup_file {
+  local source=$1
+
+  if [[ ! -f "$source" ]]; then
+    echo "Source file not found"
+    return 1
+  fi
+
+  local timestamp=$(date +%Y%m%d_%H%M%S)
+  local backup="${source}.${timestamp}.backup"
+
+  cp "$source" "$backup"
+
+  if [[ $? -eq 0 ]]; then
+    echo "Backup created: $backup"
+    return 0
+  else
+    echo "Backup failed"
+    return 1
+  fi
+}</code></pre>
+      <h3>Practical example: string helpers</h3>
+      <pre><code>function to_uppercase {
+  echo "$1" | tr '[:lower:]' '[:upper:]'
+}
+
+function to_lowercase {
+  echo "$1" | tr '[:upper:]' '[:lower:]'
+}
+
+function string_length {
+  echo ${#1}
+}</code></pre>
+      <h3>Practical example: menu-driven script</h3>
+      <pre><code>function show_date { date; }
+function show_users { who; }
+function show_disk { df -h; }
+function show_menu {
+  echo "1. Show date"
+  echo "2. Show users"
+  echo "3. Show disk usage"
+  echo "4. Exit"
+}
+
+while true; do
+  show_menu
+  read -p "Enter choice: " choice
+  case $choice in
+    1) show_date ;;
+    2) show_users ;;
+    3) show_disk ;;
+    4) echo "Goodbye!"; exit 0 ;;
+    *) echo "Invalid option" ;;
+  esac
+  read -p "Press Enter to continue..."
+done</code></pre>
+      <h3>Function habits that help</h3>
+      <ul>
+        <li>Use descriptive names.</li>
+        <li>Document inputs and behavior with comments.</li>
+        <li>Validate parameters before use.</li>
+        <li>Prefer <code>local</code> variables inside functions.</li>
+        <li>Return proper success or failure status codes.</li>
+      </ul>
+    </section>
+
+    <section id="best-practices">
+      <h2>10. Best Practices</h2>
+      <h3>Organize scripts clearly</h3>
+      <pre><code>#!/bin/bash
+
+# Script metadata and purpose
+# Global variables
+# Functions
+# Main logic
+
+main() {
+  echo "Script started"
+  # Do work here
+  echo "Script completed"
+}
+
+main "$@"</code></pre>
+      <h3>Use stronger error handling</h3>
+      <pre><code>set -e
+set -u
+set -o pipefail
+trap 'echo "Error on line $LINENO"' ERR</code></pre>
+      <p>
+        These options help a script fail fast and report problems more clearly.
+      </p>
+      <h3>Validate inputs</h3>
+      <pre><code>if [[ $# -eq 0 ]]; then
+  echo "Usage: $0 &lt;filename&gt;"
+  exit 1
+fi
+
+filename=$1
+if [[ ! -f "$filename" ]]; then
+  echo "Error: File does not exist"
+  exit 1
+fi</code></pre>
+      <h3>Use meaningful names</h3>
+      <pre><code># Better
+user_count=10
+backup_directory="/backups"
+log_file_path="/var/log/app.log"
+
+# Worse
+uc=10
+bd="/backups"
+lfp="/var/log/app.log"</code></pre>
+      <h3>Quote variables</h3>
+      <pre><code>filename="my file.txt"
+
+# Good
+cat "$filename"
+
+# Risky when spaces exist
+# cat $filename</code></pre>
+      <h3>Put repeated logic into functions</h3>
+      <pre><code>function print_header {
+  echo "================================"
+  echo "$1"
+  echo "================================"
+}</code></pre>
+      <h3>Add usage/help output</h3>
+      <pre><code>function show_usage {
+  cat &lt;&lt; EOF
+Usage: $0 [OPTIONS] &lt;file&gt;
+
+OPTIONS:
+  -h, --help      Show this help
+  -v, --verbose   Verbose mode
+  -o, --output    Output file
+EOF
+}</code></pre>
+      <h3>Debugging tips</h3>
+      <ul>
+        <li>Use <code>set -x</code> to trace commands as they execute.</li>
+        <li>Print temporary debug messages with <code>echo</code>.</li>
+        <li>Check exit codes using <code>$?</code> when troubleshooting failures.</li>
+      </ul>
+      <pre><code>set -x
+# commands here
+set +x</code></pre>
+      <h3>Security basics</h3>
+      <ul>
+        <li>Avoid <code>eval</code> with user-controlled input.</li>
+        <li>Validate and sanitize user input before using it.</li>
+        <li>Prefer full command paths when security matters.</li>
+      </ul>
+      <pre><code>read -p "Enter filename: " filename
+
+if [[ "$filename" =~ [^a-zA-Z0-9._-] ]]; then
+  echo "Invalid filename"
+  exit 1
+fi
+
+/bin/ls /home/user</code></pre>
+      <blockquote>
+        Strong Bash scripts are not only about making something work. They should also be readable, safe, predictable, and easy to maintain.
+      </blockquote>
+      <h3>Key takeaways</h3>
+      <div>
+        <span class="tag">Start with <code>#!/bin/bash</code></span>
+        <span class="tag">Quote variables</span>
+        <span class="tag">Validate input</span>
+        <span class="tag">Reuse functions</span>
+        <span class="tag">Comment clearly</span>
+        <span class="tag">Handle errors</span>
+        <span class="tag">Test thoroughly</span>
+      </div>
+      <h3>Good next steps</h3>
+      <ul>
+        <li>Practice with real file and backup tasks.</li>
+        <li>Explore regular expressions and process control.</li>
+        <li>Learn tools like <code>bash -x</code> and ShellCheck.</li>
+        <li>Study secure scripting habits more deeply.</li>
+        <li>Automate one daily task and improve it over time.</li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <p>
+        This standalone HTML page was prepared as an original, blog-friendly rewrite based on the structure and topics of a public Bash scripting tutorial. It is designed for comfortable reading and easy publishing.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

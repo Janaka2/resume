@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foundations</title>
+<link rel="stylesheet" href="styles.css">
+<script src="search.js"></script>
+<script src="copy.js"></script>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <h2 class="brand">Prompt Engineering Handbook</h2>
+    <p class="tagline">Clean white documentation layout for senior engineers.</p>
+    <input id="searchBox" class="search" type="text" placeholder="Search navigation..." onkeyup="filterNav()">
+    <div class="nav-section-title">Sections</div>
+    <ul>
+      <li data-nav-item><a href="index.html">Home</a></li>
+<li data-nav-item><a href="foundations.html" class="active">Foundations</a></li>
+<li data-nav-item><a href="templates.html">Templates</a></li>
+<li data-nav-item><a href="strategies.html">Strategies</a></li>
+<li data-nav-item><a href="developer.html">Developer Prompts</a></li>
+<li data-nav-item><a href="rag.html">RAG Prompting</a></li>
+<li data-nav-item><a href="agents.html">Agent Prompting</a></li>
+<li data-nav-item><a href="debugging.html">Debugging Playbook</a></li>
+<li data-nav-item><a href="cheatsheet.html">Cheat Sheet</a></li>
+    </ul>
+  </aside>
+  <main class="content">
+    <div class="container">
+
+<section class="hero">
+  <div class="kicker">Foundation</div>
+  <h1>Core Principles of Prompt Engineering</h1>
+  <p>Good prompting is not about magic wording. It is about reducing ambiguity, giving the model the right working context, and shaping the output so it is useful inside a real engineering workflow.</p>
+</section>
+
+<div class="panel">
+  <h2>1. Define the model’s job clearly</h2>
+  <p>Tell the model what role it should play and what kind of output you expect. A weak prompt says “explain this code.” A strong prompt says “act as a senior Java reviewer and explain the code’s behavior, risks, and possible refactoring opportunities.”</p>
+
+  <h2>2. Give useful context, not random detail</h2>
+  <p>The model performs better when it has the right constraints and background. Include framework, language version, business rules, target audience, and expected output format.</p>
+
+  <h2>3. Ask for structured output</h2>
+  <p>Structured output is easier to verify and reuse. Prefer headings, tables, JSON, checklists, or side-by-side comparisons instead of a loose paragraph.</p>
+
+  <h2>4. Separate thinking stages</h2>
+  <p>For bigger tasks, split prompts into phases such as analyse → plan → implement → validate. This often produces more reliable results than asking for everything in one shot.</p>
+
+  <h2>5. Add a quality bar</h2>
+  <p>Ask the model to check assumptions, mention uncertainty, or list trade-offs. This reduces shallow “looks correct” answers.</p>
+</div>
+
+<div class="panel">
+  <h2>Good prompt anatomy</h2>
+  <table>
+    <tr><th>Part</th><th>Purpose</th><th>Example</th></tr>
+    <tr><td>Role</td><td>Sets the perspective</td><td>Act as a senior Spring Boot architect.</td></tr>
+    <tr><td>Context</td><td>Provides the situation</td><td>This service handles payment reconciliation in batch mode.</td></tr>
+    <tr><td>Task</td><td>States what to do</td><td>Find design issues and propose a safer structure.</td></tr>
+    <tr><td>Constraints</td><td>Prevents drift</td><td>Keep the solution compatible with Java 21 and PostgreSQL.</td></tr>
+    <tr><td>Output shape</td><td>Makes the answer reusable</td><td>Return: summary, risks, improved code, and migration steps.</td></tr>
+  </table>
+</div>
+
+    </div>
+  </main>
+</div>
+</body>
+</html>

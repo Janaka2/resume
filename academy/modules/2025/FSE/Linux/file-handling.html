@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.">
+  <title>File Handling</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+<a href="index.html">Home</a>
+<a href="top-100-linux-commands.html">Top 100 Linux Commands</a>
+<a href="top-50-debugging-commands.html">Top 50 Debugging</a>
+<a href="log-investigation-techniques.html">Log Investigation</a>
+<a href="troubleshooting-resources.html">Disk / CPU / Memory</a>
+<a href="awk-sed-mastery.html">awk + sed</a>
+<a href="production-one-liners.html">One-Liners</a>
+<a href="file-handling.html">File Handling</a>
+<a href="vi-editor-complete.html">VI Editor</a>
+</nav>
+  </div>
+</header>
+<main class="container">
+
+<section class="hero">
+  <h1>File Handling</h1>
+  <p>File handling is a core part of Linux scripting: creating, copying, moving, syncing, compressing, comparing, finding and validating files safely.</p>
+</section>
+<section class="card">
+  <h2>Core Commands</h2>
+  <table>
+    <tr><th>Command</th><th>What it does</th><th>Example</th></tr>
+    <tr><td><code>touch</code></td><td>Create empty file</td><td><code>touch app.log</code></td></tr>
+    <tr><td><code>mkdir -p</code></td><td>Create nested directories</td><td><code>mkdir -p /opt/apps/config</code></td></tr>
+    <tr><td><code>cp</code></td><td>Copy files</td><td><code>cp app.jar /opt/apps/</code></td></tr>
+    <tr><td><code>cp -r</code></td><td>Copy directories</td><td><code>cp -r config/ backup/</code></td></tr>
+    <tr><td><code>mv</code></td><td>Move or rename</td><td><code>mv old.log archive.log</code></td></tr>
+    <tr><td><code>rm</code></td><td>Remove file</td><td><code>rm temp.txt</code></td></tr>
+    <tr><td><code>rm -rf</code></td><td>Remove recursively</td><td><code>rm -rf temp/</code></td></tr>
+    <tr><td><code>find</code></td><td>Find by name/type/size</td><td><code>find /var/log -name '*.log'</code></td></tr>
+    <tr><td><code>tar</code></td><td>Archive and compress</td><td><code>tar -czvf backup.tar.gz app/</code></td></tr>
+    <tr><td><code>zip/unzip</code></td><td>Zip archive management</td><td><code>zip -r app.zip app/</code></td></tr>
+    <tr><td><code>rsync</code></td><td>Fast sync and copy</td><td><code>rsync -avz logs/ user@host:/backup/</code></td></tr>
+    <tr><td><code>diff</code></td><td>Compare text files</td><td><code>diff a.yml b.yml</code></td></tr>
+    <tr><td><code>stat</code></td><td>Show metadata</td><td><code>stat app.jar</code></td></tr>
+    <tr><td><code>md5sum</code></td><td>Verify checksum</td><td><code>md5sum app.jar</code></td></tr>
+  </table>
+
+  <h2>Safe Patterns</h2>
+  <pre>cp -v source target
+mv -v old new
+rm -i important.txt
+rsync -avzn source/ target/   # dry run first
+find . -type f -name '*.log' -mtime +7 -delete</pre>
+
+  <h2>Useful Checks</h2>
+  <pre>du -sh *
+find . -type f | wc -l
+find /data -type f -size +500M
+ls -ltr
+file app.jar</pre>
+</section>
+
+  <div class="footer">Built as a practical Linux mastery reference for senior engineers.</div>
+</main>
+</body>
+</html>

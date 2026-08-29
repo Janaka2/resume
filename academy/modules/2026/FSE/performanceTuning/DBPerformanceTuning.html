@@ -1,0 +1,1226 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Learn How to Solve Critical Performance Problems with Step by Step Approach!</title>
+    <meta name="description" content="A 2026-ready, step-by-step Oracle DB performance tuning handbook: DB Time, AWR, SQL Monitor, execution plans, indexing, optimizer stats, cursor sharing, SPM, and tracing." />
+
+    <style>
+        :root{
+          --bg: #0b1020;
+          --panel: #111a33;
+          --text: #eef2ff;
+          --muted: #b9c2e6;
+          --brand: #7c9cff;
+          --ok: #38bdf8;
+          --warn: #fbbf24;
+          --bad: #fb7185;
+          --border: rgba(255,255,255,.12);
+          --shadow: 0 12px 30px rgba(0,0,0,.35);
+          --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+          --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+          --radius: 16px;
+          --radius-sm: 12px;
+          --max: 1080px;
+        }
+
+        @media (prefers-color-scheme: light){
+          :root{
+            --bg: #f7f8ff;
+            --panel: #ffffff;
+            --text: #0c1222;
+            --muted: #41506e;
+            --brand: #365cff;
+            --ok: #0284c7;
+            --warn: #b45309;
+            --bad: #be123c;
+            --border: rgba(8,12,20,.12);
+            --shadow: 0 12px 30px rgba(10,16,32,.10);
+          }
+        }
+
+        *{ box-sizing: border-box; }
+        html, body{ height: 100%; }
+        body{
+          margin: 0;
+          font-family: var(--sans);
+          color: var(--text);
+          background: radial-gradient(900px 600px at 20% 10%, rgba(124,156,255,.22), transparent 60%),
+                      radial-gradient(900px 600px at 80% 0%, rgba(56,189,248,.12), transparent 60%),
+                      var(--bg);
+          line-height: 1.55;
+        }
+
+        a{ color: var(--brand); text-decoration: none; }
+        a:hover{ text-decoration: underline; }
+
+        .wrap{ max-width: var(--max); margin: 0 auto; padding: 28px 18px 80px; }
+
+        .topbar{
+          position: sticky;
+          top: 0;
+          z-index: 20;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          background: color-mix(in oklab, var(--bg) 85%, transparent);
+          border-bottom: 1px solid var(--border);
+        }
+        .topbar-inner{
+          max-width: var(--max);
+          margin: 0 auto;
+          padding: 10px 18px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+        .brand-dot{
+          width: 10px; height: 10px;
+          border-radius: 999px;
+          background: var(--brand);
+          box-shadow: 0 0 0 4px color-mix(in oklab, var(--brand) 25%, transparent);
+        }
+        .topbar-title{
+          font-weight: 700;
+          letter-spacing: .2px;
+          font-size: 14px;
+          color: var(--muted);
+          flex: 1;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .progress{
+          height: 8px;
+          width: 220px;
+          border-radius: 999px;
+          background: color-mix(in oklab, var(--panel) 70%, transparent);
+          border: 1px solid var(--border);
+          overflow: hidden;
+        }
+        .progress > span{
+          display: block;
+          height: 100%;
+          width: 0%;
+          background: linear-gradient(90deg, var(--ok), var(--brand));
+          border-radius: 999px;
+          transition: width .12s linear;
+        }
+
+        .hero{
+          margin-top: 22px;
+          padding: 26px 22px;
+          background: color-mix(in oklab, var(--panel) 86%, transparent);
+          border: 1px solid var(--border);
+          box-shadow: var(--shadow);
+          border-radius: var(--radius);
+        }
+        .hero h1{
+          margin: 0 0 8px;
+          font-size: clamp(28px, 4.6vw, 44px);
+          line-height: 1.12;
+          letter-spacing: -.6px;
+        }
+        .hero p{
+          margin: 10px 0 0;
+          color: var(--muted);
+          font-size: 16px;
+          max-width: 80ch;
+        }
+        .pillrow{ display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+        .pill{
+          border: 1px solid var(--border);
+          background: color-mix(in oklab, var(--panel) 80%, transparent);
+          padding: 7px 10px;
+          border-radius: 999px;
+          font-size: 13px;
+          color: var(--muted);
+        }
+
+        .grid{
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 16px;
+          margin-top: 18px;
+        }
+        @media (min-width: 980px){
+          .grid{ grid-template-columns: 320px 1fr; align-items: start; }
+        }
+
+        .card{
+          background: var(--panel);
+          border: 1px solid var(--border);
+          border-radius: var(--radius);
+          box-shadow: var(--shadow);
+          padding: 16px;
+        }
+
+        .toc h2{
+          margin: 0 0 10px;
+          font-size: 15px;
+          color: var(--muted);
+          text-transform: uppercase;
+          letter-spacing: .12em;
+        }
+        .toc a{
+          display: block;
+          padding: 8px 10px;
+          border-radius: 10px;
+          color: var(--text);
+          border: 1px solid transparent;
+          transition: all 0.2s ease;
+        }
+        .toc a:hover{
+          background: color-mix(in oklab, var(--brand) 10%, transparent);
+          border-color: color-mix(in oklab, var(--brand) 25%, transparent);
+          text-decoration: none;
+        }
+        .toc small{ color: var(--muted); display: block; font-size: 12px; margin-top: 2px;}
+
+        section{ scroll-margin-top: 74px; }
+        .content h2{
+          margin: 0 0 10px;
+          font-size: 24px;
+          letter-spacing: -.2px;
+          border-bottom: 1px solid var(--border);
+          padding-bottom: 8px;
+          margin-top: 32px;
+        }
+        .content section:first-child h2 { margin-top: 0; }
+
+        .content h3{
+          margin: 24px 0 10px;
+          font-size: 18px;
+          letter-spacing: -.1px;
+        }
+        .content p{ margin: 10px 0; color: color-mix(in oklab, var(--text) 92%, var(--muted)); }
+        .content .muted{ color: var(--muted); }
+
+        .callout{
+          margin: 14px 0;
+          padding: 12px 12px 12px 14px;
+          border-radius: var(--radius-sm);
+          border: 1px solid var(--border);
+          background: color-mix(in oklab, var(--panel) 72%, transparent);
+          position: relative;
+        }
+        .callout:before{
+          content: "";
+          position: absolute;
+          left: 0; top: 0; bottom: 0;
+          width: 4px;
+          border-radius: 999px;
+          background: var(--brand);
+          opacity: .9;
+          margin: 10px;
+        }
+        .callout strong{ color: var(--text); }
+        .callout.warn:before{ background: var(--warn); }
+        .callout.bad:before{ background: var(--bad); }
+        .callout.ok:before{ background: var(--ok); }
+
+        ul.checklist{
+          list-style: none;
+          padding: 0;
+          margin: 10px 0;
+          display: grid;
+          gap: 8px;
+        }
+        ul.checklist li{
+          display: flex;
+          gap: 10px;
+          align-items: flex-start;
+          padding: 10px;
+          border-radius: 12px;
+          border: 1px solid var(--border);
+          background: color-mix(in oklab, var(--panel) 78%, transparent);
+          transition: background 0.2s ease;
+        }
+        ul.checklist li:hover {
+          background: color-mix(in oklab, var(--panel) 90%, transparent);
+        }
+        ul.checklist input{ margin-top: 5px; width: 16px; height: 16px; cursor: pointer; accent-color: var(--brand); }
+        ul.checklist label{ cursor: pointer; flex: 1; font-weight: 500;}
+        ul.checklist span.meta{ display: block; color: var(--muted); font-size: 13px; margin-top: 4px; font-weight: normal;}
+
+        ol.steps{
+          margin: 10px 0 0 18px;
+          padding: 0;
+        }
+        ol.steps li{ margin: 12px 0; padding-left: 8px; }
+        ol.steps li strong{ color: var(--text); }
+
+        pre{
+          margin: 16px 0;
+          padding: 16px;
+          border-radius: 14px;
+          border: 1px solid var(--border);
+          background: color-mix(in oklab, #000 22%, var(--panel));
+          overflow: auto;
+          font-family: var(--mono);
+          font-size: 13px;
+          line-height: 1.5;
+          position: relative;
+        }
+
+        .copybtn{
+          position: absolute;
+          top: 10px; right: 10px;
+          font-size: 12px;
+          padding: 6px 10px;
+          border-radius: 999px;
+          border: 1px solid var(--border);
+          background: color-mix(in oklab, var(--panel) 70%, transparent);
+          color: var(--text);
+          cursor: pointer;
+          transition: all 0.2s ease;
+          font-family: var(--sans);
+          font-weight: 500;
+        }
+        .copybtn:hover{
+          border-color: color-mix(in oklab, var(--brand) 40%, transparent);
+          background: color-mix(in oklab, var(--panel) 90%, transparent);
+        }
+
+        details{
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          padding: 12px;
+          background: color-mix(in oklab, var(--panel) 82%, transparent);
+          margin: 12px 0;
+        }
+        details summary{
+          cursor: pointer;
+          font-weight: 600;
+          color: var(--text);
+          outline: none;
+        }
+        details p{ margin: 10px 0 0; }
+
+        .split{
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 14px;
+          margin-top: 16px;
+        }
+        @media (min-width: 860px){
+          .split{ grid-template-columns: 1fr 1fr; }
+        }
+
+        .mini{
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          padding: 16px;
+          background: color-mix(in oklab, var(--panel) 80%, transparent);
+        }
+        .mini h4{
+          margin: 0 0 8px;
+          font-size: 14px;
+          letter-spacing: .08em;
+          text-transform: uppercase;
+          color: var(--text);
+        }
+
+        /* AI Tool Styles */
+        .ai-box {
+          border: 1px solid color-mix(in oklab, var(--brand) 40%, transparent);
+          border-radius: var(--radius-sm);
+          padding: 16px;
+          background: color-mix(in oklab, var(--brand) 5%, var(--panel));
+          margin-top: 16px;
+        }
+        .ai-box h4 {
+          margin: 0 0 8px;
+          color: var(--brand);
+          font-size: 15px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+        .ai-input {
+          width: 100%;
+          padding: 10px 12px;
+          border-radius: 8px;
+          border: 1px solid var(--border);
+          background: var(--bg);
+          color: var(--text);
+          font-family: var(--sans);
+          margin-top: 8px;
+        }
+        .ai-input:focus {
+          outline: 2px solid var(--brand);
+          border-color: transparent;
+        }
+        textarea.ai-input {
+          font-family: var(--mono);
+          font-size: 13px;
+          resize: vertical;
+          min-height: 80px;
+        }
+        .ai-btn {
+          margin-top: 10px;
+          padding: 10px 18px;
+          border-radius: 8px;
+          background: linear-gradient(135deg, var(--brand), #5b21b6);
+          color: #fff;
+          border: none;
+          cursor: pointer;
+          font-weight: 600;
+          transition: opacity 0.2s;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+        }
+        .ai-btn:hover:not(:disabled) {
+          opacity: 0.9;
+        }
+        .ai-btn:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+        .ai-result {
+          margin-top: 14px;
+          font-size: 14px;
+          display: none;
+          padding: 16px;
+          background: color-mix(in oklab, var(--bg) 50%, #000);
+          border-radius: 8px;
+          border: 1px solid var(--border);
+          line-height: 1.6;
+        }
+        .ai-result strong { color: var(--text); }
+        .ai-result code {
+          font-family: var(--mono);
+          font-size: 12px;
+          padding: 2px 4px;
+          background: color-mix(in oklab, var(--panel) 80%, transparent);
+          border-radius: 4px;
+        }
+
+        footer{
+          margin-top: 40px;
+          padding-top: 20px;
+          border-top: 1px solid var(--border);
+          color: var(--muted);
+          font-size: 13px;
+          text-align: center;
+        }
+        kdb, kbd{
+          font-family: var(--mono);
+          font-size: 12px;
+          padding: 2px 6px;
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          background: color-mix(in oklab, var(--panel) 75%, transparent);
+          color: var(--text);
+        }
+    </style>
+</head>
+
+<body>
+<div class="topbar">
+    <div class="topbar-inner">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <div class="topbar-title">DB Performance Tuning Handbook • Updated for 2026 • Oracle-focused</div>
+        <div class="progress" aria-label="reading progress"><span id="progressBar"></span></div>
+    </div>
+</div>
+
+<div class="wrap">
+    <header class="hero">
+        <h1>Learn How to Solve Critical Performance Problems with Step by Step Approach!</h1>
+        <p>
+            A study-friendly, step-by-step handbook you can follow during real incidents.
+            Focus: <strong>Oracle DB time methodology</strong>, <strong>SQL monitoring</strong>,
+            <strong>execution plans</strong>, <strong>advanced indexing</strong>, <strong>optimizer statistics</strong>,
+            <strong>cursor sharing</strong>, and <strong>plan stability</strong>.
+        </p>
+        <div class="pillrow" role="list" aria-label="Key properties">
+            <span class="pill" role="listitem">Practical workflow → Not random tips</span>
+            <span class="pill" role="listitem">Clear English + examples</span>
+            <span class="pill" role="listitem">Licensed + no-pack fallback paths</span>
+            <span class="pill" role="listitem">Updated for 2026 releases (19c / 21c / 26ai)</span>
+        </div>
+
+        <div class="callout warn" style="margin-top:20px">
+            <strong>Licensing note:</strong>
+            Many “best” Oracle tuning tools (AWR/ASH/ADDM/SQL Monitor/SQL Tuning Advisor) are part of
+            Diagnostics/Tuning Packs. Always confirm your licensing before using pack-specific views/reports/APIs.
+        </div>
+    </header>
+
+    <div class="grid">
+        <div>
+            <aside class="card" style="margin-bottom: 16px;">
+                <h2 style="margin: 0 0 10px; font-size: 15px; color: var(--muted); text-transform: uppercase; letter-spacing: .12em;">AI Settings</h2>
+                <p style="font-size: 12px; color: var(--muted); margin: 0 0 10px;">Enter your Gemini API key to enable the AI assistants. It is saved locally in your browser.</p>
+                <input type="password" id="geminiApiKey" placeholder="API Key (AIza...)" class="ai-input" style="margin-top: 0; padding: 8px 10px; font-size: 13px;">
+                <button id="saveApiKeyBtn" class="ai-btn" style="width: 100%; padding: 8px; font-size: 13px; margin-top: 8px; justify-content: center;">Save Key</button>
+            </aside>
+
+            <aside class="card toc" aria-label="Table of contents">
+                <h2>Contents</h2>
+                <a href="#what-youll-learn">What you’ll learn <small>skills checklist</small></a>
+                <a href="#labs">Practice labs <small>hands-on drills</small></a>
+                <a href="#quizzes">Weekly quizzes <small>self-testing</small></a>
+                <a href="#references">References <small>primary docs</small></a>
+            </aside>
+        </div>
+
+        <main class="card content">
+            <section id="what-youll-learn">
+                <h2>What you’ll learn</h2>
+                <p class="muted">
+                    Use this as your checklist. This page is intentionally “study-friendly”: you can tick items as you learn.
+                </p>
+
+                <ul class="checklist" id="learnChecklist">
+                    <li><input type="checkbox" id="l1"><label for="l1">Learn How to Solve Critical Performance Problems with Step by Step Approach!<span class="meta">Use DB time first, then drill into top SQL, then fix safely.</span></label></li>
+                    <li><input type="checkbox" id="l2"><label for="l2">Learn Advanced Indexing Techniques for Ultimate Database Performance!<span class="meta">Composite indexes, function-based indexes, bitmap (DW), invisible-index testing.</span></label></li>
+                    <li><input type="checkbox" id="l3"><label for="l3">Learn How to Use Various Performance Tuning Tools for In-Depth Assistance!<span class="meta">AWR/ADDM, SQL Monitor, DBMS_XPLAN, SQL Trace + TKPROF.</span></label></li>
+                    <li><input type="checkbox" id="l4"><label for="l4">Maximize the Query Performance by Using Advanced Tuning Tecniques!<span class="meta">Rewrite SQL, fix stats, add access paths, stabilize plans.</span></label></li>
+                    <li><input type="checkbox" id="l5"><label for="l5">Learn Oracle Database Architecture by “Tuning” aspects.<span class="meta">DB time, waits, memory areas (SGA/PGA), and how SQL consumes them.</span></label></li>
+                    <li><input type="checkbox" id="l6"><label for="l6">Identify and Optimize the Performance of poorly performing (bad) SQLs.<span class="meta">Top SQL → plan → root cause → verify.</span></label></li>
+                    <li><input type="checkbox" id="l7"><label for="l7">Understand SQL Tuning Terminologies<span class="meta">DB time, AAS, wait classes, cardinality, selectivity, access paths.</span></label></li>
+                    <li><input type="checkbox" id="l8"><label for="l8">Learn How to Create “Better” Queries<span class="meta">Remove unnecessary work; keep predicates sargable; avoid cartesian joins.</span></label></li>
+                    <li><input type="checkbox" id="l9"><label for="l9">Learn How to Prioritize your SQL Tuning Efforts.<span class="meta">Fix what contributes most DB time and/or blocks others.</span></label></li>
+                    <li><input type="checkbox" id="l10"><label for="l10">Learn the Details of How an SQL Code is Interpreted<span class="meta">Parsing → optimization → row source generation → execution.</span></label></li>
+                    <li><input type="checkbox" id="l11"><label for="l11">Learn Useful Hints to improve Performance of your Queries<span class="meta">Hints as experiments, not permanent band-aids.</span></label></li>
+                    <li><input type="checkbox" id="l12"><label for="l12">Learn & Improve How to Use Oracle Optimizer and Execution Plans Well<span class="meta">Actual plan, E-Rows vs A-Rows, plan stability.</span></label></li>
+                    <li><input type="checkbox" id="l13"><label for="l13">Various Tips and Tricks to make the Oracle SQL queries run faster.<span class="meta">Binds, stats, indexing, plan regression prevention.</span></label></li>
+                    <li><input type="checkbox" id="l14"><label for="l14">Oracle Performance Tuning on both Oracle11g and Oracle12c Environment.<span class="meta">Technique still applies; tooling and support differ. Prefer modern LTS when possible.</span></label></li>
+                    <li><input type="checkbox" id="l15"><label for="l15">Learn Efficient Schema Design<span class="meta">Design for access paths and stable cardinality assumptions.</span></label></li>
+                    <li><input type="checkbox" id="l16"><label for="l16">Weekly Quizzes & Assessment Tests<span class="meta">Included near the end for self-check.</span></label></li>
+                    <li><input type="checkbox" id="l17"><label for="l17">Working materials and always up to date!<span class="meta">Last updated: 2026-04-10. References link to primary docs.</span></label></li>
+                </ul>
+
+                <details>
+                    <summary>2026 version snapshot (quick)</summary>
+                    <p>
+                        As of Oracle’s published Lifetime Support chart: 19c is the long-term release with premier support through 2029 and extended support through 2032.
+                        21c is an innovation release (premier support through 2027). 26ai is listed as a long-term release with premier support through 2031.
+                        11g/12c releases are out of extended support.
+                    </p>
+                </details>
+            </section>
+
+            <section id="workflow">
+                <h2>The step-by-step workflow</h2>
+                <p>
+                    Use this during incidents. The goal is to avoid “random tuning” and always keep evidence.
+                </p>
+
+                <ol class="steps">
+                    <li><strong>Define the goal and scope</strong><br/>
+                        Is it response time or throughput? Is it system-wide, service-wide, or only one SQL statement?
+                        Write down the target (example: “p95 from 2.4s → 500ms”).
+                    </li>
+
+                    <li><strong>Measure DB time first</strong><br/>
+                        DB time is your master metric (CPU + non-idle waits for active sessions).
+                        If DB time spikes, you must identify which wait class/event or CPU dominates.
+                    </li>
+
+                    <li><strong>Find the biggest contributors</strong><br/>
+                        Identify top SQL (by DB time / CPU / elapsed time) and top wait events during the “bad window”.
+                        Fixing the top 1–5 SQLs often beats micro-optimizing everything.
+                    </li>
+
+                    <li><strong>Pick the right drill tool</strong><br/>
+                        <em>Now:</em> SQL Monitor / Real-Time Monitoring. <em>History:</em> AWR/ADDM. <em>No packs:</em> SQL Trace + TKPROF.
+                    </li>
+
+                    <li><strong>Confirm the actual plan</strong><br/>
+                        Avoid EXPLAIN PLAN-only tuning when possible. Prefer cursor-cache plan with row counts:
+                        compare <strong>E-Rows vs A-Rows</strong> per step.
+                    </li>
+
+                    <li><strong>Diagnose root cause by category</strong><br/>
+                        Common categories: inefficient SQL shape, missing/stale stats, missing access path, plan regression, parsing storms, locking.
+                    </li>
+
+                    <li><strong>Apply the smallest safe fix</strong><br/>
+                        Prefer: fix stats → add index (if needed) → rewrite SQL → plan stability (SPM/profile/patch) → hints (last resort).
+                    </li>
+
+                    <li><strong>Validate and prevent regression</strong><br/>
+                        Re-measure DB time and statement time. If plan changed or improved, consider plan baselines for stability.
+                    </li>
+                </ol>
+
+                <div class="callout ok">
+                    <strong>Golden rule:</strong> Every tuning action must answer two questions:
+                    <em>(1) What evidence proves it was the bottleneck?</em> and <em>(2) What evidence proves the change improved it?</em>
+                </div>
+            </section>
+
+            <section id="triage">
+                <h2>Fast triage cheat sheet</h2>
+
+                <div class="split">
+                    <div class="mini">
+                        <h4>CPU-bound</h4>
+                        <p>
+                            You see high DB CPU / “on CPU” activity.
+                            Typical causes: inefficient SQL (too many rows), missing access paths, bad join order, parsing storms.
+                        </p>
+                        <p class="muted">
+                            Action: identify top SQL by CPU/DB time → SQL Monitor + plan stats → reduce work.
+                        </p>
+                    </div>
+
+                    <div class="mini">
+                        <h4>I/O-bound</h4>
+                        <p>
+                            Dominant I/O wait class/events, high reads, long I/O time.
+                            Typical causes: full scans, missing indexes, poor clustering, storage latency.
+                        </p>
+                        <p class="muted">
+                            Action: identify top SQL → verify access path → index/partition/rewrite.
+                        </p>
+                    </div>
+
+                    <div class="mini">
+                        <h4>Concurrency / locking</h4>
+                        <p>
+                            Many sessions waiting on locks/latches or “blocking session” dominates.
+                        </p>
+                        <p class="muted">
+                            Action: find blockers, shorten transactions, reduce hot rows, review app transaction design.
+                        </p>
+                    </div>
+
+                    <div class="mini">
+                        <h4>Parsing / shared pool pressure</h4>
+                        <p>
+                            Excessive hard parses, many similar SQLs differing by literals/formatting.
+                        </p>
+                        <p class="muted">
+                            Action: enforce bind variables + consistent SQL text; avoid CURSOR_SHARING=FORCE as a permanent fix.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="ai-box">
+                    <h4>✨ Ask AI: Oracle Error or Wait Event</h4>
+                    <p class="muted" style="margin: 0; font-size: 13px;">Stuck on a weird wait event or an ORA- code? Let the Gemini Assistant explain it and suggest triage steps.</p>
+                    <div style="display: flex; gap: 10px; align-items: flex-start;">
+                        <input type="text" id="aiWaitInput" class="ai-input" placeholder="e.g., 'enq: TX - row lock contention' or 'ORA-01555'">
+                        <button id="aiWaitBtn" class="ai-btn" style="margin-top: 8px;">✨ Explain</button>
+                    </div>
+                    <div id="aiWaitResult" class="ai-result"></div>
+                </div>
+
+                <details>
+                    <summary>Mini glossary: DB time, waits, AAS</summary>
+                    <p>
+                        <strong>DB time</strong> = CPU time + non-idle wait time across active sessions (cumulative).<br>
+                        <strong>Wait event</strong> = what a session is waiting for (I/O, locks, etc.).<br>
+                        <strong>Average Active Sessions (AAS)</strong> is a convenient way to visualize how much work and waiting happens over time, broken down by dimensions like SQL ID or wait class.
+                    </p>
+                </details>
+            </section>
+
+            <section id="plans">
+                <h2>Execution plans (done right)</h2>
+                <p>
+                    Execution plans are your “X-ray”. But you must prefer <strong>actual execution statistics</strong> over purely explained plans.
+                </p>
+
+                <div class="ai-box" style="margin-bottom: 24px;">
+                    <h4>✨ AI Plan Analyzer</h4>
+                    <p class="muted" style="margin: 0; font-size: 13px;">Paste your raw DBMS_XPLAN or EXPLAIN PLAN output. Gemini will identify bottlenecks like unexpected full scans, Cartesian joins, or bad cardinality estimates.</p>
+                    <textarea id="aiPlanInput" class="ai-input" placeholder="Paste execution plan here..."></textarea>
+                    <button id="aiPlanBtn" class="ai-btn">✨ Analyze Plan</button>
+                    <div id="aiPlanResult" class="ai-result"></div>
+                </div>
+
+                <div class="callout warn">
+                    <strong>Important:</strong> EXPLAIN PLAN can differ from what actually ran (environment differences, bind values, stats, etc.).
+                    Always validate with runtime evidence when possible.
+                </div>
+
+                <h3>Copy‑paste starter: show plan with actual row counts (when available)</h3>
+                <pre><button class="copybtn" data-copy>Copy</button><code>-- 1) Run the statement with plan statistics enabled (example)
+-- You may need: ALTER SESSION SET statistics_level = ALL;
+
+SELECT /*+ gather_plan_statistics */ ...
+FROM   ...
+WHERE  ...;
+
+-- 2) Display plan from cursor cache with actual stats
+SELECT * FROM TABLE(
+  DBMS_XPLAN.DISPLAY_CURSOR(
+    NULL, NULL, 'TYPICAL +ALLSTATS LAST'
+  )
+);</code></pre>
+
+                <details>
+                    <summary>How to interpret the “E-Rows vs A-Rows” mismatch</summary>
+                    <p>
+                        If the optimizer estimated 10 rows (E-Rows) but you actually got 100,000 (A-Rows),
+                        the plan choice can easily be wrong (nested loop vs hash join, index vs full scan).
+                        Common suspects: stale stats, skew/histograms, bind peeking/cursor sharing effects.
+                    </p>
+                </details>
+            </section>
+
+            <section id="sql-rewrite">
+                <h2>SQL Rewriting & Optimization</h2>
+                <p>Sometimes the best way to fix a performance issue is to stop relying on the optimizer to rescue bad code, and rewrite the query to remove anti-patterns.</p>
+
+                <div class="ai-box" style="margin-bottom: 24px;">
+                    <h4>✨ AI SQL Optimizer</h4>
+                    <p class="muted" style="margin: 0; font-size: 13px;">Paste a slow or inefficient SQL query. Gemini will analyze it for anti-patterns (like implicit conversions, non-sargable predicates, or correlated subqueries) and suggest an optimized rewrite.</p>
+                    <textarea id="aiSqlInput" class="ai-input" placeholder="SELECT * FROM orders WHERE TO_CHAR(order_date, 'YYYY') = '2025'..."></textarea>
+                    <button id="aiSqlBtn" class="ai-btn">✨ Rewrite SQL</button>
+                    <div id="aiSqlResult" class="ai-result"></div>
+                </div>
+            </section>
+
+            <section id="indexing">
+                <h2>Advanced indexing techniques</h2>
+
+                <h3>Index type selection (quick rules)</h3>
+                <ul>
+                    <li><strong>B-tree</strong>: Most OLTP workloads (high concurrency, selective predicates).</li>
+                    <li><strong>Bitmap</strong>: Mainly data warehousing / low-cardinality columns, but can be risky with OLTP DML concurrency.</li>
+                    <li><strong>Function-based</strong>: When your predicate uses an expression (e.g., <code>UPPER(col)</code>).</li>
+                </ul>
+
+                <h3>Function‑based index example</h3>
+                <pre><button class="copybtn" data-copy>Copy</button><code>-- If your queries do: WHERE UPPER(email) = :email
+-- then a normal index on email may not be used.
+-- A function-based index can help:
+
+CREATE INDEX users_email_u_idx ON users (UPPER(email));</code></pre>
+
+                <details>
+                    <summary>Invisible-index testing (safe experimentation)</summary>
+                    <p>
+                        For safer index experiments, you can create an index as INVISIBLE (so it won’t be used unless you explicitly allow it),
+                        test it, then decide whether to make it visible. This is a strong strategy for avoiding surprise regressions.
+                    </p>
+                </details>
+
+                <div class="ai-box" style="margin-top: 24px;">
+                    <h4>✨ AI Indexing Advisor</h4>
+                    <p class="muted" style="margin: 0; font-size: 13px;">Not sure what index to build? Paste your table columns and the slow query, and Gemini will suggest the optimal index type (and provide the DDL).</p>
+                    <textarea id="aiIndexInput" class="ai-input" placeholder="Table: EMP(empno, ename, deptno, salary, hiredate)&#10;Query: SELECT * FROM emp WHERE deptno = 10 AND UPPER(ename) = 'SMITH';"></textarea>
+                    <button id="aiIndexBtn" class="ai-btn">✨ Recommend Index</button>
+                    <div id="aiIndexResult" class="ai-result"></div>
+                </div>
+            </section>
+
+            <section id="stats">
+                <h2>Optimizer statistics</h2>
+
+                <div class="callout ok">
+                    <strong>Most common fix:</strong> If your plan is wrong because the optimizer is guessing wrong,
+                    improving statistics is often the cleanest and safest correction.
+                </div>
+
+                <h3>Automatic optimizer statistics collection (concept)</h3>
+                <p>
+                    In modern Oracle versions, automatic statistics tasks are designed to refresh objects whose stats are missing or stale.
+                    That reduces risk of bad plans from outdated inputs.
+                </p>
+
+                <h3>DBMS_STATS: a safe “starter” command (table-level)</h3>
+                <pre><button class="copybtn" data-copy>Copy</button><code>-- Example: gather stats for one table (adjust options for your environment)
+BEGIN
+  DBMS_STATS.GATHER_TABLE_STATS(
+    ownname  => 'APP',
+    tabname  => 'ORDERS',
+    cascade  => TRUE
+  );
+END;
+/
+</code></pre>
+
+                <details>
+                    <summary>When to be careful</summary>
+                    <p>
+                        Statistics changes can change execution plans. That can be good (fix regressions) or risky (create regressions).
+                        When performance is mission-critical, capture “before”, make a targeted stats change, and validate “after”.
+                    </p>
+                </details>
+            </section>
+
+            <section id="cursor-sharing">
+                <h2>Cursor sharing & bind variables</h2>
+                <p>
+                    Cursor sharing can improve performance dramatically by reducing hard parses and enabling plan reuse,
+                    but it requires discipline in SQL text consistency and bind usage.
+                </p>
+
+                <div class="callout warn">
+                    <strong>Key point:</strong> “Textually identical” means character-for-character identical (including spacing and case).
+                    Small text changes can create new parent cursors and increase parsing work.
+                </div>
+
+                <h3>Developer checklist</h3>
+                <ul class="checklist" id="devChecklist">
+                    <li><input type="checkbox" id="d1"><label for="d1">Use bind variables in OLTP queries (avoid literal-per-request SQL)</label></li>
+                    <li><input type="checkbox" id="d2"><label for="d2">Standardize SQL formatting (spacing/case/comments) across the codebase</label></li>
+                    <li><input type="checkbox" id="d3"><label for="d3">Do not use CURSOR_SHARING=FORCE as a permanent production fix</label></li>
+                    <li><input type="checkbox" id="d4"><label for="d4">Minimize session-level optimizer changes that reduce cursor reuse</label></li>
+                </ul>
+            </section>
+
+            <section id="plan-stability">
+                <h2>Plan stability tools</h2>
+                <p>
+                    When a plan change causes a regression, you often need a controlled mechanism that keeps performance stable while the environment evolves.
+                </p>
+
+                <div class="split">
+                    <div class="mini">
+                        <h4>SQL Plan Management</h4>
+                        <p>
+                            Use SQL plan baselines so the optimizer uses only accepted/verified plans.
+                            Ideal for preventing regressions after upgrades or statistics shifts.
+                        </p>
+                    </div>
+                    <div class="mini">
+                        <h4>SQL Profiles / SQL Patches</h4>
+                        <p>
+                            Profiles improve estimates; patches apply targeted optimizer directives (hints) without changing the app SQL.
+                            Use governance: track why it exists and when to remove it.
+                        </p>
+                    </div>
+                </div>
+
+                <details>
+                    <summary>Hints: when to use (and when not to)</summary>
+                    <p>
+                        Hints are useful for controlled testing and quick experiments, but they create “extra code to manage”
+                        and can become wrong as data changes. Prefer plan management tools for long-term stability.
+                    </p>
+                </details>
+            </section>
+
+            <section id="toolbelt">
+                <h2>Toolbelt</h2>
+
+                <h3>SQL Monitor report: generate HTML</h3>
+                <pre><button class="copybtn" data-copy>Copy</button><code>-- Example (requires proper licensing / pack enablement):
+-- Generate an SQL Monitor report as HTML for a SQL_ID
+
+SET PAGESIZE 0
+SET LINESIZE 32767
+SET LONG 5000000
+SET LONGCHUNKSIZE 5000000
+
+SPOOL sqlmon_report.html
+SELECT DBMS_SQL_MONITOR.REPORT_SQL_MONITOR(
+  sql_id => 'your_sql_id_here',
+  type => 'HTML',
+  report_level => 'ALL'
+)
+FROM dual;
+SPOOL OFF</code></pre>
+
+                <h3>SQL Trace + TKPROF (no-pack fallback)</h3>
+                <pre><button class="copybtn" data-copy>Copy</button><code>-- Session-level SQL trace (example)
+EXEC DBMS_SESSION.SET_SQL_TRACE(TRUE);
+
+-- Run your workload here...
+
+EXEC DBMS_SESSION.SET_SQL_TRACE(FALSE);
+
+-- Then run TKPROF on the generated trace file (OS command)
+-- tkprof input.trc output.txt sort=exeela</code></pre>
+
+                <div class="callout bad">
+                    <strong>Overhead warning:</strong> SQL Trace increases system overhead. Enable it only while tuning, then disable it.
+                </div>
+
+                <div class="ai-box" style="margin-top: 24px;">
+                    <h4>✨ AWR / Statspack Summarizer</h4>
+                    <p class="muted" style="margin: 0; font-size: 13px;">AWR reports can be overwhelming. Paste the "Top 10 Foreground Events" or "SQL ordered by Elapsed Time" text snippet here for a plain-English executive summary.</p>
+                    <textarea id="aiAwrInput" class="ai-input" placeholder="Paste AWR text snippet here..."></textarea>
+                    <button id="aiAwrBtn" class="ai-btn">✨ Summarize AWR</button>
+                    <div id="aiAwrResult" class="ai-result"></div>
+                </div>
+
+                <div class="ai-box" style="margin-top: 24px;">
+                    <h4>✨ Diagnostic Script Generator</h4>
+                    <p class="muted" style="margin: 0; font-size: 13px;">Describe a DBA task in plain English (e.g., "Find all blocking sessions" or "Show tablespace usage"), and Gemini will write the Oracle SQL script for you.</p>
+                    <div style="display: flex; gap: 10px; align-items: flex-start;">
+                        <input type="text" id="aiScriptInput" class="ai-input" placeholder="e.g., 'Find top 5 largest tables in the APP schema'">
+                        <button id="aiScriptBtn" class="ai-btn" style="margin-top: 8px;">✨ Generate Script</button>
+                    </div>
+                    <div id="aiScriptResult" class="ai-result"></div>
+                </div>
+            </section>
+
+            <section id="labs">
+                <h2>Practice labs</h2>
+
+                <details>
+                    <summary>Lab: Find top SQL and pick one target</summary>
+                    <p><strong>Goal:</strong> Learn how to choose what to tune first.</p>
+                    <ol class="steps">
+                        <li>Pick a known “bad window” (a slow period).</li>
+                        <li>Identify top SQL by DB time / AAS.</li>
+                        <li>Select one statement with high DB time and clear business impact.</li>
+                        <li>Collect: SQL text, SQL_ID, plan hash value, basic runtime metrics.</li>
+                    </ol>
+                </details>
+
+                <details>
+                    <summary>Lab: Diagnose an E‑Rows vs A‑Rows mismatch</summary>
+                    <p><strong>Goal:</strong> Learn how to spot bad estimates and what usually fixes them.</p>
+                    <ol class="steps">
+                        <li>Get the actual plan with statistics (ALLSTATS LAST).</li>
+                        <li>Highlight the first plan step where A-Rows diverges massively from E-Rows.</li>
+                        <li>Hypothesis: stale stats or skew/histograms.</li>
+                        <li>Apply a targeted stats refresh, then re-run and compare.</li>
+                    </ol>
+                </details>
+            </section>
+
+            <section id="quizzes">
+                <h2>Weekly quizzes</h2>
+
+                <details>
+                    <summary>Quiz: Why is EXPLAIN PLAN not enough?</summary>
+                    <p><strong>Answer key:</strong> EXPLAIN PLAN shows what the optimizer would do in the explain environment,
+                        which can differ from execution, so the explained plan can differ from the actual plan.
+                        Always validate with runtime evidence when possible.</p>
+                </details>
+
+                <details>
+                    <summary>Quiz: What is DB time, in one sentence?</summary>
+                    <p><strong>Answer key:</strong> DB time is the sum of CPU time and non-idle wait time across all active sessions (cumulative).</p>
+                </details>
+
+                <details>
+                    <summary>Quiz: Why can two queries that “look the same” fail to share a cursor?</summary>
+                    <p><strong>Answer key:</strong> Cursor sharing requires character-for-character identical SQL text (including spaces/case/comments),
+                        plus compatible optimizer environment and other checks.</p>
+                </details>
+            </section>
+
+            <section id="references">
+                <h2>References (primary starting points)</h2>
+                <p class="muted">
+                    These are the core docs that back the methodology in this post.
+                </p>
+                <ul>
+                    <li>Oracle Lifetime Support Policy — Coverage for Technology (support dates table)</li>
+                    <li>Oracle Database Licensing Information User Manual (Diagnostics/Tuning pack requirements)</li>
+                    <li>Oracle SQL Tuning Guide (26ai) — methodology, tools, optimizer controls</li>
+                    <li>AWR documentation (what it collects and why)</li>
+                    <li>Monitoring Database Operations / SQL Monitor documentation</li>
+                    <li>Execution plans documentation (EXPLAIN PLAN vs actual plans, DBMS_XPLAN)</li>
+                    <li>Indexes & index-organized tables documentation</li>
+                </ul>
+            </section>
+
+            <footer>
+                Built as a study-friendly handbook. Copy sections into your internal runbooks.<br>
+                Tip: use <kbd>Ctrl</kbd> + <kbd>F</kbd> (or <kbd>Cmd</kbd> + <kbd>F</kbd>) to jump to the tool or topic you need.
+            </footer>
+        </main>
+    </div>
+</div>
+
+<script>
+    // Reading progress bar
+    const bar = document.getElementById('progressBar');
+    function updateProgress(){
+      const h = document.documentElement;
+      const scrolled = h.scrollTop || document.body.scrollTop;
+      const max = (h.scrollHeight - h.clientHeight) || 1;
+      const pct = Math.max(0, Math.min(1, scrolled / max)) * 100;
+      bar.style.width = pct.toFixed(2) + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    // Copy buttons for code blocks with iframe fallback
+    document.querySelectorAll('button[data-copy]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const pre = btn.parentElement;
+        const code = pre.querySelector('code');
+        const textToCopy = code.textContent;
+
+        try {
+          // Try modern clipboard API first
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(textToCopy);
+          } else {
+            // Fallback for iframe environments
+            const textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            // Prevent scrolling to bottom
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            textArea.style.top = "0";
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+          }
+
+          const old = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(() => btn.textContent = old, 1500);
+        } catch(e) {
+          console.error('Copy failed', e);
+          btn.textContent = 'Copy failed';
+          setTimeout(() => btn.textContent = 'Copy', 1500);
+        }
+      });
+    });
+
+    // Persist checklist state in localStorage
+    function persistChecklist(containerId, storageKey){
+      const root = document.getElementById(containerId);
+      if(!root) return;
+      const boxes = root.querySelectorAll('input[type="checkbox"]');
+      const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+      boxes.forEach(b => { if(saved[b.id] !== undefined) b.checked = saved[b.id]; });
+      root.addEventListener('change', () => {
+        const out = {};
+        boxes.forEach(b => out[b.id] = b.checked);
+        localStorage.setItem(storageKey, JSON.stringify(out));
+      });
+    }
+    persistChecklist('learnChecklist', 'db_tuning_learn');
+    persistChecklist('devChecklist', 'db_tuning_dev');
+
+    // ==========================================
+    // GEMINI API INTEGRATION & SETTINGS
+    // ==========================================
+    const envApiKey = ""; // Fallback for the execution environment
+
+    const apiKeyInput = document.getElementById('geminiApiKey');
+    const saveApiKeyBtn = document.getElementById('saveApiKeyBtn');
+
+    // Load saved key on startup
+    const savedKey = localStorage.getItem('gemini_api_key');
+    if (savedKey) {
+      apiKeyInput.value = savedKey;
+    }
+
+    // Save key to local storage
+    saveApiKeyBtn.addEventListener('click', () => {
+      const key = apiKeyInput.value.trim();
+      if (key) {
+        localStorage.setItem('gemini_api_key', key);
+        saveApiKeyBtn.textContent = '✨ Saved!';
+      } else {
+        localStorage.removeItem('gemini_api_key');
+        saveApiKeyBtn.textContent = '🗑️ Cleared!';
+      }
+      setTimeout(() => saveApiKeyBtn.textContent = 'Save Key', 2000);
+    });
+
+    async function callGemini(prompt, systemInstruction) {
+      const userApiKey = localStorage.getItem('gemini_api_key') || envApiKey;
+
+      if (!userApiKey) {
+        return "**Error:** Please enter your Gemini API Key in the AI Settings panel (left sidebar) to use these features.";
+      }
+
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${userApiKey}`;
+      const payload = {
+        contents: [{ parts: [{ text: prompt }] }],
+        systemInstruction: { parts: [{ text: systemInstruction }] }
+      };
+
+      const delays = [1000, 2000, 4000, 8000, 16000];
+      for (let attempt = 0; attempt <= delays.length; attempt++) {
+        try {
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!res.ok) {
+            if (res.status === 400) return "**Error:** Invalid API Key. Please check your key in the AI Settings panel.";
+            throw new Error(`HTTP ${res.status}`);
+          }
+          const data = await res.json();
+          return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
+        } catch (err) {
+          if (attempt === delays.length) {
+            return `**Error:** Failed to connect to AI after multiple retries. Please try again.`;
+          }
+          await new Promise(r => setTimeout(r, delays[attempt]));
+        }
+      }
+    }
+
+    function formatMarkdown(text) {
+      // Basic markdown parser for bold, italic, code blocks, and newlines
+      let html = text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/\n/g, '<br>');
+      return `<p style="margin-top:0">${html}</p>`;
+    }
+
+    // 1. Wait Event / ORA Explainer Feature
+    const aiWaitBtn = document.getElementById('aiWaitBtn');
+    const aiWaitInput = document.getElementById('aiWaitInput');
+    const aiWaitResult = document.getElementById('aiWaitResult');
+
+    aiWaitBtn.addEventListener('click', async () => {
+      const query = aiWaitInput.value.trim();
+      if (!query) return;
+
+      aiWaitBtn.disabled = true;
+      aiWaitBtn.textContent = '✨ Thinking...';
+      aiWaitResult.style.display = 'block';
+      aiWaitResult.innerHTML = '<span style="color:var(--muted)">Searching Oracle knowledge base...</span>';
+
+      const prompt = `Analyze this Oracle Database issue: "${query}". \n1. Briefly explain what it means.\n2. Provide 1-2 common root causes.\n3. Give actionable tuning/triage steps. Keep it concise.`;
+      const sysInst = "You are an expert Oracle DBA and Performance Tuning consultant. Provide concise, accurate technical advice.";
+
+      const response = await callGemini(prompt, sysInst);
+
+      aiWaitResult.innerHTML = formatMarkdown(response);
+      aiWaitBtn.disabled = false;
+      aiWaitBtn.textContent = '✨ Explain';
+    });
+
+    // Handle enter key for input
+    aiWaitInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') aiWaitBtn.click();
+    });
+
+    // 2. Execution Plan Analyzer Feature
+    const aiPlanBtn = document.getElementById('aiPlanBtn');
+    const aiPlanInput = document.getElementById('aiPlanInput');
+    const aiPlanResult = document.getElementById('aiPlanResult');
+
+    aiPlanBtn.addEventListener('click', async () => {
+      const planText = aiPlanInput.value.trim();
+      if (!planText) return;
+
+      aiPlanBtn.disabled = true;
+      aiPlanBtn.textContent = '✨ Analyzing...';
+      aiPlanResult.style.display = 'block';
+      aiPlanResult.innerHTML = '<span style="color:var(--muted)">Scanning execution plan for bottlenecks...</span>';
+
+      const prompt = `Analyze the following Oracle Execution Plan. Identify any major red flags, such as unexpected FULL TABLE SCANS on large tables, inefficient nested loops, massive differences between E-Rows and A-Rows, or Cartesian joins. Suggest 2-3 specific optimization strategies.\n\nPlan:\n${planText}`;
+      const sysInst = "You are an expert Oracle Performance Tuning DBA. Analyze execution plans directly and provide actionable insights. Highlight the most expensive operations.";
+
+      const response = await callGemini(prompt, sysInst);
+
+      aiPlanResult.innerHTML = formatMarkdown(response);
+      aiPlanBtn.disabled = false;
+      aiPlanBtn.textContent = '✨ Analyze Plan';
+    });
+
+    // 3. SQL Rewriter Feature
+    const aiSqlBtn = document.getElementById('aiSqlBtn');
+    const aiSqlInput = document.getElementById('aiSqlInput');
+    const aiSqlResult = document.getElementById('aiSqlResult');
+
+    aiSqlBtn.addEventListener('click', async () => {
+      const sqlText = aiSqlInput.value.trim();
+      if (!sqlText) return;
+
+      aiSqlBtn.disabled = true;
+      aiSqlBtn.textContent = '✨ Optimizing...';
+      aiSqlResult.style.display = 'block';
+      aiSqlResult.innerHTML = '<span style="color:var(--muted)">Analyzing SQL structure and looking for anti-patterns...</span>';
+
+      const prompt = `Review the following Oracle SQL query for performance anti-patterns (e.g., implicit conversions, lack of sargability, scalar subqueries, cross joins). Provide: \n1. A brief explanation of the issues.\n2. A rewritten, optimized version of the SQL.\n\nQuery:\n${sqlText}`;
+      const sysInst = "You are an expert Oracle SQL Developer and Performance Tuner. Focus on modern Oracle SQL features (e.g., analytic functions, CTEs) and sargable predicates.";
+
+      const response = await callGemini(prompt, sysInst);
+
+      aiSqlResult.innerHTML = formatMarkdown(response);
+      aiSqlBtn.disabled = false;
+      aiSqlBtn.textContent = '✨ Rewrite SQL';
+    });
+
+    // 4. AWR Summarizer Feature
+    const aiAwrBtn = document.getElementById('aiAwrBtn');
+    const aiAwrInput = document.getElementById('aiAwrInput');
+    const aiAwrResult = document.getElementById('aiAwrResult');
+
+    aiAwrBtn.addEventListener('click', async () => {
+      const awrText = aiAwrInput.value.trim();
+      if (!awrText) return;
+
+      aiAwrBtn.disabled = true;
+      aiAwrBtn.textContent = '✨ Summarizing...';
+      aiAwrResult.style.display = 'block';
+      aiAwrResult.innerHTML = '<span style="color:var(--muted)">Processing AWR statistics...</span>';
+
+      const prompt = `Analyze the following Oracle AWR/Statspack report snippet. Provide an executive summary of the primary performance bottleneck identified in this snippet, and suggest the top 2 immediate areas to investigate. Keep it concise and accessible to a developer.\n\nAWR Snippet:\n${awrText}`;
+      const sysInst = "You are an expert Oracle DBA. Translate raw AWR metrics into a clear, actionable business summary.";
+
+      const response = await callGemini(prompt, sysInst);
+
+      aiAwrResult.innerHTML = formatMarkdown(response);
+      aiAwrBtn.disabled = false;
+      aiAwrBtn.textContent = '✨ Summarize AWR';
+    });
+
+    // 5. Indexing Advisor Feature
+    const aiIndexBtn = document.getElementById('aiIndexBtn');
+    const aiIndexInput = document.getElementById('aiIndexInput');
+    const aiIndexResult = document.getElementById('aiIndexResult');
+
+    aiIndexBtn.addEventListener('click', async () => {
+      const inputTxt = aiIndexInput.value.trim();
+      if (!inputTxt) return;
+
+      aiIndexBtn.disabled = true;
+      aiIndexBtn.textContent = '✨ Analyzing...';
+      aiIndexResult.style.display = 'block';
+      aiIndexResult.innerHTML = '<span style="color:var(--muted)">Designing optimal index strategy...</span>';
+
+      const prompt = `Based on the following table details and query, recommend the most optimal Oracle indexing strategy (e.g., B-tree, Bitmap, Function-based, Composite). \n1. Explain why this index is best.\n2. Provide the exact CREATE INDEX statement.\n\nInput:\n${inputTxt}`;
+      const sysInst = "You are an expert Oracle Database Performance Architect. Focus on minimizing I/O and creating highly selective, efficient indexes.";
+
+      const response = await callGemini(prompt, sysInst);
+
+      aiIndexResult.innerHTML = formatMarkdown(response);
+      aiIndexBtn.disabled = false;
+      aiIndexBtn.textContent = '✨ Recommend Index';
+    });
+
+    // 6. DBA Script Generator Feature
+    const aiScriptBtn = document.getElementById('aiScriptBtn');
+    const aiScriptInput = document.getElementById('aiScriptInput');
+    const aiScriptResult = document.getElementById('aiScriptResult');
+
+    aiScriptBtn.addEventListener('click', async () => {
+      const query = aiScriptInput.value.trim();
+      if (!query) return;
+
+      aiScriptBtn.disabled = true;
+      aiScriptBtn.textContent = '✨ Writing...';
+      aiScriptResult.style.display = 'block';
+      aiScriptResult.innerHTML = '<span style="color:var(--muted)">Drafting Oracle SQL script...</span>';
+
+      const prompt = `Write an Oracle database diagnostic or administration script to accomplish the following task: "${query}". \nProvide only the SQL/PLSQL code and brief comments explaining what it does. Do not include excessive conversational filler.`;
+      const sysInst = "You are a Senior Oracle DBA. Write safe, accurate, and efficient Oracle SQL scripts using data dictionary views (dba_*, v$*) where appropriate.";
+
+      const response = await callGemini(prompt, sysInst);
+
+      aiScriptResult.innerHTML = formatMarkdown(response);
+      aiScriptBtn.disabled = false;
+      aiScriptBtn.textContent = '✨ Generate Script';
+    });
+
+    // Handle enter key for script input
+    aiScriptInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') aiScriptBtn.click();
+    });
+</script>
+</body>
+</html>

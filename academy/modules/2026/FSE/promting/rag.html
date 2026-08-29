@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAG Prompting</title>
+<link rel="stylesheet" href="styles.css">
+<script src="search.js"></script>
+<script src="copy.js"></script>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <h2 class="brand">Prompt Engineering Handbook</h2>
+    <p class="tagline">Clean white documentation layout for senior engineers.</p>
+    <input id="searchBox" class="search" type="text" placeholder="Search navigation..." onkeyup="filterNav()">
+    <div class="nav-section-title">Sections</div>
+    <ul>
+      <li data-nav-item><a href="index.html">Home</a></li>
+<li data-nav-item><a href="foundations.html">Foundations</a></li>
+<li data-nav-item><a href="templates.html">Templates</a></li>
+<li data-nav-item><a href="strategies.html">Strategies</a></li>
+<li data-nav-item><a href="developer.html">Developer Prompts</a></li>
+<li data-nav-item><a href="rag.html" class="active">RAG Prompting</a></li>
+<li data-nav-item><a href="agents.html">Agent Prompting</a></li>
+<li data-nav-item><a href="debugging.html">Debugging Playbook</a></li>
+<li data-nav-item><a href="cheatsheet.html">Cheat Sheet</a></li>
+    </ul>
+  </aside>
+  <main class="content">
+    <div class="container">
+
+<section class="hero">
+  <div class="kicker">RAG</div>
+  <h1>Prompting for Retrieval-Augmented Generation</h1>
+  <p>RAG works best when the prompt clearly tells the model how to use retrieved context and what to do when context is incomplete.</p>
+</section>
+
+<div class="panel">
+  <h2>Core rule</h2>
+  <p>Tell the model to answer from retrieved material first. Also tell it how to behave when the context is missing, conflicting, or insufficient.</p>
+
+  <pre id="rag1"><code>You are a grounded assistant.
+
+Use only the context below to answer the question.
+If the answer is not fully supported by the context, say so clearly.
+Do not invent missing facts.
+
+Context:
+{retrieved_documents}
+
+Question:
+{user_question}
+
+Output:
+- direct answer
+- supporting evidence from context
+- uncertainty or missing information</code></pre>
+  <button class="copy-btn" data-copy="rag1" onclick="copyText('rag1')">Copy template</button>
+</div>
+
+<div class="panel">
+  <h2>Common RAG mistakes</h2>
+  <table>
+    <tr><th>Mistake</th><th>What happens</th><th>Fix</th></tr>
+    <tr><td>Too much retrieved text</td><td>The answer becomes noisy or confused.</td><td>Reduce chunk count and improve retrieval quality.</td></tr>
+    <tr><td>No grounding rule</td><td>The model mixes context with guesswork.</td><td>Explicitly say use only the context.</td></tr>
+    <tr><td>No uncertainty handling</td><td>The answer sounds certain even when evidence is weak.</td><td>Require the model to state gaps.</td></tr>
+  </table>
+</div>
+
+    </div>
+  </main>
+</div>
+</body>
+</html>

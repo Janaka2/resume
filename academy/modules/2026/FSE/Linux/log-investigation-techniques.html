@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.">
+  <title>Log Investigation Techniques</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+<a href="index.html">Home</a>
+<a href="top-100-linux-commands.html">Top 100 Linux Commands</a>
+<a href="top-50-debugging-commands.html">Top 50 Debugging</a>
+<a href="log-investigation-techniques.html">Log Investigation</a>
+<a href="troubleshooting-resources.html">Disk / CPU / Memory</a>
+<a href="awk-sed-mastery.html">awk + sed</a>
+<a href="production-one-liners.html">One-Liners</a>
+<a href="file-handling.html">File Handling</a>
+<a href="vi-editor-complete.html">VI Editor</a>
+</nav>
+  </div>
+</header>
+<main class="container">
+
+<section class="hero"><h1>Log Investigation Techniques</h1><p>Good log investigation is about narrowing the problem fast: identify the time window, find the failing request, extract the stacktrace, remove noise, then group repeating patterns.</p></section><section class="card"><h2>Recommended Workflow</h2><ol><li>Start with the time window and service name.</li><li>Search for <code>ERROR</code>, <code>Exception</code>, request ID, transaction ID, username or endpoint.</li><li>Use context lines around the match to understand the sequence.</li><li>Summarize duplicate failures to find the main issue.</li><li>Correlate with service restarts, deployments, traffic spikes or database/network events.</li></ol><h2>Command Reference</h2><table><tr><th>Command</th><th>What it does</th><th>Example</th></tr><tr><td><code>grep -n 'ERROR' app.log</code></td><td>Finds error lines and shows their line numbers.</td><td><code>grep -n 'ERROR' app.log</code></td></tr><tr><td><code>grep -n 'Exception' app.log</code></td><td>Finds exception lines with line numbers.</td><td><code>grep -n 'Exception' app.log</code></td></tr><tr><td><code>grep -A 20 -B 5 'NullPointerException' app.log</code></td><td>Shows lines before and after a match for context.</td><td><code>grep -A 20 -B 5 'NullPointerException' app.log</code></td></tr><tr><td><code>tail -f app.log | grep -E 'ERROR|WARN'</code></td><td>Follows logs live and filters serious messages.</td><td><code>tail -f app.log | grep -E 'ERROR|WARN'</code></td></tr><tr><td><code>sed -n '1200,1260p' app.log</code></td><td>Prints a selected line range from a log.</td><td><code>sed -n '1200,1260p' app.log</code></td></tr><tr><td><code>awk '/ERROR|WARN|Exception/' app.log</code></td><td>Prints lines matching multiple patterns.</td><td><code>awk '/ERROR|WARN|Exception/' app.log</code></td></tr><tr><td><code>zgrep -n 'ERROR' app.log.gz</code></td><td>Searches inside compressed logs.</td><td><code>zgrep -n 'ERROR' app.log.gz</code></td></tr><tr><td><code>grep 'requestId=abc123' app.log</code></td><td>Traces one request or correlation ID through the log.</td><td><code>grep 'requestId=abc123' app.log</code></td></tr><tr><td><code>grep '2026-03-08' app.log</code></td><td>Filters lines for a specific date.</td><td><code>grep '2026-03-08' app.log</code></td></tr><tr><td><code>grep 'ERROR' app.log | sort | uniq -c | sort -nr | head</code></td><td>Groups repeated errors to spot the main issue.</td><td><code>grep 'ERROR' app.log | sort | uniq -c | sort -nr | head</code></td></tr></table><h2>What to Look For</h2><ul><li>First error before the cascade of follow-up errors</li><li>Retry loops, timeouts and connection refused messages</li><li>Memory or GC pressure before slow responses</li><li>Restart events before or after the failure window</li><li>Common thread names, request IDs or host names</li></ul></section>
+
+  <div class="footer">Built as a practical Linux mastery reference for senior engineers.</div>
+</main>
+</body>
+</html>

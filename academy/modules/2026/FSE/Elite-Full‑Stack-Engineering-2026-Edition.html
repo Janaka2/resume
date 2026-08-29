@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Janaka Academy · Elite Full‑Stack Mastery (2026)</title>
+  <meta name="description" content="Elite Full‑Stack Engineering Mastery — Java, Spring Boot, React, Kafka, Linux, Microservices, DevOps, AI, Leadership." />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Inter + JetBrains Mono fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root { color-scheme: light; }
+    html, body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif; }
+    code, pre { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; }
+    .glass { backdrop-filter: saturate(180%) blur(8px); background: rgba(255,255,255,.75); }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <!-- Top Nav -->
+  <header class="sticky top-0 z-50 glass border-b border-gray-200">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="/" class="flex items-center gap-3">
+          <div class="h-9 w-9 rounded-xl bg-blue-600 text-white grid place-content-center font-extrabold">JA</div>
+          <div>
+            <div class="text-lg font-semibold tracking-tight">Janaka Academy</div>
+            <div class="text-xs text-gray-500 -mt-0.5">Elite Full‑Stack Mastery</div>
+          </div>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#modules" class="hover:text-blue-700">Courses</a>
+          <a href="#projects" class="hover:text-blue-700">Projects</a>
+          <a href="#mentorship" class="hover:text-blue-700">Mentorship</a>
+          <a href="#about" class="hover:text-blue-700">About</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <a href="#modules" class="rounded-xl bg-blue-600 px-4 py-2 text-white text-sm font-medium hover:bg-blue-700 transition">Explore Modules</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight">
+            Elite Full‑Stack Engineering — <span class="text-blue-700">2026 Edition</span>
+          </h1>
+          <p class="mt-5 text-lg text-gray-600">
+            Become a top‑1% engineer with a battle‑tested curriculum covering <span class="font-semibold">Java 22</span>,
+            <span class="font-semibold">Spring Boot 3.3</span>, <span class="font-semibold">React 19</span>,
+            <span class="font-semibold">Kafka 4.x</span>, Linux, Microservices, DevOps, AI integrations, and Leadership.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#modules" class="rounded-xl bg-blue-600 px-5 py-3 text-white font-medium hover:bg-blue-700 transition">Browse Curriculum</a>
+            <a href="#structure" class="rounded-xl border border-gray-300 px-5 py-3 text-gray-800 font-medium hover:border-gray-400 transition">How it’s organized</a>
+          </div>
+          <div class="mt-6 flex items-center gap-4 text-xs text-gray-500">
+            <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-blue-600"></span> Backend</span>
+            <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-emerald-600"></span> Frontend</span>
+            <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-purple-600"></span> Messaging</span>
+            <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-amber-600"></span> DevOps</span>
+            <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-slate-700"></span> Leadership</span>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="absolute -inset-8 -z-10 bg-gradient-to-tr from-blue-100 to-white rounded-3xl"></div>
+          <div class="rounded-3xl border bg-white p-6 shadow-sm">
+            <div class="grid grid-cols-2 gap-4 text-sm">
+              <div class="rounded-2xl border p-4">
+                <div class="text-xs text-gray-500">Backend Focus</div>
+                <div class="mt-1 text-2xl font-bold">60%</div>
+              </div>
+              <div class="rounded-2xl border p-4">
+                <div class="text-xs text-gray-500">Frontend Focus</div>
+                <div class="mt-1 text-2xl font-bold">30%</div>
+              </div>
+              <div class="rounded-2xl border p-4">
+                <div class="text-xs text-gray-500">Leadership</div>
+                <div class="mt-1 text-2xl font-bold">10%</div>
+              </div>
+              <div class="rounded-2xl border p-4">
+                <div class="text-xs text-gray-500">Capstones</div>
+                <div class="mt-1 text-2xl font-bold">7+</div>
+              </div>
+            </div>
+            <div class="mt-4 text-xs text-gray-500">Up‑to‑date as of <span class="font-semibold">April 2026</span>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it’s organized -->
+  <section id="structure" class="border-t border-gray-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+      <h2 class="text-2xl md:text-3xl font-bold tracking-tight">How the curriculum is organized</h2>
+      <p class="mt-3 text-gray-600 max-w-3xl">Balanced learning path → Foundations → Professional Projects → Enterprise Architecture → Leadership & Delivery Excellence.</p>
+      <ul class="mt-6 grid md:grid-cols-4 gap-4 text-sm">
+        <li class="rounded-2xl border p-5"><span class="font-semibold">1) Foundations</span><br/>Mindset, environment, Git discipline, Clean Code.</li>
+        <li class="rounded-2xl border p-5"><span class="font-semibold">2) Backend</span><br/>Java 22, Spring Boot 3.3, Postgres.</li>
+        <li class="rounded-2xl border p-5"><span class="font-semibold">3) Frontend</span><br/>React 19 + TypeScript, API integration, testing.</li>
+        <li class="rounded-2xl border p-5"><span class="font-semibold">4) Systems</span><br/>Kafka EDA, Linux, Docker/K8s, Observability.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Modules Grid -->
+  <section id="modules" class="border-t border-gray-200 bg-gray-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div class="flex items-end justify-between flex-wrap gap-4">
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Curriculum Modules</h2>
+        <div class="flex items-center gap-2">
+          <input id="filter-input" type="text" placeholder="Filter modules…" class="w-64 max-w-full rounded-xl border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600" />
+        </div>
+      </div>
+
+      <div id="modules-grid" class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+  <!-- DAILY_LINKS_START -->
+  <section id="daily-learning" class="border-t border-gray-200 bg-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+          <div class="mb-8 md:flex md:items-end md:justify-between">
+              <div>
+                  <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Daily Learning Log</h2>
+                  <p class="mt-3 text-gray-600 max-w-2xl">Follow the day-by-day progression. Each page contains detailed notes, code snippets, and reflections for that specific day's focus.</p>
+              </div>
+          </div>
+
+          <!-- Styled List matching the rest of the site's cards -->
+          <ul class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+              <!-- Day Item Template (Copy this for new pages) -->
+              <li>
+                  <a href="Linux/index.html" class="block rounded-2xl border border-gray-200 bg-gray-50 p-5 hover:bg-white hover:border-blue-300 hover:shadow-md hover:-translate-y-1 transition-all duration-200 group">
+                      <div class="flex items-center justify-between">
+                          <span class="text-xs font-extrabold uppercase tracking-wider text-blue-600">Day 01</span>
+                          <span class="text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
+                      </div>
+                      <h3 class="mt-3 text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">Linux Commands & Tools</h3>
+                      <p class="mt-2 text-sm text-gray-600 line-clamp-2">Linux CLI Mastery for Senior Engineers</p>
+                  </a>
+              </li>
+
+              <!-- Example Day 2 -->
+              <li>
+                  <a href="./promting/index.html" class="block rounded-2xl border border-gray-200 bg-gray-50 p-5 hover:bg-white hover:border-blue-300 hover:shadow-md hover:-translate-y-1 transition-all duration-200 group">
+                      <div class="flex items-center justify-between">
+                          <span class="text-xs font-extrabold uppercase tracking-wider text-blue-600">Day 02</span>
+                          <span class="text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
+                      </div>
+                      <h3 class="mt-3 text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">Prompt Engineering Playbook</h3>
+                      <p class="mt-2 text-sm text-gray-600 line-clamp-2">Prompt Engineering Playbook for Senior Software Engineers.</p>
+                  </a>
+              </li>
+
+              <!-- Example Day 3 -->
+              <li>
+                  <a href="./entanglement/index.html" class="block rounded-2xl border border-gray-200 bg-gray-50 p-5 hover:bg-white hover:border-blue-300 hover:shadow-md hover:-translate-y-1 transition-all duration-200 group">
+                      <div class="flex items-center justify-between">
+                          <span class="text-xs font-extrabold uppercase tracking-wider text-blue-600">Day 03</span>
+                          <span class="text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
+                      </div>
+                      <h3 class="mt-3 text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">Quantum Entanglement and Quantum Computing</h3>
+                      <p class="mt-2 text-sm text-gray-600 line-clamp-2">A simple, practical guide to understand entanglement, real use cases, and how quantum computing can support career growth.</p>
+                  </a>
+              </li>
+
+              <li>
+                  <a href="hexagonal-architecture-guide.html" class="block rounded-2xl border border-gray-200 bg-gray-50 p-5 hover:bg-white hover:border-blue-300 hover:shadow-md hover:-translate-y-1 transition-all duration-200 group">
+                      <div class="flex items-center justify-between">
+                          <span class="text-xs font-extrabold uppercase tracking-wider text-blue-600">Day 04</span>
+                          <span class="text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
+                      </div>
+                      <h3 class="mt-3 text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">Hexagonal Architecture (Ports & Adapters)</h3>
+                      <p class="mt-2 text-sm text-gray-600 line-clamp-2">A practical, modern guide to understanding Hexagonal Architecture deeply, applying it with current Java and Spring.</p>
+                  </a>
+              </li>
+
+              <li>
+                  <a href="virtual_threads_java_21_academy_page.html" class="block rounded-2xl border border-gray-200 bg-gray-50 p-5 hover:bg-white hover:border-blue-300 hover:shadow-md hover:-translate-y-1 transition-all duration-200 group">
+                      <div class="flex items-center justify-between">
+                          <span class="text-xs font-extrabold uppercase tracking-wider text-blue-600">Day 05</span>
+                          <span class="text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
+                      </div>
+                      <h3 class="mt-3 text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">Virtual threads in Java 21</h3>
+                      <p class="mt-2 text-sm text-gray-600 line-clamp-2">Virtual threads in Java 21 — complete practical guide</p>
+                  </a>
+              </li>
+
+              <li>
+                  <a href="bash_shell_scripting_guide_blog.html" class="block rounded-2xl border border-gray-200 bg-gray-50 p-5 hover:bg-white hover:border-blue-300 hover:shadow-md hover:-translate-y-1 transition-all duration-200 group">
+                      <div class="flex items-center justify-between">
+                          <span class="text-xs font-extrabold uppercase tracking-wider text-blue-600">Day 06</span>
+                          <span class="text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
+                      </div>
+                      <h3 class="mt-3 text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">Bash Shell</h3>
+                      <p class="mt-2 text-sm text-gray-600 line-clamp-2">Bash Shell Scripting Guide</p>
+                  </a>
+              </li>
+
+              <li>
+                  <a href="performanceTuning/DBPerformanceTuning.html" class="block rounded-2xl border border-gray-200 bg-gray-50 p-5 hover:bg-white hover:border-blue-300 hover:shadow-md hover:-translate-y-1 transition-all duration-200 group">
+                      <div class="flex items-center justify-between">
+                          <span class="text-xs font-extrabold uppercase tracking-wider text-blue-600">Day 07</span>
+                          <span class="text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
+                      </div>
+                      <h3 class="mt-3 text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">Performance Problems</h3>
+                      <p class="mt-2 text-sm text-gray-600 line-clamp-2">How to Solve Critical Performance Problems</p>
+                  </a>
+              </li>
+              <li>
+                  <a href="performanceTuning/DBPerformanceTuning.html" class="block rounded-2xl border border-gray-200 bg-gray-50 p-5 hover:bg-white hover:border-blue-300 hover:shadow-md hover:-translate-y-1 transition-all duration-200 group">
+                      <div class="flex items-center justify-between">
+                          <span class="text-xs font-extrabold uppercase tracking-wider text-blue-600">Day 08</span>
+                          <span class="text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
+                      </div>
+                      <h3 class="mt-3 text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">Java Modernization</h3>
+                      <p class="mt-2 text-sm text-gray-600 line-clamp-2">Modernizing the Java Journey: A Comprehensive Study Guide</p>
+                  </a>
+              </li>
+
+
+              <li>
+                  <a href="./design-patterns-architecture-playbook.html" class="block rounded-2xl border border-gray-200 bg-gray-50 p-5 hover:bg-white hover:border-blue-300 hover:shadow-md hover:-translate-y-1 transition-all duration-200 group">
+                      <div class="flex items-center justify-between">
+                          <span class="text-xs font-extrabold uppercase tracking-wider text-blue-600">Day 09</span>
+                          <span class="text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
+                      </div>
+                      <h3 class="mt-3 text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">Java Design Patterns for Real Projects</h3>
+                      <p class="mt-2 text-sm text-gray-600 line-clamp-2">Simple and practical playbook to choose the right design pattern for business use cases.</p>
+                  </a>
+              </li>
+
+              <!-- Empty State Placeholder (Optional: keep at the end) -->
+              <li class="rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50/50 p-5 flex flex-col items-center justify-center text-center text-gray-400 min-h-[160px]">
+                  <svg class="w-6 h-6 mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                  <span class="text-sm font-medium">New pages will appear here</span>
+              </li>
+
+          </ul>
+      </div>
+  </section>
+  <!-- Projects CTA -->
+  <section id="projects" class="border-t border-gray-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div class="rounded-3xl border p-8 md:p-12 grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h3 class="text-xl md:text-2xl font-bold">Capstone Projects & Real‑World Scenarios</h3>
+          <p class="mt-3 text-gray-600">Each module includes a hands‑on project: multi‑tenant APIs, event‑driven order processing, live dashboards, and a final enterprise system deployed on Kubernetes with observability.</p>
+        </div>
+        <div class="text-right md:text-right">
+          <a href="./capstone.html" class="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-white font-medium hover:bg-blue-700 transition">View Capstone Outline<span aria-hidden>→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mentorship CTA -->
+  <section id="mentorship" class="border-t border-gray-200 bg-gray-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div class="rounded-3xl border p-8 md:p-12">
+        <h3 class="text-xl md:text-2xl font-bold">Mentorship & Leadership Track</h3>
+        <p class="mt-3 text-gray-600">Communication under pressure, debugging discipline, documentation, stakeholder alignment, and architecture reviews. Become the engineer others rely on.</p>
+        <a href="./leadership.html" class="mt-6 inline-flex items-center gap-2 rounded-xl border border-gray-300 px-5 py-3 text-sm font-medium hover:border-gray-400 transition">Open Leadership Module<span aria-hidden>→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About / Footer -->
+  <section id="about" class="border-t border-gray-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div class="grid md:grid-cols-3 gap-10">
+        <div>
+          <h4 class="text-lg font-semibold">About Janaka Academy</h4>
+          <p class="mt-2 text-gray-600">Empowering engineers to surpass technical mastery with spiritual depth and ethical integrity. Built for clarity, discipline, and real‑world impact.</p>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold">Contact</h4>
+          <ul class="mt-2 text-gray-600 space-y-1 text-sm">
+            <li>Email: <a class="text-blue-700 hover:underline" href="mailto:janaka2@gmail.com">janaka2@gmail.com</a></li>
+            <li>Site: <a class="text-blue-700 hover:underline" href="https://janaka.me" target="_blank" rel="noopener">janaka.me</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold">Version</h4>
+          <p class="mt-2 text-gray-600 text-sm">Curriculum updated: <span class="font-medium">November 2025</span>. Tech focus: Java 22, Spring Boot 3.3, React 19, Kafka 4.x.</p>
+        </div>
+      </div>
+      <div class="mt-10 border-t pt-6 text-xs text-gray-500">© <span id="year"></span> Janaka Academy. All rights reserved.</div>
+    </div>
+  </section>
+
+  <!-- Data + Render Script -->
+  <script>
+    const modules = [
+      {
+        title: 'Foundation: Engineering Mindset & Setup',
+        href: './foundation.html',
+        blurb: 'Mindset, environment, Git discipline, Clean Code, Java toolchain.',
+        tag: 'Leadership',
+        tone: 'slate'
+      },
+      {
+        title: 'Modernizing the Java Journey',
+        href: './modenizeJava.html',
+        blurb: 'A Comprehensive Study Guide.',
+        tag: 'Backend',
+        tone: 'blue'
+      },
+      {
+        title: 'Java Design Patterns & Architecture Playground',
+        href: './design-patterns-architecture-playbook.html',
+        blurb: 'Choose the right pattern fast using practical business scenarios, tests, and architecture guidance.',
+        tag: 'Backend',
+        tone: 'blue'
+      },
+      {
+        title: 'Core Java Mastery (Java 22)',
+        href: './java-core.html',
+        blurb: 'JVM model, records, sealed classes, virtual threads, performance.',
+        tag: 'Backend',
+        tone: 'blue'
+      },
+      {
+        title: 'Spring Boot 3.3 Ecosystem',
+        href: './spring-boot.html',
+        blurb: 'REST APIs, JPA, validation, security (OAuth2/JWT), testing, observability.',
+        tag: 'Backend',
+        tone: 'blue'
+      },
+      {
+        title: 'Apache Kafka 4.x & Event‑Driven Architecture',
+        href: './kafka.html',
+        blurb: 'Producers/Consumers, schemas, EOS, Streams/Connect/KSQL, CQRS.',
+        tag: 'Messaging',
+        tone: 'purple'
+      },
+      {
+        title: 'React 19 + TypeScript Frontend',
+        href: './react.html',
+        blurb: 'RSC, hooks, state (Zustand/RTK), React Query, forms, testing.',
+        tag: 'Frontend',
+        tone: 'emerald'
+      },
+      {
+        title: 'Essential Linux & CLI for Engineers',
+        href: './linux.html',
+        blurb: 'Filesystem, grep/find, processes, networking, systemd, bash, SSH/rsync.',
+        tag: 'DevOps',
+        tone: 'amber'
+      },
+      {
+        title: 'DevOps & Cloud: Docker · K8s · Helm',
+        href: './devops-cloud.html',
+        blurb: 'Containers, images, CI/CD, Kubernetes deployments, Helm charts.',
+        tag: 'DevOps',
+        tone: 'amber'
+      },
+      {
+        title: 'Advanced Microservices & Distributed Systems',
+        href: './microservices.html',
+        blurb: 'API gateway, saga, circuit breaker, discovery, resilience patterns.',
+        tag: 'Backend',
+        tone: 'blue'
+      },
+      {
+        title: 'AI Integration for Java Systems (2025)',
+        href: './ai-integration.html',
+        blurb: 'OpenAI/Claude/Gemini, LangChain4j, RAG, vector search, governance.',
+        tag: 'Backend',
+        tone: 'blue'
+      },
+      {
+        title: 'Leadership, Communication & Delivery Excellence',
+        href: './leadership.html',
+        blurb: 'Stakeholder communication, docs, reviews, mentoring, interviews.',
+        tag: 'Leadership',
+        tone: 'slate'
+      },
+      {
+        title: 'Enterprise Capstone: Global Logistics Platform',
+        href: './capstone.html',
+        blurb: 'Full stack system: React + Spring + Kafka + Postgres + K8s + Observability.',
+        tag: 'Project',
+        tone: 'blue'
+      }
+    ];
+
+    const toneToColor = (tone) => ({
+      blue:   { dot: 'bg-blue-600',   badge: 'text-blue-700 border-blue-200 bg-blue-50' },
+      emerald:{ dot: 'bg-emerald-600',badge: 'text-emerald-700 border-emerald-200 bg-emerald-50' },
+      purple: { dot: 'bg-purple-600', badge: 'text-purple-700 border-purple-200 bg-purple-50' },
+      amber:  { dot: 'bg-amber-600',  badge: 'text-amber-700 border-amber-200 bg-amber-50' },
+      slate:  { dot: 'bg-slate-700',  badge: 'text-slate-700 border-slate-200 bg-slate-50' }
+    })[tone] || { dot: 'bg-gray-500', badge: 'text-gray-700 border-gray-200 bg-gray-50' };
+
+    const grid = document.getElementById('modules-grid');
+
+    function render(list) {
+      grid.innerHTML = '';
+      list.forEach(m => {
+        const colors = toneToColor(m.tone);
+        const card = document.createElement('article');
+        card.className = 'bg-white border rounded-2xl shadow-sm hover:shadow-md transition p-6 flex flex-col';
+        card.innerHTML = `
+          <div class="flex items-center gap-2 text-xs">
+            <span class="h-2 w-2 rounded-full ${colors.dot}"></span>
+            <span class="inline-flex items-center gap-2 rounded-full border px-2.5 py-1 ${colors.badge}">${m.tag}</span>
+          </div>
+          <h3 class="mt-3 text-lg font-semibold text-gray-900"><a class="hover:underline" href="${m.href}">${m.title}</a></h3>
+          <p class="mt-2 text-sm text-gray-600 flex-1">${m.blurb}</p>
+          <div class="mt-5">
+            <a href="${m.href}" class="inline-flex items-center gap-2 rounded-xl bg-gray-900 text-white px-4 py-2 text-sm font-medium hover:bg-gray-800">Open module<span aria-hidden>→</span></a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Initial render
+    render(modules);
+
+    // Simple filter
+    const filterInput = document.getElementById('filter-input');
+    filterInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      const filtered = modules.filter(m =>
+        m.title.toLowerCase().includes(q) ||
+        m.blurb.toLowerCase().includes(q) ||
+        m.tag.toLowerCase().includes(q)
+      );
+      render(filtered);
+    });
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

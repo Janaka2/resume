@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Prompting</title>
+<link rel="stylesheet" href="styles.css">
+<script src="search.js"></script>
+<script src="copy.js"></script>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <h2 class="brand">Prompt Engineering Handbook</h2>
+    <p class="tagline">Clean white documentation layout for senior engineers.</p>
+    <input id="searchBox" class="search" type="text" placeholder="Search navigation..." onkeyup="filterNav()">
+    <div class="nav-section-title">Sections</div>
+    <ul>
+      <li data-nav-item><a href="index.html">Home</a></li>
+<li data-nav-item><a href="foundations.html">Foundations</a></li>
+<li data-nav-item><a href="templates.html">Templates</a></li>
+<li data-nav-item><a href="strategies.html">Strategies</a></li>
+<li data-nav-item><a href="developer.html">Developer Prompts</a></li>
+<li data-nav-item><a href="rag.html">RAG Prompting</a></li>
+<li data-nav-item><a href="agents.html" class="active">Agent Prompting</a></li>
+<li data-nav-item><a href="debugging.html">Debugging Playbook</a></li>
+<li data-nav-item><a href="cheatsheet.html">Cheat Sheet</a></li>
+    </ul>
+  </aside>
+  <main class="content">
+    <div class="container">
+
+<section class="hero">
+  <div class="kicker">Agents</div>
+  <h1>Prompting for Agent Workflows</h1>
+  <p>Agent prompts need more than task description. They need operating rules: when to plan, when to use tools, when to stop, and how to validate.</p>
+</section>
+
+<div class="panel">
+  <h2>Planner-executor pattern</h2>
+  <pre id="agent1"><code>Role: Task planner and executor.
+
+Instructions:
+1. Understand the user goal.
+2. Break it into small steps.
+3. Use tools only when needed.
+4. After each important step, check whether the result supports the goal.
+5. Stop when the task is complete or when required information is unavailable.
+6. State uncertainty clearly.</code></pre>
+  <button class="copy-btn" data-copy="agent1" onclick="copyText('agent1')">Copy template</button>
+
+  <h2>Why this matters</h2>
+  <p>Without operating rules, agents often over-call tools, loop unnecessarily, or act too confidently. Clear tool and stopping instructions reduce those failures.</p>
+</div>
+
+<div class="panel">
+  <h2>Useful agent guardrails</h2>
+  <ul>
+    <li>Do not call a tool if the answer is already available in context.</li>
+    <li>Ask for confirmation only when the choice materially changes the result.</li>
+    <li>Summarise partial findings instead of stalling.</li>
+    <li>Validate output before final response.</li>
+  </ul>
+</div>
+
+    </div>
+  </main>
+</div>
+</body>
+</html>
