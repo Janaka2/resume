@@ -1,82 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Linux & CLI Mastery for Java Developers</title>
-    <style>
-        body {
-          font-family: Arial, sans-serif;
-          line-height: 1.6;
-          margin: 0;
-          padding: 0 1rem;
-          background: #f9f9f9;
-          color: #333;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linux & CLI Mastery for Java Developers</title>
+  <link rel="canonical" href="https://janaka.me/academy/modules/2025/FSE/linux.html">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
         }
-        header {
-          background: #24292e;
-          color: white;
-          padding: 1rem;
-          text-align: center;
-        }
-        nav {
-          background: #eee;
-          padding: 1rem;
-          margin-bottom: 1rem;
-        }
-        nav a {
-          display: block;
-          color: #0366d6;
-          margin: 0.5rem 0;
-          text-decoration: none;
-        }
-        section {
-          margin-bottom: 2rem;
-          padding: 1rem;
-          background: white;
-          border-radius: 5px;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        h2 {
-          color: #2c3e50;
-        }
-        h3 {
-          margin-top: 1.5rem;
-          color: #444;
-        }
-        pre, code {
-          background: #f4f4f4;
-          padding: 0.5rem;
-          overflow-x: auto;
-          display: block;
-          white-space: pre-wrap;
-          border-left: 4px solid #ccc;
-          margin: 1rem 0;
-        }
-        table {
-          width: 100%;
-          border-collapse: collapse;
-          margin-top: 1rem;
-        }
-        table, th, td {
-          border: 1px solid #ddd;
-        }
-        th, td {
-          padding: 0.5rem;
-          text-align: left;
-        }
-        th {
-          background: #f0f0f0;
-        }
-        ul {
-          padding-left: 1.2rem;
-        }
-        ul li {
-          margin-bottom: 0.5rem;
-        }
-    </style>
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/subsite.css">
 </head>
 <body>
+
+<div data-include="/partials/site-nav.html"></div>
 <header>
     <h1>Essential Linux & CLI Mastery for Senior Java Engineers</h1>
     <p>Complete Practical Guide + Cheat Sheet</p>
@@ -226,5 +176,14 @@ git mergetool</code></pre>
         <li>View CPU usage → <code>top</code></li>
     </ul>
 </section>
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js"></script>
+<script src="/assets/js/site-nav.js"></script>
 </body>
 </html>

@@ -1,76 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <title>Foundation: Engineering Mindset & Setup</title>
-    <style>
-        /* Sass-like structure (nested with placeholder syntax for clarity) */
-        body {
-          font-family: Arial, sans-serif;
-          line-height: 1.6;
-          margin: 20px;
-          padding: 0;
-          background-color: #f5f5f5;
-          color: #333;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foundation: Engineering Mindset & Setup</title>
+  <link rel="canonical" href="https://janaka.me/academy/modules/2025/FSE/foundation.html">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
         }
-        h1, h2, h3 {
-          color: #2c3e50;
-          margin-top: 1em;
-        }
-        h1 {
-          border-bottom: 2px solid #3498db;
-          padding-bottom: 0.2em;
-        }
-        h2 {
-          color: #2980b9;
-        }
-        p {
-          margin: 0.5em 0;
-        }
-        ul {
-          list-style-type: disc;
-          margin-left: 1.5em;
-        }
-        li {
-          margin: 0.5em 0;
-        }
-        .checklist {
-          list-style: none;
-          padding-left: 0;
-        }
-        .checklist li {
-          margin: 0.2em 0;
-        }
-        input[type="checkbox"] {
-          margin-right: 0.5em;
-        }
-        .progress-bar {
-          width: 100%;
-          background-color: #ddd;
-          border-radius: 5px;
-          overflow: hidden;
-          margin: 0.5em 0;
-        }
-        .progress {
-          width: 30%;
-          height: 20px;
-          background-color: #3498db;
-          text-align: center;
-          color: white;
-          line-height: 20px;
-        }
-        details {
-          background: #eef;
-          padding: 0.5em;
-          margin: 0.5em 0;
-        }
-        summary {
-          cursor: pointer;
-          font-weight: bold;
-        }
-    </style>
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/subsite.css">
 </head>
 <body>
+
+<div data-include="/partials/site-nav.html"></div>
 <h1>Foundation: Engineering Mindset &amp; Setup</h1>
 <p>Welcome to the first step of your engineering journey! This is where we build your mindset, get your tools ready, and lay the groundwork for success. Remember, anyone can feel like they’re <strong>behind</strong> or that the world is moving too fast. But right now, you're here and you have the power to make today count. Let go of any doubts or past setbacks—they don’t define you. Focus on this moment and let's get started.</p>
 
@@ -138,5 +94,14 @@
 <p>In a fast-moving world, patience is the secret superpower. Everyone learns at their own pace. What matters is consistency and confidence in yourself. You've taken the important first steps by committing to this 90-day sprint and reading this page. That's courage!</p>
 <p>Each section above is a milestone on your path. Use the checklists and track your progress. Most of all, <strong>believe in yourself</strong>. You've got the drive to succeed. The present moment – this very step – is where all your power lies. You already have a miracle: the fact that you showed up ready to learn.</p>
 <p>The future engineer you’re becoming starts now. Let's do this! 🚀</p>
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js"></script>
+<script src="/assets/js/site-nav.js"></script>
 </body>
 </html>
