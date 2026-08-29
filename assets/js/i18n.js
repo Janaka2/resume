@@ -10,6 +10,7 @@ window.JP_I18N = (function () {
   var DE = {
     /* ---- top bar ---- */
     navExp: 'Erfahrung',
+    navProjects: 'Projekte',
     navCerts: 'Zertifizierungen',
     navEdu: 'Ausbildung',
     navJourney: 'Werdegang',
@@ -68,6 +69,29 @@ window.JP_I18N = (function () {
     whL2: 'Ich arbeitete mit <strong>ABSI</strong> im Gesundheitswesen, später bei <strong>Roomsnet.com</strong> als Java/JEE-Entwickler und Technical Lead in der Hotellerie, und mit <strong>Simbios</strong> an Projekten für Kunden wie <strong>Van Genechten Packaging</strong>, <strong>Nokia Siemens Networks</strong>, <strong>Johnson &amp; Johnson</strong> und <strong>Centric IT Solutions</strong>.',
     whL3: '2011 wechselte ich zur <strong>Europäischen Kommission (DIGIT)</strong> und leitete die Entwicklung robuster E-Procurement-Systeme und komplexer Workflows für die EU.',
     whL4: 'Seit 2018 ist die Schweiz meine Basis — mit <strong>UBS</strong> und <strong>Credit Suisse</strong> im Zentrum: hochperformantes Full-Stack-Engineering, Systemmigrationen und die Integration KI-gestützter Automatisierung.',
+
+    /* ---- independent projects ---- */
+    pjEyebrow: 'Eigene Projekte',
+    pjH2: 'Zwei Produkte, von der Idee bis in Produktion.',
+    pjLede: 'In meiner Freizeit und auf eigener Infrastruktur entstanden — unabhängig von meiner Anstellung und ohne Bezug zum Geschäft meines Arbeitgebers. Beide sind live, und beide sind von Grund auf privat gebaut: Alle Daten bleiben auf dem Gerät der Nutzerin oder des Nutzers.',
+    pjLive: 'Live',
+    p1Sub: 'nuechtern.app · Fasten-Tracker · PWA',
+    p1Desc: 'Ein Fasten-Begleiter, der die Biologie sichtbar macht: ein Timer, der die aktuelle Stoffwechselphase zeigt und sagt, was der Körper in Stunde 14 tatsächlich tut — dazu die Hinweise zu Flüssigkeit und Elektrolyten, die den meisten Trackern fehlen.',
+    p1Pts: '<li>Stoffwechsel-Timer, Wasser- und Elektrolyt-Protokoll, Gewichtsverlauf, Serien und Meilensteine.</li><li>Lässt sich auf dem Homescreen installieren und läuft vollständig offline — ohne Konto, ohne Werbung, ohne Tracking.</li><li>Für den deutschsprachigen Markt geschrieben, auf Deutsch und Englisch.</li>',
+    p1Chips: '<span class="chip">PWA</span><span class="chip">Offline-first</span><span class="chip">nur auf dem Gerät</span><span class="chip">DE / EN</span>',
+    p1Btn: 'nüchtern öffnen ↗',
+    p2Sub: 'daily-momentum.com · Zeiterfassung · PWA',
+    p2Desc: 'Eine stille Aufzeichnung, wohin der Tag gegangen ist. Ein Tippen sagt, was man gerade tut — es gibt keinen Start- und keinen Stopp-Knopf, denn etwas zu beginnen beendet das Vorherige. Alles andere wird daraus abgeleitet.',
+    p2Pts: '<li>Der Tag als ein einziger Streifen, die Woche im Vergleich zur Vorwoche, Muster ausschliesslich aus dem Erfassten.</li><li>Ein vergessener Nachmittag kommt später als Frage zurück statt als Lücke; Einträge lassen sich verschieben, teilen, zusammenführen und umbenennen.</li><li>Kein Konto, kein Server, kein Upload — mit Export als Sicherungsdatei oder Tabelle, jederzeit.</li>',
+    p2Chips: '<span class="chip">PWA</span><span class="chip">Offline-first</span><span class="chip">nur auf dem Gerät</span><span class="chip">Datenexport</span>',
+    p2Btn: 'Daily Momentum öffnen ↗',
+    pjHowLabel: 'Wie sie entstanden sind',
+    pjHowH: 'Ein Engineer, KI im Prozess, ausgeliefert.',
+    pjHowP: 'Beide Produkte wurden von einer Person spezifiziert, gestaltet, gebaut, getextet und deployed — an Abenden und Wochenenden — mit LLMs als bewusstem Werkzeug in jedem Schritt, nicht als Spielerei. Dieselbe Arbeitsweise bringe ich in regulierte Umgebungen: mit dem Modell schnell vorankommen und das Ergebnis anschliessend an dem Massstab messen, den die Domäne verlangt.',
+    pjHowPts: '<li>Produktumfang und Interaktionsflüsse zuerst gegen ein Modell entworfen, danach von Hand gekürzt, bis nur noch bleibt, was seinen Platz verdient.</li><li>Umsetzung in engen Generieren-und-Prüfen-Schleifen — Architektur und Review bleiben bei mir, und nichts geht live, was ich nicht Zeile für Zeile erklären kann.</li><li>Oberflächentexte in zwei Sprachen sowie das visuelle Erscheinungsbild beider Apps KI-gestützt erstellt und auf eine einheitliche Stimme redigiert.</li><li>Von der leeren Seite zur öffentlichen URL in Wochen statt Quartalen — ohne Team, ohne Budget, ohne fremde Hilfe.</li>',
+    pjAcqH: 'Beide Produkte könnten ein besseres Zuhause finden.',
+    pjAcqP: 'Beide sind unabhängig von meiner Anstellung entstanden und stehen mir daher frei zur Weitergabe. Wenn eines davon in ein Portfolio passt, das Sie aufbauen, spreche ich gerne über Übernahme oder Lizenzierung — Quellcode, Marke, Domain und eine dokumentierte Übergabe.',
+    pjAcqBtn: '✉&nbsp; Per E-Mail anfragen',
 
     /* ---- certifications ---- */
     certEyebrow: 'Zertifizierungen &amp; Kurse',
