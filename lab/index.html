@@ -1,80 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Labs — Experiments & Demos</title>
-    <meta name="description" content="Hands-on demos: RAG chatbot, job research agent, momentum journal, and more.">
-    <link rel="canonical" href="https://janaka.me/lab/"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Labs — Experiments &amp; Demos</title>
+  <meta name="description" content="Hands-on demos: RAG chatbot, job research agent, momentum journal, and more.">
+  <link rel="canonical" href="https://janaka.me/lab/">
 
-    <!-- Favicon set (optional paths; place your files in assets/icons if needed) -->
-    <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg?v=1"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png?v=1"/>
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16.png?v=1"/>
-    <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png?v=1"/>
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png?v=1">
 
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/subsite.css">
 </head>
-<body class="bg-gray-100 leading-relaxed text-gray-800">
-  <div data-include="/partials/site-nav.html"></div>
-  <header class="bg-gradient-to-r from-blue-50 to-indigo-100 py-12 px-4">
-    <img src="./assets/icons/lab-icon.png" alt="Janaka Academy Icon" class="w-24 h-24 md:w-28 md:h-28 mx-auto mb-6" />
-    <div class="max-w-6xl mx-auto text-center">
-      <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Labs & Experiments</h1>
-      <p class="text-xl text-gray-700 mb-4">Live demos, small tools and proof‑of‑concepts exploring AI, automation and productivity.</p>
+<body>
+
+<div data-include="/partials/site-nav.html"></div>
+
+<main>
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow">Lab</p>
+      <h1>Experiments &amp; demos.</h1>
+      <p class="lede">Live demos, small tools and proof-of-concepts exploring AI, automation and productivity. Rough by design — each one exists to answer a question.</p>
     </div>
-  </header>
-  <section class="py-12 px-4 bg-white">
-    <div class="max-w-6xl mx-auto">
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-gray-50 rounded-lg p-6 shadow">
-          <h2 class="font-semibold text-blue-700 mb-2">RAG Chatbot (FAISS)</h2>
-          <p class="text-gray-600 mb-2 text-sm">Python · FAISS · OpenAI SDK</p>
-          <p class="text-gray-700 mb-4">Local doc search with chunking, MMR, re‑rank, and guardrails.</p>
-          <div class="flex space-x-4">
-            <a href="./rag-demo/" class="text-blue-600 text-sm underline">Open Demo</a>
-            <a href="https://github.com/Janaka2/RAG-Powered-Chatbot" class="text-blue-600 text-sm underline">Source</a>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="grid">
+
+        <article class="card item">
+          <h3>RAG Chatbot (FAISS)</h3>
+          <p class="sub">Python · FAISS · OpenAI SDK</p>
+          <p>Local document search with chunking, MMR re-ranking and guardrails.</p>
+          <div class="chips">
+            <span class="chip">RAG</span><span class="chip">FAISS</span><span class="chip">Python</span>
           </div>
-        </div>
-        <div class="bg-gray-50 rounded-lg p-6 shadow">
-          <h2 class="font-semibold text-blue-700 mb-2">Job‑Research Agent</h2>
-          <p class="text-gray-600 mb-2 text-sm">Agents · Multi‑tool orchestration</p>
-          <p class="text-gray-700 mb-4">Scrapes roles, matches to profile, drafts outreach with guardrails.</p>
-          <div class="flex space-x-4">
-            <a href="./job-agent/" class="text-blue-600 text-sm underline">Open Demo</a>
-            <a href="https://github.com/Janaka2/job-research-agent" class="text-blue-600 text-sm underline">Source</a>
+          <div class="links">
+            <a href="./rag-demo/">Open demo →</a>
+            <a href="https://github.com/Janaka2/RAG-Powered-Chatbot" target="_blank" rel="noopener">Source ↗</a>
           </div>
-        </div>
-        <div class="bg-gray-50 rounded-lg p-6 shadow">
-          <h2 class="font-semibold text-blue-700 mb-2">Momentum Journal</h2>
-          <p class="text-gray-600 mb-2 text-sm">Daily system · voice & text</p>
-          <p class="text-gray-700 mb-4">Lightweight routine for clarity, actions and tracking.</p>
-          <a href="./momentum/" class="text-blue-600 text-sm underline">Open Demo</a>
-        </div>
-          <div class="bg-gray-50 rounded-lg p-6 shadow">
-              <h2 class="font-semibold text-blue-700 mb-2">Study Notes</h2>
-              <p class="text-gray-600 mb-2 text-sm">Learn in Style</p>
-              <p class="text-gray-700 mb-4">New way of leaning with LLMs</p>
-              <a href="./Notes/llm-study-notes-handwritten-style.html" class="mt-4 text-indigo-600 text-sm hover:underline">Demo 1 →</a>
-              <a href="./Notes/hand-book-note1.html" class="mt-4 text-indigo-600 text-sm hover:underline">Demo 2 →</a>
-              <a href="./Notes/hand-book-note2.html" class="mt-4 text-indigo-600 text-sm hover:underline">Demo 3 →</a>
-              <a href="./Notes/hand-book-note3.html" class="mt-4 text-indigo-600 text-sm hover:underline">Demo 4 →</a>
-              <a href="./Notes/llm-hand‑annotated-demo5.html" class="mt-4 text-indigo-600 text-sm hover:underline">Demo 5 →</a>
+        </article>
+
+        <article class="card item">
+          <h3>Job-Research Agent</h3>
+          <p class="sub">Agents · multi-tool orchestration</p>
+          <p>Scrapes roles, matches them against a profile and drafts outreach, with guardrails on every tool call.</p>
+          <div class="chips">
+            <span class="chip">Agents</span><span class="chip">Orchestration</span><span class="chip">Guardrails</span>
           </div>
+          <div class="links">
+            <a href="./job-agent/">Open demo →</a>
+            <a href="https://github.com/Janaka2/job-research-agent" target="_blank" rel="noopener">Source ↗</a>
+          </div>
+        </article>
+
+        <article class="card item">
+          <h3>Momentum Journal</h3>
+          <p class="sub">Daily system · voice &amp; text</p>
+          <p>A lightweight routine for clarity, actions and tracking.</p>
+          <div class="chips">
+            <span class="chip">Journal</span><span class="chip">Voice</span>
+          </div>
+          <div class="links">
+            <a href="./momentum/">Open demo →</a>
+          </div>
+        </article>
+
+        <article class="card item">
+          <h3>Study Notes</h3>
+          <p class="sub">Learning in a hand-written style</p>
+          <p>A different way of taking notes with LLMs — five variations on the same idea.</p>
+          <div class="links">
+            <a href="./Notes/llm-study-notes-handwritten-style.html">Demo 1 →</a>
+            <a href="./Notes/hand-book-note1.html">Demo 2 →</a>
+            <a href="./Notes/hand-book-note2.html">Demo 3 →</a>
+            <a href="./Notes/hand-book-note3.html">Demo 4 →</a>
+            <a href="./Notes/llm-hand%E2%80%91annotated-demo5.html">Demo 5 →</a>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
-  <footer class="bg-gray-800 text-gray-400 py-4">
-    <div class="max-w-6xl mx-auto text-center text-sm">
-      © 2025 Janaka Premathilaka. Built with ♥ and Tailwind CSS.
-    </div>
-  </footer>
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>© <span id="year"></span> Janaka Premathilaka · Zug 🇨🇭</span>
+    <span><a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
 <script src="/assets/js/includes.js"></script>
 <script src="/assets/js/site-nav.js"></script>
 </body>

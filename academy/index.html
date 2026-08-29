@@ -1,248 +1,168 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Janaka Academy</title>
-    <meta name="description" content="Empowering engineers to surpass technical mastery with spiritual depth and ethical integrity." />
-    <link rel="icon" href="./assets/icons/academy-icon.png" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Tweak default link focus for accessibility */
-        a:focus { outline: 2px dashed #2563eb; outline-offset: 2px; }
-        html {
-            scroll-behavior: smooth;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Janaka Academy</title>
+  <meta name="description" content="Step-by-step training for engineers: Java, Spring Boot, cloud and AI integration, built on ethics, mentoring and long-term impact.">
+  <link rel="canonical" href="https://janaka.me/academy/">
 
-    </style>
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png?v=1">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/subsite.css">
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased">
-<!-- Top Navigation -->
+<body>
+
 <div data-include="/partials/site-nav.html"></div>
 
-<!-- Hero -->
-<header class="max-w-4xl mx-auto px-6 pt-12 pb-6 text-center">
-    <img src="./assets/icons/academy-icon.png" alt="Janaka Academy Icon" class="w-24 h-24 md:w-28 md:h-28 mx-auto mb-6" />
-    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">
-        Janaka Academy
-    </h1>
-    <p class="mt-3 text-lg md:text-xl text-gray-600">
-        Empowering a new generation of engineers to surpass technical mastery with spiritual depth and ethical integrity.
-    </p>
-    <div class="mt-5 inline-flex items-center gap-2 text-gray-500 text-sm">
-        <span>🌱</span><span>❤️</span><span>🎓</span>
+<main>
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow">Janaka Academy</p>
+      <h1>Engineers who surpass their teacher.</h1>
+      <p class="lede">Step-by-step training in modern Java, Spring Boot, cloud and AI integration — built on ethics, mentoring and long-term impact rather than a certificate at the end.</p>
+      <div class="actions">
+        <a class="btn primary" href="#courses">Explore courses</a>
+        <a class="btn" href="#join">Join the mission</a>
+      </div>
     </div>
-</header>
-<!-- Fixed Academy banner -->
-<div class="fixed top-4 right-4 z-50">
-    <a href="#course-catalog"
-       class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-full shadow-lg hover:bg-blue-700 transition">
-        Explore Courses →
-    </a>
-</div>
-<!-- Main Content -->
-<main class="max-w-3xl mx-auto px-6 pb-16 space-y-12">
-    <!-- Vision -->
-    <section id="vision" class="bg-white rounded-2xl shadow p-6">
-        <h2 class="text-2xl font-semibold mb-3">Vision</h2>
-        <p class="text-gray-700 leading-relaxed">
-            My mission is to empower the giant within a thousand hearts — guiding each to surpass me not just in engineering
-            skill, but in spiritual depth and ethical integrity. Together, step by step, we’ll create an elite group of
-            technical master minds who innovate with compassion, live by principle, and make the world easier for everyone.
-        </p>
-    </section>
+  </section>
 
-    <!-- What We Would Do -->
-    <section id="what-we-do" class="bg-white rounded-2xl shadow p-6">
-        <h2 class="text-2xl font-semibold mb-4">What We Would Do</h2>
-        <ul class="space-y-4 text-gray-700">
-            <li>
-                <span class="font-medium">Step-by-step learning paths:</span>
-                Comprehensive curriculum covering Java, Spring Boot, AI integration, and other technologies that enable you to build scalable, modern solutions.
-            </li>
-            <li>
-                <span class="font-medium">Hands-on projects:</span>
-                Real-world exercises that teach you how to design, develop, and deploy enterprise systems.
-            </li>
-            <li>
-                <span class="font-medium">Mentorship and community:</span>
-                Access to a supportive network of mentors and peers committed to your success.
-            </li>
-            <li>
-                <span class="font-medium">Ethical and spiritual growth:</span>
-                Guidance on aligning your technical journey with strong ethics and a deeper sense of purpose.
-            </li>
+  <section class="sec">
+    <div class="wrap">
+      <p class="eyebrow">Vision</p>
+      <h2>Why this exists.</h2>
+      <div class="prose">
+        <p>My mission is to empower the giant within a thousand hearts — guiding each to surpass me not just in engineering skill, but in spiritual depth and ethical integrity. Step by step, that builds a group of technical minds who innovate with compassion, live by principle, and make the world easier for everyone.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <p class="eyebrow">Approach</p>
+      <h2>What we do.</h2>
+      <div class="grid" style="margin-top:18px">
+        <article class="card item">
+          <h3>Step-by-step learning paths</h3>
+          <p>A curriculum through Java, Spring Boot and AI integration that ends with you able to build scalable, modern systems.</p>
+        </article>
+        <article class="card item">
+          <h3>Hands-on projects</h3>
+          <p>Real exercises in designing, developing and deploying enterprise systems — not toy examples.</p>
+        </article>
+        <article class="card item">
+          <h3>Mentorship and community</h3>
+          <p>A network of mentors and peers who are invested in your getting there.</p>
+        </article>
+        <article class="card item">
+          <h3>Ethical and spiritual growth</h3>
+          <p>Guidance on aligning the technical journey with strong ethics and a clearer sense of purpose.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="courses">
+    <div class="wrap">
+      <p class="eyebrow">Courses</p>
+      <h2>Choose your path.</h2>
+      <p class="lede">Start where you are now, and grow step by step into an elite, ethical engineer.</p>
+
+      <div class="cards2" style="margin-top:20px">
+        <article class="card item">
+          <div class="chips"><span class="chip">2025 Edition</span><span class="chip">Advanced</span></div>
+          <h3>Elite Full-Stack Engineering</h3>
+          <p>Deep, guided training in modern Java, Spring Boot, cloud and architecture — built on ethics, mentoring and long-term impact.</p>
+          <ul>
+            <li>12 months, self-paced <small>Duration</small></li>
+            <li>Mid to senior engineers <small>For</small></li>
+            <li>Projects · reviews · rituals <small>Format</small></li>
+          </ul>
+          <div class="links">
+            <a href="/academy/modules/2025/FSE/Elite-Full%E2%80%91Stack-Engineering-2025-Edition.html">View course →</a>
+          </div>
+        </article>
+
+        <article class="card item">
+          <div class="chips"><span class="chip">2026 Edition</span><span class="chip">Advanced</span></div>
+          <h3>Elite Full-Stack Engineering</h3>
+          <p>The current edition, refreshed for 2026 — same spine, updated for where the tooling and the models have moved.</p>
+          <ul>
+            <li>12 months, self-paced <small>Duration</small></li>
+            <li>Mid to senior engineers <small>For</small></li>
+            <li>Projects · reviews · rituals <small>Format</small></li>
+          </ul>
+          <div class="links">
+            <a href="/academy/modules/2026/FSE/Elite-Full%E2%80%91Stack-Engineering-2026-Edition.html">View course →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="join">
+    <div class="wrap">
+      <p class="eyebrow">Participate</p>
+      <h2>Join the mission.</h2>
+      <p class="lede">Everyone is welcome. Here is how to take part.</p>
+      <div class="card" style="margin-top:18px">
+        <ul>
+          <li><b>Star and watch the repository</b> to hear about new material, events and updates.</li>
+          <li><b>Fork it and open a pull request</b> with improvements, study notes or new content — contributions shape the academy.</li>
+          <li><b>Join the community channels</b> to connect with other learners, ask questions and share what you find.</li>
+          <li><b>Tell someone</b> who wants to grow technically and ethically. The goal is a thousand people who exceed their own expectations.</li>
         </ul>
-    </section>
-
-    <!-- Join the Mission -->
-    <section id="join" class="bg-white rounded-2xl shadow p-6">
-        <h2 class="text-2xl font-semibold mb-3">Join the Mission</h2>
-        <p class="text-gray-700 mb-4">Everyone is welcome!</p>
-        <p class="text-gray-700">Here’s how you can participate:</p>
-        <ul class="list-disc pl-6 mt-3 space-y-3 text-gray-700">
-            <li>
-                <span class="font-medium">Star and watch the repository</span> to stay informed about new learning materials, events, and updates.
-            </li>
-            <li>
-                <span class="font-medium">Fork the repo</span> and submit pull requests with improvements, study notes, or new content. Your contributions help shape the academy.
-            </li>
-            <li>
-                <span class="font-medium">Join our community channels</span> (Discord/Slack links will be provided) to connect with fellow learners, ask questions, and share insights.
-            </li>
-            <li>
-                <span class="font-medium">Spread the word</span> — invite others who are eager to grow technically, spiritually, and ethically. Together we aim to empower at least 1,000 people to exceed their own expectations and serve the world.
-            </li>
-        </ul>
-    </section>
-    <section id="course-catalog" class="max-w-5xl mx-auto mt-16 mb-24 px-4">
-        <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold mb-2">Choose your path</h2>
-            <p class="text-gray-600">
-                Start where you are now – grow step by step into an elite, ethical engineer.
-            </p>
+        <div class="actions">
+          <a class="btn primary" href="https://github.com/Janaka2" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn" href="mailto:janaka2@gmail.com">Ask a question</a>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Optional filter bar – purely visual for now -->
-
-        <div class="flex flex-wrap gap-2 justify-center mb-6 text-sm">
-          <button class="px-3 py-1 rounded-full border bg-white">All</button>
-          <button class="px-3 py-1 rounded-full border border-gray-200 text-gray-600">
-            Full-Stack
-          </button>
-          <button class="px-3 py-1 rounded-full border border-gray-200 text-gray-600">
-            AI & Agents
-          </button>
-          <button class="px-3 py-1 rounded-full border border-gray-200 text-gray-600">
-            Leadership
-          </button>
-        </div>
-
-        <div class="grid gap-6 md:grid-cols-2">
-            <!-- Course 1: Elite Full-Stack Engineering -->
-            <article class="rounded-2xl border bg-white/80 backdrop-blur shadow-sm p-6 flex flex-col">
-                <header class="mb-4">
-                    <div class="flex items-center gap-2 mb-2 text-sm text-gray-500">
-          <span class="inline-flex px-2 py-0.5 rounded-full bg-blue-50 text-blue-700">
-            2025 Edition
-          </span>
-                        <span class="inline-flex px-2 py-0.5 rounded-full bg-gray-100">
-            Advanced
-          </span>
-                    </div>
-                    <h3 class="text-xl font-semibold">
-                        Elite Full-Stack Engineering – 2025 Edition
-                    </h3>
-                </header>
-
-                <p class="text-gray-600 text-sm mb-4 flex-1">
-                    Deep, guided training in modern Java, Spring Boot, cloud, and architecture –
-                    built on ethics, mentoring, and long-term impact.
-                </p>
-
-                <dl class="text-xs text-gray-500 mb-4 flex flex-wrap gap-x-6 gap-y-2">
-                    <div>
-                        <dt class="font-semibold text-gray-700">Duration</dt>
-                        <dd>12 months · self-paced</dd>
-                    </div>
-                    <div>
-                        <dt class="font-semibold text-gray-700">For</dt>
-                        <dd>Mid–Senior Engineers</dd>
-                    </div>
-                    <div>
-                        <dt class="font-semibold text-gray-700">Format</dt>
-                        <dd>Projects · Reviews · Rituals</dd>
-                    </div>
-                </dl>
-
-                <a href="/academy/modules/2025/FSE/Elite-Full%E2%80%91Stack-Engineering-2025-Edition.html"
-                   class="inline-flex items-center justify-center mt-auto text-sm font-semibold
-                px-4 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700">
-                    View course →
-                </a>
-            </article>
-
-            <!-- Course 1: Elite Full-Stack Engineering -->
-            <article class="rounded-2xl border bg-white/80 backdrop-blur shadow-sm p-6 flex flex-col">
-                <header class="mb-4">
-                    <div class="flex items-center gap-2 mb-2 text-sm text-gray-500">
-          <span class="inline-flex px-2 py-0.5 rounded-full bg-blue-50 text-blue-700">
-            2026 Edition
-          </span>
-                        <span class="inline-flex px-2 py-0.5 rounded-full bg-gray-100">
-            Advanced
-          </span>
-                    </div>
-                    <h3 class="text-xl font-semibold">
-                        Elite Full-Stack Engineering – 2026 Edition
-                    </h3>
-                </header>
-
-                <p class="text-gray-600 text-sm mb-4 flex-1">
-                    Deep, guided training in modern Java, Spring Boot, cloud, and architecture –
-                    built on ethics, mentoring, and long-term impact.
-                </p>
-
-                <dl class="text-xs text-gray-500 mb-4 flex flex-wrap gap-x-6 gap-y-2">
-                    <div>
-                        <dt class="font-semibold text-gray-700">Duration</dt>
-                        <dd>12 months · self-paced</dd>
-                    </div>
-                    <div>
-                        <dt class="font-semibold text-gray-700">For</dt>
-                        <dd>Mid–Senior Engineers</dd>
-                    </div>
-                    <div>
-                        <dt class="font-semibold text-gray-700">Format</dt>
-                        <dd>Projects · Reviews · Rituals</dd>
-                    </div>
-                </dl>
-
-                <a href="/academy/modules/2026/FSE/Elite-Full‑Stack-Engineering-2026-Edition.html"
-                   class="inline-flex items-center justify-center mt-auto text-sm font-semibold
-                px-4 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700">
-                    View course →
-                </a>
-            </article>
-
-            <!-- Later: add more <article> cards here for new courses -->
-        </div>
-    </section>
-
-    <!-- Contributing -->
-    <section id="contributing" class="bg-white rounded-2xl shadow p-6">
-        <h2 class="text-2xl font-semibold mb-3">Contributing</h2>
-        <p class="text-gray-700 leading-relaxed">
-            We welcome contributions of all kinds: new tutorials, bug fixes, documentation improvements, or suggestions for content.
-            Before contributing, please read the guidelines in <code>CONTRIBUTING.md</code> (to be added) and adhere to our code of conduct,
-            which fosters respect, collaboration, and a spirit of generosity.
-        </p>
-    </section>
-
-    <!-- License -->
-    <section id="license" class="bg-white rounded-2xl shadow p-6">
-        <h2 class="text-2xl font-semibold mb-3">License</h2>
-        <p class="text-gray-700">This project is licensed under the <strong>Apache-2.0 License</strong>. See the <code>LICENSE</code> file for details.</p>
-    </section>
+  <section class="sec">
+    <div class="wrap">
+      <div class="cards2">
+        <article class="card">
+          <h3>Contributing</h3>
+          <p style="margin-top:8px">Tutorials, fixes, documentation and suggestions are all welcome. Read the guidelines in <code>CONTRIBUTING.md</code> first, and hold to the code of conduct — respect, collaboration and generosity.</p>
+        </article>
+        <article class="card">
+          <h3>License</h3>
+          <p style="margin-top:8px">Licensed under the <b>Apache-2.0 License</b>. See the <code>LICENSE</code> file for the full text.</p>
+        </article>
+      </div>
+    </div>
+  </section>
 </main>
 
-<!-- Footer -->
-<footer class="border-t bg-white">
-    <div class="max-w-6xl mx-auto px-6 py-6 text-sm text-gray-500 flex flex-col md:flex-row items-center justify-between gap-2">
-        <p>© <span id="year"></span> Janaka Academy</p>
-        <div class="flex items-center gap-3">
-            <a href="https://github.com/Janaka2" class="text-blue-600 hover:underline">GitHub</a>
-            <a href="mailto:janaka2@gmail.com" class="text-blue-600 hover:underline">Contact</a>
-        </div>
-    </div>
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>© <span id="year"></span> Janaka Academy · Zug 🇨🇭</span>
+    <span><a href="https://github.com/Janaka2" target="_blank" rel="noopener">GitHub</a> · <a href="mailto:janaka2@gmail.com">Contact</a> · <a href="/">janaka.me</a></span>
+  </div>
 </footer>
 
-<script>
-    // Set the current year in the footer.
-    document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
-<!-- Interactive Course Menu Script -->
 <script src="/assets/js/includes.js"></script>
 <script src="/assets/js/site-nav.js"></script>
 </body>

@@ -1,0 +1,104 @@
+/* =====================================================================
+   Sub-site layer — blog / lab / ai / cv / academy
+   Loaded AFTER assets/css/theme.css, and never by the hub at /.
+   Adds only what theme.css does not already provide; everything here
+   is built from the same tokens, so the sub-sites read as one site.
+   ===================================================================== */
+
+/* ---- top bar: sub-site links must survive on mobile ----
+   The hub hides .navlink under 760px because it has a hero beneath.
+   Sub-site nav links are the only navigation there is, so they wrap. */
+.topbar nav.subnav { flex-wrap: wrap; row-gap: 6px; }
+.topbar nav.subnav a.active { color: var(--ac); }
+@media (max-width: 560px) {
+  .topbar .wrap { height: auto; padding-top: 10px; padding-bottom: 10px; }
+  .topbar nav.subnav { gap: 12px; }
+}
+
+/* ---- page head ---- */
+.subhero { padding: 56px 0 8px; }
+.subhero h1 {
+  font-family: var(--font-head); font-weight: 800;
+  font-size: clamp(1.9rem, 4.4vw, 2.7rem);
+  line-height: 1.06; letter-spacing: -.022em;
+}
+.subhero .lede { margin-top: 14px; font-size: 1.02rem; }
+.subhero .badges { margin-top: 18px; }
+/* the head already carries its own bottom space */
+.subhero + .sec { padding-top: 30px; }
+
+/* ---- card grid ---- */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(288px, 1fr)); gap: 14px; }
+.card.item { display: flex; flex-direction: column; gap: 10px; }
+.card.item > p { font-size: .95rem; color: color-mix(in srgb, var(--tx) 88%, var(--tx2)); }
+.card.item .links { margin-top: auto; padding-top: 6px; display: flex; flex-wrap: wrap; gap: 14px; }
+.card.item .links a {
+  font-family: var(--font-mono); font-size: .74rem; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--ac); text-decoration: none;
+}
+.card.item .links a:hover { text-decoration: underline; }
+
+/* ---- post list (blog) ---- */
+.posts { list-style: none; display: grid; gap: 0; margin-top: 4px;
+         border-top: 1px solid var(--ln); }
+.posts li { padding: 18px 0; border-bottom: 1px solid var(--ln); }
+.posts h3 { font-family: var(--font-head); font-weight: 700; font-size: 1.06rem; margin-bottom: 4px; }
+.posts h3 a { color: var(--tx); text-decoration: none; }
+.posts h3 a:hover { color: var(--ac); }
+.posts .when { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .06em; color: var(--tx2); }
+.posts p { color: var(--tx2); font-size: .95rem; margin-top: 6px; max-width: 68ch; }
+
+/* ---- long-form article body ---- */
+.prose { max-width: 72ch; }
+.prose h2 { font-size: clamp(1.2rem, 2.4vw, 1.5rem); margin: 32px 0 10px; }
+.prose h3 { font-family: var(--font-head); font-weight: 700; font-size: 1.04rem; margin: 24px 0 6px; }
+.prose p, .prose li { color: color-mix(in srgb, var(--tx) 88%, var(--tx2)); }
+.prose p { margin-top: 12px; }
+.prose ul, .prose ol { margin: 12px 0 0 20px; display: grid; gap: 6px; }
+.prose pre {
+  margin-top: 14px; padding: 14px 16px; overflow-x: auto;
+  background: var(--chip); border: 1px solid var(--ln); border-radius: var(--r);
+}
+.prose pre code { background: none; padding: 0; font-size: .86rem; }
+.prose code { font-family: var(--font-mono); font-size: .86rem;
+              background: var(--chip); border-radius: 5px; padding: 2px 6px; }
+.prose blockquote { margin-top: 16px; padding-left: 18px; border-left: 3px solid var(--ac); color: var(--tx2); }
+
+/* ---- loading overlay + simple form field (blog AI helpers) ---- */
+.spinner {
+  position: fixed; inset: 0; z-index: 110; display: flex;
+  align-items: center; justify-content: center;
+  background: color-mix(in srgb, var(--tx) 45%, transparent);
+}
+.spinner.hidden { display: none; }
+.spinner i {
+  display: block; width: 42px; height: 42px; border-radius: 50%;
+  border: 3px solid var(--ln); border-top-color: var(--ac);
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.field { display: block; margin-top: 10px; }
+.field span {
+  display: block; font-family: var(--font-mono); font-size: .7rem;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--tx2); margin-bottom: 6px;
+}
+.field input {
+  width: 100%; font: 400 .95rem var(--font-sans); color: var(--tx);
+  background: var(--bg); border: 1px solid var(--ln);
+  border-radius: 9px; padding: 10px 12px;
+}
+.field input:focus { outline: 2px solid var(--ac); outline-offset: 1px; }
+.modal-body { padding: 18px; overflow-y: auto; white-space: pre-wrap;
+              color: color-mix(in srgb, var(--tx) 88%, var(--tx2)); }
+.modal-foot { padding: 14px 18px; border-top: 1px solid var(--ln); display: flex; justify-content: flex-end; }
+
+/* ---- footer ---- */
+.sitefoot { margin-top: 64px; border-top: 1px solid var(--ln); background: var(--bg2); }
+.sitefoot .wrap {
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between;
+  align-items: center; padding-top: 22px; padding-bottom: 22px;
+  font-family: var(--font-mono); font-size: .7rem; color: var(--tx2);
+}
+.sitefoot a { color: var(--tx2); text-decoration: none; }
+.sitefoot a:hover { color: var(--ac); }

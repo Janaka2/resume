@@ -1,21 +1,25 @@
 <!--
   Shared cross-property navigation for the janaka.me sub-sites
-  (blog, lab, ai, cv, academy). The hub at / has its own .topbar nav.
+  (blog, lab, ai, cv, academy). The hub at / has its own .topbar in index.html.
 
   Loaded with assets/js/includes.js:
       <div data-include="/partials/site-nav.html"></div>
   Active state is applied by assets/js/site-nav.js from location.pathname —
   do not hard-code the current page here.
+
+  Styling comes from assets/css/theme.css (.topbar) plus assets/css/subsite.css.
 -->
-<nav class="bg-white shadow sticky top-0 z-50">
-  <div class="max-w-6xl mx-auto flex justify-between items-center py-4 px-6">
-    <div class="flex flex-wrap gap-x-4 gap-y-2 text-sm">
-      <a href="/"         data-nav="home"    class="text-blue-600 hover:text-indigo-600">Home</a>
-      <a href="/blog/"    data-nav="blog"    class="text-blue-600 hover:text-indigo-600">Blog</a>
-      <a href="/lab/"     data-nav="lab"     class="text-blue-600 hover:text-indigo-600">Lab</a>
-      <a href="/ai/"      data-nav="ai"      class="text-blue-600 hover:text-indigo-600">AI / Agents</a>
-      <a href="/cv/"      data-nav="cv"      class="text-blue-600 hover:text-indigo-600">CV</a>
-      <a href="/academy/" data-nav="academy" class="text-blue-600 hover:text-indigo-600">Academy</a>
-    </div>
+<header class="topbar">
+  <div class="wrap">
+    <a class="logo" href="/">Janaka<b>.</b></a>
+    <nav class="subnav" aria-label="Sections">
+      <a href="/blog/"    data-nav="blog">Blog</a>
+      <a href="/lab/"     data-nav="lab">Lab</a>
+      <a href="/ai/"      data-nav="ai">AI</a>
+      <a href="/cv/"      data-nav="cv">CV</a>
+      <a href="/academy/" data-nav="academy">Academy</a>
+      <button id="themeBtn" class="iconbtn" type="button"
+              aria-label="Switch between light and dark theme">◐</button>
+    </nav>
   </div>
-</nav>
+</header>
