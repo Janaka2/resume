@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Study Notes</title>
+
+    <!-- 1. Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Import Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <!-- 3. Add Custom CSS for Handwritten Styles -->
+    <style>
+        /* Define fonts for use with Tailwind */
+        .font-serif {
+            font-family: 'Merriweather', serif;
+        }
+        .font-hand {
+            font-family: 'Kalam', cursive;
+        }
+        .font-marker {
+            font-family: 'Permanent Marker', cursive;
+        }
+
+        /* Base style for all highlights */
+        .h {
+            display: inline;
+            /* Allow highlights to break across lines cleanly */
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+            position: relative;
+            z-index: 1;
+            transition: all 0.2s ease-in-out;
+            padding: 0.1em 0; /* Ensures background covers descenders */
+        }
+
+        /* Pseudo-element creates the "messy" marker stroke */
+        .h::before {
+            content: '';
+            position: absolute;
+            left: -0.25em;
+            right: -0.25em;
+            top: 0;
+            bottom: 0;
+            z-index: -1;
+            /* The "hand-drawn" effect: slightly rotated & skewed */
+            transform: rotate(-1.5deg) skewX(-1deg);
+            border-radius: 4px;
+            opacity: 0.7; /* Simulates marker opacity */
+        }
+        
+        /* Highlight hover effect */
+        .h:hover {
+            opacity: 1;
+        }
+        .h:hover::before {
+            opacity: 1;
+            transform: rotate(-1deg) skewX(0deg) scale(1.02);
+        }
+
+        /* --- Highlight Colors --- */
+        .h-yellow::before { background-color: #fef08a; } /* yellow-300 */
+        .h-pink::before { background-color: #f9a8d4; } /* pink-300 */
+        .h-green::before { background-color: #a7f3d0; } /* green-200 */
+        .h-blue::before { background-color: #bfdbfe; } /* blue-200 */
+
+        /* "Extra Important" highlight - double-layered / darker */
+        .h-double-pink {
+            position: relative;
+            z-index: 2;
+        }
+        .h-double-pink::before {
+            background-color: #f472b6; /* pink-400 */
+            opacity: 0.8;
+            transform: rotate(-1deg) skew(-2deg);
+            /* Double-stroke effect with box-shadow */
+            box-shadow: 0 4px 0 #f472b6;
+        }
+
+        /* --- Annotation Styles --- */
+        
+        /* Wavy Underline (for "errors" or emphasis) */
+        .u-wavy-red {
+            text-decoration: underline;
+            text-decoration-style: wavy;
+            text-decoration-color: #ef4444; /* red-500 */
+            text-underline-offset: 4px;
+            text-decoration-thickness: 2px;
+        }
+
+        /* Circled / Boxed Text */
+        .c-blue-dash {
+            display: inline-block;
+            border: 2px dashed #3b82f6; /* blue-500 */
+            border-radius: 12px;
+            padding: 0.1em 0.3em;
+            /* Make it look hand-drawn */
+            transform: rotate(-3deg);
+            font-family: 'Permanent Marker', cursive;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+
+        /* Doodles */
+        .doodle-star {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.2rem;
+            color: #f59e0b; /* amber-500 */
+            display: inline-block;
+            transform: rotate(15deg);
+        }
+        
+        .doodle-arrow {
+            font-family: 'Kalam', cursive;
+            font-size: 1.5rem;
+            color: #16a34a; /* green-600 */
+            display: inline-block;
+            transform: rotate(-5deg);
+        }
+
+        /* Margin/Sticky Notes */
+        .margin-note {
+            position: absolute;
+            z-index: 5;
+            font-family: 'Kalam', cursive;
+            line-height: 1.2;
+            color: #555;
+            transition: transform 0.2s ease;
+        }
+        .margin-note:hover {
+            transform: scale(1.05);
+        }
+        
+        .sticky-note {
+            position: absolute;
+            z-index: 10;
+            background-color: #fef9c3; /* yellow-100 */
+            padding: 1rem;
+            font-family: 'Kalam', cursive;
+            line-height: 1.3;
+            /* Give it that "tacked on" look */
+            transform: rotate(3deg);
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+        }
+        .sticky-note:hover {
+            transform: rotate(1deg) scale(1.05);
+            box-shadow: 7px 7px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+
+<!-- This is the "desk" -->
+<body class="bg-blue-100 p-4 sm:p-8 md:p-12 font-serif text-gray-800">
+
+<!-- This is the "page" of paper -->
+<div id="page-container" class="max-w-5xl mx-auto p-8 sm:p-12 md:p-20 bg-yellow-50 shadow-lg rounded-lg relative">
+
+    <!-- All notes are positioned relative to this 'page-container' -->
+
+    <!-- Margin Note (Left) -->
+    <div class="margin-note hidden md:block" style="top: 180px; left: 20px; transform: rotate(-6deg);">
+        <div class="font-marker text-blue-600 text-lg">🤔 Why "Large"?</div>
+        <p class="text-sm">...it's about the <br> 1. Data size <br> 2. Model parameters</p>
+    </div>
+
+    <!-- Margin Note (Left) -->
+    <div class="margin-note hidden md:block" style="top: 600px; left: 30px; transform: rotate(-3deg);">
+        <div class="font-marker text-red-600 text-lg">
+            <span class="doodle-star">⭐</span> Big Problem!
+        </div>
+        <p class="text-sm">Models just "make stuff up" <br> ...but sound confident! <br> (Check sources!)</p>
+    </div>
+
+    <!-- Sticky Note (Right) -->
+    <div class="sticky-note w-48 hidden lg:block" style="top: 350px; right: 20px; transform: rotate(4deg);">
+        <p class="font-marker text-lg">💡 This is the KEY!</p>
+        <p>The "self-attention" part is what lets it understand <span class="u-wavy-red">context</span> over long sentences.</p>
+        <p class="mt-2">...totally changed NLP.</p>
+    </div>
+
+
+    <!-- This is the centered column of "textbook" text -->
+    <div class="max-w-2xl mx-auto space-y-6">
+        <h1 class="font-marker text-4xl text-center text-blue-800">
+            Study Notes: Assessing LLMs
+        </h1>
+
+        <p class="text-lg leading-relaxed">
+            <span class="h h-yellow" title="Stands for Large Language Model">Large Language Models (LLMs)</span> have become incredibly powerful.
+            These are AI models trained on <span class="h h-pink">massive datasets of text and code</span>—sometimes trillions of words. This training process allows them to generate text, translate languages, write different kinds of creative content, and answer your questions in an informative way.
+        </p>
+
+        <h2 class="font-marker text-3xl text-gray-700 pt-4">
+            How Do They Work? (The Gist)
+        </h2>
+
+        <p class="leading-relaxed">
+            Most modern LLMs, like GPT and PaLM, are based on the
+            <span class="c-blue-dash">Transformer architecture</span>.
+            This design, introduced in 2017, was revolutionary. Its key innovation is
+            <span class="h h-green" title="Lets the model weigh the importance of different words in a sentence.">self-attention mechanisms</span>.
+            This allows the model to "pay attention" to different parts of the input text simultaneously, giving it a
+            much deeper understanding of context and nuance compared to older models.
+        </p>
+
+        <p class="leading-relaxed">
+            The models are "pre-trained" on general internet data and then
+            <span class="h h-blue">"fine-tuned"</span>
+            for specific tasks, like following instructions or being helpful.
+        </p>
+
+        <h2 class="font-marker text-3xl text-gray-700 pt-4">
+            Limitations & Assessment
+        </h2>
+
+        <p class="leading-relaxed">
+            Despite their capabilities, LLMs have significant limitations. One of the most well-known is
+            <span class="u-wavy-red">"hallucinations,"</span>
+            where the model generates plausible-sounding but factually incorrect or nonsensical information.
+            <span class="h h-yellow">They don't "know" things;</span> they predict the next most likely word.
+        </p>
+
+        <p class="leading-relaxed">
+            Assessing them is also a complex challenge. While we have benchmarks like
+            MMLU (Massive Multitask Language Understanding), these don't fully capture
+            <span class="doodle-arrow font-marker text-green-700 text-2xl mr-2"></span><span class="h h-double-pink">real-world usefulness and ethical considerations</span>.
+            Issues of bias (learned from training data), misuse, and environmental impact are all
+            critical areas of ongoing research and debate.
+        </p>
+
+        <p class="text-center pt-8 font-hand text-gray-500">
+            - End of Chapter 3 Summary -
+        </p>
+
+    </div> <!-- End of text column -->
+
+</div> <!-- End of "page" -->
+
+</body>
+</html>

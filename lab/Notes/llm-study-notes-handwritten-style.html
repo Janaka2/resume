@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Study Notes</title>
+
+    <!-- 1. Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Import Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <!-- 3. Add Custom CSS for Handwritten Styles -->
+    <style>
+        /* ... existing font definitions ... */
+        .font-serif { font-family: 'Merriweather', serif; }
+        .font-hand { font-family: 'Kalam', cursive; }
+        .font-marker { font-family: 'Permanent Marker', cursive; }
+
+        /* ... existing highlight styles (.h, .h::before, .h-colors) ... */
+        .h { display: inline; box-decoration-break: clone; -webkit-box-decoration-break: clone; position: relative; z-index: 1; transition: all 0.2s ease-in-out; padding: 0.1em 0; }
+        .h::before { content: ''; position: absolute; left: -0.25em; right: -0.25em; top: 0; bottom: 0; z-index: -1; transform: rotate(-1.5deg) skewX(-1deg); border-radius: 4px; opacity: 0.7; }
+        .h:hover { opacity: 1; }
+        .h:hover::before { opacity: 1; transform: rotate(-1deg) skewX(0deg) scale(1.02); }
+        .h-yellow::before { background-color: #fef08a; }
+        .h-pink::before { background-color: #f9a8d4; }
+        .h-green::before { background-color: #a7f3d0; }
+        .h-blue::before { background-color: #bfdbfe; }
+        .h-double-pink { position: relative; z-index: 2; }
+        .h-double-pink::before { background-color: #f472b6; opacity: 0.8; transform: rotate(-1deg) skew(-2deg); box-shadow: 0 4px 0 #f472b6; }
+
+        /* ... existing annotation styles (.u-wavy-red, .c-blue-dash, doodles) ... */
+        .u-wavy-red { text-decoration: underline; text-decoration-style: wavy; text-decoration-color: #ef4444; text-underline-offset: 4px; text-decoration-thickness: 2px; }
+        .c-blue-dash { display: inline-block; border: 2px dashed #3b82f6; border-radius: 12px; padding: 0.1em 0.3em; transform: rotate(-3deg); font-family: 'Permanent Marker', cursive; font-weight: 700; color: #3b82f6; }
+        .doodle-star { font-family: 'Permanent Marker', cursive; font-size: 1.2rem; color: #f59e0b; display: inline-block; transform: rotate(15deg); }
+        .doodle-arrow { font-family: 'Kalam', cursive; font-size: 1.5rem; color: #16a34a; display: inline-block; transform: rotate(-5deg); }
+
+        /* ✨ New Pencil Tool Style */
+        .t-pencil {
+            font-family: 'Kalam', cursive;
+            color: #374151; /* gray-700 */
+            font-size: 1.05em;
+            font-weight: 700;
+        }
+
+        /* ... existing margin/sticky notes ... */
+        .margin-note { position: absolute; z-index: 5; font-family: 'Kalam', cursive; line-height: 1.2; color: #555; transition: transform 0.2s ease; }
+        .margin-note:hover { transform: scale(1.05); }
+        .sticky-note { position: absolute; z-index: 10; background-color: #fef9c3; padding: 1rem; font-family: 'Kalam', cursive; line-height: 1.3; transform: rotate(3deg); box-shadow: 5px 5px 10px rgba(0,0,0,0.15); transition: all 0.2s ease; }
+        .sticky-note:hover { transform: rotate(1deg) scale(1.05); box-shadow: 7px 7px 15px rgba(0,0,0,0.2); }
+
+        /* ✨ New Dynamic Sticky Note Styles */
+        .sticky-note-dynamic {
+            position: absolute;
+            z-index: 10;
+            background-color: #fef9c3; /* yellow-100 */
+            font-family: 'Kalam', cursive;
+            line-height: 1.3;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+            width: 200px;
+            height: 200px;
+            cursor: move; /* Draggable */
+            border: 1px dashed #fcd34d; /* yellow-300 */
+        }
+        .sticky-note-dynamic:focus-within {
+            z-index: 11;
+            box-shadow: 7px 7px 15px rgba(0,0,0,0.2);
+            transform: scale(1.02);
+        }
+        .sticky-delete {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            background-color: #ef4444; /* red-500 */
+            color: white;
+            border: none;
+            border-radius: 0 0 0 10px;
+            cursor: pointer;
+            font-family: sans-serif;
+            font-weight: bold;
+            line-height: 20px;
+            text-align: center;
+            opacity: 0.2;
+            z-index: 12;
+        }
+        .sticky-note-dynamic:hover .sticky-delete {
+            opacity: 1;
+        }
+        .sticky-content {
+            padding: 1rem;
+            width: 100%;
+            height: 100%;
+            outline: none;
+            cursor: text;
+            overflow-y: auto;
+        }
+
+        /* ... existing Gemini & Modal styles ... */
+        .btn-explain { font-family: 'Kalam', cursive; font-size: 0.8em; color: #2563eb; background-color: #dbeafe; border-radius: 8px; padding: 2px 8px; margin-left: 10px; cursor: pointer; transition: all 0.2s ease; transform: rotate(-2deg); border: 1px dashed #93c5fd; }
+        .btn-explain:hover { transform: rotate(0deg) scale(1.05); background-color: #bfdbfe; }
+        .btn-summary { font-family: 'Permanent Marker', cursive; font-size: 1.1rem; color: #15803d; background-color: #dcfce7; border-radius: 10px; padding: 0.5rem 1.5rem; cursor: pointer; transition: all 0.2s ease; transform: rotate(-1deg); border: 2px dashed #86efac; display: inline-block; margin-top: 1rem; }
+        .btn-summary:hover { transform: rotate(0deg) scale(1.03); background-color: #bbf7d0; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .btn-quiz { font-family: 'Permanent Marker', cursive; font-size: 1.1rem; color: #7e22ce; background-color: #f3e8ff; border-radius: 10px; padding: 0.5rem 1.5rem; cursor: pointer; transition: all 0.2s ease; transform: rotate(1deg); border: 2px dashed #d8b4fe; display: inline-block; margin-top: 1rem; margin-left: 0.5rem; }
+        .btn-quiz:hover { transform: rotate(0deg) scale(1.03); background-color: #e9d5ff; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        #gemini-modal-overlay { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); z-index: 40; display: none; align-items: center; justify-content: center; }
+        #gemini-modal-content { background-color: #fefce8; background-image: repeating-linear-gradient(to bottom, #fefce8 0, #fefce8 24px, #dbeafe 25px); background-size: 100% 25px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 90%; max-width: 600px; padding: 2.5rem 2rem 2rem 3.5rem; position: relative; max-height: 80vh; overflow-y: auto; transform: scale(0.95); opacity: 0; transition: all 0.2s ease-out; border-left: 2px solid #f87171; }
+        #gemini-modal-overlay.show #gemini-modal-content { transform: scale(1); opacity: 1; }
+        #gemini-modal-title { font-family: 'Permanent Marker', cursive; font-size: 1.75rem; color: #3b82f6; margin-top: 0; line-height: 1.2; }
+        #gemini-modal-body { font-family: 'Kalam', cursive; font-size: 1.1rem; color: #374151; line-height: 2; white-space: pre-wrap; }
+        #gemini-modal-close { position: absolute; top: 1rem; right: 1rem; font-family: 'Permanent Marker', cursive; font-size: 1.5rem; color: #9ca3af; background: none; border: none; cursor: pointer; transition: all 0.2s ease; }
+        #gemini-modal-close:hover { color: #ef4444; transform: rotate(180deg); }
+        #gemini-loader { width: 50px; height: 50px; border-radius: 50%; border: 5px dashed #3b82f6; animation: spin 1.5s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* ... existing toolbox styles ... */
+        #style-toolbox { position: fixed; top: 1rem; right: 1rem; background-color: #fffbeb; border: 2px dashed #fcd34d; border-radius: 10px; padding: 0.5rem; font-family: 'Kalam', cursive; box-shadow: 3px 3px 10px rgba(0,0,0,0.1); transform: rotate(1deg); z-index: 30; display: flex; flex-direction: column; gap: 0.5rem; }
+        #style-toolbox h3 { font-family: 'Permanent Marker', cursive; text-align: center; font-size: 1rem; color: #ca8a04; margin: 0 0 0.25rem 0; padding-bottom: 0.25rem; border-bottom: 1px solid #fde68a; }
+        #style-toolbox button { background: #fff; border: 1px dashed #ccc; border-radius: 5px; padding: 0.25rem 0.5rem; cursor: pointer; transition: all 0.2s ease; font-size: 0.9rem; }
+        #style-toolbox button:hover { transform: rotate(-2deg) scale(1.05); background-color: #fef9c3; }
+        #style-toolbox button.active { transform: rotate(0deg) scale(1); border-style: solid; box-shadow: 0 0 5px 2px rgba(0,0,0,0.1); font-weight: 700; }
+        .btn-h-yellow { border-color: #fef08a; background-color: #fef9c3; }
+        .btn-h-pink { border-color: #f9a8d4; background-color: #fce7f3; }
+        .btn-h-green { border-color: #a7f3d0; background-color: #f0fdf4; }
+        .btn-h-blue { border-color: #bfdbfe; background-color: #eff6ff; }
+        .btn-u-wavy-red { border-color: #ef4444; background-color: #fee2e2; }
+        .btn-explain-highlights { border-color: #3b82f6; background-color: #eff6ff; color: #2563eb; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid #fde68a; font-weight: 700; }
+
+        /* ✨ New Toolbox Button Styles */
+        .btn-t-pencil { border-color: #374151; background-color: #f3f4f6; }
+        .btn-add-sticky { border-color: #facc15; background-color: #fef9c3; }
+        /* ✨ New Analogy Button Style */
+        .btn-gen-analogy { border-color: #a855f7; background-color: #f3e8ff; color: #9333ea; font-weight: 700; margin-top: 0.25rem; }
+
+        /* ✨ New ELI5 Button Style */
+        .btn-eli5 { border-color: #f59e0b; background-color: #fffbeb; color: #d97706; font-weight: 700; margin-top: 0.25rem; }
+
+        /* ✨ New Study Questions Button Style */
+        .btn-gen-questions {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.1rem;
+            color: #db2777; /* pink-600 */
+            background-color: #fce7f3; /* pink-100 */
+            border-radius: 10px;
+            padding: 0.5rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            transform: rotate(-1.5deg);
+            border: 2px dashed #f9a8d4; /* pink-300 */
+            display: inline-block;
+            margin-top: 1rem;
+            margin-left: 0.5rem;
+        }
+        .btn-gen-questions:hover {
+            transform: rotate(0deg) scale(1.03);
+            background-color: #fbcfe8; /* pink-200 */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        /* ✨ New Summarize Stickies Button Style */
+        .btn-summarize-stickies {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.1rem;
+            color: #0d9488; /* teal-600 */
+            background-color: #ccfbf1; /* teal-100 */
+            border-radius: 10px;
+            padding: 0.5rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            transform: rotate(1.2deg);
+            border: 2px dashed #5eead4; /* teal-300 */
+            display: inline-block;
+            margin-top: 1rem;
+            margin-left: 0.5rem;
+        }
+        .btn-summarize-stickies:hover {
+            transform: rotate(0deg) scale(1.03);
+            background-color: #99f6e4; /* teal-200 */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        /* ✨ New API Key Modal Style */
+        #api-key-modal-overlay {
+            display: none; /* Hidden by default */
+        }
+    </style>
+</head>
+
+<!-- This is the "desk" -->
+<body class="bg-blue-100 p-4 sm:p-8 md:p-12 font-serif text-gray-800">
+
+<!-- ✨ Updated Style Toolbox -->
+<div id="style-toolbox">
+    <h3>Toolbox</h3>
+    <button data-tool="h-yellow" class="btn-h-yellow">Highlight (Yellow)</button>
+    <button data-tool="h-pink" class="btn-h-pink">Highlight (Pink)</button>
+    <button data-tool="h-green" class="btn-h-green">Highlight (Green)</button>
+    <button data-tool="h-blue" class="btn-h-blue">Highlight (Blue)</button>
+    <button data-tool="u-wavy-red" class="btn-u-wavy-red">Underline (Wavy)</button>
+    <!-- ✨ New Tools -->
+    <button data-tool="t-pencil" class="btn-t-pencil">✏️ Pencil Note</button>
+    <button data-tool="add-sticky" class="btn-add-sticky">📌 Add Sticky Note</button>
+
+    <button id="btn-explain-highlights" class="btn-explain-highlights">✨ Explain My Highlights</button>
+    <!-- ✨ New Analogy Button -->
+    <button id="btn-gen-analogy" class="btn-gen-analogy">✨ Get Analogy</button>
+    <!-- ✨ New ELI5 Button -->
+    <button id="btn-eli5" class="btn-eli5">✨ ELI5</button>
+</div>
+
+<!-- This is the "page" of paper -->
+<div id="page-container" class="max-w-5xl mx-auto p-8 sm:p-12 md:p-20 bg-yellow-50 shadow-lg rounded-lg relative">
+
+    <!-- ... existing margin notes ... -->
+    <div class="margin-note hidden md:block" style="top: 180px; left: 20px; transform: rotate(-6deg);">
+        <!-- ... -->
+    </div>
+
+    <!-- This is the centered column of "textbook" text -->
+    <div id="study-content" class="max-w-2xl mx-auto space-y-6">
+        <!-- ... existing text content (h1, p, h2, p, etc.) ... -->
+        <h1 class="font-marker text-4xl text-center text-blue-800">
+            Study Notes: Assessing LLMs
+        </h1>
+        <p class="text-lg leading-relaxed" data-section="intro">
+            <span class="h h-yellow" title="Stands for Large Language Model">Large Language Models (LLMs)</span> have become incredibly powerful.
+            These are AI models trained on <span class="h h-pink">massive datasets of text and code</span>—sometimes trillions of words. This training process allows them to generate text, translate languages, write different kinds of creative content, and answer your questions in an informative way.
+        </p>
+        <h2 class="font-marker text-3xl text-gray-700 pt-4 flex items-center">
+            How Do They Work? (The Gist)
+            <button class="btn-explain" data-target-section="how-it-works">✨ Explain</button>
+        </h2>
+        <p class="leading-relaxed" data-section="how-it-works">
+            Most modern LLMs, like GPT and PaLM, are based on the
+            <span class="c-blue-dash">Transformer architecture</span>.
+            This design, introduced in 2017, was revolutionary. Its key innovation is
+            <span class="h h-green" title="Lets the model weigh the importance of different words in a sentence.">self-attention mechanisms</span>.
+            This allows the model to "pay attention" to different parts of the input text simultaneously, giving it a
+            much deeper understanding of context and nuance compared to older models.
+            The models are "pre-trained" on general internet data and then
+            <span class="h h-blue">"fine-tuned"</span>
+            for specific tasks, like following instructions or being helpful.
+        </p>
+        <h2 class="font-marker text-3xl text-gray-700 pt-4 flex items-center">
+            Limitations & Assessment
+            <button class="btn-explain" data-target-section="limitations">✨ Explain</button>
+        </h2>
+        <p class="leading-relaxed" data-section="limitations">
+            Despite their capabilities, LLMs have significant limitations. One of the most well-known is
+            <span class="u-wavy-red">"hallucinations,"</span>
+            where the model generates plausible-sounding but factually incorrect or nonsensical information.
+            <span class="h h-yellow">They don't "know" things;</span> they predict the next most likely word.
+            Assessing them is also a complex challenge. While we have benchmarks like
+            MMLU (Massive Multitask Language Understanding), these don't fully capture
+            <span class="doodle-arrow font-marker text-green-700 text-2xl mr-2"></span><span class="h h-double-pink">real-world usefulness and ethical considerations</span>.
+            Issues of bias (learned from training data), misuse, and environmental impact are all
+            critical areas of ongoing research and debate.
+        </p>
+        <div class="text-center pt-8">
+            <button id="btn-generate-summary" class="btn-summary">✨ Generate Key Takeaways</button>
+            <button id="btn-quiz-me" class="btn-quiz">✨ Quiz Me!</button>
+            <!-- ✨ New Study Questions Button -->
+            <button id="btn-gen-questions" class="btn-gen-questions">✨ Study Questions</button>
+            <!-- ✨ New Summarize Stickies Button -->
+            <button id="btn-summarize-stickies" class="btn-summarize-stickies">✨ Summarize My Stickies</button>
+        </div>
+        <p class="text-center pt-8 font-hand text-gray-500">
+            - End of Chapter 3 Summary -
+        </p>
+    </div> <!-- End of text column -->
+
+    <!-- ✨ Dynamic Sticky Notes will be appended here by JS -->
+
+</div> <!-- End of "page" -->
+
+<!-- ... existing Gemini Modal ... -->
+<div id="gemini-modal-overlay">
+    <div id="gemini-modal-content">
+        <button id="gemini-modal-close">X</button>
+        <h2 id="gemini-modal-title">Study Buddy says...</h2>
+        <div id="gemini-modal-body">
+            <!-- Content will be injected here -->
+        </div>
+    </div>
+</div>
+
+<!-- ✨ New API Key Modal -->
+<div id="api-key-modal-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-75 z-50 flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-xl font-hand w-full max-w-md">
+        <h2 class="font-marker text-2xl text-red-600 mb-4">API Key Required</h2>
+        <p class="text-gray-700 mb-4">To use the AI 'Study Buddy' features, you need a Gemini API key. Please paste it below.</p>
+        <p class="text-sm text-gray-500 mb-4">This key will only be stored in your browser's session and will be gone when you close the tab.</p>
+        <input type="password" id="api-key-input" class="w-full p-2 border border-gray-300 rounded font-sans" placeholder="Enter your Gemini API key...">
+        <button id="api-key-save" class="w-full mt-4 bg-blue-600 text-white font-marker p-2 rounded-lg text-lg hover:bg-blue-700">Save and Start Studying</button>
+    </div>
+</div>
+
+
+<!-- ✨ Firebase and API Logic -->
+<script type="module">
+    // Firebase Imports
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, onSnapshot, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // --- Global Config & State ---
+    // API key is no longer stored here. It's now in sessionStorage.
+
+    // App/Firebase state
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+    const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+    let db, auth, userId, isAuthReady = false;
+    let annotationDebounceTimer, dynamicElementsDebounceTimer;
+
+    // Tool state
+    let currentTool = null;
+    let dynamicElements = { stickies: [] }; // ✨ New state for stickies
+    let draggedElement = null; // ✨ For dragging
+    let isDragging = false, offsetX, offsetY;
+
+    // --- Element Selectors ---
+    const pageContainer = document.getElementById('page-container'); // ✨ New
+    const modalOverlay = document.getElementById('gemini-modal-overlay');
+    const modalContent = document.getElementById('gemini-modal-content');
+    const modalTitle = document.getElementById('gemini-modal-title');
+    const modalBody = document.getElementById('gemini-modal-body');
+    const modalClose = document.getElementById('gemini-modal-close');
+
+    // ✨ New API Key Modal Selectors
+    const apiKeyModalOverlay = document.getElementById('api-key-modal-overlay');
+    const apiKeyInput = document.getElementById('api-key-input');
+    const apiKeySaveButton = document.getElementById('api-key-save');
+
+    const explainButtons = document.querySelectorAll('.btn-explain');
+    const summaryButton = document.getElementById('btn-generate-summary');
+    const quizButton = document.getElementById('btn-quiz-me');
+    const explainHighlightsButton = document.getElementById('btn-explain-highlights');
+    // ✨ New Selectors
+    const questionsButton = document.getElementById('btn-gen-questions');
+    const analogyButton = document.getElementById('btn-gen-analogy');
+    // ✨ New Selectors
+    const eli5Button = document.getElementById('btn-eli5');
+    const summarizeStickiesButton = document.getElementById('btn-summarize-stickies');
+
+    const toolbox = document.getElementById('style-toolbox');
+    const studyContent = document.getElementById('study-content');
+
+    // --- Modal Controls ---
+    function showModal(title, contentHTML) {
+        modalTitle.textContent = title;
+        modalBody.innerHTML = contentHTML;
+        modalOverlay.style.display = 'flex';
+        setTimeout(() => {
+            modalOverlay.classList.add('show');
+            modalContent.classList.add('show');
+        }, 10);
+    }
+    function hideModal() {
+        modalOverlay.classList.remove('show');
+        modalContent.classList.remove('show');
+        setTimeout(() => {
+            modalOverlay.style.display = 'none';
+        }, 200);
+    }
+    function showLoading() {
+        showModal("Thinking...", '<div class="flex justify-center items-center h-32"><div id="gemini-loader"></div></div>');
+    }
+    modalClose.addEventListener('click', hideModal);
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) hideModal();
+    });
+
+    // --- Gemini API Logic ---
+    explainButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const sectionId = button.dataset.targetSection;
+            const section = document.querySelector(`p[data-section="${sectionId}"]`);
+            if (section) handleExplainClick(section.innerText);
+        });
+    });
+    summaryButton.addEventListener('click', () => {
+        const allText = getAllStudyText();
+        handleSummaryClick(allText);
+    });
+    quizButton.addEventListener('click', () => {
+        const allText = getAllStudyText();
+        handleQuizMeClick(allText);
+    });
+    explainHighlightsButton.addEventListener('click', handleExplainHighlightsClick);
+    // ✨ New Listeners
+    questionsButton.addEventListener('click', () => {
+        const allText = getAllStudyText();
+        handleQuestionsClick(allText);
+    });
+    analogyButton.addEventListener('click', handleAnalogyClick);
+    // ✨ New Listeners
+    eli5Button.addEventListener('click', handleELI5Click);
+    summarizeStickiesButton.addEventListener('click', handleSummarizeStickiesClick);
+
+    // ✨ New API Key Modal Listener
+    apiKeySaveButton.addEventListener('click', () => {
+        const key = apiKeyInput.value.trim();
+        if (key) {
+            sessionStorage.setItem('geminiApiKey', key);
+            apiKeyModalOverlay.style.display = 'none';
+        } else {
+            apiKeyInput.placeholder = "Please enter a valid key!";
+        }
+    });
+
+
+    function getAllStudyText() {
+        const paragraphs = studyContent.querySelectorAll('p[data-section]');
+        let allText = "";
+        paragraphs.forEach(p => { allText += p.innerText + "\n\n"; });
+        return allText;
+    }
+    async function handleExplainClick(text) {
+        showLoading();
+        const systemPrompt = "You are a helpful and friendly study buddy. Explain the following text in simple, easy-to-understand terms for a student. Use bullet points or short paragraphs.";
+        const userQuery = `Explain this to me:\n\n"${text}"`;
+        try {
+            const responseText = await callGeminiApi(userQuery, systemPrompt);
+            showModal("Study Buddy says...", formatResponse(responseText));
+        } catch (error) {
+            console.error("Gemini API error:", error);
+            showModal("Oops!", "Sorry, I couldn't connect to my brain just now. Please try again in a moment.");
+        }
+    }
+    async function handleSummaryClick(allText) {
+        showLoading();
+        const systemPrompt = "You are a helpful study buddy. Summarize the following study notes into 3-5 key takeaways. Format them as a bulleted list using a '*' prefix. Keep the tone encouraging.";
+        const userQuery = `Here are my notes, can you summarize them?\n\n"${allText}"`;
+        try {
+            const responseText = await callGeminiApi(userQuery, systemPrompt);
+            showModal("Key Takeaways!", formatResponse(responseText));
+        } catch (error) {
+            console.error("Gemini API error:", error);
+            showModal("Oops!", "Sorry, I couldn't summarize the notes right now. Please try again in a moment.");
+        }
+    }
+    async function handleQuizMeClick(allText) {
+        showLoading();
+        const systemPrompt = "You are a helpful study buddy. Based on the following text, generate a short 3-question multiple-choice quiz. Provide the questions, options (e.g., A, B, C, D), and bold the correct answer. Format it clearly for a student to read.";
+        const userQuery = `Generate a quiz from these notes:\n\n"${allText}"`;
+        try {
+            const responseText = await callGeminiApi(userQuery, systemPrompt);
+            showModal("Quiz Time!", formatResponse(responseText));
+        } catch (error) {
+            console.error("Gemini API error:", error);
+            showModal("Oops!", "Sorry, I couldn't generate a quiz right now. Please try again.");
+        }
+    }
+    // ✨ New Function
+    async function handleQuestionsClick(allText) {
+        showLoading();
+        const systemPrompt = "You are a helpful study buddy. Based on the following text, generate 3-5 open-ended study questions to promote critical thinking. Format them as a numbered list. Keep the tone encouraging.";
+        const userQuery = `Generate study questions from these notes:\n\n"${allText}"`;
+        try {
+            const responseText = await callGeminiApi(userQuery, systemPrompt);
+            showModal("Study Questions!", formatResponse(responseText));
+        } catch (error) {
+            console.error("Gemini API error:", error);
+            showModal("Oops!", "Sorry, I couldn't generate questions right now. Please try again.");
+        }
+    }
+    // ✨ New Function
+    async function handleELI5Click() {
+        const selection = window.getSelection();
+        const selectedText = selection.toString().trim();
+
+        if (selectedText === "") {
+            showModal("Hold on!", "Please select some text on the page first, then click the 'ELI5' button.");
+            return;
+        }
+
+        showLoading();
+        const systemPrompt = "You are a friendly study buddy. Explain the following concept like I'm 5 years old, using very simple words, short sentences, and a simple analogy if possible.";
+        const userQuery = `Explain this like I'm 5: "${selectedText}"`;
+        try {
+            const responseText = await callGeminiApi(userQuery, systemPrompt);
+            showModal("Explain Like I'm 5...", formatResponse(responseText));
+            selection.removeAllRanges(); // Clear the selection
+        } catch (error) {
+            console.error("Gemini API error:", error);
+            showModal("Oops!", "Sorry, I couldn't generate an ELI5 explanation. Please try again.");
+        }
+    }
+    // ✨ New Function
+    async function handleSummarizeStickiesClick() {
+        if (!dynamicElements.stickies || dynamicElements.stickies.length === 0) {
+            showModal("Hold on!", "You haven't written any sticky notes yet! Add some notes and then I can summarize them for you.");
+            return;
+        }
+
+        const allStickyText = dynamicElements.stickies
+            .map(s => s.text)
+            .filter(text => text.trim() !== "" && text.trim() !== "Type here...") // Filter out empty/default text
+            .join('\n- ');
+
+        if (allStickyText.trim() === "") {
+            showModal("Hold on!", "Your sticky notes are all empty. Write some thoughts on them first!");
+            return;
+        }
+
+        showLoading();
+        const systemPrompt = "You are a helpful study buddy. The user has written the following thoughts on sticky notes. Please summarize their main ideas into a single, concise paragraph. Respond directly to the user.";
+        const userQuery = `Here are my sticky note thoughts, can you summarize them for me?\n\n- ${allStickyText}`;
+        try {
+            const responseText = await callGeminiApi(userQuery, systemPrompt);
+            showModal("Your Sticky Note Summary...", formatResponse(responseText));
+        } catch (error) {
+            console.error("Gemini API error:", error);
+            showModal("Oops!", "Sorry, I couldn't summarize your sticky notes. Please try again.");
+        }
+    }
+    // ✨ New Function
+    async function handleAnalogyClick() {
+        const selection = window.getSelection();
+        const selectedText = selection.toString().trim();
+
+        if (selectedText === "") {
+            showModal("Hold on!", "Please select some text on the page first, then click the 'Get Analogy' button.");
+            return;
+        }
+
+        showLoading();
+        const systemPrompt = "You are a helpful study buddy. Explain the following concept to a student using a simple, easy-to-understand analogy.";
+        const userQuery = `Here's the concept:\n\n"${selectedText}"`;
+        try {
+            const responseText = await callGeminiApi(userQuery, systemPrompt);
+            showModal("Here's an Analogy...", formatResponse(responseText));
+            selection.removeAllRanges(); // Clear the selection
+        } catch (error) {
+            console.error("Gemini API error:", error);
+            showModal("Oops!", "Sorry, I couldn't generate an analogy right now. Please try again.");
+        }
+    }
+    async function handleExplainHighlightsClick() {
+        const highlightedSpans = studyContent.querySelectorAll('.h');
+        if (highlightedSpans.length === 0) {
+            showModal("Hold on!", "You haven't highlighted anything yet. Select some text with a highlight tool first!");
+            return;
+        }
+        let highlightedText = [];
+        highlightedSpans.forEach(span => {
+            highlightedText.push(span.innerText);
+        });
+        const uniqueHighlights = [...new Set(highlightedText)]; // Remove duplicates
+        showLoading();
+        const systemPrompt = "You are a helpful study buddy. A student has highlighted the following concepts from their notes. Explain how these concepts are related to each other in the context of LLMs. Keep it simple and encouraging.";
+        const userQuery = `Explain the connection between these highlighted concepts:\n\n- ${uniqueHighlights.join('\n- ')}`;
+        try {
+            const responseText = await callGeminiApi(userQuery, systemPrompt);
+            showModal("Connecting the Dots...", formatResponse(responseText));
+        } catch (error) {
+            console.error("Gemini API error:", error);
+            showModal("Oops!", "Sorry, I couldn't explain the highlights right now. Please try again.");
+        }
+    }
+    function formatResponse(text) {
+        text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        return text
+            .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/<strong>/g, '<strong>').replace(/<\/strong>/g, '</strong>')
+            .replace(/\n/g, '<br>')
+            .replace(/^\* (.*$)/gm, '<span class="text-2xl mr-2 text-blue-500">&bull;</span>$1');
+    }
+    async function callGeminiApi(userQuery, systemPrompt, retries = 3, delay = 1000) {
+        // ✨ Get API key from session storage
+        const apiKey = sessionStorage.getItem('geminiApiKey');
+
+        if (!apiKey) {
+            console.error("API Key is missing from session storage.");
+            // Show the API key modal instead of the regular one
+            apiKeyModalOverlay.style.display = 'flex';
+            return Promise.reject(new Error("API Key Missing"));
+        }
+
+        // ✨ Construct apiUrl here
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+        const payload = { contents: [{ parts: [{ text: userQuery }] }], systemInstruction: { parts: [{ text: systemPrompt }] }, };
+        try {
+            const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            if (!response.ok) {
+                if (response.status === 429 && retries > 0) {
+                    await new Promise(res => setTimeout(res, delay));
+                    return callGeminiApi(userQuery, systemPrompt, retries - 1, delay * 2);
+                }
+                throw new Error(`API Error: ${response.statusText}`);
+            }
+            const result = await response.json();
+            const candidate = result.candidates?.[0];
+            if (candidate && candidate.content?.parts?.[0]?.text) {
+                return candidate.content.parts[0].text;
+            } else { throw new Error("Invalid API response structure."); }
+        } catch (error) {
+            if (retries > 0) {
+                await new Promise(res => setTimeout(res, delay));
+                return callGeminiApi(userQuery, systemPrompt, retries - 1, delay * 2);
+            }
+            throw error;
+        }
+    }
+
+    // --- ✨ Annotation & Firebase Logic (Updated) ---
+
+    /**
+     * Initializes Firebase and sets up auth listener.
+     */
+    async function initFirebase() {
+        if (!firebaseConfig.apiKey) {
+            console.error("Firebase config is missing.");
+            return;
+        }
+        try {
+            setLogLevel('Debug');
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    // User is signed in
+                } else if (typeof __initial_auth_token !== 'undefined') {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                userId = auth.currentUser.uid;
+                isAuthReady = true;
+                console.log("Auth ready. User:", userId);
+                loadAnnotations(); // Load text annotations
+                loadDynamicElements(); // ✨ Load stickies
+            });
+        } catch (e) {
+            console.error("Firebase init error:", e);
+        }
+    }
+
+    /**
+     * Attaches a real-time listener to load text annotations from Firestore.
+     */
+    function loadAnnotations() {
+        if (!isAuthReady) return;
+        const docRef = doc(db, `/artifacts/${appId}/users/${userId}/llm-study-notes/content`);
+
+        onSnapshot(docRef, (docSnap) => {
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                console.log("Loading text annotations...");
+                document.querySelectorAll('p[data-section]').forEach(p => {
+                    const section = p.dataset.section;
+                    if (data[section]) {
+                        p.innerHTML = data[section];
+                    }
+                });
+            } else {
+                console.log("No existing text annotations found.");
+            }
+        }, (error) => {
+            console.error("Error loading text annotations:", error);
+        });
+    }
+
+    /**
+     * Saves the current innerHTML of all content paragraphs to Firestore.
+     */
+    async function saveAnnotations() {
+        if (!isAuthReady) return;
+        console.log("Saving text annotations...");
+        const paragraphs = document.querySelectorAll('p[data-section]');
+        const dataToSave = {};
+        paragraphs.forEach(p => {
+            dataToSave[p.dataset.section] = p.innerHTML;
+        });
+        try {
+            const docRef = doc(db, `/artifacts/${appId}/users/${userId}/llm-study-notes/content`);
+            await setDoc(docRef, dataToSave);
+            console.log("Text save complete.");
+        } catch (e) {
+            console.error("Error saving text annotations:", e);
+        }
+    }
+    function requestSaveAnnotations() {
+        clearTimeout(annotationDebounceTimer);
+        annotationDebounceTimer = setTimeout(saveAnnotations, 1000);
+    }
+
+    // --- ✨ New Sticky Note Logic ---
+
+    /**
+     * Loads dynamic elements (stickies) from Firestore.
+     */
+    function loadDynamicElements() {
+        if (!isAuthReady) return;
+        const docRef = doc(db, `/artifacts/${appId}/users/${userId}/llm-study-notes/dynamic-elements`);
+
+        onSnapshot(docRef, (docSnap) => {
+            if (docSnap.exists()) {
+                dynamicElements = docSnap.data();
+                if (!dynamicElements.stickies) dynamicElements.stickies = [];
+                console.log("Loading dynamic elements...");
+            } else {
+                console.log("No existing dynamic elements found.");
+                dynamicElements = { stickies: [] };
+            }
+            renderDynamicElements();
+        }, (error) => {
+            console.error("Error loading dynamic elements:", error);
+        });
+    }
+
+    /**
+     * Renders all stickies from the `dynamicElements` state.
+     */
+    function renderDynamicElements() {
+        // Clear existing dynamic stickies
+        document.querySelectorAll('.sticky-note-dynamic').forEach(el => el.remove());
+
+        // Re-create from state
+        if(dynamicElements.stickies) {
+            dynamicElements.stickies.forEach(stickyData => {
+                createStickyNoteElement(stickyData);
+            });
+        }
+    }
+
+    /**
+     * Creates a single sticky note element in the DOM.
+     */
+    function createStickyNoteElement(stickyData) {
+        const div = document.createElement('div');
+        div.className = 'sticky-note-dynamic';
+        div.id = stickyData.id;
+        div.style.top = stickyData.top;
+        div.style.left = stickyData.left;
+        div.style.transform = stickyData.rotation;
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'sticky-delete';
+        deleteBtn.textContent = 'X';
+
+        const content = document.createElement('div');
+        content.className = 'sticky-content';
+        content.contentEditable = "true";
+        content.textContent = stickyData.text; // Use textContent for safety, auto-converts newlines
+
+        div.appendChild(deleteBtn);
+        div.appendChild(content);
+        pageContainer.appendChild(div);
+
+        // --- Add Event Listeners for this new sticky ---
+
+        // Save on text edit
+        content.addEventListener('input', (e) => {
+            e.stopPropagation();
+            stickyData.text = e.target.textContent;
+            requestSaveDynamicElements();
+        });
+
+        // Delete
+        deleteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            div.remove(); // Remove from DOM
+            dynamicElements.stickies = dynamicElements.stickies.filter(s => s.id !== stickyData.id); // Remove from state
+            requestSaveDynamicElements(); // Save new state
+        });
+
+        // Drag Start
+        div.addEventListener('mousedown', (e) => {
+            // Don't drag if clicking contenteditable or delete
+            if (e.target.closest('.sticky-content') || e.target.closest('.sticky-delete')) return;
+
+            isDragging = true;
+            draggedElement = div;
+            const rect = div.getBoundingClientRect();
+            const pageRect = pageContainer.getBoundingClientRect();
+            offsetX = e.clientX - (rect.left - pageRect.left);
+            offsetY = e.clientY - (rect.top - pageRect.top);
+            div.style.zIndex = 20; // Bring to front
+        });
+    }
+
+    // Global drag listeners
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging || !draggedElement) return;
+        e.preventDefault();
+
+        const pageRect = pageContainer.getBoundingClientRect();
+        let newLeft = e.clientX - offsetX - pageRect.left;
+        let newTop = e.clientY - offsetY - pageRect.top;
+
+        // Constrain to page
+        newLeft = Math.max(0, Math.min(newLeft, pageRect.width - draggedElement.offsetWidth));
+        newTop = Math.max(0, Math.min(newTop, pageRect.height - draggedElement.offsetHeight));
+
+        draggedElement.style.left = `${newLeft}px`;
+        draggedElement.style.top = `${newTop}px`;
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (!isDragging || !draggedElement) return;
+
+        draggedElement.style.zIndex = 10;
+        const stickyData = dynamicElements.stickies.find(s => s.id === draggedElement.id);
+        if(stickyData) {
+            stickyData.top = draggedElement.style.top;
+            stickyData.left = draggedElement.style.left;
+            requestSaveDynamicElements(); // Save new position
+        }
+
+        isDragging = false;
+        draggedElement = null;
+    });
+
+    /**
+     * Saves the entire dynamic elements state to Firestore.
+     */
+    async function saveDynamicElements() {
+        if (!isAuthReady) return;
+        console.log("Saving dynamic elements...");
+        try {
+            const docRef = doc(db, `/artifacts/${appId}/users/${userId}/llm-study-notes/dynamic-elements`);
+            await setDoc(docRef, dynamicElements);
+            console.log("Dynamic elements save complete.");
+        } catch (e) {
+            console.error("Error saving dynamic elements:", e);
+        }
+    }
+    function requestSaveDynamicElements() {
+        clearTimeout(dynamicElementsDebounceTimer);
+        dynamicElementsDebounceTimer = setTimeout(saveDynamicElements, 1000);
+    }
+
+    // --- ✨ Updated Tool Logic ---
+
+    /**
+     * Handles clicks on the style toolbox to set the current tool.
+     */
+    toolbox.addEventListener('click', (e) => {
+        const button = e.target.closest('button');
+        // ✨ Updated to ignore new action buttons
+        if (!button || button.id === 'btn-explain-highlights' || button.id === 'btn-gen-analogy' || button.id === 'btn-eli5') return;
+
+        // Reset cursor
+        pageContainer.style.cursor = 'auto';
+
+        if (button.classList.contains('active')) {
+            currentTool = null;
+            button.classList.remove('active');
+        } else {
+            toolbox.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+            currentTool = button.dataset.tool;
+            button.classList.add('active');
+
+            if (currentTool === 'add-sticky') {
+                pageContainer.style.cursor = 'crosshair';
+            }
+        }
+        console.log("Current tool:", currentTool);
+    });
+
+    /**
+     * Handles text selection (mouseup) to apply text-based styles.
+     */
+    function handleTextSelection() {
+        // Only run for text tools, not sticky tool
+        if (!currentTool || currentTool === 'add-sticky') return;
+
+        const selection = window.getSelection();
+        if (selection.isCollapsed || selection.rangeCount === 0) return;
+        const range = selection.getRangeAt(0);
+        if (range.toString().trim() === "" || toolbox.contains(range.commonAncestorContainer) || modalOverlay.contains(range.commonAncestorContainer)) {
+            return;
+        }
+
+        const span = document.createElement('span');
+
+        if (currentTool.startsWith('h-')) {
+            span.classList.add('h', currentTool);
+        } else if (currentTool === 't-pencil') { // ✨ New case
+            span.classList.add('t-pencil');
+        } else {
+            span.classList.add(currentTool); // e.g., u-wavy-red
+        }
+
+        try {
+            range.surroundContents(span);
+            selection.removeAllRanges();
+            requestSaveAnnotations(); // Save the text change
+        } catch (e) {
+            console.warn("Could not apply style (selection may be too complex):", e);
+        }
+    }
+
+    studyContent.addEventListener('mouseup', handleTextSelection);
+    studyContent.addEventListener('touchend', handleTextSelection);
+
+    /**
+     * ✨ New: Handles clicks on the page to add stickies.
+     */
+    pageContainer.addEventListener('click', (e) => {
+        if (currentTool !== 'add-sticky') return;
+
+        // Don't add if clicking on existing UI
+        if (e.target.closest('#study-content') || e.target.closest('.sticky-note-dynamic') || e.target.closest('#style-toolbox') || e.target.closest('.margin-note')) {
+            return;
+        }
+
+        const rect = pageContainer.getBoundingClientRect();
+        const top = e.clientY - rect.top - 20; // Adjust for better placement
+        const left = e.clientX - rect.left - 20;
+
+        const newSticky = {
+            id: `sticky-${Date.now()}`,
+            text: "Type here...",
+            top: `${top}px`,
+            left: `${left}px`,
+            rotation: `rotate(${Math.random() * 4 - 2}deg)` // -2 to +2 deg
+        };
+
+        // Add to state and render
+        dynamicElements.stickies.push(newSticky);
+        createStickyNoteElement(newSticky);
+        requestSaveDynamicElements(); // Save new state
+
+        // Reset tool
+        currentTool = null;
+        pageContainer.style.cursor = 'auto';
+        const activeButton = toolbox.querySelector('button.active');
+        if (activeButton) activeButton.classList.remove('active');
+    });
+
+    // ✨ New function to check for API key on load
+    function checkApiKey() {
+        const storedKey = sessionStorage.getItem('geminiApiKey');
+        if (!storedKey) {
+            apiKeyModalOverlay.style.display = 'flex';
+        }
+    }
+
+    // --- Initialize App ---
+    initFirebase();
+    checkApiKey(); // ✨ Check for API key on page load
+
+</script>
+</body>
+</html>

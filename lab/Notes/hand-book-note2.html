@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Study‑Style Notes: Aspects & Assessment of LLMs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Caveat:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root{
+          --paper:#fcfbf7;
+          --ink:#222;
+          --muted:#60636c;
+          --hl-yellow:#fff59d;
+          --hl-pink:#ffccde;
+          --hl-green:#c5f7d1;
+          --hl-blue:#cfe8ff;
+          --hl-orange:#ffe3b3;
+          --sticky:#fff1a8;
+          --sticky-blue:#bfe3ff;
+          --sticky-green:#dff8cf;
+          --accent:#4b6bfb;
+        }
+
+        html, body { height: 100%; }
+        body{
+          margin:0;
+          background:
+            radial-gradient(1200px 600px at 10% -10%, rgba(0,0,0,.06), transparent 60%),
+            radial-gradient(800px 400px at 100% 0%, rgba(0,0,0,.05), transparent 60%),
+            var(--paper);
+          font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", sans-serif;
+          color: var(--ink);
+          line-height: 1.6;
+        }
+
+        /* Page frame */
+        .page{
+          max-width: 900px;
+          margin: 48px auto;
+          background: repeating-linear-gradient(transparent, transparent 34px, rgba(70,120,255,.07) 35px), var(--paper);
+          box-shadow: 0 30px 50px rgba(0,0,0,.15), 0 1px 0 rgba(0,0,0,.08) inset;
+          border-radius: 14px;
+          position: relative;
+          padding: 70px 68px 80px 88px;
+          overflow: hidden;
+        }
+
+        /* Left margin binder holes */
+        .page::before{
+          content: "";
+          position: absolute; left: 26px; top: 0; bottom: 0;
+          width: 20px;
+          background:
+            radial-gradient(circle at 50% 60px, #ddd 0 7px, transparent 8px) 0 0/100% 140px,
+            radial-gradient(circle at 50% 130px, #ddd 0 7px, transparent 8px) 0 0/100% 140px,
+            radial-gradient(circle at 50% 200px, #ddd 0 7px, transparent 8px) 0 0/100% 140px;
+          opacity:.9;
+        }
+
+        h1{
+          font-weight: 800;
+          line-height: 1.15;
+          margin: 0 0 18px;
+          letter-spacing: .2px;
+        }
+
+        .subtitle{
+          color: var(--muted);
+          margin-bottom: 28px;
+          font-size: 0.95rem;
+        }
+
+        /* Handwriting + doodle styles */
+        .hand{ font-family: "Caveat", "Shadows Into Light", cursive; }
+        .scribble{ font-family: "Shadows Into Light", cursive; }
+
+        /* Highlighter styles */
+        .hl{ position: relative; padding: 2px 4px; border-radius: 6px; }
+        .hl::before{
+          content: ""; position: absolute; inset: 0 0 0 0; z-index: -1;
+          transform: rotate(-.3deg);
+          filter: saturate(115%);
+          box-shadow: 0 0 0 6px transparent;
+        }
+        .hl:hover{ text-shadow: 0 0 0.01px currentColor; }
+        .hl:hover::before{ box-shadow: 0 0 0 6px rgba(0,0,0,.03), 0 10px 20px rgba(0,0,0,.06); }
+
+        .y{ background: var(--hl-yellow); }
+        .p{ background: var(--hl-pink); }
+        .g{ background: var(--hl-green); }
+        .b{ background: var(--hl-blue); }
+        .o{ background: var(--hl-orange); }
+
+        /* Underlines & waves */
+        .u{ text-decoration: underline 3px solid rgba(0,0,0,.5); text-underline-offset: 6px; }
+        .wavy{ text-decoration-style: wavy; text-decoration-color: rgba(0,0,0,.45); text-decoration-thickness: 2px; text-underline-offset: 5px; text-decoration-line: underline; }
+
+        /* Circled words */
+        .circled{
+          padding: 0 8px; border-radius: 20px; box-shadow: 0 0 0 2px rgba(0,0,0,.55) inset; display: inline-block;
+        }
+
+        /* Margin notes */
+        .note{
+          position: absolute; right: -18px; width: 220px;
+          transform: rotate(-2.2deg);
+          padding: 14px 16px; background: var(--sticky);
+          box-shadow: 0 8px 18px rgba(0,0,0,.18); border: 1px solid rgba(0,0,0,.08);
+          border-radius: 6px; filter: saturate(110%);
+        }
+        .note.small{ width: 180px; padding: 10px 12px; }
+        .note.blue{ background: var(--sticky-blue); transform: rotate(1.8deg); }
+        .note.green{ background: var(--sticky-green); transform: rotate(-.8deg); }
+        .tape{
+          position: absolute; inset: -10px auto auto 18px; width: 86px; height: 24px;
+          background: rgba(255,255,255,.7); box-shadow: 0 4px 8px rgba(0,0,0,.12);
+          transform: rotate(-6deg);
+        }
+
+        /* Tooltip notes */
+        .tip{ position: relative; cursor: help; }
+        .tip:hover::after{
+          content: attr(data-tip); position: absolute; left: 0; top: 120%;
+          background: #111; color: #fff; font-size:.85rem; padding: 8px 10px; border-radius: 6px; white-space: nowrap;
+          box-shadow: 0 10px 22px rgba(0,0,0,.22);
+        }
+
+        /* Callouts */
+        .callout{
+          border-left: 6px solid var(--accent);
+          background: rgba(75,107,251,.06);
+          padding: 12px 16px; border-radius: 8px; margin: 24px 0;
+        }
+
+        /* Doodle arrows */
+        .arrow{ position: absolute; pointer-events: none; opacity:.85; }
+
+        /* Code-like chips */
+        .chip{ display:inline-block; border:1px dashed rgba(0,0,0,.4); padding:2px 8px; border-radius: 999px; font-size:.85rem; background: rgba(255,255,255,.4); }
+
+        /* Footer nav */
+        .foot{
+          margin-top: 28px; font-size: .9rem; color: var(--muted);
+          display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
+        }
+        .foot a{ color: var(--accent); text-decoration: none; border-bottom: 1px dashed rgba(75,107,251,.4); }
+
+        /* Responsive tweaks */
+        @media (max-width: 860px){
+          .page { padding: 56px 24px 64px 54px; }
+          .note{ position: static; transform: rotate(-2deg); width: auto; margin: 14px 0; }
+          .arrow{ display:none; }
+        }
+    </style>
+</head>
+<body>
+<main class="page">
+    <div class="tape" aria-hidden="true"></div>
+
+    <h1>Aspects & <span class="hl y">Assessment</span> of <span class="circled">LLMs</span></h1>
+    <p class="subtitle">A study‑style, hand‑annotated layout you can reuse as a blog theme.</p>
+
+    <!-- Margin sticky notes -->
+    <aside class="note hand" style="top:72px;">
+        💡 Key idea: <b>evaluate what you ship</b> — not just benchmarks.
+    </aside>
+    <aside class="note small blue scribble" style="top:220px;">
+        🤔 Why this matters? Accuracy ≠ Usefulness.
+    </aside>
+    <aside class="note green hand" style="top:380px;">
+        Try: <b>task‑specific</b> evals + <b>human in the loop</b>.
+    </aside>
+
+    <!-- Doodle arrows (SVG) -->
+    <svg class="arrow" width="200" height="120" style="top:145px; right:260px" viewBox="0 0 200 120" fill="none" stroke="#333" stroke-width="3">
+        <path d="M10,90 C80,20 120,20 180,60" stroke-linecap="round" />
+        <path d="M168,50 l18,8 l-12,12" fill="none" />
+    </svg>
+
+    <section>
+        <p>
+            Large Language Models (LLMs) are judged along multiple <span class="hl g tip" data-tip="Different axes; optimize for context, not a single number.">axes</span>:
+            <span class="hl y">factuality</span>, <span class="hl b">reasoning</span>, <span class="hl o">helpfulness</span>, <span class="hl p">safety</span>,
+            latency/throughput, context handling, and cost. A practical rule: <span class="u">evaluate like your users behave</span> — not only with synthetic prompts.
+        </p>
+
+        <div class="callout">
+            <strong>Quick scan:</strong> <span class="chip">MRR</span>, <span class="chip">nDCG</span> for retrieval; <span class="chip">EM</span>/<span class="chip">F1</span> for QA;
+            <span class="chip">ROUGE</span>/<span class="chip">BLEU</span>/<span class="chip">BERTScore</span> for generation; <span class="chip">MMLU</span>, <span class="chip">BIG‑bench</span> for breadth.
+        </div>
+
+        <h2 class="hand" style="margin-top:22px;">What to look for</h2>
+        <ul>
+            <li><span class="hl y">Factuality</span>: reduce hallucinations via <span class="hl b">retrieval</span>, citations, and constrained decoding.</li>
+            <li><span class="hl g">Reasoning</span>: chain‑of‑thought, tool use, and structured scratchpads.</li>
+            <li><span class="hl p">Safety</span> & bias: red‑team tests, refusal handling, and fairness audits.</li>
+            <li>Latency & cost: measure <span class="wavy">P50/P95</span>, tokens/sec, cache hits; track $/task.</li>
+            <li>Robustness: adversarial prompts, long context drift, non‑English inputs.</li>
+        </ul>
+
+        <p>
+            For product fit, run <span class="hl o">task‑grounded</span> evaluations with your own data and success criteria.
+            Use a <span class="circled">scorecard</span> so trade‑offs are visible; highlight <span class="hl p">safety</span> regressions in red and <span class="hl g">quality</span> gains in green.
+        </p>
+    </section>
+
+    <section>
+        <h2 class="hand">How to assess (fast)</h2>
+        <ol>
+            <li>Define clear <span class="hl y">acceptance criteria</span> (e.g., “no medical claims,” “≥80% EM on internal set”).</li>
+            <li>Create a <span class="hl b">golden set</span> of ~200 prompts + references; include edge cases and tricky negatives.</li>
+            <li>Automate metrics; sample <span class="hl g">human review</span> weekly for drift.</li>
+            <li>Compare variants A/B with <span class="hl o">paired</span> prompts; keep a change log.</li>
+            <li>Instrument production: capture <span class="hl p">user flags</span>, latency, and failure modes.</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2 class="hand">Common pitfalls</h2>
+        <ul>
+            <li>Overfitting to leaderboards like <span class="tip" data-tip="Helpful for breadth, insufficient for product">MMLU</span>.</li>
+            <li>Ignoring <span class="u">data provenance</span> and privacy constraints.</li>
+            <li>Confusing clever <span class="wavy">demos</span> with reliable capability.</li>
+            <li>Not testing <span class="hl y">distribution shifts</span>: new topics, dates, or formats.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2 class="hand">Mini glossary</h2>
+        <p>
+            <span class="hl y">EM</span>: exact string match; <span class="hl g">F1</span>: token overlap; <span class="hl b">nDCG</span>: graded ranking; <span class="hl o">MRR</span>: first‑hit rank;
+            <span class="hl p">BERTScore</span>: semantic similarity; <span class="hl y">Hallucination</span>: confident, fabricated content.
+        </p>
+    </section>
+
+    <!-- Handwritten footer with doodles -->
+    <div class="foot">
+        <span class="scribble">★ Remember: "Measure twice, deploy once."</span>
+        <a href="#">Open scorecard template</a>
+        <a href="#">See eval scripts</a>
+    </div>
+</main>
+</body>
+</html>

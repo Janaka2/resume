@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LLM Notes — Hand‑Annotated Highlights Demo</title>
+    <style>
+        /* ===== Base “book page” look ===== */
+        :root{
+          --ink:#222;
+          --paper:#fbfaf7;
+          --paper-lines:repeating-linear-gradient(
+            to bottom,
+            rgba(0,0,0,.03) 0 1px,
+            transparent 1px 28px
+          );
+          --margin-rule: linear-gradient(to right, rgba(255,0,0,.18), rgba(255,0,0,.18))
+                           left/2px 100% no-repeat;
+          --ring: radial-gradient(circle at 30% 50%, rgba(0,0,0,.12), transparent 50%);
+
+          /* Highlighter colors */
+          --hl-yellow:#fff27a;
+          --hl-pink:#ffb3d1;
+          --hl-mint:#b9ffd9;
+          --hl-blue:#bfe0ff;
+          --hl-lav:#e0caff;
+          --hl-orange:#ffd199;
+
+          /* Pen colors */
+          --pen-blue:#1f4fff;
+          --pen-red:#d22525;
+          --pen-green:#007d4b;
+        }
+
+        html,body{height:100%}
+        body{
+          margin:0; color:var(--ink); background:#f3f0ea;
+          font: 16px/1.6 "Georgia", "Times New Roman", ui-serif, serif;
+        }
+
+        .wrap{
+          max-width: 880px; margin: 48px auto; padding: 24px;
+        }
+
+        .page{
+          position: relative;
+          background:
+            var(--paper-lines),
+            var(--margin-rule),
+            var(--paper);
+          box-shadow:
+            0 10px 30px rgba(0,0,0,.15),
+            inset 0 0 0 1px rgba(0,0,0,.05);
+          border-radius: 14px;
+          padding: 64px 56px 72px 72px; /* left pad = margin column */
+          overflow: hidden;
+          isolation: isolate;
+        }
+
+        /* Fake hole punches */
+        .page::before{
+          content:""; position:absolute; left:22px; top:40px; bottom:40px; width:10px;
+          background:
+            radial-gradient(circle at 50% 5%, rgba(0,0,0,.16) 50%, transparent 52%) 0 0/100% 52px repeat-y,
+            radial-gradient(circle at 50% 50%, white 40%, transparent 42%) 0 0/100% 52px repeat-y;
+          filter: drop-shadow(0 0 4px rgba(0,0,0,.15));
+          border-radius: 6px;
+          pointer-events:none;
+        }
+
+        h1,h2{font-family: ui-serif, Georgia, serif; margin:0 0 14px}
+        h1{font-size: 2.2rem; line-height:1.2}
+        h2{font-size: 1.15rem; letter-spacing:.02em; text-transform:uppercase; color:#555}
+
+        p{margin: 0 0 14px;}
+        .muted{color:#666}
+
+        /* ===== Handwritten margin notes ===== */
+        .note{position:relative;}
+        .note::after{
+          content: attr(data-note);
+          position:absolute; left:-56px; top:-2px; width:48px;
+          font: 13px/1.25 "Comic Sans MS", "Bradley Hand", "Segoe Print", cursive;
+          color:#1d1b16; transform: rotate(-5deg);
+          text-align:right;
+        }
+
+        /* ===== Highlighter styles (several variants) ===== */
+        .hl{position:relative; padding:.1em .15em; border-radius: .2em;}
+        .hl.yellow{ background: linear-gradient(transparent 35%, var(--hl-yellow) 36% 85%, transparent 86%); }
+        .hl.pink{   background: linear-gradient(transparent 35%, var(--hl-pink) 36% 85%, transparent 86%); }
+        .hl.mint{   background: linear-gradient(transparent 35%, var(--hl-mint) 36% 85%, transparent 86%); }
+        .hl.blue{   background: linear-gradient(transparent 35%, var(--hl-blue) 36% 85%, transparent 86%); }
+        .hl.lav{    background: linear-gradient(transparent 35%, var(--hl-lav) 36% 85%, transparent 86%); }
+        .hl.orange{ background: linear-gradient(transparent 35%, var(--hl-orange) 36% 85%, transparent 86%); }
+
+        /* Wavy gel‑pen underline */
+        .wavy{ text-decoration: underline wavy var(--pen-red) 2px; text-underline-offset: .2em; }
+
+        /* Double marker (two strokes) */
+        .double-hl{
+          background:
+            linear-gradient(transparent 55%, var(--hl-lav) 56% 85%, transparent 86%),
+            linear-gradient(transparent 35%, var(--hl-yellow) 36% 65%, transparent 66%);
+          border-radius:.2em; padding:.05em .15em;
+        }
+
+        /* “Boxed” highlighter with rough edges */
+        .box-hl{ position:relative; z-index:0; }
+        .box-hl::before{
+          content:""; position:absolute; inset: 0 .05em .1em; z-index:-1;
+          background: var(--hl-blue);
+          filter: saturate(110%) contrast(95%);
+          clip-path: polygon(0% 8%, 3% 3%, 97% 0%, 100% 10%, 98% 95%, 4% 100%, 1% 90%, 0% 20%);
+        }
+
+        /* Marker swipe accent (underline) */
+        .swipe{
+          background: linear-gradient(var(--hl-mint) 0 0) left bottom/100% .6em no-repeat;
+          padding-bottom:.05em; border-radius:2px;
+        }
+
+        /* Squiggle underline with SVG mask */
+        .squiggle{ position:relative; }
+        .squiggle::after{
+          content:""; position:absolute; left:0; right:0; bottom:-2px; height:8px;
+          background:
+            url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="8" viewBox="0 0 160 8"><path d="M0 6 Q 5 0 10 6 T 20 6 T 30 6 T 40 6 T 50 6 T 60 6 T 70 6 T 80 6 T 90 6 T 100 6 T 110 6 T 120 6 T 130 6 T 140 6 T 150 6 T 160 6" fill="none" stroke="%23d22525" stroke-width="2.5" stroke-linecap="round"/></svg>')
+            left/auto 100% repeat-x;
+        }
+
+        /* Sticky note callout */
+        .sticky{
+          position:relative; display:block; margin:18px 0; padding:14px 16px 16px 16px;
+          width:min(520px, 100%); background:#fff8a6; color:#3a2f00;
+          font: 15px/1.45 "Comic Sans MS", "Bradley Hand", cursive;
+          transform: rotate(-1.5deg);
+          box-shadow: 0 6px 18px rgba(0,0,0,.18), 0 1px 0 rgba(255,255,255,.7) inset;
+        }
+        .sticky::before{ /* tape */
+          content:""; position:absolute; top:-10px; left: 30%; width:120px; height:22px;
+          background: repeating-linear-gradient(135deg, rgba(255,255,255,.8) 0 6px, rgba(230,230,230,.8) 6px 12px);
+          box-shadow: 0 6px 6px rgba(0,0,0,.15);
+          transform: rotate(2deg);
+        }
+
+        /* Bookmark tab */
+        .tab{
+          position:absolute; right:16px; top:24px; padding:6px 12px;
+          background:#ff7373; color:white; font-weight:700; letter-spacing:.04em;
+          clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+          box-shadow: 0 4px 10px rgba(0,0,0,.2);
+          font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        }
+
+        /* Checkbox list (study checklist style) */
+        .checklist{list-style:none; padding:0; margin: 12px 0}
+        .checklist li{margin: 6px 0 8px;}
+        .check{appearance:none; inline-size:1.05em; block-size:1.05em; border:2px solid #333; display:inline-block; vertical-align:-2px; margin-right:.5em; border-radius:.15em}
+        .check:checked{background: conic-gradient(from 45deg, #2ecc71 0 90deg, transparent 0 360deg), linear-gradient(#2ecc71,#2ecc71); background-size: 50% 50%, 100% 100%; background-position: 0 0, 0 0; background-repeat:no-repeat; border-color:#2ecc71}
+
+        /* Pen annotations */
+        .pen{font-family: "Comic Sans MS", "Bradley Hand", cursive;}
+        .pen.blue{color: var(--pen-blue)}
+        .pen.green{color: var(--pen-green)}
+        .pen.red{color: var(--pen-red)}
+
+        /* Divider with torn edge */
+        .torn{ height:16px; background:
+            radial-gradient(circle at 10px 8px, transparent 8px, #d9d1c6 8px) 0 0/20px 16px repeat-x,
+            linear-gradient(#d9d1c6,#d9d1c6);
+          margin: 22px -56px; opacity:.8
+        }
+
+        /* Variant containers to showcase different styles */
+        .variant{ margin: 22px 0 26px; padding: 14px 14px 2px; border-left: 4px solid rgba(0,0,0,.1); background: rgba(255,255,255,.35); border-radius: 10px;}
+        .variant h3{ margin: 0 0 10px; font-size: 1rem; text-transform: uppercase; letter-spacing:.04em; color:#444; }
+
+        /* Callout arrows using ::marker and ::after tricks */
+        .callout{ position:relative; padding: 12px 14px; border-radius:12px; background: #eef7ff; border:1px dashed #99c5ff }
+        .callout::after{ content:"⇨"; position:absolute; right:-18px; top: 8px; color:#99c5ff; font-size: 24px; transform: rotate(10deg); }
+
+        /* Small utility classes */
+        .mt-2{margin-top:.5rem}.mt-3{margin-top:1rem}
+
+        /* Print friendliness */
+        @media print{ body{background:white} .page{box-shadow:none} .tab{display:none} }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <article class="page" role="article">
+        <div class="tab">LLM ✍️ Notes</div>
+
+        <h1 class="note" data-note="⭐ key idea">Large Language Models (LLMs) — What to Remember</h1>
+        <p class="muted">A memory‑friendly, hand‑annotated summary you can drop into any blog page. Mix & match the CSS classes below to get different “student highlight” looks.</p>
+
+        <div class="torn" aria-hidden="true"></div>
+
+        <h2>Core Uses of LLMs</h2>
+        <p>
+            LLMs are <span class="hl yellow">general‑purpose text engines</span> trained on large corpora. They excel at
+            <span class="double-hl">knowledge retrieval & synthesis</span>, <span class="hl pink">content generation</span>,
+            <span class="hl mint">reasoning over structured/unstructured inputs</span>, and <span class="swipe">language transformation</span> (translate, rewrite, compress).
+        </p>
+        <p class="note" data-note="applications">Common jobs: <em>assistants</em>, <em>search & RAG</em>, <em>coding</em>, <em>data wrangling</em>, <em>agents</em>, and <em>automation</em>.</p>
+
+        <section class="variant">
+            <h3>Variant A — Classic Neon Highlighters</h3>
+            <p>
+                <span class="hl yellow">Retrieval‑Augmented Generation (RAG)</span> pairs an LLM with a search index to ground answers in your docs, reducing hallucination.
+                Add <span class="hl blue">citations</span> and <span class="hl orange">chunking + embeddings</span> to improve precision.
+            </p>
+            <p>
+                For <span class="hl lav">analytics</span>, prompt the model to produce <strong>JSON</strong> or <strong>tables</strong> and post‑check with validators.
+            </p>
+        </section>
+
+        <section class="variant">
+            <h3>Variant B — Gel‑Pen Underlines + Squiggles</h3>
+            <p>
+                Good prompts are <span class="wavy">goal‑tied</span>, specify <span class="squiggle">format</span>, and constrain <span class="wavy">sources</span>.
+                Use <strong>few‑shot examples</strong> for style and <strong>system messages</strong> for rules.
+            </p>
+            <p class="pen red">Tip: keep output schemas stable; breaking schemas = brittle pipelines.</p>
+        </section>
+
+        <section class="variant">
+            <h3>Variant C — Boxed Highlighter + Margin Notes</h3>
+            <p class="note" data-note="⚙️ infra">
+                <span class="box-hl">Production setups</span> route queries by skill or cost. Cache frequent prompts and throttle long‑running tools.
+            </p>
+            <ul class="checklist">
+                <li><input class="check" type="checkbox"> Add <strong>guardrails</strong> (allowed tools, timeouts).</li>
+                <li><input class="check" type="checkbox"> Log <strong>traces</strong> + prompts + model versions.</li>
+                <li><input class="check" type="checkbox"> Evaluate with <em>precision/recall</em>, <em>nDCG</em>, <em>human rubrics</em>.</li>
+            </ul>
+        </section>
+
+        <section class="variant">
+            <h3>Variant D — Sticky Note + Callout</h3>
+            <div class="sticky">Remember: <strong>Grounding</strong> (RAG/tools) → <strong>Planning</strong> (agents) → <strong>Verification</strong> (checkers) → <strong>Feedback</strong> (logs/evals).</div>
+            <p class="callout">Use <em>function calling</em> to delegate to code, databases, or search; keep tool outputs deterministic.</p>
+        </section>
+
+        <section class="variant">
+            <h3>Variant E — Mixed Markers (two‑stroke)</h3>
+            <p>
+                Safety requires <span class="double-hl">policy prompts + classifiers</span> and <span class="hl mint">red‑team tests</span> for jailbreaks.
+                Mask PII, rate‑limit, and prefer <span class="hl blue">server‑side secrets</span>.
+            </p>
+            <p class="pen green">Deploy canaries: if the model leaks a token, alerts trigger instantly.</p>
+        </section>
+
+        <h2 class="mt-3">Memory Anchors (for quick recall)</h2>
+        <p>
+            Think <strong>G-P-V-F</strong>: <span class="hl orange">Ground</span>, <span class="hl yellow">Plan</span>, <span class="hl blue">Verify</span>, <span class="hl mint">Feedback</span>.
+            Pair each with examples you repeat in reviews.
+        </p>
+
+        <p class="muted mt-2">Copy this file into your blog. You can apply the classes (<code>.hl .yellow</code>, <code>.wavy</code>, <code>.box-hl</code>, <code>.sticky</code>, <code>.note[data-note]</code>, etc.) to your own text to get the same hand‑marked look.</p>
+    </article>
+</div>
+</body>
+</html>

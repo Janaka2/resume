@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labs — Experiments & Demos</title>
+    <meta name="description" content="Hands-on demos: RAG chatbot, job research agent, momentum journal, and more.">
+    <link rel="canonical" href="https://lab.janaka.me/"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Favicon set (optional paths; place your files in assets/icons if needed) -->
+    <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg?v=1"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png?v=1"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16.png?v=1"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png?v=1"/>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 leading-relaxed text-gray-800">
+  <nav class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
+      <div class="flex space-x-4 text-sm">
+        <a href="https://janaka.me" class="text-blue-600">Home</a>
+        <a href="https://blog.janaka.me" class="text-blue-600">Blog</a>
+        <a href="#" class="text-blue-600 font-semibold border-b-2 border-blue-600">Lab</a>
+        <a href="https://ai.janaka.me" class="text-blue-600">AI / Agents</a>
+        <a href="https://cv.janaka.me" class="text-blue-600">CV</a>
+        <a href="https://academy.janaka.me" class="text-blue-600 opacity-70 hover:opacity-100">Academy</a>
+      </div>
+    </div>
+  </nav>
+  <header class="bg-gradient-to-r from-blue-50 to-indigo-100 py-12 px-4">
+    <img src="./assets/icons/lab-icon.png" alt="Janaka Academy Icon" class="w-24 h-24 md:w-28 md:h-28 mx-auto mb-6" />
+    <div class="max-w-6xl mx-auto text-center">
+      <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Labs & Experiments</h1>
+      <p class="text-xl text-gray-700 mb-4">Live demos, small tools and proof‑of‑concepts exploring AI, automation and productivity.</p>
+    </div>
+  </header>
+  <section class="py-12 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-gray-50 rounded-lg p-6 shadow">
+          <h2 class="font-semibold text-blue-700 mb-2">RAG Chatbot (FAISS)</h2>
+          <p class="text-gray-600 mb-2 text-sm">Python · FAISS · OpenAI SDK</p>
+          <p class="text-gray-700 mb-4">Local doc search with chunking, MMR, re‑rank, and guardrails.</p>
+          <div class="flex space-x-4">
+            <a href="./rag-demo/" class="text-blue-600 text-sm underline">Open Demo</a>
+            <a href="https://github.com/Janaka2/RAG-Powered-Chatbot" class="text-blue-600 text-sm underline">Source</a>
+          </div>
+        </div>
+        <div class="bg-gray-50 rounded-lg p-6 shadow">
+          <h2 class="font-semibold text-blue-700 mb-2">Job‑Research Agent</h2>
+          <p class="text-gray-600 mb-2 text-sm">Agents · Multi‑tool orchestration</p>
+          <p class="text-gray-700 mb-4">Scrapes roles, matches to profile, drafts outreach with guardrails.</p>
+          <div class="flex space-x-4">
+            <a href="./job-agent/" class="text-blue-600 text-sm underline">Open Demo</a>
+            <a href="https://github.com/Janaka2/job-research-agent" class="text-blue-600 text-sm underline">Source</a>
+          </div>
+        </div>
+        <div class="bg-gray-50 rounded-lg p-6 shadow">
+          <h2 class="font-semibold text-blue-700 mb-2">Momentum Journal</h2>
+          <p class="text-gray-600 mb-2 text-sm">Daily system · voice & text</p>
+          <p class="text-gray-700 mb-4">Lightweight routine for clarity, actions and tracking.</p>
+          <a href="./momentum/" class="text-blue-600 text-sm underline">Open Demo</a>
+        </div>
+          <div class="bg-gray-50 rounded-lg p-6 shadow">
+              <h2 class="font-semibold text-blue-700 mb-2">Study Notes</h2>
+              <p class="text-gray-600 mb-2 text-sm">Learn in Style</p>
+              <p class="text-gray-700 mb-4">New way of leaning with LLMs</p>
+              <a href="./Notes/llm-study-notes-handwritten-style.html" class="mt-4 text-indigo-600 text-sm hover:underline">Demo 1 →</a>
+              <a href="./Notes/hand-book-note1.html" class="mt-4 text-indigo-600 text-sm hover:underline">Demo 2 →</a>
+              <a href="./Notes/hand-book-note2.html" class="mt-4 text-indigo-600 text-sm hover:underline">Demo 3 →</a>
+              <a href="./Notes/hand-book-note3.html" class="mt-4 text-indigo-600 text-sm hover:underline">Demo 4 →</a>
+              <a href="./Notes/llm-hand‑annotated-demo5.html" class="mt-4 text-indigo-600 text-sm hover:underline">Demo 5 →</a>
+          </div>
+      </div>
+    </div>
+  </section>
+  <footer class="bg-gray-800 text-gray-400 py-4">
+    <div class="max-w-6xl mx-auto text-center text-sm">
+      © 2025 Janaka Premathilaka. Built with ♥ and Tailwind CSS.
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LLM Notes — Hand‑Annotated Highlights Demo + Toolbox</title>
+    <style>
+        :root{ --ink:#222; --paper:#fbfaf7; --paper-lines:repeating-linear-gradient(to bottom, rgba(0,0,0,.03) 0 1px, transparent 1px 28px); --margin-rule: linear-gradient(to right, rgba(255,0,0,.18), rgba(255,0,0,.18)) left/2px 100% no-repeat; --ring: radial-gradient(circle at 30% 50%, rgba(0,0,0,.12), transparent 50%); --hl-yellow:#fff27a; --hl-pink:#ffb3d1; --hl-mint:#b9ffd9; --hl-blue:#bfe0ff; --hl-lav:#e0caff; --hl-orange:#ffd199; --pen-blue:#1f4fff; --pen-red:#d22525; --pen-green:#007d4b; --pen-black:#222; }
+        html,body{height:100%}
+        body{ margin:0; color:var(--ink); background:#f3f0ea; font: 16px/1.6 Georgia, "Times New Roman", ui-serif, serif; }
+        .wrap{ max-width: 880px; margin: 48px auto; padding: 24px; }
+        .page{ position: relative; background: var(--paper-lines), var(--margin-rule), var(--paper); box-shadow: 0 10px 30px rgba(0,0,0,.15), inset 0 0 0 1px rgba(0,0,0,.05); border-radius: 14px; padding: 64px 56px 72px 72px; overflow: hidden; isolation: isolate; }
+        .page::before{ content:""; position:absolute; left:22px; top:40px; bottom:40px; width:10px; background: radial-gradient(circle at 50% 5%, rgba(0,0,0,.16) 50%, transparent 52%) 0 0/100% 52px repeat-y, radial-gradient(circle at 50% 50%, white 40%, transparent 42%) 0 0/100% 52px repeat-y; filter: drop-shadow(0 0 4px rgba(0,0,0,.15)); border-radius: 6px; pointer-events:none; }
+        h1,h2{font-family: ui-serif, Georgia, serif; margin:0 0 14px}
+        h1{font-size: 2.2rem; line-height:1.2}
+        h2{font-size: 1.15rem; letter-spacing:.02em; text-transform:uppercase; color:#555}
+        p{margin: 0 0 14px;} .muted{color:#666}
+        .note{position:relative;}
+        .note::after{ content: attr(data-note); position:absolute; left:-56px; top:-2px; width:48px; font: 13px/1.25 "Comic Sans MS", "Bradley Hand", "Segoe Print", cursive; color:#1d1b16; transform: rotate(-5deg); text-align:right; }
+        .hl{position:relative; padding:.1em .15em; border-radius: .2em;}
+        .hl.yellow{ background: linear-gradient(transparent 35%, var(--hl-yellow) 36% 85%, transparent 86%); }
+        .hl.pink{   background: linear-gradient(transparent 35%, var(--hl-pink) 36% 85%, transparent 86%); }
+        .hl.mint{   background: linear-gradient(transparent 35%, var(--hl-mint) 36% 85%, transparent 86%); }
+        .hl.blue{   background: linear-gradient(transparent 35%, var(--hl-blue) 36% 85%, transparent 86%); }
+        .hl.lav{    background: linear-gradient(transparent 35%, var(--hl-lav) 36% 85%, transparent 86%); }
+        .hl.orange{ background: linear-gradient(transparent 35%, var(--hl-orange) 36% 85%, transparent 86%); }
+        .wavy{ text-decoration: underline wavy var(--pen-red) 2px; text-underline-offset: .2em; }
+        .double-hl{ background: linear-gradient(transparent 55%, var(--hl-lav) 56% 85%, transparent 86%), linear-gradient(transparent 35%, var(--hl-yellow) 36% 65%, transparent 66%); border-radius:.2em; padding:.05em .15em; }
+        .box-hl{ position:relative; z-index:0; }
+        .box-hl::before{ content:""; position:absolute; inset: 0 .05em .1em; z-index:-1; background: var(--hl-blue); filter: saturate(110%) contrast(95%); clip-path: polygon(0% 8%, 3% 3%, 97% 0%, 100% 10%, 98% 95%, 4% 100%, 1% 90%, 0% 20%); }
+        .swipe{ background: linear-gradient(var(--hl-mint) 0 0) left bottom/100% .6em no-repeat; padding-bottom:.05em; border-radius:2px; }
+        .squiggle{ position:relative; }
+        .squiggle::after{ content:""; position:absolute; left:0; right:0; bottom:-2px; height:8px; background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="8" viewBox="0 0 160 8"><path d="M0 6 Q 5 0 10 6 T 20 6 T 30 6 T 40 6 T 50 6 T 60 6 T 70 6 T 80 6 T 90 6 T 100 6 T 110 6 T 120 6 T 130 6 T 140 6 T 150 6 T 160 6" fill="none" stroke="%23d22525" stroke-width="2.5" stroke-linecap="round"/></svg>') left/auto 100% repeat-x; }
+        .sticky{ position:absolute; display:block; padding:14px 16px 16px 16px; min-width:160px; max-width:320px; background:#fff8a6; color:#3a2f00; font: 15px/1.45 "Comic Sans MS","Bradley Hand",cursive; transform: rotate(-1.5deg); box-shadow: 0 6px 18px rgba(0,0,0,.18), 0 1px 0 rgba(255,255,255,.7) inset; border:1px solid rgba(0,0,0,.08); border-radius:6px; }
+        .sticky .handle{ cursor:move; font-weight:700; margin-bottom:6px; }
+        .sticky .close{ position:absolute; right:6px; top:4px; cursor:pointer; font-weight:700; }
+        .sticky[contenteditable="true"]:focus{ outline:2px dashed #d2b800; }
+        .tab{ position:absolute; right:16px; top:24px; padding:6px 12px; background:#ff7373; color:white; font-weight:700; letter-spacing:.04em; clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%); box-shadow: 0 4px 10px rgba(0,0,0,.2); font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+        .checklist{list-style:none; padding:0; margin: 12px 0}
+        .checklist li{margin: 6px 0 8px;}
+        .check{appearance:none; inline-size:1.05em; block-size:1.05em; border:2px solid #333; display:inline-block; vertical-align:-2px; margin-right:.5em; border-radius:.15em}
+        .check:checked{background: conic-gradient(from 45deg, #2ecc71 0 90deg, transparent 0 360deg), linear-gradient(#2ecc71,#2ecc71); background-size: 50% 50%, 100% 100%; background-position: 0 0, 0 0; background-repeat:no-repeat; border-color:#2ecc71}
+        .pen{font-family: "Comic Sans MS", "Bradley Hand", cursive;}
+        .pen.blue{color: var(--pen-blue)} .pen.green{color: var(--pen-green)} .pen.red{color: var(--pen-red)}
+        .torn{ height:16px; background: radial-gradient(circle at 10px 8px, transparent 8px, #d9d1c6 8px) 0 0/20px 16px repeat-x, linear-gradient(#d9d1c6,#d9d1c6); margin: 22px -56px; opacity:.8 }
+        .variant{ margin: 22px 0 26px; padding: 14px 14px 2px; border-left: 4px solid rgba(0,0,0,.1); background: rgba(255,255,255,.35); border-radius: 10px;}
+        .variant h3{ margin: 0 0 10px; font-size: 1rem; text-transform: uppercase; letter-spacing:.04em; color:#444; }
+        .callout{ position:relative; padding: 12px 14px; border-radius:12px; background: #eef7ff; border:1px dashed #99c5ff }
+        .callout::after{ content:"⇨"; position:absolute; right:-18px; top: 8px; color:#99c5ff; font-size: 24px; transform: rotate(10deg); }
+        .mt-2{margin-top:.5rem}.mt-3{margin-top:1rem}
+        .toolbox{ position: sticky; top: 8px; z-index: 999; display:flex; flex-wrap: wrap; gap:8px; align-items:center; padding:10px 12px; margin-bottom:10px; background:#ffffffc7; backdrop-filter: blur(6px); border:1px solid rgba(0,0,0,.08); border-radius:12px; box-shadow: 0 2px 12px rgba(0,0,0,.08); font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+        .toolbox .group{ display:flex; gap:6px; align-items:center; }
+        .btn{ cursor:pointer; border:1px solid rgba(0,0,0,.15); background:white; padding:6px 8px; border-radius:8px; font-size:13px; }
+        .btn[aria-pressed="true"]{ outline:2px solid #2563eb; }
+        .swatch{ width:22px; height:22px; border-radius:6px; border:1px solid rgba(0,0,0,.2); cursor:pointer; }
+        .sep{ width:1px; height:26px; background:rgba(0,0,0,.1); margin:0 2px; }
+        .small{ font-size:12px; opacity:.8 }
+        #pen-canvas{ position:absolute; inset:0; pointer-events:none; }
+        @media print{ body{background:white} .page{box-shadow:none} .tab{display:none} .toolbox{display:none} }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="toolbox" id="toolbox" role="toolbar" aria-label="Annotations">
+        <div class="group small">Highlight:</div>
+        <div class="group" data-mode="highlight">
+            <button class="swatch" title="Yellow" data-class="hl yellow" style="background:var(--hl-yellow)"></button>
+            <button class="swatch" title="Pink" data-class="hl pink" style="background:var(--hl-pink)"></button>
+            <button class="swatch" title="Mint" data-class="hl mint" style="background:var(--hl-mint)"></button>
+            <button class="swatch" title="Blue" data-class="hl blue" style="background:var(--hl-blue)"></button>
+            <button class="swatch" title="Lav" data-class="hl lav" style="background:var(--hl-lav)"></button>
+            <button class="swatch" title="Orange" data-class="hl orange" style="background:var(--hl-orange)"></button>
+            <button class="btn" data-class="double-hl">Double</button>
+            <button class="btn" data-class="wavy">Wavy</button>
+            <button class="btn" data-class="box-hl">Boxed</button>
+            <button class="btn" data-class="swipe">Swipe</button>
+        </div>
+        <div class="sep" aria-hidden="true"></div>
+        <div class="group">
+            <button class="btn" id="add-sticky">➕ Sticky</button>
+            <button class="btn" id="pen-toggle" aria-pressed="false">✏️ Pencil</button>
+            <select class="btn" id="pen-color">
+                <option value="#222">Black</option>
+                <option value="#d22525">Red</option>
+                <option value="#1f4fff">Blue</option>
+                <option value="#007d4b">Green</option>
+            </select>
+            <button class="btn" id="pen-undo">Undo</button>
+            <button class="btn" id="pen-clear">Clear Pen</button>
+        </div>
+        <div class="sep" aria-hidden="true"></div>
+        <div class="group">
+            <button class="btn" id="save-session">💾 Save</button>
+            <button class="btn" id="load-session">📥 Load</button>
+            <button class="btn" id="export-json">⬇️ Export</button>
+            <label class="btn" for="import-json" title="Import JSON">⬆️ Import</label>
+            <input type="file" id="import-json" accept="application/json" hidden>
+            <button class="btn" id="clear-all">🧹 Clear</button>
+        </div>
+    </div>
+
+    <article class="page" role="article" id="page">
+        <canvas id="pen-canvas"></canvas>
+        <div class="tab">LLM ✍️ Notes</div>
+
+        <h1 class="note" data-note="⭐ key idea">Large Language Models (LLMs) — What to Remember</h1>
+        <p class="muted">A memory‑friendly, hand‑annotated summary you can drop into any blog page. Mix & match the CSS classes below to get different “student highlight” looks.</p>
+
+        <div class="torn" aria-hidden="true"></div>
+
+        <h2>Core Uses of LLMs</h2>
+        <p>
+            LLMs are <span class="hl yellow">general‑purpose text engines</span> trained on large corpora. They excel at
+            <span class="double-hl">knowledge retrieval & synthesis</span>, <span class="hl pink">content generation</span>,
+            <span class="hl mint">reasoning over structured/unstructured inputs</span>, and <span class="swipe">language transformation</span> (translate, rewrite, compress).
+        </p>
+        <p class="note" data-note="applications">Common jobs: <em>assistants</em>, <em>search & RAG</em>, <em>coding</em>, <em>data wrangling</em>, <em>agents</em>, and <em>automation</em>.</p>
+
+        <section class="variant">
+            <h3>Variant A — Classic Neon Highlighters</h3>
+            <p>
+                <span class="hl yellow">Retrieval‑Augmented Generation (RAG)</span> pairs an LLM with a search index to ground answers in your docs, reducing hallucination.
+                Add <span class="hl blue">citations</span> and <span class="hl orange">chunking + embeddings</span> to improve precision.
+            </p>
+            <p>
+                For <span class="hl lav">analytics</span>, prompt the model to produce <strong>JSON</strong> or <strong>tables</strong> and post‑check with validators.
+            </p>
+        </section>
+
+        <section class="variant">
+            <h3>Variant B — Gel‑Pen Underlines + Squiggles</h3>
+            <p>
+                Good prompts are <span class="wavy">goal‑tied</span>, specify <span class="squiggle">format</span>, and constrain <span class="wavy">sources</span>.
+                Use <strong>few‑shot examples</strong> for style and <strong>system messages</strong> for rules.
+            </p>
+            <p class="pen red">Tip: keep output schemas stable; breaking schemas = brittle pipelines.</p>
+        </section>
+
+        <section class="variant">
+            <h3>Variant C — Boxed Highlighter + Margin Notes</h3>
+            <p class="note" data-note="⚙️ infra">
+                <span class="box-hl">Production setups</span> route queries by skill or cost. Cache frequent prompts and throttle long‑running tools.
+            </p>
+            <ul class="checklist">
+                <li><input class="check" type="checkbox"> Add <strong>guardrails</strong> (allowed tools, timeouts).</li>
+                <li><input class="check" type="checkbox"> Log <strong>traces</strong> + prompts + model versions.</li>
+                <li><input class="check" type="checkbox"> Evaluate with <em>precision/recall</em>, <em>nDCG</em>, <em>human rubrics</em>.</li>
+            </ul>
+        </section>
+
+        <section class="variant">
+            <h3>Variant D — Sticky Note + Callout</h3>
+            <div class="sticky" style="left:420px; top:360px;" contenteditable="true">
+                <div class="handle">Sticky</div>
+                <div class="close" title="Remove">×</div>
+                Remember: <strong>Grounding</strong> (RAG/tools) → <strong>Planning</strong> (agents) → <strong>Verification</strong> (checkers) → <strong>Feedback</strong> (logs/evals).
+            </div>
+            <p class="callout">Use <em>function calling</em> to delegate to code, databases, or search; keep tool outputs deterministic.</p>
+        </section>
+
+        <section class="variant">
+            <h3>Variant E — Mixed Markers (two‑stroke)</h3>
+            <p>
+                Safety requires <span class="double-hl">policy prompts + classifiers</span> and <span class="hl mint">red‑team tests</span> for jailbreaks.
+                Mask PII, rate‑limit, and prefer <span class="hl blue">server‑side secrets</span>.
+            </p>
+            <p class="pen green">Deploy canaries: if the model leaks a token, alerts trigger instantly.</p>
+        </section>
+
+        <h2 class="mt-3">Memory Anchors (for quick recall)</h2>
+        <p>
+            Think <strong>G-P-V-F</strong>: <span class="hl orange">Ground</span>, <span class="hl yellow">Plan</span>, <span class="hl blue">Verify</span>, <span class="hl mint">Feedback</span>.
+            Pair each with examples you repeat in reviews.
+        </p>
+
+        <p class="muted mt-2">Use the toolbox above to highlight selections, add stickies, draw with a pencil, and save/restore sessions.</p>
+    </article>
+</div>
+
+<script>
+    (function(){
+      var STORAGE_KEY = location.pathname + '::annot-session';
+      var page = document.getElementById('page');
+      var toolbox = document.getElementById('toolbox');
+      var canvas = document.getElementById('pen-canvas');
+      var ctx = canvas.getContext('2d');
+      var baseW = null, baseH = null; // stroke base size for scaling
+
+      function resizeCanvas(){
+        var r = page.getBoundingClientRect();
+        var dpr = Math.max(1, window.devicePixelRatio || 1);
+        canvas.width = r.width * dpr; canvas.height = r.height * dpr;
+        canvas.style.width = r.width + 'px'; canvas.style.height = r.height + 'px';
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+        redrawStrokes();
+      }
+      window.addEventListener('resize', resizeCanvas);
+
+      function wrapSelection(className){
+        var sel = window.getSelection();
+        if(!sel || sel.rangeCount === 0) return;
+        var range = sel.getRangeAt(0);
+        if(!page.contains(range.commonAncestorContainer)) return;
+        if(range.collapsed) return;
+        var span = document.createElement('span');
+        className.split(' ').forEach(function(c){ if(c) span.classList.add(c); });
+        try{ range.surroundContents(span); }
+        catch(e){ var frag = range.extractContents(); span.appendChild(frag); range.insertNode(span); }
+        sel.removeAllRanges();
+      }
+
+      toolbox.addEventListener('click', function(e){
+        var btn = e.target.closest('.btn, .swatch');
+        if(!btn) return;
+        var cls = btn.dataset.class;
+        if(cls){ wrapSelection(cls); saveSession(); }
+      });
+
+      function makeSticky(x, y, text){
+        x = x || 120; y = y || 120; text = text || '';
+        var s = document.createElement('div');
+        s.className = 'sticky'; s.style.left = x+'px'; s.style.top = y+'px';
+        s.setAttribute('contenteditable','true');
+        s.innerHTML = '<div class="handle">Sticky</div><div class="close" title="Remove">×</div>' + text;
+        page.appendChild(s); bindSticky(s); return s;
+      }
+      function bindSticky(s){
+        var handle = s.querySelector('.handle');
+        var close = s.querySelector('.close');
+        var sx=0, sy=0, ox=0, oy=0, dragging=false;
+        function down(ev){ dragging=true; var p=ev.touches?ev.touches[0]:ev; sx=p.clientX; sy=p.clientY; ox=parseFloat(s.style.left)||0; oy=parseFloat(s.style.top)||0; ev.preventDefault(); }
+        function move(ev){ if(!dragging) return; var p=ev.touches?ev.touches[0]:ev; s.style.left = (ox + (p.clientX - sx))+'px'; s.style.top = (oy + (p.clientY - sy))+'px'; }
+        function up(){ dragging=false; saveSession(); }
+        handle.addEventListener('mousedown',down); handle.addEventListener('touchstart',down,{passive:false});
+        window.addEventListener('mousemove',move); window.addEventListener('touchmove',move,{passive:false});
+        window.addEventListener('mouseup',up); window.addEventListener('touchend',up);
+        close.addEventListener('click', function(){ s.remove(); saveSession(); });
+        s.addEventListener('input', function(){ saveSession(); });
+      }
+      document.getElementById('add-sticky').addEventListener('click', function(){ makeSticky(160+Math.random()*200, 160+Math.random()*120, ''); saveSession(); });
+
+      var penOn=false; var penColor = document.getElementById('pen-color').value; var strokes=[]; var current=null;
+      var toggleBtn = document.getElementById('pen-toggle');
+      function setPen(on){ penOn = on; toggleBtn.setAttribute('aria-pressed', on? 'true':'false'); canvas.style.pointerEvents = on? 'auto':'none'; }
+      toggleBtn.addEventListener('click', function(){ setPen(!penOn); });
+      document.getElementById('pen-color').addEventListener('change', function(e){ penColor = e.target.value; });
+
+      function canvasPoint(ev){ var b = page.getBoundingClientRect(); var p = ev.touches? ev.touches[0]: ev; return { x: p.clientX - b.left, y: p.clientY - b.top }; }
+      function drawLineSegment(a,b,color){ ctx.strokeStyle=color; ctx.lineWidth=2; ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); }
+      function redrawStrokes(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        var dpr = Math.max(1, window.devicePixelRatio||1);
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+        var r = page.getBoundingClientRect();
+        var sx = 1, sy = 1;
+        if(baseW && baseH){ sx = r.width / baseW; sy = r.height / baseH; }
+        strokes.forEach(function(st){
+          for(var i=1;i<st.pts.length;i++){
+            var p0 = {x: st.pts[i-1].x * sx, y: st.pts[i-1].y * sy};
+            var p1 = {x: st.pts[i].x * sx, y: st.pts[i].y * sy};
+            drawLineSegment(p0, p1, st.color);
+          }
+        });
+      }
+      function penDown(ev){ if(!penOn) return; if(!baseW||!baseH){ var r = page.getBoundingClientRect(); baseW = r.width; baseH = r.height; }
+        current = { color: penColor, pts: [] }; var pt = canvasPoint(ev); current.pts.push(pt); strokes.push(current); drawing=true; ev.preventDefault(); }
+      function penMove(ev){ if(!current) return; var pt = canvasPoint(ev); var prev = current.pts[current.pts.length-1]; current.pts.push(pt); drawLineSegment(prev, pt, current.color); ev.preventDefault(); }
+      function penUp(){ if(!current) return; current=null; saveSession(); }
+      var drawing=false; canvas.addEventListener('mousedown', penDown); window.addEventListener('mousemove', penMove); window.addEventListener('mouseup', penUp);
+      canvas.addEventListener('touchstart', penDown, {passive:false}); window.addEventListener('touchmove', penMove, {passive:false}); window.addEventListener('touchend', penUp);
+      document.getElementById('pen-undo').addEventListener('click', function(){ strokes.pop(); redrawStrokes(); saveSession(); });
+      document.getElementById('pen-clear').addEventListener('click', function(){ strokes = []; redrawStrokes(); saveSession(); });
+
+      function getSession(){ var r = page.getBoundingClientRect(); return { html: page.innerHTML, strokes: strokes, baseW: baseW || r.width, baseH: baseH || r.height }; }
+      function setSession(sess){ if(!sess) return; page.innerHTML = sess.html; var newCanvas = document.getElementById('pen-canvas'); canvas.width = newCanvas.width; canvas.height = newCanvas.height; newCanvas.replaceWith(canvas); strokes = sess.strokes || []; baseW = sess.baseW || null; baseH = sess.baseH || null; Array.prototype.slice.call(page.querySelectorAll('.sticky')).forEach(bindSticky); resizeCanvas(); }
+      function saveSession(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(getSession())); }catch(e){} }
+      function loadSession(){ try{ var raw = localStorage.getItem(STORAGE_KEY); if(!raw) return; setSession(JSON.parse(raw)); }catch(e){} }
+
+      document.getElementById('save-session').addEventListener('click', saveSession);
+      document.getElementById('load-session').addEventListener('click', loadSession);
+      document.getElementById('export-json').addEventListener('click', function(){ var blob = new Blob([JSON.stringify(getSession())], {type:'application/json'}); var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'annotations.json'; a.click(); URL.revokeObjectURL(a.href); });
+      document.getElementById('import-json').addEventListener('change', function(e){ var f = e.target.files && e.target.files[0]; if(!f) return; var reader = new FileReader(); reader.onload = function(){ try{ setSession(JSON.parse(reader.result)); saveSession(); }catch(err){ alert('Invalid JSON'); } }; reader.readAsText(f); });
+      document.getElementById('clear-all').addEventListener('click', function(){ if(!confirm('Clear all annotations?')) return; localStorage.removeItem(STORAGE_KEY); location.reload(); });
+
+      resizeCanvas();
+      Array.prototype.slice.call(page.querySelectorAll('.sticky')).forEach(bindSticky);
+    })();
+</script>
+</body>
+</html>
