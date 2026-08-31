@@ -1,5 +1,6 @@
 # FSE Daily Learning Log
 
+- [2026-08-31 - DevOps and Cloud](2026-08-31-devops-cloud.html)
 - [2026-08-30 - AI Integration](2026-08-30-ai-integration.html)
 - [2026-08-29 - Kafka Fundamentals](2026-08-29-kafka.html)
 - [2026-08-28 - React Patterns](2026-08-28-react.html)
