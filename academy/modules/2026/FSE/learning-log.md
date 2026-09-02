@@ -1,5 +1,6 @@
 # FSE Daily Learning Log
 
+- [2026-09-02 - Spring Boot Deep Dive](2026-09-02-spring-boot.html)
 - [2026-09-01 - Linux CLI Mastery](2026-09-01-linux-cli.html)
 - [2026-08-31 - DevOps and Cloud](2026-08-31-devops-cloud.html)
 - [2026-08-30 - AI Integration](2026-08-30-ai-integration.html)
