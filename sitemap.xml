@@ -21,27 +21,7 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/awk-sed-mastery.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/bash_shell_scripting_guide_blog.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://janaka.me/academy/modules/2025/FSE/capstone.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/csv_operation.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/day-01.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.4</priority>
   </url>
@@ -56,47 +36,7 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/entanglement/career-roadmap.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/entanglement/entanglement.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/entanglement/</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/entanglement/quantum-computing.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/entanglement/references.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/entanglement/use-cases.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/file-handling.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://janaka.me/academy/modules/2025/FSE/foundation.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/hexagonal-architecture-guide.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.4</priority>
   </url>
@@ -116,58 +56,8 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/Linux/awk-sed-mastery.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/Linux/file-handling.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/Linux/</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/Linux/log-investigation-techniques.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/Linux/production-one-liners.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/Linux/top-100-linux-commands.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/Linux/top-50-debugging-commands.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/Linux/troubleshooting-resources.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/Linux/vi-editor-complete.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
     <loc>https://janaka.me/academy/modules/2025/FSE/linux.html</loc>
     <lastmod>2026-08-29</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/log-investigation-techniques.html</loc>
-    <lastmod>2026-09-02</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
@@ -176,122 +66,12 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/performanceTuning/DBPerformanceTuning.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/production-one-liners.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/promting/agents.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/promting/cheatsheet.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/promting/comparison.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/promting/debugging.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/promting/developer-tasks.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/promting/developer.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/promting/foundations.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/promting/gemini.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/promting/glossary.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/promting/gpt54.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/promting/</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/promting/rag.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/promting/references.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/promting/strategies.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/promting/templates.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
     <loc>https://janaka.me/academy/modules/2025/FSE/react.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://janaka.me/academy/modules/2025/FSE/spring-boot.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/top-100-linux-commands.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/top-50-debugging-commands.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/troubleshooting-resources.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/vi-editor-complete.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://janaka.me/academy/modules/2025/FSE/virtual_threads_java_21_academy_page.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.4</priority>
   </url>
@@ -632,7 +412,7 @@
   </url>
   <url>
     <loc>https://janaka.me/cv/</loc>
-    <lastmod>2026-08-29</lastmod>
+    <lastmod>2026-09-02</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
