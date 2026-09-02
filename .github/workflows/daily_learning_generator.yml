@@ -275,7 +275,7 @@ jobs:
                   year=year,
                   slug="learning-index",
                   heading="Daily learning pages",
-                  lede="One page per day, each on the day&rsquo;s topic.",
+                  lede="One page per day, each on that day&rsquo;s topic: the notes, commands and takeaways captured while working through the full-stack engineering curriculum.",
               )
 
           index_html = ensure_anchor(index_html, {"year": year, "slug": "learning-index", "heading": "Daily learning pages", "lede": "One page per day, each on the day&rsquo;s topic."})

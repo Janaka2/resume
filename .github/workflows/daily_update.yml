@@ -241,7 +241,7 @@ jobs:
                   year=year,
                   slug="notes-index",
                   heading="Daily notes",
-                  lede="A free-form log, one entry per day.",
+                  lede="A free-form daily log: what was worked on, what was learned, the commands worth keeping and the questions still open.",
               )
 
           index_html = ensure_anchor(index_html, {"year": year, "slug": "notes-index", "heading": "Daily notes", "lede": "A free-form log, one entry per day."})

@@ -1,0 +1,11 @@
+# https://janaka.me
+User-agent: *
+Allow: /
+
+# Everything else in /partials/ is a fragment that index.html assembles at
+# runtime, not a page. The visual CV lives there too and is a real destination,
+# so it stays crawlable — the longer, more specific rule wins.
+Allow: /partials/janaka_visual_resume_v3_3.html
+Disallow: /partials/
+
+Sitemap: https://janaka.me/sitemap.xml
