@@ -179,7 +179,7 @@ window.JP_I18N = (function () {
   /* Strings used by JS-driven UI (not tied to a data-i18n node) */
   var STR = {
     en: {
-      title: 'Janaka Premathilaka — Senior Java Engineer & Solution Architect',
+      title: 'Janaka Premathilaka — Java Engineer & Solution Architect',
       langBtnAria: 'Auf Deutsch wechseln',
       themeBtnAria: 'Switch between light and dark theme',
       readMore: 'Read more',
@@ -188,7 +188,7 @@ window.JP_I18N = (function () {
       pdf: 'partials/Janaka_Premathilaka_CV_2026.pdf'
     },
     de: {
-      title: 'Janaka Premathilaka — Senior Java Engineer & Solution Architect (Lebenslauf)',
+      title: 'Janaka Premathilaka — Java Engineer & Solution Architect (Lebenslauf)',
       langBtnAria: 'Switch to English',
       themeBtnAria: 'Zwischen hellem und dunklem Design wechseln',
       readMore: 'Mehr lesen',
