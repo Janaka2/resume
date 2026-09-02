@@ -18,9 +18,13 @@ on:
         description: "Topic slug, e.g. linux-cli or spring-boot"
         required: false
         default: ""
-  schedule:
-    # Runs every day at 05:17 UTC
-    - cron: "17 5 * * *"
+# Scheduled runs are paused. Between March and September 2026 they produced 183
+# pages and not one was ever written in, so the site filled with empty templates
+# that no page linked to. Re-enable the cron below when the notes are actually
+# being written; until then use "Run workflow" to scaffold a page on demand.
+#  schedule:
+#   # Runs every day at 05:17 UTC
+#   - cron: "17 5 * * *"
 
 permissions:
   contents: write
@@ -176,62 +180,114 @@ jobs:
               page_path.write_text(html, encoding="utf-8")
               print(f"generated {page_path}")
 
-          # ---- learning log -------------------------------------------------
-          # These joins previously used "\\n", which Python reads as a literal
-          # backslash-n. The log became one long line, its duplicate check could
-          # never match, and every entry was appended again on each run.
-          log_path = FSE_DIR / "learning-log.md"
-          entry = f"- [{today} - {title}]({file_name})"
+          # The index pages carry the same chrome as every other page: theme.css
+          # plus subsite.css, the shared nav partial and the shared footer. The
+          # previous notes index emitted bare HTML with no stylesheet at all.
+          INDEX_TEMPLATE = """<!DOCTYPE html>
+          <html lang="en" data-theme="light">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>{heading} &mdash; {year}</title>
+            <meta name="description" content="{lede}" />
+            <link rel="canonical" href="https://janaka.me/academy/modules/{year}/FSE/{slug}.html" />
 
-          if log_path.exists():
-              lines = log_path.read_text(encoding="utf-8").splitlines()
+            <script>
+              (function(){{
+                try {{
+                  var t = localStorage.getItem("jp-theme");
+                  if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {{
+                    document.documentElement.setAttribute("data-theme", "dark");
+                  }}
+                }} catch (e) {{}}
+              }})();
+            </script>
+
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+            <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+            <link rel="stylesheet" href="/assets/css/theme.css" />
+            <link rel="stylesheet" href="/assets/css/subsite.css" />
+          </head>
+          <body>
+
+          <div data-include="/partials/site-nav.html"></div>
+
+          <main>
+            <section class="sec subhero">
+              <div class="wrap">
+                <p class="eyebrow"><a href="/academy/" style="color:inherit;text-decoration:none">&larr; Academy</a></p>
+                <h1>{heading} &mdash; {year}</h1>
+                <p class="lede">{lede}</p>
+              </div>
+            </section>
+
+            <section class="sec">
+              <div class="wrap">
+                <ul class="loglist">
+                </ul>
+              </div>
+            </section>
+          </main>
+
+          <footer class="sitefoot">
+            <div class="wrap">
+              <span>&copy; <span id="year"></span> Janaka Academy</span>
+              <span><a href="/academy/">Academy</a> &middot; <a href="/">janaka.me</a></span>
+            </div>
+          </footer>
+
+          <script src="/assets/js/includes.js"></script>
+          <script src="/assets/js/site-nav.js"></script>
+          </body>
+          </html>
+          """
+
+          # An index written before this template existed has no .loglist anchor.
+          # Rebuild it rather than silently doing nothing - that silent no-op is
+          # exactly what orphaned every page the old nav-block splice produced.
+          def ensure_anchor(html, template_kwargs):
+              anchor = '<ul class="loglist">'
+              if anchor in html:
+                  return html
+              carried = re.findall(r"<li>.*?</li>", html, re.S)
+              html = INDEX_TEMPLATE.format(**template_kwargs)
+              for old in reversed(carried):
+                  html = html.replace(anchor, anchor + "\n      " + old.strip(), 1)
+              print(f"rebuilt the index on the design system, carrying {len(carried)} entries")
+              return html
+
+
+          # ---- index page ---------------------------------------------------
+          # This used to splice an <li> into the Elite page between the
+          # DAILY_LINKS markers, matching the literal string "<ul>". The 2026
+          # rebuild changed that element to <ul class="grid" ...>, so the match
+          # silently failed and every page generated after it was orphaned.
+          # The generator now owns one index page instead of editing curated
+          # markup, and the Elite page carries a single static link to it.
+          index_path = FSE_DIR / "learning-index.html"
+          entry = f'      <li><a href="{quote(file_name)}"><strong>{today}</strong> &middot; {title}</a></li>'
+
+          if index_path.exists():
+              index_html = index_path.read_text(encoding="utf-8")
           else:
-              lines = ["# FSE Daily Learning Log", ""]
+              index_html = INDEX_TEMPLATE.format(
+                  year=year,
+                  slug="learning-index",
+                  heading="Daily learning pages",
+                  lede="One page per day, each on the day&rsquo;s topic.",
+              )
 
-          if not any(f"({file_name})" in line for line in lines):
-              insert_at = 2 if len(lines) >= 2 else len(lines)
-              lines.insert(insert_at, entry)
-              log_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-              print(f"logged in {log_path}")
+          index_html = ensure_anchor(index_html, {"year": year, "slug": "learning-index", "heading": "Daily learning pages", "lede": "One page per day, each on the day&rsquo;s topic."})
 
-          # ---- main page nav block -----------------------------------------
-          START, END = "<!-- DAILY_LINKS_START -->", "<!-- DAILY_LINKS_END -->"
-          item = f'      <li><a href="{quote(file_name)}">{today} - {title}</a></li>'
-
-          if main_page is None:
-              print("no Elite main page in this folder; skipped nav update")
+          # Match on the href, not the whole line, so a re-run cannot duplicate.
+          if f'href="{quote(file_name)}"' not in index_html:
+              anchor = '<ul class="loglist">'
+              index_html = index_html.replace(anchor, anchor + "\n" + entry, 1)
+              index_path.write_text(index_html, encoding="utf-8")
+              print(f"indexed in {index_path}")
           else:
-              content = main_page.read_text(encoding="utf-8")
-
-              if START not in content or END not in content:
-                  block = (
-                      f"{START}\n"
-                      "    <section>\n"
-                      "      <h2>Daily Learning Pages</h2>\n"
-                      "      <ul>\n"
-                      f"{item}\n"
-                      "      </ul>\n"
-                      "    </section>\n"
-                      f"{END}\n"
-                  )
-                  if "</body>" in content:
-                      content = content.replace("</body>", block + "</body>", 1)
-                  else:
-                      content = content + "\n" + block
-                  main_page.write_text(content, encoding="utf-8")
-                  print(f"created nav block in {main_page.name}")
-              elif quote(file_name) not in content:
-                  # Insert newest-first, immediately after the block's <ul>.
-                  block = content[content.index(START):content.index(END)]
-                  if "<ul>" in block:
-                      new_block = block.replace("<ul>", "<ul>\n" + item, 1)
-                      content = content.replace(block, new_block, 1)
-                      main_page.write_text(content, encoding="utf-8")
-                      print(f"linked from {main_page.name}")
-                  else:
-                      print("markers present but no <ul>; left alone")
-              else:
-                  print("already linked from main page")
+              print("already indexed")
           PY
 
       - name: Commit and push

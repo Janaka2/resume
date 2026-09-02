@@ -16,9 +16,13 @@ on:
         description: "Note date as YYYY-MM-DD. Defaults to today (UTC)."
         required: false
         default: ""
-  schedule:
+# Scheduled runs are paused. Between March and September 2026 they produced 183
+# pages and not one was ever written in, so the site filled with empty templates
+# that no page linked to. Re-enable the cron below when the notes are actually
+# being written; until then use "Run workflow" to scaffold a page on demand.
+#  schedule:
     # 07:00 UTC daily
-    - cron: "0 7 * * *"
+#   - cron: "0 7 * * *"
 
 # Without this the default GITHUB_TOKEN is read-only and the push fails.
 permissions:
@@ -139,6 +143,84 @@ jobs:
           </html>
           """
 
+          # The index pages carry the same chrome as every other page: theme.css
+          # plus subsite.css, the shared nav partial and the shared footer. The
+          # previous notes index emitted bare HTML with no stylesheet at all.
+          INDEX_TEMPLATE = """<!DOCTYPE html>
+          <html lang="en" data-theme="light">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>{heading} &mdash; {year}</title>
+            <meta name="description" content="{lede}" />
+            <link rel="canonical" href="https://janaka.me/academy/modules/{year}/FSE/{slug}.html" />
+
+            <script>
+              (function(){{
+                try {{
+                  var t = localStorage.getItem("jp-theme");
+                  if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {{
+                    document.documentElement.setAttribute("data-theme", "dark");
+                  }}
+                }} catch (e) {{}}
+              }})();
+            </script>
+
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+            <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+            <link rel="stylesheet" href="/assets/css/theme.css" />
+            <link rel="stylesheet" href="/assets/css/subsite.css" />
+          </head>
+          <body>
+
+          <div data-include="/partials/site-nav.html"></div>
+
+          <main>
+            <section class="sec subhero">
+              <div class="wrap">
+                <p class="eyebrow"><a href="/academy/" style="color:inherit;text-decoration:none">&larr; Academy</a></p>
+                <h1>{heading} &mdash; {year}</h1>
+                <p class="lede">{lede}</p>
+              </div>
+            </section>
+
+            <section class="sec">
+              <div class="wrap">
+                <ul class="loglist">
+                </ul>
+              </div>
+            </section>
+          </main>
+
+          <footer class="sitefoot">
+            <div class="wrap">
+              <span>&copy; <span id="year"></span> Janaka Academy</span>
+              <span><a href="/academy/">Academy</a> &middot; <a href="/">janaka.me</a></span>
+            </div>
+          </footer>
+
+          <script src="/assets/js/includes.js"></script>
+          <script src="/assets/js/site-nav.js"></script>
+          </body>
+          </html>
+          """
+
+          # An index written before this template existed has no .loglist anchor.
+          # Rebuild it rather than silently doing nothing - that silent no-op is
+          # exactly what orphaned every page the old nav-block splice produced.
+          def ensure_anchor(html, template_kwargs):
+              anchor = '<ul class="loglist">'
+              if anchor in html:
+                  return html
+              carried = re.findall(r"<li>.*?</li>", html, re.S)
+              html = INDEX_TEMPLATE.format(**template_kwargs)
+              for old in reversed(carried):
+                  html = html.replace(anchor, anchor + "\n      " + old.strip(), 1)
+              print(f"rebuilt the index on the design system, carrying {len(carried)} entries")
+              return html
+
+
           created = False
           if page.exists():
               print(f"note already exists, leaving it alone: {page}")
@@ -148,24 +230,27 @@ jobs:
               print(f"created {page}")
 
           # Keep a per-year index so notes are never orphaned. Newest first.
-          entry = f'    <li><a href="{page.name}">{today}</a></li>'
+          # This used to emit bare HTML with no stylesheet, no nav and no footer,
+          # which made it the only page on the site off the design system.
+          entry = f'      <li><a href="{page.name}"><strong>{today}</strong></a></li>'
+
           if index.exists():
-              lines = index.read_text(encoding="utf-8").splitlines()
+              index_html = index.read_text(encoding="utf-8")
           else:
-              lines = [
-                  "<!DOCTYPE html>", '<html lang="en">', "<head>",
-                  '  <meta charset="UTF-8" />',
-                  '  <meta name="viewport" content="width=device-width, initial-scale=1.0" />',
-                  f"  <title>Daily notes — {year}</title>", "</head>", "<body>",
-                  '  <p><a href="/academy/">&larr; Back to Academy</a></p>',
-                  f"  <h1>Daily notes — {year}</h1>", "  <ul>", "  </ul>",
-                  "</body>", "</html>",
-              ]
+              index_html = INDEX_TEMPLATE.format(
+                  year=year,
+                  slug="notes-index",
+                  heading="Daily notes",
+                  lede="A free-form log, one entry per day.",
+              )
+
+          index_html = ensure_anchor(index_html, {"year": year, "slug": "notes-index", "heading": "Daily notes", "lede": "A free-form log, one entry per day."})
 
           # Compare on the href, not the whole line, so re-runs cannot double up.
-          if f'href="{page.name}"' not in "\n".join(lines):
-              lines.insert(lines.index("  <ul>") + 1, entry)
-              index.write_text("\n".join(lines) + "\n", encoding="utf-8")
+          if f'href="{page.name}"' not in index_html:
+              anchor = '<ul class="loglist">'
+              index_html = index_html.replace(anchor, anchor + "\n" + entry, 1)
+              index.write_text(index_html, encoding="utf-8")
               print(f"indexed in {index}")
 
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:

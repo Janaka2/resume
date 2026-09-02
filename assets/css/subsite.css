@@ -256,3 +256,16 @@ html[data-theme="dark"] .ai-btn { color: #06121F; }
 }
 .sitefoot a { color: var(--tx2); text-decoration: none; }
 .sitefoot a:hover { color: var(--ac); }
+
+/* ---- daily log indexes (academy/modules/<year>/FSE/*-index.html) ----
+   Written by the two GitHub Actions generators; styled here so those pages
+   never drift off the design system the way the old bare index did. */
+.loglist { list-style: none; display: grid; gap: 0; margin-top: 4px; }
+.loglist li { padding: 12px 0; border-bottom: 1px solid var(--ln); }
+.loglist a { color: var(--tx); text-decoration: none; display: block; }
+.loglist a:hover { color: var(--ac); }
+.loglist strong {
+  font-family: var(--font-mono); font-weight: 500; font-size: .78rem;
+  letter-spacing: .06em; color: var(--tx2); margin-right: 8px;
+}
+.loglist a:hover strong { color: var(--ac); }
