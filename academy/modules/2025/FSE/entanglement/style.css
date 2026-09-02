@@ -86,3 +86,6 @@ footer { border-top: 1px solid var(--line); color: var(--muted); padding: 24px 0
 code.inline { background: #f3f4f6; padding: 2px 6px; border-radius: 6px; }
 .kpi { font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; }
 @media (max-width: 860px) { .two-col { grid-template-columns: 1fr; } .nav { align-items: start; gap: 8px; flex-direction: column; } }
+
+/* Card titles sit directly under the page h1, so they are h2; keep the h3 sizing. */
+.card h2 { margin-top: 0; margin-bottom: 10px; font-size: 1.17em; }

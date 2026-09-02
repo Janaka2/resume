@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hexagonal Architecture for Senior Java Developers (2026 Edition)</title>
+  <title>Hexagonal Architecture for Senior Java Developers</title>
   <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/hexagonal-architecture-guide.html">
 
   <!-- Apply the stored theme before first paint to avoid a flash -->
@@ -37,15 +37,15 @@
       </p>
       <div class="grid">
         <div class="card">
-          <h3>Core idea</h3>
+          <h2>Core idea</h2>
           <p class="mini">Business logic stays in the center. UI, database, messaging, and external systems stay outside and connect through ports.</p>
         </div>
         <div class="card">
-          <h3>Why it matters</h3>
+          <h2>Why it matters</h2>
           <p class="mini">It protects the domain from framework and infrastructure churn, making systems easier to test and evolve.</p>
         </div>
         <div class="card">
-          <h3>2026 reality</h3>
+          <h2>2026 reality</h2>
           <p class="mini">Hexagonal is still strong, but best results usually come when combined with domain-driven packaging and modular monolith thinking.</p>
         </div>
       </div>
@@ -655,14 +655,14 @@ public record PaymentTimedOut() implements PaymentResult {}</code></pre>
       Built as a practical 2026 study page for senior Java developers who want something accurate, modern, and directly reusable for teaching or publishing.
     </div>
 
-      <div style="margin:20px 0;padding:16px;border:1px solid #e5e7eb;border-radius:12px;background:#f8fafc;">
+      <div class="card" style="margin:20px 0">
           <h3 style="margin:0 0 8px 0;">Project Repository</h3>
           <p style="margin:0 0 12px 0;">
               View the full source code for this Hexagonal Architecture example on GitHub.
           </p>
-          <a href="https://github.com/Janaka2/orders"
-             target="_blank"
-             style="display:inline-block;padding:10px 16px;background:#111827;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:600;">
+          <a class="btn primary"
+             href="https://github.com/Janaka2/orders"
+             target="_blank" rel="noopener">
               Open GitHub Repository
           </a>
       </div>

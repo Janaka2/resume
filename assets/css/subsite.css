@@ -143,16 +143,16 @@ input.filter:focus { outline: 2px solid var(--ac); outline-offset: 1px; }
   text-transform: uppercase; color: var(--tx2);
 }
 a.card { text-decoration: none; color: inherit; display: block; }
-a.card:hover h3 { color: var(--ac); }
+a.card:hover h2, a.card:hover h3 { color: var(--ac); }
 .empty { color: var(--tx2); font-size: .95rem; padding: 18px 0; }
 
 /* ---- post list (blog) ---- */
 .posts { list-style: none; display: grid; gap: 0; margin-top: 4px;
          border-top: 1px solid var(--ln); }
 .posts li { padding: 18px 0; border-bottom: 1px solid var(--ln); }
-.posts h3 { font-family: var(--font-head); font-weight: 700; font-size: 1.06rem; margin-bottom: 4px; }
-.posts h3 a { color: var(--tx); text-decoration: none; }
-.posts h3 a:hover { color: var(--ac); }
+.posts h2, .posts h3 { font-family: var(--font-head); font-weight: 700; font-size: 1.06rem; margin-bottom: 4px; }
+.posts h2 a, .posts h3 a { color: var(--tx); text-decoration: none; }
+.posts h2 a:hover, .posts h3 a:hover { color: var(--ac); }
 .posts .when { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .06em; color: var(--tx2); }
 .posts p { color: var(--tx2); font-size: .95rem; margin-top: 6px; max-width: 68ch; }
 

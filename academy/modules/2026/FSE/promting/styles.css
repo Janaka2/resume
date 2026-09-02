@@ -59,7 +59,7 @@ body{
   border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)
 }
 .card:hover{transform:translateY(-2px);transition:all .15s ease}
-.card h3{margin:0 0 8px;font-size:1.05rem}
+.card h2,.card h3{margin:0 0 8px;font-size:1.05rem}
 .card p{margin:0;color:var(--muted)}
 h1,h2,h3{line-height:1.25;color:#111827}
 h2{margin-top:34px;margin-bottom:10px}
@@ -97,3 +97,7 @@ code{font-family:Consolas,"Courier New",monospace}
   .layout{display:block}
   .hero{padding:22px}
 }
+
+/* The sidebar label is the first heading under the page h1, so it is h2;
+   keep it at the size it had as an h3. */
+.sidebar h2{font-size:1.17em;margin:1em 0}

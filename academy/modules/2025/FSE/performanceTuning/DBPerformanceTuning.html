@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Learn How to Solve Critical Performance Problems with Step by Step Approach!</title>
+  <title>Database Performance Tuning: A Step-by-Step Approach</title>
   <link rel="canonical" href="https://janaka.me/academy/modules/2025/FSE/performanceTuning/DBPerformanceTuning.html">
 
   <!-- Apply the stored theme before first paint to avoid a flash -->
@@ -168,7 +168,7 @@
 
                 <div class="split">
                     <div class="mini">
-                        <h4>CPU-bound</h4>
+                        <h3>CPU-bound</h3>
                         <p>
                             You see high DB CPU / “on CPU” activity.
                             Typical causes: inefficient SQL (too many rows), missing access paths, bad join order, parsing storms.
@@ -179,7 +179,7 @@
                     </div>
 
                     <div class="mini">
-                        <h4>I/O-bound</h4>
+                        <h3>I/O-bound</h3>
                         <p>
                             Dominant I/O wait class/events, high reads, long I/O time.
                             Typical causes: full scans, missing indexes, poor clustering, storage latency.
@@ -190,7 +190,7 @@
                     </div>
 
                     <div class="mini">
-                        <h4>Concurrency / locking</h4>
+                        <h3>Concurrency / locking</h3>
                         <p>
                             Many sessions waiting on locks/latches or “blocking session” dominates.
                         </p>
@@ -200,7 +200,7 @@
                     </div>
 
                     <div class="mini">
-                        <h4>Parsing / shared pool pressure</h4>
+                        <h3>Parsing / shared pool pressure</h3>
                         <p>
                             Excessive hard parses, many similar SQLs differing by literals/formatting.
                         </p>
@@ -211,7 +211,7 @@
                 </div>
 
                 <div class="ai-box">
-                    <h4>✨ Ask AI: Oracle Error or Wait Event</h4>
+                    <h3>✨ Ask AI: Oracle Error or Wait Event</h3>
                     <p class="muted" style="margin: 0; font-size: 13px;">Stuck on a weird wait event or an ORA- code? Let the Gemini Assistant explain it and suggest triage steps.</p>
                     <div style="display: flex; gap: 10px; align-items: flex-start;">
                         <input type="text" id="aiWaitInput" class="ai-input" placeholder="e.g., 'enq: TX - row lock contention' or 'ORA-01555'">
@@ -237,7 +237,7 @@
                 </p>
 
                 <div class="ai-box" style="margin-bottom: 24px;">
-                    <h4>✨ AI Plan Analyzer</h4>
+                    <h3>✨ AI Plan Analyzer</h3>
                     <p class="muted" style="margin: 0; font-size: 13px;">Paste your raw DBMS_XPLAN or EXPLAIN PLAN output. Gemini will identify bottlenecks like unexpected full scans, Cartesian joins, or bad cardinality estimates.</p>
                     <textarea id="aiPlanInput" class="ai-input" placeholder="Paste execution plan here..."></textarea>
                     <button id="aiPlanBtn" class="ai-btn">✨ Analyze Plan</button>
@@ -279,7 +279,7 @@ SELECT * FROM TABLE(
                 <p>Sometimes the best way to fix a performance issue is to stop relying on the optimizer to rescue bad code, and rewrite the query to remove anti-patterns.</p>
 
                 <div class="ai-box" style="margin-bottom: 24px;">
-                    <h4>✨ AI SQL Optimizer</h4>
+                    <h3>✨ AI SQL Optimizer</h3>
                     <p class="muted" style="margin: 0; font-size: 13px;">Paste a slow or inefficient SQL query. Gemini will analyze it for anti-patterns (like implicit conversions, non-sargable predicates, or correlated subqueries) and suggest an optimized rewrite.</p>
                     <textarea id="aiSqlInput" class="ai-input" placeholder="SELECT * FROM orders WHERE TO_CHAR(order_date, 'YYYY') = '2025'..."></textarea>
                     <button id="aiSqlBtn" class="ai-btn">✨ Rewrite SQL</button>
@@ -385,14 +385,14 @@ END;
 
                 <div class="split">
                     <div class="mini">
-                        <h4>SQL Plan Management</h4>
+                        <h3>SQL Plan Management</h3>
                         <p>
                             Use SQL plan baselines so the optimizer uses only accepted/verified plans.
                             Ideal for preventing regressions after upgrades or statistics shifts.
                         </p>
                     </div>
                     <div class="mini">
-                        <h4>SQL Profiles / SQL Patches</h4>
+                        <h3>SQL Profiles / SQL Patches</h3>
                         <p>
                             Profiles improve estimates; patches apply targeted optimizer directives (hints) without changing the app SQL.
                             Use governance: track why it exists and when to remove it.
