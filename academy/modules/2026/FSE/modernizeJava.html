@@ -1,51 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modernizing the Java Journey: A Comprehensive Study Guide</title>
-  <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/java/modernizeJava.html">
-  <meta name="description" content="Too long; didn&#x27;t read? Get an AI-generated quick summary of this study guide.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .prose h2 { scroll-margin-top: 5rem; }
-        .prose h3 { scroll-margin-top: 5rem; }
-    </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#f97316', // Orange theme fitting Java
-                        secondary: '#1e293b' // Slate
-                    }
-                }
-            }
-        }
-    </script>
-</head>
-<body class="bg-gray-50 text-gray-800 antialiased selection:bg-primary selection:text-white">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modernizing the Java Journey: A Comprehensive Study Guide</title>
+  <meta name="description" content="Gemini API Key Needed Required for the AI Summary and AI Tutor features. Save Saved! Too long; didn&#x27;t read? Get an AI-generated quick summary of this…">
+  <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/modenizeJava.html">
 
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/subsite.css">
+
+  <!-- This page was authored against Tailwind and then moved onto the janaka.me
+       design system, which leaves ~600 utility class names with nothing behind
+       them. Rather than reflow 150 class attributes, the handful of utilities
+       the page actually leans on are implemented here from the design tokens,
+       so it renders correctly - and theme-aware - in light and dark. -->
+  <style>
+    .wrap > header { margin-bottom: 40px; }
+    .wrap > header h1 { margin-bottom: 18px; }
+    .wrap > header > p { color: var(--tx2); font-size: 1.06rem; max-width: 62ch; }
+
+    /* pills and inline emphasis */
+    .bg-primary\/10 {
+      background: color-mix(in srgb, var(--ac) 12%, transparent);
+      color: var(--ac); border-radius: 999px; padding: 5px 11px;
+      font-family: var(--font-mono); font-size: .72rem; letter-spacing: .04em;
+    }
+    .text-primary { color: var(--ac); }
+    .text-secondary { color: var(--tx); }
+    .text-gray-500, .text-gray-600, .text-gray-700 { color: var(--tx2); }
+    .text-gray-800, .text-gray-900 { color: var(--tx); }
+    .font-bold, .font-semibold, .font-extrabold { font-weight: 700; }
+    .text-sm { font-size: .9rem; }
+    .text-xs { font-size: .78rem; }
+    .text-xl { font-size: 1.12rem; }
+
+    /* dark code panels */
+    .bg-slate-800 {
+      background: #101E33; color: #E6EDF6; border-radius: var(--r);
+      padding: 14px 16px; overflow-x: auto;
+    }
+    .bg-slate-800 code, .bg-slate-800 pre { color: inherit; background: none; font-family: var(--font-mono); }
+    .text-orange-300 { color: #F2B27A; }
+
+    /* light inset panels */
+    .bg-white { background: var(--bg2); border: 1px solid var(--ln); border-radius: 10px; padding: 12px 14px; }
+    .bg-orange-100 { background: color-mix(in srgb, var(--ac) 14%, transparent); color: var(--ac); border-radius: 6px; padding: 2px 6px; }
+    .bg-red-50, .text-red-500 { color: #C0392B; }
+    .bg-red-50 { background: color-mix(in srgb, #C0392B 10%, transparent); border: 1px solid color-mix(in srgb, #C0392B 30%, transparent); border-radius: 8px; padding: 10px 12px; }
+
+    /* layout helpers */
+    .flex { display: flex; }
+    .items-start { align-items: flex-start; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; }
+    .mt-1 { margin-top: 4px; } .mt-6 { margin-top: 24px; } .mt-12 { margin-top: 44px; }
+    .mb-1 { margin-bottom: 4px; } .mb-3 { margin-bottom: 12px; }
+    .mb-4 { margin-bottom: 16px; } .mb-8 { margin-bottom: 30px; }
+    .space-y-2 > * + * { margin-top: 8px; }
+    .space-y-4 > * + * { margin-top: 16px; }
+    .space-y-8 > * + * { margin-top: 34px; }
+    .w-4, .h-4 { width: 16px; height: 16px; }
+    .w-5, .h-5 { width: 20px; height: 20px; }
+    .w-6, .h-6 { width: 24px; height: 24px; }
+    .w-8, .h-8 { width: 32px; height: 32px; }
+    .w-full { width: 100%; }
+    .hidden { display: none; }
+    .list-disc { list-style: disc; }
+    .pl-6 { padding-left: 24px; }
+    .p-1 { padding: 2px 6px; } .p-3 { padding: 12px; } .p-4 { padding: 14px 16px; }
+    .rounded, .rounded-lg, .rounded-xl { border-radius: 10px; }
+    .rounded-full { border-radius: 999px; }
+    .border { border: 1px solid var(--ln); }
+    .border-b { border-bottom: 1px solid var(--ln); }
+    .pb-2 { padding-bottom: 8px; }
+    .overflow-x-auto { overflow-x: auto; }
+
+    /* the section headings already carry .prose sizing; just keep the rule */
+    .prose h2.border-b { padding-bottom: 10px; }
+
+    /* form controls in the API-key panel */
+    .bg-slate-700 {
+      background: var(--bg2); color: var(--tx); border: 1px solid var(--ln);
+      border-radius: 8px; padding: 9px 11px; width: 100%;
+    }
+    .text-slate-300 { color: var(--tx2); }
+
+
+    /* buttons and the remaining surfaces */
+    .bg-primary, .bg-orange-500 {
+      background: var(--ac); color: #fff; border: 1px solid var(--ac);
+      border-radius: 8px; padding: 9px 15px; font-weight: 600; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px; transition: filter .15s ease;
+    }
+    .bg-primary:hover, .bg-orange-500:hover { filter: brightness(1.08); }
+    html[data-theme="dark"] .bg-primary, html[data-theme="dark"] .bg-orange-500 { color: #06121F; }
+    .bg-gray-50, .bg-gray-100, .bg-slate-100, .bg-orange-50 {
+      background: var(--chip); border-radius: 10px; padding: 12px 14px;
+    }
+    .bg-slate-900, .bg-slate-800\/50 { background: #0B1626; color: #E6EDF6; border-radius: var(--r); padding: 14px 16px; }
+    .text-white { color: #fff; }
+    .text-4xl, .text-5xl { font-size: clamp(1.9rem, 4.4vw, 2.7rem); }
+    .text-2xl, .text-3xl { font-size: clamp(1.3rem, 3vw, 1.6rem); }
+    .text-lg { font-size: 1.02rem; }
+    .text-center { text-align: center; }
+    .leading-tight { line-height: 1.1; }
+    .max-w-3xl { max-width: 62ch; }
+    .max-w-none { max-width: none; }
+    .divide-y > * + * { border-top: 1px solid var(--ln); }
+    .marker\3A text-primary li::marker { color: var(--ac); }
+    .px-3 { padding-left: 12px; padding-right: 12px; }
+    .px-4 { padding-left: 16px; padding-right: 16px; }
+    .py-1 { padding-top: 4px; padding-bottom: 4px; }
+    .py-2 { padding-top: 8px; padding-bottom: 8px; }
+    .block { display: block; }
+    .whitespace-nowrap { white-space: nowrap; }
+    .animate-spin { animation: jspin 1s linear infinite; }
+    @keyframes jspin { to { transform: rotate(360deg); } }
+    input:focus, button:focus-visible { outline: 2px solid var(--ac); outline-offset: 2px; }
+    /* Tailwind md: breakpoint is 768px; these are the only md: rules the page uses. */
+    @media (min-width: 768px) {
+      .md\3A text-left { text-align: left; }
+      .md\3A block { display: block; }
+    }
+
+    table { border-collapse: collapse; width: 100%; }
+    th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--ln); font-size: .92rem; }
+    th { font-family: var(--font-mono); font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--tx2); }
+  </style>
+</head>
+<body>
+
+<div data-include="/partials/site-nav.html"></div>
 <!-- Navigation -->
-<nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16 items-center">
-            <div class="flex-shrink-0 flex items-center gap-2">
-                <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-            </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#" class="text-gray-500 hover:text-primary transition">Articles</a>
-                <a href="#" class="text-gray-500 hover:text-primary transition">Tutorials</a>
-                <a href="#" class="text-gray-500 hover:text-primary transition">Resources</a>
-            </div>
-        </div>
-    </div>
-</nav>
+
 
 <!-- Main Content -->
-<main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<main class="container">
 
     <!-- Header -->
     <header class="mb-12 text-center md:text-left">
@@ -60,6 +167,24 @@
             A detailed synthesis of current Java development practices, ecosystem choices, and modernization strategies based on the "How to (Re)start Your Java Journey in 2026" presentation.
         </p>
     </header>
+
+    <!-- API Key Configuration -->
+    <div class="mb-8 bg-slate-100 p-5 rounded-xl border border-slate-300 shadow-sm flex flex-col md:flex-row items-start md:items-center gap-4 justify-between">
+        <div class="flex items-center gap-3">
+            <div class="p-2 bg-white rounded-lg shadow-sm">
+                <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4v-5.257A6 6 0 0110.5 2.257 6.6 6.6 0 0115 7zm-3 0a1 1 0 100-2 1 1 0 000 2z"></path></svg>
+            </div>
+            <div>
+                <span class="block text-sm font-bold text-slate-800">Gemini API Key Needed</span>
+                <span class="block text-xs text-slate-500">Required for the AI Summary and AI Tutor features.</span>
+            </div>
+        </div>
+        <div class="flex-grow flex items-center gap-2 w-full md:w-auto">
+            <input type="password" id="api-key-input" placeholder="Enter your API Key..." class="flex-grow w-full border border-slate-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-inner" />
+            <button onclick="saveApiKey()" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg text-sm font-semibold transition whitespace-nowrap shadow-sm">Save</button>
+        </div>
+        <span id="api-key-status" class="text-xs text-green-600 font-bold hidden px-2">Saved!</span>
+    </div>
 
     <!-- AI Summary Feature -->
     <div class="mb-12 bg-orange-50 p-6 rounded-xl border border-orange-200 shadow-sm relative overflow-hidden">
@@ -83,7 +208,6 @@
             Generating summary...
         </div>
     </div>
-    <p class="lede" style="margin-bottom:2rem">Java has transitioned into a high-velocity ecosystem focusing on productivity, performance, and AI-readiness.</p>
 
     <!-- Article Content -->
     <article class="prose prose-lg max-w-none text-gray-700 space-y-8">
@@ -340,15 +464,26 @@
 </main>
 
 <!-- Footer -->
-<footer class="bg-white border-t border-gray-200 mt-12 py-12">
-    <div class="max-w-5xl mx-auto px-4 text-center text-gray-500 text-sm">
-        <p>&copy; 2026. All rights reserved.</p>
-        <p class="mt-2">Built for the Modern Java Ecosystem.</p>
-    </div>
-</footer>
+
 
 <!-- Scripts -->
 <script>
+    // Load API Key from local storage on startup
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedKey = localStorage.getItem('gemini_api_key');
+        if (savedKey) {
+            document.getElementById('api-key-input').value = savedKey;
+        }
+    });
+
+    function saveApiKey() {
+        const key = document.getElementById('api-key-input').value.trim();
+        localStorage.setItem('gemini_api_key', key);
+        const status = document.getElementById('api-key-status');
+        status.classList.remove('hidden');
+        setTimeout(() => status.classList.add('hidden'), 2000);
+    }
+
     function toggleAnswers() {
         const answerKey = document.getElementById('answerKey');
         const btn = document.getElementById('toggleAnswersBtn');
@@ -369,10 +504,6 @@
 
     // --- Gemini API Integrations ---
 
-    const apiKey = ""; // API key is injected automatically by the environment
-    const modelName = "gemini-2.5-flash-preview-09-2025";
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
-
     // Utility: Fetch with Exponential Backoff
     async function fetchWithRetry(url, options, retries = 5) {
         const delays = [1000, 2000, 4000, 8000, 16000];
@@ -390,6 +521,18 @@
 
     // Core API Call Wrapper
     async function callGemini(prompt, systemInstruction = "") {
+        const apiKey = document.getElementById('api-key-input').value.trim();
+
+        if (!apiKey) {
+            return `<div class="text-red-500 font-semibold p-3 bg-red-50 rounded border border-red-200">
+                        ⚠️ Error: Please enter your Gemini API key in the configuration section above to use this feature.
+                    </div>`;
+        }
+
+        // Using the standard public flash model for external keys
+        const modelName = "gemini-1.5-flash";
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+
         const payload = {
             contents: [{ parts: [{ text: prompt }] }],
         };
@@ -408,7 +551,9 @@
             return result.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
         } catch (error) {
             console.error("Gemini API Error:", error);
-            return "Sorry, an error occurred while connecting to the AI. Please try again later.";
+            return `<div class="text-red-500 font-semibold p-3 bg-red-50 rounded border border-red-200">
+                        ❌ Sorry, an error occurred while connecting to the AI. Please verify your API key is correct.
+                    </div>`;
         }
     }
 
@@ -448,7 +593,7 @@
         if (!userAnswer.trim()) {
             // Flash an alert if they try to submit an empty answer
             const alertDiv = document.createElement('div');
-            alertDiv.className = "text-red-400 text-sm mt-2";
+            alertDiv.className = "text-red-400 text-sm mt-2 font-semibold";
             alertDiv.innerText = "Please write an answer before evaluating!";
             btn.parentElement.appendChild(alertDiv);
             setTimeout(() => alertDiv.remove(), 3000);
@@ -477,5 +622,14 @@
         btn.classList.remove('opacity-50', 'cursor-not-allowed');
     }
 </script>
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js"></script>
+<script src="/assets/js/site-nav.js"></script>
 </body>
 </html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Engineering Handbook</title>
+  <meta name="description" content="Built for software engineers working with modern LLMs, agent workflows, RAG systems, debugging, architecture analysis, and daily coding productivity. The…">
+  <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/prompting/index.html">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/subsite.css">
+</head>
+<body>
+
+<div data-include="/partials/site-nav.html"></div>
+<div class="layout">
+  <aside class="sidebar">
+    <h2 class="brand">Prompt Engineering Handbook</h2>
+    <p class="tagline">Clean white documentation layout for senior engineers.</p>
+    <input id="searchBox" class="search" type="text" placeholder="Search navigation..." onkeyup="filterNav()">
+    <div class="nav-section-title">Sections</div>
+    <ul>
+      <li data-nav-item><a href="index.html" class="active">Home</a></li>
+<li data-nav-item><a href="foundations.html">Foundations</a></li>
+<li data-nav-item><a href="templates.html">Templates</a></li>
+<li data-nav-item><a href="strategies.html">Strategies</a></li>
+<li data-nav-item><a href="developer.html">Developer Prompts</a></li>
+<li data-nav-item><a href="rag.html">RAG Prompting</a></li>
+<li data-nav-item><a href="agents.html">Agent Prompting</a></li>
+<li data-nav-item><a href="debugging.html">Debugging Playbook</a></li>
+<li data-nav-item><a href="cheatsheet.html">Cheat Sheet</a></li>
+    </ul>
+  </aside>
+  <main class="content">
+    <div class="container">
+
+<section class="hero">
+  <div class="kicker">Senior Engineer Edition</div>
+  <h1>Prompt Engineering Handbook</h1>
+  <p>Built for software engineers working with modern LLMs, agent workflows, RAG systems, debugging, architecture analysis, and daily coding productivity. The layout is intentionally white, clean, and reader-friendly for long study sessions.</p>
+</section>
+
+<div class="grid">
+  <a class="card" href="foundations.html"><h2>Foundations</h2><p>Core thinking patterns that make prompts reliable and reusable.</p></a>
+  <a class="card" href="templates.html"><h2>Templates</h2><p>Reusable prompt structures you can adapt quickly for real tasks.</p></a>
+  <a class="card" href="strategies.html"><h2>Strategies</h2><p>High-value prompting methods with practical engineering examples.</p></a>
+  <a class="card" href="developer.html"><h2>Developer Prompts</h2><p>Prompts for coding, refactoring, testing, reviews, and design work.</p></a>
+  <a class="card" href="rag.html"><h2>RAG Prompting</h2><p>How to ground model answers in retrieved documents without drift.</p></a>
+  <a class="card" href="agents.html"><h2>Agent Prompting</h2><p>Planner-executor prompts, tool usage rules, and validation loops.</p></a>
+  <a class="card" href="debugging.html"><h2>Debugging Playbook</h2><p>How to diagnose hallucinations, weak outputs, and wrong assumptions.</p></a>
+  <a class="card" href="cheatsheet.html"><h2>Cheat Sheet</h2><p>Quick reference page for daily use.</p></a>
+</div>
+
+<div class="panel">
+  <h2>What this handbook focuses on</h2>
+  <table>
+    <tr><th>Area</th><th>What you get</th></tr>
+    <tr><td>Prompt design</td><td>Role definition, constraints, context framing, output structure, evaluation patterns.</td></tr>
+    <tr><td>Developer workflow</td><td>Prompts for code generation, review, refactoring, API work, bug fixing, test creation, and architecture notes.</td></tr>
+    <tr><td>LLM systems</td><td>Prompting patterns for RAG, tool-calling, multi-step workflows, and agent-style systems.</td></tr>
+    <tr><td>Quality control</td><td>Techniques to reduce hallucinations, overconfidence, ambiguity, and noisy outputs.</td></tr>
+  </table>
+</div>
+
+<div class="callout">
+  This version improves alignment, spacing, section consistency, and content depth compared with the earlier draft. Every page now uses the same white theme and the same layout rules.
+</div>
+
+<p class="footer-note">Tip: start with Foundations, then Templates, then Developer Prompts. After that, move to RAG and Agents.</p>
+
+    </div>
+  </main>
+</div>
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js"></script>
+<script src="/assets/js/site-nav.js"></script>
+</body>
+</html>

@@ -16,6 +16,8 @@ SKIP_DIRS = ('partials/', 'reports/', 'chatbot/', 'ai/mcp-agent-skeleton/', 'scr
 KEEP = ('partials/janaka_visual_resume_v3_3.html',)
 SKIP_FILES = ('resume-26-3-2026.html', '404.html')
 PLACEHOLDER = ("Add today's learning notes here", "Replace with the day's work")
+# Redirect stubs left at renamed URLs are not pages to index.
+REDIRECT = 'http-equiv="refresh"'
 
 
 def last_modified(path):
@@ -39,7 +41,7 @@ def main():
         if (any(f.startswith(d) for d in SKIP_DIRS) and f not in KEEP) or f in SKIP_FILES:
             continue
         text = p.read_text(encoding='utf-8', errors='ignore')
-        if any(ph in text for ph in PLACEHOLDER):
+        if any(ph in text for ph in PLACEHOLDER) or REDIRECT in text:
             continue
         loc = SITE + quote(f)
         if loc.endswith('/index.html'):

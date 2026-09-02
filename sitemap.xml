@@ -171,11 +171,6 @@
     <priority>0.55</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/java/modernizeJava.html</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.3</priority>
-  </url>
-  <url>
     <loc>https://janaka.me/academy/modules/2026/FSE/java-core.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.4</priority>
@@ -256,7 +251,7 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/modenizeJava.html</loc>
+    <loc>https://janaka.me/academy/modules/2026/FSE/modernizeJava.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.4</priority>
   </url>
@@ -276,77 +271,77 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/promting/agents.html</loc>
+    <loc>https://janaka.me/academy/modules/2026/FSE/prompting/agents.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/promting/cheatsheet.html</loc>
+    <loc>https://janaka.me/academy/modules/2026/FSE/prompting/cheatsheet.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/promting/comparison.html</loc>
+    <loc>https://janaka.me/academy/modules/2026/FSE/prompting/comparison.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/promting/debugging.html</loc>
+    <loc>https://janaka.me/academy/modules/2026/FSE/prompting/debugging.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/promting/developer-tasks.html</loc>
+    <loc>https://janaka.me/academy/modules/2026/FSE/prompting/developer-tasks.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/promting/developer.html</loc>
+    <loc>https://janaka.me/academy/modules/2026/FSE/prompting/developer.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/promting/foundations.html</loc>
+    <loc>https://janaka.me/academy/modules/2026/FSE/prompting/foundations.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/promting/gemini.html</loc>
+    <loc>https://janaka.me/academy/modules/2026/FSE/prompting/gemini.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/promting/glossary.html</loc>
+    <loc>https://janaka.me/academy/modules/2026/FSE/prompting/glossary.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/promting/gpt54.html</loc>
+    <loc>https://janaka.me/academy/modules/2026/FSE/prompting/gpt54.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/promting/</loc>
+    <loc>https://janaka.me/academy/modules/2026/FSE/prompting/</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/promting/rag.html</loc>
+    <loc>https://janaka.me/academy/modules/2026/FSE/prompting/rag.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/promting/references.html</loc>
+    <loc>https://janaka.me/academy/modules/2026/FSE/prompting/references.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/promting/strategies.html</loc>
+    <loc>https://janaka.me/academy/modules/2026/FSE/prompting/strategies.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://janaka.me/academy/modules/2026/FSE/promting/templates.html</loc>
+    <loc>https://janaka.me/academy/modules/2026/FSE/prompting/templates.html</loc>
     <lastmod>2026-09-02</lastmod>
     <priority>0.3</priority>
   </url>

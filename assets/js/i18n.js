@@ -100,6 +100,8 @@ window.JP_I18N = (function () {
     certG2: 'Java, Spring &amp; Produktivität',
     certG3: 'Daten &amp; SQL',
     certG4: 'Sprachen &amp; Soft Skills',
+    certG6: 'Laufend',
+    lblSpringEta: 'Laufend · voraussichtlich Q4 2026',
     certG5: 'Sun-Zertifizierungen (seit 2006)',
     lblInstructor: 'Kursleitung:',
     lblInstructors: 'Kursleitung:',
@@ -116,7 +118,7 @@ window.JP_I18N = (function () {
     edu2d: 'BIT — Bachelor of Information Technology',
     edu2s: '1999 — 2004 · 6 Semester abgeschlossen',
     edu3d: 'Master in Computer Engineering',
-    edu3s: '2007 — heute · laufend',
+    edu3s: '2007 — pausiert · nicht abgeschlossen',
 
     /* ---- life journey ---- */
     jEyebrow: 'Mein Lebensweg',
@@ -127,7 +129,7 @@ window.JP_I18N = (function () {
     j1b: '<h3>Schulzeit</h3><p class="jw">1985 — 1998</p><p>Süden Sri Lankas</p>',
     j2a: '<h3>Bachelor-Abschluss</h3><p class="jw">1999 — 2003</p><p>University of Sri Jayewardenepura</p><p>BSc in Informatik, Statistik, Mathematik</p>',
     j2b: '<h3>Zweiter Bachelor</h3><p class="jw">1999 — 2004</p><p>University of Colombo</p><p>BIT (6 Semester abgeschlossen)</p>',
-    j2c: '<h3>Masterstudium</h3><p class="jw">2007 — heute</p><p>University of Moratuwa</p><p>Computer Engineering (laufend)</p>',
+    j2c: '<h3>Masterstudium</h3><p class="jw">2007 — pausiert</p><p>University of Moratuwa</p><p>Computer Engineering — nicht abgeschlossen, pausiert</p>',
     j2d: '<h3>Zertifizierungen</h3><p class="jw">2005 — 2006</p><p>Sun-Java-Zertifizierungen (SCJP, SCBCD, SCEA, SCWCD)</p>',
     j3a: '<h3>Erste Stelle</h3><p class="jw">2004</p><p>Union Bank of Colombo Ltd</p><p>Banking Software Engineer</p>',
     j3b: '<h3>Frühe Karriere</h3><p class="jw">2006 — 2008</p><p>Mehrere Unternehmen in Sri Lanka</p><p>Java/JEE-Entwickler</p>',
@@ -143,11 +145,11 @@ window.JP_I18N = (function () {
     j5c: '<h3>Remote aus UK</h3><p class="jw">2019 — 2020</p><p>Liverpool, UK</p><p>Remote-Arbeit für Schweizer Kunden</p>',
     j5d: '<h3>Credit Suisse</h3><p class="jw">2019 — 2024</p><p>IT Solution Developer</p><p>Bankensysteme &amp; FX-Handel</p>',
     j5e: '<h3>UBS</h3><p class="jw">2024 — heute</p><p>Senior Full-Stack Solution Engineer (Lead)</p><p>KI-Integration &amp; LLMs</p>',
-    j6a: '<h3>Master abschliessen</h3><p class="jw">laufend</p><p>University of Moratuwa</p><p>Computer Engineering</p>',
+    j6a: '<h3>Master abschliessen</h3><p class="jw">pausiert</p><p>University of Moratuwa</p><p>Computer Engineering</p>',
     j6b: '<h3>KI-Forschung &amp; Entwicklung</h3><p class="jw">Zukunftsziel</p><p>Fortgeschrittene KI-Systeme</p><p>LLM-Optimierung &amp; Deployment</p>',
     j6c: '<h3>Projekte mit globaler Wirkung</h3><p class="jw">Langfristige Vision</p><p>Enterprise-KI-Lösungen</p><p>Skalierbare intelligente Systeme</p>',
     j6d: '<h3>Technologie-Leadership</h3><p class="jw">Karriereziel</p><p>Architektur-Exzellenz</p><p>Mentoring der nächsten Engineer-Generation</p>',
-    j6e: '<h3>Start der Janaka Academy</h3><p class="jw">02.11.2025</p><p>1’000+ Engineers weltweit stärken</p><p>Schritt-für-Schritt-Training, damit andere mich übertreffen — technisch und ethisch</p>',
+    j5f: '<h3>Janaka Academy gestartet</h3><p class="jw">02.11.2025</p><p>1’000+ Engineers weltweit stärken</p><p>Schritt-für-Schritt-Training, damit andere mich übertreffen — technisch und ethisch</p>',
     j6btn: 'Beitreten',
 
     /* ---- key metrics ---- */
