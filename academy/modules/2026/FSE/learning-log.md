@@ -1,5 +1,6 @@
 # FSE Daily Learning Log
 
+- [2026-09-04 - React Patterns](2026-09-04-react.html)
 - [2026-09-03 - Microservices Design](2026-09-03-microservices.html)
 - [2026-09-02 - Spring Boot Deep Dive](2026-09-02-spring-boot.html)
 - [2026-09-01 - Linux CLI Mastery](2026-09-01-linux-cli.html)
