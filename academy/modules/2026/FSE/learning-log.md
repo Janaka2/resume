@@ -1,5 +1,6 @@
 # FSE Daily Learning Log
 
+- [2026-09-05 - Kafka Fundamentals](2026-09-05-kafka.html)
 - [2026-09-04 - React Patterns](2026-09-04-react.html)
 - [2026-09-03 - Microservices Design](2026-09-03-microservices.html)
 - [2026-09-02 - Spring Boot Deep Dive](2026-09-02-spring-boot.html)
