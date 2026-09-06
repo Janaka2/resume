@@ -1,5 +1,6 @@
 # FSE Daily Learning Log
 
+- [2026-09-06 - AI Integration](2026-09-06-ai-integration.html)
 - [2026-09-05 - Kafka Fundamentals](2026-09-05-kafka.html)
 - [2026-09-04 - React Patterns](2026-09-04-react.html)
 - [2026-09-03 - Microservices Design](2026-09-03-microservices.html)
