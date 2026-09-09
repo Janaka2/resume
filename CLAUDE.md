@@ -62,10 +62,11 @@ Both templates are inline Python in the workflow files. If you change the shared
 
 ## Brand and marketing toolkit (`.claude/`)
 
-Project-level subagents live in `.claude/agents/` and skills in `.claude/skills/`. `.claude/skills/brand-voice/SKILL.md` is the single source of truth for positioning, approved claims and ecosystem one-liners; load it before writing or reviewing any copy. `site-page` holds the HTML skeleton every new page must follow.
+Project-level subagents live in `.claude/agents/` and skills in `.claude/skills/`. `.claude/skills/brand-voice/SKILL.md` is the single source of truth for positioning, approved claims and ecosystem one-liners; load it before writing or reviewing any copy. `site-page` holds the HTML skeleton every new page must follow. `goals/vision.md` is the personal vision and ninety-day targets that the `success-coach` agent reads and, on request, updates.
 
 | Need | Use |
 |---|---|
+| Daily or weekly coaching session | `/coach`, `/coach weekly`, `/coach decision <topic>` |
 | Pre-push check | `/release-check` |
 | Weekly maintenance (health + brand + SEO + academy + market) | `/weekly-brand-review` |
 | Monthly market demand scan | `/market-pulse` |
