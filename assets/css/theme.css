@@ -6,18 +6,18 @@
 
 /* ============ tokens ============ */
 :root{
-  --bg:#FAFBFD; --bg2:#FFFFFF; --tx:#10243E; --tx2:#5B6B7F;
-  --ln:#DCE3EB; --ac:#0E7C66; --ok:#18A36C; --chip:#F1F5F9;
-  --shadow:0 1px 2px rgba(16,36,62,.05),0 8px 24px rgba(16,36,62,.06);
+  --bg:#FAFAF8; --bg2:#FFFFFF; --tx:#16181D; --tx2:#6B7079;
+  --ln:#E4E4E0; --ac:#2F4A6D; --ok:#5C8A72; --chip:#F2F2EF;
+  --shadow:0 1px 2px rgba(22,24,29,.04),0 8px 24px rgba(22,24,29,.05);
   --r:12px;
   --font-sans:"IBM Plex Sans",system-ui,sans-serif;
   --font-mono:"IBM Plex Mono",monospace;
   --font-head:"Archivo",sans-serif;
 }
 html[data-theme="dark"]{
-  --bg:#0B1626; --bg2:#101E33; --tx:#E6EDF6; --tx2:#93A4BA;
-  --ln:#233650; --ac:#2EB596; --ok:#2ECB87; --chip:#16263D;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
+  --bg:#0F1114; --bg2:#16191E; --tx:#ECEDEF; --tx2:#9A9FA8;
+  --ln:#272B32; --ac:#9BB4D6; --ok:#7FAF93; --chip:#1D2127;
+  --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.4);
 }
 
 /* ============ base ============ */

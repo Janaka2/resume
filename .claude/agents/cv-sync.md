@@ -14,7 +14,7 @@ You are the single point of truth enforcement for career facts. The source of tr
 - Certification list with issue years
 - Language levels (e.g. German B1)
 - Contact details: email, phone, LinkedIn, GitHub, WhatsApp link
-- Product names and domains: nüchtern (nuechtern.app), Daily Momentum (daily-momentum.com), RepeatCycle (loop.janaka.me)
+- Product names and domains: nüchtern (nuechtern.app), Daily Momentum (daily-momentum.com), Loop (loop.janaka.me)
 - PDF file names in `partials/` referenced by the hub and the noscript fallback
 
 ## Procedure

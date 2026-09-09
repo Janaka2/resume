@@ -89,7 +89,7 @@ window.JP_I18N = (function () {
     p3Desc: 'Ein Gedächtnis für alles, was sich wiederholt — Giessen, Geburtstage, Filter, Rechnungen. Eine Aktivität bekommt einen festen Rhythmus, oder man hält nur fest, wann sie stattgefunden hat, und die App erkennt das Muster aus dem, was tatsächlich war. Der Verlauf kann einen Rhythmus vorschlagen; ob man ihm folgt, entscheidet man selbst.',
     p3Pts: '<li>Fünf ruhige Bereiche — Zuhause, Menschen, Wohlbefinden, Instandhaltung, Finanzen — mit Status, voraussichtlich nächstem Termin und Fotos je Aktivität.</li><li>Eine Tageszusammenfassung statt einzelner Meldungen, mit Ruhezeiten, die eingehalten werden.</li><li>Daten auf dem Gerät oder wahlweise im eigenen Google Drive; portable Sicherung, CSV-Export, Wiederherstellungspunkte und 30 Tage Papierkorb.</li>',
     p3Chips: '<span class="chip">PWA</span><span class="chip">Offline-first</span><span class="chip">eigenes Gerät oder eigenes Drive</span><span class="chip">EN</span>',
-    p3Btn: 'RepeatCycle öffnen ↗',
+    p3Btn: 'Loop öffnen ↗',
     pjHowLabel: 'Wie sie entstanden sind',
     pjHowH: 'Ein Engineer, KI im Prozess, ausgeliefert.',
     pjHowP: 'Alle drei Produkte wurden von einer Person spezifiziert, gestaltet, gebaut, getextet und deployed — an Abenden und Wochenenden — mit LLMs als bewusstem Werkzeug in jedem Schritt, nicht als Spielerei. Dieselbe Arbeitsweise bringe ich in regulierte Umgebungen: mit dem Modell schnell vorankommen und das Ergebnis anschliessend an dem Massstab messen, den die Domäne verlangt.',

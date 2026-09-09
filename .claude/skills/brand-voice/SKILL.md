@@ -17,7 +17,7 @@ Janaka Premathilaka — Senior Java Engineer & Solution Architect, Zug, Switzerl
 
 1. Hiring managers and recruiters for senior Java / architecture / applied-AI roles in Switzerland and DACH, and remote EU.
 2. Engineers evaluating him as a lead, mentor or collaborator.
-3. Potential acquirers or licensees of nüchtern, Daily Momentum and RepeatCycle.
+3. Potential acquirers or licensees of nüchtern, Daily Momentum and Loop.
 4. Learners considering Janaka Academy.
 
 ## Voice
@@ -36,7 +36,7 @@ Janaka Premathilaka — Senior Java Engineer & Solution Architect, Zug, Switzerl
 - Employers: UBS, Credit Suisse, European Commission
 - Stack signals: Java, Spring Boot, Kafka, Kubernetes, Oracle/PostgreSQL, REST, microservices, CI/CD; AI: LLM integration, RAG, LangChain, LangGraph, CrewAI, AutoGen, OpenAI Agents SDK, MCP
 - Location: Zug; work radius Zürich, Zug, Basel, remote
-- Products: nüchtern (nuechtern.app), Daily Momentum (daily-momentum.com) and RepeatCycle (loop.janaka.me), all live, all privacy by construction (on-device, or storage the user owns), all built solo with AI in the loop, all open to acquisition or licensing. RepeatCycle is the name and loop.janaka.me the address; always write them together, name first, never "Loop" as a product name
+- Products: nüchtern (nuechtern.app), Daily Momentum (daily-momentum.com) and Loop (loop.janaka.me), all live, all privacy by construction (on-device, or storage the user owns), all built solo with AI in the loop, all open to acquisition or licensing. Loop is the name and loop.janaka.me the address (renamed from RepeatCycle in September 2026; never use the old name)
 
 ## Ecosystem one-liners (use consistently)
 
@@ -50,7 +50,7 @@ Janaka Premathilaka — Senior Java Engineer & Solution Architect, Zug, Switzerl
 | Academy | janaka.me/academy/ | Engineers who surpass their teacher: daily notes and learning paths |
 | nüchtern | nuechtern.app | Fasting companion that keeps the biology visible, offline, DE/EN |
 | Daily Momentum | daily-momentum.com | A quiet record of where the day went, one tap, on-device only |
-| RepeatCycle | loop.janaka.me | Remembers what repeats, learns the rhythm from your own history, on your device or your own Drive |
+| Loop | loop.janaka.me | Remembers what repeats, learns the rhythm from your own history, on your device or your own Drive |
 
 ## Target keywords (for titles, descriptions, chips, posts)
 
