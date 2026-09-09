@@ -72,8 +72,8 @@ window.JP_I18N = (function () {
 
     /* ---- independent projects ---- */
     pjEyebrow: 'Eigene Projekte',
-    pjH2: 'Zwei Produkte, von der Idee bis in Produktion.',
-    pjLede: 'In meiner Freizeit und auf eigener Infrastruktur entstanden — unabhängig von meiner Anstellung und ohne Bezug zum Geschäft meines Arbeitgebers. Beide sind live, und beide sind von Grund auf privat gebaut: Alle Daten bleiben auf dem Gerät der Nutzerin oder des Nutzers.',
+    pjH2: 'Drei Produkte, von der Idee bis in Produktion.',
+    pjLede: 'In meiner Freizeit und auf eigener Infrastruktur entstanden — unabhängig von meiner Anstellung und ohne Bezug zum Geschäft meines Arbeitgebers. Alle drei sind live, und alle drei sind von Grund auf privat gebaut: Die Daten bleiben auf dem Gerät der Nutzerin oder des Nutzers — oder, auf Wunsch, in einem Speicher, der ihnen selbst gehört.',
     pjLive: 'Live',
     p1Sub: 'nuechtern.app · Fasten-Tracker · PWA',
     p1Desc: 'Ein Fasten-Begleiter, der die Biologie sichtbar macht: ein Timer, der die aktuelle Stoffwechselphase zeigt und sagt, was der Körper in Stunde 14 tatsächlich tut — dazu die Hinweise zu Flüssigkeit und Elektrolyten, die den meisten Trackern fehlen.',
@@ -85,12 +85,17 @@ window.JP_I18N = (function () {
     p2Pts: '<li>Der Tag als ein einziger Streifen, die Woche im Vergleich zur Vorwoche, Muster ausschliesslich aus dem Erfassten.</li><li>Ein vergessener Nachmittag kommt später als Frage zurück statt als Lücke; Einträge lassen sich verschieben, teilen, zusammenführen und umbenennen.</li><li>Kein Konto, kein Server, kein Upload — mit Export als Sicherungsdatei oder Tabelle, jederzeit.</li>',
     p2Chips: '<span class="chip">PWA</span><span class="chip">Offline-first</span><span class="chip">nur auf dem Gerät</span><span class="chip">Datenexport</span>',
     p2Btn: 'Daily Momentum öffnen ↗',
+    p3Sub: 'loop.janaka.me · wiederkehrende Aktivitäten · PWA',
+    p3Desc: 'Ein Gedächtnis für alles, was sich wiederholt — Giessen, Geburtstage, Filter, Rechnungen. Eine Aktivität bekommt einen festen Rhythmus, oder man hält nur fest, wann sie stattgefunden hat, und die App erkennt das Muster aus dem, was tatsächlich war. Der Verlauf kann einen Rhythmus vorschlagen; ob man ihm folgt, entscheidet man selbst.',
+    p3Pts: '<li>Fünf ruhige Bereiche — Zuhause, Menschen, Wohlbefinden, Instandhaltung, Finanzen — mit Status, voraussichtlich nächstem Termin und Fotos je Aktivität.</li><li>Eine Tageszusammenfassung statt einzelner Meldungen, mit Ruhezeiten, die eingehalten werden.</li><li>Daten auf dem Gerät oder wahlweise im eigenen Google Drive; portable Sicherung, CSV-Export, Wiederherstellungspunkte und 30 Tage Papierkorb.</li>',
+    p3Chips: '<span class="chip">PWA</span><span class="chip">Offline-first</span><span class="chip">eigenes Gerät oder eigenes Drive</span><span class="chip">EN</span>',
+    p3Btn: 'RepeatCycle öffnen ↗',
     pjHowLabel: 'Wie sie entstanden sind',
     pjHowH: 'Ein Engineer, KI im Prozess, ausgeliefert.',
-    pjHowP: 'Beide Produkte wurden von einer Person spezifiziert, gestaltet, gebaut, getextet und deployed — an Abenden und Wochenenden — mit LLMs als bewusstem Werkzeug in jedem Schritt, nicht als Spielerei. Dieselbe Arbeitsweise bringe ich in regulierte Umgebungen: mit dem Modell schnell vorankommen und das Ergebnis anschliessend an dem Massstab messen, den die Domäne verlangt.',
-    pjHowPts: '<li>Produktumfang und Interaktionsflüsse zuerst gegen ein Modell entworfen, danach von Hand gekürzt, bis nur noch bleibt, was seinen Platz verdient.</li><li>Umsetzung in engen Generieren-und-Prüfen-Schleifen — Architektur und Review bleiben bei mir, und nichts geht live, was ich nicht Zeile für Zeile erklären kann.</li><li>Oberflächentexte in zwei Sprachen sowie das visuelle Erscheinungsbild beider Apps KI-gestützt erstellt und auf eine einheitliche Stimme redigiert.</li><li>Von der leeren Seite zur öffentlichen URL in Wochen statt Quartalen — ohne Team, ohne Budget, ohne fremde Hilfe.</li>',
-    pjAcqH: 'Beide Produkte könnten ein besseres Zuhause finden.',
-    pjAcqP: 'Beide sind unabhängig von meiner Anstellung entstanden und stehen mir daher frei zur Weitergabe. Wenn eines davon in ein Portfolio passt, das Sie aufbauen, spreche ich gerne über Übernahme oder Lizenzierung — Quellcode, Marke, Domain und eine dokumentierte Übergabe.',
+    pjHowP: 'Alle drei Produkte wurden von einer Person spezifiziert, gestaltet, gebaut, getextet und deployed — an Abenden und Wochenenden — mit LLMs als bewusstem Werkzeug in jedem Schritt, nicht als Spielerei. Dieselbe Arbeitsweise bringe ich in regulierte Umgebungen: mit dem Modell schnell vorankommen und das Ergebnis anschliessend an dem Massstab messen, den die Domäne verlangt.',
+    pjHowPts: '<li>Produktumfang und Interaktionsflüsse zuerst gegen ein Modell entworfen, danach von Hand gekürzt, bis nur noch bleibt, was seinen Platz verdient.</li><li>Umsetzung in engen Generieren-und-Prüfen-Schleifen — Architektur und Review bleiben bei mir, und nichts geht live, was ich nicht Zeile für Zeile erklären kann.</li><li>Oberflächentexte in zwei Sprachen sowie das visuelle Erscheinungsbild aller drei Apps KI-gestützt erstellt und auf eine einheitliche Stimme redigiert.</li><li>Von der leeren Seite zur öffentlichen URL in Wochen statt Quartalen — ohne Team, ohne Budget, ohne fremde Hilfe.</li>',
+    pjAcqH: 'Jedes der drei Produkte könnte ein besseres Zuhause finden.',
+    pjAcqP: 'Alle drei sind unabhängig von meiner Anstellung entstanden und stehen mir daher frei zur Weitergabe. Wenn eines davon in ein Portfolio passt, das Sie aufbauen, spreche ich gerne über Übernahme oder Lizenzierung — Quellcode, Marke, gegebenenfalls Domain und eine dokumentierte Übergabe.',
     pjAcqBtn: '✉&nbsp; Per E-Mail anfragen',
 
     /* ---- certifications ---- */

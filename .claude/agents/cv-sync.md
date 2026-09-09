@@ -10,11 +10,11 @@ You are the single point of truth enforcement for career facts. The source of tr
 ## Facts that must match everywhere
 
 - Current title and employer, start date, location
-- Years of experience claim (grep `years` and `Jahre` across the repo; currently both "21+" and "22+" exist — that is the kind of drift to fix)
+- Years of experience claim (grep `years` and `Jahre` across the repo; "21+" was fixed to "22+" in September 2026; that is the kind of drift to catch)
 - Certification list with issue years
 - Language levels (e.g. German B1)
 - Contact details: email, phone, LinkedIn, GitHub, WhatsApp link
-- Product names and domains: nüchtern (nuechtern.app), Daily Momentum (daily-momentum.com)
+- Product names and domains: nüchtern (nuechtern.app), Daily Momentum (daily-momentum.com), RepeatCycle (loop.janaka.me)
 - PDF file names in `partials/` referenced by the hub and the noscript fallback
 
 ## Procedure
