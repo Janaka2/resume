@@ -72,8 +72,8 @@ window.JP_I18N = (function () {
 
     /* ---- independent projects ---- */
     pjEyebrow: 'Eigene Projekte',
-    pjH2: 'Drei Produkte, von der Idee bis in Produktion.',
-    pjLede: 'In meiner Freizeit und auf eigener Infrastruktur entstanden — unabhängig von meiner Anstellung und ohne Bezug zum Geschäft meines Arbeitgebers. Alle drei sind live, und alle drei sind von Grund auf privat gebaut: Die Daten bleiben auf dem Gerät der Nutzerin oder des Nutzers — oder, auf Wunsch, in einem Speicher, der ihnen selbst gehört.',
+    pjH2: 'Vier Produkte, von der Idee bis in Produktion.',
+    pjLede: 'In meiner Freizeit und auf eigener Infrastruktur entstanden — unabhängig von meiner Anstellung und ohne Bezug zum Geschäft meines Arbeitgebers. Alle vier sind live, und alle vier sind von Grund auf privat gebaut: Die Daten bleiben auf dem Gerät der Nutzerin oder des Nutzers — oder, auf Wunsch, in einem Speicher, der ihnen selbst gehört.',
     pjLive: 'Live',
     p1Sub: 'nuechtern.app · Fasten-Tracker · PWA',
     p1Desc: 'Ein Fasten-Begleiter, der die Biologie sichtbar macht: ein Timer, der die aktuelle Stoffwechselphase zeigt und sagt, was der Körper in Stunde 14 tatsächlich tut — dazu die Hinweise zu Flüssigkeit und Elektrolyten, die den meisten Trackern fehlen.',
@@ -90,12 +90,17 @@ window.JP_I18N = (function () {
     p3Pts: '<li>Fünf ruhige Bereiche — Zuhause, Menschen, Wohlbefinden, Instandhaltung, Finanzen — mit Status, voraussichtlich nächstem Termin und Fotos je Aktivität.</li><li>Eine Tageszusammenfassung statt einzelner Meldungen, mit Ruhezeiten, die eingehalten werden.</li><li>Daten auf dem Gerät oder wahlweise im eigenen Google Drive; portable Sicherung, CSV-Export, Wiederherstellungspunkte und 30 Tage Papierkorb.</li>',
     p3Chips: '<span class="chip">PWA</span><span class="chip">Offline-first</span><span class="chip">eigenes Gerät oder eigenes Drive</span><span class="chip">EN</span>',
     p3Btn: 'Loop öffnen ↗',
+    p4Sub: 'babyloop.janaka.me · Pflegetagebuch für Babys und Kleinkinder · PWA',
+    p4Desc: 'Die kleinen Momente festhalten, ohne das Telefon ständig in der Hand zu haben. Zwei Tipps genügen für eine Mahlzeit, ein Nickerchen, eine Temperatur oder das erste Lächeln — und der Tag fügt sich zu einer Zusammenfassung, die auch müde Eltern noch lesen können.',
+    p4Pts: '<li>Selbst definierte Aktivitäten — einfache Ereignisse, Timer, Messwerte, Mengen, Bewertungen — mit Fotos und Notizen, gespeichert im Moment des Antippens.</li><li>Eine Tageszusammenfassung und ein teilbares PDF für die Kinderärztin, die Grosseltern oder eine zweite Betreuungsperson.</li><li>Keine Konten, keine Server, keine Analytik. Die Daten bleiben auf dem Gerät oder wahlweise im eigenen Google Drive, um sie zwischen Telefonen zu teilen.</li>',
+    p4Chips: '<span class="chip">PWA</span><span class="chip">Offline-first</span><span class="chip">eigenes Gerät oder eigenes Drive</span><span class="chip">EN</span>',
+    p4Btn: 'BabyLoop öffnen ↗',
     pjHowLabel: 'Wie sie entstanden sind',
     pjHowH: 'Ein Engineer, KI im Prozess, ausgeliefert.',
-    pjHowP: 'Alle drei Produkte wurden von einer Person spezifiziert, gestaltet, gebaut, getextet und deployed — an Abenden und Wochenenden — mit LLMs als bewusstem Werkzeug in jedem Schritt, nicht als Spielerei. Dieselbe Arbeitsweise bringe ich in regulierte Umgebungen: mit dem Modell schnell vorankommen und das Ergebnis anschliessend an dem Massstab messen, den die Domäne verlangt.',
-    pjHowPts: '<li>Produktumfang und Interaktionsflüsse zuerst gegen ein Modell entworfen, danach von Hand gekürzt, bis nur noch bleibt, was seinen Platz verdient.</li><li>Umsetzung in engen Generieren-und-Prüfen-Schleifen — Architektur und Review bleiben bei mir, und nichts geht live, was ich nicht Zeile für Zeile erklären kann.</li><li>Oberflächentexte in zwei Sprachen sowie das visuelle Erscheinungsbild aller drei Apps KI-gestützt erstellt und auf eine einheitliche Stimme redigiert.</li><li>Von der leeren Seite zur öffentlichen URL in Wochen statt Quartalen — ohne Team, ohne Budget, ohne fremde Hilfe.</li>',
-    pjAcqH: 'Jedes der drei Produkte könnte ein besseres Zuhause finden.',
-    pjAcqP: 'Alle drei sind unabhängig von meiner Anstellung entstanden und stehen mir daher frei zur Weitergabe. Wenn eines davon in ein Portfolio passt, das Sie aufbauen, spreche ich gerne über Übernahme oder Lizenzierung — Quellcode, Marke, gegebenenfalls Domain und eine dokumentierte Übergabe.',
+    pjHowP: 'Alle vier Produkte wurden von einer Person spezifiziert, gestaltet, gebaut, getextet und deployed — an Abenden und Wochenenden — mit LLMs als bewusstem Werkzeug in jedem Schritt, nicht als Spielerei. Dieselbe Arbeitsweise bringe ich in regulierte Umgebungen: mit dem Modell schnell vorankommen und das Ergebnis anschliessend an dem Massstab messen, den die Domäne verlangt.',
+    pjHowPts: '<li>Produktumfang und Interaktionsflüsse zuerst gegen ein Modell entworfen, danach von Hand gekürzt, bis nur noch bleibt, was seinen Platz verdient.</li><li>Umsetzung in engen Generieren-und-Prüfen-Schleifen — Architektur und Review bleiben bei mir, und nichts geht live, was ich nicht Zeile für Zeile erklären kann.</li><li>Oberflächentexte in zwei Sprachen sowie das visuelle Erscheinungsbild aller vier Apps KI-gestützt erstellt und auf eine einheitliche Stimme redigiert.</li><li>Von der leeren Seite zur öffentlichen URL in Wochen statt Quartalen — ohne Team, ohne Budget, ohne fremde Hilfe.</li>',
+    pjAcqH: 'Jedes der vier Produkte könnte ein besseres Zuhause finden.',
+    pjAcqP: 'Alle vier sind unabhängig von meiner Anstellung entstanden und stehen mir daher frei zur Weitergabe. Wenn eines davon in ein Portfolio passt, das Sie aufbauen, spreche ich gerne über Übernahme oder Lizenzierung — Quellcode, Marke, gegebenenfalls Domain und eine dokumentierte Übergabe.',
     pjAcqBtn: '✉&nbsp; Per E-Mail anfragen',
 
     /* ---- certifications ---- */
