@@ -36,6 +36,7 @@ Janaka Premathilaka — Senior Java Engineer & Solution Architect, Zug, Switzerl
 - Employers: UBS, Credit Suisse, European Commission
 - Stack signals: Java, Spring Boot, Kafka, Kubernetes, Oracle/PostgreSQL, REST, microservices, CI/CD; AI: LLM integration, RAG, LangChain, LangGraph, CrewAI, AutoGen, OpenAI Agents SDK, MCP
 - Location: Zug; work radius Zürich, Zug, Basel, remote
+- Products are Swiss made (engineered in Zug); the quality claim is always backed by the habits behind it (hand-reviewed code, no servers or dependencies to fail, privacy by design), never used as a bare sticker
 - Products: nüchtern (nuechtern.app), Daily Momentum (daily-momentum.com), Loop (loop.janaka.me) and BabyLoop (babyloop.janaka.me), all live, all privacy by construction (on-device, or storage the user owns), all built solo with AI in the loop, all open to acquisition or licensing. Loop is the name and loop.janaka.me the address (renamed from RepeatCycle in September 2026; never use the old name)
 
 ## Ecosystem one-liners (use consistently)
