@@ -60,6 +60,24 @@ Two GitHub Actions at `.github/workflows/` run daily and commit to `main`:
 
 Both templates are inline Python in the workflow files. If you change the shared page chrome (nav, footer, stylesheet links), update those templates too or new pages will drift. Pull before pushing — the bots commit every day.
 
+## Brand and marketing toolkit (`.claude/`)
+
+Project-level subagents live in `.claude/agents/` and skills in `.claude/skills/`. `.claude/skills/brand-voice/SKILL.md` is the single source of truth for positioning, approved claims and ecosystem one-liners; load it before writing or reviewing any copy. `site-page` holds the HTML skeleton every new page must follow.
+
+| Need | Use |
+|---|---|
+| Pre-push check | `/release-check` |
+| Weekly maintenance (health + brand + SEO + academy + market) | `/weekly-brand-review` |
+| Monthly market demand scan | `/market-pulse` |
+| New blog post | `/new-blog-post <topic>` |
+| Fill empty academy pages | `/fill-academy [N]` |
+| Hub copy change | `/i18n-add`, then the `i18n-translator` agent |
+| Social copy | `/linkedin-post <url>` or the `social-promoter` agent |
+| Career facts changed | `cv-sync` agent |
+| Product copy (nüchtern, Daily Momentum) | `product-marketer` agent |
+
+`.github/workflows/weekly_brand_review.yml` runs `/weekly-brand-review` every Monday via the Claude Code GitHub Action and opens a PR; it needs the `ANTHROPIC_API_KEY` repository secret.
+
 ### Archived files
 
 `indexBK.html`, `partials/*BK.html`, `partials/janaka_visual_resume_v3.html`, `…v3_1.html`, `resumeredesign.patch`, and the root-level PDF are kept for reference only. `resume-26-3-2026.html` is a separate A4 print/PDF-export template that is intentionally not themed.
