@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /partials/
+Sitemap: https://janaka.me/sitemap.xml
