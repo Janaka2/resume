@@ -101,6 +101,7 @@ window.JP_I18N = (function () {
     pjHowPts: '<li>Produktumfang und Interaktionsflüsse zuerst gegen ein Modell entworfen, danach von Hand gekürzt, bis nur noch bleibt, was seinen Platz verdient.</li><li>Umsetzung in engen Generieren-und-Prüfen-Schleifen — Architektur und Review bleiben bei mir, und nichts geht live, was ich nicht Zeile für Zeile erklären kann.</li><li>Oberflächentexte in zwei Sprachen sowie das visuelle Erscheinungsbild aller vier Apps KI-gestützt erstellt und auf eine einheitliche Stimme redigiert.</li><li>Von der leeren Seite zur öffentlichen URL in Wochen statt Quartalen — ohne Team, ohne Budget, ohne fremde Hilfe.</li>',
     pjAcqH: 'Jedes der vier Produkte könnte ein besseres Zuhause finden.',
     pjAcqP: 'Alle vier sind unabhängig von meiner Anstellung entstanden und stehen mir daher frei zur Weitergabe. Wenn eines davon in ein Portfolio passt, das Sie aufbauen, spreche ich gerne über Übernahme oder Lizenzierung — Quellcode, Marke, gegebenenfalls Domain und eine dokumentierte Übergabe.',
+    pjCatBtn: 'Zum Produktkatalog →',
     pjAcqBtn: '✉&nbsp; Per E-Mail anfragen',
 
     /* ---- certifications ---- */

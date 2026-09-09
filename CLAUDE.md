@@ -29,7 +29,7 @@ Two different chromes use this mechanism:
 | Page | Nav | Behaviour script | Includes |
 |---|---|---|---|
 | Hub `/index.html` | inline `.topbar` in `index.html` | `assets/js/main.js` + `assets/js/i18n.js` | `partials/header.html`, `experience.html`, … (relative paths) |
-| Sub-sites (`blog/`, `lab/`, `ai/`, `cv/`, `academy/`) | `/partials/site-nav.html` | `assets/js/site-nav.js` | root-absolute `/partials/...` paths |
+| Sub-sites (`blog/`, `lab/`, `products/`, `ai/`, `cv/`, `academy/`) | `/partials/site-nav.html` | `assets/js/site-nav.js` | root-absolute `/partials/...` paths |
 
 `site-nav.js` derives the active nav item from the first URL path segment (`data-nav` attribute), so never hard-code an active link in `site-nav.html`.
 
@@ -62,7 +62,7 @@ Both templates are inline Python in the workflow files. If you change the shared
 
 ## Brand and marketing toolkit (`.claude/`)
 
-Project-level subagents live in `.claude/agents/` and skills in `.claude/skills/`. `.claude/skills/brand-voice/SKILL.md` is the single source of truth for positioning, approved claims and ecosystem one-liners; load it before writing or reviewing any copy. `site-page` holds the HTML skeleton every new page must follow. `goals/vision.md` is the personal vision and ninety-day targets that the `success-coach` agent reads and, on request, updates.
+Project-level subagents live in `.claude/agents/` and skills in `.claude/skills/`. `products/index.html` is the sales catalogue for the finished apps; keep it in step with the hub's project cards. `.claude/skills/brand-voice/SKILL.md` is the single source of truth for positioning, approved claims and ecosystem one-liners; load it before writing or reviewing any copy. `site-page` holds the HTML skeleton every new page must follow. `goals/vision.md` is the personal vision and ninety-day targets that the `success-coach` agent reads and, on request, updates.
 
 | Need | Use |
 |---|---|

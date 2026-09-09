@@ -26,6 +26,7 @@ EXPLICIT = [
     "blog/posts/machine-learning-blog.html",
     "blog/posts/mcp-agent-integration.html",
     "lab/",
+    "products/",
     "lab/Notes/hand-book-note1.html",
     "lab/Notes/hand-book-note2.html",
     "lab/Notes/hand-book-note3.html",

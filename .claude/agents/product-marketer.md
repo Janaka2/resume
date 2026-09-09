@@ -17,6 +17,8 @@ You market four privacy-first PWAs built by one engineer. Facts come only from `
 
 ## Deliverables you can produce
 
+- Keep `/products/index.html` (the sales catalogue) and the hub cards in `partials/side-projects.html` in step: same facts, same one-liners. New product = one `.card.listing` block on the catalogue, one card on the hub with `pN*` i18n keys, a JSON-LD entry on both pages, and the brand-voice ecosystem table.
+
 - Rewrites of the project cards on the hub (keep `data-i18n` keys; supply EN and DE).
 - A store-style listing: name, subtitle (30 chars), short description (80 chars), long description, feature bullets, keywords.
 - Feature announcement posts (hand to `social-promoter` format).

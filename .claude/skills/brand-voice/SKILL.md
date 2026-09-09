@@ -45,6 +45,7 @@ Janaka Premathilaka — Senior Java Engineer & Solution Architect, Zug, Switzerl
 | Hub | janaka.me | Senior Java Engineer & Solution Architect, Zug |
 | Blog | janaka.me/blog/ | Clear, hands-on articles on Java, Kafka, RAG, agents and evals |
 | Lab | janaka.me/lab/ | Experiments and demos, runnable, with notes |
+| Products | janaka.me/products/ | Finished, live, privacy-first apps available for acquisition or licensing |
 | AI | janaka.me/ai/ | Agents that are readable, reliable and worth shipping |
 | CV | janaka.me/cv/ | Two decades of critical systems, case studies and stack |
 | Academy | janaka.me/academy/ | Engineers who surpass their teacher: daily notes and learning paths |
@@ -59,7 +60,7 @@ Senior Java Engineer Switzerland · Solution Architect Zürich Zug · Spring Boo
 
 ## CTA hierarchy
 
-Primary: Contact (email) and View CV / PDF. Secondary: products, academy. Tertiary: blog, lab, AI, GitHub, LinkedIn.
+Primary: Contact (email) and View CV / PDF. Secondary: products catalogue (/products/), academy. Tertiary: blog, lab, AI, GitHub, LinkedIn.
 
 ## Contact facts
 

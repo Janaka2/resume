@@ -256,3 +256,46 @@ html[data-theme="dark"] .ai-btn { color: #06121F; }
 }
 .sitefoot a { color: var(--tx2); text-decoration: none; }
 .sitefoot a:hover { color: var(--ac); }
+
+/* ---- products catalogue (/products/) ----
+   One .listing per product: content on the left, spec panel on the right. */
+.listing { display: grid; grid-template-columns: 1.45fr 1fr; gap: 0; padding: 0; overflow: hidden; }
+.listing > .listing-main { padding: 26px 26px 24px; display: flex; flex-direction: column; gap: 14px; }
+.listing > .listing-spec {
+  padding: 26px 24px; background: var(--chip); border-left: 1px solid var(--ln);
+  font-size: .9rem;
+}
+.listing-spec dl { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; row-gap: 10px; margin: 0; }
+.listing-spec dt { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--tx2); padding-top: 3px; }
+.listing-spec dd { margin: 0; color: var(--tx); }
+.listing-spec .avail { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--ln); }
+.listing-main h3 { font-family: var(--font-head); font-size: 1.35rem; letter-spacing: -.01em; }
+.listing-main .who { color: var(--tx2); font-size: .92rem; }
+.listing-main .who b { color: var(--tx); font-weight: 600; }
+.listing + .listing { margin-top: 18px; }
+@media (max-width: 760px) {
+  .listing { grid-template-columns: 1fr; }
+  .listing > .listing-spec { border-left: none; border-top: 1px solid var(--ln); }
+}
+
+/* handover package and process */
+.package { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 8px; }
+.package .card h3 { font-size: 1rem; margin-bottom: 6px; }
+.package .card p { color: var(--tx2); font-size: .92rem; }
+.steps { counter-reset: step; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-top: 8px; }
+.step { position: relative; padding: 22px 20px 20px 20px; border: 1px solid var(--ln); border-radius: var(--r); background: var(--bg2); }
+.step::before {
+  counter-increment: step; content: counter(step, decimal-leading-zero);
+  display: block; font-family: var(--font-mono); font-size: .72rem; letter-spacing: .14em; color: var(--ac); margin-bottom: 10px;
+}
+.step h3 { font-size: 1rem; margin-bottom: 6px; }
+.step p { color: var(--tx2); font-size: .92rem; }
+
+/* faq */
+.faq details { border-top: 1px solid var(--ln); padding: 14px 0; }
+.faq details:last-child { border-bottom: 1px solid var(--ln); }
+.faq summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-family: var(--font-mono); color: var(--ac); }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { margin-top: 10px; color: var(--tx2); max-width: 70ch; }
