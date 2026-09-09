@@ -2,15 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://janaka.me/</loc><lastmod>2026-09-09</lastmod></url>
   <url><loc>https://janaka.me/blog/</loc><lastmod>2026-09-09</lastmod></url>
-  <url><loc>https://janaka.me/blog/posts/ai-evaluation-frameworks.html</loc><lastmod>2026-08-29</lastmod></url>
+  <url><loc>https://janaka.me/blog/posts/ai-evaluation-frameworks.html</loc><lastmod>2026-09-09</lastmod></url>
   <url><loc>https://janaka.me/blog/posts/machine-learning-blog.html</loc><lastmod>2026-09-09</lastmod></url>
-  <url><loc>https://janaka.me/blog/posts/mcp-agent-integration.html</loc><lastmod>2026-08-29</lastmod></url>
+  <url><loc>https://janaka.me/blog/posts/mcp-agent-integration.html</loc><lastmod>2026-09-09</lastmod></url>
   <url><loc>https://janaka.me/lab/</loc><lastmod>2026-09-09</lastmod></url>
-  <url><loc>https://janaka.me/lab/Notes/hand-book-note1.html</loc><lastmod>2026-08-29</lastmod></url>
-  <url><loc>https://janaka.me/lab/Notes/hand-book-note2.html</loc><lastmod>2026-08-29</lastmod></url>
-  <url><loc>https://janaka.me/lab/Notes/hand-book-note3.html</loc><lastmod>2026-08-29</lastmod></url>
-  <url><loc>https://janaka.me/lab/Notes/llm-hand%E2%80%91annotated-demo5.html</loc><lastmod>2026-08-29</lastmod></url>
-  <url><loc>https://janaka.me/lab/Notes/llm-study-notes-handwritten-style.html</loc><lastmod>2026-08-29</lastmod></url>
+  <url><loc>https://janaka.me/lab/Notes/hand-book-note1.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://janaka.me/lab/Notes/hand-book-note2.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://janaka.me/lab/Notes/hand-book-note3.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://janaka.me/lab/Notes/llm-hand%E2%80%91annotated-demo5.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://janaka.me/lab/Notes/llm-study-notes-handwritten-style.html</loc><lastmod>2026-09-09</lastmod></url>
   <url><loc>https://janaka.me/ai/</loc><lastmod>2026-09-09</lastmod></url>
   <url><loc>https://janaka.me/cv/</loc><lastmod>2026-09-09</lastmod></url>
   <url><loc>https://janaka.me/academy/</loc><lastmod>2026-09-09</lastmod></url>
@@ -211,6 +211,7 @@
   <url><loc>https://janaka.me/academy/modules/2026/FSE/2026-09-07-note.html</loc><lastmod>2026-09-07</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/2026-09-08-java-core.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/2026-09-08-note.html</loc><lastmod>2026-09-08</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/2026-09-09-linux-cli.html</loc><lastmod>2026-09-09</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/Elite-Full%E2%80%91Stack-Engineering-2026-Edition.html</loc><lastmod>2026-09-09</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/ai-integration.html</loc><lastmod>2026-08-29</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/awk-sed-mastery.html</loc><lastmod>2026-08-29</lastmod></url>
