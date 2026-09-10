@@ -3,31 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MCP for Agent Integrations — a practical guide</title>
-  <meta name="description" content="Understand MCP and build tool integrations with safety and clarity.">
+  <title>MCP for Agent Integrations: the Model Context Protocol</title>
+  <meta name="description" content="What the Model Context Protocol is, its three primitives and two transports, a minimal Python server, and how to run it safely in a regulated bank.">
   <link rel="canonical" href="https://janaka.me/blog/posts/mcp-agent-integration.html">
-  <meta property="og:title" content="MCP for Agent Integrations — a practical guide">
-  <meta property="og:description" content="Understand MCP and build tool integrations with safety and clarity.">
+  <meta property="og:title" content="MCP for Agent Integrations: the Model Context Protocol">
+  <meta property="og:description" content="What the Model Context Protocol is, its three primitives and two transports, a minimal Python server, and how to run it safely in a regulated bank.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://janaka.me/blog/posts/mcp-agent-integration.html">
   <meta property="og:image" content="https://janaka.me/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="article:published_time" content="2025-10-19">
-  <meta property="article:modified_time" content="2026-08-29">
+  <meta property="article:modified_time" content="2026-09-10">
   <meta property="article:author" content="https://janaka.me">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="MCP for Agent Integrations — a practical guide">
-  <meta name="twitter:description" content="Understand MCP and build tool integrations with safety and clarity.">
+  <meta name="twitter:title" content="MCP for Agent Integrations: the Model Context Protocol">
+  <meta name="twitter:description" content="What the Model Context Protocol is, its three primitives and two transports, a minimal Python server, and how to run it safely in a regulated bank.">
   <meta name="twitter:image" content="https://janaka.me/assets/og-image.png">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "MCP for Agent Integrations — a practical guide",
-    "description": "Understand MCP and build tool integrations with safety and clarity.",
+    "headline": "MCP for Agent Integrations: the Model Context Protocol",
+    "description": "What the Model Context Protocol is, its three primitives and two transports, a minimal Python server, and how to run it safely in a regulated bank.",
     "datePublished": "2025-10-19",
-    "dateModified": "2026-08-29",
+    "dateModified": "2026-09-10",
     "author": {
       "@type": "Person",
       "name": "Janaka Premathilaka",
@@ -45,8 +45,6 @@
     }
   }
   </script>
-
-  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg?v=1">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png?v=1">
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16.png?v=1">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png?v=1">
@@ -65,7 +63,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="/assets/css/theme.css">
   <link rel="stylesheet" href="/assets/css/subsite.css">
 </head>
@@ -78,58 +78,92 @@
     <div class="wrap">
       <p class="eyebrow"><a href="/blog/" style="color:inherit;text-decoration:none">← Blog</a></p>
       <h1>MCP for agent integrations</h1>
-      <p class="when" style="font-family:var(--font-mono);font-size:.74rem;letter-spacing:.06em;color:var(--tx2);margin-top:12px">Published Oct 2025 · 10 min read</p>
-
-      <div class="quote" style="margin-top:26px">
-        <p style="font-size:1rem;font-family:var(--font-sans);font-weight:400;line-height:1.6">
-          Model capabilities explicitly, wrap them in guardrails, and iterate until the behaviour is predictable. That is the whole method.
-        </p>
-        <p class="who">TL;DR</p>
-      </div>
+      <p class="when" style="font-family:var(--font-mono);font-size:.74rem;letter-spacing:.06em;color:var(--tx2);margin-top:12px">Published Oct 2025 · Revised Sep 2026 · 9 min read</p>
 
       <div class="prose" style="margin-top:32px">
-        <h2>Why MCP?</h2>
-        <p>Multi-capability prompts let you combine several tools or APIs into a single agent workflow. They decouple the tool function from the prompt, which gives you control over which functions get invoked and when. By modelling capabilities and their schema explicitly, you can enforce safety and keep the agent's reasoning aligned with the business logic.</p>
-        <p>This matters most when generative AI meets corporate systems. Explicit capabilities are what let you attach role-based access, audit logging and fallback steps — so that calling an external tool or updating data is something you can reason about afterwards.</p>
+        <div class="aside-note">
+          <p><strong>Takeaways</strong></p>
+          <ul>
+            <li>MCP is the Model Context Protocol: an open standard over JSON-RPC 2.0 in which a server exposes tools, resources and prompts and a client inside the agent discovers and calls them.</li>
+            <li>It is not a prompting technique and does not replace function calling; it standardises the wiring between the model's tool call and the system that executes it.</li>
+            <li>Two transports: stdio for a subprocess you launch, Streamable HTTP for a server elsewhere. Since revision 2026-07-28 every HTTP request is self-contained.</li>
+            <li>A server is a dozen lines with the official Python SDK. The client side is one <code>Client</code> object, <code>list_tools()</code> and <code>call_tool()</code>.</li>
+            <li>In a bank the protocol is the easy part. The work is the perimeter: allow-listed servers, OAuth on HTTP, a log line per <code>tools/call</code>, least privilege per tool.</li>
+          </ul>
+        </div>
 
-        <h2>A minimal example</h2>
-        <p>Simplified pseudo-code for constructing an MCP and wiring in a tool function:</p>
-        <pre><code>// Define the capability
-{
-  "name": "sendEmail",
-  "description": "Send an email with subject and body",
-  "parameters": {
-    "type": "object",
-    "properties": {
-      "to":      { "type": "string" },
-      "subject": { "type": "string" },
-      "body":    { "type": "string" }
-    },
-    "required": ["to", "subject", "body"]
-  }
-}
+        <h2>What MCP is, and is not</h2>
+        <p>MCP stands for Model Context Protocol. Anthropic published it in November 2024 as an open standard, now developed in the open at <a href="https://modelcontextprotocol.io/">modelcontextprotocol.io</a>; the current specification revision is 2026-07-28, read on 10 September 2026. The site's own definition: "an open-source standard for connecting AI applications to external systems."</p>
+        <p>Three roles. A <em>host</em> is the LLM application, say an agent runtime or an IDE. Inside it, a <em>client</em> holds one connection to one <em>server</em>, a small process or service that owns access to something: a database, a ticketing system, a file tree. Messages are JSON-RPC 2.0. The model itself is outside the protocol; the host decides which model it talks to.</p>
+        <p>The contrast with plain function calling is the point most people miss. Function calling is the model's side: the API returns a structured request to call <code>account_balance</code> with these arguments. What executes it, where the definitions come from, how a second agent reuses the integration: none of that is defined. MCP fills the gap. The client asks a server <code>tools/list</code>, receives JSON Schema definitions, hands them to the model as function-calling tools, and when the model picks one sends <code>tools/call</code> and returns the result. Build the integration once as a server and every MCP-capable host can use it.</p>
 
-// Compose the MCP prompt with the capability description
-const prompt = `
-You are an assistant that can only call the "sendEmail" capability.
-If the user asks you to send a message, call the function with the right JSON.
-`;
+        <h2>Three primitives, two transports</h2>
+        <p>A server offers any of three things. <strong>Tools</strong> are functions the model may execute, each with a name, description and input schema. <strong>Resources</strong> are data addressed by URI, read with <code>resources/read</code>: context the host pulls in, not actions. <strong>Prompts</strong> are templated messages a server publishes for users, fetched with <code>prompts/get</code>. Most integration work is tools; resources earn their place when the agent needs to read a policy document rather than call something.</p>
+        <p>Transports carry the messages without changing their meaning. <strong>stdio</strong>: the client launches the server as a subprocess and exchanges newline-delimited JSON-RPC over its standard streams, which is why a stdio server must never write to stdout; a stray <code>print()</code> corrupts the stream. <strong>Streamable HTTP</strong>: the server exposes one endpoint, conventionally <code>/mcp</code>, and every JSON-RPC request is its own HTTP POST, answered with a single JSON object or a Server-Sent Events stream scoped to that request. The 2026-07-28 revision removed protocol-level sessions, so each request carries its protocol version and client capabilities in <code>_meta</code> and mirrors them into headers: <code>MCP-Protocol-Version</code>, <code>Mcp-Method</code> and <code>Mcp-Name</code>. That detail matters for audit.</p>
 
-// Handler that executes the actual send...</code></pre>
+        <h2>A minimal server in Python</h2>
+        <p>The official SDK is the <code>mcp</code> package, installed with <code>uv add "mcp[cli]"</code> (2.0 or later). Type hints and the docstring become the tool's schema and description.</p>
+        <pre><code># ledger_server.py
+from mcp.server import MCPServer
 
-        <h2>Step by step</h2>
+mcp = MCPServer("ledger")
+
+@mcp.tool()
+async def account_balance(iban: str) -> str:
+    """Return the booked balance for an account the caller may see.
+
+    Args:
+        iban: IBAN of the account, e.g. CH93 0076 2011 6238 5295 7
+    """
+    # Look this up in your own system. Never print() in a stdio server.
+    return "CHF 12'340.55"
+
+if __name__ == "__main__":
+    mcp.run(transport="stdio")</code></pre>
+        <p>Run it with <code>uv run ledger_server.py</code>. To serve the same code to remote clients, change the last line to <code>mcp.run(transport="streamable-http", port=3001)</code> and clients connect to <code>http://127.0.0.1:3001/mcp</code>. The SDK builds a Starlette app and serves it with uvicorn; to mount it inside an existing ASGI application you build the app yourself.</p>
+
+        <h2>Connecting an agent to it</h2>
+        <p><code>StdioServerParameters</code> describes the subprocess, <code>stdio_client()</code> turns it into a transport, and <code>Client</code> opens it inside an <code>async with</code>. Entering the block launches the server and agrees a protocol version; leaving it shuts the subprocess down.</p>
+        <pre><code>import asyncio
+from mcp import Client, StdioServerParameters
+from mcp.client.stdio import stdio_client
+
+async def main() -> None:
+    params = StdioServerParameters(command="python", args=["ledger_server.py"])
+    async with Client(stdio_client(params)) as client:
+        tools = await client.list_tools()
+        print([t.name for t in tools.tools])   # ['account_balance']
+        result = await client.call_tool(
+            "account_balance", {"iban": "CH93 0076 2011 6238 5295 7"}
+        )
+        print(result.content, result.is_error)
+
+asyncio.run(main())</code></pre>
+        <p>An agent loop sits between those two calls. Each entry in <code>tools.tools</code> has <code>name</code>, <code>description</code> and <code>input_schema</code>, the shape a chat API's tool definition wants. When the model returns a tool use, the loop calls <code>call_tool</code> and feeds <code>result.content</code> back. A tool that raises does not raise in your code; it answers with <code>is_error</code> set, so pass the flag on and let the model read the message. A desktop host registers the same server under its <code>mcpServers</code> config key with a <code>command</code> and <code>args</code>.</p>
+
+        <h2>Inside a bank: what changes</h2>
+        <p>The specification is candid that it cannot enforce its own security principles; hosts and servers have to. Five concerns cover most of a review.</p>
+        <p><strong>Allow-list servers.</strong> The servers an agent may connect to are configuration, reviewed and versioned, never discovered at runtime. Pin the command for stdio servers and the exact URL for HTTP ones. Tool descriptions "should be considered untrusted, unless obtained from a trusted server", so an unreviewed server is prompt injection with a schema.</p>
+        <p><strong>Authentication on Streamable HTTP.</strong> Authorization is optional in the protocol, but for HTTP transports the spec defines it as OAuth 2.1: the MCP server is a resource server, the token travels in <code>Authorization: Bearer</code> on every request, and the server must validate that the token was issued for it as audience (RFC 8707). Servers must not accept or pass through any other tokens. Servers must also validate the <code>Origin</code> header and, when local, bind to 127.0.0.1. For stdio servers the guidance is the opposite: no OAuth, credentials come from the environment, so the process that launches the server owns the secret.</p>
+        <p><strong>Audit logging of tool calls.</strong> Every action the agent takes is one <code>tools/call</code> message with a name and arguments. Log it at the client, where you know the user and conversation, and at the server, where you know what ran. On Streamable HTTP the <code>Mcp-Method</code> and <code>Mcp-Name</code> headers let a gateway log and route without parsing the body; the server must reject any request where header and body disagree, which is what makes that log trustworthy.</p>
+        <p><strong>Keep data inside the perimeter.</strong> Run servers next to the systems they wrap and keep the transport internal. Whatever a tool returns becomes model context and leaves for the model provider unless the model is hosted inside, so return the minimum: a balance, not the customer record. The spec's own principle is that hosts must not transmit resource data elsewhere without user consent.</p>
+        <p><strong>Least privilege per tool.</strong> One server per system, and within it only the tools the use case needs. Scope tokens per tool where the authorization server allows it; the spec supports a scope challenge in <code>WWW-Authenticate</code> for this. It also says hosts must obtain explicit user consent before invoking any tool. In an unattended agent that consent becomes policy: a written list of tools that may run without a human, and a human step for the rest.</p>
+
+        <h2>Where this fits with Spring AI and Java</h2>
+        <p>Java is a first-class option. The official Java SDK lives at <a href="https://github.com/modelcontextprotocol/java-sdk">modelcontextprotocol/java-sdk</a> and Spring AI builds its MCP support on it. Spring AI 2.0 ships starters for both sides: <code>spring-ai-starter-mcp-server</code> for a stdio server, WebMVC and WebFlux variants for Streamable HTTP, and <code>spring-ai-starter-mcp-client</code> for the agent. The server quickstart annotates a service method with <code>@Tool</code> and exposes it through a <code>ToolCallbackProvider</code>; <code>spring.ai.mcp.server.protocol=STREAMABLE</code> switches a web server to Streamable HTTP. For a Spring Boot estate with security filters and observability already in place, this is the shortest path to an MCP server that passes the same reviews as every other service.</p>
+
+        <h2>The skeleton in this repo</h2>
+        <p>The <a href="https://github.com/Janaka2/resume/tree/main/ai/mcp-agent-skeleton" target="_blank" rel="noopener">MCP agent skeleton</a> is a small Python project for reading and adapting, not for production. It is a hand-written stdio client with no SDK dependency, so the JSON-RPC traffic is visible: it launches each server listed in <code>config/servers.json</code> as a subprocess, sends <code>initialize</code>, discovers tools with <code>tools/list</code> and runs them with <code>tools/call</code>. An interactive loop in <code>agent.py</code> accepts <code>list tools</code> and <code>run &lt;server&gt; &lt;tool&gt; {json}</code>; <code>llm.py</code> holds a stub model to replace. Two caveats: it targets the 2024-11-05 revision with the older initialize handshake, and it frames messages with Content-Length headers rather than the newline delimiting the current stdio binding specifies. Use it to understand the flow, then build with the official SDK.</p>
+
+        <h2>Practical takeaways</h2>
         <ol>
-          <li>Define each capability separately — input schema, description and constraints.</li>
-          <li>Compose a prompt that lists the available capabilities and says when to call them.</li>
-          <li>Implement handlers that validate input, call the API and return a structured response.</li>
-          <li>Write guardrails so the agent cannot take an unauthorised action or pass a malformed parameter.</li>
-          <li>Test with example conversations, and refine the prompt and handlers against what actually happens.</li>
+          <li>Start with one server and one tool over stdio; prove <code>list_tools</code> and <code>call_tool</code> before adding a model.</li>
+          <li>Write the tool docstring as if it were the API contract, because to the model it is.</li>
+          <li>Move to Streamable HTTP only when the server must run elsewhere, and add OAuth, Origin validation and a gateway log at the same time.</li>
+          <li>Keep a versioned allow-list of servers and, per server, the tools an unattended agent may call.</li>
+          <li>Log every <code>tools/call</code> with user, conversation, tool name and arguments; that log is what the auditor will ask for.</li>
         </ol>
-        <p>Treating tool integrations as explicit capabilities makes agents both more flexible and safer. You can add or remove one without rewriting the prompt, and usage and errors stay traceable per capability.</p>
-
-        <h2>Securing it for your organisation</h2>
-        <p>When the systems are sensitive, security is the design constraint rather than a later pass. Use role-based access so the agent holds only the privileges each capability needs. Validate every input against its schema and sanitise what comes back. Log and monitor in enough detail that misuse is visible.</p>
-        <p>It is worth building a sandbox where new capabilities and prompts can be exercised against synthetic data before they reach production. Problems found there are cheap; the same problems found later are not.</p>
+        <p>Sources, read 10 September 2026: MCP specification revision 2026-07-28 (overview, transports, Streamable HTTP, authorization), the build-server and build-client guides on modelcontextprotocol.io, the Python SDK reference, and the Spring AI MCP overview for Spring AI 2.0.1.</p>
       </div>
     </div>
   </article>
