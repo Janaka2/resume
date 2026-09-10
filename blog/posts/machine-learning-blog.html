@@ -136,36 +136,27 @@
 
             <h3 class="text-2xl font-semibold text-gray-900 mb-3">
                 Mean, Median, Mode
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 These are measures of central tendency. The mean is the average value (sum of all values divided by the count), the median is the middle value when data are sorted, and the mode is the most frequently occurring value. For example, if we have transaction amounts, the mean gives the average transaction size, the median gives the midpoint (useful if the distribution is skewed by outliers), and the mode might indicate a frequently charged amount. In Python, you can compute these with libraries like NumPy and SciPy (e.g., <code class="code-inline">numpy.mean(data)</code> for mean, <code class="code-inline">numpy.median(data)</code> for median, and <code class="code-inline">scipy.stats.mode(data)</code> for mode). Understanding these helps answer "What is common or typical in my data?".
-                <button class="ai-btn-inline code-explain-btn" data-code="numpy.mean(data), numpy.median(data), scipy.stats.mode(data)">✨ Explain Code</button>
             </p>
 
             <h3 class="text-2xl font-semibold text-gray-900 mb-3">
                 Standard Deviation and Variance
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 These are measures of spread (dispersion). The standard deviation (std dev) describes how spread out the values are around the mean. A low std dev means data points are tightly clustered near the mean; a high std dev means values are widely spread. For instance, if legitimate transactions vary between \$5 and \$5000, the standard deviation will be high indicating high variability in amounts. In contrast, a consistently priced item would have a low std dev in sales price. Formally, the variance is the average of squared deviations from the mean, and std dev is the square root of variance. In Python, <code class="code-inline">numpy.std(data)</code> gives the standard deviation. Knowing the standard deviation helps you identify outliers e.g., a transaction amount that is several std devs above the mean may be suspicious in fraud detection.
-                <button class="ai-btn-inline code-explain-btn" data-code="numpy.std(data)">✨ Explain Code</button>
             </p>
 
             <h3 class="text-2xl font-semibold text-gray-900 mb-3">
                 Percentiles
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 A percentile indicates the value below which a given percentage of data falls. For example, the 75th percentile is a value such that 75% of the data are less than or equal to it. Percentiles are used to understand the distribution of data "what value marks the top 10% of transactions?", etc. If the 90th percentile of transaction amount is \$300 (i.e., 90% of transactions are \$300 or less), then a \$500 transaction is in the top 10% (potentially an outlier). In Python, <code class="code-inline">numpy.percentile(data, 90)</code> would return the 90th percentile. Percentiles are especially helpful in anomaly detection: for instance, transactions above the 99th percentile in amount might be flagged for review as they're extremely rare.
-                <button class="ai-btn-inline code-explain-btn" data-code="numpy.percentile(data, 90)">✨ Explain Code</button>
             </p>
             <p class="mb-4">
                 Understanding these statistics gives you a baseline for your data. In our fraud example, you might find that the mean transaction amount is \$50, but the standard deviation is \$200 (indicating a long tail of high amounts), and that 99th percentile is \$1000. Such info could guide how you set threshold-based alerts or how you preprocess data for modeling.
             </p>
-            <button class="ai-btn summarize-btn mt-6">
-                ✨ Summarize this section
-            </button>
         </section>
 
         <!-- Section: Data Visualization -->
@@ -179,25 +170,20 @@
 
             <h3 class="text-2xl font-semibold text-gray-900 mb-3">
                 Data Distribution & Histograms
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 A distribution can be visualized with a histogram, which shows the frequency of data points in binned value ranges. For instance, a histogram of transaction amounts might show that most purchases are low-value with a long tail of high-value purchases. A special kind of distribution is the normal distribution (a bell curve). A normal (Gaussian) distribution has most values clustered around the mean and symmetric tails. Many natural phenomena approximate a normal distribution. If your data is approximately normal, you know that ~68% of values lie within 1 std dev of the mean, ~95% within 2 std dev, etc. This can inform anomaly detection: points beyond 3 std dev might be considered outliers. Python's <code class="code-inline">numpy.random.normal(mean, std, size)</code> can generate synthetic normal data, and <code class="code-inline">plt.hist(data)</code> (Matplotlib) will plot its histogram. In a normal distribution, the mean≈median≈mode, and the histogram is bell-shaped. Recognizing if data is normal or skewed helps in choosing the right models and transformations.
-                <button class="ai-btn-inline code-explain-btn" data-code="numpy.random.normal(mean, std, size), plt.hist(data)">✨ Explain Code</button>
             </p>
 
             <h3 class="text-2xl font-semibold text-gray-900 mb-3">
                 Scatter Plots
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 A scatter plot visualizes the relationship between two variables by plotting data points on an X-Y plane. For example, plotting x = age of account vs $y=$ transaction amount for credit card transactions might reveal patterns - perhaps newer accounts make smaller purchases, or perhaps fraudulent transactions cluster in a certain range. A scatter plot represents each data point as a dot, where the position along x and y axes corresponds to its values for two features. Using Python's Matplotlib (<code class="code-inline">plt.scatter(x, y)</code>), you can quickly spot correlations or outliers. In our example scenario, a scatter plot might show that very high transaction amounts (y) mostly come from older accounts (x), with a few exceptions - those exceptions could be interesting anomalies. Scatter plots also help in regression problems (as we'll see in the next section) by revealing whether a linear relationship exists between variables.
-                <button class="ai-btn-inline code-explain-btn" data-code="plt.scatter(x, y)">✨ Explain Code</button>
             </p>
 
             <h3 class="text-2xl font-semibold text-gray-900 mb-3">
                 Data Distribution in Multiple Dimensions
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 For higher dimensions, visualization is trickier, but techniques like pair-plots or dimensionality reduction (PCA, t-SNE) can help. Clustering algorithms (discussed later) and distance measures inherently rely on the distribution of data in multi-dimensional feature space. For example, hierarchical clustering will measure dissimilarities between data points across all chosen features to build clusters, and k-means clustering assumes clusters are roughly spherical in the feature space, centered around a mean.
@@ -208,9 +194,6 @@
             <p class="aside-note">
                 (At this stage, you might wonder: can't we do all this in Java as well? Yes, absolutely. Java has libraries like Weka and Smile for statistics and visualization, though they're less commonly used than Python's libraries. Python is favored in ML for its rich ecosystem e.g., NumPy, pandas, Matplotlib which makes such analysis straightforward. However, the concepts of mean, std dev, distribution are language-agnostic, and you can certainly compute them or even integrate Python ML libraries into a Java-based system if needed.)
             </p>
-            <button class="ai-btn summarize-btn mt-6">
-                ✨ Summarize this section
-            </button>
         </section>
 
         <!-- Section: Supervised Learning -->
@@ -225,7 +208,6 @@
 
             <h3 class="text-2xl font-semibold text-gray-900 mb-3">
                 Regression: Predicting Continuous Outcomes
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 Regression models predict a numeric value. For instance, given features like property size, location, etc., predicting house price is a regression task. In our running example, we might use regression to predict the expected transaction amount for a customer (though classification is more typical for fraud detection, regression could be used for related tasks like forecasting spending).
@@ -233,25 +215,20 @@
 
             <h4 class="text-xl font-semibold text-gray-900 mb-2">
                 Linear Regression
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h4>
             <p class="mb-4">
                 This is the simplest regression approach, assuming a linear relationship between input feature(s) and the output. In a single-feature (univariate) scenario, linear regression fits a straight line through the data points (on an X-Y scatter plot). The line is defined by an equation <code class="code-inline">y = m*x + b</code> (slope m and intercept b are parameters). The model finds the line that best fits the data (usually by minimizing the squared error between predictions and actual values). Linear regression uses the relationship between data points to draw a straight line through them, which can then be used for prediction. For example, if you plotted "minutes spent on website" (x) vs "dollars spent" (y) for customers, a linear regression line could predict spending from time on site. Python's SciPy can do this via <code class="code-inline">stats.linregress</code> which yields slope and intercept. In practice, you'd use libraries like scikit-learn (Linear Regression). Linear models are easy to interpret and fast to train, but they can underfit if relationships are nonlinear. In our scenario, linear regression could help understand trends (e.g., does transaction amount increase linearly with account age?), but fraud patterns are likely more complex than a single line can capture.
-                <button class="ai-btn-inline code-explain-btn" data-code="stats.linregress">✨ Explain Code</button>
             </p>
 
             <h4 class="text-xl font-semibold text-gray-900 mb-2">
                 Polynomial Regression
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h4>
             <p class="mb-4">
                 What if the relationship isn't a straight line? Polynomial regression extends linear regression by considering polynomial terms of the feature (e.g., fitting a curve <code class="code-inline">y = a + b1*x + b2*x^2 + ...</code>). If a scatter plot shows a curve pattern (say a quadratic trend), polynomial regression can capture that. If your data points will not fit a straight line (linear regression), a polynomial curve might be ideal. For instance, perhaps very small or very large transactions have disproportionately different risk levels a curve might fit that trend better than a line. You can perform polynomial regression by creating additional features (e.g., <code class="code-inline">x^2</code>, <code class="code-inline">x^3</code>) and using linear regression on the expanded feature set. In Python, <code class="code-inline">numpy.polyfit</code> can directly fit a polynomial to data. One must be cautious not to use too high a polynomial degree, as that can lead to overfitting (the curve passes through all training points but fails to generalize). Typically, you'd examine the R-squared (R^2) metric to see how well the curve explains variance in data an R^2 close to 1 means a good fit.
-                <button class="ai-btn-inline code-explain-btn" data-code="numpy.polyfit">✨ Explain Code</button>
             </p>
 
             <h4 class="text-xl font-semibold text-gray-900 mb-2">
                 Multiple Regression
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h4>
             <p class="mb-4">
                 This refers to linear regression with multiple input features (also called multivariate linear regression). In reality, outcomes usually depend on several factors. Multiple regression is like linear regression but with more than one independent variable - it tries to predict the target based on two or more features. For example, to predict house price, you'd use size, number of bedrooms, location, etc. In credit analytics, you might predict credit score using income, age of account, debt, etc. The model is still linear, but in a multi-dimensional space: <code class="code-inline">y = b0 + b1*x1 + b2*x2 + ... + bp*xp</code>. Coefficients <code class="code-inline">bi</code> indicate how much each feature influences the prediction, which is valuable for interpretability (e.g., if <code class="code-inline">b1</code> is large, feature 1 strongly impacts <code class="code-inline">y</code>). Using libraries (scikit-learn's Linear Regression or statsmodels in Python), you can train a multiple regression model on your dataset. In our example, multiple regression might not directly solve fraud detection (which is classification), but it could help with related tasks like predicting the probability of fraud or estimating expected transaction volume. It's also a good starting point for understanding more complex models.
@@ -262,7 +239,6 @@
 
             <h3 class="text-2xl font-semibold text-gray-900 mt-8 mb-3">
                 Classification: Predicting Categories (Labels)
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 For our fraud detection use case, classification is the core task - deciding if a transaction is "fraud" or "not fraud". Classification algorithms predict discrete labels (binary or multi-class). Let's look at fundamental classification methods:
@@ -270,34 +246,27 @@
 
             <h4 class="text-xl font-semibold text-gray-900 mb-2">
                 Logistic Regression
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h4>
             <p class="mb-4">
                 Despite the name "regression," logistic regression is actually a classification algorithm (the confusion stems from its statistical origins). Logistic regression models the probability of a binary outcome (yes/no, 1/0) using a logistic (sigmoid) function. It produces a score between 0 and 1 which can be interpreted as P(positive class). For example, logistic regression could take features of a transaction (amount, time, location, etc.) and output a probability of fraud. If P(fraud) > 0.5, you classify it as fraud (positive class), otherwise not fraud (negative class). The model is essentially a linear combination of inputs passed through a sigmoid curve to squash the output to [0,1]. It's trained by maximizing the likelihood of the data (equivalently minimizing a log-loss cost). Logistic regression is simple and fast, and often surprisingly effective as a baseline. It assumes a linear decision boundary in the feature space (after transformation by the sigmoid). In Python, scikit-learn's <code class="code-inline">LogisticRegression</code> makes it easy to train one. Logistic regression is widely used in industry for its probabilistic output and interpretability - coefficients can be examined to see how each feature influences the log-odds of the outcome (e.g., it might reveal that high transaction amounts strongly increase odds of fraud, controlling for other factors). If you have a strong software engineering background (in Java), you might implement logistic regression fairly directly (the math involves gradients and an optimization routine like gradient descent, which libraries can handle). Typically though, one would use existing libraries.
-                <button class="ai-btn-inline code-explain-btn" data-code="sklearn.LogisticRegression">✨ Explain Code</button>
             </p>
 
             <h4 class="text-xl font-semibold text-gray-900 mb-2">
                 k-Nearest Neighbors (KNN)
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h4>
             <p class="mb-4">
                 This is an intuitive, instance-based learning method. The idea: to classify a new data point, look at the "k" most similar points (neighbors) in the training set and take a majority vote of their classes. "Similarity" is defined via a distance metric (Euclidean distance is common for numerical data). For example, if you have a new transaction, find the 5 transactions in your historical data most similar to it (perhaps based on amount, merchant, time, etc.). If 4 of those 5 were non-fraud and 1 was fraud, the majority vote classifies the new one as non-fraud. KNN is non-parametric and makes no explicit assumption about data distribution the model is literally the stored training instances. It's very simple to implement: you compute distances and keep track of nearest neighbors. In Python, you can use scikit-learn's <code class="code-inline">KNeighborsClassifier</code>. KNN's main drawbacks are that it can be slow for large datasets (since every prediction requires scanning the database) and that it doesn't produce an explicit model or coefficients. However, it's often a good baseline and can perform well in low-dimensional spaces. In our scenario, a KNN classifier might say "this transaction is similar to these known legitimate ones, so it's probably legitimate as well". One must choose k (the number of neighbors) carefully too low can be noisy, too high can include irrelevant points. KNN can also be used for regression (taking average of neighbors' values instead of vote) e.g., predicting a house price by averaging prices of nearest houses.
-                <button class="ai-btn-inline code-explain-btn" data-code="sklearn.KNeighborsClassifier">✨ Explain Code</button>
             </p>
 
             <h4 class="text-xl font-semibold text-gray-900 mb-2">
                 Decision Trees
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h4>
             <p class="mb-4">
                 A decision tree is a flowchart-like tree structure for decisions. Each internal node tests a feature (e.g., "is transaction amount > \$1000?"), each branch is an outcome of that test (yes/no), and each leaf node assigns a class label (decision). The tree is built (learned from data) by finding which splits best separate the classes (common criteria include Gini impurity or information gain). Decision trees are very interpretable: you can follow the path to see why a prediction was made ("transaction amount > \$1000? yes; card owner age < 25? yes; -> classify as fraud"). They can capture nonlinear relationships by the combination of decisions. For example, a tree could learn a rule that "IF amount > \$1000 AND card is used in a new city AND past behavior is normal THEN flag as fraud". Training a decision tree in Python is straightforward with scikit-learn's <code class="code-inline">DecisionTreeClassifier</code>. Trees tend to overfit if grown too deep, so usually one prunes them or sets limits (max depth, min samples per leaf, etc.). Despite this, they are powerful and form the basis of more advanced ensemble methods like Random Forests. In Java, you might use libraries or implement ID3/CART algorithms but using a library (like Weka's J48 or XGBoost for gradient boosted trees) is much easier.
-                <button class="ai-btn-inline code-explain-btn" data-code="sklearn.DecisionTreeClassifier">✨ Explain Code</button>
             </p>
 
             <h4 class="text-xl font-semibold text-gray-900 mb-2">
                 Evaluating Classifiers - Confusion Matrix
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h4>
             <p class="mb-4">
                 When dealing with classification, we need to measure performance beyond just "accuracy". A useful tool is the confusion matrix - a table that compares the model's predicted labels with the actual true labels for a set of test data. For binary classification, it's a 2x2 table with entries: True Positives (TP), True Negatives (TN), False Positives (FP), and False Negatives (FN). Using our fraud example, if "positive" = fraud, "negative" = legit, then:
@@ -326,23 +295,17 @@
             </p>
             <p class="mb-4">
                 In Python, you can use <code class="code-inline">sklearn.metrics.confusion_matrix(y_true, y_pred)</code> to get the matrix, and libraries like Seaborn to visualize it in a heatmap. The example above might correspond to a case where out of 100 actual frauds, the model caught 85 (TP) and missed 15 (FN), and out of 900 actual legit transactions, it correctly let 870 through (TN) but falsely flagged 30 (FP) - yielding precision ≈ 73.9% and recall = 85%. Improving the model might involve reducing those 15 missed frauds (FN) without raising FP too much.
-                <button class="ai-btn-inline code-explain-btn" data-code="sklearn.metrics.confusion_matrix(y_true, y_pred)">✨ Explain Code</button>
             </p>
 
             <h4 class="text-xl font-semibold text-gray-900 mb-2">
                 ROC Curve & AUC
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h4>
             <p class="mb-4">
                 Another important evaluation tool for binary classifiers is the ROC curve (Receiver Operating Characteristic curve). This is a plot of the True Positive Rate (Recall) against False Positive Rate for various threshold settings. Logistic regression and many models output a probability or score; by setting a threshold on that score to decide positive vs negative, you can trade off recall and precision. The ROC curve shows this trade-off across all thresholds. A model with no skill would produce a diagonal ROC curve (random guessing), whereas a good model bows towards the top-left corner (high TPR, low FPR). The AUC (Area Under the ROC Curve) is a single number summary - the higher, the better (max 1.0). An AUC of 0.5 means random performance; 0.9 is excellent. In practice, you might compute AUC to compare models. For instance, if one model has AUC 0.85 and another 0.90, the latter generally achieves a better sensitivity-specificity balance. In Python, <code class="code-inline">sklearn.metrics.roc_curve</code> and <code class="code-inline">roc_auc_score</code> can be used. ROC/AUC is especially useful in imbalanced scenarios (like fraud detection) because it's insensitive to the actual positive/negative ratio and focuses on the model's ability to rank positives higher than negatives.
-                <button class="ai-btn-inline code-explain-btn" data-code="sklearn.metrics.roc_curve, sklearn.metrics.roc_auc_score">✨ Explain Code</button>
             </p>
             <p class="aside-note">
                 (Java note: All these algorithms have equivalents in Java libraries. For instance, Weka or Apache Spark's MLlib offers implementations of logistic regression, decision trees, etc. The evaluation concepts like confusion matrix and ROC remain the same. You could generate a confusion matrix in Java by simply tallying outcomes in a 2D array, and even compute AUC if you have model scores. The heavy lifting like training a logistic regression is often delegated to libraries in both languages. For a Java developer, it might be enlightening to compare a Python scikit-learn implementation with a Java Weka implementation on the same dataset to see that they yield the same confusion matrix values.)
             </p>
-            <button class="ai-btn summarize-btn mt-6">
-                ✨ Summarize this section
-            </button>
         </section>
 
         <!-- Section: Unsupervised Learning -->
@@ -358,7 +321,6 @@
             </p>
             <h3 class="text-2xl font-semibold text-gray-900 mb-3">
                 K-Means Clustering
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 K-means is a popular algorithm for partitioning data into K clusters. It is intuitive: you specify the number of clusters K, and the algorithm will assign each of the n data points to one of the K clusters such that points in the same cluster are "close" to each other (and ideally far from points in other clusters). It works iteratively:
@@ -371,7 +333,6 @@
             </ul>
             <p class="mb-4">
                 The objective is to minimize the within-cluster variance (sum of squared distances of points from their cluster's centroid). In essence, k-means aims to partition n observations into k clusters such that each observation belongs to the cluster with the nearest mean (centroid). For example, if you cluster transactions based on features like amount, time, merchant category, you might find clusters corresponding to "grocery purchases", "travel bookings", "online subscriptions", etc., since transactions naturally group by behavior. A new transaction that doesn't clearly belong to any cluster (i.e., it has a high distance to all cluster centroids) might be an outlier - potentially fraudulent. K-means is efficient and works well for compact, spherical clusters but has limitations: you need to choose K in advance and it can be affected by scale (feature scaling is important here!) and initialization. Tools like the "elbow method" (plotting explained variance vs K) can help pick a good K. In Python, you'd use <code class="code-inline">sklearn.cluster.KMeans</code>.
-                <button class="ai-btn-inline code-explain-btn" data-code="sklearn.cluster.KMeans">✨ Explain Code</button>
             </p>
             <p class="mb-4">
                 One must note k-means assumes clusters of roughly equal size and density. It might not perform well if clusters are very different shapes or sizes. Also, because it uses means, it's not robust to outliers (a few extreme points can skew a centroid).
@@ -379,11 +340,9 @@
 
             <h3 class="text-2xl font-semibold text-gray-900 mb-3">
                 Hierarchical Clustering
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 This method builds a hierarchy of clusters either agglomeratively (bottom-up merging) or divisively (top-down splitting). Agglomerative clustering, for instance, starts with each data point as its own cluster, then repeatedly merges the two closest clusters until you end up with one big cluster. If you record this merging process, it forms a tree called a dendrogram, which you can cut at a certain level to get a desired number of clusters. Hierarchical clustering is an unsupervised method that builds clusters by measuring dissimilarities (distances) between data points. It doesn't require specifying K upfront (though you decide how to cut the dendrogram), and it can capture nested clusters. For our example, hierarchical clustering could reveal a structure like: transactions split first into "daytime vs nighttime" clusters, and within "daytime" there are subclusters for "weekday vs weekend purchases", etc. This can be insightful for understanding data taxonomy. The trade-off is that hierarchical methods are more computationally expensive (especially for large datasets) than k-means, and merging decisions are hard to undo (greedy). Python's SciPy has <code class="code-inline">linkage</code> and <code class="code-inline">dendrogram</code> functions to perform and visualize hierarchical clustering. Scikit-learn also provides <code class="code-inline">AgglomerativeClustering</code>. An output of hierarchical clustering is a dendrogram chart, which is great for visual analysis of cluster distances and deciding how many clusters to use.
-                <button class="ai-btn-inline code-explain-btn" data-code="scipy.linkage, scipy.dendrogram, sklearn.AgglomerativeClustering">✨ Explain Code</button>
             </p>
             <p class="mb-4">
                 In anomaly detection, hierarchical clustering can similarly identify outliers: after clustering, outliers might appear as single-element clusters or points that merge only at very high distance thresholds.
@@ -391,7 +350,6 @@
 
             <h3 class="text-2xl font-semibold text-gray-900 mb-3">
                 Anomaly Detection via Unsupervised Learning
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 Sometimes we explicitly train models for anomaly detection. One method is to model the "normal" data distribution (through clustering or statistical models) and then flag points with low likelihood under that model. For example, a Gaussian mixture model (GMM) could model the distribution of normal transactions; transactions with very low probability under the GMM are anomalies. Clustering approaches like DBSCAN (which finds dense regions and labels sparse points as outliers) are also effective. If we revisit our earlier statistics, say transaction amounts roughly follow a normal distribution with mean \$50 and std \$200 - a transaction of \$5000 is ~25 std dev above the mean, which is astronomically unlikely (this would be flagged by a simple rule too). In multiple dimensions, we rely on distance-based or density-based measures.
@@ -405,9 +363,6 @@
             <p class="aside-note">
                 (Java perspective: Clustering algorithms are available in Java (Weka includes k-means and hierarchical, Apache Commons has clustering modules, etc.). The logic for k-means iterative distance computation and centroid update is not too complex to implement from scratch, given Java's performance, but one would typically reuse library code. Visualization like dendrograms might require additional coding in Java, whereas Python's ecosystem makes it easy to plot. Still, results such as cluster assignments or outlier scores can be obtained and then visualized in a tool-agnostic way (like exporting to a CSV and plotting).)
             </p>
-            <button class="ai-btn summarize-btn mt-6">
-                ✨ Summarize this section
-            </button>
         </section>
 
         <!-- Section: Preprocessing -->
@@ -421,7 +376,6 @@
 
             <h3 class="text-2xl font-semibold text-gray-900 mb-3">
                 Feature Scaling (Normalization/Standardization)
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 Many ML algorithms (like k-NN, k-means, logistic regression, neural networks) perform better when features are on comparable scales. Feature scaling is a method to normalize the range of features in your data. For instance, consider two features: "transaction amount" (which can range from 1 to 10,000) and "number of transactions in last 24h" (range 0 to 50). The first feature ranges over 4 orders of magnitude, the second over two. Unscaled, algorithms that use Euclidean distance or gradients might get dominated by the "amount" feature simply because of scale. To prevent this, we scale features:
@@ -432,7 +386,6 @@
             </ul>
             <p class="mb-4">
                 The choice depends on the algorithm and data distribution. Some algorithms (like tree-based models) are not sensitive to scale, but others (like gradient descent based models, SVMs, KNN) require scaling for optimal performance. In Python, you can use <code class="code-inline">sklearn.preprocessing.StandardScaler</code> or <code class="code-inline">MinMaxScaler</code>. A practical tip: fit the scaler on the training data only, then transform training and test consistently - this avoids data leakage.
-                <button class="ai-btn-inline code-explain-btn" data-code="sklearn.preprocessing.StandardScaler, sklearn.preprocessing.MinMaxScaler">✨ Explain Code</button>
             </p>
             <p class="mb-4">
                 In our fraud scenario, scaling ensures that features like "amount" and "time since last transaction" contribute appropriately. If amount is unscaled and huge, a distance-based model might effectively ignore the "time" feature. By scaling, we ensure each feature's unit doesn't bias the model unduly.
@@ -440,7 +393,6 @@
 
             <h3 class="text-2xl font-semibold text-gray-900 mb-3">
                 Categorical Data Encoding
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 Not all features are numeric. You might have categorical features like "merchant category" (groceries, electronics, etc.), "day of week", or a user's "account type" (basic, premium). ML models, especially those based on math and distance, need numeric input. Thus we convert categories to numbers:
@@ -452,14 +404,10 @@
             </ul>
             <p class="mb-4">
                 For our example, a feature like "transaction location" might be categorical (country codes or online vs in-store). We'd encode those. If using one-hot, be mindful of the "dummy variable trap": if one-hot encoding a feature into N dummies, dropping one dummy (or using regularization) is needed in linear models to avoid redundancy (multicollinearity). Tools like pandas <code class="code-inline">get_dummies</code> or <code class="code-inline">sklearn.OneHotEncoder</code> handle one-hot easily.
-                <button class="ai-btn-inline code-explain-btn" data-code="pandas.get_dummies, sklearn.OneHotEncoder">✨ Explain Code</button>
             </p>
             <p class="mb-4">
                 Proper preprocessing often decides if a model can learn effectively. For instance, training a neural network on raw categorical inputs (not encoded) won't work, and using unscaled features might make convergence very slow or lead to suboptimal solutions. The good news is these steps are well-supported by libraries in Python, and in Java, you would find similar utilities or implement a small routine (like scaling each column by its min and range).
             </p>
-            <button class="ai-btn summarize-btn mt-6">
-                ✨ Summarize this section
-            </button>
         </section>
 
         <!-- Section: Training & Tuning -->
@@ -473,7 +421,6 @@
 
             <h3 class="text-2xl font-semibold text-gray-900 mb-3">
                 Train/Test Split and Cross-Validation
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 We touched on splitting data into training and testing sets. Typically, you keep aside a portion of labeled data (e.g., 20-30%) as a test set to evaluate your model's performance on unseen data. You train (fit) the model on the training set (e.g., 80% of data), then predict on the test set and compute metrics (accuracy, precision, etc.). This simulates how the model will perform in the real world. It's crucial that the test data is not used in training - otherwise, your evaluation will be overly optimistic (a form of "data leakage"). In code, one might use <code class="code-inline">sklearn.model_selection.train_test_split</code> to do this shuffle and split.
@@ -493,12 +440,10 @@
             </p>
             <p class="mb-4">
                 In Python, <code class="code-inline">sklearn.model_selection.cross_val_score</code> automates k-fold CV. In our fraud example, because fraud is rare, you'd ensure that each fold maintains class proportions (stratified cross-validation) so that you don't end up with a fold that has zero fraud cases, for instance.
-                <button class="ai-btn-inline code-explain-btn" data-code="sklearn.model_selection.train_test_split, sklearn.model_selection.cross_val_score">✨ Explain Code</button>
             </p>
 
             <h3 class="text-2xl font-semibold text-gray-900 mb-3">
                 Hyperparameter Tuning and Grid Search
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 Most ML algorithms have hyperparameters - settings not learned from data but set by the practitioner. For
@@ -517,7 +462,6 @@
             </p>
             <p class="mb-4">
                 Scikit-learn provides <code class="code-inline">GridSearchCV</code> which handles the splitting, training, and scoring for each combo. You simply supply a <code class="code-inline">param_grid</code> dictionary and a model. In our context, you might grid search the threshold of a classifier to optimize F1-score, or the number of neighbors in KNN that gives the best recall at an acceptable precision, etc.
-                <button class="ai-btn-inline code-explain-btn" data-code="sklearn.GridSearchCV, param_grid">✨ Explain Code</button>
             </p>
             <p class="mb-4">
                 Always remember: hyperparameter tuning should be done on training data (with CV) - not on the final test set. The final test set should only be used once at the end to report the model's performance. If you tune hyperparameters on the test set, you effectively "train on the test set" via selection, which invalidates the test's unbiased nature.
@@ -525,7 +469,6 @@
 
             <h3 class="text-2xl font-semibold text-gray-900 mb-3">
                 Ensemble Methods - Bagging (Bootstrap Aggregation)
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 One way to boost model performance is by combining multiple models. Ensemble methods leverage the wisdom
@@ -551,7 +494,6 @@
             </p>
             <p class="mb-4">
                 In Python, <code class="code-inline">sklearn.ensemble.BaggingClassifier</code> can wrap any base model. <code class="code-inline">RandomForestClassifier</code> is a specialized, optimized bagging of trees implementation. These ensemble methods are powerful - they can capture complex relationships and usually have good default settings, but you can tune hyperparameters like number of estimators or tree depth to balance bias-variance.
-                <button class="ai-btn-inline code-explain-btn" data-code="sklearn.ensemble.BaggingClassifier, sklearn.RandomForestClassifier">✨ Explain Code</button>
             </p>
             <p class="aside-note">
                 (Java note: Weka has implementations of Bagging and Random Forest. The concepts remain the same. In production, ensembles can be heavier to deploy (multiple models instead of one), but techniques like model distillation or simply the acceptability of a bit more compute can make it fine. Today's systems often deploy ensembles, given the benefits in accuracy.)
@@ -559,7 +501,6 @@
 
             <h3 class="text-2xl font-semibold text-gray-900 mb-3">
                 Practical Deployment Considerations
-                <button class="ai-btn-inline eli5-btn">✨ ELI5</button>
             </h3>
             <p class="mb-4">
                 After training and tuning, you'll deploy the model to actually make predictions on new data. Key considerations include:
@@ -573,9 +514,6 @@
             <p class="mb-4">
                 Finally, remember that machine learning is an iterative process. You rarely get everything perfect in one go. It's common to loop back from deployment to data analysis: if the model is erring on certain cases, collect more data or engineer new features to address those. For instance, maybe our fraud model is missing a lot of fraud on weekends. That insight might lead us to include "day of week" as a feature, retrain, and improve recall on weekends.
             </p>
-            <button class="ai-btn summarize-btn mt-6">
-                ✨ Summarize this section
-            </button>
         </section>
 
         <!-- Section: Conclusion -->
@@ -621,9 +559,6 @@
             <p class="mb-4">
                 Congratulations on taking your first steps into machine learning! With Python as your learning tool (and Java in your back pocket), you're well-equipped to implement these concepts. Keep practicing with real datasets (there are plenty of open datasets and Kaggle competitions to try), and soon you'll be as confident in ML as you are in Java development. Happy learning and coding!
             </p>
-            <button id="quiz-btn" class="ai-btn quiz-btn mt-6">
-                ✨ Test Your Knowledge
-            </button>
         </section>
 
         <!-- Section: Sources -->
@@ -665,39 +600,8 @@
       </div>
     </div>
   </section>
+<div data-related class="sec"></div>
 </main>
-
-<!-- AI helper output -->
-<div id="geminiModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="geminiModalTitle">
-  <div class="modal-card" style="height:auto;max-height:80vh;max-width:640px">
-    <div class="modal-head">
-      <h3 id="geminiModalTitle">&#10024; AI assistant</h3>
-      <button class="modal-close" type="button" id="closeModal" aria-label="Close">&#10005;</button>
-    </div>
-    <div id="modalContent" class="modal-body"></div>
-  </div>
-</div>
-
-<!-- API key prompt -->
-<div id="apiKeyModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="apiKeyTitle">
-  <div class="modal-card" style="height:auto;max-width:420px">
-    <div class="modal-head">
-      <h3 id="apiKeyTitle">Enter API key</h3>
-      <button class="modal-close" type="button" id="cancelApiKeyBtn" aria-label="Close">&#10005;</button>
-    </div>
-    <div class="modal-body" style="white-space:normal">
-      <p class="sub">These helpers call the Gemini API from your browser. The key stays in this tab's session storage and is gone when you close it.</p>
-      <label class="field" for="apiKeyInput"><span>Gemini API key</span>
-        <input type="password" id="apiKeyInput" placeholder="Paste your key" autocomplete="off">
-      </label>
-    </div>
-    <div class="modal-foot">
-      <button class="btn primary" type="button" id="saveApiKeyBtn">Save and continue</button>
-    </div>
-  </div>
-</div>
-
-<div id="loadingSpinner" class="spinner hidden"><i></i></div>
 
 <footer class="sitefoot">
   <div class="wrap">
@@ -706,145 +610,8 @@
   </div>
 </footer>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const modal          = document.getElementById('geminiModal');
-  const closeModal     = document.getElementById('closeModal');
-  const modalContent   = document.getElementById('modalContent');
-  const loadingSpinner = document.getElementById('loadingSpinner');
-  const apiKeyModal    = document.getElementById('apiKeyModal');
-  const apiKeyInput    = document.getElementById('apiKeyInput');
-  const saveApiKeyBtn  = document.getElementById('saveApiKeyBtn');
-  const cancelApiKeyBtn = document.getElementById('cancelApiKeyBtn');
-
-  const summarizeButtons   = document.querySelectorAll('.summarize-btn');
-  const quizButton         = document.getElementById('quiz-btn');
-  const eli5Buttons        = document.querySelectorAll('.eli5-btn');
-  const codeExplainButtons = document.querySelectorAll('.code-explain-btn');
-
-  let pending = null;
-
-  const showModal = (content) => { modalContent.textContent = content; modal.classList.remove('hidden'); };
-  const hideModal = () => modal.classList.add('hidden');
-  closeModal.addEventListener('click', hideModal);
-  modal.addEventListener('click', (e) => { if (e.target === modal) hideModal(); });
-  document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape') return;
-    hideModal(); apiKeyModal.classList.add('hidden');
-  });
-
-  const showLoading = () => loadingSpinner.classList.remove('hidden');
-  const hideLoading = () => loadingSpinner.classList.add('hidden');
-
-  // The original hard-coded an empty apiKey with a note that "the environment"
-  // would inject one. Nothing does on GitHub Pages, so every button 400'd.
-  // The key is now asked for once and kept in sessionStorage for the tab.
-  const callGeminiAPI = async (apiKey, userQuery, systemInstruction, retries = 3, delay = 1000) => {
-    showLoading();
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-    const payload = {
-      contents: [{ parts: [{ text: userQuery }] }],
-      systemInstruction: { parts: [{ text: systemInstruction }] },
-    };
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if (!response.ok) {
-        if (response.status === 429 && retries > 0) {
-          await new Promise(r => setTimeout(r, delay));
-          return callGeminiAPI(apiKey, userQuery, systemInstruction, retries - 1, delay * 2);
-        }
-        throw new Error(`API Error: ${response.status} ${response.statusText}`);
-      }
-      const result = await response.json();
-      const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-      if (!text) throw new Error('Invalid response structure from API.');
-      hideLoading();
-      showModal(text);
-    } catch (error) {
-      console.error('Error calling Gemini API:', error);
-      hideLoading();
-      if (error.message.includes('400') || error.message.includes('API key not valid')) {
-        sessionStorage.removeItem('geminiApiKey');
-        showModal('That API key was not accepted. Try again with a valid key.');
-      } else {
-        showModal('Sorry, that request could not be completed. Please try again later.');
-      }
-    }
-  };
-
-  const ask = (userQuery, systemInstruction) => {
-    const key = sessionStorage.getItem('geminiApiKey');
-    if (key) { callGeminiAPI(key, userQuery, systemInstruction); return; }
-    pending = { userQuery, systemInstruction };
-    apiKeyModal.classList.remove('hidden');
-    apiKeyInput.focus();
-  };
-
-  saveApiKeyBtn.addEventListener('click', () => {
-    const key = apiKeyInput.value.trim();
-    if (!key) return;
-    sessionStorage.setItem('geminiApiKey', key);
-    apiKeyModal.classList.add('hidden');
-    apiKeyInput.value = '';
-    if (pending) { callGeminiAPI(key, pending.userQuery, pending.systemInstruction); pending = null; }
-  });
-  apiKeyInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') saveApiKeyBtn.click(); });
-  cancelApiKeyBtn.addEventListener('click', () => { apiKeyModal.classList.add('hidden'); pending = null; });
-
-  summarizeButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const section = button.closest('section');
-      if (!section) return;
-      const clone = section.cloneNode(true);
-      clone.querySelectorAll('.ai-btn, .ai-btn-inline').forEach(el => el.remove());
-      ask(clone.innerText || clone.textContent,
-          'Summarize the following text about machine learning in a single concise paragraph of two or three sentences.');
-    });
-  });
-
-  if (quizButton) quizButton.addEventListener('click', () => {
-    const article = document.querySelector('.prose');
-    if (!article) return;
-    const clone = article.cloneNode(true);
-    clone.querySelectorAll('.ai-btn, .ai-btn-inline, #sources, .aside-note').forEach(el => el.remove());
-    ask(clone.innerText || clone.textContent,
-        'You are a quiz master. From the provided article about machine learning, write one multiple-choice question with four options (A, B, C, D). State the correct answer and give a one-sentence explanation.');
-  });
-
-  eli5Buttons.forEach(button => {
-    button.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const header = button.closest('h3, h4');
-      if (!header) return;
-      let content = header.innerText.replace('✨ ELI5', '').trim();
-      let next = header.nextElementSibling;
-      while (next && next.tagName !== 'P') next = next.nextElementSibling;
-      if (next) {
-        const pText = next.innerText || next.textContent;
-        content += '\n\nContext: ' + pText.split('. ')[0] + '.';
-      }
-      ask(content, "Explain the following machine learning concept as you would to a five-year-old, in two or three simple sentences. Use an analogy if one fits.");
-    });
-  });
-
-  codeExplainButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const codeToExplain = button.dataset.code;
-      const host = button.closest('p');
-      const context = host ? host.innerText.replace(/✨ Explain Code/g, '').trim() : '';
-      ask(`Explain the following code snippet(s):\n\n${codeToExplain}\n\nThe paragraph they appeared in, for context:\n${context}`,
-          'Briefly explain what the provided Python snippet does and why it matters in machine learning. Two to four sentences.');
-    });
-  });
-});
-</script>
-
 <script src="/assets/js/includes.js"></script>
 <script src="/assets/js/site-nav.js"></script>
+<script src="/assets/js/related.js"></script>
 </body>
 </html>

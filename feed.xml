@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Janaka Premathilaka</title>
+  <subtitle>Clear, hands-on articles on Java, Kafka, RAG, agents and evals, plus academy modules and lab notes.</subtitle>
+  <link rel="alternate" type="text/html" href="https://janaka.me/"/>
+  <link rel="self" type="application/atom+xml" href="https://janaka.me/feed.xml"/>
+  <id>https://janaka.me/</id>
+  <updated>2026-09-10T00:00:00Z</updated>
+  <author><name>Janaka Premathilaka</name><uri>https://janaka.me/</uri></author>
+  <generator>scripts/gen-feed.py</generator>
+  <entry>
+    <title>LLM Study Notes — Interactive Highlighter Toolbox</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/lab/Notes/llm-study-notes-handwritten-style.html"/>
+    <id>https://janaka.me/lab/Notes/llm-study-notes-handwritten-style.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-09-09T00:00:00Z</updated>
+    <category term="lab" label="Lab"/>
+    <summary>Interactive study notes on assessing large language models with a highlighter toolbox, sticky notes, and explain, analogy and ELI5 helpers.</summary>
+  </entry>
+  <entry>
+    <title>LLM Notes — Hand‑Annotated Highlights Demo + Toolbox</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/lab/Notes/llm-hand%E2%80%91annotated-demo5.html"/>
+    <id>https://janaka.me/lab/Notes/llm-hand%E2%80%91annotated-demo5.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-09-09T00:00:00Z</updated>
+    <category term="lab" label="Lab"/>
+    <summary>Interactive hand-annotated notes on large language models with a highlighter toolbox: mark up, add sticky notes, save, load and export your annotations.</summary>
+  </entry>
+  <entry>
+    <title>LLM Study Notes — Assessing LLMs, Handwritten Style</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/lab/Notes/hand-book-note3.html"/>
+    <id>https://janaka.me/lab/Notes/hand-book-note3.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-09-09T00:00:00Z</updated>
+    <category term="lab" label="Lab"/>
+    <summary>Handwritten-style study notes on assessing large language models: why they are large, how self-attention works, and why hallucination is the big problem.</summary>
+  </entry>
+  <entry>
+    <title>Study‑Style Notes: Aspects &amp; Assessment of LLMs</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/lab/Notes/hand-book-note2.html"/>
+    <id>https://janaka.me/lab/Notes/hand-book-note2.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-09-09T00:00:00Z</updated>
+    <category term="lab" label="Lab"/>
+    <summary>Study-style notes on assessing large language models: factuality, reasoning, safety, latency and cost, with the retrieval, QA and generation metrics.</summary>
+  </entry>
+  <entry>
+    <title>LLM Notes — Hand‑Annotated Highlights Demo</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/lab/Notes/hand-book-note1.html"/>
+    <id>https://janaka.me/lab/Notes/hand-book-note1.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-09-09T00:00:00Z</updated>
+    <category term="lab" label="Lab"/>
+    <summary>Hand-annotated study notes on what large language models are used for: retrieval and RAG, content generation, reasoning, coding and agents.</summary>
+  </entry>
+  <entry>
+    <title>Java 21 Virtual Threads - Complete Practical Guide</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/virtual_threads_java_21_academy_page.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/virtual_threads_java_21_academy_page.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-09-09T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>In Java applications in 2026, one of the most important concurrency upgrades is virtual threads in Java 21. They let me keep the simple thread-per-task programming model, but at a scale that was not…</summary>
+  </entry>
+  <entry>
+    <title>VI Editor Complete</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/vi-editor-complete.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/vi-editor-complete.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>VI/VIM is often the only editor available on Linux servers. This page focuses on the commands engineers really use in production.</summary>
+  </entry>
+  <entry>
+    <title>Disk Memory CPU Troubleshooting</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/troubleshooting-resources.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/troubleshooting-resources.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>This page gives the fastest commands for capacity and performance issues. The goal is to identify whether the bottleneck is storage, memory pressure, CPU saturation, or process limits.</summary>
+  </entry>
+  <entry>
+    <title>Top 50 Debugging Commands</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/top-50-debugging-commands.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/top-50-debugging-commands.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>These are the commands engineers reach for during incidents: process checks, ports, logs, services, containers, filesystems and network validation.</summary>
+  </entry>
+  <entry>
+    <title>Top 100 Linux Commands</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/top-100-linux-commands.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/top-100-linux-commands.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>This page focuses on commands that are practical in real backend, DevOps, CI/CD, support and scripting work. The descriptions are short for fast lookup.</summary>
+  </entry>
+  <entry>
+    <title>Spring Boot 3.3 Ecosystem</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/spring-boot.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/spring-boot.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-09-10T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.</summary>
+  </entry>
+  <entry>
+    <title>React 19 + TypeScript Frontend Engineering</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/react.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/react.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-09-10T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.</summary>
+  </entry>
+  <entry>
+    <title>Templates</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/templates.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/promting/templates.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>These are written so you can copy and adapt them quickly. They are practical, simple, and designed for day-to-day engineering work.</summary>
+  </entry>
+  <entry>
+    <title>Strategies</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/strategies.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/promting/strategies.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>The best prompt pattern depends on the job. Below are the main strategies that matter most in real engineering usage.</summary>
+  </entry>
+  <entry>
+    <title>References and Source Notes</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/references.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/promting/references.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…</summary>
+  </entry>
+  <entry>
+    <title>RAG Prompting</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/rag.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/promting/rag.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>RAG works best when the prompt clearly tells the model how to use retrieved context and what to do when context is incomplete.</summary>
+  </entry>
+  <entry>
+    <title>Prompt Engineering Handbook</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/index.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/promting/index.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>Built for software engineers working with modern LLMs, agent workflows, RAG systems, debugging, architecture analysis, and daily coding productivity. The layout is intentionally white, clean, and…</summary>
+  </entry>
+  <entry>
+    <title>GPT-5.4 Prompting Guide</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/gpt54.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/promting/gpt54.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>If your prompt is vague, you get broad but not exact answers.</summary>
+  </entry>
+  <entry>
+    <title>Glossary in Easy English</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/glossary.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/promting/glossary.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…</summary>
+  </entry>
+  <entry>
+    <title>Latest Gemini Prompting Guide</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/gemini.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/promting/gemini.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…</summary>
+  </entry>
+  <entry>
+    <title>Foundations</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/foundations.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/promting/foundations.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>Good prompting is not about magic wording. It is about reducing ambiguity, giving the model the right working context, and shaping the output so it is useful inside a real engineering workflow.</summary>
+  </entry>
+  <entry>
+    <title>Developer Prompts</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/developer.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/promting/developer.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>This section is tuned for senior developers who want fast, reusable prompts for real project work.</summary>
+  </entry>
+  <entry>
+    <title>Most Useful Developer Task Prompts</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/developer-tasks.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/promting/developer-tasks.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…</summary>
+  </entry>
+  <entry>
+    <title>Debugging Playbook</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/debugging.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/promting/debugging.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>When a prompt gives weak results, the cause is usually one of a few common problems: unclear task, missing context, no output shape, weak grounding, or no quality check.</summary>
+  </entry>
+  <entry>
+    <title>GPT-5.4 vs Gemini: Practical Prompting Differences</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/comparison.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/promting/comparison.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…</summary>
+  </entry>
+  <entry>
+    <title>Cheat Sheet</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/cheatsheet.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/promting/cheatsheet.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>A practical summary for daily use.</summary>
+  </entry>
+  <entry>
+    <title>Agent Prompting</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/agents.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/promting/agents.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>Agent prompts need more than task description. They need operating rules: when to plan, when to use tools, when to stop, and how to validate.</summary>
+  </entry>
+  <entry>
+    <title>Production One-Liners</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/production-one-liners.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/production-one-liners.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>These are short commands that solve common production tasks fast. They are especially useful for support engineers, backend developers and operators.</summary>
+  </entry>
+  <entry>
+    <title>Learn How to Solve Critical Performance Problems with Step by Step Approach!</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/performanceTuning/DBPerformanceTuning.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/performanceTuning/DBPerformanceTuning.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>Use this as your checklist. This page is intentionally “study-friendly”: you can tick items as you learn.</summary>
+  </entry>
+  <entry>
+    <title>Modernizing the Java Journey: A Comprehensive Study Guide</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/modenizeJava.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/modenizeJava.html</id>
+    <published>2026-08-29T00:00:00Z</published>
+    <updated>2026-09-09T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>Java has evolved from a slow-moving language with releases every four or five years to a vibrant, fast-paced ecosystem. As of 2026, the platform follows a strict "release on the clock" schedule…</summary>
+  </entry>
+</feed>

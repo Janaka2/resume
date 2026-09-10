@@ -78,7 +78,58 @@
     if (y) y.textContent = new Date().getFullYear();
   }
 
-  function boot() { markActive(); wireTheme(); setYear(); ensureMainId(); wirePrint(); }
+  /* Search: a "Search /" button in the nav plus the "/" shortcut. The overlay
+     itself lives in /assets/js/search.js and is injected on first use, so a
+     page that is never searched does not download it. Once search.js has
+     loaded it owns both triggers (window.jpSearch is set) and this shim
+     steps aside. */
+  var searchLoading = false;
+  function loadSearch() {
+    if (window.jpSearch) { window.jpSearch.open(); return; }
+    if (searchLoading) return;
+    searchLoading = true;
+    var s = document.createElement('script');
+    s.src = '/assets/js/search.js';
+    s.onload = function () { if (window.jpSearch) window.jpSearch.open(); };
+    s.onerror = function () { searchLoading = false; };
+    document.head.appendChild(s);
+  }
+  function inTextField(node) {
+    if (!node) return false;
+    var tag = (node.tagName || '').toLowerCase();
+    return tag === 'input' || tag === 'textarea' || tag === 'select' || node.isContentEditable;
+  }
+  function wireSearch() {
+    var nav = document.querySelector('nav.subnav');
+    if (nav && !nav.querySelector('[data-search-open]')) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'iconbtn searchbtn';
+      btn.setAttribute('data-search-open', '');
+      btn.setAttribute('aria-label', 'Search the site (press / anywhere)');
+      btn.innerHTML = 'Search <kbd>/</kbd>';
+      var theme = document.getElementById('themeBtn');
+      if (theme && theme.parentNode === nav) nav.insertBefore(btn, theme);
+      else nav.appendChild(btn);
+    }
+    if (window.__jpSearchWired) return;
+    window.__jpSearchWired = true;
+    document.addEventListener('click', function (ev) {
+      if (window.jpSearch) return;
+      var t = ev.target && ev.target.closest ? ev.target.closest('[data-search-open]') : null;
+      if (!t) return;
+      ev.preventDefault();
+      loadSearch();
+    });
+    document.addEventListener('keydown', function (ev) {
+      if (window.jpSearch) return;
+      if (ev.key !== '/' || ev.ctrlKey || ev.metaKey || ev.altKey || inTextField(ev.target)) return;
+      ev.preventDefault();
+      loadSearch();
+    });
+  }
+
+  function boot() { markActive(); wireSearch(); wireTheme(); setYear(); ensureMainId(); wirePrint(); }
 
   /* Boot only on partials:loaded. includes.js dispatches it after every
      data-include fetch has settled (success or failure), and every page that

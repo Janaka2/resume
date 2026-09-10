@@ -6,17 +6,18 @@
   <title>Blog — Java, Kafka, RAG and Agents | Janaka Premathilaka</title>
   <meta name="description" content="Clear, hands-on articles on Java, Spring Boot, Kafka, RAG, agents and evals, written by a senior Java engineer and solution architect in Zug, Switzerland.">
   <link rel="canonical" href="https://janaka.me/blog/">
+  <link rel="alternate" type="application/atom+xml" title="Janaka Premathilaka" href="/feed.xml">
   <meta property="og:title" content="Blog — Java, Kafka, RAG and Agents | Janaka Premathilaka">
   <meta property="og:description" content="Clear, hands-on articles on Java, Spring Boot, Kafka, RAG, agents and evals, written by a senior Java engineer and solution architect in Zug, Switzerland.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://janaka.me/blog/">
-  <meta property="og:image" content="https://janaka.me/assets/og-image.png">
+  <meta property="og:image" content="https://janaka.me/assets/og/blog.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Blog — Java, Kafka, RAG and Agents | Janaka Premathilaka">
   <meta name="twitter:description" content="Clear, hands-on articles on Java, Spring Boot, Kafka, RAG, agents and evals, written by a senior Java engineer and solution architect in Zug, Switzerland.">
-  <meta name="twitter:image" content="https://janaka.me/assets/og-image.png">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/blog.png">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png?v=1">
   <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16.png?v=1">
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png?v=1">
@@ -64,19 +65,16 @@
       <ul class="posts">
 
         <li>
-          <p class="when">Oct 2025 · 60 min read</p>
+          <p class="when">35 min · Oct 2025</p>
           <h3><a href="./posts/machine-learning-blog.html" id="articleTitle">Machine Learning: A Comprehensive Top-Down Guide</a></h3>
           <p id="articleSummary">A top-down introduction to core machine learning concepts, covering the whole workflow — data analysis and preprocessing through to regression, classification and clustering.</p>
           <div class="links" style="margin-top:12px">
             <a href="./posts/machine-learning-blog.html">Read more →</a>
-            <button class="linkbtn" type="button" id="whyReadBtn">✨ Why read this?</button>
-            <button class="linkbtn" type="button" id="generateTweetBtn">✨ Draft a post</button>
-            <button class="linkbtn" type="button" id="getKeyConceptsBtn">✨ Key concepts</button>
           </div>
         </li>
 
         <li>
-          <p class="when">Oct 2025 · 60 min read</p>
+          <p class="when">84 min · Oct 2025</p>
           <h3><a href="./posts/ai-evaluation-frameworks.html">Evals — Designing, Implementing and Interpreting AI Evaluation Frameworks</a></h3>
           <p>A deep guide to building and reading AI evaluation pipelines: from model accuracy through to agentic behaviour, the metrics, the tooling and where it is all heading.</p>
           <div class="links" style="margin-top:12px">
@@ -85,7 +83,7 @@
         </li>
 
         <li>
-          <p class="when">Oct 2025 · 10 min read</p>
+          <p class="when">8 min · Oct 2025</p>
           <h3><a href="./posts/mcp-agent-integration.html">MCP for Agent Integrations</a></h3>
           <p>Multi-capability prompts, and how to integrate external tools safely — schema, capabilities, auth and guardrails.</p>
           <div class="links" style="margin-top:12px">
@@ -93,56 +91,10 @@
           </div>
         </li>
 
-        <li>
-          <p class="when">Draft</p>
-          <h3>RAG with FAISS: Chunking, MMR, Re-ranking</h3>
-          <p>Production-ready retrieval patterns — vector search, chunk sizing and re-ranking strategy, with the parameters explained.</p>
-          <div class="chips" style="margin-top:10px"><span class="chip">Not published yet</span></div>
-        </li>
-
-        <li>
-          <p class="when">Draft</p>
-          <h3>Spring Boot + Kafka: a dead-letter strategy that scales</h3>
-          <p>Fault-tolerant consumers, redrive policies and the observability that keeps incidents calm.</p>
-          <div class="chips" style="margin-top:10px"><span class="chip">Not published yet</span></div>
-        </li>
-
       </ul>
     </div>
   </section>
 </main>
-
-<!-- AI helper output -->
-<div id="geminiModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal-card" style="height:auto;max-height:80vh;max-width:560px">
-    <div class="modal-head">
-      <h3 id="modalTitle">✨ AI assistant</h3>
-      <button class="modal-close" type="button" id="closeModal" aria-label="Close">✕</button>
-    </div>
-    <div id="modalContent" class="modal-body"></div>
-  </div>
-</div>
-
-<!-- API key prompt -->
-<div id="apiKeyModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="apiKeyTitle">
-  <div class="modal-card" style="height:auto;max-width:420px">
-    <div class="modal-head">
-      <h3 id="apiKeyTitle">Enter API key</h3>
-      <button class="modal-close" type="button" id="cancelApiKeyBtn" aria-label="Close">✕</button>
-    </div>
-    <div class="modal-body" style="white-space:normal">
-      <p class="sub">These helpers call the Gemini API from your browser. The key is kept in this tab's session storage only — it is never sent anywhere else and is gone when you close the tab.</p>
-      <label class="field" for="apiKeyInput"><span>Gemini API key</span>
-        <input type="password" id="apiKeyInput" placeholder="Paste your key" autocomplete="off">
-      </label>
-    </div>
-    <div class="modal-foot">
-      <button class="btn primary" type="button" id="saveApiKeyBtn">Save and continue</button>
-    </div>
-  </div>
-</div>
-
-<div id="loadingSpinner" class="spinner hidden"><i></i></div>
 
 <footer class="sitefoot">
   <div class="wrap">
@@ -151,143 +103,6 @@
   </div>
 </footer>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  let pendingApiCall = null; // held while we ask for a key
-
-  const whyReadBtn        = document.getElementById('whyReadBtn');
-  const generateTweetBtn  = document.getElementById('generateTweetBtn');
-  const getKeyConceptsBtn = document.getElementById('getKeyConceptsBtn');
-  const modal             = document.getElementById('geminiModal');
-  const closeModal        = document.getElementById('closeModal');
-  const modalTitle        = document.getElementById('modalTitle');
-  const modalContent      = document.getElementById('modalContent');
-  const loadingSpinner    = document.getElementById('loadingSpinner');
-
-  const apiKeyModal    = document.getElementById('apiKeyModal');
-  const apiKeyInput    = document.getElementById('apiKeyInput');
-  const saveApiKeyBtn  = document.getElementById('saveApiKeyBtn');
-  const cancelApiKeyBtn = document.getElementById('cancelApiKeyBtn');
-
-  const showModal = (title, content) => {
-    modalTitle.innerText = title;
-    modalContent.textContent = content;
-    modal.classList.remove('hidden');
-  };
-  const hideModal = () => modal.classList.add('hidden');
-
-  closeModal.addEventListener('click', hideModal);
-  modal.addEventListener('click', (e) => { if (e.target === modal) hideModal(); });
-  document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape') return;
-    hideModal();
-    apiKeyModal.classList.add('hidden');
-  });
-
-  const showLoading = () => loadingSpinner.classList.remove('hidden');
-  const hideLoading = () => loadingSpinner.classList.add('hidden');
-
-  const callGeminiAPI = async (apiKey, userQuery, systemInstruction, modalTitleText, retries = 3, delay = 1000) => {
-    showLoading();
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-    const payload = {
-      contents: [{ parts: [{ text: userQuery }] }],
-      systemInstruction: { parts: [{ text: systemInstruction }] },
-    };
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if (!response.ok) {
-        if (response.status === 429 && retries > 0) {
-          await new Promise(r => setTimeout(r, delay));
-          // apiKey has to be passed through here — without it the retry sent
-          // userQuery as the key and every rate-limited call failed.
-          return callGeminiAPI(apiKey, userQuery, systemInstruction, modalTitleText, retries - 1, delay * 2);
-        }
-        throw new Error(`API Error: ${response.status} ${response.statusText}`);
-      }
-      const result = await response.json();
-      const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-      if (!text) throw new Error('Invalid response structure from API.');
-      hideLoading();
-      showModal(modalTitleText, text);
-    } catch (error) {
-      console.error('Error calling Gemini API:', error);
-      hideLoading();
-      if (error.message.includes('400') || error.message.includes('API key not valid')) {
-        sessionStorage.removeItem('geminiApiKey');
-        showModal('Error', 'That API key was not accepted. Refresh and try again with a valid key.');
-      } else {
-        showModal('Error', "Sorry, that request could not be completed. Please try again later.");
-      }
-    }
-  };
-
-  const handleApiCall = (userQuery, systemInstruction, modalTitleText) => {
-    const apiKey = sessionStorage.getItem('geminiApiKey');
-    if (apiKey) {
-      callGeminiAPI(apiKey, userQuery, systemInstruction, modalTitleText);
-    } else {
-      pendingApiCall = { userQuery, systemInstruction, modalTitleText };
-      apiKeyModal.classList.remove('hidden');
-      apiKeyInput.focus();
-    }
-  };
-
-  saveApiKeyBtn.addEventListener('click', () => {
-    const key = apiKeyInput.value.trim();
-    if (!key) return;
-    sessionStorage.setItem('geminiApiKey', key);
-    apiKeyModal.classList.add('hidden');
-    apiKeyInput.value = '';
-    if (pendingApiCall) {
-      callGeminiAPI(key, pendingApiCall.userQuery, pendingApiCall.systemInstruction, pendingApiCall.modalTitleText);
-      pendingApiCall = null;
-    }
-  });
-  apiKeyInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') saveApiKeyBtn.click(); });
-
-  cancelApiKeyBtn.addEventListener('click', () => {
-    apiKeyModal.classList.add('hidden');
-    pendingApiCall = null;
-  });
-
-  const article = () => ({
-    title: document.getElementById('articleTitle').innerText,
-    summary: document.getElementById('articleSummary').innerText,
-  });
-
-  whyReadBtn.addEventListener('click', () => {
-    const { title, summary } = article();
-    handleApiCall(
-      `Based on the following article title and summary, generate a few bullet points about why a developer, student or tech enthusiast should read it.\n\nTitle: ${title}\nSummary: ${summary}`,
-      'You write for a technical blog. Produce three or four concise, benefit-oriented bullet points. Use asterisks for bullets. No hype.',
-      '✨ Why read this'
-    );
-  });
-
-  generateTweetBtn.addEventListener('click', () => {
-    const { title, summary } = article();
-    handleApiCall(
-      `Write a short post (under 280 characters) promoting this article. Include the title, a hook from the summary, and the placeholder URL "[YOUR_BLOG_URL]".\n\nTitle: ${title}\nSummary: ${summary}`,
-      'You write social posts for a technical blog. Be concise and specific, and use at most two relevant hashtags.',
-      '✨ Draft a post'
-    );
-  });
-
-  getKeyConceptsBtn.addEventListener('click', () => {
-    const { title, summary } = article();
-    handleApiCall(
-      `Extract the key technical concepts and topics from this article title and summary. List them as bullet points.\n\nTitle: ${title}\nSummary: ${summary}`,
-      'Extract the main technical topics from the text and list them with asterisk bullets. Nothing else.',
-      '✨ Key concepts'
-    );
-  });
-});
-</script>
 <script src="/assets/js/includes.js"></script>
 <script src="/assets/js/site-nav.js"></script>
 </body>

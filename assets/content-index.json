@@ -1,0 +1,1094 @@
+[
+ {
+  "url": "/products/index.html",
+  "title": "Products for Sale — Privacy-First Apps",
+  "section": "products",
+  "description": "Swiss-made, privacy-first web apps, finished and live, available for acquisition or licensing: nüchtern, Daily Momentum, Loop and BabyLoop. Built in Zug to banking-grade standards.",
+  "tags": [
+   "products",
+   "sale",
+   "privacy",
+   "first",
+   "apps"
+  ],
+  "date": "2026-09-10",
+  "updated": "2026-09-10",
+  "words": 1573,
+  "minutes": 8
+ },
+ {
+  "url": "/lab/Notes/llm-study-notes-handwritten-style.html",
+  "title": "LLM Study Notes — Interactive Highlighter Toolbox",
+  "section": "lab",
+  "description": "Interactive study notes on assessing large language models with a highlighter toolbox, sticky notes, and explain, analogy and ELI5 helpers.",
+  "tags": [
+   "lab",
+   "llm",
+   "study",
+   "interactive",
+   "highlighter"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-09",
+  "words": 320,
+  "minutes": 2
+ },
+ {
+  "url": "/lab/Notes/llm-hand%E2%80%91annotated-demo5.html",
+  "title": "LLM Notes — Hand‑Annotated Highlights Demo + Toolbox",
+  "section": "lab",
+  "description": "Interactive hand-annotated notes on large language models with a highlighter toolbox: mark up, add sticky notes, save, load and export your annotations.",
+  "tags": [
+   "lab",
+   "llm",
+   "hand",
+   "annotated",
+   "highlights"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-09",
+  "words": 356,
+  "minutes": 2
+ },
+ {
+  "url": "/lab/Notes/hand-book-note3.html",
+  "title": "LLM Study Notes — Assessing LLMs, Handwritten Style",
+  "section": "lab",
+  "description": "Handwritten-style study notes on assessing large language models: why they are large, how self-attention works, and why hallucination is the big problem.",
+  "tags": [
+   "lab",
+   "llm",
+   "study",
+   "assessing",
+   "llms"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-09",
+  "words": 273,
+  "minutes": 2
+ },
+ {
+  "url": "/lab/Notes/hand-book-note2.html",
+  "title": "Study‑Style Notes: Aspects & Assessment of LLMs",
+  "section": "lab",
+  "description": "Study-style notes on assessing large language models: factuality, reasoning, safety, latency and cost, with the retrieval, QA and generation metrics.",
+  "tags": [
+   "lab",
+   "study",
+   "style",
+   "aspects",
+   "assessment"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-09",
+  "words": 316,
+  "minutes": 2
+ },
+ {
+  "url": "/lab/Notes/hand-book-note1.html",
+  "title": "LLM Notes — Hand‑Annotated Highlights Demo",
+  "section": "lab",
+  "description": "Hand-annotated study notes on what large language models are used for: retrieval and RAG, content generation, reasoning, coding and agents.",
+  "tags": [
+   "lab",
+   "llm",
+   "hand",
+   "annotated",
+   "highlights"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-09",
+  "words": 346,
+  "minutes": 2
+ },
+ {
+  "url": "/ai/index.html",
+  "title": "AI Agents in Regulated Systems",
+  "section": "ai",
+  "description": "Agents that are readable, reliable and worth shipping. Production patterns for LLM integration, RAG, MCP and evals from banking-grade Java engineering.",
+  "tags": [
+   "ai",
+   "agents",
+   "regulated",
+   "systems"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-10",
+  "words": 502,
+  "minutes": 3
+ },
+ {
+  "url": "/academy/modules/2026/FSE/virtual_threads_java_21_academy_page.html",
+  "title": "Java 21 Virtual Threads - Complete Practical Guide",
+  "section": "academy",
+  "description": "In Java applications in 2026, one of the most important concurrency upgrades is virtual threads in Java 21. They let me keep the simple thread-per-task programming model, but at a scale that was not…",
+  "tags": [
+   "academy",
+   "java",
+   "virtual",
+   "threads"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-09",
+  "words": 1374,
+  "minutes": 7
+ },
+ {
+  "url": "/academy/modules/2026/FSE/vi-editor-complete.html",
+  "title": "VI Editor Complete",
+  "section": "academy",
+  "description": "VI/VIM is often the only editor available on Linux servers. This page focuses on the commands engineers really use in production.",
+  "tags": [
+   "academy",
+   "editor"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 273,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/troubleshooting-resources.html",
+  "title": "Disk Memory CPU Troubleshooting",
+  "section": "academy",
+  "description": "This page gives the fastest commands for capacity and performance issues. The goal is to identify whether the bottleneck is storage, memory pressure, CPU saturation, or process limits.",
+  "tags": [
+   "academy",
+   "disk",
+   "memory",
+   "cpu",
+   "troubleshooting"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 207,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/top-50-debugging-commands.html",
+  "title": "Top 50 Debugging Commands",
+  "section": "academy",
+  "description": "These are the commands engineers reach for during incidents: process checks, ports, logs, services, containers, filesystems and network validation.",
+  "tags": [
+   "academy",
+   "top",
+   "debugging",
+   "commands"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 599,
+  "minutes": 3
+ },
+ {
+  "url": "/academy/modules/2026/FSE/top-100-linux-commands.html",
+  "title": "Top 100 Linux Commands",
+  "section": "academy",
+  "description": "This page focuses on commands that are practical in real backend, DevOps, CI/CD, support and scripting work. The descriptions are short for fast lookup.",
+  "tags": [
+   "academy",
+   "top",
+   "linux",
+   "commands"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 826,
+  "minutes": 4
+ },
+ {
+  "url": "/academy/modules/2026/FSE/spring-boot.html",
+  "title": "Spring Boot 3.3 Ecosystem",
+  "section": "academy",
+  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "tags": [
+   "academy",
+   "spring",
+   "boot",
+   "ecosystem"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-10",
+  "words": 130,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/react.html",
+  "title": "React 19 + TypeScript Frontend Engineering",
+  "section": "academy",
+  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "tags": [
+   "academy",
+   "react",
+   "typescript",
+   "frontend",
+   "engineering"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-10",
+  "words": 127,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/promting/templates.html",
+  "title": "Templates",
+  "section": "academy",
+  "description": "These are written so you can copy and adapt them quickly. They are practical, simple, and designed for day-to-day engineering work.",
+  "tags": [
+   "academy",
+   "templates"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 204,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/promting/strategies.html",
+  "title": "Strategies",
+  "section": "academy",
+  "description": "The best prompt pattern depends on the job. Below are the main strategies that matter most in real engineering usage.",
+  "tags": [
+   "academy",
+   "strategies"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 218,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/promting/references.html",
+  "title": "References and Source Notes",
+  "section": "academy",
+  "description": "This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…",
+  "tags": [
+   "academy",
+   "references",
+   "source"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 207,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/promting/rag.html",
+  "title": "RAG Prompting",
+  "section": "academy",
+  "description": "RAG works best when the prompt clearly tells the model how to use retrieved context and what to do when context is incomplete.",
+  "tags": [
+   "academy",
+   "rag",
+   "prompting"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 187,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/promting/index.html",
+  "title": "Prompt Engineering Handbook",
+  "section": "academy",
+  "description": "Built for software engineers working with modern LLMs, agent workflows, RAG systems, debugging, architecture analysis, and daily coding productivity. The layout is intentionally white, clean, and…",
+  "tags": [
+   "academy",
+   "prompt",
+   "engineering",
+   "handbook"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 255,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/promting/gpt54.html",
+  "title": "GPT-5.4 Prompting Guide",
+  "section": "academy",
+  "description": "If your prompt is vague, you get broad but not exact answers.",
+  "tags": [
+   "academy",
+   "gpt",
+   "prompting"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 429,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/promting/glossary.html",
+  "title": "Glossary in Easy English",
+  "section": "academy",
+  "description": "This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…",
+  "tags": [
+   "academy",
+   "glossary",
+   "easy",
+   "english"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 230,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/promting/gemini.html",
+  "title": "Latest Gemini Prompting Guide",
+  "section": "academy",
+  "description": "This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…",
+  "tags": [
+   "academy",
+   "latest",
+   "gemini",
+   "prompting"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 390,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/promting/foundations.html",
+  "title": "Foundations",
+  "section": "academy",
+  "description": "Good prompting is not about magic wording. It is about reducing ambiguity, giving the model the right working context, and shaping the output so it is useful inside a real engineering workflow.",
+  "tags": [
+   "academy",
+   "foundations"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 291,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/promting/developer.html",
+  "title": "Developer Prompts",
+  "section": "academy",
+  "description": "This section is tuned for senior developers who want fast, reusable prompts for real project work.",
+  "tags": [
+   "academy",
+   "developer",
+   "prompts"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 169,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/promting/developer-tasks.html",
+  "title": "Most Useful Developer Task Prompts",
+  "section": "academy",
+  "description": "This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…",
+  "tags": [
+   "academy",
+   "most",
+   "useful",
+   "developer",
+   "task"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 502,
+  "minutes": 3
+ },
+ {
+  "url": "/academy/modules/2026/FSE/promting/debugging.html",
+  "title": "Debugging Playbook",
+  "section": "academy",
+  "description": "When a prompt gives weak results, the cause is usually one of a few common problems: unclear task, missing context, no output shape, weak grounding, or no quality check.",
+  "tags": [
+   "academy",
+   "debugging",
+   "playbook"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 162,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/promting/comparison.html",
+  "title": "GPT-5.4 vs Gemini: Practical Prompting Differences",
+  "section": "academy",
+  "description": "This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…",
+  "tags": [
+   "academy",
+   "gpt",
+   "gemini",
+   "prompting",
+   "differences"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 312,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/promting/cheatsheet.html",
+  "title": "Cheat Sheet",
+  "section": "academy",
+  "description": "A practical summary for daily use.",
+  "tags": [
+   "academy",
+   "cheat",
+   "sheet"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 121,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/promting/agents.html",
+  "title": "Agent Prompting",
+  "section": "academy",
+  "description": "Agent prompts need more than task description. They need operating rules: when to plan, when to use tools, when to stop, and how to validate.",
+  "tags": [
+   "academy",
+   "agent",
+   "prompting"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 173,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/production-one-liners.html",
+  "title": "Production One-Liners",
+  "section": "academy",
+  "description": "These are short commands that solve common production tasks fast. They are especially useful for support engineers, backend developers and operators.",
+  "tags": [
+   "academy",
+   "production",
+   "one",
+   "liners"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 263,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/performanceTuning/DBPerformanceTuning.html",
+  "title": "Learn How to Solve Critical Performance Problems with Step by Step Approach!",
+  "section": "academy",
+  "description": "Use this as your checklist. This page is intentionally “study-friendly”: you can tick items as you learn.",
+  "tags": [
+   "academy",
+   "solve",
+   "critical",
+   "performance",
+   "problems"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 2186,
+  "minutes": 10
+ },
+ {
+  "url": "/academy/modules/2026/FSE/modenizeJava.html",
+  "title": "Modernizing the Java Journey: A Comprehensive Study Guide",
+  "section": "academy",
+  "description": "Java has evolved from a slow-moving language with releases every four or five years to a vibrant, fast-paced ecosystem. As of 2026, the platform follows a strict \"release on the clock\" schedule…",
+  "tags": [
+   "academy",
+   "modernizing",
+   "java",
+   "journey",
+   "study"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-09",
+  "words": 1514,
+  "minutes": 7
+ },
+ {
+  "url": "/academy/modules/2026/FSE/microservices.html",
+  "title": "Advanced Microservices & Distributed Systems",
+  "section": "academy",
+  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "tags": [
+   "academy",
+   "advanced",
+   "microservices",
+   "distributed",
+   "systems"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-10",
+  "words": 129,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/log-investigation-techniques.html",
+  "title": "Log Investigation Techniques",
+  "section": "academy",
+  "description": "Good log investigation is about narrowing the problem fast: identify time window, find the failing request, extract the stacktrace, remove noise, then group repeating patterns.",
+  "tags": [
+   "academy",
+   "log",
+   "investigation",
+   "techniques"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 260,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/linux.html",
+  "title": "Linux & CLI Mastery for Java Developers",
+  "section": "academy",
+  "description": "Complete practical guide and quick-reference commands for day-to-day backend engineering work.",
+  "tags": [
+   "academy",
+   "linux",
+   "cli",
+   "mastery",
+   "java"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 434,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/leadership.html",
+  "title": "Leadership, Communication & Delivery Excellence",
+  "section": "academy",
+  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "tags": [
+   "academy",
+   "leadership",
+   "communication",
+   "delivery",
+   "excellence"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-10",
+  "words": 127,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/kafka.html",
+  "title": "Apache Kafka 4.x & Event-Driven Architecture",
+  "section": "academy",
+  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "tags": [
+   "academy",
+   "apache",
+   "kafka",
+   "event",
+   "driven"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-10",
+  "words": 131,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/java-core.html",
+  "title": "Core Java Mastery (Java 22)",
+  "section": "academy",
+  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "tags": [
+   "academy",
+   "core",
+   "java",
+   "mastery"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-10",
+  "words": 132,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/index.html",
+  "title": "Linux CLI Mastery",
+  "section": "academy",
+  "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+  "tags": [
+   "academy",
+   "linux",
+   "cli",
+   "mastery"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 250,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/hexagonal-architecture-guide.html",
+  "title": "Hexagonal Architecture for Senior Java Developers (2026 Edition)",
+  "section": "academy",
+  "description": "A practical, modern guide to understanding Hexagonal Architecture deeply, applying it with current Java and Spring, avoiding over-engineering, and using it in a way that actually improves…",
+  "tags": [
+   "academy",
+   "hexagonal",
+   "architecture",
+   "senior",
+   "java"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-09",
+  "words": 2194,
+  "minutes": 10
+ },
+ {
+  "url": "/academy/modules/2026/FSE/foundation.html",
+  "title": "Foundation: Engineering Mindset & Setup",
+  "section": "academy",
+  "description": "Welcome to the first step of your engineering journey! This is where we build your mindset, get your tools ready, and lay the groundwork for success. Remember, anyone can feel like they’re behind or…",
+  "tags": [
+   "academy",
+   "foundation",
+   "engineering",
+   "mindset",
+   "setup"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 1014,
+  "minutes": 5
+ },
+ {
+  "url": "/academy/modules/2026/FSE/file-handling.html",
+  "title": "File Handling",
+  "section": "academy",
+  "description": "File handling is a core part of Linux scripting: creating, copying, moving, syncing, compressing, comparing, finding and validating files safely.",
+  "tags": [
+   "academy",
+   "file",
+   "handling"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 209,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/entanglement/use-cases.html",
+  "title": "Quantum Use Cases",
+  "section": "academy",
+  "description": "This page focuses on realistic areas where quantum concepts can support career development and practical experimentation.",
+  "tags": [
+   "academy",
+   "quantum",
+   "use",
+   "cases"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 317,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/entanglement/references.html",
+  "title": "References",
+  "section": "academy",
+  "description": "These official sources are good starting points for deeper study and platform-specific hands-on work.",
+  "tags": [
+   "academy",
+   "references"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 86,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/entanglement/quantum-computing.html",
+  "title": "Quantum Computing Explained",
+  "section": "academy",
+  "description": "This page explains the moving parts clearly: qubits, superposition, gates, interference, entanglement, measurement, noise, error correction, and hybrid execution.",
+  "tags": [
+   "academy",
+   "quantum",
+   "computing",
+   "explained"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 339,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/entanglement/index.html",
+  "title": "Practical Quantum Entanglement and Quantum Computing",
+  "section": "academy",
+  "description": "A clear explanation using simple logic instead of heavy physics language.",
+  "tags": [
+   "academy",
+   "quantum",
+   "entanglement",
+   "computing"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 289,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/entanglement/entanglement.html",
+  "title": "Entanglement Explained",
+  "section": "academy",
+  "description": "Entanglement means two or more quantum objects become linked in a way that their measurement results are correlated beyond what normal classical rules can explain.",
+  "tags": [
+   "academy",
+   "entanglement",
+   "explained"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 298,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/entanglement/career-roadmap.html",
+  "title": "Career Roadmap",
+  "section": "academy",
+  "description": "This plan is designed for a senior software engineer who wants enough quantum depth to speak clearly, build small experiments, and position themselves well for future opportunities.",
+  "tags": [
+   "academy",
+   "career",
+   "roadmap"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 264,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/devops-cloud.html",
+  "title": "DevOps & Cloud: Docker · Kubernetes · CI/CD",
+  "section": "academy",
+  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "tags": [
+   "academy",
+   "devops",
+   "cloud",
+   "docker",
+   "kubernetes"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-10",
+  "words": 133,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/design-patterns-architecture-playbook.html",
+  "title": "Design Patterns & Architecture Playground",
+  "section": "academy",
+  "description": "Most developers learn design patterns as theory. In real projects, the challenge is different: you must pick the right pattern quickly, explain trade-offs clearly, and deliver maintainable code.…",
+  "tags": [
+   "academy",
+   "design",
+   "patterns",
+   "architecture",
+   "playground"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 359,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/day-01.html",
+  "title": "Linux CLI Mastery",
+  "section": "academy",
+  "description": "This mini-site is organized as separate HTML pages with a parent navigation page, so you can browse each topic quickly and reuse it as a personal reference. The content is practical…",
+  "tags": [
+   "academy",
+   "linux",
+   "cli",
+   "mastery"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 229,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/csv_operation.html",
+  "title": "CLI Data Mastery: CSV & Shell Scripting",
+  "section": "academy",
+  "description": "Automate data validation, cleaning, and reporting using standard Unix utilities like awk, sed, and join.",
+  "tags": [
+   "academy",
+   "cli",
+   "data",
+   "mastery",
+   "csv"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 343,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/capstone.html",
+  "title": "Enterprise Capstone: Global Logistics Platform",
+  "section": "academy",
+  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "tags": [
+   "academy",
+   "enterprise",
+   "capstone",
+   "global",
+   "logistics"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 147,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/bash_shell_scripting_guide_blog.html",
+  "title": "Bash Shell Scripting Guide",
+  "section": "academy",
+  "description": "This is a clean, blog-ready learning guide inspired by a Bash shell scripting tutorial page. It keeps the same full learning journey and topic coverage in an original rewritten format: what Bash is…",
+  "tags": [
+   "academy",
+   "bash",
+   "shell",
+   "scripting"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 2294,
+  "minutes": 11
+ },
+ {
+  "url": "/academy/modules/2026/FSE/awk-sed-mastery.html",
+  "title": "awk sed mastery",
+  "section": "academy",
+  "description": "awk is best for column-based parsing and conditional reporting. sed is best for quick line editing, replacements and stream transformations.",
+  "tags": [
+   "academy",
+   "awk",
+   "sed",
+   "mastery"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 192,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/ai-integration.html",
+  "title": "AI Integration for Enterprise Java Systems",
+  "section": "academy",
+  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "tags": [
+   "academy",
+   "integration",
+   "enterprise",
+   "java",
+   "systems"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-10",
+  "words": 135,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/Linux/vi-editor-complete.html",
+  "title": "VI Editor Complete",
+  "section": "academy",
+  "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+  "tags": [
+   "academy",
+   "editor"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 517,
+  "minutes": 3
+ },
+ {
+  "url": "/academy/modules/2026/FSE/Linux/troubleshooting-resources.html",
+  "title": "Disk Memory CPU Troubleshooting",
+  "section": "academy",
+  "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+  "tags": [
+   "academy",
+   "disk",
+   "memory",
+   "cpu",
+   "troubleshooting"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 360,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/Linux/top-50-debugging-commands.html",
+  "title": "Top 50 Debugging Commands",
+  "section": "academy",
+  "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+  "tags": [
+   "academy",
+   "top",
+   "debugging",
+   "commands"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 606,
+  "minutes": 3
+ },
+ {
+  "url": "/academy/modules/2026/FSE/Linux/top-100-linux-commands.html",
+  "title": "Top 100 Linux Commands",
+  "section": "academy",
+  "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+  "tags": [
+   "academy",
+   "top",
+   "linux",
+   "commands"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 833,
+  "minutes": 4
+ },
+ {
+  "url": "/academy/modules/2026/FSE/Linux/production-one-liners.html",
+  "title": "Production One-Liners",
+  "section": "academy",
+  "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+  "tags": [
+   "academy",
+   "production",
+   "one",
+   "liners"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 370,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/Linux/log-investigation-techniques.html",
+  "title": "Log Investigation Techniques",
+  "section": "academy",
+  "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+  "tags": [
+   "academy",
+   "log",
+   "investigation",
+   "techniques"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 336,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/Linux/index.html",
+  "title": "Linux CLI Mastery",
+  "section": "academy",
+  "description": "This mini-site is organized as separate HTML pages with a parent navigation page, so you can browse each topic quickly and reuse it as a personal reference. The content is practical…",
+  "tags": [
+   "academy",
+   "linux",
+   "cli",
+   "mastery"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 258,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/Linux/file-handling.html",
+  "title": "File Handling",
+  "section": "academy",
+  "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+  "tags": [
+   "academy",
+   "file",
+   "handling"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 211,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/Linux/awk-sed-mastery.html",
+  "title": "awk + sed Mastery",
+  "section": "academy",
+  "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+  "tags": [
+   "academy",
+   "awk",
+   "sed",
+   "mastery"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-08-29",
+  "words": 430,
+  "minutes": 2
+ },
+ {
+  "url": "/blog/posts/machine-learning-blog.html",
+  "title": "Machine Learning: A Comprehensive Top-Down Guide",
+  "section": "blog",
+  "description": "A top-down introduction to machine learning: the workflow, the algorithms and the evaluation.",
+  "tags": [
+   "blog",
+   "machine",
+   "learning",
+   "top",
+   "down"
+  ],
+  "date": "2025-10-29",
+  "updated": "2026-09-10",
+  "words": 7643,
+  "minutes": 35
+ },
+ {
+  "url": "/blog/posts/ai-evaluation-frameworks.html",
+  "title": "Evals — Designing and Interpreting AI Evaluation Frameworks",
+  "section": "blog",
+  "description": "Building and reading AI evaluation pipelines: metrics, tooling and agentic behaviour.",
+  "tags": [
+   "blog",
+   "evals",
+   "designing",
+   "interpreting",
+   "evaluation"
+  ],
+  "date": "2025-10-29",
+  "updated": "2026-09-10",
+  "words": 18476,
+  "minutes": 84
+ },
+ {
+  "url": "/blog/posts/mcp-agent-integration.html",
+  "title": "MCP for Agent Integrations: the Model Context Protocol",
+  "section": "blog",
+  "description": "What the Model Context Protocol is, its three primitives and two transports, a minimal Python server, and how to run it safely in a regulated bank.",
+  "tags": [
+   "blog",
+   "mcp",
+   "agent",
+   "integrations",
+   "model"
+  ],
+  "date": "2025-10-19",
+  "updated": "2026-09-10",
+  "words": 1652,
+  "minutes": 8
+ }
+]
