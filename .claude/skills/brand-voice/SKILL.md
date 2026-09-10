@@ -34,7 +34,7 @@ Janaka Premathilaka — Senior Java Engineer & Solution Architect, Zug, Switzerl
 
 - 22+ years (use this figure; "21+" is stale)
 - Employers: UBS, Credit Suisse, European Commission
-- Stack signals: Java, Spring Boot, Kafka, Kubernetes, Oracle/PostgreSQL, REST, microservices, CI/CD; AI: LLM integration, RAG, LangChain, LangGraph, CrewAI, AutoGen, OpenAI Agents SDK, MCP
+- Stack signals: Java, Spring Boot, Kafka, Kubernetes, Oracle/PostgreSQL, REST, microservices, CI/CD; AI: LLM integration, RAG, LangChain, LangGraph, CrewAI, AutoGen, OpenAI Agents SDK, MCP servers and clients, AI-assisted engineering with Claude Code and OpenAI Codex
 - Location: Zug; work radius Zürich, Zug, Basel, remote
 - Products are Swiss made (engineered in Zug); the quality claim is always backed by the habits behind it (hand-reviewed code, no servers or dependencies to fail, privacy by design), never used as a bare sticker
 - Products: nüchtern (nuechtern.app), Daily Momentum (daily-momentum.com), Loop (loop.janaka.me) and BabyLoop (babyloop.janaka.me), all live, all privacy by construction (on-device, or storage the user owns), all built solo with AI in the loop, all open to acquisition or licensing. Loop is the name and loop.janaka.me the address (renamed from RepeatCycle in September 2026; never use the old name)
@@ -48,7 +48,7 @@ Janaka Premathilaka — Senior Java Engineer & Solution Architect, Zug, Switzerl
 | Lab | janaka.me/lab/ | Experiments and demos, runnable, with notes |
 | Products | janaka.me/products/ | Finished, live, privacy-first apps available for acquisition or licensing |
 | AI | janaka.me/ai/ | Agents that are readable, reliable and worth shipping |
-| CV | janaka.me/cv/ | Two decades of critical systems, case studies and stack |
+| CV | janaka.me/cv/ | Two decades of critical systems, case studies and stack. The PDF is exported from `cv/print/index.html` via `scripts/export-cv-pdf.py` |
 | Academy | janaka.me/academy/ | Engineers who surpass their teacher: daily notes and learning paths |
 | nüchtern | nuechtern.app | Fasting companion that keeps the biology visible, offline, DE/EN |
 | Daily Momentum | daily-momentum.com | A quiet record of where the day went, one tap, on-device only |

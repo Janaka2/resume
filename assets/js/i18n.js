@@ -43,7 +43,7 @@ window.JP_I18N = (function () {
     cSkillsH: 'Kernkompetenzen',
     cSkG1: 'Engineering',
     cSkG2: 'KI / LLM-Engineering',
-    cSkC2: '<span class="chip">LangChain</span><span class="chip">LlamaIndex</span><span class="chip">RAG / CAG</span><span class="chip">Agentic Workflows</span><span class="chip">lokale LLMs</span>',
+    cSkC2: '<span class="chip">LangChain</span><span class="chip">LlamaIndex</span><span class="chip">RAG / CAG</span><span class="chip">Agentic Workflows</span><span class="chip">lokale LLMs</span><span class="chip">MCP</span><span class="chip">Claude Code</span><span class="chip">OpenAI Codex</span>',
     cSkG3: 'DevOps &amp; Cloud',
     cLangsH: 'Sprachen',
     lgEnN: 'Englisch', lgEnL: 'Verhandlungssicher · <b>C1/C2</b>',

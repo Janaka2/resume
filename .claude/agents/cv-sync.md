@@ -15,7 +15,7 @@ You are the single point of truth enforcement for career facts. The source of tr
 - Language levels (e.g. German B1)
 - Contact details: email, phone, LinkedIn, GitHub, WhatsApp link
 - Product names and domains: nüchtern (nuechtern.app), Daily Momentum (daily-momentum.com), Loop (loop.janaka.me), BabyLoop (babyloop.janaka.me)
-- PDF file names in `partials/` referenced by the hub and the noscript fallback
+- PDF file names in `partials/` referenced by the hub and the noscript fallback. The English PDF is generated: edit `cv/print/index.html`, run `python3 scripts/export-cv-pdf.py` (must stay two pages). The German PDF still comes from the .docx; flag it when English facts change.
 
 ## Procedure
 
