@@ -64,7 +64,12 @@ h2{font-family:var(--font-head);font-weight:700;font-size:clamp(1.45rem,3vw,1.9r
 .iconbtn:hover{border-color:var(--ac)}
 #themeBtn{width:34px;font-size:.95rem}
 #langBtn{padding:0 10px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;font-weight:500}
+/* Nine links do not fit below ~1100px: drop the in-page anchors first and keep
+   the property links (Products, Blog, Academy); below 760px hide them all. */
+@media(max-width:1100px){.topbar nav a.navlink:not(.navlink-ext){display:none}}
 @media(max-width:760px){.topbar nav a.navlink{display:none}}
+.topbar nav{flex-shrink:0}
+.topbar .logo{flex-shrink:0}
 
 /* ============ hero ============ */
 .hero{padding:64px 0 0}
@@ -333,5 +338,5 @@ html[data-theme="dark"] .btn.primary{color:#06121F}
 .chat-foot-link:hover,.chat-foot-link[aria-expanded="true"]{color:var(--ac)}
 
 /* hub top bar: divider before the property links (Products · Blog · Academy) */
-.navlink.navsep{opacity:.35;pointer-events:none;padding:0 2px}
+.navlink.navsep{opacity:.35;pointer-events:none;padding:0 2px;cursor:default}
 .navlink.navlink-ext{color:var(--ac)}
