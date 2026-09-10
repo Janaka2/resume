@@ -22,7 +22,7 @@ Read `CLAUDE.md` for the architecture. This skill is the copy-paste template.
   <meta property="og:description" content="SAME AS DESCRIPTION" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://janaka.me/SECTION/PATH" />
-  <meta property="og:image" content="https://janaka.me/assets/Janaka.png" />
+  <meta property="og:image" content="https://janaka.me/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <script>
@@ -38,15 +38,20 @@ Read `CLAUDE.md` for the architecture. This skill is the copy-paste template.
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
+  <link rel="manifest" href="/assets/site.webmanifest" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <link rel="stylesheet" href="/assets/css/theme.css" />
   <link rel="stylesheet" href="/assets/css/subsite.css" />
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <div data-include="/partials/site-nav.html"></div>
 
-<main>
+<main id="main">
   <article class="sec subhero">
     <div class="wrap">
       <p class="eyebrow"><a href="/SECTION/" style="color:inherit;text-decoration:none">&larr; SECTION</a></p>
@@ -79,12 +84,14 @@ Read `CLAUDE.md` for the architecture. This skill is the copy-paste template.
 - Colours only via tokens: `--bg`, `--bg2`, `--tx`, `--tx2`, `--ln`, `--ac`, `--ok`, `--chip`, `--shadow`, `--r`. Fonts via `--font-head` and inherited body font.
 - Available layout classes: `.sec`, `.wrap`, `.subhero`, `.eyebrow`, `.prose`, `.lede`, `.badges`/`.badge`, `.chips`/`.chip`, `.card`, `.cards2`, `.cta`, `.btn`/`.btn.primary`. Check `theme.css` and `subsite.css` before inventing a class.
 - Exactly one `<h1>`. Headings in order.
+- Favicons: PNG links only (`/assets/icons/favicon-32.png`, `-16.png`, `apple-touch-icon.png`); never an SVG that wraps a bitmap.
+- Portrait: use the `assets/portrait-{172,344,516}.{webp,jpg}` set in a `<picture>`, never the original JPG.
 - Images: `<img src="..." alt="..." loading="lazy">`, assets under the section's own `assets/` folder.
 - Test with `python3 -m http.server 8000` in light and dark theme.
 
 ## Checklist before commit
 
-- [ ] pre-paint theme script present
+- [ ] pre-paint theme script present, fonts loaded non-blocking, manifest + referrer meta, skip link, `<main id="main">`
 - [ ] theme.css + subsite.css linked, no styles.css
 - [ ] shared nav include + footer + includes.js + site-nav.js
 - [ ] title, description, canonical, og:*, twitter:card

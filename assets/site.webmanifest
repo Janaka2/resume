@@ -1,0 +1,12 @@
+{
+  "name": "Janaka Premathilaka",
+  "short_name": "Janaka",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#FAFAF8",
+  "theme_color": "#2F4A6D",
+  "icons": [
+    { "src": "/assets/icons/base-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/assets/icons/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

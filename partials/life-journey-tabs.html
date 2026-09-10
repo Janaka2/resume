@@ -3,24 +3,24 @@
     <p class="eyebrow" data-i18n="jEyebrow">My Life Journey</p>
     <h2 data-i18n="jH2">From Galle to Zug.</h2>
 
-    <div class="tabbar" aria-label="Life journey periods">
-      <button class="tab-btn" type="button" data-tab="early-years" data-i18n="jTab1">👶 Early Years</button>
-      <button class="tab-btn" type="button" data-tab="educationJourney" data-i18n="jTab2">🎓 Education</button>
-      <button class="tab-btn" type="button" data-tab="career-start" data-i18n="jTab3">💼 Career Start</button>
-      <button class="tab-btn" type="button" data-tab="belgium-era" data-i18n="jTab4">🇧🇪 Belgium Era</button>
-      <button class="tab-btn" type="button" data-tab="switzerland-era" data-i18n="jTab5">🇨🇭 Switzerland Era</button>
-      <button class="tab-btn" type="button" data-tab="future-dreams" data-i18n="jTab6">🌟 Future Dreams</button>
+    <div class="tabbar" role="tablist" aria-label="Life journey periods">
+      <button class="tab-btn" type="button" role="tab" id="tab-early-years" aria-selected="false" aria-controls="early-years" tabindex="-1" data-tab="early-years" data-i18n="jTab1">👶 Early Years</button>
+      <button class="tab-btn active" type="button" role="tab" id="tab-educationJourney" aria-selected="true" aria-controls="educationJourney" tabindex="0" data-tab="educationJourney" data-i18n="jTab2">🎓 Education</button>
+      <button class="tab-btn" type="button" role="tab" id="tab-career-start" aria-selected="false" aria-controls="career-start" tabindex="-1" data-tab="career-start" data-i18n="jTab3">💼 Career Start</button>
+      <button class="tab-btn" type="button" role="tab" id="tab-belgium-era" aria-selected="false" aria-controls="belgium-era" tabindex="-1" data-tab="belgium-era" data-i18n="jTab4">🇧🇪 Belgium Era</button>
+      <button class="tab-btn" type="button" role="tab" id="tab-switzerland-era" aria-selected="false" aria-controls="switzerland-era" tabindex="-1" data-tab="switzerland-era" data-i18n="jTab5">🇨🇭 Switzerland Era</button>
+      <button class="tab-btn" type="button" role="tab" id="tab-future-dreams" aria-selected="false" aria-controls="future-dreams" tabindex="-1" data-tab="future-dreams" data-i18n="jTab6">🌟 Future Dreams</button>
     </div>
 
     <div class="tabpanes">
-      <div class="tab-content hidden" id="early-years">
+      <div class="tab-content hidden" id="early-years" role="tabpanel" aria-labelledby="tab-early-years" tabindex="0">
         <div class="jgrid">
           <div class="jitem"><span class="emo" aria-hidden="true">👶</span><div data-i18n="j1a"><h3>Born</h3><p class="jw">February 1980</p><p>Galle, Sri Lanka</p></div></div>
           <div class="jitem"><span class="emo" aria-hidden="true">🏫</span><div data-i18n="j1b"><h3>School Years</h3><p class="jw">1985 — 1998</p><p>Southern Sri Lanka</p></div></div>
         </div>
       </div>
 
-      <div class="tab-content" id="educationJourney">
+      <div class="tab-content" id="educationJourney" role="tabpanel" aria-labelledby="tab-educationJourney" tabindex="0">
         <div class="jgrid">
           <div class="jitem"><span class="emo" aria-hidden="true">🎓</span><div data-i18n="j2a"><h3>Bachelor’s Degree</h3><p class="jw">1999 — 2004</p><p>University of Sri Jayewardenepura</p><p>BSc in Computer Science, Statistics, Mathematics</p></div></div>
           <div class="jitem"><span class="emo" aria-hidden="true">🎓</span><div data-i18n="j2b"><h3>Second Bachelor’s</h3><p class="jw">1999 — 2004</p><p>University of Colombo</p><p>BIT (6 semesters completed)</p></div></div>
@@ -29,14 +29,14 @@
         </div>
       </div>
 
-      <div class="tab-content hidden" id="career-start">
+      <div class="tab-content hidden" id="career-start" role="tabpanel" aria-labelledby="tab-career-start" tabindex="0">
         <div class="jgrid">
           <div class="jitem"><span class="emo" aria-hidden="true">💼</span><div data-i18n="j3a"><h3>First Job</h3><p class="jw">2004</p><p>Union Bank of Colombo Ltd</p><p>Banking Software Engineer</p></div></div>
           <div class="jitem"><span class="emo" aria-hidden="true">🏢</span><div data-i18n="j3b"><h3>Early Career</h3><p class="jw">2006 — 2008</p><p>Multiple companies in Sri Lanka</p><p>Java/JEE Developer roles</p></div></div>
         </div>
       </div>
 
-      <div class="tab-content hidden" id="belgium-era">
+      <div class="tab-content hidden" id="belgium-era" role="tabpanel" aria-labelledby="tab-belgium-era" tabindex="0">
         <div class="jgrid">
           <div class="jitem"><span class="emo" aria-hidden="true">✈️</span><div data-i18n="j4a"><h3>Moved to Belgium</h3><p class="jw">August 2008</p><p>Brussels Area</p></div></div>
           <div class="jitem"><span class="emo" aria-hidden="true">💍</span><div data-i18n="j4b"><h3>Got Married</h3><p class="jw">2010</p><p>Belgium</p></div></div>
@@ -48,7 +48,7 @@
         </div>
       </div>
 
-      <div class="tab-content hidden" id="switzerland-era">
+      <div class="tab-content hidden" id="switzerland-era" role="tabpanel" aria-labelledby="tab-switzerland-era" tabindex="0">
         <div class="jgrid">
           <div class="jitem"><span class="emo" aria-hidden="true">🏔️</span><div data-i18n="j5a"><h3>Moved to Switzerland</h3><p class="jw">January 2018</p><p>Zurich Area</p></div></div>
           <div class="jitem"><span class="emo" aria-hidden="true">🔷</span><div data-i18n="j5b"><h3>UBS</h3><p class="jw">2018 — 2019</p><p>IT Solution Development Specialist</p><p>Banking systems</p></div></div>
@@ -58,7 +58,7 @@
         </div>
       </div>
 
-      <div class="tab-content hidden" id="future-dreams">
+      <div class="tab-content hidden" id="future-dreams" role="tabpanel" aria-labelledby="tab-future-dreams" tabindex="0">
         <div class="jgrid">
           <div class="jitem"><span class="emo" aria-hidden="true">🎓</span><div data-i18n="j6a"><h3>Complete Master’s Degree</h3><p class="jw">Ongoing</p><p>University of Moratuwa</p><p>Computer Engineering</p></div></div>
           <div class="jitem"><span class="emo" aria-hidden="true">🤖</span><div data-i18n="j6b"><h3>AI Research &amp; Development</h3><p class="jw">Future goal</p><p>Advanced AI systems</p><p>LLM optimization &amp; deployment</p></div></div>

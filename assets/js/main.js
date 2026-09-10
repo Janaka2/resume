@@ -22,11 +22,16 @@
     var root = document.documentElement;
     var themeBtn = document.getElementById('themeBtn');
     if (!themeBtn) return;
+    function reflect() {
+      themeBtn.setAttribute('aria-pressed', root.getAttribute('data-theme') === 'dark' ? 'true' : 'false');
+    }
     themeBtn.addEventListener('click', function () {
       var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
       setStore('jp-theme', next);
+      reflect();
     });
+    reflect();
   }
 
   /* ---------- language ---------- */
@@ -80,20 +85,54 @@
 
   /* ---------- life journey tabs ---------- */
   function setupTabs() {
-    var buttons = document.querySelectorAll('.tab-btn');
-    var panels = document.querySelectorAll('.tab-content');
+    var buttons = Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
+    var panels = Array.prototype.slice.call(document.querySelectorAll('.tab-content'));
     if (!buttons.length || !panels.length) return;
 
-    function setActive(tabId) {
+    /* WAI-ARIA tabs pattern: role="tablist" on the bar, role="tab" buttons with a
+       roving tabindex, role="tabpanel" panes. The markup in
+       partials/life-journey-tabs.html already carries the roles/ids; the
+       attributes are (re)asserted here so the partial and the script cannot drift. */
+    var bar = buttons[0].parentNode;
+    if (bar) bar.setAttribute('role', 'tablist');
+    buttons.forEach(function (b) {
+      var panelId = b.dataset.tab;
+      if (!b.id) b.id = 'tab-' + panelId;
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-controls', panelId);
+      b.removeAttribute('aria-pressed');
+    });
+    panels.forEach(function (p) {
+      p.setAttribute('role', 'tabpanel');
+      p.setAttribute('tabindex', '0');
+      var tab = buttons.filter(function (b) { return b.dataset.tab === p.id; })[0];
+      if (tab) p.setAttribute('aria-labelledby', tab.id);
+    });
+
+    function setActive(tabId, focusTab) {
       panels.forEach(function (p) { p.classList.toggle('hidden', p.id !== tabId); });
       buttons.forEach(function (b) {
         var on = b.dataset.tab === tabId;
         b.classList.toggle('active', on);
-        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+        b.setAttribute('tabindex', on ? '0' : '-1');
+        if (on && focusTab) b.focus();
       });
     }
-    buttons.forEach(function (b) {
+    buttons.forEach(function (b, i) {
       b.addEventListener('click', function () { setActive(b.dataset.tab); });
+      b.addEventListener('keydown', function (ev) {
+        var next;
+        switch (ev.key) {
+          case 'ArrowRight': next = (i + 1) % buttons.length; break;
+          case 'ArrowLeft':  next = (i - 1 + buttons.length) % buttons.length; break;
+          case 'Home':       next = 0; break;
+          case 'End':        next = buttons.length - 1; break;
+          default: return;
+        }
+        ev.preventDefault();
+        setActive(buttons[next].dataset.tab, true);
+      });
     });
     setActive('educationJourney'); // default tab, as before
   }
@@ -135,6 +174,25 @@
   function setupChatPopup() {
     var popup = document.getElementById('chatPopup');
     var lastFocus = null;
+    var inerted = [];
+
+    /* Focus trap: make everything outside the dialog inert (unfocusable and
+       hidden from assistive tech) while it is open. The popup may be nested in
+       an include slot, so its ancestors up to <body> are left alone. */
+    function setInert(on) {
+      if (on) {
+        var keep = [];
+        for (var n = popup; n && n !== document.body; n = n.parentNode) keep.push(n);
+        Array.prototype.forEach.call(document.body.children, function (el) {
+          if (keep.indexOf(el) !== -1 || el.hasAttribute('inert')) return;
+          el.setAttribute('inert', '');
+          inerted.push(el);
+        });
+      } else {
+        inerted.forEach(function (el) { el.removeAttribute('inert'); });
+        inerted = [];
+      }
+    }
 
     window.openChatPopup = function () {
       if (!popup) return;
@@ -144,6 +202,7 @@
       }
       lastFocus = document.activeElement;
       popup.classList.remove('hidden');
+      setInert(true);
       document.body.style.overflow = 'hidden';
       var closeBtn = popup.querySelector('.modal-close');
       if (closeBtn) closeBtn.focus();
@@ -151,7 +210,8 @@
     window.closeChatPopup = function () {
       if (!popup) return;
       popup.classList.add('hidden');
-      document.body.style.overflow = 'auto';
+      setInert(false);
+      document.body.style.overflow = '';
       if (lastFocus && lastFocus.focus) lastFocus.focus();
     };
     if (popup) {
@@ -164,6 +224,22 @@
     }
   }
 
+  /* ---------- print: open every <details> so FAQ answers are on paper ---------- */
+  function setupPrint() {
+    var opened = [];
+    window.addEventListener('beforeprint', function () {
+      opened = [];
+      Array.prototype.forEach.call(document.querySelectorAll('details:not([open])'), function (d) {
+        d.setAttribute('open', '');
+        opened.push(d);
+      });
+    });
+    window.addEventListener('afterprint', function () {
+      opened.forEach(function (d) { d.removeAttribute('open'); });
+      opened = [];
+    });
+  }
+
   /* ---------- boot after partials are in the DOM ---------- */
   window.addEventListener('partials:loaded', function () {
     setupTheme();
@@ -172,6 +248,7 @@
     setupTabs();
     setupWorkHistory();
     setupChatPopup();
+    setupPrint();
     applyLang();
   });
 })();

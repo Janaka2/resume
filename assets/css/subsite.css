@@ -299,3 +299,15 @@ html[data-theme="dark"] .ai-btn { color: #06121F; }
 .faq summary::after { content: "+"; font-family: var(--font-mono); color: var(--ac); }
 .faq details[open] summary::after { content: "–"; }
 .faq details p { margin-top: 10px; color: var(--tx2); max-width: 70ch; }
+
+/* print (sub-site pages) */
+@page { margin: 14mm; }
+@media print {
+  .topbar, .sitefoot, .actions, .skip { display: none !important; }
+  /* <details> is opened by site-nav.js on beforeprint; these keep the answer visible either way */
+  .faq details, .faq details > * { display: block; }
+  .faq summary::after { content: none; }
+  .prose a[href^="http"]:not([href*="janaka.me"])::after {
+    content: " (" attr(href) ")"; font-family: var(--font-mono); font-size: .8em; word-break: break-all;
+  }
+}

@@ -26,7 +26,10 @@
         </div>
       </div>
       <figure class="photo-card">
-        <img src="assets/janaka2.jpg" alt="Portrait photo of Janaka Premathilaka" width="172" height="195">
+        <picture>
+          <source type="image/webp" srcset="assets/portrait-172.webp 1x, assets/portrait-344.webp 2x, assets/portrait-516.webp 3x">
+          <img src="assets/portrait-172.jpg" srcset="assets/portrait-172.jpg 1x, assets/portrait-344.jpg 2x, assets/portrait-516.jpg 3x" alt="Portrait photo of Janaka Premathilaka" width="172" height="221" fetchpriority="high" decoding="async">
+        </picture>
         <figcaption data-i18n="heroFigcap">ZUG · SWITZERLAND</figcaption>
       </figure>
     </div>

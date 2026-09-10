@@ -17,8 +17,6 @@
   <meta name="twitter:title" content="CV — Senior Java Engineer &amp; Solution Architect, Zug">
   <meta name="twitter:description" content="Two decades of critical systems at UBS, Credit Suisse and the European Commission. Java, Spring Boot, Kafka, Kubernetes, now LLM and RAG. Case studies.">
   <meta name="twitter:image" content="https://janaka.me/assets/og-image.png">
-
-  <link rel="icon" type="image/svg+xml" href="./assets/icons/cv/favicon.svg?v=1">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/cv/favicon-32.png?v=1">
   <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/cv/favicon-16.png?v=1">
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/cv/apple-touch-icon.png?v=1">
@@ -37,15 +35,20 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="/assets/css/theme.css">
   <link rel="stylesheet" href="/assets/css/subsite.css">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <div data-include="/partials/site-nav.html"></div>
 
-<main>
+<main id="main">
   <section class="sec subhero">
     <div class="wrap">
       <div class="hero-grid">
@@ -62,7 +65,10 @@
           </div>
         </div>
         <figure class="photo-card">
-          <img src="./assets/icons/cv/janaka2.jpg" alt="Janaka Premathilaka">
+          <picture>
+            <source type="image/webp" srcset="/assets/portrait-172.webp 1x, /assets/portrait-344.webp 2x, /assets/portrait-516.webp 3x">
+            <img src="/assets/portrait-172.jpg" srcset="/assets/portrait-172.jpg 1x, /assets/portrait-344.jpg 2x, /assets/portrait-516.jpg 3x" alt="Portrait photo of Janaka Premathilaka" width="172" height="221" fetchpriority="high" decoding="async">
+          </picture>
           <figcaption>ZUG · SWITZERLAND</figcaption>
         </figure>
       </div>
