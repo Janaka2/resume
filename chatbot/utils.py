@@ -1,4 +1,4 @@
-import os, json, re, requests
+import os, csv, json, re, requests
 from datetime import datetime, timezone
 from typing import Any
 from config import PUSHOVER_TOKEN, PUSHOVER_USER, LEADS_CSV, UNKNOWN_LOG
@@ -60,22 +60,22 @@ def append_unknown_log(q: str):
     except Exception as e:
         print("append_unknown_log error:", e)
 
+LEAD_FIELD_MAX = 500
+
+def _clean_field(value: str) -> str:
+    """Single line, capped length, so one lead is always exactly one CSV row."""
+    text = re.sub(r"[\r\n]+", " ", value or "").strip()
+    return text[:LEAD_FIELD_MAX]
+
 def append_lead(name: str, email: str, phone: str, company: str, message: str) -> str:
     try:
-        header_needed = not os.path.exists(LEADS_CSV)
-        with open(LEADS_CSV, "a", encoding="utf-8") as f:
+        header_needed = not os.path.exists(LEADS_CSV) or os.path.getsize(LEADS_CSV) == 0
+        with open(LEADS_CSV, "a", encoding="utf-8", newline="") as f:
+            writer = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
             if header_needed:
-                f.write("timestamp_utc,name,email,phone,company,message\n")
+                writer.writerow(["timestamp_utc", "name", "email", "phone", "company", "message"])
             ts = datetime.now(timezone.utc).isoformat()
-            row = [
-                ts,
-                (name or "").replace(",", " "),
-                (email or "").replace(",", " "),
-                (phone or "").replace(",", " "),
-                (company or "").replace(",", " "),
-                (message or "").replace("\n", " ").replace(",", " "),
-            ]
-            f.write(",".join(row) + "\n")
+            writer.writerow([ts] + [_clean_field(v) for v in (name, email, phone, company, message)])
         push_pushover(f"New lead: {name} | {email} | {phone} | {company}")
         return "Thank you—your details were received. I’ll follow up."
     except Exception as e:

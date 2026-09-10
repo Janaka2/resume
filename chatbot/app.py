@@ -1,12 +1,36 @@
 # app.py
-import os, secrets
+import logging, secrets, time as _t
 import gradio as gr
 
-from config import CSS, SUGGESTED_QUESTIONS, QA_PATH
+from config import CSS, SUGGESTED_QUESTIONS, QA_PATH, ADMIN_PASSWORD
 from utils import append_lead, load_json, save_json
-from admin import ADMIN_SESSIONS
+from admin import ADMIN_SESSIONS, ADMIN_SESSION_TTL
 from retriever import retriever  # ensures corpus is built
 from app_logic import answer_query, health, ask_quick
+from ratelimit import TokenBucket, client_key
+
+# ---------- Admin gate ----------
+# The default password from config.py must never be usable in production.
+ADMIN_ENABLED = bool(ADMIN_PASSWORD) and ADMIN_PASSWORD != "change-me"
+if not ADMIN_ENABLED:
+    logging.warning(
+        "ADMIN_PASSWORD is unset or still 'change-me' — the Manage Knowledge tab is disabled. "
+        "Set a strong ADMIN_PASSWORD in the Space secrets to enable it."
+    )
+
+# ---------- Rate limiting (per client, 20 requests / 10 minutes) ----------
+RATE_LIMITER = TokenBucket(capacity=20, period=600)
+RATE_LIMIT_MSG = (
+    "You've sent quite a few questions in a short time — please wait a few minutes and try again. "
+    "If it's urgent, reach me directly at janaka2@gmail.com or +41 76 224 84 45."
+)
+
+def answer_limited(chat_history, user_input, request):
+    """Wrap answer_query with the per-client bucket. `request` is the injected gr.Request."""
+    if not RATE_LIMITER.allow(client_key(request)):
+        question = (user_input or "").strip() or "…"
+        return chat_history + [(question, RATE_LIMIT_MSG)], ""
+    return answer_query(chat_history, user_input)
 
 # ---------- Client JS (runs in browser via demo.load) ----------
 SPEECH_INIT_JS = r"""
@@ -196,10 +220,10 @@ SPEECH_INIT_JS = r"""
 """
 
 # ---------- UI ----------
-with gr.Blocks(title="Janaka’s Learning Chatbot", css=CSS) as demo:
+with gr.Blocks(title="Janaka’s AI Assistant", css=CSS) as demo:
     gr.HTML("<style>.gr-button { white-space: normal; line-height: 1.2; }</style>")
     gr.Markdown(
-        "## Janaka’s Learning Chatbot\n"
+        "## Janaka’s AI Assistant\n"
         "Warm, concise screening. If a detail is missing, I’ll tell you and follow up. "
         "You can also share your details in the **Contact** tab."
     )
@@ -222,13 +246,22 @@ with gr.Blocks(title="Janaka’s Learning Chatbot", css=CSS) as demo:
         with gr.Row():
             speak_toggle = gr.Checkbox(value=True, label="🔊 Speak answers", elem_id="speak_toggle")
 
+        # Gradio injects the request only for parameters annotated as gr.Request,
+        # so these must be real functions rather than lambdas.
+        def _make_quick(question):
+            def _quick(state_, request: gr.Request):
+                if not RATE_LIMITER.allow(client_key(request)):
+                    return state_ + [(question, RATE_LIMIT_MSG)], ""
+                return ask_quick(state_, question)
+            return _quick
+
         for btn, label in zip(quick_buttons, SUGGESTED_QUESTIONS):
-            btn.click(lambda s, q=label: ask_quick(s, q), [state], [state, user_in]) \
+            btn.click(_make_quick(label), [state], [state, user_in]) \
                 .then(lambda s: s, inputs=state, outputs=chatbot) \
                 .then(lambda: "", None, user_in)
 
-        def _send(state_, msg):
-            return answer_query(state_, msg)
+        def _send(state_, msg, request: gr.Request):
+            return answer_limited(state_, msg, request)
 
         send_btn.click(_send, [state, user_in], [state, user_in]) \
             .then(lambda s: s, inputs=state, outputs=chatbot) \
@@ -263,7 +296,7 @@ with gr.Blocks(title="Janaka’s Learning Chatbot", css=CSS) as demo:
         gr.Markdown("> Or reach me directly: **janaka2@gmail.com** · **+41 76 224 84 45**")
 
     # Manage Knowledge tab
-    with gr.Tab("Manage Knowledge"):
+    with gr.Tab("Manage Knowledge", visible=ADMIN_ENABLED):
         admin_token = gr.State("")
         login_group = gr.Group(visible=True)
         with login_group:
@@ -289,12 +322,12 @@ with gr.Blocks(title="Janaka’s Learning Chatbot", css=CSS) as demo:
             reindex_out = gr.Markdown()
 
         def _login(pw):
-            if not pw or pw.strip() != os.getenv("ADMIN_PASSWORD", "change-me").strip():
+            supplied = (pw or "").strip().encode("utf-8")
+            expected = ADMIN_PASSWORD.encode("utf-8")
+            if not ADMIN_ENABLED or not supplied or not secrets.compare_digest(supplied, expected):
                 return "", gr.update(visible=True), gr.update(visible=True), gr.update(visible=False), "Invalid password."
             token = secrets.token_urlsafe(24)
-            import time as _t
-            if "ADMIN_SESSIONS" in globals():
-                ADMIN_SESSIONS[token] = _t.time() + 60 * 60 * 4
+            ADMIN_SESSIONS[token] = _t.time() + ADMIN_SESSION_TTL
             return token, gr.update(visible=False), gr.update(visible=False), gr.update(visible=True), "Logged in. Welcome!"
 
         login_btn.click(
@@ -303,12 +336,10 @@ with gr.Blocks(title="Janaka’s Learning Chatbot", css=CSS) as demo:
             [admin_token, admin_pw_input, login_btn, admin_group, login_status],
         )
 
-        import time as _t
-
         def add_qa_session(token: str, q: str, a: str) -> str:
             if token not in ADMIN_SESSIONS or ADMIN_SESSIONS[token] < _t.time():
                 return "Not authorized."
-            ADMIN_SESSIONS[token] = _t.time() + 60 * 60 * 4
+            ADMIN_SESSIONS[token] = _t.time() + ADMIN_SESSION_TTL
             q = (q or "").strip()
             a = (a or "").strip()
             if not q or not a:
@@ -331,7 +362,7 @@ with gr.Blocks(title="Janaka’s Learning Chatbot", css=CSS) as demo:
         def list_qa_session(token: str) -> str:
             if token not in ADMIN_SESSIONS or ADMIN_SESSIONS[token] < _t.time():
                 return "Not authorized."
-            ADMIN_SESSIONS[token] = _t.time() + 60 * 60 * 4
+            ADMIN_SESSIONS[token] = _t.time() + ADMIN_SESSION_TTL
             data = load_json(QA_PATH, [])
             if not data:
                 return "No Q&A entries yet."
@@ -343,7 +374,7 @@ with gr.Blocks(title="Janaka’s Learning Chatbot", css=CSS) as demo:
         def reindex_session(token: str) -> str:
             if token not in ADMIN_SESSIONS or ADMIN_SESSIONS[token] < _t.time():
                 return "Not authorized."
-            ADMIN_SESSIONS[token] = _t.time() + 60 * 60 * 4
+            ADMIN_SESSIONS[token] = _t.time() + ADMIN_SESSION_TTL
             retriever.build_corpus()
             return "Reindexed knowledge successfully."
 
@@ -362,4 +393,5 @@ with gr.Blocks(title="Janaka’s Learning Chatbot", css=CSS) as demo:
 
 # ---------- Launch ----------
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=7860)
+    demo.queue(max_size=20, default_concurrency_limit=2)
+    demo.launch(server_name="0.0.0.0", server_port=7860, show_api=False)

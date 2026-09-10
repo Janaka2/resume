@@ -1,0 +1,7 @@
+# Runtime dependencies for the ClarityBot Space (derived from the imports in *.py).
+gradio==4.44.1
+openai>=1.40,<2
+python-dotenv>=1.0,<2
+scikit-learn>=1.5,<2
+numpy>=1.26,<3
+requests>=2.32,<3
