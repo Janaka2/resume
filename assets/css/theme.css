@@ -346,3 +346,15 @@ html[data-theme="dark"] .btn.primary{color:#06121F}
 /* hub top bar: divider before the property links (Products · Blog · Academy) */
 .navlink.navsep{opacity:.6;pointer-events:none;padding:0 2px;cursor:default}
 .navlink.navlink-ext{color:var(--ac)}
+
+/* ============ products ledger on the hub (five rows, one card) ============ */
+.plist{padding:6px 22px 16px}
+.prow{display:grid;grid-template-columns:150px 1fr auto;gap:18px;align-items:center;padding:14px 0;border-bottom:1px solid var(--ln)}
+.prow:last-of-type{border-bottom:none}
+.pname h3{font-family:var(--font-head);font-size:1.02rem;font-weight:700;letter-spacing:-.01em;margin:0}
+.pdom{display:block;font-family:var(--font-mono);font-size:.7rem;color:var(--tx2);margin-top:2px}
+.pline{font-size:.94rem;color:color-mix(in srgb,var(--tx) 88%,var(--tx2));margin:0}
+.popen{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ac)}
+.popen .dot{animation:none}
+.pfoot{margin-top:12px;font-size:.84rem;color:var(--tx2)}
+@media(max-width:680px){.prow{grid-template-columns:1fr auto;row-gap:6px}.prow .pline{grid-column:1/-1}}

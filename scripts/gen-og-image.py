@@ -71,7 +71,7 @@ def page_image(eyebrow, lines, sub=None, url="janaka.me"):
 PAGES = {
     "hub": None,
     "cv": ("CV", ["Two decades of", "critical systems."], None, "janaka.me/cv/"),
-    "products": ("Products", ["Finished software,", "ready for a new owner."], "nüchtern · Daily Momentum · Loop · BabyLoop", "janaka.me/products/"),
+    "products": ("Products", ["Finished software,", "ready for a new owner."], "nüchtern · Daily Momentum · Loop · BabyLoop · LeftHere", "janaka.me/products/"),
     "blog": ("Blog", ["Clear, hands-on articles on", "Java, Kafka, RAG and agents."], None, "janaka.me/blog/"),
     "lab": ("Lab", ["Experiments and demos,", "with notes."], None, "janaka.me/lab/"),
     "ai": ("AI", ["Agents that are readable,", "reliable and worth shipping."], None, "janaka.me/ai/"),

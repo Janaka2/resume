@@ -15,7 +15,7 @@ The engineer-architect who proved that banking-grade rigour and practical AI bel
 | Career | Recognised in Swiss banking and DACH as the go-to Senior Java + applied-AI architect; leading an AI-in-regulated-systems initiative `[confirm]` | Significance and contribution: the work protects millions of people's money |
 | janaka.me ecosystem | Every property alive, consistent and current; blog publishing twice a month; lab demos runnable `[confirm]` | Certainty: the brand works while he sleeps |
 | Janaka Academy | Zero empty pages; three complete learning paths; first cohort of learners engaged `[confirm]` | Contribution: a thousand hearts |
-| nüchtern, Daily Momentum, Loop & BabyLoop | Steady users, one product either acquired, licensed or growing on purpose `[confirm]` | Growth and variety: proof he can ship end to end |
+| nüchtern, Daily Momentum, Loop, BabyLoop & LeftHere | Steady users, one product either acquired, licensed or growing on purpose `[confirm]` | Growth and variety: proof he can ship end to end |
 | German | B2 certified `[confirm]` | Connection: belonging in Switzerland fully |
 | Health and energy | Consistent training and fasting rhythm, energy to sustain all of the above `[confirm]` | Everything else depends on it |
 

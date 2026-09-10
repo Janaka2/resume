@@ -17,7 +17,7 @@ Janaka Premathilaka — Senior Java Engineer & Solution Architect, Zug, Switzerl
 
 1. Hiring managers and recruiters for senior Java / architecture / applied-AI roles in Switzerland and DACH, and remote EU.
 2. Engineers evaluating him as a lead, mentor or collaborator.
-3. Potential acquirers or licensees of nüchtern, Daily Momentum, Loop and BabyLoop.
+3. Potential acquirers or licensees of nüchtern, Daily Momentum, Loop, BabyLoop and LeftHere.
 4. Learners considering Janaka Academy.
 
 ## Voice
@@ -37,7 +37,7 @@ Janaka Premathilaka — Senior Java Engineer & Solution Architect, Zug, Switzerl
 - Stack signals: Java, Spring Boot, Kafka, Kubernetes, Oracle/PostgreSQL, REST, microservices, CI/CD; AI: LLM integration, RAG, LangChain, LangGraph, CrewAI, AutoGen, OpenAI Agents SDK, MCP servers and clients, AI-assisted engineering with Claude Code and OpenAI Codex
 - Location: Zug; work radius Zürich, Zug, Basel, remote
 - Products are Swiss made (engineered in Zug); the quality claim is always backed by the habits behind it (hand-reviewed code, no servers or dependencies to fail, privacy by design), never used as a bare sticker
-- Products: nüchtern (nuechtern.app), Daily Momentum (daily-momentum.com), Loop (loop.janaka.me) and BabyLoop (babyloop.janaka.me), all live, all privacy by construction (on-device, or storage the user owns), all built solo with AI in the loop, all open to acquisition or licensing. Loop is the name and loop.janaka.me the address (renamed from RepeatCycle in September 2026; never use the old name)
+- Products: nüchtern (nuechtern.app), Daily Momentum (daily-momentum.com), Loop (loop.janaka.me), BabyLoop (babyloop.janaka.me) and LeftHere (here.janaka.me), all live, all privacy by construction (on-device, or storage the user owns), all built solo with AI in the loop, all open to acquisition or licensing. Loop is the name and loop.janaka.me the address (renamed from RepeatCycle in September 2026; never use the old name)
 
 ## Ecosystem one-liners (use consistently)
 
@@ -54,6 +54,7 @@ Janaka Premathilaka — Senior Java Engineer & Solution Architect, Zug, Switzerl
 | Daily Momentum | daily-momentum.com | A quiet record of where the day went, one tap, on-device only |
 | Loop | loop.janaka.me | Remembers what repeats, learns the rhythm from your own history, on your device or your own Drive |
 | BabyLoop | babyloop.janaka.me | Two-tap care log for babies and toddlers; keeps the little moments without keeping the phone in hand; on your device or your own Drive |
+| LeftHere | here.janaka.me | Take a photo and it remembers where you left the car, keys, bag or a favourite place; the map walks you back; on your device or your own Drive |
 
 ## Target keywords (for titles, descriptions, chips, posts)
 

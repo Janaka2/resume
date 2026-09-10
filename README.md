@@ -1,6 +1,6 @@
 # janaka.me — personal site of Janaka Premathilaka
 
-**Senior Java Engineer & Solution Architect, Zug 🇨🇭.** Banking-grade Java engineering, now bringing practical AI into regulated systems. Hub for the blog, lab, AI notes, CV, Janaka Academy and four products: [nüchtern](https://nuechtern.app/), [Daily Momentum](https://daily-momentum.com/), [Loop](https://loop.janaka.me/) and [BabyLoop](https://babyloop.janaka.me/).
+**Senior Java Engineer & Solution Architect, Zug 🇨🇭.** Banking-grade Java engineering, now bringing practical AI into regulated systems. Hub for the blog, lab, AI notes, CV, Janaka Academy and five products: [nüchtern](https://nuechtern.app/), [Daily Momentum](https://daily-momentum.com/), [Loop](https://loop.janaka.me/), [BabyLoop](https://babyloop.janaka.me/) and [LeftHere](https://here.janaka.me/).
 
 Plain HTML/CSS/JavaScript. No frameworks, no build step — host it anywhere (GitHub Pages works as-is).
 

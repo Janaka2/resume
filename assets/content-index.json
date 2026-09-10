@@ -3,7 +3,7 @@
   "url": "/products/index.html",
   "title": "Products for Sale — Privacy-First Apps",
   "section": "products",
-  "description": "Swiss-made, privacy-first web apps, finished and live, available for acquisition or licensing: nüchtern, Daily Momentum, Loop and BabyLoop. Built in Zug to banking-grade standards.",
+  "description": "Swiss-made, privacy-first web apps, finished and live, available for acquisition or licensing: nüchtern, Daily Momentum, Loop, BabyLoop and LeftHere. Built in Zug to banking-grade standards.",
   "tags": [
    "products",
    "sale",
@@ -13,8 +13,8 @@
   ],
   "date": "2026-09-10",
   "updated": "2026-09-10",
-  "words": 1573,
-  "minutes": 8
+  "words": 1765,
+  "minutes": 9
  },
  {
   "url": "/lab/Notes/llm-study-notes-handwritten-style.html",
@@ -129,7 +129,7 @@
    "threads"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-09",
+  "updated": "2026-09-10",
   "words": 1374,
   "minutes": 7
  },
@@ -487,7 +487,7 @@
    "problems"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-10",
   "words": 2186,
   "minutes": 10
  },
@@ -504,7 +504,7 @@
    "study"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-09",
+  "updated": "2026-09-10",
   "words": 1514,
   "minutes": 7
  },
@@ -554,7 +554,7 @@
    "java"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-10",
   "words": 434,
   "minutes": 2
  },
@@ -637,7 +637,7 @@
    "java"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-09",
+  "updated": "2026-09-10",
   "words": 2194,
   "minutes": 10
  },
@@ -654,7 +654,7 @@
    "setup"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-10",
   "words": 1014,
   "minutes": 5
  },
@@ -861,7 +861,7 @@
    "scripting"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-10",
   "words": 2294,
   "minutes": 11
  },
