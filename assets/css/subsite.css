@@ -374,3 +374,10 @@ html.search-open { overflow: hidden; }
 .related-card .chips { margin-top: auto; padding-top: 4px; }
 .related-grid { margin-bottom: 8px; }
 @media print { .search-overlay, .searchbtn, [data-related] { display: none !important; } }
+
+/* product flow illustration under a catalogue listing */
+.flow { margin: 14px 0 6px; }
+.flow a { display: block; border: 1px solid var(--ln); border-radius: var(--r); overflow: hidden; background: var(--bg2); box-shadow: var(--shadow); }
+.flow img { display: block; width: 100%; height: auto; }
+.flow figcaption { margin-top: 8px; font-family: var(--font-mono); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--tx2); }
+html[data-theme="dark"] .flow a { background: #FAF8F5; }
