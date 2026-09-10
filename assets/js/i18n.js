@@ -20,10 +20,10 @@ window.JP_I18N = (function () {
     navAcademyX: 'Academy',
 
     /* ---- hero ---- */
-    heroStatus: 'prod · stabil seit 2004 · pikett: getragen · audits: bestanden',
+    heroStatus: 'prod · stabil seit 2004 · Pikett: geleistet · Audits: bestanden',
     heroRole: 'Senior Java Engineer &amp; Solution Architect',
     heroHook: '<b>Ich baue grundsolide Enterprise-Java-Systeme — und führe sie ins KI-Zeitalter.</b><br>Über 22 Jahre geschäftskritische Software für Banken und den öffentlichen Sektor — UBS, Credit Suisse und die Europäische Kommission.',
-    heroBadges: '<span class="badge">Zug, Schweiz 🇨🇭</span><span class="badge">Niederlassung C</span><span class="badge hot">Deutsch B1 ↗</span><span class="badge">Banking-IT · regulierte Systeme</span><span class="badge hot">KI · LLM · Agentic RAG</span>',
+    heroBadges: '<span class="badge">Zug, Schweiz 🇨🇭</span><span class="badge">Niederlassungsbewilligung C</span><span class="badge hot">Deutsch B1 ↗</span><span class="badge">Banking-IT · regulierte Systeme</span><span class="badge hot">KI · LLM · Agentic RAG</span>',
     btnViewCv: 'Mein aktueller Lebenslauf',
     btnEmail: 'E-Mail',
     btnPdf: 'PDF-Lebenslauf',
@@ -47,14 +47,14 @@ window.JP_I18N = (function () {
     cSkG3: 'DevOps &amp; Cloud',
     cLangsH: 'Sprachen',
     lgEnN: 'Englisch', lgEnL: 'Verhandlungssicher · <b>C1/C2</b>',
-    lgDeN: 'Deutsch', lgDeL: 'Gut · <b>B1 ↗ in aktiver Weiterbildung</b>',
+    lgDeN: 'Deutsch', lgDeL: 'Mittelstufe · <b>B1 ↗ in aktiver Weiterbildung</b>',
     lgSiN: 'Singhalesisch', lgSiL: 'Muttersprache',
     lgFrN: 'Französisch', lgFrL: 'Grundkenntnisse',
     lgNlN: 'Niederländisch', lgNlL: 'Grundkenntnisse',
 
     /* ---- experience ---- */
     expEyebrow: 'Erfahrung',
-    expH2: '22 Jahre, Production-Grade.',
+    expH2: 'Über 22 Jahre, Production-Grade.',
     expMoreBtn: 'Mehr Details ↓',
     x1when: '<b>01.2024 — heute</b> · Zürich, Schweiz',
     x1pts: '<li>Vollständige Verantwortung für sechs Enterprise-Applikationen durch die Credit-Suisse-UBS-Fusion — Systemstabilität ohne Betriebsunterbrüche, unter hohem Druck.</li><li>Führung der Teams durch Multi-Plattform-Migrationen und Technologie-Decommissioning; Lösung hochpriorisierter Produktionsincidents mit ruhiger, entschlossener Hand.</li><li>Leitung der Archivierungsinitiative: 100 % termingerecht unter auditpflichtigen Fristen; Linux- und Oracle-CLI-Pipelines für regulierte Multi-Gigabyte-Datenfeeds.</li><li>Konzeption und Produktivsetzung von LLM- und Agentic-RAG-Automatisierungen für interne Bankprozesse, integriert in bestehende Java-Services — inklusive lokaler Llama-3-Inferenz für Daten, welche die Bank nicht verlassen dürfen.</li><li>Praxiserfahrung mit dem OpenAI Agents SDK und Model Context Protocol (MCP): Multi-Tool-Orchestrierung, Guardrails und RAG-gestützte Enterprise-Applikationen in Python.</li><li>Mentoring von Junior-Engineers, Leitung von Code-Reviews, Pikettdienst.</li>',
@@ -76,7 +76,7 @@ window.JP_I18N = (function () {
     /* ---- independent projects ---- */
     pjEyebrow: 'Eigene Projekte',
     pjH2: 'Vier Produkte, von der Idee bis in Produktion.',
-    pjLede: 'In meiner Freizeit und auf eigener Infrastruktur entstanden — unabhängig von meiner Anstellung und ohne Bezug zum Geschäft meines Arbeitgebers. Alle vier sind live, und alle vier sind von Grund auf privat gebaut: Die Daten bleiben auf dem Gerät der Nutzerin oder des Nutzers — oder, auf Wunsch, in einem Speicher, der ihnen selbst gehört.',
+    pjLede: 'In meiner Freizeit und auf eigener Infrastruktur entstanden — unabhängig von meiner Anstellung und ohne Bezug zum Geschäft meines Arbeitgebers. Alle vier sind live, und alle vier sind von Grund auf privat gebaut: Die Daten bleiben auf dem Gerät der Nutzenden — oder, auf Wunsch, in einem Speicher, der ihnen selbst gehört.',
     pjLive: 'Live',
     p1Sub: 'nuechtern.app · Fasten-Tracker · PWA',
     p1Desc: 'Ein Fasten-Begleiter, der die Biologie sichtbar macht: ein Timer, der die aktuelle Stoffwechselphase zeigt und sagt, was der Körper in Stunde 14 tatsächlich tut — dazu die Hinweise zu Flüssigkeit und Elektrolyten, die den meisten Trackern fehlen.',
@@ -94,18 +94,18 @@ window.JP_I18N = (function () {
     p3Chips: '<span class="chip">PWA</span><span class="chip">Offline-first</span><span class="chip">eigenes Gerät oder eigenes Drive</span><span class="chip">EN</span>',
     p3Btn: 'Loop öffnen ↗',
     p4Sub: 'babyloop.janaka.me · Pflegetagebuch für Babys und Kleinkinder · PWA',
-    p4Desc: 'Die kleinen Momente festhalten, ohne das Telefon ständig in der Hand zu haben. Zwei Tipps genügen für eine Mahlzeit, ein Nickerchen, eine Temperatur oder das erste Lächeln — und der Tag fügt sich zu einer Zusammenfassung, die auch müde Eltern noch lesen können.',
-    p4Pts: '<li>Selbst definierte Aktivitäten — einfache Ereignisse, Timer, Messwerte, Mengen, Bewertungen — mit Fotos und Notizen, gespeichert im Moment des Antippens.</li><li>Eine Tageszusammenfassung und ein teilbares PDF für die Kinderärztin, die Grosseltern oder eine zweite Betreuungsperson.</li><li>Keine Konten, keine Server, keine Analytik. Die Daten bleiben auf dem Gerät oder wahlweise im eigenen Google Drive, um sie zwischen Telefonen zu teilen.</li>',
+    p4Desc: 'Die kleinen Momente festhalten, ohne das Telefon ständig in der Hand zu haben. Zweimal tippen genügt für eine Mahlzeit, ein Nickerchen, eine Temperatur oder das erste Lächeln — und der Tag fügt sich zu einer Zusammenfassung, die auch müde Eltern noch lesen können.',
+    p4Pts: '<li>Selbst definierte Aktivitäten — einfache Ereignisse, Timer, Messwerte, Mengen, Bewertungen — mit Fotos und Notizen, gespeichert im Moment des Antippens.</li><li>Eine Tageszusammenfassung und ein teilbares PDF für die Kinderärztin, die Grosseltern oder eine zweite Betreuungsperson.</li><li>Keine Konten, keine Server, kein Tracking. Die Daten bleiben auf dem Gerät oder wahlweise im eigenen Google Drive, um sie zwischen Telefonen zu teilen.</li>',
     p4Chips: '<span class="chip">PWA</span><span class="chip">Offline-first</span><span class="chip">eigenes Gerät oder eigenes Drive</span><span class="chip">EN</span>',
     p4Btn: 'BabyLoop öffnen ↗',
     pjHowLabel: 'Wie sie entstanden sind',
-    pjHowH: 'Ein Engineer, KI im Prozess, ausgeliefert.',
+    pjHowH: 'Ein Engineer, KI im Loop, live.',
     pjHowP: 'Alle vier Produkte wurden von einer Person spezifiziert, gestaltet, gebaut, getextet und deployed — an Abenden und Wochenenden — mit LLMs als bewusstem Werkzeug in jedem Schritt, nicht als Spielerei. Dieselbe Arbeitsweise bringe ich in regulierte Umgebungen: mit dem Modell schnell vorankommen und das Ergebnis anschliessend an dem Massstab messen, den die Domäne verlangt.',
     pjHowPts: '<li>Produktumfang und Interaktionsflüsse zuerst gegen ein Modell entworfen, danach von Hand gekürzt, bis nur noch bleibt, was seinen Platz verdient.</li><li>Umsetzung in engen Generieren-und-Prüfen-Schleifen — Architektur und Review bleiben bei mir, und nichts geht live, was ich nicht Zeile für Zeile erklären kann.</li><li>Oberflächentexte in zwei Sprachen sowie das visuelle Erscheinungsbild aller vier Apps KI-gestützt erstellt und auf eine einheitliche Stimme redigiert.</li><li>Von der leeren Seite zur öffentlichen URL in Wochen statt Quartalen — ohne Team, ohne Budget, ohne fremde Hilfe.</li>',
     pjAcqH: 'Jedes der vier Produkte könnte ein besseres Zuhause finden.',
     pjAcqP: 'Alle vier sind unabhängig von meiner Anstellung entstanden und stehen mir daher frei zur Weitergabe. Wenn eines davon in ein Portfolio passt, das Sie aufbauen, spreche ich gerne über Übernahme oder Lizenzierung — Quellcode, Marke, gegebenenfalls Domain und eine dokumentierte Übergabe.',
     pjCatBtn: 'Zum Produktkatalog →',
-    pjAcqBtn: '✉&nbsp; Per E-Mail anfragen',
+    pjAcqBtn: 'Per E-Mail anfragen',
 
     /* ---- certifications ---- */
     certEyebrow: 'Zertifizierungen &amp; Kurse',
@@ -120,8 +120,8 @@ window.JP_I18N = (function () {
     lblIssuer: 'Aussteller:',
     lblDone: '✓ 100 % abgeschlossen',
     lblDone98: '98 % abgeschlossen',
-    lblDoneDate: 'Abgeschlossen am 21.09.2025',
-    lblIssued2006: 'Ausgestellt Jan. 2006',
+    lblDoneDate: 'Abgeschlossen am 21. September 2025',
+    lblIssued2006: 'Ausgestellt Januar 2006',
 
     /* ---- education ---- */
     eduEyebrow: 'Ausbildung',
@@ -151,7 +151,7 @@ window.JP_I18N = (function () {
     j4d: '<h3>Zweites Kind</h3><p class="jw">Dezember 2013</p><p>Tochter</p>',
     j4e: '<h3>Erstes Eigenheim</h3><p class="jw">Dezember 2015</p><p>Belgien</p>',
     j4f: '<h3>Drittes Kind</h3><p class="jw">Dezember 2016</p><p>Tochter</p>',
-    j4g: '<h3>Europäische Kommission</h3><p class="jw">2011 — 2018</p><p>Sr. Full-Stack Java Developer</p><p>E-Procurement-Systeme</p>',
+    j4g: '<h3>Europäische Kommission</h3><p class="jw">2011 — 2018</p><p>Senior Full-Stack Java/JEE Developer</p><p>E-Procurement-Systeme</p>',
     j5a: '<h3>Umzug in die Schweiz</h3><p class="jw">Januar 2018</p><p>Raum Zürich</p>',
     j5b: '<h3>UBS</h3><p class="jw">2018 — 2019</p><p>IT Solution Development Specialist</p><p>Bankensysteme</p>',
     j5c: '<h3>Remote aus UK</h3><p class="jw">2019 — 2020</p><p>Liverpool, UK</p><p>Remote-Arbeit für Schweizer Kunden</p>',
@@ -188,13 +188,13 @@ window.JP_I18N = (function () {
     /* ---- contact / footer ---- */
     ctEyebrow: 'Kontakt',
     ctH2: 'Mein Postfach ist offen.',
-    ctLede: 'Wenn Banking-Grade-Engineering plus praktische KI das Problem auf Ihrem Tisch ist — in der Schweiz oder remote/hybrid in Europa — sprechen wir.',
+    ctLede: 'Wenn Banking-Grade-Engineering plus praktische KI das Problem auf Ihrem Tisch ist — in Zürich, Zug oder Basel, oder remote in Europa — dann lassen Sie uns sprechen. Verfügbar für Senior-Java-, Architektur- und Applied-AI-Rollen; Kündigungsfrist auf Anfrage.',
     ctPS: 'PS — You are very welcome to write in English, too.',
-    ctRefs: 'Ausgezeichnete Referenzen von UBS, Credit Suisse und der Europäischen Kommission auf Anfrage.',
+    ctRefs: 'Referenzen von UBS, Credit Suisse und der Europäischen Kommission auf Anfrage.',
     ctExplore: 'Entdecken',
     ctMailBadge: 'Kontakt',
     ctRights: 'Alle Rechte vorbehalten.',
-    footRight: 'von Hand gebaut — keine Frameworks, kein Build-Step. Quelltext ansehen.'
+    footRight: 'von Hand gebaut — keine Frameworks. Quelltext ansehen.'
   };
 
   /* Strings used by JS-driven UI (not tied to a data-i18n node) */
