@@ -68,9 +68,17 @@ function setupWorkHistory() {
 
 // Chat popup
 function setupChatPopup() {
+  // Same pattern as the hub (assets/js/main.js): the iframe carries data-src
+  // pointing straight at the Hugging Face Space and is only loaded on first open.
+  const CHAT_SRC = 'https://janaka2-claritybot.hf.space?embed=1&lite=1';
   window.openChatPopup = function() {
     const el = document.getElementById('chatPopup');
-    if (el) { el.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+    if (!el) return;
+    const iframe = document.getElementById('chatIframe');
+    if (iframe && !iframe.getAttribute('src')) {
+      iframe.setAttribute('src', iframe.getAttribute('data-src') || CHAT_SRC);
+    }
+    el.classList.remove('hidden'); document.body.style.overflow = 'hidden';
   }
   window.closeChatPopup = function() {
     const el = document.getElementById('chatPopup');

@@ -8,6 +8,8 @@ async function loadPartials() {
   await Promise.all(
     slots.map(async (el) => {
       const file = el.getAttribute('data-include');
+      // Slots pre-filled at build time (scripts/build-hub.py) are left alone.
+      if (el.hasAttribute('data-inlined')) return;
       try {
         const res = await fetch(file, { cache: 'no-cache' });
         el.innerHTML = await res.text();

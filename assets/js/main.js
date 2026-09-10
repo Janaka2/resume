@@ -171,10 +171,31 @@
   }
 
   /* ---------- chat popup ---------- */
+  var SPACE_ORIGIN = 'https://janaka2-claritybot.hf.space';
+  var WAKE_TIMEOUT_MS = 45000;
+
   function setupChatPopup() {
     var popup = document.getElementById('chatPopup');
     var lastFocus = null;
     var inerted = [];
+    var warmed = false;
+    var wakeTimer = null;
+    var loaded = false;
+
+    /* Warm-up: the Space sleeps after 48h idle. Ping it once on the first
+       hover/focus/touch of any trigger so it starts waking before the click. */
+    function warmUp() {
+      if (warmed) return;
+      warmed = true;
+      try {
+        fetch(SPACE_ORIGIN + '/config', { mode: 'cors', cache: 'no-store' }).catch(function () {});
+      } catch (e) {}
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('[onclick*="openChatPopup"]'), function (el) {
+      ['pointerenter', 'focus', 'touchstart'].forEach(function (evt) {
+        el.addEventListener(evt, warmUp, { once: true, passive: true });
+      });
+    });
 
     /* Focus trap: make everything outside the dialog inert (unfocusable and
        hidden from assistive tech) while it is open. The popup may be nested in
@@ -194,12 +215,47 @@
       }
     }
 
+    /* Loading state: skeleton overlays the iframe until its "load" fires.
+       After 45s without load the waking text becomes a "taking longer" notice;
+       the fallback card (email / WhatsApp / CV) stays visible either way. */
+    var skeleton = document.getElementById('chatSkeleton');
+    var wakeMsg = document.getElementById('chatWakeMsg');
+    var foot = document.getElementById('chatFoot');
+    var preferBtn = document.getElementById('chatPreferEmail');
+
+    function onIframeLoaded() {
+      loaded = true;
+      if (wakeTimer) { clearTimeout(wakeTimer); wakeTimer = null; }
+      if (skeleton) { skeleton.classList.add('loaded'); skeleton.classList.add('hidden'); }
+      if (foot) foot.classList.remove('hidden');
+      if (preferBtn) preferBtn.setAttribute('aria-expanded', 'false');
+    }
+    function onWakeTimeout() {
+      wakeTimer = null;
+      if (loaded || !wakeMsg) return;
+      /* swap the key, seed the English text, then let i18n pick the language */
+      wakeMsg.setAttribute('data-i18n', 'chatSlow');
+      wakeMsg.textContent = STR.en.chatSlow;
+      window.JP_I18N.apply(lang);
+    }
+    function startIframe(iframe) {
+      warmUp();
+      iframe.addEventListener('load', onIframeLoaded, { once: true });
+      iframe.setAttribute('src', iframe.getAttribute('data-src')); // load on first open only
+      wakeTimer = setTimeout(onWakeTimeout, WAKE_TIMEOUT_MS);
+    }
+    if (preferBtn && skeleton) {
+      preferBtn.addEventListener('click', function () {
+        var show = skeleton.classList.contains('hidden');
+        skeleton.classList.toggle('hidden', !show);
+        preferBtn.setAttribute('aria-expanded', show ? 'true' : 'false');
+      });
+    }
+
     window.openChatPopup = function () {
       if (!popup) return;
       var iframe = document.getElementById('chatIframe');
-      if (iframe && !iframe.getAttribute('src')) {
-        iframe.setAttribute('src', iframe.getAttribute('data-src')); // load on first open only
-      }
+      if (iframe && !iframe.getAttribute('src')) startIframe(iframe);
       lastFocus = document.activeElement;
       popup.classList.remove('hidden');
       setInert(true);

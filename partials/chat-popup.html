@@ -4,6 +4,28 @@
       <h3 id="chatPopupTitle" data-i18n="chatTitle">Chat with Janaka’s AI Assistant</h3>
       <button class="modal-close" type="button" onclick="closeChatPopup()" aria-label="Close chat">✕</button>
     </div>
-    <iframe data-src="https://janaka2.github.io/pa/" title="Janaka's AI assistant chat" id="chatIframe"></iframe>
+    <div class="modal-body">
+      <!-- Loading skeleton: shown until the Space's iframe fires "load" (it sleeps after 48h idle and can take 20–60s to wake). -->
+      <div class="chat-skeleton" id="chatSkeleton" aria-live="polite">
+        <div class="chat-skel-bubbles" aria-hidden="true">
+          <span class="chat-skel-line w60"></span>
+          <span class="chat-skel-line w80 me"></span>
+          <span class="chat-skel-line w45"></span>
+        </div>
+        <p class="chat-skel-msg" id="chatWakeMsg" data-i18n="chatWaking">Waking the assistant… usually under 20 seconds.</p>
+        <div class="chat-fallback" id="chatFallback">
+          <p class="chat-fallback-k" data-i18n="chatFallbackK">Or reach me directly</p>
+          <div class="chat-fallback-links">
+            <a class="btn" href="mailto:janaka2@gmail.com" data-i18n="chatFallbackMail">✉️&nbsp; Email</a>
+            <a class="btn" href="https://wa.me/41762248445" target="_blank" rel="noopener" data-i18n="chatFallbackWa">WhatsApp</a>
+            <a class="btn" href="/cv/" data-i18n="chatFallbackCv">View CV</a>
+          </div>
+        </div>
+      </div>
+      <iframe data-src="https://janaka2-claritybot.hf.space?embed=1&lite=1" title="Janaka's AI assistant chat" id="chatIframe" allow="clipboard-write"></iframe>
+    </div>
+    <div class="modal-foot hidden" id="chatFoot">
+      <button class="chat-foot-link" type="button" id="chatPreferEmail" aria-expanded="false" aria-controls="chatSkeleton" data-i18n="chatPreferEmail">Prefer email?</button>
+    </div>
   </div>
 </div>

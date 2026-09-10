@@ -16,13 +16,13 @@ python3 -m http.server 8000     # then open http://localhost:8000/
 
 There is no lint, build, or test step. Verify changes by loading the page in a browser (check both light and dark theme, and EN/DE on the hub page).
 
-The `chatbot/` directory is a Gradio Python app deployed separately (the site embeds it via an iframe to `https://janaka2.github.io/pa/`). It reads `OPENAI_API_KEY`, `ADMIN_PASSWORD`, `RESUME_SOURCE_URL`, `PUSHOVER_*` and `SYSTEM_PROMPT` from `.env`; there is no requirements file in this repo.
+The `chatbot/` directory is a Gradio Python app deployed separately (the site embeds the Hugging Face Space `janaka2-claritybot.hf.space` directly in the chat modal, with a waking-up skeleton and an email fallback). It reads `OPENAI_API_KEY`, `ADMIN_PASSWORD`, `RESUME_SOURCE_URL`, `PUSHOVER_*` and `SYSTEM_PROMPT` from `.env`; `chatbot/requirements.txt` pins its dependencies and `.github/workflows/deploy_chatbot.yml` uploads the folder to the Space when it changes.
 
 ## Architecture
 
 ### Partial-assembly pattern
 
-Every page is a shell that fills `<div data-include="...">` slots at runtime via `assets/js/includes.js`. The loader fetches each partial, injects it, then fires a single `partials:loaded` event on `window`. **All behaviour scripts boot on that event**, not on `DOMContentLoaded` — anything that touches injected DOM (nav active state, theme button, tabs, i18n) must wait for it.
+Every page is a shell that fills `<div data-include="...">` slots at runtime via `assets/js/includes.js`. The hub is additionally pre-assembled: `python3 scripts/build-hub.py` inlines the partials into `index.html` (marked `data-inlined`, closed with an `<!-- /include -->` sentinel) so the page paints and previews without JavaScript; the loader skips those slots. **Run the build after every change to a hub partial**, or `index.html` goes stale; partials remain the source, never edit the inlined copy. The loader fetches each partial, injects it, then fires a single `partials:loaded` event on `window`. **All behaviour scripts boot on that event**, not on `DOMContentLoaded` — anything that touches injected DOM (nav active state, theme button, tabs, i18n) must wait for it.
 
 Two different chromes use this mechanism:
 

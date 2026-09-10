@@ -34,4 +34,4 @@ comm -23 /tmp/keys.txt /tmp/de.txt   # missing in DE
 comm -13 /tmp/keys.txt /tmp/de.txt   # unused DE keys
 ```
 
-Then open the site, press DE, and read the changed section. Hand off to the `i18n-translator` agent for language quality when the change is more than a line.
+Then run `python3 scripts/build-hub.py` so the inlined hub picks up the new markup, open the site, press DE, and read the changed section. Hand off to the `i18n-translator` agent for language quality when the change is more than a line.

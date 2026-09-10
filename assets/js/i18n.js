@@ -15,6 +15,9 @@ window.JP_I18N = (function () {
     navEdu: 'Ausbildung',
     navJourney: 'Werdegang',
     navContact: 'Kontakt',
+    navProductsX: 'Produkte',
+    navBlogX: 'Blog',
+    navAcademyX: 'Academy',
 
     /* ---- hero ---- */
     heroStatus: 'prod · stabil seit 2004 · pikett: getragen · audits: bestanden',
@@ -174,6 +177,13 @@ window.JP_I18N = (function () {
     ctaP: 'Chatten Sie mit meinem KI-Assistenten über meine Erfahrung, meine Skills oder meine Verfügbarkeit.',
     ctaBtn: '💬&nbsp; Jetzt chatten',
     chatTitle: 'Chat mit Janakas KI-Assistent',
+    chatWaking: 'Assistent wird geweckt… meist unter 20 Sekunden.',
+    chatSlow: 'Der Assistent braucht länger als üblich. Sie erreichen mich direkt:',
+    chatFallbackK: 'Oder direkt Kontakt aufnehmen',
+    chatFallbackMail: '✉️&nbsp; E-Mail',
+    chatFallbackWa: 'WhatsApp',
+    chatFallbackCv: 'Lebenslauf ansehen',
+    chatPreferEmail: 'Lieber per E-Mail?',
 
     /* ---- contact / footer ---- */
     ctEyebrow: 'Kontakt',
@@ -196,6 +206,7 @@ window.JP_I18N = (function () {
       readMore: 'Read more',
       showLess: 'Show less',
       chatClose: 'Close chat',
+      chatSlow: 'The assistant is taking longer than usual. You can reach me directly:',
       pdf: 'partials/Janaka_Premathilaka_CV_2026.pdf'
     },
     de: {
