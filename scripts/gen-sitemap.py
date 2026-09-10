@@ -54,9 +54,30 @@ EXCLUDE_PATTERNS = [
 ]
 EXCLUDE_RE = [re.compile(p) for p in EXCLUDE_PATTERNS]
 
+# Content rule: unfilled scaffolds never go in the sitemap.
+# The daily workflows emit pages that carry a placeholder sentence and a
+# noindex meta until someone actually writes them (/fill-academy removes
+# both). A file containing any of these markers is skipped regardless of
+# its path, so an empty page cannot be submitted to search engines.
+SCAFFOLD_MARKERS = [
+    "Add today's learning notes here",     # daily_learning_generator.yml
+    "Replace with the day's work",         # daily_update.yml
+    'name="robots" content="noindex"',     # explicit noindex on any page
+]
+
 
 def excluded(rel):
     return any(r.search(rel) for r in EXCLUDE_RE)
+
+
+def is_scaffold(file_rel):
+    """True if the file's content marks it as an unfilled or noindex page."""
+    try:
+        with open(os.path.join(ROOT, file_rel), encoding="utf-8", errors="ignore") as fh:
+            text = fh.read()
+    except OSError:
+        return False
+    return any(m in text for m in SCAFFOLD_MARKERS)
 
 
 def lastmod(rel_file):
@@ -106,6 +127,9 @@ def main():
         file_rel = rel + "index.html" if rel == "" or rel.endswith("/") else rel
         if not os.path.exists(os.path.join(ROOT, file_rel)):
             print(f"skip (missing): {file_rel}", file=sys.stderr)
+            continue
+        if is_scaffold(file_rel):
+            print(f"skip (scaffold/noindex): {file_rel}", file=sys.stderr)
             continue
         entries.append((url_for(rel), lastmod(file_rel)))
 
