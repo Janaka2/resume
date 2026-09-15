@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-janaka.me — Janaka Premathilaka's personal resume site plus five sub-sites (`blog/`, `lab/`, `ai/`, `cv/`, `academy/`). Plain HTML/CSS/JS, no framework, no build step, no package manager, no tests. Hosted on GitHub Pages straight from the repo root.
+janaka.me — Janaka Premathilaka's personal resume site plus the sub-sites (`blog/`, `lab/`, `ai/`, `products/`, `academy/`) and the CV at `/resume/` (`/cv/` redirects there). Plain HTML/CSS/JS, no framework, no build step, no package manager, no tests. Hosted on GitHub Pages straight from the repo root.
 
 ## Commands
 
@@ -29,7 +29,7 @@ Two different chromes use this mechanism:
 | Page | Nav | Behaviour script | Includes |
 |---|---|---|---|
 | Hub `/index.html` | inline `.topbar` in `index.html` | `assets/js/main.js` + `assets/js/i18n.js` | `partials/header.html`, `experience.html`, … (relative paths) |
-| Sub-sites (`blog/`, `lab/`, `products/`, `ai/`, `cv/`, `academy/`) | `/partials/site-nav.html` | `assets/js/site-nav.js` | root-absolute `/partials/...` paths |
+| Sub-sites (`blog/`, `lab/`, `products/`, `ai/`, `academy/`, the `lab/Notes/` pages) | `/partials/site-nav.html` | `assets/js/site-nav.js` | root-absolute `/partials/...` paths |
 
 `site-nav.js` derives the active nav item from the first URL path segment (`data-nav` attribute), so never hard-code an active link in `site-nav.html`.
 
@@ -53,7 +53,7 @@ Two different chromes use this mechanism:
 
 ### Academy daily automation
 
-Two GitHub Actions at `.github/workflows/` run daily and commit to `main`:
+Two GitHub Actions at `.github/workflows/` used to run daily and commit to `main`. **Both schedules are commented out since 2026-09-15** because they published empty placeholder pages; they still run on `workflow_dispatch`. Re-enable only once the templates write real content:
 
 - `daily_learning_generator.yml` (05:17 UTC) — writes `academy/modules/<year>/FSE/<date>-<topic>.html` from a rotating topic pool, appends to `learning-log.md`, and inserts a link between the `<!-- DAILY_LINKS_START -->` / `<!-- DAILY_LINKS_END -->` markers in that year's `Elite‑Full‑Stack‑Engineering-*-Edition.html` (its filename contains a non-breaking hyphen U+2011; the workflow globs for it).
 - `daily_update.yml` (07:00 UTC) — writes `<date>-note.html` and links it from `notes-index.html`.
@@ -81,4 +81,4 @@ Project-level subagents live in `.claude/agents/` and skills in `.claude/skills/
 
 ### Archived files
 
-`indexBK.html`, `partials/*BK.html`, `partials/janaka_visual_resume_v3.html`, `…v3_1.html`, `resumeredesign.patch`, and the root-level PDF are kept for reference only. `resume-26-3-2026.html` is a separate A4 print/PDF-export template that is intentionally not themed.
+The old backups (`indexBK.html`, `partials/*BK.html`, the v3/v3_1 visual résumés, `resumeredesign.patch`, the root-level PDF and the March 2026 A4 template) were removed on 2026-09-15; git history has them. `cv/print/index.html` is the only print template: it is the A4 source for the PDF, generated with `scripts/export-cv-pdf.py`, noindex and unlinked.

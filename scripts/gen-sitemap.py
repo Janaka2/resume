@@ -33,8 +33,7 @@ EXPLICIT = [
     "lab/Notes/llm-hand‑annotated-demo5.html",
     "lab/Notes/llm-study-notes-handwritten-style.html",
     "ai/",
-    "cv/",
-    "resume/",
+    "resume/",               # the CV; /cv/ is a redirect stub
     "academy/",
 ]
 # Directory trees crawled for every *.html (recursively).
@@ -97,6 +96,9 @@ def lastmod(rel_file):
 
 def url_for(rel):
     # Encode each path segment; keep "/" and the trailing slash of directories.
+    # index.html files are listed by their directory URL, matching their canonical.
+    if rel.endswith("/index.html"):
+        rel = rel[: -len("index.html")]
     return BASE + "/".join(urllib.parse.quote(seg) for seg in rel.split("/"))
 
 
