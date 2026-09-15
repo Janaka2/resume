@@ -96,6 +96,10 @@ window.JP_I18N = (function () {
     /* ---- certifications ---- */
     certEyebrow: 'Zertifizierungen &amp; Kurse',
     certH2: 'Immer am Lernen.',
+    certG0: 'Anthropic Claude Academy (2026)',
+    lblBadgeAug26: '✓ Badge · abgeschlossen August 2026',
+    lblInProgressSep26: 'In Bearbeitung · September 2026',
+    lblExamPrep26: 'Prüfungsvorbereitung · 2026',
     certG1: 'Cloud, KI &amp; Automation',
     certG2: 'Java, Spring &amp; Produktivität',
     certG3: 'Daten &amp; SQL',
