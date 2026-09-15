@@ -1,5 +1,39 @@
 [
  {
+  "url": "/blog/posts/spring-kafka-deadletter.html",
+  "title": "Dead-letter topics in Spring Kafka: retries and replay",
+  "section": "blog",
+  "description": "How to handle poison pills in Spring Kafka with DefaultErrorHandler, @RetryableTopic, DeadLetterPublishingRecoverer and a governed replay path.",
+  "tags": [
+   "blog",
+   "dead",
+   "letter",
+   "topics",
+   "spring"
+  ],
+  "date": "2026-09-15",
+  "updated": "2026-08-29",
+  "words": 1954,
+  "minutes": 9
+ },
+ {
+  "url": "/blog/posts/rag-faiss-patterns.html",
+  "title": "RAG with FAISS: Chunking, MMR and Re-Ranking",
+  "section": "blog",
+  "description": "Why naive top-k retrieval fails, how to chunk and index with FAISS, and how MMR and cross-encoder re-ranking fix it for a regulated bank.",
+  "tags": [
+   "blog",
+   "rag",
+   "faiss",
+   "chunking",
+   "mmr"
+  ],
+  "date": "2026-09-15",
+  "updated": "2026-08-29",
+  "words": 1871,
+  "minutes": 9
+ },
+ {
   "url": "/products/index.html",
   "title": "Products for Sale — Privacy-First Apps",
   "section": "products",
@@ -12,8 +46,8 @@
    "apps"
   ],
   "date": "2026-09-10",
-  "updated": "2026-09-10",
-  "words": 1765,
+  "updated": "2026-09-15",
+  "words": 1786,
   "minutes": 9
  },
  {
@@ -29,8 +63,8 @@
    "highlighter"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-09",
-  "words": 320,
+  "updated": "2026-09-15",
+  "words": 333,
   "minutes": 2
  },
  {
@@ -46,8 +80,8 @@
    "highlights"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-09",
-  "words": 356,
+  "updated": "2026-09-15",
+  "words": 369,
   "minutes": 2
  },
  {
@@ -63,8 +97,8 @@
    "llms"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-09",
-  "words": 273,
+  "updated": "2026-09-15",
+  "words": 286,
   "minutes": 2
  },
  {
@@ -80,8 +114,8 @@
    "assessment"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-09",
-  "words": 316,
+  "updated": "2026-09-15",
+  "words": 329,
   "minutes": 2
  },
  {
@@ -97,8 +131,8 @@
    "highlights"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-09",
-  "words": 346,
+  "updated": "2026-09-15",
+  "words": 359,
   "minutes": 2
  },
  {
@@ -137,13 +171,13 @@
   "url": "/academy/modules/2026/FSE/vi-editor-complete.html",
   "title": "VI Editor Complete",
   "section": "academy",
-  "description": "VI/VIM is often the only editor available on Linux servers. This page focuses on the commands engineers really use in production.",
+  "description": "VI Editor Complete — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "editor"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 273,
   "minutes": 2
  },
@@ -151,7 +185,7 @@
   "url": "/academy/modules/2026/FSE/troubleshooting-resources.html",
   "title": "Disk Memory CPU Troubleshooting",
   "section": "academy",
-  "description": "This page gives the fastest commands for capacity and performance issues. The goal is to identify whether the bottleneck is storage, memory pressure, CPU saturation, or process limits.",
+  "description": "Disk Memory CPU Troubleshooting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "disk",
@@ -160,7 +194,7 @@
    "troubleshooting"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 207,
   "minutes": 1
  },
@@ -168,7 +202,7 @@
   "url": "/academy/modules/2026/FSE/top-50-debugging-commands.html",
   "title": "Top 50 Debugging Commands",
   "section": "academy",
-  "description": "These are the commands engineers reach for during incidents: process checks, ports, logs, services, containers, filesystems and network validation.",
+  "description": "Top 50 Debugging Commands — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "top",
@@ -176,7 +210,7 @@
    "commands"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 599,
   "minutes": 3
  },
@@ -184,7 +218,7 @@
   "url": "/academy/modules/2026/FSE/top-100-linux-commands.html",
   "title": "Top 100 Linux Commands",
   "section": "academy",
-  "description": "This page focuses on commands that are practical in real backend, DevOps, CI/CD, support and scripting work. The descriptions are short for fast lookup.",
+  "description": "Top 100 Linux Commands — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "top",
@@ -192,7 +226,7 @@
    "commands"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 826,
   "minutes": 4
  },
@@ -233,13 +267,13 @@
   "url": "/academy/modules/2026/FSE/promting/templates.html",
   "title": "Templates",
   "section": "academy",
-  "description": "These are written so you can copy and adapt them quickly. They are practical, simple, and designed for day-to-day engineering work.",
+  "description": "Templates — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "templates"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 204,
   "minutes": 1
  },
@@ -247,13 +281,13 @@
   "url": "/academy/modules/2026/FSE/promting/strategies.html",
   "title": "Strategies",
   "section": "academy",
-  "description": "The best prompt pattern depends on the job. Below are the main strategies that matter most in real engineering usage.",
+  "description": "Strategies — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "strategies"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 218,
   "minutes": 1
  },
@@ -261,14 +295,14 @@
   "url": "/academy/modules/2026/FSE/promting/references.html",
   "title": "References and Source Notes",
   "section": "academy",
-  "description": "This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…",
+  "description": "References and Source Notes — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "references",
    "source"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 207,
   "minutes": 1
  },
@@ -276,14 +310,14 @@
   "url": "/academy/modules/2026/FSE/promting/rag.html",
   "title": "RAG Prompting",
   "section": "academy",
-  "description": "RAG works best when the prompt clearly tells the model how to use retrieved context and what to do when context is incomplete.",
+  "description": "RAG Prompting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "rag",
    "prompting"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 187,
   "minutes": 1
  },
@@ -299,7 +333,7 @@
    "handbook"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 255,
   "minutes": 2
  },
@@ -307,14 +341,14 @@
   "url": "/academy/modules/2026/FSE/promting/gpt54.html",
   "title": "GPT-5.4 Prompting Guide",
   "section": "academy",
-  "description": "If your prompt is vague, you get broad but not exact answers.",
+  "description": "GPT-5.4 Prompting Guide — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "gpt",
    "prompting"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 429,
   "minutes": 2
  },
@@ -322,7 +356,7 @@
   "url": "/academy/modules/2026/FSE/promting/glossary.html",
   "title": "Glossary in Easy English",
   "section": "academy",
-  "description": "This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…",
+  "description": "Glossary in Easy English — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "glossary",
@@ -330,7 +364,7 @@
    "english"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 230,
   "minutes": 2
  },
@@ -338,7 +372,7 @@
   "url": "/academy/modules/2026/FSE/promting/gemini.html",
   "title": "Latest Gemini Prompting Guide",
   "section": "academy",
-  "description": "This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…",
+  "description": "Latest Gemini Prompting Guide — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "latest",
@@ -346,7 +380,7 @@
    "prompting"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 390,
   "minutes": 2
  },
@@ -354,13 +388,13 @@
   "url": "/academy/modules/2026/FSE/promting/foundations.html",
   "title": "Foundations",
   "section": "academy",
-  "description": "Good prompting is not about magic wording. It is about reducing ambiguity, giving the model the right working context, and shaping the output so it is useful inside a real engineering workflow.",
+  "description": "Foundations — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "foundations"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 291,
   "minutes": 2
  },
@@ -368,14 +402,14 @@
   "url": "/academy/modules/2026/FSE/promting/developer.html",
   "title": "Developer Prompts",
   "section": "academy",
-  "description": "This section is tuned for senior developers who want fast, reusable prompts for real project work.",
+  "description": "Developer Prompts — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "developer",
    "prompts"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 169,
   "minutes": 1
  },
@@ -383,7 +417,7 @@
   "url": "/academy/modules/2026/FSE/promting/developer-tasks.html",
   "title": "Most Useful Developer Task Prompts",
   "section": "academy",
-  "description": "This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…",
+  "description": "Most Useful Developer Task Prompts — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "most",
@@ -392,7 +426,7 @@
    "task"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 502,
   "minutes": 3
  },
@@ -400,14 +434,14 @@
   "url": "/academy/modules/2026/FSE/promting/debugging.html",
   "title": "Debugging Playbook",
   "section": "academy",
-  "description": "When a prompt gives weak results, the cause is usually one of a few common problems: unclear task, missing context, no output shape, weak grounding, or no quality check.",
+  "description": "Debugging Playbook — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "debugging",
    "playbook"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 162,
   "minutes": 1
  },
@@ -415,7 +449,7 @@
   "url": "/academy/modules/2026/FSE/promting/comparison.html",
   "title": "GPT-5.4 vs Gemini: Practical Prompting Differences",
   "section": "academy",
-  "description": "This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…",
+  "description": "GPT-5.4 vs Gemini: Practical Prompting Differences — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "gpt",
@@ -424,7 +458,7 @@
    "differences"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 312,
   "minutes": 2
  },
@@ -432,14 +466,14 @@
   "url": "/academy/modules/2026/FSE/promting/cheatsheet.html",
   "title": "Cheat Sheet",
   "section": "academy",
-  "description": "A practical summary for daily use.",
+  "description": "Cheat Sheet — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "cheat",
    "sheet"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 121,
   "minutes": 1
  },
@@ -447,14 +481,14 @@
   "url": "/academy/modules/2026/FSE/promting/agents.html",
   "title": "Agent Prompting",
   "section": "academy",
-  "description": "Agent prompts need more than task description. They need operating rules: when to plan, when to use tools, when to stop, and how to validate.",
+  "description": "Agent Prompting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "agent",
    "prompting"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 173,
   "minutes": 1
  },
@@ -462,7 +496,7 @@
   "url": "/academy/modules/2026/FSE/production-one-liners.html",
   "title": "Production One-Liners",
   "section": "academy",
-  "description": "These are short commands that solve common production tasks fast. They are especially useful for support engineers, backend developers and operators.",
+  "description": "Production One-Liners — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "production",
@@ -470,7 +504,7 @@
    "liners"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 263,
   "minutes": 2
  },
@@ -529,7 +563,7 @@
   "url": "/academy/modules/2026/FSE/log-investigation-techniques.html",
   "title": "Log Investigation Techniques",
   "section": "academy",
-  "description": "Good log investigation is about narrowing the problem fast: identify time window, find the failing request, extract the stacktrace, remove noise, then group repeating patterns.",
+  "description": "Log Investigation Techniques — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "log",
@@ -537,7 +571,7 @@
    "techniques"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 260,
   "minutes": 2
  },
@@ -620,7 +654,7 @@
    "mastery"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 250,
   "minutes": 2
  },
@@ -662,14 +696,14 @@
   "url": "/academy/modules/2026/FSE/file-handling.html",
   "title": "File Handling",
   "section": "academy",
-  "description": "File handling is a core part of Linux scripting: creating, copying, moving, syncing, compressing, comparing, finding and validating files safely.",
+  "description": "File Handling — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "file",
    "handling"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 209,
   "minutes": 1
  },
@@ -677,7 +711,7 @@
   "url": "/academy/modules/2026/FSE/entanglement/use-cases.html",
   "title": "Quantum Use Cases",
   "section": "academy",
-  "description": "This page focuses on realistic areas where quantum concepts can support career development and practical experimentation.",
+  "description": "Quantum Use Cases — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "quantum",
@@ -685,7 +719,7 @@
    "cases"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 317,
   "minutes": 2
  },
@@ -693,13 +727,13 @@
   "url": "/academy/modules/2026/FSE/entanglement/references.html",
   "title": "References",
   "section": "academy",
-  "description": "These official sources are good starting points for deeper study and platform-specific hands-on work.",
+  "description": "References — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "references"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 86,
   "minutes": 1
  },
@@ -707,7 +741,7 @@
   "url": "/academy/modules/2026/FSE/entanglement/quantum-computing.html",
   "title": "Quantum Computing Explained",
   "section": "academy",
-  "description": "This page explains the moving parts clearly: qubits, superposition, gates, interference, entanglement, measurement, noise, error correction, and hybrid execution.",
+  "description": "Quantum Computing Explained — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "quantum",
@@ -715,7 +749,7 @@
    "explained"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 339,
   "minutes": 2
  },
@@ -731,7 +765,7 @@
    "computing"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 289,
   "minutes": 2
  },
@@ -739,14 +773,14 @@
   "url": "/academy/modules/2026/FSE/entanglement/entanglement.html",
   "title": "Entanglement Explained",
   "section": "academy",
-  "description": "Entanglement means two or more quantum objects become linked in a way that their measurement results are correlated beyond what normal classical rules can explain.",
+  "description": "Entanglement Explained — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "entanglement",
    "explained"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 298,
   "minutes": 2
  },
@@ -754,14 +788,14 @@
   "url": "/academy/modules/2026/FSE/entanglement/career-roadmap.html",
   "title": "Career Roadmap",
   "section": "academy",
-  "description": "This plan is designed for a senior software engineer who wants enough quantum depth to speak clearly, build small experiments, and position themselves well for future opportunities.",
+  "description": "Career Roadmap — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "career",
    "roadmap"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 264,
   "minutes": 2
  },
@@ -803,7 +837,7 @@
   "url": "/academy/modules/2026/FSE/day-01.html",
   "title": "Linux CLI Mastery",
   "section": "academy",
-  "description": "This mini-site is organized as separate HTML pages with a parent navigation page, so you can browse each topic quickly and reuse it as a personal reference. The content is practical…",
+  "description": "Linux CLI Mastery — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "linux",
@@ -811,7 +845,7 @@
    "mastery"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 229,
   "minutes": 2
  },
@@ -819,7 +853,7 @@
   "url": "/academy/modules/2026/FSE/csv_operation.html",
   "title": "CLI Data Mastery: CSV & Shell Scripting",
   "section": "academy",
-  "description": "Automate data validation, cleaning, and reporting using standard Unix utilities like awk, sed, and join.",
+  "description": "CLI Data Mastery: CSV & Shell Scripting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "cli",
@@ -828,8 +862,8 @@
    "csv"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
-  "words": 343,
+  "updated": "2026-09-15",
+  "words": 341,
   "minutes": 2
  },
  {
@@ -869,7 +903,7 @@
   "url": "/academy/modules/2026/FSE/awk-sed-mastery.html",
   "title": "awk sed mastery",
   "section": "academy",
-  "description": "awk is best for column-based parsing and conditional reporting. sed is best for quick line editing, replacements and stream transformations.",
+  "description": "awk sed mastery — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
   "tags": [
    "academy",
    "awk",
@@ -877,7 +911,7 @@
    "mastery"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 192,
   "minutes": 1
  },
@@ -908,7 +942,7 @@
    "editor"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 517,
   "minutes": 3
  },
@@ -925,7 +959,7 @@
    "troubleshooting"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 360,
   "minutes": 2
  },
@@ -941,7 +975,7 @@
    "commands"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 606,
   "minutes": 3
  },
@@ -957,7 +991,7 @@
    "commands"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 833,
   "minutes": 4
  },
@@ -973,7 +1007,7 @@
    "liners"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 370,
   "minutes": 2
  },
@@ -989,7 +1023,7 @@
    "techniques"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 336,
   "minutes": 2
  },
@@ -1005,7 +1039,7 @@
    "mastery"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 258,
   "minutes": 2
  },
@@ -1020,7 +1054,7 @@
    "handling"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 211,
   "minutes": 1
  },
@@ -1036,7 +1070,7 @@
    "mastery"
   ],
   "date": "2026-08-29",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 430,
   "minutes": 2
  },

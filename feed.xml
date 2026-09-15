@@ -5,15 +5,33 @@
   <link rel="alternate" type="text/html" href="https://janaka.me/"/>
   <link rel="self" type="application/atom+xml" href="https://janaka.me/feed.xml"/>
   <id>https://janaka.me/</id>
-  <updated>2026-09-10T00:00:00Z</updated>
+  <updated>2026-09-15T00:00:00Z</updated>
   <author><name>Janaka Premathilaka</name><uri>https://janaka.me/</uri></author>
   <generator>scripts/gen-feed.py</generator>
+  <entry>
+    <title>Dead-letter topics in Spring Kafka: retries and replay</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/blog/posts/spring-kafka-deadletter.html"/>
+    <id>https://janaka.me/blog/posts/spring-kafka-deadletter.html</id>
+    <published>2026-09-15T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="blog" label="Blog"/>
+    <summary>How to handle poison pills in Spring Kafka with DefaultErrorHandler, @RetryableTopic, DeadLetterPublishingRecoverer and a governed replay path.</summary>
+  </entry>
+  <entry>
+    <title>RAG with FAISS: Chunking, MMR and Re-Ranking</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/blog/posts/rag-faiss-patterns.html"/>
+    <id>https://janaka.me/blog/posts/rag-faiss-patterns.html</id>
+    <published>2026-09-15T00:00:00Z</published>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <category term="blog" label="Blog"/>
+    <summary>Why naive top-k retrieval fails, how to chunk and index with FAISS, and how MMR and cross-encoder re-ranking fix it for a regulated bank.</summary>
+  </entry>
   <entry>
     <title>LLM Study Notes — Interactive Highlighter Toolbox</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/lab/Notes/llm-study-notes-handwritten-style.html"/>
     <id>https://janaka.me/lab/Notes/llm-study-notes-handwritten-style.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-09T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="lab" label="Lab"/>
     <summary>Interactive study notes on assessing large language models with a highlighter toolbox, sticky notes, and explain, analogy and ELI5 helpers.</summary>
   </entry>
@@ -22,7 +40,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/lab/Notes/llm-hand%E2%80%91annotated-demo5.html"/>
     <id>https://janaka.me/lab/Notes/llm-hand%E2%80%91annotated-demo5.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-09T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="lab" label="Lab"/>
     <summary>Interactive hand-annotated notes on large language models with a highlighter toolbox: mark up, add sticky notes, save, load and export your annotations.</summary>
   </entry>
@@ -31,7 +49,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/lab/Notes/hand-book-note3.html"/>
     <id>https://janaka.me/lab/Notes/hand-book-note3.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-09T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="lab" label="Lab"/>
     <summary>Handwritten-style study notes on assessing large language models: why they are large, how self-attention works, and why hallucination is the big problem.</summary>
   </entry>
@@ -40,7 +58,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/lab/Notes/hand-book-note2.html"/>
     <id>https://janaka.me/lab/Notes/hand-book-note2.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-09T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="lab" label="Lab"/>
     <summary>Study-style notes on assessing large language models: factuality, reasoning, safety, latency and cost, with the retrieval, QA and generation metrics.</summary>
   </entry>
@@ -49,7 +67,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/lab/Notes/hand-book-note1.html"/>
     <id>https://janaka.me/lab/Notes/hand-book-note1.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-09T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="lab" label="Lab"/>
     <summary>Hand-annotated study notes on what large language models are used for: retrieval and RAG, content generation, reasoning, coding and agents.</summary>
   </entry>
@@ -58,7 +76,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/virtual_threads_java_21_academy_page.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/virtual_threads_java_21_academy_page.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-09T00:00:00Z</updated>
+    <updated>2026-09-10T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>In Java applications in 2026, one of the most important concurrency upgrades is virtual threads in Java 21. They let me keep the simple thread-per-task programming model, but at a scale that was not…</summary>
   </entry>
@@ -67,36 +85,36 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/vi-editor-complete.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/vi-editor-complete.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>VI/VIM is often the only editor available on Linux servers. This page focuses on the commands engineers really use in production.</summary>
+    <summary>VI Editor Complete — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>Disk Memory CPU Troubleshooting</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/troubleshooting-resources.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/troubleshooting-resources.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>This page gives the fastest commands for capacity and performance issues. The goal is to identify whether the bottleneck is storage, memory pressure, CPU saturation, or process limits.</summary>
+    <summary>Disk Memory CPU Troubleshooting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>Top 50 Debugging Commands</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/top-50-debugging-commands.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/top-50-debugging-commands.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>These are the commands engineers reach for during incidents: process checks, ports, logs, services, containers, filesystems and network validation.</summary>
+    <summary>Top 50 Debugging Commands — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>Top 100 Linux Commands</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/top-100-linux-commands.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/top-100-linux-commands.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>This page focuses on commands that are practical in real backend, DevOps, CI/CD, support and scripting work. The descriptions are short for fast lookup.</summary>
+    <summary>Top 100 Linux Commands — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>Spring Boot 3.3 Ecosystem</title>
@@ -121,43 +139,43 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/templates.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/templates.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>These are written so you can copy and adapt them quickly. They are practical, simple, and designed for day-to-day engineering work.</summary>
+    <summary>Templates — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>Strategies</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/strategies.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/strategies.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>The best prompt pattern depends on the job. Below are the main strategies that matter most in real engineering usage.</summary>
+    <summary>Strategies — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>References and Source Notes</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/references.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/references.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…</summary>
+    <summary>References and Source Notes — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>RAG Prompting</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/rag.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/rag.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>RAG works best when the prompt clearly tells the model how to use retrieved context and what to do when context is incomplete.</summary>
+    <summary>RAG Prompting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>Prompt Engineering Handbook</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/index.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/index.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>Built for software engineers working with modern LLMs, agent workflows, RAG systems, debugging, architecture analysis, and daily coding productivity. The layout is intentionally white, clean, and…</summary>
   </entry>
@@ -166,116 +184,98 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/gpt54.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/gpt54.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>If your prompt is vague, you get broad but not exact answers.</summary>
+    <summary>GPT-5.4 Prompting Guide — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>Glossary in Easy English</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/glossary.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/glossary.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…</summary>
+    <summary>Glossary in Easy English — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>Latest Gemini Prompting Guide</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/gemini.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/gemini.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…</summary>
+    <summary>Latest Gemini Prompting Guide — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>Foundations</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/foundations.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/foundations.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>Good prompting is not about magic wording. It is about reducing ambiguity, giving the model the right working context, and shaping the output so it is useful inside a real engineering workflow.</summary>
+    <summary>Foundations — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>Developer Prompts</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/developer.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/developer.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>This section is tuned for senior developers who want fast, reusable prompts for real project work.</summary>
+    <summary>Developer Prompts — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>Most Useful Developer Task Prompts</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/developer-tasks.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/developer-tasks.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…</summary>
+    <summary>Most Useful Developer Task Prompts — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>Debugging Playbook</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/debugging.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/debugging.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>When a prompt gives weak results, the cause is usually one of a few common problems: unclear task, missing context, no output shape, weak grounding, or no quality check.</summary>
+    <summary>Debugging Playbook — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>GPT-5.4 vs Gemini: Practical Prompting Differences</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/comparison.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/comparison.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>This mini-site turns prompt engineering into something practical, reusable, and developer-friendly. It focuses on modern prompting for GPT-5.4 style workflows and the latest Gemini prompting…</summary>
+    <summary>GPT-5.4 vs Gemini: Practical Prompting Differences — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>Cheat Sheet</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/cheatsheet.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/cheatsheet.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>A practical summary for daily use.</summary>
+    <summary>Cheat Sheet — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>Agent Prompting</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/agents.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/agents.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>Agent prompts need more than task description. They need operating rules: when to plan, when to use tools, when to stop, and how to validate.</summary>
+    <summary>Agent Prompting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
   <entry>
     <title>Production One-Liners</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/production-one-liners.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/production-one-liners.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>These are short commands that solve common production tasks fast. They are especially useful for support engineers, backend developers and operators.</summary>
-  </entry>
-  <entry>
-    <title>Learn How to Solve Critical Performance Problems with Step by Step Approach!</title>
-    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/performanceTuning/DBPerformanceTuning.html"/>
-    <id>https://janaka.me/academy/modules/2026/FSE/performanceTuning/DBPerformanceTuning.html</id>
-    <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
-    <category term="academy" label="Academy"/>
-    <summary>Use this as your checklist. This page is intentionally “study-friendly”: you can tick items as you learn.</summary>
-  </entry>
-  <entry>
-    <title>Modernizing the Java Journey: A Comprehensive Study Guide</title>
-    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/modenizeJava.html"/>
-    <id>https://janaka.me/academy/modules/2026/FSE/modenizeJava.html</id>
-    <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-09T00:00:00Z</updated>
-    <category term="academy" label="Academy"/>
-    <summary>Java has evolved from a slow-moving language with releases every four or five years to a vibrant, fast-paced ecosystem. As of 2026, the platform follows a strict "release on the clock" schedule…</summary>
+    <summary>Production One-Liners — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
 </feed>

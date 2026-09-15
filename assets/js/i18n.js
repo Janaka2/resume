@@ -111,6 +111,7 @@ window.JP_I18N = (function () {
     lblDone: '✓ 100 % abgeschlossen',
     lblDone98: '98 % abgeschlossen',
     lblDoneDate: 'Abgeschlossen am 21. September 2025',
+    lblIssued2024: 'Ausgestellt 2024',
     lblIssued2006: 'Ausgestellt Januar 2006',
 
     /* ---- education ---- */

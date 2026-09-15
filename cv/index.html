@@ -1,274 +1,38 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CV — Senior Java Engineer &amp; Solution Architect, Zug</title>
-  <meta name="description" content="Two decades of critical systems at UBS, Credit Suisse and the European Commission. Java, Spring Boot, Kafka, Kubernetes, now LLM and RAG. Case studies.">
-  <link rel="canonical" href="https://janaka.me/cv/">
-  <link rel="alternate" type="application/atom+xml" title="Janaka Premathilaka" href="/feed.xml">
-  <meta property="og:title" content="CV — Senior Java Engineer &amp; Solution Architect, Zug">
-  <meta property="og:description" content="Two decades of critical systems at UBS, Credit Suisse and the European Commission. Java, Spring Boot, Kafka, Kubernetes, now LLM and RAG. Case studies.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://janaka.me/cv/">
-  <meta property="og:image" content="https://janaka.me/assets/og/cv.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CV — Senior Java Engineer &amp; Solution Architect, Zug">
-  <meta name="twitter:description" content="Two decades of critical systems at UBS, Credit Suisse and the European Commission. Java, Spring Boot, Kafka, Kubernetes, now LLM and RAG. Case studies.">
-  <meta name="twitter:image" content="https://janaka.me/assets/og/cv.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/cv/favicon-32.png?v=1">
-  <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/cv/favicon-16.png?v=1">
-  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/cv/apple-touch-icon.png?v=1">
-
-  <!-- Apply the stored theme before first paint to avoid a flash -->
-  <script>
-    (function(){
-      try {
-        var t = localStorage.getItem("jp-theme");
-        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-          document.documentElement.setAttribute("data-theme", "dark");
-        }
-      } catch (e) {}
-    })();
-  </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="/assets/css/theme.css?v=20260910">
-  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260910">
-  <link rel="manifest" href="/assets/site.webmanifest">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Janaka Premathilaka — CV has moved to janaka.me/resume/</title>
+<!--
+  Redirect stub. The CV lives at resume/index.html, served from
+  https://janaka.me/resume/. This file keeps the old /cv/ address working for
+  links shared before the two CV pages were unified; do not put content here.
+  cv/print/ is unrelated: it is the A4 source for the PDF (scripts/export-cv-pdf.py).
+-->
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://janaka.me/resume/">
+<meta http-equiv="refresh" content="0; url=/resume/">
+<script>
+  (function(){
+    try {
+      var t = localStorage.getItem("jp-theme");
+      if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    } catch (e) {}
+    try { location.replace("/resume/" + location.hash); } catch (e) {}
+  })();
+</script>
+<style>
+  :root{--bg:#FAFAF8;--tx:#16181D;--tx2:#6B7079;--ac:#2F4A6D}
+  html[data-theme="dark"]{--bg:#0F1114;--tx:#ECEDEF;--tx2:#9A9FA8;--ac:#9BB4D6}
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--tx);
+       font:400 1rem/1.6 "IBM Plex Sans",system-ui,sans-serif;text-align:center;padding:24px}
+  p{color:var(--tx2)} a{color:var(--ac)}
+</style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-
-<div data-include="/partials/site-nav.html"></div>
-
-<main id="main">
-  <section class="sec subhero">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div>
-          <p class="eyebrow">Curriculum Vitae</p>
-          <h1>Janaka Premathilaka</h1>
-          <p class="role">Senior Java Engineer &amp; Solution Architect</p>
-          <p class="lede">I build rock-solid enterprise Java systems and lead them into the AI era. Twenty-two years of mission-critical banking and public-sector delivery, and a reputation for calm execution — steadying teams, cutting through noise, and finishing without shortcuts.</p>
-          <p class="lede" style="margin-top:12px">Specialised in Java, Spring Boot, Oracle SQL and distributed systems. I have architected high-throughput platforms and mentored teams across Sri Lanka, Belgium, the UK and Switzerland.</p>
-          <div class="actions">
-            <a class="btn primary" href="#contact">Get in touch</a>
-            <a class="btn" href="/resume/">Interactive CV</a>
-            <a class="btn" href="/partials/Janaka_Premathilaka_CV_2026.pdf">PDF CV</a>
-            <button class="btn" type="button" onclick="window.print()">Print</button>
-          </div>
-        </div>
-        <figure class="photo-card">
-          <picture>
-            <source type="image/webp" srcset="/assets/portrait-172.webp 1x, /assets/portrait-344.webp 2x, /assets/portrait-516.webp 3x">
-            <img src="/assets/portrait-172.jpg" srcset="/assets/portrait-172.jpg 1x, /assets/portrait-344.jpg 2x, /assets/portrait-516.jpg 3x" alt="Portrait photo of Janaka Premathilaka" width="172" height="221" fetchpriority="high" decoding="async">
-          </picture>
-          <figcaption>ZUG · SWITZERLAND</figcaption>
-        </figure>
-      </div>
-
-      <div class="stats" role="list">
-        <div class="stat" role="listitem"><b>22+</b><span>years experience</span></div>
-        <div class="stat" role="listitem"><b>40+</b><span>enterprise projects</span></div>
-        <div class="stat" role="listitem"><b>4</b><span>countries delivered in</span></div>
-        <div class="stat" role="listitem"><b>≈30%</b><span>avg performance gain</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec" id="about">
-    <div class="wrap">
-      <p class="eyebrow">About</p>
-      <h2>Two decades of critical systems.</h2>
-      <div class="prose">
-        <p>After a BSc in Computer Science in Sri Lanka, I started building enterprise software at a private bank in Colombo. Over the next two decades I delivered critical systems across Europe — e-procurement for the European Commission in Belgium, wealth-management platforms, and mission-critical teams through the UBS–Credit Suisse merger in Switzerland and the UK.</p>
-        <p>My work sits where scalable architecture meets practical AI: Java, Spring Boot and Oracle SQL on one side; LangChain, RAG, LangGraph, the Model Context Protocol and Kafka on the other, with Claude Code and OpenAI Codex as daily tools held to line-by-line review. I am a hands-on lead — I mentor, I simplify, and I turn ideas into things that run.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec" id="values">
-    <div class="wrap">
-      <p class="eyebrow">Core values</p>
-      <h2>What guides the work.</h2>
-      <div class="grid" style="margin-top:18px">
-        <article class="card item"><h3>Innovation</h3><p>Bringing LLMs, LangGraph and RAG to bear on problems that used to need headcount.</p></article>
-        <article class="card item"><h3>Collaboration</h3><p>Mentoring engineers, aligning stakeholders, and building a culture where trust is the default.</p></article>
-        <article class="card item"><h3>Reliability</h3><p>Resilient systems, honest uptime, and clear accountability when something breaks.</p></article>
-        <article class="card item"><h3>Continuous learning</h3><p>Staying current with AI, cloud and the practices that outlast a given framework.</p></article>
-        <article class="card item"><h3>Results</h3><p>Real problems solved, performance measurably improved, impact you can point at.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec" id="experience">
-    <div class="wrap">
-      <p class="eyebrow">Experience</p>
-      <h2>Where it was done.</h2>
-      <ul class="tl">
-        <li class="live">
-          <p class="when"><b>Jan 2018 — present</b> · Zurich, Switzerland</p>
-          <h3>Senior Full-Stack Solution Engineer</h3>
-          <p class="org">UBS / Credit Suisse</p>
-          <ul class="points">
-            <li>Led delivery of six enterprise applications through the UBS–Credit Suisse merger with zero major incidents.</li>
-            <li>Built a high-performance Master Data Management platform from scratch, unifying consumer data across global systems.</li>
-            <li>Architected a microservices platform for wealth management serving 3,000+ daily users.</li>
-            <li>Designed high-throughput event-streaming pipelines with Kafka and GraphQL for real-time analytics.</li>
-            <li>Introduced RAG-powered intranet search and data-analysis services with LangGraph and AutoGen.</li>
-            <li>Mentored a cross-functional team, set coding standards, and streamlined CI/CD with Jenkins.</li>
-          </ul>
-          <div class="chips">
-            <span class="chip">Java 17</span><span class="chip">Spring Boot</span><span class="chip">Oracle SQL</span><span class="chip">Kafka</span><span class="chip">GraphQL</span><span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">React</span><span class="chip">Jenkins</span><span class="chip">Docker</span>
-          </div>
-        </li>
-        <li>
-          <p class="when"><b>Jun 2011 — Jan 2018</b> · Brussels, Belgium</p>
-          <h3>Senior Full-Stack Java/JEE Developer</h3>
-          <p class="org">European Commission</p>
-          <ul class="points">
-            <li>Designed and built an e-procurement system that accounted for <b>40%</b> of the department's total revenue.</li>
-            <li>Developed microservices and integration patterns with JEE, SOAP/REST and enterprise messaging.</li>
-            <li>Implemented JBPM workflows for complex procurement processes, with approvals, escalations and audit trails.</li>
-            <li>Worked with cross-border teams to hold the system to EU procurement standards.</li>
-          </ul>
-          <div class="chips">
-            <span class="chip">Java EE</span><span class="chip">Angular</span><span class="chip">JBPM</span><span class="chip">SOA</span><span class="chip">Oracle SQL</span>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="sec" id="skills">
-    <div class="wrap">
-      <p class="eyebrow">Skills</p>
-      <h2>The stack.</h2>
-      <div class="grid" style="margin-top:18px">
-        <article class="card item"><h3>Languages &amp; back-end</h3><p>Java 17, Spring Boot, Spring Cloud, JPA/Hibernate, Node.js, GraphQL.</p></article>
-        <article class="card item"><h3>Front-end &amp; UI</h3><p>React, Angular, TypeScript, HTML5, CSS3.</p></article>
-        <article class="card item"><h3>Databases &amp; cloud</h3><p>Oracle SQL, PostgreSQL, MongoDB, AWS, Azure, GCP.</p></article>
-        <article class="card item"><h3>DevOps &amp; infrastructure</h3><p>Docker, Kubernetes, Jenkins, GitHub Actions, Terraform, CI/CD.</p></article>
-        <article class="card item"><h3>AI &amp; data</h3><p>LLMs and RAG, LangChain, LangGraph, AutoGen, OpenAI Agents SDK, MCP servers and clients, Claude Code, OpenAI Codex, Kafka, Apache Spark.</p></article>
-        <article class="card item"><h3>Beyond code</h3><p>Leadership, mentoring, architecture, problem solving, stakeholder communication.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec" id="projects">
-    <div class="wrap">
-      <p class="eyebrow">Projects</p>
-      <h2>Case studies.</h2>
-      <div class="grid" style="margin-top:18px">
-        <article class="card item">
-          <h3>RAG-Powered Chatbot</h3>
-          <p class="sub">Architect &amp; developer</p>
-          <p>A retrieval-augmented chatbot using LangGraph and vector databases to give context-aware answers inside an enterprise.</p>
-          <div class="chips"><span class="chip">Python</span><span class="chip">LangChain</span><span class="chip">FAISS</span><span class="chip">React</span></div>
-          <div class="links"><a href="https://github.com/Janaka2/RAG-Powered-Chatbot" target="_blank" rel="noopener">View code ↗</a></div>
-        </article>
-        <article class="card item">
-          <h3>Job Research Agent</h3>
-          <p class="sub">Developer</p>
-          <p>An agent that automates job research, summarises postings and matches requirements using LLMs.</p>
-          <div class="chips"><span class="chip">Python</span><span class="chip">LangChain</span><span class="chip">Puppeteer</span></div>
-          <div class="links"><a href="https://github.com/Janaka2" target="_blank" rel="noopener">View code ↗</a></div>
-        </article>
-        <article class="card item">
-          <h3>Real-Time Streaming &amp; Analytics</h3>
-          <p class="sub">Solution architect</p>
-          <p>A streaming analytics platform on Kafka and Spark, with React dashboards for live insight.</p>
-          <div class="chips"><span class="chip">Java</span><span class="chip">Kafka</span><span class="chip">Spark</span><span class="chip">Grafana</span></div>
-          <div class="links"><a href="https://github.com/Janaka2/Real-time-Data-Streaming-and-Analytics" target="_blank" rel="noopener">View code ↗</a></div>
-        </article>
-        <article class="card item">
-          <h3>DevOps CI/CD Pipeline</h3>
-          <p class="sub">DevOps engineer</p>
-          <p>An automated pipeline for microservices with Jenkins, Docker and Kubernetes for hands-off deployment.</p>
-          <div class="chips"><span class="chip">Jenkins</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">Helm</span></div>
-          <div class="links"><a href="https://github.com/Janaka2/DevOps-CI-CD-Pipeline-Project" target="_blank" rel="noopener">View code ↗</a></div>
-        </article>
-        <article class="card item">
-          <h3>Five shipped products</h3>
-          <p class="sub">Founder, architect, developer</p>
-          <p>nüchtern, Daily Momentum, Loop, BabyLoop and LeftHere: five privacy-first PWAs specified, built and shipped solo, evenings and weekends, with AI in the loop.</p>
-          <div class="chips"><span class="chip">PWA</span><span class="chip">Offline-first</span><span class="chip">Privacy by construction</span></div>
-          <div class="links"><a href="/#projects">See the products →</a></div>
-        </article>
-        <article class="card item">
-          <h3>Technical writing</h3>
-          <p class="sub">Author</p>
-          <p>Deep dives into Java, Spring Boot, AI and microservices — complex topics made usable.</p>
-          <div class="links"><a href="/blog/">Read the blog →</a></div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec" id="education">
-    <div class="wrap">
-      <p class="eyebrow">Education</p>
-      <h2>Qualifications.</h2>
-      <div class="cards2" style="margin-top:18px">
-        <article class="card">
-          <h3>BSc Computer Science</h3>
-          <p class="sub">University of Sri Jayewardenepura · 1999 — 2003</p>
-          <p style="margin-top:8px">Major in Computer Science, with Statistics and Mathematics.</p>
-        </article>
-        <article class="card">
-          <h3>MSc Computer Engineering</h3>
-          <p class="sub">University of Moratuwa · 2007 — present</p>
-          <p style="margin-top:8px">Distributed systems and AI integration. In progress.</p>
-        </article>
-        <article class="card">
-          <h3>Agentic AI Engineering</h3>
-          <p class="sub">Complete Agentic AI Engineering Course · 2025</p>
-          <p style="margin-top:8px">Building AI agents with LLMs and retrieval-augmented techniques.</p>
-        </article>
-        <article class="card">
-          <h3>Certifications</h3>
-          <ul>
-            <li>CKA — Certified Kubernetes Administrator (2024)</li>
-            <li>AWS Solutions Architect Associate (2023)</li>
-            <li>Sun Java Certifications — SCJP, SCBCD, SCEA</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec" id="contact">
-    <div class="wrap">
-      <p class="eyebrow">Contact</p>
-      <h2>Get in touch.</h2>
-      <p class="lede">Interested in working together, or want to know more? My inbox is open.</p>
-      <div class="actions">
-        <a class="btn primary" href="mailto:janaka2@gmail.com">janaka2@gmail.com</a>
-        <a class="btn" href="tel:+41762248445">+41 76 224 84 45</a>
-        <a class="btn" href="https://wa.me/41762248445?text=Hi%20Janaka%2C%20I%20saw%20your%20CV.%20Let%27s%20chat!" target="_blank" rel="noopener">WhatsApp</a>
-        <a class="btn" href="https://linkedin.com/in/janakapremathilaka" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="https://github.com/Janaka2" target="_blank" rel="noopener">GitHub</a>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer class="sitefoot">
-  <div class="wrap">
-    <span>© <span id="year"></span> Janaka Premathilaka · Zug 🇨🇭</span>
-    <span><a href="/">janaka.me</a></span>
-  </div>
-</footer>
-
-<script src="/assets/js/includes.js?v=20260910"></script>
-<script src="/assets/js/site-nav.js?v=20260910"></script>
+  <p>The CV has moved to <a href="/resume/">janaka.me/resume/</a>.</p>
 </body>
 </html>

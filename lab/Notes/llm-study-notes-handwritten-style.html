@@ -1,11 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLM Study Notes — Interactive Highlighter Toolbox</title>
     <meta name="description" content="Interactive study notes on assessing large language models with a highlighter toolbox, sticky notes, and explain, analogy and ELI5 helpers.">
     <link rel="canonical" href="https://janaka.me/lab/Notes/llm-study-notes-handwritten-style.html">
+    <!-- Shared site chrome: theme, fonts and the design system, loaded before the page's own styles so those keep the last word -->
+    <script>
+      (function(){
+        try {
+          var t = localStorage.getItem("jp-theme");
+          if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+            document.documentElement.setAttribute("data-theme", "dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/theme.css?v=20260915">
+    <link rel="stylesheet" href="/assets/css/subsite.css?v=20260915">
+    <link rel="manifest" href="/assets/site.webmanifest">
+
 
     <!-- 1. Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -191,10 +209,35 @@
             display: none; /* Hidden by default */
         }
     </style>
+
+    <style>
+      /* Site chrome guard. This note styles bare header/nav/div/.wrap for its paper look;
+         these rules keep the shared top bar and footer exactly as theme.css draws them,
+         bleeding across the note's own page padding (--jp-body-pad). */
+      :root{--jp-body-pad:48px}
+      body>div[data-include]{display:contents}
+      header.topbar{position:sticky;top:0;z-index:50;margin:calc(-1*var(--jp-body-pad)) calc(-1*var(--jp-body-pad)) var(--jp-body-pad);padding:0;width:auto;max-width:none;
+        border:0;border-bottom:1px solid var(--ln);border-radius:0;box-shadow:none;text-align:left;color:var(--tx);
+        background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);font:400 1rem/1.65 "IBM Plex Sans",system-ui,sans-serif}
+      header.topbar .wrap{display:flex;align-items:center;gap:18px;height:56px;max-width:1020px;margin:0 auto;padding:0 24px;background:none;border:0;box-shadow:none;border-radius:0;width:auto}
+      header.topbar .logo{font-family:var(--font-head);font-weight:800;font-size:1.05rem;color:var(--tx);text-decoration:none;letter-spacing:-.02em;margin:0;padding:0;border:0;background:none;flex-shrink:0}
+      header.topbar .logo b{color:var(--ac)}
+      header.topbar nav{margin:0 0 0 auto;padding:0;display:flex;flex-wrap:wrap;gap:12px;row-gap:6px;align-items:center;background:none;border:0;box-shadow:none;position:static;width:auto;flex-shrink:0}
+      header.topbar nav a{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx2);text-decoration:none;margin:0;padding:0;border:0;background:none;box-shadow:none;display:inline;font-weight:400}
+      header.topbar nav a:hover,header.topbar nav a.active{color:var(--ac)}
+      header.topbar .iconbtn{border:1px solid var(--ln);background:var(--bg2);color:var(--tx);border-radius:8px;height:34px;width:34px;padding:0;margin:0;cursor:pointer;line-height:1;font-size:.95rem;box-shadow:none}
+      header.topbar .iconbtn:hover{border-color:var(--ac)}
+      header.topbar nav .searchbtn{width:auto;padding:0 10px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;font-weight:500;color:var(--tx2);display:inline-flex;align-items:center;gap:7px}
+      footer.sitefoot{margin:64px calc(-1*var(--jp-body-pad)) calc(-1*var(--jp-body-pad));padding:0;border:0;border-top:1px solid var(--ln);background:var(--bg2);border-radius:0;box-shadow:none;text-align:left;width:auto;max-width:none;color:var(--tx2)}
+      footer.sitefoot .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;max-width:1020px;margin:0 auto;padding:22px 24px;font-family:var(--font-mono);font-size:.7rem;color:var(--tx2);background:none;border:0;box-shadow:none;width:auto}
+      footer.sitefoot a{color:var(--tx2);text-decoration:none;border:0;background:none;padding:0;margin:0}
+      footer.sitefoot a:hover{color:var(--ac)}
+    </style>
 </head>
 
 <!-- This is the "desk" -->
 <body class="bg-blue-100 p-4 sm:p-8 md:p-12 font-serif text-gray-800">
+<div data-include="/partials/site-nav.html"></div>
 
 <!-- ✨ Updated Style Toolbox -->
 <div id="style-toolbox">
@@ -954,5 +997,14 @@
     checkApiKey(); // ✨ Check for API key on page load
 
 </script>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>© <span id="year"></span> Janaka Premathilaka · Zug 🇨🇭</span>
+    <span><a href="/lab/">← Back to the Lab</a> · <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+<script src="/assets/js/includes.js?v=20260915"></script>
+<script src="/assets/js/site-nav.js?v=20260915"></script>
 </body>
 </html>

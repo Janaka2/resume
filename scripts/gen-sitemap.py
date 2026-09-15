@@ -25,6 +25,8 @@ EXPLICIT = [
     "blog/posts/ai-evaluation-frameworks.html",
     "blog/posts/machine-learning-blog.html",
     "blog/posts/mcp-agent-integration.html",
+    "blog/posts/rag-faiss-patterns.html",
+    "blog/posts/spring-kafka-deadletter.html",
     "lab/",
     "products/",
     "lab/Notes/hand-book-note1.html",
@@ -33,8 +35,7 @@ EXPLICIT = [
     "lab/Notes/llm-hand‑annotated-demo5.html",
     "lab/Notes/llm-study-notes-handwritten-style.html",
     "ai/",
-    "cv/",
-    "resume/",
+    "resume/",               # the CV; /cv/ is a redirect stub
     "academy/",
 ]
 # Directory trees crawled for every *.html (recursively).
@@ -49,8 +50,6 @@ EXCLUDE_PATTERNS = [
     r"^partials/",                          # fetch()-assembled fragments, never standalone pages
     r"^resume-26-3-2026\.html$",            # A4 print/PDF export template
     r"coming_soon[^/]*\.html$",             # placeholder pages
-    r"^blog/posts/rag-faiss-patterns\.html$",       # blog stub
-    r"^blog/posts/spring-kafka-deadletter\.html$",  # blog stub
     r"^academy/modules/2026/FSE/java/",     # duplicate of the daily pages
 ]
 EXCLUDE_RE = [re.compile(p) for p in EXCLUDE_PATTERNS]
@@ -97,6 +96,9 @@ def lastmod(rel_file):
 
 def url_for(rel):
     # Encode each path segment; keep "/" and the trailing slash of directories.
+    # index.html files are listed by their directory URL, matching their canonical.
+    if rel.endswith("/index.html"):
+        rel = rel[: -len("index.html")]
     return BASE + "/".join(urllib.parse.quote(seg) for seg in rel.split("/"))
 
 

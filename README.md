@@ -16,9 +16,8 @@ Plain HTML/CSS/JavaScript. No frameworks, no build step — host it anywhere (Gi
 | `assets/js/i18n.js` | EN/DE translations (`data-i18n` keys; English is captured from the markup, German lives in the dictionary). |
 | `assets/js/main.js` | Theme switch, language switch, tabs, collapsible work history, chat popup. |
 | `partials/*.pdf` | Downloadable CV (EN) and Lebenslauf (DE). |
-| `resume-26-3-2026.html` | Separate A4 print/PDF-export CV template (intentionally print-styled, not themed). |
+| `cv/print/index.html` | A4 print source for the CV PDF (`scripts/export-cv-pdf.py`); noindex, unlinked, intentionally print-styled. |
 | `chatbot/` | Python backend powering the AI assistant (deployed separately; the site embeds it from `janaka2.github.io/pa/`). |
-| `indexBK.html`, `partials/*BK.html`, `partials/janaka_visual_resume_v3.html`, `…v3_1.html` | Archived older versions, kept for reference. |
 
 ## Conventions
 

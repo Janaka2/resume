@@ -1,2 +1,0 @@
-# janaka-cv
-janaka-cv

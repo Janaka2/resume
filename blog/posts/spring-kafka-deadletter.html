@@ -1,1 +1,277 @@
-progress
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dead-letter topics in Spring Kafka: retries and replay</title>
+  <meta name="description" content="How to handle poison pills in Spring Kafka with DefaultErrorHandler, @RetryableTopic, DeadLetterPublishingRecoverer and a governed replay path.">
+  <link rel="canonical" href="https://janaka.me/blog/posts/spring-kafka-deadletter.html">
+  <meta property="og:title" content="Dead-letter topics in Spring Kafka: retries and replay">
+  <meta property="og:description" content="How to handle poison pills in Spring Kafka with DefaultErrorHandler, @RetryableTopic, DeadLetterPublishingRecoverer and a governed replay path.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://janaka.me/blog/posts/spring-kafka-deadletter.html">
+  <meta property="og:image" content="https://janaka.me/assets/og/blog.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="article:published_time" content="2026-09-15">
+  <meta property="article:modified_time" content="2026-09-15">
+  <meta property="article:author" content="https://janaka.me">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dead-letter topics in Spring Kafka: retries and replay">
+  <meta name="twitter:description" content="How to handle poison pills in Spring Kafka with DefaultErrorHandler, @RetryableTopic, DeadLetterPublishingRecoverer and a governed replay path.">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/blog.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Dead-letter topics in Spring Kafka: retries and replay",
+    "description": "How to handle poison pills in Spring Kafka with DefaultErrorHandler, @RetryableTopic, DeadLetterPublishingRecoverer and a governed replay path.",
+    "datePublished": "2026-09-15",
+    "dateModified": "2026-09-15",
+    "author": {
+      "@type": "Person",
+      "name": "Janaka Premathilaka",
+      "url": "https://janaka.me"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Janaka Premathilaka",
+      "url": "https://janaka.me"
+    },
+    "image": "https://janaka.me/assets/og/blog.png",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://janaka.me/blog/posts/spring-kafka-deadletter.html"
+    }
+  }
+  </script>
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png?v=1">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260910">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260910">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div data-include="/partials/site-nav.html"></div>
+
+<main id="main">
+  <article class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/blog/" style="color:inherit;text-decoration:none">← Blog</a></p>
+      <h1>Dead-letter topics in Spring Kafka</h1>
+      <p class="lede">A poison pill stalls a partition because a consumer must process records in offset order. Spring for Apache Kafka fixes this with bounded retries, non-blocking retry topics, and a dead-letter topic that carries the original offset and exception for an audited, governed replay.</p>
+      <p class="when" style="font-family:var(--font-mono);font-size:.74rem;letter-spacing:.06em;color:var(--tx2);margin-top:12px">Published Sep 2026 · 8 min read</p>
+
+      <div class="prose" style="margin-top:32px">
+        <div class="aside-note">
+          <p><strong>Takeaways</strong></p>
+          <ul>
+            <li>A consumer commits offsets per partition in order, so one record that always throws blocks everything behind it on that partition.</li>
+            <li><code>DefaultErrorHandler</code> retries in place, blocking the partition; <code>@RetryableTopic</code> retries on separate topics, so the original partition keeps moving.</li>
+            <li><code>DeadLetterPublishingRecoverer</code> ends the story: original topic, partition, offset and exception land in headers, then the offset commits and the consumer moves on.</li>
+            <li>Wrap deserializers in <code>ErrorHandlingDeserializer</code> — a bad payload never reaches your try/catch otherwise, it kills the consumer thread first.</li>
+            <li>A DLT is a production topic with its own retention, ACLs and PII exposure. Replay from it is a change, not a debugging convenience.</li>
+          </ul>
+        </div>
+
+        <h2>Why does one bad record stall the whole partition?</h2>
+        <p>Kafka's unit of ordering is the partition. One consumer owns a partition and reads it strictly in offset order, because the next <code>poll()</code> only returns records once the previous batch's offsets are committed. If record 1,204 throws every time and your handling just logs and rethrows, the framework retries it forever; offset 1,205 never gets a turn, and lag on that one partition climbs while its siblings keep moving.</p>
+        <p>That pattern — one partition frozen, the rest healthy — is the tell. A slow consumer needs more capacity; a poison pill needs somewhere else for the bad record to go.</p>
+
+        <h2>How do you retry a failing record without blocking the partition?</h2>
+        <p><code>DefaultErrorHandler</code> retries in place: it classifies the exception, and for anything recoverable it re-delivers the same record to your listener according to a <code>BackOff</code>, without advancing the offset. That is still blocking — the partition sits still for the length of the backoff — which is fine for a dependency down for a few seconds, and wrong for a record that will never succeed.</p>
+        <pre><code>@Bean
+public DefaultErrorHandler kafkaErrorHandler(KafkaTemplate&lt;Object, Object&gt; template) {
+    var recoverer = new DeadLetterPublishingRecoverer(template,
+        (record, ex) -&gt; new TopicPartition(record.topic() + "-dlt", record.partition()));
+
+    // 1s, 2s, 4s, 8s, capped at 15s, then give up and recover
+    var backOff = new ExponentialBackOffWithMaxRetries(4);
+    backOff.setInitialInterval(1_000L);
+    backOff.setMultiplier(2.0);
+    backOff.setMaxInterval(15_000L);
+
+    var handler = new DefaultErrorHandler(recoverer, backOff);
+    // fail fast on programming errors instead of retrying them four times
+    handler.addNotRetryableExceptions(IllegalArgumentException.class);
+    return handler;
+}</code></pre>
+        <p>Once the backoff is exhausted, the handler calls the recoverer and only then does the container commit the offset. That is the step that matters: without a recoverer, exhausting the backoff still throws, and depending on container properties you either seek back to the same offset and loop, or stop the consumer. A recoverer turns "give up" into "move on".</p>
+
+        <h2>What does @RetryableTopic add, and how are the retry topics named?</h2>
+        <p>Blocking retries hold up the partition for as long as the backoff runs — a problem once backoffs reach tens of seconds. Since Spring Kafka 2.7, <code>@RetryableTopic</code> takes the retry off the original partition: each failed attempt republishes to a dedicated retry topic, a listener there picks it up after its own delay, and the original partition stays free throughout.</p>
+        <pre><code>@RetryableTopic(
+    attempts = "4",
+    backoff = @Backoff(delay = 1000, multiplier = 2.0, maxDelay = 15000),
+    autoCreateTopics = "true",
+    exclude = { IllegalArgumentException.class }
+)
+@KafkaListener(topics = "orders", groupId = "orders-service")
+public void onOrder(ConsumerRecord&lt;String, Order&gt; record) {
+    orderService.process(record.value());
+}
+
+@DltHandler
+public void onDlt(ConsumerRecord&lt;String, Order&gt; record,
+                   @Header(KafkaHeaders.DLT_EXCEPTION_MESSAGE) String message) {
+    dltAuditRepository.record(record.topic(), record.partition(), record.offset(), message);
+}</code></pre>
+        <p>Spring creates the topics when <code>autoCreateTopics</code> is on, suffixed with their delay by default: <code>orders</code> becomes <code>orders-retry-1000</code>, <code>orders-retry-2000</code>, ending at <code>orders-dlt</code>. Set <code>topicSuffixingStrategy = TopicSuffixingStrategy.SUFFIX_WITH_INDEX_VALUE</code> for <code>orders-retry-0</code>, <code>orders-retry-1</code> instead, and give each retry topic at least as many partitions as the original, or you lose per-key ordering. Skip <code>@DltHandler</code> and Spring wires a <code>DeadLetterPublishingRecoverer</code> automatically.</p>
+
+        <table>
+          <thead><tr><th>Choose</th><th>When</th></tr></thead>
+          <tbody>
+            <tr><td>DefaultErrorHandler + BackOff</td><td>Short outages, low retry counts, a few seconds total — the partition can afford to wait.</td></tr>
+            <tr><td>@RetryableTopic</td><td>Longer backoffs, downstream systems with their own slow recovery, or many listeners where you do not want one flaky dependency to freeze every partition it touches.</td></tr>
+          </tbody>
+        </table>
+
+        <h2>What lands in the dead-letter topic, and what headers does it carry?</h2>
+        <p><code>DeadLetterPublishingRecoverer</code> does the write to the DLT: by default the original topic name with <code>-dlt</code> appended, same partition number, stamped with headers describing what went wrong and where it came from.</p>
+        <table>
+          <thead><tr><th>Header (KafkaHeaders)</th><th>Holds</th></tr></thead>
+          <tbody>
+            <tr><td>DLT_EXCEPTION_FQCN</td><td>Fully qualified class name of the exception that caused the failure.</td></tr>
+            <tr><td>DLT_EXCEPTION_MESSAGE</td><td>The exception's message.</td></tr>
+            <tr><td>DLT_EXCEPTION_STACKTRACE</td><td>The full stack trace, as text.</td></tr>
+            <tr><td>DLT_ORIGINAL_TOPIC</td><td>The topic the record was originally consumed from.</td></tr>
+            <tr><td>DLT_ORIGINAL_PARTITION</td><td>The partition it came from.</td></tr>
+            <tr><td>DLT_ORIGINAL_OFFSET</td><td>Its offset on that partition — the key you need to replay it precisely.</td></tr>
+            <tr><td>DLT_ORIGINAL_TIMESTAMP</td><td>Its original produce timestamp.</td></tr>
+          </tbody>
+        </table>
+        <p>That is the point of a recoverer over a hand-rolled <code>catch</code> that logs and swallows: a logged exception tells you a record failed once, at the moment you happened to be watching. A DLT record with these headers tells you, permanently, which record, from where, and why — queryable with any Kafka client.</p>
+
+        <h2>How do you stop a bad deserializer from taking the consumer down first?</h2>
+        <p>All of the above assumes your listener gets called with a deserialized object. A malformed payload — wrong schema, truncated bytes, JSON where Avro is expected — fails inside the deserializer, on the poll thread, before any error handler sees a record to retry. Unhandled, it kills the consumer.</p>
+        <p><code>ErrorHandlingDeserializer</code> is the fix: it wraps your real deserializer, catches what it throws, and hands the container a record with a null value and the exception in a header instead of letting it propagate.</p>
+        <pre><code>@Bean
+public ConsumerFactory&lt;String, Order&gt; consumerFactory() {
+    Map&lt;String, Object&gt; props = new HashMap&lt;&gt;();
+    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+    props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
+    props.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class.getName());
+    return new DefaultKafkaConsumerFactory&lt;&gt;(props);
+}</code></pre>
+        <p><code>DefaultErrorHandler</code> treats <code>DeserializationException</code> as fatal by default — no retries, straight to the recoverer, which is right: a payload that will never parse only delays the inevitable. It still reaches your DLT with the original topic, partition and offset, and the exception headers now point at a schema problem rather than a business one.</p>
+
+        <h2>Does any of this give you exactly-once processing?</h2>
+        <p>No, and it is worth saying plainly. <code>@RetryableTopic</code> and DLT publishing sit on Kafka's ordinary at-least-once semantics: a rebalance, a crash between processing and committing, or a redelivered retry-topic message can all bring the same event to your listener twice. Kafka's transactional producer gives exactly-once for a strict read-process-write pipeline that never leaves Kafka, but once a listener calls a database, an API or another topic outside that transaction, you are back to at-least-once.</p>
+        <p>The practical answer is an idempotent consumer: make reprocessing safe rather than trying to prevent it, by tracking applied event IDs alongside the business write, in the same transaction.</p>
+        <pre><code>@Transactional
+public void process(PaymentEvent event) {
+    if (processedEventRepository.existsById(event.id())) {
+        return; // already applied — safe to see this again after a retry or replay
+    }
+    ledger.apply(event);
+    processedEventRepository.save(new ProcessedEvent(event.id(), Instant.now()));
+}</code></pre>
+        <p>This is also what makes replay safe later: to the consumer, a replayed record is just another redelivery.</p>
+
+        <h2>How do you replay from the DLT without replaying blind?</h2>
+        <p>A DLT record stays unresolved until it is fixed and replayed, or deliberately written off. Replay means producing it back onto its original topic — read from the <code>DLT_ORIGINAL_TOPIC</code> header, not the DLT topic name — with a trail kept outside the Kafka log, since retention will eventually delete both the record and the evidence of what happened to it.</p>
+        <pre><code>@Service
+public class DltReplayService {
+
+    private final KafkaTemplate&lt;String, byte[]&gt; kafkaTemplate;
+    private final ReplayAuditRepository auditRepository;
+
+    public DltReplayService(KafkaTemplate&lt;String, byte[]&gt; kafkaTemplate,
+                             ReplayAuditRepository auditRepository) {
+        this.kafkaTemplate = kafkaTemplate;
+        this.auditRepository = auditRepository;
+    }
+
+    public void replay(ConsumerRecord&lt;String, byte[]&gt; dltRecord, String replayedBy, String reason) {
+        String originalTopic = header(dltRecord, KafkaHeaders.DLT_ORIGINAL_TOPIC);
+        int originalPartition = Integer.parseInt(header(dltRecord, KafkaHeaders.DLT_ORIGINAL_PARTITION));
+
+        kafkaTemplate.send(originalTopic, dltRecord.key(), dltRecord.value());
+
+        auditRepository.save(new ReplayAudit(
+            originalTopic, originalPartition, dltRecord.offset(),
+            replayedBy, reason, Instant.now()));
+    }
+
+    private String header(ConsumerRecord&lt;?, ?&gt; record, String name) {
+        return new String(record.headers().lastHeader(name).value(), StandardCharsets.UTF_8);
+    }
+}</code></pre>
+        <p>Two things make this worth building rather than reaching for a console producer. Replaying preserves the key, so it lands on the same partition and behind the same idempotency check as any other event for that entity. And every replay writes who did it, why, and which DLT offset it came from, into a table nobody can quietly delete — the record an auditor will actually ask for.</p>
+
+        <h2>What should page someone: DLT lag and retry depth</h2>
+        <ol>
+          <li><strong>DLT lag.</strong> Any consumer-group lag on a <code>*-dlt</code> topic means records are sitting unresolved — nothing reads a DLT automatically, so that lag never falls on its own. Alert on lag above zero sustained past your triage window, not on a threshold count.</li>
+          <li><strong>Retry depth.</strong> With <code>@RetryableTopic</code>, watch how far down the retry chain records land. Volume on <code>orders-retry-8000</code> rather than <code>orders-retry-1000</code> means attempts are failing repeatedly before they reach the DLT — an earlier signal that a dependency is degrading.</li>
+        </ol>
+        <p>Both are ordinary consumer-group lag metrics, from Micrometer's Kafka bindings or <code>kafka-consumer-groups.sh --describe</code>. The work is deciding these topics deserve their own alert, not lumping them in with the main topic's lag.</p>
+
+        <h2>How is this governed in a bank?</h2>
+        <p>A dead-letter topic holds customer data that failed to process, which makes it a compliance surface, not just an engineering convenience.</p>
+        <ul>
+          <li><strong>Retention.</strong> Long enough to triage and replay, often longer than the source topic — but every extra day is another day a sensitive payload sits in a second location. Set it against your triage SLA, not the topic default.</li>
+          <li><strong>PII in the payload.</strong> The DLT carries the failed record unredacted, plus a stack trace that can itself leak field values. Apply the source topic's data classification and ACLs to the DLT too, narrower if anything, and check exceptions don't echo raw values into a header.</li>
+          <li><strong>Who may replay.</strong> Replay reintroduces an event into a live system — a change, not a read. Route it through the approval any production write gets: named requester, reason, a second approver for anything touching money movement.</li>
+        </ul>
+        <p>None of this is exotic; it is the governance a bank already applies to manual payment corrections, extended to cover a new kind of correction.</p>
+
+        <h2>Practical takeaways</h2>
+        <ol>
+          <li>Start with <code>DefaultErrorHandler</code> and a short <code>ExponentialBackOffWithMaxRetries</code>; move to <code>@RetryableTopic</code> only once a backoff would otherwise stall the partition for longer than you can tolerate.</li>
+          <li>Always end the chain in a <code>DeadLetterPublishingRecoverer</code>. Without one, exhausting retries still throws, and a thrown exception is a stalled partition with extra steps.</li>
+          <li>Wrap every consumer's deserializer in <code>ErrorHandlingDeserializer</code>, even if you're confident in your schema. It costs nothing when messages are well-formed.</li>
+          <li>Design the listener to be idempotent before you need it to be. It is the same property that makes retries, redeliveries and replays all safe.</li>
+          <li>Alert on DLT lag and retry-topic depth as their own signals, and build a replay tool with an audit trail before you need one under pressure — not while triaging an incident.</li>
+        </ol>
+        <p>My Java and Spring background, including the financial-services systems this pattern comes from, is on my <a href="/resume/">CV</a>. If you're weighing <code>DefaultErrorHandler</code> against <code>@RetryableTopic</code> for a pipeline, or want a replay tool's audit trail reviewed against a bank's change-control process, <a href="mailto:janaka2@gmail.com">email me</a>. For the same instinct applied elsewhere, see <a href="/blog/posts/mcp-agent-integration.html">audit logging for agent tool calls</a>.</p>
+
+        <h2>Sources</h2>
+        <ul>
+          <li><a href="https://docs.spring.io/spring-kafka/reference/kafka/annotation-error-handling.html" target="_blank" rel="noopener">Spring for Apache Kafka reference — Handling Exceptions</a> (DefaultErrorHandler, ErrorHandlingDeserializer, DeadLetterPublishingRecoverer)</li>
+          <li><a href="https://docs.spring.io/spring-kafka/reference/retrytopic.html" target="_blank" rel="noopener">Spring for Apache Kafka reference — Non-Blocking Retries / Retry Topic</a></li>
+          <li><a href="https://docs.spring.io/spring-kafka/reference/retrytopic/topic-naming.html" target="_blank" rel="noopener">Spring for Apache Kafka reference — Retry Topic naming</a></li>
+          <li><a href="https://kafka.apache.org/documentation/#intro_consumers" target="_blank" rel="noopener">Apache Kafka documentation — Consumers and consumer groups</a></li>
+          <li><a href="https://www.confluent.io/learn/kafka-dead-letter-queue/" target="_blank" rel="noopener">Confluent — Apache Kafka Dead Letter Queue</a></li>
+        </ul>
+        <p>Sources checked September 2026.</p>
+      </div>
+    </div>
+  </article>
+<div data-related class="sec"></div>
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>© <span id="year"></span> Janaka Premathilaka · Zug 🇨🇭</span>
+    <span><a href="/blog/">All articles</a> · <a href="mailto:janaka2@gmail.com">janaka2@gmail.com</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+<script src="/assets/js/related.js"></script>
+</body>
+</html>
