@@ -8,8 +8,8 @@
 <meta property="og:title" content="Janaka Premathilaka — Senior Java Engineer & Solution Architect">
 <meta property="og:description" content="Banking-grade Java + practical AI in regulated environments. 22+ years. Zug, Switzerland.">
 <meta property="og:type" content="profile">
-<!-- Update this canonical to the final address once published (e.g. on janaka.me) -->
-<link rel="canonical" href="https://janaka.me/partials/janaka_visual_resume_v3_3.html">
+<link rel="canonical" href="https://janaka.me/resume/">
+<meta property="og:url" content="https://janaka.me/resume/">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -87,7 +87,8 @@ nav a:hover{color:var(--ac)}
 .iconbtn:hover{border-color:var(--ac)}
 #themeBtn{width:34px;font-size:.95rem}
 #langBtn{padding:0 10px;font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.08em;font-weight:500}
-@media(max-width:680px){nav a.navlink{display:none}}
+.navhome{padding-left:14px;border-left:1px solid var(--ln);white-space:nowrap}
+@media(max-width:760px){nav a.navlink{display:none}.navhome{padding-left:0;border-left:0}}
 /* ============ hero ============ */
 .hero{padding:64px 0 0}
 .hero-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:start}
@@ -280,6 +281,9 @@ details .points{margin-top:10px}
 .contact{margin-top:72px;border-top:1px solid var(--ln);padding:56px 0 28px;background:var(--bg2)}
 .contact h2{margin-bottom:8px}
 .refs{font-style:italic;color:var(--tx2);font-size:.9rem;margin-top:22px}
+.footnav{margin:28px 0 0;display:flex;flex-wrap:wrap;gap:8px 18px}
+.footnav a{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx2);text-decoration:none}
+.footnav a:hover{color:var(--ac)}
 .foot{
   display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;
   margin-top:40px;padding-top:18px;border-top:1px solid var(--ln);
@@ -291,7 +295,7 @@ details .points{margin-top:10px}
   html{scroll-behavior:auto}
 }
 @media print{
-  .topbar,.actions,.listen,.packet,#themeBtn,#langBtn{display:none!important}
+  .topbar,.actions,.listen,.packet,.footnav,#themeBtn,#langBtn{display:none!important}
   body{background:#fff;color:#000}
   .sec{padding-top:28px}
   .tl>li,.card,.skillcard{break-inside:avoid}
@@ -303,12 +307,13 @@ details .points{margin-top:10px}
 
 <header class="topbar">
   <div class="wrap">
-    <a class="logo" href="#top">Janaka<b>.</b></a>
+    <a class="logo" href="/" title="janaka.me">Janaka<b>.</b></a>
     <nav aria-label="Sections">
       <a class="navlink" href="#perimeter" data-i18n="navPeri">The Perimeter</a>
       <a class="navlink" href="#experience" data-i18n="navExp">Experience</a>
       <a class="navlink" href="#skills" data-i18n="navSkills">Skills</a>
       <a class="navlink" href="#contact" data-i18n="navContact">Contact</a>
+      <a class="navhome" href="/">← janaka.me</a>
       <button id="langBtn" class="iconbtn" type="button" aria-label="Auf Deutsch wechseln">DE</button>
       <button id="themeBtn" class="iconbtn" type="button" aria-label="Switch between light and dark theme">◐</button>
     </nav>
@@ -340,7 +345,7 @@ details .points{margin-top:10px}
           <a class="btn" href="mailto:janaka2@gmail.com" data-i18n="btnEmail">Email</a>
           <a class="btn" href="https://www.linkedin.com/in/janakapremathilaka/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="btn" href="https://github.com/Janaka2" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn" href="Janaka_Premathilaka_CV_2026.pdf" download id="pdfBtn">PDF CV</a>
+          <a class="btn" href="/partials/Janaka_Premathilaka_CV_2026.pdf" download id="pdfBtn">PDF CV</a>
         </div>
         <div class="listen" id="listenPanel" aria-live="polite">
           <div class="label"><span id="listenLabelTxt">Audio briefing — transcript</span><button id="stopBtn" type="button">■ stop</button></div>
@@ -567,6 +572,13 @@ details .points{margin-top:10px}
       <a class="btn" href="https://javawithme.wordpress.com/" target="_blank" rel="noopener">Blog</a>
     </div>
     <p class="refs" data-i18n="ctRefs">Excellent references from UBS, Credit Suisse, and the European Commission available upon request.</p>
+    <nav class="footnav" aria-label="janaka.me">
+      <a href="/" data-i18n="footNavHome">← Back to janaka.me</a>
+      <a href="/cv/" data-i18n="footNavCv">Full CV</a>
+      <a href="/products/" data-i18n="footNavProducts">Products</a>
+      <a href="/blog/">Blog</a>
+      <a href="/academy/">Academy</a>
+    </nav>
     <div class="foot">
       <span>© <span id="year"></span> Janaka Premathilaka · Zug 🇨🇭</span>
       <span data-i18n="footRight">built by hand — no frameworks, no build step. view source.</span>
@@ -654,7 +666,8 @@ details .points{margin-top:10px}
     ctLede: "Wenn Banking-Grade-Engineering plus praktische KI das Problem auf Ihrem Tisch ist — in der Schweiz oder remote/hybrid in Europa — sprechen wir.",
     ctPS: "PS — You are very welcome to write in English, too.",
     ctRefs: "Ausgezeichnete Referenzen von UBS, Credit Suisse und der Europäischen Kommission auf Anfrage.",
-    footRight: "von Hand gebaut — keine Frameworks, kein Build-Step. Quelltext ansehen."
+    footRight: "von Hand gebaut — keine Frameworks, kein Build-Step. Quelltext ansehen.",
+    footNavHome: "← Zurück zu janaka.me", footNavCv: "Vollständiger Lebenslauf", footNavProducts: "Produkte"
   };
 
   var STR = {
@@ -681,9 +694,9 @@ details .points{margin-top:10px}
     de: "Hallo — ich bin Janaka Premathilaka. Ich schreibe Java für Banken, seit mehr als zweiundzwanzig Jahren: Union Bank of Colombo, die Europäische Kommission in Brüssel, dann Credit Suisse und UBS hier in der Schweiz. Während der Credit-Suisse-UBS-Fusion habe ich die Verantwortung für sechs Enterprise-Applikationen übernommen und die auditierte Archivierung termingerecht geliefert. Seit 2023 bringe ich grosse Sprachmodelle, RAG und Agentic-Automatisierung in genau diese regulierte Welt — einschliesslich lokaler Modell-Inferenz, wo Daten die Bank nicht verlassen dürfen. Meine Arbeit ist geschäftskritisch, auditiert — und darf nicht ausfallen. Ich wohne in Zug, habe die Niederlassungsbewilligung C, und mein Deutsch ist auf B1 — Tendenz steigend. Wenn Banking-Engineering plus praktische KI das Problem auf Ihrem Tisch ist: Mein Postfach ist offen."
   };
 
-  // To use fixed locations, paste full URLs here. Otherwise upload both PDFs
-  // into the SAME folder as this HTML file.
-  var PDF_URLS = { en: "Janaka_Premathilaka_CV_2026.pdf", de: "Janaka_Premathilaka_Lebenslauf_2026_DE.pdf" };
+  // Both PDFs live in /partials/. Root-absolute so the page works from /resume/
+  // (and from the old /partials/ address, which redirects here).
+  var PDF_URLS = { en: "/partials/Janaka_Premathilaka_CV_2026.pdf", de: "/partials/Janaka_Premathilaka_Lebenslauf_2026_DE.pdf" };
 
   var langBtn = document.getElementById("langBtn");
   var lang = getStore("jp-lang");
