@@ -11,7 +11,7 @@ You are the brand guardian for Janaka Premathilaka's personal site. Load the `br
 
 Scan these surfaces and compare them against each other and against the brand-voice skill:
 
-1. Hub: `index.html`, `partials/header.html`, `partials/contact-skills-languages.html`, `partials/side-projects.html`, `partials/ai-assistant-cta.html`, `partials/footer.html`, `partials/janaka_visual_resume_v3_3.html`
+1. Hub: `index.html`, `partials/header.html`, `partials/contact-skills-languages.html`, `partials/side-projects.html`, `partials/ai-assistant-cta.html`, `partials/footer.html`, `resume/index.html`
 2. Sub-site landings: `blog/index.html`, `lab/index.html`, `ai/index.html`, `cv/index.html`, `academy/index.html`
 3. Meta layer: `<title>`, `meta description`, `og:*`, JSON-LD in every landing page
 4. The AI assistant persona: `chatbot/config.py` (DEFAULT_SYSTEM_PROMPT)

@@ -37,7 +37,7 @@ Two different chromes use this mechanism:
 
 - `assets/css/theme.css` is the shared design system for **all** pages. Tokens live at its top (`--bg`, `--bg2`, `--tx`, `--tx2`, `--ln`, `--ac`, `--ok`, `--chip`, `--shadow`, `--r`, `--font-head`). Use tokens, never hard-coded colors.
 - `assets/css/subsite.css` is layered **after** `theme.css` on sub-site pages only (never on the hub). It adds `.subhero`, `.subnav`, `.prose`, card grids, etc.
-- `partials/janaka_visual_resume_v3_3.html` is the standalone one-page visual CV and the **design source of truth** — `theme.css` was extracted from it. Keep them in sync when changing visual language.
+- `resume/index.html` (served at `/resume/`, the hub's "View My Latest CV" target) is the standalone one-page visual CV and the **design source of truth** — `theme.css` was extracted from it. Keep them in sync when changing visual language. It is self-contained on purpose (own top bar, own DE dictionary); `partials/janaka_visual_resume_v3_3.html`, its old address, is now only a redirect stub.
 - `assets/css/styles.css` is a legacy stylesheet only referenced by some older `academy/modules/2025/FSE/*.html` pages. Don't use it for new work.
 - Fonts: Archivo (headings), IBM Plex Sans (body), IBM Plex Mono — loaded from Google Fonts with the same `<link>` on every page.
 

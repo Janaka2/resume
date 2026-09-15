@@ -34,6 +34,7 @@ EXPLICIT = [
     "lab/Notes/llm-study-notes-handwritten-style.html",
     "ai/",
     "cv/",
+    "resume/",
     "academy/",
 ]
 # Directory trees crawled for every *.html (recursively).
