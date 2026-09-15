@@ -1,1 +1,232 @@
-progress..
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RAG with FAISS: Chunking, MMR and Re-Ranking</title>
+  <meta name="description" content="Why naive top-k retrieval fails, how to chunk and index with FAISS, and how MMR and cross-encoder re-ranking fix it for a regulated bank.">
+  <link rel="canonical" href="https://janaka.me/blog/posts/rag-faiss-patterns.html">
+  <meta property="og:title" content="RAG with FAISS: Chunking, MMR and Re-Ranking">
+  <meta property="og:description" content="Why naive top-k retrieval fails, how to chunk and index with FAISS, and how MMR and cross-encoder re-ranking fix it for a regulated bank.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://janaka.me/blog/posts/rag-faiss-patterns.html">
+  <meta property="og:image" content="https://janaka.me/assets/og/blog.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="article:published_time" content="2026-09-15">
+  <meta property="article:modified_time" content="2026-09-15">
+  <meta property="article:author" content="https://janaka.me">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RAG with FAISS: Chunking, MMR and Re-Ranking">
+  <meta name="twitter:description" content="Why naive top-k retrieval fails, how to chunk and index with FAISS, and how MMR and cross-encoder re-ranking fix it for a regulated bank.">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/blog.png">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "RAG with FAISS: Chunking, MMR and Re-Ranking",
+    "description": "Why naive top-k retrieval fails, how to chunk and index with FAISS, and how MMR and cross-encoder re-ranking fix it for a regulated bank.",
+    "datePublished": "2026-09-15",
+    "dateModified": "2026-09-15",
+    "author": {
+      "@type": "Person",
+      "name": "Janaka Premathilaka",
+      "url": "https://janaka.me"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Janaka Premathilaka",
+      "url": "https://janaka.me"
+    },
+    "image": "https://janaka.me/assets/og/blog.png",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://janaka.me/blog/posts/rag-faiss-patterns.html"
+    }
+  }
+  </script>
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png?v=1">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260910">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260910">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<div data-include="/partials/site-nav.html"></div>
+
+<main id="main">
+  <article class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/blog/" style="color:inherit;text-decoration:none">← Blog</a></p>
+      <h1>RAG with FAISS: chunking, MMR and re-ranking</h1>
+      <p class="when" style="font-family:var(--font-mono);font-size:.74rem;letter-spacing:.06em;color:var(--tx2);margin-top:12px">Published Sep 2026 · 8 min read</p>
+
+      <div class="prose" style="margin-top:32px">
+        <p>Naive top-k retrieval returns near-duplicate chunks and misses the passage that answers the question. Chunk deliberately, choose a FAISS index that matches your scale, diversify results with Maximal Marginal Relevance, then re-rank with a cross-encoder before context reaches the model.</p>
+
+        <div class="aside-note">
+          <p><strong>Takeaways</strong></p>
+          <ul>
+            <li>Cosine similarity alone rewards redundancy: the top five chunks are often five phrasings of one clause, not five distinct facts.</li>
+            <li>Chunk by structure first — recursive or parent-child splitting beats a fixed window on headings, clauses or tables.</li>
+            <li><code>IndexFlatIP</code> for exactness, <code>IndexHNSWFlat</code> for low-latency at a few million vectors, <code>IndexIVFFlat</code>/<code>IndexIVFPQ</code> once the corpus outgrows RAM.</li>
+            <li>Maximal Marginal Relevance (Carbonell &amp; Goldstein, 1998) trades relevance against diversity with one parameter, λ.</li>
+            <li>A cross-encoder re-ranks the shortlist, not the corpus — score 20–30 candidates, never the whole index.</li>
+            <li>FAISS and the small models it depends on can all run on-premise; the perimeter question is about the chat model and the logs.</li>
+          </ul>
+        </div>
+
+        <h2>Why does naive top-k retrieval fail?</h2>
+        <p>Rank a policy corpus by cosine similarity and take the top five, and you often get five near-duplicates: three restatements of one clause, one superseded revision of it, and nothing from the exception paragraph next to it. Pure similarity search has no concept of redundancy — it scores each chunk against the query alone, so a boilerplate paragraph repeated across forty documents crowds out the one chunk that would have answered the question differently.</p>
+        <p>That is worse than an annoyance in a regulated setting. An assistant that quotes the wrong revision of a policy is not just unhelpful — it is a wrong answer delivered with apparent confidence. Retrieval quality is the ceiling on generation quality: no prompt recovers a fact that never made it into context.</p>
+
+        <h2>How should you chunk documents for retrieval?</h2>
+        <p>Chunking decides what unit of text a similarity score is computed against, and it matters more than the embedding model. Four strategies cover most production pipelines.</p>
+        <table>
+          <thead><tr><th>Strategy</th><th>Typical size</th><th>Overlap</th><th>Best for</th></tr></thead>
+          <tbody>
+            <tr><td>Fixed-size</td><td>~512 tokens</td><td>~10% (≈50 tokens)</td><td>Homogeneous plain text — FAQs, chat logs</td></tr>
+            <tr><td>Recursive (structure-aware)</td><td>~800 characters</td><td>~100–200 characters</td><td>Prose with headings and paragraphs — most policy and manual text</td></tr>
+            <tr><td>Semantic</td><td>Variable, by topic shift</td><td>None (breakpoint-cut)</td><td>Long documents where topics change mid-section</td></tr>
+            <tr><td>Parent-child</td><td>Child 200–400 tokens, parent 1500–2500 tokens</td><td>Small overlap on the child only</td><td>Precise matching with full context returned to the model</td></tr>
+          </tbody>
+        </table>
+        <p>Fixed-size splitting is the cheapest and the crudest: cut every 512 tokens with a 10% overlap so a fact split across the boundary still appears whole in a neighbouring chunk. It works on flat, repetitive text, and badly on anything with structure, because it cuts a clause in half as often as it respects one.</p>
+        <p>Recursive splitting — LangChain's <code>RecursiveCharacterTextSplitter</code> is the common implementation — tries a list of separators in order, from double newline down to single character, and only falls back to a harder cut when a paragraph is too long to keep whole. Around 800 characters with 100–200 of overlap keeps most clauses intact.</p>
+        <p>Semantic chunking embeds consecutive sentences and cuts where similarity between neighbouring sentence embeddings drops, so a boundary lands where the topic actually changes rather than where a character counter runs out. It costs one extra embedding pass but earns its keep on long documents that drift across several subjects.</p>
+        <p>Parent-child chunking separates what you search from what you serve: index small child chunks (200–400 tokens) for retrieval precision, but store a pointer from each to a larger parent section (1500–2500 tokens). A query matches the precise child; the pipeline hands the model the parent, so the answer keeps context a 300-token fragment would not. Default to this once naive top-k has already caused one wrong answer in review.</p>
+
+        <h2>Which FAISS index fits: Flat, IVF or HNSW?</h2>
+        <p>Three index families cover almost every RAG corpus size. <code>IndexFlatIP</code> is exhaustive: it compares the query against every stored vector, so cost grows linearly, but the result is exact and reproducible — the same query returns the same ranking every time, which matters when an auditor asks why the assistant retrieved a given clause. It needs no training step and is the default until profiling says otherwise, usually up to roughly a million chunks.</p>
+        <p><code>IndexHNSWFlat</code> is a graph: each vector links to a bounded number of neighbours, and search walks the graph instead of scanning every vector. It needs no training, and stays low-latency well past a million vectors, at the cost of more memory per vector than a compressed IVF index and no support for removing vectors — a corpus with hard deletions needs a rebuild, or IVF instead.</p>
+        <p><code>IndexIVFFlat</code> and its compressed sibling <code>IndexIVFPQ</code> partition the vector space into clusters with k-means, then search only the nearest few (<code>nprobe</code>) instead of the whole set. They need a training pass first. IVF earns its complexity once the corpus is too large for HNSW's memory footprint, or once PQ compression is needed to fit the vectors at all — FAISS's own guidance is that IVF becomes the practical option once full-precision vectors no longer fit in memory.</p>
+        <pre><code>import faiss
+import numpy as np
+
+d = 384  # e.g. sentence-transformers all-MiniLM-L6-v2
+xb = np.load("chunk_embeddings.npy").astype("float32")
+faiss.normalize_L2(xb)  # inner product now behaves like cosine similarity
+
+# Exact, exhaustive -- reproducible, good for an audit trail
+index_flat = faiss.IndexFlatIP(d)
+index_flat.add(xb)
+
+# Graph-based -- no training, low query latency, more RAM per vector
+index_hnsw = faiss.IndexHNSWFlat(d, 32, faiss.METRIC_INNER_PRODUCT)
+index_hnsw.hnsw.efSearch = 64
+index_hnsw.add(xb)
+
+# Clustered -- needs training, scales past what HNSW can hold in RAM
+quantizer = faiss.IndexFlatIP(d)
+index_ivf = faiss.IndexIVFFlat(quantizer, d, 100, faiss.METRIC_INNER_PRODUCT)
+index_ivf.train(xb)
+index_ivf.add(xb)
+index_ivf.nprobe = 8  # cells searched per query -- trades recall for speed</code></pre>
+
+        <h2>How does Maximal Marginal Relevance add diversity?</h2>
+        <p>Maximal Marginal Relevance, from Carbonell and Goldstein's 1998 paper on summarisation and passage re-ranking, re-orders a candidate set to reward relevance and penalise similarity to what is already picked:</p>
+        <p><code>MMR = argmax<sub>D<sub>i</sub> ∈ R \ S</sub> [ λ · Sim1(D<sub>i</sub>, Q) − (1 − λ) · max<sub>D<sub>j</sub> ∈ S</sub> Sim2(D<sub>i</sub>, D<sub>j</sub>) ]</code></p>
+        <p>R is the candidate set FAISS returned, S is the set already selected, Q is the query, and λ trades relevance against diversity: λ = 1 is plain similarity ranking, λ = 0 picks purely for novelty. In practice, pull 20–50 candidates from FAISS, then run MMR to select the 4–8 chunks that go into the prompt. A λ around 0.5–0.7 keeps enterprise Q&amp;A leaning toward relevance while still forcing out at least one non-duplicate chunk.</p>
+        <pre><code>import numpy as np
+
+def mmr(query_vec, candidate_vecs, k=5, lambda_mult=0.6):
+    """Greedy MMR over L2-normalised embeddings (dot product = cosine sim)."""
+    selected, remaining = [], list(range(len(candidate_vecs)))
+    sim_to_query = candidate_vecs @ query_vec
+    while remaining and len(selected) < k:
+        if not selected:
+            pick = remaining[int(np.argmax(sim_to_query[remaining]))]
+        else:
+            sim_to_selected = candidate_vecs[remaining] @ candidate_vecs[selected].T
+            redundancy = sim_to_selected.max(axis=1)
+            score = lambda_mult * sim_to_query[remaining] - (1 - lambda_mult) * redundancy
+            pick = remaining[int(np.argmax(score))]
+        selected.append(pick)
+        remaining.remove(pick)
+    return selected  # indices into candidate_vecs, in MMR order</code></pre>
+
+        <h2>When does cross-encoder re-ranking earn its latency?</h2>
+        <p>The embedding model behind FAISS is a bi-encoder: it scores the query and each chunk independently, which is what makes indexing millions of chunks feasible. A cross-encoder feeds the query and one candidate chunk into the same transformer together, so it attends across both texts before producing a relevance score — far more accurate, and far slower, so it runs against the 20–30 candidates MMR narrowed down, never the whole corpus.</p>
+        <pre><code>from sentence_transformers import CrossEncoder
+
+reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+pairs = [(query, chunk.text) for chunk in shortlisted_chunks]
+scores = reranker.predict(pairs)
+
+ranked = [c for _, c in sorted(zip(scores, shortlisted_chunks), key=lambda p: -p[0])]
+context = ranked[:6]</code></pre>
+        <p>Re-ranking the whole corpus with a cross-encoder defeats the reason you built a vector index in the first place.</p>
+
+        <h2>How do you evaluate the pipeline, and what should you log?</h2>
+        <p>Two numbers catch most regressions. <strong>Recall@k</strong> needs a labelled set of question and correct-chunk pairs you maintain yourself: the fraction of questions where the correct chunk lands in the top k, measured before and after re-ranking, so a drop after re-ranking shows a broken filter. <strong>Faithfulness</strong> checks whether each claim in the generated answer is actually supported by retrieved context rather than the model's prior knowledge — I cover it in more depth in the <a href="/blog/posts/ai-evaluation-frameworks.html">evaluation frameworks piece</a> on this blog; frameworks such as Ragas compute it by extracting claims from the answer and checking each against context.</p>
+        <ul>
+          <li>the query text, or a hash of it if the content is sensitive</li>
+          <li>the chunk ids and raw similarity scores FAISS returned</li>
+          <li>the MMR-selected subset and the λ used</li>
+          <li>the cross-encoder scores, if re-ranking ran</li>
+          <li>the final chunk ids sent to the model, and the model name and version</li>
+          <li>the generated answer and the latency of each stage</li>
+        </ul>
+        <p>That log, not the demo, is what an incident review or an audit will ask for. Build it before launch.</p>
+
+        <h2>Can this run on-premise when data may not leave the bank?</h2>
+        <p>FAISS itself has no network dependency — it is a CPU or GPU library that runs in-process, so once the index is built inside the perimeter, it and the search step never leave. The parts of a RAG pipeline that usually do reach outside are the embedding model and the generation model. An open-weights embedding model such as BAAI/bge or E5, served locally through sentence-transformers or a small inference server, replaces a hosted embeddings API. An open-weights chat model served the same way replaces the hosted LLM. The cross-encoder re-ranker is a similarly small model and stays local for the same reason — none of the document text or embeddings has to cross the perimeter to be scored.</p>
+        <p>What is left is not a library choice but a set of decisions: where the index is stored and backed up, who is authorised to call the retrieval service, and whether the query log counts as personal or client data under the bank's classification. Treat those the way an <a href="/blog/posts/mcp-agent-integration.html">agent's tool calls</a> are treated in review — an allow-list, a log line per request, least privilege — rather than something the library resolves on its own.</p>
+
+        <h2>Practical takeaways</h2>
+        <ol>
+          <li>Chunk with structure in mind first; use fixed-size windows only as a fallback for plain, unstructured text.</li>
+          <li>Start with <code>IndexFlatIP</code>; move to HNSW or IVF once latency or memory forces it, and keep an exact index for anything that must be reproducible on audit.</li>
+          <li>Pull more candidates than you need, diversify with MMR, then re-rank the shortlist with a cross-encoder — never go straight from raw similarity to the prompt.</li>
+          <li>Track recall@k before and after re-ranking, and a faithfulness score on generated answers, against an evaluation set you maintain yourself.</li>
+          <li>Log every stage of the pipeline per request; that log is what will be reviewed, not the demo.</li>
+        </ol>
+
+        <h2>Sources</h2>
+        <ul>
+          <li><a href="https://github.com/facebookresearch/faiss/wiki/Guidelines-to-choose-an-index" target="_blank" rel="noopener">FAISS wiki — Guidelines to choose an index</a></li>
+          <li><a href="https://github.com/facebookresearch/faiss/wiki/Faiss-indexes" target="_blank" rel="noopener">FAISS wiki — Faiss indexes</a></li>
+          <li><a href="https://dl.acm.org/doi/10.1145/290941.291025" target="_blank" rel="noopener">Carbonell, J. &amp; Goldstein, J. (1998). The Use of MMR, Diversity-Based Reranking for Reordering Documents and Producing Summaries. SIGIR '98.</a></li>
+          <li><a href="https://sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html" target="_blank" rel="noopener">Sentence Transformers — Retrieve &amp; Re-Rank</a></li>
+          <li><a href="https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/" target="_blank" rel="noopener">Ragas — Available metrics (faithfulness, context recall)</a></li>
+        </ul>
+        <p>Sources checked September 2026.</p>
+      </div>
+    </div>
+  </article>
+<div data-related class="sec"></div>
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>© <span id="year"></span> Janaka Premathilaka · Zug 🇨🇭</span>
+    <span><a href="/blog/">All articles</a> · <a href="mailto:janaka2@gmail.com">janaka2@gmail.com</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+<script src="/assets/js/related.js"></script>
+</body>
+</html>
