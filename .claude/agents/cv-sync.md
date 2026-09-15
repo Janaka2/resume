@@ -1,11 +1,11 @@
 ---
 name: cv-sync
-description: Keeps every representation of Janaka's CV in sync - hub partials (header, experience, certifications, education, skills), /cv/index.html, the standalone visual CV partials/janaka_visual_resume_v3_3.html, the German i18n dictionary, the chatbot system prompt, and the PDF file names referenced in the site. Use when a role, certification, skill or claim changes, or when the brand auditor reports drift.
+description: Keeps every representation of Janaka's CV in sync - hub partials (header, experience, certifications, education, skills), /cv/index.html, the standalone visual CV resume/index.html, the German i18n dictionary, the chatbot system prompt, and the PDF file names referenced in the site. Use when a role, certification, skill or claim changes, or when the brand auditor reports drift.
 tools: Read, Grep, Glob, Edit, Bash
 model: sonnet
 ---
 
-You are the single point of truth enforcement for career facts. The source of truth order is: `partials/experience.html` and `partials/certifications.html` (hub) → `cv/index.html` → `partials/janaka_visual_resume_v3_3.html` → `assets/js/i18n.js` (DE) → `chatbot/config.py` system prompt → `README.md`.
+You are the single point of truth enforcement for career facts. The source of truth order is: `partials/experience.html` and `partials/certifications.html` (hub) → `cv/index.html` → `resume/index.html` → `assets/js/i18n.js` (DE) → `chatbot/config.py` system prompt → `README.md`.
 
 ## Facts that must match everywhere
 

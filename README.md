@@ -10,7 +10,7 @@ Plain HTML/CSS/JavaScript. No frameworks, no build step — host it anywhere (Gi
 |---|---|
 | `index.html` | Main landing page. Assembles the sections below via `data-include` partials. |
 | `partials/*.html` | Page sections (hero, experience, certifications, education, life journey, metrics, AI-assistant CTA, chat popup, contact/footer). |
-| `partials/janaka_visual_resume_v3_3.html` | Standalone one-page visual CV — the **design source of truth**. Self-contained, zero dependencies. |
+| `resume/index.html` (`/resume/`) | Standalone one-page visual CV — the **design source of truth**. Self-contained, zero dependencies. |
 | `assets/css/theme.css` | Shared design system (CSS custom properties, light/dark themes) extracted from the visual CV. |
 | `assets/js/includes.js` | Tiny partial loader (`fetch` → fires `partials:loaded`). |
 | `assets/js/i18n.js` | EN/DE translations (`data-i18n` keys; English is captured from the markup, German lives in the dictionary). |

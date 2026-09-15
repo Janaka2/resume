@@ -2,7 +2,7 @@
  * EN/DE translations for the main page.
  * English is the default and is captured from the markup itself at boot;
  * German lives in the DE dictionary below, keyed by data-i18n attributes.
- * Same mechanism (and same localStorage keys) as partials/janaka_visual_resume_v3_3.html.
+ * Same mechanism (and same localStorage keys) as resume/index.html (the visual CV at /resume/).
  */
 window.JP_I18N = (function () {
   'use strict';
