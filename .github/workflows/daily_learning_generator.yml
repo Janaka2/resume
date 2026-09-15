@@ -18,9 +18,11 @@ on:
         description: "Topic slug, e.g. linux-cli or spring-boot"
         required: false
         default: ""
-  schedule:
+  # Paused on 2026-09-15: the generator was publishing empty placeholder pages.
+  # Re-enable the schedule once the template writes real content. Manual runs still work.
+  # schedule:
     # Runs every day at 05:17 UTC
-    - cron: "17 5 * * *"
+    #   - cron: "17 5 * * *"
 
 permissions:
   contents: write

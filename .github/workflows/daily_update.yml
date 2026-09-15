@@ -16,9 +16,11 @@ on:
         description: "Note date as YYYY-MM-DD. Defaults to today (UTC)."
         required: false
         default: ""
-  schedule:
+  # Paused on 2026-09-15: the generator was publishing empty placeholder pages.
+  # Re-enable the schedule once the template writes real content. Manual runs still work.
+  # schedule:
     # 07:00 UTC daily
-    - cron: "0 7 * * *"
+    #   - cron: "0 7 * * *"
 
 # Without this the default GITHUB_TOKEN is read-only and the push fails.
 permissions:
