@@ -200,7 +200,7 @@ Content-Type: application/problem+json
 <pre><code class="language-bash">helm upgrade --install assetcare deploy/helm/assetcare -n assetcare --create-namespace \
   --set global.host=assetcare.example.com --set image.tag=1.0.0 \
   --set api.existingSecret=assetcare-secrets --wait
-scripts/smoke-test.sh https://assetcare.example.com/api</code></pre>
+scripts/smoke-test.sh https://assetcare.example.com</code></pre>
 <p><b>Proof.</b> <code>helm lint</code> and <code>helm template</code> pass for the free and the enterprise value sets, executed locally. Image builds, Trivy and the config render check run in CI. The OCI installation is documented step by step with a verification per step and was not executed by the author's build environment.</p>
 
       </div>
