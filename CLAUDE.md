@@ -78,6 +78,8 @@ Project-level subagents live in `.claude/agents/` and skills in `.claude/skills/
 | Career facts changed | `cv-sync` agent |
 | Product copy (nüchtern, Daily Momentum) | `product-marketer` agent |
 
+`ai/mcp-momentum-planner/` is the worked example behind the Academy guide `academy/modules/2026/FSE/mcp-end-to-end.html`: the same MCP server (plan contract, deterministic validator, save with elicitation) in Python (`mcp` 2.2), plain Java (MCP Java SDK 2.0) and Spring Boot 4 + Spring AI 2.0. The page is generated from those files, so change the code there and regenerate rather than editing the page's code blocks; all three were built and run before publishing (Python: `pytest` + `test_client.py`; Java and Spring: compiled with Maven and driven by the same client).
+
 `.github/workflows/weekly_brand_review.yml` runs `/weekly-brand-review` every Monday via the Claude Code GitHub Action and opens a PR; it needs the `ANTHROPIC_API_KEY` repository secret.
 
 ### Archived files

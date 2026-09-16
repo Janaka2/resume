@@ -487,7 +487,7 @@ class Scheduler {
     }
     String plan(String request) { return chat.prompt().user(request).call().content(); }
 }</code></pre>
-<div class="aside-note"><p><b>Why it matters.</b> MCP is how an agent reaches systems it does not own without bespoke integrations. The runnable <a href='https://github.com/Janaka2/resume/tree/main/ai/mcp-agent-skeleton' target='_blank' rel='noopener'>MCP agent skeleton</a> shows the same protocol from a Python client; the Spring version above is what it looks like inside a Boot service.</p></div>
+<div class="aside-note"><p><b>Why it matters.</b> MCP is how an agent reaches systems it does not own without bespoke integrations. The runnable <a href='https://github.com/Janaka2/resume/tree/main/ai/mcp-agent-skeleton' target='_blank' rel='noopener'>MCP agent skeleton</a> shows the same protocol from a Python client; the Spring version above is what it looks like inside a Boot service. For the whole protocol, and a complete verified server in Java, Spring AI and Python, read <a href='./mcp-end-to-end.html'>MCP end to end</a>.</p></div>
 
       </div>
     </div>
