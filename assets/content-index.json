@@ -210,7 +210,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 273,
+  "words": 279,
   "minutes": 2
  },
  {
@@ -227,7 +227,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 207,
+  "words": 213,
   "minutes": 1
  },
  {
@@ -243,7 +243,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 599,
+  "words": 605,
   "minutes": 3
  },
  {
@@ -259,14 +259,14 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 826,
+  "words": 832,
   "minutes": 4
  },
  {
   "url": "/academy/modules/2026/FSE/spring-boot.html",
   "title": "Spring Boot 3.3 Ecosystem",
   "section": "academy",
-  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "description": "← Janaka Academy",
   "tags": [
    "academy",
    "spring",
@@ -275,14 +275,14 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-10",
-  "words": 130,
+  "words": 135,
   "minutes": 1
  },
  {
   "url": "/academy/modules/2026/FSE/react.html",
   "title": "React 19 + TypeScript Frontend Engineering",
   "section": "academy",
-  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "description": "← Janaka Academy",
   "tags": [
    "academy",
    "react",
@@ -292,7 +292,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-10",
-  "words": 127,
+  "words": 133,
   "minutes": 1
  },
  {
@@ -306,7 +306,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 204,
+  "words": 209,
   "minutes": 1
  },
  {
@@ -320,8 +320,8 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 218,
-  "minutes": 1
+  "words": 223,
+  "minutes": 2
  },
  {
   "url": "/academy/modules/2026/FSE/promting/references.html",
@@ -335,7 +335,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 207,
+  "words": 164,
   "minutes": 1
  },
  {
@@ -350,14 +350,14 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 187,
+  "words": 192,
   "minutes": 1
  },
  {
   "url": "/academy/modules/2026/FSE/promting/index.html",
   "title": "Prompt Engineering Handbook",
   "section": "academy",
-  "description": "Built for software engineers working with modern LLMs, agent workflows, RAG systems, debugging, architecture analysis, and daily coding productivity. The layout is intentionally white, clean, and…",
+  "description": "← Janaka Academy",
   "tags": [
    "academy",
    "prompt",
@@ -366,8 +366,8 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 255,
-  "minutes": 2
+  "words": 197,
+  "minutes": 1
  },
  {
   "url": "/academy/modules/2026/FSE/promting/gpt54.html",
@@ -381,7 +381,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 429,
+  "words": 386,
   "minutes": 2
  },
  {
@@ -397,8 +397,8 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 230,
-  "minutes": 2
+  "words": 187,
+  "minutes": 1
  },
  {
   "url": "/academy/modules/2026/FSE/promting/gemini.html",
@@ -413,7 +413,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 390,
+  "words": 347,
   "minutes": 2
  },
  {
@@ -427,7 +427,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 291,
+  "words": 295,
   "minutes": 2
  },
  {
@@ -442,7 +442,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 169,
+  "words": 174,
   "minutes": 1
  },
  {
@@ -459,7 +459,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 502,
+  "words": 459,
   "minutes": 3
  },
  {
@@ -474,7 +474,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 162,
+  "words": 167,
   "minutes": 1
  },
  {
@@ -491,7 +491,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 312,
+  "words": 269,
   "minutes": 2
  },
  {
@@ -506,7 +506,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 121,
+  "words": 126,
   "minutes": 1
  },
  {
@@ -521,7 +521,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 173,
+  "words": 178,
   "minutes": 1
  },
  {
@@ -537,7 +537,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 263,
+  "words": 269,
   "minutes": 2
  },
  {
@@ -571,14 +571,14 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-10",
-  "words": 1514,
+  "words": 1517,
   "minutes": 7
  },
  {
   "url": "/academy/modules/2026/FSE/microservices.html",
   "title": "Advanced Microservices & Distributed Systems",
   "section": "academy",
-  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "description": "← Janaka Academy",
   "tags": [
    "academy",
    "advanced",
@@ -588,7 +588,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-10",
-  "words": 129,
+  "words": 135,
   "minutes": 1
  },
  {
@@ -604,14 +604,14 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 260,
+  "words": 266,
   "minutes": 2
  },
  {
   "url": "/academy/modules/2026/FSE/linux.html",
   "title": "Linux & CLI Mastery for Java Developers",
   "section": "academy",
-  "description": "Complete practical guide and quick-reference commands for day-to-day backend engineering work.",
+  "description": "← Janaka Academy",
   "tags": [
    "academy",
    "linux",
@@ -621,14 +621,14 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-10",
-  "words": 434,
+  "words": 407,
   "minutes": 2
  },
  {
   "url": "/academy/modules/2026/FSE/leadership.html",
   "title": "Leadership, Communication & Delivery Excellence",
   "section": "academy",
-  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "description": "← Janaka Academy",
   "tags": [
    "academy",
    "leadership",
@@ -638,14 +638,14 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-10",
-  "words": 127,
+  "words": 133,
   "minutes": 1
  },
  {
   "url": "/academy/modules/2026/FSE/kafka.html",
   "title": "Apache Kafka 4.x & Event-Driven Architecture",
   "section": "academy",
-  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "description": "← Janaka Academy",
   "tags": [
    "academy",
    "apache",
@@ -655,14 +655,14 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-10",
-  "words": 131,
+  "words": 135,
   "minutes": 1
  },
  {
   "url": "/academy/modules/2026/FSE/java-core.html",
   "title": "Core Java Mastery (Java 22)",
   "section": "academy",
-  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "description": "← Janaka Academy",
   "tags": [
    "academy",
    "core",
@@ -671,7 +671,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-10",
-  "words": 132,
+  "words": 137,
   "minutes": 1
  },
  {
@@ -687,7 +687,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 250,
+  "words": 240,
   "minutes": 2
  },
  {
@@ -711,7 +711,7 @@
   "url": "/academy/modules/2026/FSE/foundation.html",
   "title": "Foundation: Engineering Mindset & Setup",
   "section": "academy",
-  "description": "Welcome to the first step of your engineering journey! This is where we build your mindset, get your tools ready, and lay the groundwork for success. Remember, anyone can feel like they’re behind or…",
+  "description": "← Janaka Academy",
   "tags": [
    "academy",
    "foundation",
@@ -721,7 +721,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-10",
-  "words": 1014,
+  "words": 1019,
   "minutes": 5
  },
  {
@@ -736,7 +736,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 209,
+  "words": 215,
   "minutes": 1
  },
  {
@@ -752,7 +752,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 317,
+  "words": 323,
   "minutes": 2
  },
  {
@@ -766,7 +766,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 86,
+  "words": 90,
   "minutes": 1
  },
  {
@@ -782,14 +782,14 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 339,
+  "words": 343,
   "minutes": 2
  },
  {
   "url": "/academy/modules/2026/FSE/entanglement/index.html",
   "title": "Practical Quantum Entanglement and Quantum Computing",
   "section": "academy",
-  "description": "A clear explanation using simple logic instead of heavy physics language.",
+  "description": "← Janaka Academy",
   "tags": [
    "academy",
    "quantum",
@@ -798,7 +798,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 289,
+  "words": 268,
   "minutes": 2
  },
  {
@@ -813,7 +813,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 298,
+  "words": 302,
   "minutes": 2
  },
  {
@@ -828,14 +828,14 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 264,
+  "words": 272,
   "minutes": 2
  },
  {
   "url": "/academy/modules/2026/FSE/devops-cloud.html",
   "title": "DevOps & Cloud: Docker · Kubernetes · CI/CD",
   "section": "academy",
-  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "description": "← Janaka Academy",
   "tags": [
    "academy",
    "devops",
@@ -845,7 +845,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-10",
-  "words": 133,
+  "words": 138,
   "minutes": 1
  },
  {
@@ -878,7 +878,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 229,
+  "words": 252,
   "minutes": 2
  },
  {
@@ -895,14 +895,14 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 341,
+  "words": 339,
   "minutes": 2
  },
  {
   "url": "/academy/modules/2026/FSE/capstone.html",
   "title": "Enterprise Capstone: Global Logistics Platform",
   "section": "academy",
-  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "description": "← Janaka Academy",
   "tags": [
    "academy",
    "enterprise",
@@ -912,7 +912,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-08-29",
-  "words": 147,
+  "words": 153,
   "minutes": 1
  },
  {
@@ -944,14 +944,14 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 192,
+  "words": 198,
   "minutes": 1
  },
  {
   "url": "/academy/modules/2026/FSE/ai-integration.html",
   "title": "AI Integration for Enterprise Java Systems",
   "section": "academy",
-  "description": "This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.",
+  "description": "← Janaka Academy",
   "tags": [
    "academy",
    "integration",
@@ -961,7 +961,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-10",
-  "words": 135,
+  "words": 140,
   "minutes": 1
  },
  {
@@ -975,7 +975,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 517,
+  "words": 523,
   "minutes": 3
  },
  {
@@ -992,7 +992,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 360,
+  "words": 366,
   "minutes": 2
  },
  {
@@ -1008,7 +1008,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 606,
+  "words": 612,
   "minutes": 3
  },
  {
@@ -1024,7 +1024,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 833,
+  "words": 839,
   "minutes": 4
  },
  {
@@ -1040,7 +1040,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 370,
+  "words": 376,
   "minutes": 2
  },
  {
@@ -1056,14 +1056,14 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 336,
+  "words": 342,
   "minutes": 2
  },
  {
   "url": "/academy/modules/2026/FSE/Linux/index.html",
   "title": "Linux CLI Mastery",
   "section": "academy",
-  "description": "This mini-site is organized as separate HTML pages with a parent navigation page, so you can browse each topic quickly and reuse it as a personal reference. The content is practical…",
+  "description": "← Janaka Academy",
   "tags": [
    "academy",
    "linux",
@@ -1072,8 +1072,8 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 258,
-  "minutes": 2
+  "words": 201,
+  "minutes": 1
  },
  {
   "url": "/academy/modules/2026/FSE/Linux/file-handling.html",
@@ -1087,7 +1087,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 211,
+  "words": 217,
   "minutes": 1
  },
  {
@@ -1103,7 +1103,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 430,
+  "words": 426,
   "minutes": 2
  },
  {

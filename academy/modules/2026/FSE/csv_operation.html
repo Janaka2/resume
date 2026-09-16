@@ -1,199 +1,157 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLI Data Mastery: CSV & Shell Scripting</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLI Data Mastery: CSV &amp; Shell Scripting | Janaka Academy</title>
+  <meta name="description" content="CLI Data Mastery: CSV &amp; Shell Scripting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.">
   <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/csv_operation.html">
-  <meta name="description" content="CLI Data Mastery: CSV & Shell Scripting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root { --accent: #3b82f6; }
-        pre { position: relative; }
-        .copy-btn {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            padding: 0.25rem 0.5rem;
-            background: rgba(255,255,255,0.1);
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: all 0.2s;
+  <link rel="alternate" type="application/atom+xml" title="Janaka Premathilaka" href="/feed.xml">
+  <meta property="og:title" content="CLI Data Mastery: CSV &amp; Shell Scripting | Janaka Academy">
+  <meta property="og:description" content="CLI Data Mastery: CSV &amp; Shell Scripting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://janaka.me/academy/modules/2026/FSE/csv_operation.html">
+  <meta property="og:image" content="https://janaka.me/assets/og/academy.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CLI Data Mastery: CSV &amp; Shell Scripting | Janaka Academy">
+  <meta name="twitter:description" content="CLI Data Mastery: CSV &amp; Shell Scripting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/academy.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png?v=1">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
         }
-        .copy-btn:hover { background: var(--accent); color: white; }
-        .sidebar-link.active { border-right: 4px solid var(--accent); background: #eff6ff; color: var(--accent); }
-        html { scroll-behavior: smooth; }
-    </style>
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260916">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
+  <link rel="stylesheet" href="/assets/css/study.css?v=20260916">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans">
+<body class="study">
+<a class="skip" href="#main">Skip to content</a>
 
-<aside class="fixed left-0 top-0 h-screen w-72 bg-white border-r border-slate-200 hidden lg:block overflow-y-auto">
-    <div class="p-6">
-        <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
-            <i class="fas fa-terminal text-blue-600"></i> CSV Pro Guide
-        </h2>
-        <div class="mt-6">
-            <input type="text" id="sidebarSearch" placeholder="Search operations..." class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-        </div>
+<div data-include="/partials/site-nav.html"></div>
+
+<main id="main">
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/academy/" style="color:inherit;text-decoration:none">&larr; Janaka Academy</a></p>
+      <h1>The Ultimate CSV Scripting Guide</h1>
+      <p class="lede">Automate data validation, cleaning, and reporting using standard Unix utilities like <code>awk</code>, <code>sed</code>, and <code>join</code>.</p>
+
     </div>
-    <nav class="px-4 space-y-1" id="navLinks">
-        <a href="#basics" class="sidebar-link block px-4 py-2 rounded-md text-slate-600 hover:bg-slate-100">Counting Records</a>
-        <a href="#validation" class="sidebar-link block px-4 py-2 rounded-md text-slate-600 hover:bg-slate-100">Column Validation</a>
-        <a href="#transform" class="sidebar-link block px-4 py-2 rounded-md text-slate-600 hover:bg-slate-100">Data Transformation</a>
-        <a href="#merging" class="sidebar-link block px-4 py-2 rounded-md text-slate-600 hover:bg-slate-100">Merging Files (Joins)</a>
-        <a href="#advanced" class="sidebar-link block px-4 py-2 rounded-md text-slate-600 hover:bg-slate-100">One-Liner Cheatsheet</a>
-    </nav>
-</aside>
+  </section>
 
-<main class="lg:ml-72 p-6 md:p-12 max-w-5xl">
-    <header class="mb-12">
-        <span class="text-blue-600 font-semibold tracking-wide uppercase text-sm">Linux Shell Operations</span>
-        <h1 class="text-4xl font-extrabold text-slate-900 mt-2">The Ultimate CSV Scripting Guide</h1>
-        <p class="text-lg text-slate-600 mt-4">Automate data validation, cleaning, and reporting using standard Unix utilities like <code>awk</code>, <code>sed</code>, and <code>join</code>.</p>
-    </header>
-
-    <section id="basics" class="mb-16 scroll-mt-10">
-        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-            <i class="fas fa-list-ol text-blue-500"></i> Counting Records
-        </h2>
-        <p class="mb-4">Standard counting often includes the header row. Use these methods to get accurate data counts.</p>
-        <div class="bg-slate-900 rounded-xl p-5 text-slate-300">
-<pre><code><span class="text-green-500"># Count lines including header</span>
+  <section class="sec">
+    <div class="wrap">
+<section class="card" id="basics">
+        <h2>Counting Records</h2>
+        <p>Standard counting often includes the header row. Use these methods to get accurate data counts.</p>
+        <pre><code># Count lines including header
 wc -l data.csv
 
-<span class="text-green-500"># Count data rows only (Excludes line 1)</span>
+# Count data rows only (Excludes line 1)
 awk 'NR > 1' data.csv | wc -l
 
-<span class="text-green-500"># Count using variable for scripts</span>
+# Count using variable for scripts
 ROW_COUNT=$(tail -n +2 data.csv | grep -c .)</code></pre>
-        </div>
     </section>
 
-    <section id="validation" class="mb-16 scroll-mt-10">
-        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-            <i class="fas fa-check-double text-emerald-500"></i> Column & Field Validation
-        </h2>
-        <p class="mb-4">Check if every row adheres to the expected schema (e.g., exactly 8 columns).</p>
-        <div class="bg-slate-900 rounded-xl p-5 text-slate-300">
-<pre><code><span class="text-green-500"># Find rows that DO NOT have exactly 8 columns</span>
+    <section class="card" id="validation">
+        <h2>Column & Field Validation</h2>
+        <p>Check if every row adheres to the expected schema (e.g., exactly 8 columns).</p>
+        <pre><code># Find rows that DO NOT have exactly 8 columns
 awk -F',' 'NF != 8 { print "Error: Line " NR " has " NF " fields" }' data.csv
 
-<span class="text-green-500"># Validate that Column 3 is always numeric</span>
+# Validate that Column 3 is always numeric
 awk -F',' '$3 !~ /^[0-9]+$/ { print "Non-numeric ID at line " NR ": " $3 }' data.csv</code></pre>
-        </div>
     </section>
 
-    <section id="transform" class="mb-16 scroll-mt-10">
-        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-            <i class="fas fa-random text-purple-500"></i> Data Transformation
-        </h2>
-        <p class="mb-4">Convert case, replace delimiters, or calculate new fields on the fly.</p>
-        <div class="bg-slate-900 rounded-xl p-5 text-slate-300">
-<pre><code><span class="text-green-500"># Convert CSV to Pipe-Delimited (|)</span>
+    <section class="card" id="transform">
+        <h2>Data Transformation</h2>
+        <p>Convert case, replace delimiters, or calculate new fields on the fly.</p>
+        <pre><code># Convert CSV to Pipe-Delimited (|)
 sed 's/,/|/g' data.csv > output.psv
 
-<span class="text-green-500"># Uppercase the names in Column 2</span>
+# Uppercase the names in Column 2
 awk -F',' 'BEGIN{OFS=","} {$2=toupper($2); print}' data.csv
 
-<span class="text-green-500"># Add a "Total" column (Col4 = Col2 + Col3)</span>
+# Add a "Total" column (Col4 = Col2 + Col3)
 awk -F',' 'BEGIN{OFS=","} {if(NR>1) $4=$2+$3; else $4="Total"; print}' data.csv</code></pre>
-        </div>
     </section>
 
-    <section id="merging" class="mb-16 scroll-mt-10">
-        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-            <i class="fas fa-object-group text-orange-500"></i> Merging Files (Relational Joins)
-        </h2>
-        <p class="mb-4">Use the <code>join</code> command to combine two CSVs on a common ID column.</p>
-        <div class="bg-slate-900 rounded-xl p-5 text-slate-300">
-<pre><code><span class="text-green-500"># Sort files first (Join requires sorted input)</span>
+    <section class="card" id="merging">
+        <h2>Merging Files (Relational Joins)</h2>
+        <p>Use the <code>join</code> command to combine two CSVs on a common ID column.</p>
+        <pre><code># Sort files first (Join requires sorted input)
 sort -t',' -k1,1 users.csv > users_sorted.csv
 sort -t',' -k1,1 orders.csv > orders_sorted.csv
 
-<span class="text-green-500"># Join on Column 1 (ID)</span>
+# Join on Column 1 (ID)
 join -t',' -1 1 -2 1 users_sorted.csv orders_sorted.csv > joined_data.csv</code></pre>
-        </div>
-        <div class="bg-amber-50 border-l-4 border-amber-400 p-4 mt-4">
-            <p class="text-sm text-amber-800 italic"><strong>Note:</strong> The <code>-1 1 -2 1</code> flags tell join to use Column 1 of File 1 and Column 1 of File 2 as the keys.</p>
-        </div>
+        <div class="callout"><p><strong>Note:</strong> The <code>-1 1 -2 1</code> flags tell join to use Column 1 of File 1 and Column 1 of File 2 as the keys.</p></div>
     </section>
 
-    <section id="advanced" class="mb-16 scroll-mt-10">
-        <h2 class="text-2xl font-bold mb-6">Common One-Liners</h2>
-        <div class="overflow-hidden border border-slate-200 rounded-xl bg-white">
-            <table class="w-full text-left text-sm">
-                <thead class="bg-slate-50 border-b border-slate-200">
+    <section class="card" id="advanced">
+        <h2>Common One-Liners</h2>
+        <table>
+                <thead>
                 <tr>
-                    <th class="px-6 py-4 font-semibold">Requirement</th>
-                    <th class="px-6 py-4 font-semibold">Command</th>
+                    <th>Requirement</th>
+                    <th>Command</th>
                 </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-100">
+                <tbody>
                 <tr>
-                    <td class="px-6 py-4">Remove Header Row</td>
-                    <td class="px-6 py-4"><code>sed '1d' file.csv</code></td>
+                    <td>Remove Header Row</td>
+                    <td><code>sed '1d' file.csv</code></td>
                 </tr>
                 <tr>
-                    <td class="px-6 py-4">Sum values in Col 5</td>
-                    <td class="px-6 py-4"><code>awk -F, '{s+=$5} END{print s}' file.csv</code></td>
+                    <td>Sum values in Col 5</td>
+                    <td><code>awk -F, '{s+=$5} END{print s}' file.csv</code></td>
                 </tr>
                 <tr>
-                    <td class="px-6 py-4">Unique values in Col 1</td>
-                    <td class="px-6 py-4"><code>cut -d, -f1 file.csv | sort -u</code></td>
+                    <td>Unique values in Col 1</td>
+                    <td><code>cut -d, -f1 file.csv | sort -u</code></td>
                 </tr>
                 <tr>
-                    <td class="px-6 py-4">Filter by Date (regex)</td>
-                    <td class="px-6 py-4"><code>grep "2023-12-.." file.csv</code></td>
+                    <td>Filter by Date (regex)</td>
+                    <td><code>grep "2023-12-.." file.csv</code></td>
                 </tr>
                 </tbody>
             </table>
-        </div>
     </section>
+    </div>
+  </section>
 </main>
 
-<script>
-    // Simple search functionality
-    document.getElementById('sidebarSearch').addEventListener('input', function(e) {
-        const term = e.target.value.toLowerCase();
-        document.querySelectorAll('.sidebar-link').forEach(link => {
-            const text = link.textContent.toLowerCase();
-            link.style.display = text.includes(term) ? 'block' : 'none';
-        });
-    });
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug 🇨🇭</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
 
-    // Highlight active sidebar link on scroll
-    window.addEventListener('scroll', () => {
-        let current = '';
-        document.querySelectorAll('section').forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (pageYOffset >= sectionTop - 60) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        document.querySelectorAll('.sidebar-link').forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
-                link.classList.add('active');
-            }
-        });
-    });
-
-    // Add copy buttons to code blocks
-    document.querySelectorAll('pre').forEach(block => {
-        const button = document.createElement('button');
-        button.className = 'copy-btn';
-        button.innerText = 'Copy';
-        button.addEventListener('click', () => {
-            const text = block.innerText.replace('Copy', '');
-            navigator.clipboard.writeText(text);
-            button.innerText = 'Copied!';
-            setTimeout(() => button.innerText = 'Copy', 2000);
-        });
-        block.appendChild(button);
-    });
-</script>
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+<script src="/assets/js/study.js?v=20260916"></script>
 </body>
 </html>

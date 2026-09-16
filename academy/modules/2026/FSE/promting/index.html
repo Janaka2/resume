@@ -3,8 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prompt Engineering Handbook</title>
+  <title>Prompt Engineering Handbook | Janaka Academy</title>
+  <meta name="description" content="">
   <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/promting/">
+  <link rel="alternate" type="application/atom+xml" title="Janaka Premathilaka" href="/feed.xml">
+  <meta property="og:title" content="Prompt Engineering Handbook | Janaka Academy">
+  <meta property="og:description" content="">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://janaka.me/academy/modules/2026/FSE/promting/">
+  <meta property="og:image" content="https://janaka.me/assets/og/academy.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Prompt Engineering Handbook | Janaka Academy">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/academy.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png?v=1">
 
   <!-- Apply the stored theme before first paint to avoid a flash -->
   <script>
@@ -20,39 +36,34 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/theme.css">
-  <link rel="stylesheet" href="/assets/css/subsite.css">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260916">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
+  <link rel="stylesheet" href="/assets/css/study.css?v=20260916">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 </head>
-<body>
+<body class="study">
+<a class="skip" href="#main">Skip to content</a>
 
 <div data-include="/partials/site-nav.html"></div>
-<div class="layout">
-  <aside class="sidebar">
-    <h2 class="brand">Prompt Engineering Handbook</h2>
-    <p class="tagline">Clean white documentation layout for senior engineers.</p>
-    <input id="searchBox" class="search" type="text" placeholder="Search navigation..." onkeyup="filterNav()">
-    <div class="nav-section-title">Sections</div>
-    <ul>
-      <li data-nav-item><a href="index.html" class="active">Home</a></li>
-<li data-nav-item><a href="foundations.html">Foundations</a></li>
-<li data-nav-item><a href="templates.html">Templates</a></li>
-<li data-nav-item><a href="strategies.html">Strategies</a></li>
-<li data-nav-item><a href="developer.html">Developer Prompts</a></li>
-<li data-nav-item><a href="rag.html">RAG Prompting</a></li>
-<li data-nav-item><a href="agents.html">Agent Prompting</a></li>
-<li data-nav-item><a href="debugging.html">Debugging Playbook</a></li>
-<li data-nav-item><a href="cheatsheet.html">Cheat Sheet</a></li>
-    </ul>
-  </aside>
-  <main class="content">
-    <div class="container">
 
-<section class="hero">
-  <div class="kicker">Senior Engineer Edition</div>
-  <h1>Prompt Engineering Handbook</h1>
-  <p>Built for software engineers working with modern LLMs, agent workflows, RAG systems, debugging, architecture analysis, and daily coding productivity. The layout is intentionally white, clean, and reader-friendly for long study sessions.</p>
-</section>
+<main id="main">
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/academy/" style="color:inherit;text-decoration:none">&larr; Janaka Academy</a></p>
+      <h1>Prompt Engineering Handbook</h1>
+      <p class="lede">Built for software engineers working with modern LLMs, agent workflows, RAG systems, debugging, architecture analysis, and daily coding productivity.</p>
+      <div class="badges"><span class="badge hot">Senior Engineer Edition</span></div>
+
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+
 
 <div class="grid">
   <a class="card" href="foundations.html"><h3>Foundations</h3><p>Core thinking patterns that make prompts reliable and reusable.</p></a>
@@ -65,7 +76,7 @@
   <a class="card" href="cheatsheet.html"><h3>Cheat Sheet</h3><p>Quick reference page for daily use.</p></a>
 </div>
 
-<div class="panel">
+<div class="card">
   <h2>What this handbook focuses on</h2>
   <table>
     <tr><th>Area</th><th>What you get</th></tr>
@@ -76,23 +87,20 @@
   </table>
 </div>
 
-<div class="callout">
-  This version improves alignment, spacing, section consistency, and content depth compared with the earlier draft. Every page now uses the same white theme and the same layout rules.
-</div>
-
-<p class="footer-note">Tip: start with Foundations, then Templates, then Developer Prompts. After that, move to RAG and Agents.</p>
-
+<p class="sub" style="margin-top:14px">Tip: start with Foundations, then Templates, then Developer Prompts. After that, move to RAG and Agents.</p>
     </div>
-  </main>
-</div>
+  </section>
+</main>
+
 <footer class="sitefoot">
   <div class="wrap">
-    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug</span>
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug 🇨🇭</span>
     <span><a href="/academy/">Academy</a> &middot; <a href="/">janaka.me</a></span>
   </div>
 </footer>
 
-<script src="/assets/js/includes.js"></script>
-<script src="/assets/js/site-nav.js"></script>
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+<script src="/assets/js/study.js?v=20260916"></script>
 </body>
 </html>

@@ -1,20 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quantum Use Cases</title>
-  <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/entanglement/use-cases.html">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantum Use Cases | Janaka Academy</title>
   <meta name="description" content="Quantum Use Cases — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/entanglement/use-cases.html">
+  <link rel="alternate" type="application/atom+xml" title="Janaka Premathilaka" href="/feed.xml">
+  <meta property="og:title" content="Quantum Use Cases | Janaka Academy">
+  <meta property="og:description" content="Quantum Use Cases — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://janaka.me/academy/modules/2026/FSE/entanglement/use-cases.html">
+  <meta property="og:image" content="https://janaka.me/assets/og/academy.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Quantum Use Cases | Janaka Academy">
+  <meta name="twitter:description" content="Quantum Use Cases — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/academy.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png?v=1">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260916">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
+  <link rel="stylesheet" href="/assets/css/study.css?v=20260916">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 </head>
-<body>
-<header><div class="container nav"><a class="brand" href="index.html">Quantum Guide</a><nav class="nav-links"><a href="entanglement.html">Entanglement</a><a href="quantum-computing.html">Quantum Computing</a><a href="use-cases.html">Use Cases</a><a href="career-roadmap.html">Career Roadmap</a><a href="references.html">References</a></nav></div></header>
-<main><div class="container">
-  <section class="section">
-    <h1>Practical Use Cases That Matter</h1>
-    <p class="lead">This page focuses on realistic areas where quantum concepts can support career development and practical experimentation.</p>
+<body class="study">
+<a class="skip" href="#main">Skip to content</a>
+
+<div data-include="/partials/site-nav.html"></div>
+
+<main id="main">
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="index.html" style="color:inherit;text-decoration:none">← Quantum guide</a></p>
+      <h1>Practical Use Cases That Matter</h1>
+      <p class="lede">This page focuses on realistic areas where quantum concepts can support career development and practical experimentation.</p>
+      <nav class="modnav" aria-label="Pages in this handbook">
+        <a href="index.html">Quantum Guide</a>
+        <a href="entanglement.html">Entanglement</a>
+        <a href="quantum-computing.html">Quantum Computing</a>
+        <a href="use-cases.html" aria-current="page">Use Cases</a>
+        <a href="career-roadmap.html">Career Roadmap</a>
+        <a href="references.html">References</a>
+      </nav>
+    </div>
   </section>
+
+  <section class="sec">
+    <div class="wrap">
+
 
   <section class="grid">
     <article class="card"><h3>Chemistry and materials</h3><p>One of the strongest long-term areas. Quantum systems can naturally model other quantum systems such as molecules and materials.</p></article>
@@ -25,7 +80,7 @@
     <article class="card"><h3>Security awareness</h3><p>Quantum affects the future of cryptography. Engineers should understand post-quantum security migration even if they never build quantum algorithms.</p></article>
   </section>
 
-  <section class="section">
+  <section>
     <div class="card">
       <h2>Best practical career use cases for you</h2>
       <table>
@@ -39,10 +94,10 @@
     </div>
   </section>
 
-  <section class="section two-col">
+  <section class="cards2">
     <div class="card">
       <h2>Where hype often goes wrong</h2>
-      <ul class="clean">
+      <ul>
         <li>Assuming quantum will replace classical computing.</li>
         <li>Assuming every optimization problem gets faster.</li>
         <li>Ignoring noise, scale limits, and data loading cost.</li>
@@ -51,7 +106,7 @@
     </div>
     <div class="card">
       <h2>Good professional behavior</h2>
-      <ul class="clean">
+      <ul>
         <li>Be precise about current limits.</li>
         <li>Separate theory value from production value.</li>
         <li>Focus on learning, experimentation, and strategy.</li>
@@ -59,7 +114,19 @@
       </ul>
     </div>
   </section>
-</div></main>
-<footer><div class="container">A realistic quantum professional is careful, practical, and evidence-driven.</div></footer>
+    </div>
+  </section>
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug 🇨🇭</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+<script src="/assets/js/study.js?v=20260916"></script>
 </body>
 </html>

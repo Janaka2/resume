@@ -141,7 +141,7 @@
     <published>2026-08-29T00:00:00Z</published>
     <updated>2026-09-10T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.</summary>
+    <summary>← Janaka Academy</summary>
   </entry>
   <entry>
     <title>React 19 + TypeScript Frontend Engineering</title>
@@ -150,7 +150,7 @@
     <published>2026-08-29T00:00:00Z</published>
     <updated>2026-09-10T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>This module is now fully available. Use this page as your roadmap: what you will learn, how the study plan is structured, and where to find guided day-by-day deep dives.</summary>
+    <summary>← Janaka Academy</summary>
   </entry>
   <entry>
     <title>Templates</title>
@@ -195,7 +195,7 @@
     <published>2026-08-29T00:00:00Z</published>
     <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
-    <summary>Built for software engineers working with modern LLMs, agent workflows, RAG systems, debugging, architecture analysis, and daily coding productivity. The layout is intentionally white, clean, and…</summary>
+    <summary>← Janaka Academy</summary>
   </entry>
   <entry>
     <title>GPT-5.4 Prompting Guide</title>

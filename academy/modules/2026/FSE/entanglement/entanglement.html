@@ -1,22 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Entanglement Explained</title>
-  <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/entanglement/entanglement.html">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entanglement Explained | Janaka Academy</title>
   <meta name="description" content="Entanglement Explained — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/entanglement/entanglement.html">
+  <link rel="alternate" type="application/atom+xml" title="Janaka Premathilaka" href="/feed.xml">
+  <meta property="og:title" content="Entanglement Explained | Janaka Academy">
+  <meta property="og:description" content="Entanglement Explained — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://janaka.me/academy/modules/2026/FSE/entanglement/entanglement.html">
+  <meta property="og:image" content="https://janaka.me/assets/og/academy.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Entanglement Explained | Janaka Academy">
+  <meta name="twitter:description" content="Entanglement Explained — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/academy.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png?v=1">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260916">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
+  <link rel="stylesheet" href="/assets/css/study.css?v=20260916">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 </head>
-<body>
-<header><div class="container nav"><a class="brand" href="index.html">Quantum Guide</a><nav class="nav-links"><a href="entanglement.html">Entanglement</a><a href="quantum-computing.html">Quantum Computing</a><a href="use-cases.html">Use Cases</a><a href="career-roadmap.html">Career Roadmap</a><a href="references.html">References</a></nav></div></header>
-<main><div class="container">
-  <section class="section">
-    <h1>Quantum Entanglement in Simple Words</h1>
-    <p class="lead">Entanglement means two or more quantum objects become linked in a way that their measurement results are correlated beyond what normal classical rules can explain.</p>
+<body class="study">
+<a class="skip" href="#main">Skip to content</a>
+
+<div data-include="/partials/site-nav.html"></div>
+
+<main id="main">
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="index.html" style="color:inherit;text-decoration:none">← Quantum guide</a></p>
+      <h1>Quantum Entanglement in Simple Words</h1>
+      <p class="lede">Entanglement means two or more quantum objects become linked in a way that their measurement results are correlated beyond what normal classical rules can explain.</p>
+      <nav class="modnav" aria-label="Pages in this handbook">
+        <a href="index.html">Quantum Guide</a>
+        <a href="entanglement.html" aria-current="page">Entanglement</a>
+        <a href="quantum-computing.html">Quantum Computing</a>
+        <a href="use-cases.html">Use Cases</a>
+        <a href="career-roadmap.html">Career Roadmap</a>
+        <a href="references.html">References</a>
+      </nav>
+    </div>
   </section>
 
-  <section class="two-col">
+  <section class="sec">
+    <div class="wrap">
+
+
+  <section class="cards2">
     <div class="card">
       <h2>Simple picture</h2>
       <p>Imagine two sealed boxes sent far apart. In a normal classical system, each box already contains a fixed answer inside. You only do not know it yet.</p>
@@ -25,7 +80,7 @@
     </div>
     <div class="card">
       <h2>Why it matters</h2>
-      <ul class="clean">
+      <ul>
         <li>It is one of the main reasons quantum computing is powerful.</li>
         <li>It helps create states that classical computers struggle to describe efficiently.</li>
         <li>It is important in quantum communication, quantum error correction, and some quantum algorithms.</li>
@@ -33,7 +88,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section>
     <div class="card">
       <h2>What entanglement is not</h2>
       <table>
@@ -45,14 +100,26 @@
     </div>
   </section>
 
-  <section class="section">
+  <section>
     <div class="card">
       <h2>Practical engineer view</h2>
       <p>Think of entanglement as a special resource. In normal software engineering, resources might be CPU, memory, bandwidth, or transactions. In quantum systems, entanglement is one of the resources that can enable useful behavior.</p>
       <p>When you learn a quantum algorithm, ask: <em>Where is the entanglement created? Why is it needed? What would fail without it?</em></p>
     </div>
   </section>
-</div></main>
-<footer><div class="container">Next: read how entanglement fits into the full quantum computing model.</div></footer>
+    </div>
+  </section>
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug 🇨🇭</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+<script src="/assets/js/study.js?v=20260916"></script>
 </body>
 </html>

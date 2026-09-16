@@ -3,8 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modernizing the Java Journey: A Comprehensive Study Guide</title>
+  <title>Modernizing the Java Journey: A Comprehensive Study Guide | Janaka Academy</title>
+  <meta name="description" content="">
   <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/modenizeJava.html">
+  <link rel="alternate" type="application/atom+xml" title="Janaka Premathilaka" href="/feed.xml">
+  <meta property="og:title" content="Modernizing the Java Journey: A Comprehensive Study Guide | Janaka Academy">
+  <meta property="og:description" content="">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://janaka.me/academy/modules/2026/FSE/modenizeJava.html">
+  <meta property="og:image" content="https://janaka.me/assets/og/academy.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Modernizing the Java Journey: A Comprehensive Study Guide | Janaka Academy">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/academy.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png?v=1">
 
   <!-- Apply the stored theme before first paint to avoid a flash -->
   <script>
@@ -20,32 +36,34 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/theme.css">
-  <link rel="stylesheet" href="/assets/css/subsite.css">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260916">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
+  <link rel="stylesheet" href="/assets/css/study.css?v=20260916">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 </head>
-<body>
+<body class="study">
+<a class="skip" href="#main">Skip to content</a>
 
 <div data-include="/partials/site-nav.html"></div>
-<!-- Navigation -->
 
+<main id="main">
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/academy/" style="color:inherit;text-decoration:none">&larr; Janaka Academy</a></p>
+      <h1>Modernizing the Java Journey: A Comprehensive Study Guide</h1>
+      <p class="lede">A detailed synthesis of current Java development practices, ecosystem choices, and modernization strategies based on the "How to (Re)start Your Java Journey in 2026" presentation.</p>
 
-<!-- Main Content -->
-<main class="container">
+    </div>
+  </section>
 
-    <!-- Header -->
-    <header class="mb-12 text-center md:text-left">
-        <div class="flex items-center justify-center md:justify-start gap-3 mb-4">
-            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold">Java 2026</span>
-            <span class="text-gray-500 text-sm">Study Guide</span>
-        </div>
-        <h1 class="text-4xl md:text-5xl font-extrabold text-secondary leading-tight mb-6">
-            Modernizing the Java Journey: <br class="hidden md:block" />A Comprehensive Study Guide
-        </h1>
-        <p class="text-xl text-gray-600 mb-8 max-w-3xl">
-            A detailed synthesis of current Java development practices, ecosystem choices, and modernization strategies based on the "How to (Re)start Your Java Journey in 2026" presentation.
-        </p>
-    </header>
+  <section class="sec">
+    <div class="wrap">
+<!-- Header -->
+    
 
     <!-- API Key Configuration -->
     <div class="mb-8 bg-slate-100 p-5 rounded-xl border border-slate-300 shadow-sm flex flex-col md:flex-row items-start md:items-center gap-4 justify-between">
@@ -342,176 +360,19 @@
 
     </article>
 <div data-related class="sec"></div>
+    </div>
+  </section>
 </main>
 
-<!-- Footer -->
-
-
-<!-- Scripts -->
-<script>
-    // Load API Key from local storage on startup
-    document.addEventListener('DOMContentLoaded', () => {
-        const savedKey = localStorage.getItem('gemini_api_key');
-        if (savedKey) {
-            document.getElementById('api-key-input').value = savedKey;
-        }
-    });
-
-    function saveApiKey() {
-        const key = document.getElementById('api-key-input').value.trim();
-        localStorage.setItem('gemini_api_key', key);
-        const status = document.getElementById('api-key-status');
-        status.classList.remove('hidden');
-        setTimeout(() => status.classList.add('hidden'), 2000);
-    }
-
-    function toggleAnswers() {
-        const answerKey = document.getElementById('answerKey');
-        const btn = document.getElementById('toggleAnswersBtn');
-        const btnText = btn.querySelector('span');
-
-        if (answerKey.classList.contains('hidden')) {
-            answerKey.classList.remove('hidden');
-            btn.classList.remove('bg-orange-500', 'hover:bg-orange-600');
-            btn.classList.add('bg-slate-600', 'hover:bg-slate-700');
-            btnText.textContent = 'Hide Answer Key';
-        } else {
-            answerKey.classList.add('hidden');
-            btn.classList.remove('bg-slate-600', 'hover:bg-slate-700');
-            btn.classList.add('bg-orange-500', 'hover:bg-orange-600');
-            btnText.textContent = 'Show Answer Key';
-        }
-    }
-
-    // --- Gemini API Integrations ---
-
-    // Utility: Fetch with Exponential Backoff
-    async function fetchWithRetry(url, options, retries = 5) {
-        const delays = [1000, 2000, 4000, 8000, 16000];
-        for (let i = 0; i < retries; i++) {
-            try {
-                const response = await fetch(url, options);
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                return await response.json();
-            } catch (e) {
-                if (i === retries - 1) throw e;
-                await new Promise(res => setTimeout(res, delays[i]));
-            }
-        }
-    }
-
-    // Core API Call Wrapper
-    async function callGemini(prompt, systemInstruction = "") {
-        const apiKey = document.getElementById('api-key-input').value.trim();
-
-        if (!apiKey) {
-            return `<div class="text-red-500 font-semibold p-3 bg-red-50 rounded border border-red-200">
-                        ⚠️ Error: Please enter your Gemini API key in the configuration section above to use this feature.
-                    </div>`;
-        }
-
-        // Using the standard public flash model for external keys
-        const modelName = "gemini-1.5-flash";
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
-
-        const payload = {
-            contents: [{ parts: [{ text: prompt }] }],
-        };
-        if (systemInstruction) {
-            payload.systemInstruction = { parts: [{ text: systemInstruction }] };
-        }
-
-        const options = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        };
-
-        try {
-            const result = await fetchWithRetry(apiUrl, options);
-            return result.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
-        } catch (error) {
-            console.error("Gemini API Error:", error);
-            return `<div class="text-red-500 font-semibold p-3 bg-red-50 rounded border border-red-200">
-                        ❌ Sorry, an error occurred while connecting to the AI. Please verify your API key is correct.
-                    </div>`;
-        }
-    }
-
-    // Feature 1: TL;DR Summary Generator
-    async function generateSummary() {
-        const btn = document.getElementById('btn-summary');
-        const resultDiv = document.getElementById('summary-result');
-        const loadingDiv = document.getElementById('summary-loading');
-
-        btn.disabled = true;
-        btn.classList.add('opacity-50', 'cursor-not-allowed');
-        loadingDiv.classList.remove('hidden');
-        resultDiv.classList.add('hidden');
-
-        // Extract the text of the article to give context to the LLM
-        const articleText = document.querySelector('article').innerText;
-        const prompt = `Summarize the following study guide about Modern Java into 3 concise, highly informative bullet points. Only output the list. Use HTML <ul> and <li> tags for formatting.\n\nText: ${articleText}`;
-
-        const response = await callGemini(prompt, "You are an expert technical writer. Provide concise summaries using valid HTML.");
-
-        resultDiv.innerHTML = response;
-        loadingDiv.classList.add('hidden');
-        resultDiv.classList.remove('hidden');
-        btn.disabled = false;
-        btn.classList.remove('opacity-50', 'cursor-not-allowed');
-    }
-
-    // Feature 2: AI Quiz Tutor
-    async function gradeAnswer() {
-        const btn = document.getElementById('btn-grade');
-        const resultDiv = document.getElementById('grader-result');
-        const loadingDiv = document.getElementById('grader-loading');
-        const selectEl = document.getElementById('quiz-question-select');
-        const questionText = selectEl.options[selectEl.selectedIndex].text;
-        const userAnswer = document.getElementById('quiz-user-answer').value;
-
-        if (!userAnswer.trim()) {
-            // Flash an alert if they try to submit an empty answer
-            const alertDiv = document.createElement('div');
-            alertDiv.className = "text-red-400 text-sm mt-2 font-semibold";
-            alertDiv.innerText = "Please write an answer before evaluating!";
-            btn.parentElement.appendChild(alertDiv);
-            setTimeout(() => alertDiv.remove(), 3000);
-            return;
-        }
-
-        btn.disabled = true;
-        btn.classList.add('opacity-50', 'cursor-not-allowed');
-        loadingDiv.classList.remove('hidden');
-        resultDiv.classList.add('hidden');
-
-        const prompt = `The user is taking a quiz on a blog post about Modern Java.
-        Question: "${questionText}"
-        User's Answer: "${userAnswer}"
-
-        Please evaluate the user's answer. Give a score out of 10, provide brief, encouraging feedback, and correct any misconceptions if they are wrong. Format your response using basic HTML (e.g., <strong>, <p>, <br>). Avoid markdown formatting.`;
-
-        const systemInstruction = "You are a friendly, encouraging, and highly technical Java programming tutor. You grade quiz answers accurately and helpfully.";
-
-        const response = await callGemini(prompt, systemInstruction);
-
-        resultDiv.innerHTML = response;
-        loadingDiv.classList.add('hidden');
-        resultDiv.classList.remove('hidden');
-        btn.disabled = false;
-        btn.classList.remove('opacity-50', 'cursor-not-allowed');
-    }
-</script>
 <footer class="sitefoot">
   <div class="wrap">
-    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug</span>
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug 🇨🇭</span>
     <span><a href="/academy/">Academy</a> &middot; <a href="/">janaka.me</a></span>
   </div>
 </footer>
 
-<script src="/assets/js/includes.js"></script>
-<script src="/assets/js/site-nav.js"></script>
-<script src="/assets/js/related.js"></script>
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+<script src="/assets/js/study.js?v=20260916"></script>
 </body>
 </html>

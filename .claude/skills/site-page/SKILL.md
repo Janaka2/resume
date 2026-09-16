@@ -80,7 +80,8 @@ Read `CLAUDE.md` for the architecture. This skill is the copy-paste template.
 ## Rules
 
 - Root-absolute paths (`/assets/...`, `/partials/...`) on sub-site pages. The hub uses relative paths and its own inline nav; do not add `site-nav.html` to the hub.
-- Never load `assets/css/styles.css` (legacy). Never add a page-local stylesheet; if a style is missing, add it to `subsite.css` built from tokens.
+- Never add a page-local stylesheet; if a style is missing, add it to `subsite.css` built from tokens.
+- Academy content pages also load `/assets/css/study.css` after `subsite.css` and `/assets/js/study.js` after `site-nav.js`, and use `<body class="study">`. The study layer needs one `<h1>` and real `<h2>` sections; it builds the outline, progress and done-toggles itself (see CLAUDE.md).
 - Colours only via tokens: `--bg`, `--bg2`, `--tx`, `--tx2`, `--ln`, `--ac`, `--ok`, `--chip`, `--shadow`, `--r`. Fonts via `--font-head` and inherited body font.
 - Available layout classes: `.sec`, `.wrap`, `.subhero`, `.eyebrow`, `.prose`, `.lede`, `.badges`/`.badge`, `.chips`/`.chip`, `.card`, `.cards2`, `.cta`, `.btn`/`.btn.primary`. Check `theme.css` and `subsite.css` before inventing a class.
 - Exactly one `<h1>`. Headings in order.
@@ -92,7 +93,7 @@ Read `CLAUDE.md` for the architecture. This skill is the copy-paste template.
 ## Checklist before commit
 
 - [ ] pre-paint theme script present, fonts loaded non-blocking, manifest + referrer meta, skip link, `<main id="main">`
-- [ ] theme.css + subsite.css linked, no styles.css
+- [ ] theme.css + subsite.css linked (Academy content pages: study.css + study.js + body.study too)
 - [ ] shared nav include + footer + includes.js + site-nav.js
 - [ ] title, description, canonical, og:*, twitter:card
 - [ ] one H1, no hard-coded colours

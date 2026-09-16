@@ -1,42 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linux CLI Mastery | Janaka Academy</title>
   <meta name="description" content="Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.">
-  <title>Linux CLI Mastery</title>
   <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<header>
-  <div class="container">
-    <nav>
-<a href="index.html">Home</a>
-<a href="top-100-linux-commands.html">Top 100 Linux Commands</a>
-<a href="top-50-debugging-commands.html">Top 50 Debugging</a>
-<a href="log-investigation-techniques.html">Log Investigation</a>
-<a href="troubleshooting-resources.html">Disk / CPU / Memory</a>
-<a href="awk-sed-mastery.html">awk + sed</a>
-<a href="production-one-liners.html">One-Liners</a>
-<a href="file-handling.html">File Handling</a>
-<a href="vi-editor-complete.html">VI Editor</a>
-</nav>
-  </div>
-</header>
-<main class="container">
+  <link rel="alternate" type="application/atom+xml" title="Janaka Premathilaka" href="/feed.xml">
+  <meta property="og:title" content="Linux CLI Mastery | Janaka Academy">
+  <meta property="og:description" content="Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://janaka.me/academy/modules/2026/FSE/">
+  <meta property="og:image" content="https://janaka.me/assets/og/academy.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Linux CLI Mastery | Janaka Academy">
+  <meta name="twitter:description" content="Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/academy.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png?v=1">
 
-<section class="hero">
-  <h1>Linux CLI Mastery for Senior Engineers</h1>
-  <p>This mini-site is organized as separate HTML pages with a parent navigation page, so you can browse each topic quickly and reuse it as a personal reference. The content is practical, production-focused, and oriented toward Linux scripting and backend engineering work. Key pages now use short one-line explanations in table form for faster learning.</p>
-  <p>
-    <span class="badge">Production-friendly</span>
-    <span class="badge">Senior engineer focused</span>
-    <span class="badge">Practical commands</span>
-    <span class="badge">Fast lookup</span>
-  </p>
-<p class="small">Updated to a clean white reading layout with improved spacing, clearer table contrast, and easier long-form study readability.</p>
-</section>
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260916">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
+  <link rel="stylesheet" href="/assets/css/study.css?v=20260916">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body class="study">
+<a class="skip" href="#main">Skip to content</a>
+
+<div data-include="/partials/site-nav.html"></div>
+
+<main id="main">
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/academy/" style="color:inherit;text-decoration:none">&larr; Janaka Academy</a></p>
+      <h1>Linux CLI Mastery for Senior Engineers</h1>
+      <p class="lede">This mini-site is organized as separate HTML pages with a parent navigation page, so you can browse each topic quickly and reuse it as a personal reference. The content is practical, production-focused, and oriented toward Linux scripting and backend engineering work.</p>
+      <div class="badges"><span class="badge">Production-friendly</span> <span class="badge">Senior engineer focused</span> <span class="badge">Practical commands</span> <span class="badge">Fast lookup</span></div>
+      <nav class="modnav" aria-label="Pages in this handbook">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="top-100-linux-commands.html">Top 100 Linux Commands</a>
+        <a href="top-50-debugging-commands.html">Top 50 Debugging</a>
+        <a href="log-investigation-techniques.html">Log Investigation</a>
+        <a href="troubleshooting-resources.html">Disk / CPU / Memory</a>
+        <a href="awk-sed-mastery.html">awk + sed</a>
+        <a href="production-one-liners.html">One-Liners</a>
+        <a href="file-handling.html">File Handling</a>
+        <a href="vi-editor-complete.html">VI Editor</a>
+        <a href="top-100-linux-commands.html">Open page</a>
+        <a href="top-50-debugging-commands.html">Open page</a>
+        <a href="log-investigation-techniques.html">Open page</a>
+        <a href="troubleshooting-resources.html">Open page</a>
+        <a href="awk-sed-mastery.html">Open page</a>
+        <a href="production-one-liners.html">Open page</a>
+        <a href="file-handling.html">Open page</a>
+        <a href="vi-editor-complete.html">Open page</a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+
 
 <section class="card">
   <h2>Browse Sections</h2>
@@ -52,7 +97,20 @@
   </div>
 </section>
 
-  <div class="footer">Built as a practical Linux mastery reference for senior engineers.</div>
+  
+    </div>
+  </section>
 </main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug 🇨🇭</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+<script src="/assets/js/study.js?v=20260916"></script>
 </body>
 </html>

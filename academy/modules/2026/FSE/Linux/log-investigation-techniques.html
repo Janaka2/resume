@@ -1,34 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log Investigation Techniques | Janaka Academy</title>
   <meta name="description" content="Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.">
-  <title>Log Investigation Techniques</title>
   <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/Linux/log-investigation-techniques.html">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="alternate" type="application/atom+xml" title="Janaka Premathilaka" href="/feed.xml">
+  <meta property="og:title" content="Log Investigation Techniques | Janaka Academy">
+  <meta property="og:description" content="Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://janaka.me/academy/modules/2026/FSE/Linux/log-investigation-techniques.html">
+  <meta property="og:image" content="https://janaka.me/assets/og/academy.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Log Investigation Techniques | Janaka Academy">
+  <meta name="twitter:description" content="Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/academy.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png?v=1">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260916">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
+  <link rel="stylesheet" href="/assets/css/study.css?v=20260916">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 </head>
-<body>
-<header>
-  <div class="container">
-    <nav>
-<a href="index.html">Home</a>
-<a href="top-100-linux-commands.html">Top 100 Linux Commands</a>
-<a href="top-50-debugging-commands.html">Top 50 Debugging</a>
-<a href="log-investigation-techniques.html">Log Investigation</a>
-<a href="troubleshooting-resources.html">Disk / CPU / Memory</a>
-<a href="awk-sed-mastery.html">awk + sed</a>
-<a href="production-one-liners.html">One-Liners</a>
-<a href="file-handling.html">File Handling</a>
-<a href="vi-editor-complete.html">VI Editor</a>
-</nav>
-  </div>
-</header>
-<main class="container">
+<body class="study">
+<a class="skip" href="#main">Skip to content</a>
 
-<section class="hero"><h1>Log Investigation Techniques</h1><p>Good log investigation is about narrowing the problem fast: identify the time window, find the failing request, extract the stacktrace, remove noise, then group repeating patterns.</p></section><section class="card"><h2>Recommended Workflow</h2><ol><li>Start with the time window and service name.</li><li>Search for <code>ERROR</code>, <code>Exception</code>, request ID, transaction ID, username or endpoint.</li><li>Use context lines around the match to understand the sequence.</li><li>Summarize duplicate failures to find the main issue.</li><li>Correlate with service restarts, deployments, traffic spikes or database/network events.</li></ol><h2>Command Reference</h2><table><tr><th>Command</th><th>What it does</th><th>Example</th></tr><tr><td><code>grep -n 'ERROR' app.log</code></td><td>Finds error lines and shows their line numbers.</td><td><code>grep -n 'ERROR' app.log</code></td></tr><tr><td><code>grep -n 'Exception' app.log</code></td><td>Finds exception lines with line numbers.</td><td><code>grep -n 'Exception' app.log</code></td></tr><tr><td><code>grep -A 20 -B 5 'NullPointerException' app.log</code></td><td>Shows lines before and after a match for context.</td><td><code>grep -A 20 -B 5 'NullPointerException' app.log</code></td></tr><tr><td><code>tail -f app.log | grep -E 'ERROR|WARN'</code></td><td>Follows logs live and filters serious messages.</td><td><code>tail -f app.log | grep -E 'ERROR|WARN'</code></td></tr><tr><td><code>sed -n '1200,1260p' app.log</code></td><td>Prints a selected line range from a log.</td><td><code>sed -n '1200,1260p' app.log</code></td></tr><tr><td><code>awk '/ERROR|WARN|Exception/' app.log</code></td><td>Prints lines matching multiple patterns.</td><td><code>awk '/ERROR|WARN|Exception/' app.log</code></td></tr><tr><td><code>zgrep -n 'ERROR' app.log.gz</code></td><td>Searches inside compressed logs.</td><td><code>zgrep -n 'ERROR' app.log.gz</code></td></tr><tr><td><code>grep 'requestId=abc123' app.log</code></td><td>Traces one request or correlation ID through the log.</td><td><code>grep 'requestId=abc123' app.log</code></td></tr><tr><td><code>grep '2026-03-08' app.log</code></td><td>Filters lines for a specific date.</td><td><code>grep '2026-03-08' app.log</code></td></tr><tr><td><code>grep 'ERROR' app.log | sort | uniq -c | sort -nr | head</code></td><td>Groups repeated errors to spot the main issue.</td><td><code>grep 'ERROR' app.log | sort | uniq -c | sort -nr | head</code></td></tr></table><h2>What to Look For</h2><ul><li>First error before the cascade of follow-up errors</li><li>Retry loops, timeouts and connection refused messages</li><li>Memory or GC pressure before slow responses</li><li>Restart events before or after the failure window</li><li>Common thread names, request IDs or host names</li></ul></section>
+<div data-include="/partials/site-nav.html"></div>
 
-  <div class="footer">Built as a practical Linux mastery reference for senior engineers.</div>
+<main id="main">
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="index.html" style="color:inherit;text-decoration:none">← Linux CLI Mastery</a></p>
+      <h1>Log Investigation Techniques</h1>
+      <p class="lede">Good log investigation is about narrowing the problem fast: identify the time window, find the failing request, extract the stacktrace, remove noise, then group repeating patterns.</p>
+      <nav class="modnav" aria-label="Pages in this handbook">
+        <a href="index.html">Home</a>
+        <a href="top-100-linux-commands.html">Top 100 Linux Commands</a>
+        <a href="top-50-debugging-commands.html">Top 50 Debugging</a>
+        <a href="log-investigation-techniques.html" aria-current="page">Log Investigation</a>
+        <a href="troubleshooting-resources.html">Disk / CPU / Memory</a>
+        <a href="awk-sed-mastery.html">awk + sed</a>
+        <a href="production-one-liners.html">One-Liners</a>
+        <a href="file-handling.html">File Handling</a>
+        <a href="vi-editor-complete.html">VI Editor</a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+<section class="card"><h2>Recommended Workflow</h2><ol><li>Start with the time window and service name.</li><li>Search for <code>ERROR</code>, <code>Exception</code>, request ID, transaction ID, username or endpoint.</li><li>Use context lines around the match to understand the sequence.</li><li>Summarize duplicate failures to find the main issue.</li><li>Correlate with service restarts, deployments, traffic spikes or database/network events.</li></ol><h2>Command Reference</h2><table><tr><th>Command</th><th>What it does</th><th>Example</th></tr><tr><td><code>grep -n 'ERROR' app.log</code></td><td>Finds error lines and shows their line numbers.</td><td><code>grep -n 'ERROR' app.log</code></td></tr><tr><td><code>grep -n 'Exception' app.log</code></td><td>Finds exception lines with line numbers.</td><td><code>grep -n 'Exception' app.log</code></td></tr><tr><td><code>grep -A 20 -B 5 'NullPointerException' app.log</code></td><td>Shows lines before and after a match for context.</td><td><code>grep -A 20 -B 5 'NullPointerException' app.log</code></td></tr><tr><td><code>tail -f app.log | grep -E 'ERROR|WARN'</code></td><td>Follows logs live and filters serious messages.</td><td><code>tail -f app.log | grep -E 'ERROR|WARN'</code></td></tr><tr><td><code>sed -n '1200,1260p' app.log</code></td><td>Prints a selected line range from a log.</td><td><code>sed -n '1200,1260p' app.log</code></td></tr><tr><td><code>awk '/ERROR|WARN|Exception/' app.log</code></td><td>Prints lines matching multiple patterns.</td><td><code>awk '/ERROR|WARN|Exception/' app.log</code></td></tr><tr><td><code>zgrep -n 'ERROR' app.log.gz</code></td><td>Searches inside compressed logs.</td><td><code>zgrep -n 'ERROR' app.log.gz</code></td></tr><tr><td><code>grep 'requestId=abc123' app.log</code></td><td>Traces one request or correlation ID through the log.</td><td><code>grep 'requestId=abc123' app.log</code></td></tr><tr><td><code>grep '2026-03-08' app.log</code></td><td>Filters lines for a specific date.</td><td><code>grep '2026-03-08' app.log</code></td></tr><tr><td><code>grep 'ERROR' app.log | sort | uniq -c | sort -nr | head</code></td><td>Groups repeated errors to spot the main issue.</td><td><code>grep 'ERROR' app.log | sort | uniq -c | sort -nr | head</code></td></tr></table><h2>What to Look For</h2><ul><li>First error before the cascade of follow-up errors</li><li>Retry loops, timeouts and connection refused messages</li><li>Memory or GC pressure before slow responses</li><li>Restart events before or after the failure window</li><li>Common thread names, request IDs or host names</li></ul></section>
+
+  
+    </div>
+  </section>
 </main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug 🇨🇭</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+<script src="/assets/js/study.js?v=20260916"></script>
 </body>
 </html>
