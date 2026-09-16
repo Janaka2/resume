@@ -106,6 +106,7 @@ HEAD = f'''<!DOCTYPE html>
         <span class="badge">Spring AI 2.0</span>
         <span class="badge">Python SDK 2.2</span>
         <span class="badge">Verified examples</span>
+        <a class="badge" href="/assets/certificates/anthropic-introduction-to-model-context-protocol.pdf" target="_blank" rel="noopener" style="text-decoration:none" title="Certificate of completion, Anthropic, September 2026">Anthropic MCP course completed ↗</a>
       </div>
       <div class="actions">
         <a class="btn primary" href="#why">Start at the beginning</a>
