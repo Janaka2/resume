@@ -335,13 +335,15 @@
 </div>
 
 <!-- ✨ New API Key Modal -->
-<div id="api-key-modal-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-75 z-50 flex items-center justify-center">
+<!-- Shown only when a Study Buddy button is pressed without a key; never on page load. -->
+<div id="api-key-modal-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-75 z-50 flex items-center justify-center" style="display:none" role="dialog" aria-modal="true" aria-labelledby="api-key-modal-title">
     <div class="bg-white p-8 rounded-lg shadow-xl font-hand w-full max-w-md">
-        <h2 class="font-marker text-2xl text-red-600 mb-4">API Key Required</h2>
-        <p class="text-gray-700 mb-4">To use the AI 'Study Buddy' features, you need a Gemini API key. Please paste it below.</p>
+        <h2 id="api-key-modal-title" class="font-marker text-2xl text-red-600 mb-4">API Key Required</h2>
+        <p class="text-gray-700 mb-4">The optional AI 'Study Buddy' buttons call Google's Gemini API with your own key. The notes themselves work without one.</p>
         <p class="text-sm text-gray-500 mb-4">This key will only be stored in your browser's session and will be gone when you close the tab.</p>
         <input type="password" id="api-key-input" class="w-full p-2 border border-gray-300 rounded font-sans" placeholder="Enter your Gemini API key...">
         <button id="api-key-save" class="w-full mt-4 bg-blue-600 text-white font-marker p-2 rounded-lg text-lg hover:bg-blue-700">Save and Start Studying</button>
+        <button id="api-key-cancel" type="button" class="w-full mt-2 bg-transparent text-gray-600 font-marker p-2 rounded-lg text-lg hover:text-gray-900">Not now, just read</button>
     </div>
 </div>
 
@@ -380,6 +382,7 @@
     const apiKeyModalOverlay = document.getElementById('api-key-modal-overlay');
     const apiKeyInput = document.getElementById('api-key-input');
     const apiKeySaveButton = document.getElementById('api-key-save');
+    const apiKeyCancelButton = document.getElementById('api-key-cancel');
 
     const explainButtons = document.querySelectorAll('.btn-explain');
     const summaryButton = document.getElementById('btn-generate-summary');
@@ -457,6 +460,9 @@
             apiKeyInput.placeholder = "Please enter a valid key!";
         }
     });
+    apiKeyCancelButton.addEventListener('click', () => { apiKeyModalOverlay.style.display = 'none'; });
+    apiKeyModalOverlay.addEventListener('click', (e) => { if (e.target === apiKeyModalOverlay) apiKeyModalOverlay.style.display = 'none'; });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && apiKeyModalOverlay.style.display !== 'none') apiKeyModalOverlay.style.display = 'none'; });
 
 
     function getAllStudyText() {
@@ -622,7 +628,8 @@
 
         if (!apiKey) {
             console.error("API Key is missing from session storage.");
-            // Show the API key modal instead of the regular one
+            // Close the "Thinking..." modal and ask for the key instead
+            hideModal();
             apiKeyModalOverlay.style.display = 'flex';
             return Promise.reject(new Error("API Key Missing"));
         }
@@ -984,17 +991,11 @@
         if (activeButton) activeButton.classList.remove('active');
     });
 
-    // ✨ New function to check for API key on load
-    function checkApiKey() {
-        const storedKey = sessionStorage.getItem('geminiApiKey');
-        if (!storedKey) {
-            apiKeyModalOverlay.style.display = 'flex';
-        }
-    }
+    // The key dialog is not shown on load: callGeminiApi() opens it only when a
+    // Study Buddy button is pressed and no key is in sessionStorage.
 
     // --- Initialize App ---
     initFirebase();
-    checkApiKey(); // ✨ Check for API key on page load
 
 </script>
 
