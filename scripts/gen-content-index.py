@@ -27,6 +27,7 @@ OUT = os.path.join(ROOT, "assets", "content-index.json")
 EXPLICIT = [
     ("ai/index.html", "ai"),
     ("products/index.html", "products"),
+    ("academy/production-ready-spring-angular/index.html", "academy"),
 ]
 # Directories: (repo-relative dir, section, recursive)
 DIRS = [

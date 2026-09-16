@@ -37,6 +37,7 @@ EXPLICIT = [
     "ai/",
     "resume/",               # the CV; /cv/ is a redirect stub
     "academy/",
+    "academy/production-ready-spring-angular/",
 ]
 # Directory trees crawled for every *.html (recursively).
 CRAWL_DIRS = ["academy/modules/2026"]

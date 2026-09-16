@@ -1,5 +1,22 @@
 [
  {
+  "url": "/academy/production-ready-spring-angular/index.html",
+  "title": "From CRUD to production: Angular + Spring Boot, served as a seven-course meal",
+  "section": "academy",
+  "description": "AssetCare, a complete Angular 22 + Spring Boot 4.1 reference application built in the open: architecture, PostgreSQL migrations, a production API, the SPA, tests and scans, observability, Helm, K3s…",
+  "tags": [
+   "academy",
+   "crud",
+   "production",
+   "angular",
+   "spring"
+  ],
+  "date": "2026-09-16",
+  "updated": "2026-09-16",
+  "words": 2483,
+  "minutes": 12
+ },
+ {
   "url": "/academy/modules/2026/FSE/spring-ecosystem-and-spring-ai.html",
   "title": "The Spring ecosystem, and what Spring AI can do now",
   "section": "academy",
@@ -113,7 +130,7 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-15",
-  "words": 333,
+  "words": 340,
   "minutes": 2
  },
  {

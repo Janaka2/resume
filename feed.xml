@@ -9,6 +9,15 @@
   <author><name>Janaka Premathilaka</name><uri>https://janaka.me/</uri></author>
   <generator>scripts/gen-feed.py</generator>
   <entry>
+    <title>From CRUD to production: Angular + Spring Boot, served as a seven-course meal</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/production-ready-spring-angular/index.html"/>
+    <id>https://janaka.me/academy/production-ready-spring-angular/index.html</id>
+    <published>2026-09-16T00:00:00Z</published>
+    <updated>2026-09-16T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>AssetCare, a complete Angular 22 + Spring Boot 4.1 reference application built in the open: architecture, PostgreSQL migrations, a production API, the SPA, tests and scans, observability, Helm, K3s…</summary>
+  </entry>
+  <entry>
     <title>The Spring ecosystem, and what Spring AI can do now</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/spring-ecosystem-and-spring-ai.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/spring-ecosystem-and-spring-ai.html</id>
@@ -268,14 +277,5 @@
     <updated>2026-09-16T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>Debugging Playbook — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
-  </entry>
-  <entry>
-    <title>GPT-5.4 vs Gemini: Practical Prompting Differences</title>
-    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/comparison.html"/>
-    <id>https://janaka.me/academy/modules/2026/FSE/promting/comparison.html</id>
-    <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-16T00:00:00Z</updated>
-    <category term="academy" label="Academy"/>
-    <summary>GPT-5.4 vs Gemini: Practical Prompting Differences — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
 </feed>
