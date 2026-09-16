@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From CRUD to production: Angular + Spring Boot, served as a seven-course meal | Janaka Academy</title>
+  <meta name="description" content="AssetCare, a complete Angular 22 + Spring Boot 4.1 reference application built in the open: architecture, PostgreSQL migrations, a production API, the SPA, tests and scans, observability, Helm, K3s on a free OCI machine and CI/CD. Every course says why, what, how, and what proves it.">
+  <link rel="canonical" href="https://janaka.me/academy/production-ready-spring-angular/">
+  <link rel="alternate" type="application/atom+xml" title="Janaka Premathilaka" href="/feed.xml">
+  <meta property="og:title" content="From CRUD to production: Angular + Spring Boot, served as a seven-course meal | Janaka Academy">
+  <meta property="og:description" content="AssetCare, a complete Angular 22 + Spring Boot 4.1 reference application built in the open: architecture, PostgreSQL migrations, a production API, the SPA, tests and scans, observability, Helm, K3s on a free OCI machine and CI/CD. Every course says why, what, how, and what proves it.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://janaka.me/academy/production-ready-spring-angular/">
+  <meta property="og:image" content="https://janaka.me/assets/og/academy.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="From CRUD to production: Angular + Spring Boot, served as a seven-course meal | Janaka Academy">
+  <meta name="twitter:description" content="AssetCare, a complete Angular 22 + Spring Boot 4.1 reference application built in the open: architecture, PostgreSQL migrations, a production API, the SPA, tests and scans, observability, Helm, K3s on a free OCI machine and CI/CD. Every course says why, what, how, and what proves it.">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/academy.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png?v=1">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260916">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
+  <link rel="stylesheet" href="/assets/css/study.css?v=20260916b">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body class="study">
+<a class="skip" href="#main">Skip to content</a>
+
+<div data-include="/partials/site-nav.html"></div>
+
+<main id="main">
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/academy/" style="color:inherit;text-decoration:none">&larr; Janaka Academy</a></p>
+      <h1>From CRUD to production.</h1>
+      <p class="lede">Most tutorials stop where the real work starts. This one starts there. AssetCare is a complete asset-maintenance manager, built in the open with Angular 22, Spring Boot 4.1 on Java 25, PostgreSQL 18, Keycloak, OpenTelemetry, Helm and GitHub Actions, and deployed for free on one Oracle Cloud ARM machine. Every course below says why the piece exists, what was built, how it was built, and what proves it works. Nothing is claimed that was not run; where something was not executed, it says so.</p>
+      <div class="badges">
+        <span class="badge hot">Angular 22 · Spring Boot 4.1 · Java 25</span>
+        <span class="badge">PostgreSQL 18 · Keycloak 26</span>
+        <span class="badge">Helm · K3s · OCI free tier</span>
+        <span class="badge">Verified build, honest report</span>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="#before-we-sit-down">Start at the beginning</a>
+        <a class="btn" href="https://github.com/Janaka2/spring-angular-production-blueprint" target="_blank" rel="noopener">Get the repository ↗</a>
+        <a class="btn" href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/README.md#verification-report" target="_blank" rel="noopener">Verification report ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="before-we-sit-down">
+    <div class="wrap">
+      <p class="eyebrow">Before we sit down</p>
+      <h2>Why a reference application, and why a meal</h2>
+      <div class="prose rel-body">
+<p>A new project loses its first two weeks to the same questions every time. Which Java, which Spring Boot, which Angular. How do we log. How do users log in. How do migrations run. How does it get into a container, into a cluster, behind TLS. How do we know it is up. Every team answers these again, under deadline, and the answers calcify into the architecture for a decade.</p>
+<p>AssetCare answers them once, with reasons, in a repository you can clone: <a href="https://github.com/Janaka2/spring-angular-production-blueprint" target="_blank" rel="noopener">spring-angular-production-blueprint</a>. The domain is deliberately small. People own assets (a car, a boiler, a laptop), assets need maintenance on a schedule, someone has to prove what was done and when. Small enough to hold in your head, rich enough to need every production concern: ownership, roles, concurrent edits, audit, files, money, time.</p>
+<p>It is served as a meal because the order matters. You do not plate the main course before the kitchen is set. Each course ends with something that verifiably works and a commit that says what it added.</p>
+<table><thead><tr><th>Course</th><th>Name</th><th>What arrives at the table</th></tr></thead><tbody><tr><td>1</td><td>Mise en place</td><td>requirements, architecture, version matrix, standards, decisions, environment</td></tr><tr><td>2</td><td>Starter</td><td>the domain in code, PostgreSQL schema with Liquibase</td></tr><tr><td>3</td><td>Soup</td><td>the Spring Boot service: API, security, audit, Problem Details, observability hooks</td></tr><tr><td>4</td><td>Main course</td><td>the Angular application</td></tr><tr><td>5</td><td>Side dishes</td><td>tests at every level, scans, SBOM, load test, backup and restore</td></tr><tr><td>6</td><td>Dessert</td><td>metrics, logs, traces, dashboards, alerts</td></tr><tr><td>7</td><td>Coffee</td><td>images, Helm, K3s on OCI, TLS, CI/CD, runbook</td></tr></tbody></table>
+<div class="callout key"><span class="lbl">Free first, enterprise ready.</span><p>Everything runs on free tiers and open source. Where an enterprise would swap a piece (Oracle for PostgreSQL, a corporate identity provider, a vault, managed Kubernetes), the seam is a documented value, not a rewrite. <code>docs/PRODUCTION-GAPS.md</code> lists every such seam honestly.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="course-1-mise-en-place">
+    <div class="wrap">
+      <p class="eyebrow">Course 1 · Mise en place</p>
+      <h2>Everything in its place before the heat goes on</h2>
+      <div class="prose rel-body">
+<p><b>Why.</b> The expensive mistakes are the ones made before the first line of code: an unverified version, a dependency direction nobody enforces, a security model invented under pressure. Mise en place is writing those down first.</p>
+<p><b>What.</b> A <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/VERSION-MATRIX.md" target="_blank" rel="noopener">version matrix</a> where every version was checked against its official source on the day it was written: Java 25 LTS, Spring Boot 4.1.1, Angular 22.1, PostgreSQL 18.6, Keycloak 26.7, Helm 4.3. An <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/docs/architecture/ARCHITECTURE.md" target="_blank" rel="noopener">architecture document</a> with the context, container, request-trace and deployment diagrams. A <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/docs/architecture/DOMAIN-MODEL.md" target="_blank" rel="noopener">domain model</a>. Eleven <a href="https://github.com/Janaka2/spring-angular-production-blueprint/tree/main/docs/adr" target="_blank" rel="noopener">architecture decision records</a>: why a modular monolith and not microservices, why UUIDs, why archive instead of delete, why optimistic locking, why Keycloak. Coding standards, security principles, and a <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/docs/DEFINITION-OF-DONE.md" target="_blank" rel="noopener">Definition of Done</a> with twenty-four things a developer must be able to do before the project counts as finished.</p>
+<p><b>How.</b> The architecture is clean architecture with the boundary enforced, not described. The domain package may depend on the JDK and the persistence and validation annotations, nothing else; the application layer defines ports; adapters implement them. The rule is an ArchUnit test, so a pull request that imports Spring into the domain fails the build.</p>
+<pre><code class="language-text">adapter/in/web  ─────▶  application (use cases, ports)  ◀─────  adapter/out/persistence
+                                   │
+                                   ▼
+                              domain (entities, rules, exceptions)</code></pre>
+<p><b>Proof.</b> The backend and frontend skeletons compile; the standards are the ones every later course is held to.</p>
+<div class="callout key"><span class="lbl">Decision you will reuse.</span><p>Kafka, Redis and a second service are absent because no requirement needs them. The ADRs say what requirement would change that and where the seam is: an outbox table next to the audit events for Kafka, the cache abstraction already in place for Redis.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="course-2-starter">
+    <div class="wrap">
+      <p class="eyebrow">Course 2 · Starter</p>
+      <h2>The domain in code, and a schema that explains itself</h2>
+      <div class="prose rel-body">
+<p><b>Why.</b> The schema outlives every framework in the stack. Getting it right, with constraints and indexes that carry their reasons, is worth a whole course.</p>
+<p><b>What.</b> Six entities: <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/backend/src/main/java/me/janaka/assetcare/domain/Asset.java" target="_blank" rel="noopener">Asset</a>, Category, MaintenanceItem with recurrence, ServiceRecord, Attachment and AuditEvent. Money is a value object with amount and currency. Every table has <code>created_at</code>, <code>created_by</code>, <code>updated_at</code>, <code>updated_by</code> and a <code>version</code> column for optimistic locking. Archiving is a timestamp, not a delete.</p>
+<p><b>How.</b> <a href="https://github.com/Janaka2/spring-angular-production-blueprint/tree/main/backend/src/main/resources/db/changelog/changes" target="_blank" rel="noopener">Liquibase changelogs in YAML</a>, one file per table, each with a comment that says why the constraint or index exists, and a rollback block. Hibernate runs with <code>ddl-auto: validate</code>, so the schema in Git is the only schema. Reference data (categories) is a CSV change set; demo data is a separate change set that runs only in the <code>dev</code> context.</p>
+<pre><code class="language-yaml">- changeSet:
+    id: 002-asset
+    comment: &gt;
+      Owner index because every list query filters by owner. Partial index on
+      archived_at IS NULL because the common query is &quot;my active assets&quot;.
+    changes: [...]
+    rollback: [...]</code></pre>
+<p><b>Proof.</b> Domain unit tests for the rules (a maintenance item completes into its successor, a currency must be a valid ISO code) run locally. The migration applies to a real PostgreSQL 18 in Testcontainers and a schema test asserts the constraints; that runs in CI, where Docker is available.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="course-3-soup">
+    <div class="wrap">
+      <p class="eyebrow">Course 3 · Soup</p>
+      <h2>The service: an API that behaves the same on its worst day as on its best</h2>
+      <div class="prose rel-body">
+<p><b>Why.</b> Anyone can return 200 on the happy path. Production is about the other paths: two people editing the same record, a retried request after a timeout, a token from the wrong audience, an error a client can act on.</p>
+<p><b>What.</b> A REST API under <code>/api/v1</code>: assets with pagination, filtering, sorting and search; maintenance planning and completion; service history; attachments; categories; a dashboard. Keycloak as the identity provider with three roles: USER, ADMIN, AUDITOR. Every error is an RFC 9457 Problem Details document with a stable type URI. Every write produces an audit event in the same transaction, carrying the request id and trace id.</p>
+<p><b>How.</b> Three patterns carry most of the weight.</p>
+<ul><li><b>Optimistic locking through HTTP.</b> Every read returns an <code>ETag</code> with the entity version. Every update must send <code>If-Match</code>; without it the answer is 428, with a stale one it is 409 with a Problem Details body that names who changed the record and when. The <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/backend/src/main/java/me/janaka/assetcare/adapter/in/web/AssetController.java" target="_blank" rel="noopener">controller</a> does the HTTP part; the <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/backend/src/main/java/me/janaka/assetcare/application/AssetService.java" target="_blank" rel="noopener">use case</a> does the rule.</li><li><b>Idempotency keys.</b> A create with an <code>Idempotency-Key</code> header is stored with its response; the same key returns the same response instead of a duplicate asset. Retries become safe.</li><li><b>Roles as data, not as <code>if</code>s.</b> An <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/backend/src/main/java/me/janaka/assetcare/application/AuthorizationPolicy.java" target="_blank" rel="noopener">authorization policy</a> in the application layer decides what a user may do to an asset. The web layer never reasons about roles.</li></ul>
+<pre><code class="language-http">PUT /api/v1/assets/7c9e...  HTTP/1.1
+If-Match: &quot;3&quot;
+
+HTTP/1.1 409 Conflict
+Content-Type: application/problem+json
+{ &quot;type&quot;: &quot;https://assetcare.janaka.me/problems/stale-version&quot;, &quot;title&quot;: &quot;The asset was changed by someone else&quot;,
+  &quot;status&quot;: 409, &quot;changedBy&quot;: &quot;bob&quot;, &quot;changedAt&quot;: &quot;2026-09-16T09:12:44Z&quot;, &quot;currentVersion&quot;: 4 }</code></pre>
+<p><b>Proof.</b> Unit tests for the use cases against in-memory fakes; the ArchUnit suite; and an <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/backend/src/test/java/me/janaka/assetcare/api/AssetApiIT.java" target="_blank" rel="noopener">integration test</a> that walks the whole workflow, from create to conflict to archive to audit history, with real JWTs against real PostgreSQL. The integration tests run in CI; the unit and architecture tests ran locally (21 tests).</p>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="course-4-main-course">
+    <div class="wrap">
+      <p class="eyebrow">Course 4 · Main course</p>
+      <h2>The Angular application people actually use</h2>
+      <div class="prose rel-body">
+<p><b>Why.</b> The frontend is where every backend decision becomes visible. A 409 is only useful if the screen explains it. A role is only real if the button is not there.</p>
+<p><b>What.</b> An Angular 22 standalone application with Angular Material: login through Keycloak with PKCE, a dashboard, an asset list with search, filters, sorting and pagination, create and edit forms with validation, an asset detail with maintenance planning, service history, attachments and audit history. Loading, empty, error and forbidden states everywhere. Keyboard and screen-reader friendly.</p>
+<p><b>How.</b> Signals for state, typed reactive forms, an interceptor that attaches the token and one that turns Problem Details into a typed error. The <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/frontend/src/app/core/api/assets.api.ts" target="_blank" rel="noopener">API client</a> returns the body and the ETag together, so the <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/frontend/src/app/features/assets/asset-form.ts" target="_blank" rel="noopener">edit form</a> can send <code>If-Match</code> and show the conflict dialog with "changed by bob two minutes ago, reload?". Configuration is loaded at runtime from <code>config.json</code>, so the same build runs in every environment.</p>
+<p><b>Proof.</b> The build (548 kB initial, under budget), lint and ten unit tests ran locally. A <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/frontend/e2e/assetcare.spec.ts" target="_blank" rel="noopener">Playwright flow</a> logs in, creates an asset, plans and completes maintenance, and provokes a conflict from a second browser session; it runs in CI against the real stack.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="course-5-side-dishes">
+    <div class="wrap">
+      <p class="eyebrow">Course 5 · Side dishes</p>
+      <h2>The things nobody sees until they are missing</h2>
+      <div class="prose rel-body">
+<p><b>Why.</b> Quality that is not automated decays. Security that is not scanned is assumed. A backup that was never restored is a hope.</p>
+<p><b>What.</b> Testcontainers for integration tests, ArchUnit for the architecture, Playwright for the flow, k6 with SLO thresholds for load, CodeQL and Trivy and dependency review for security, a CycloneDX SBOM for every build, gitleaks over the history, and tested <a href="https://github.com/Janaka2/spring-angular-production-blueprint/tree/main/scripts" target="_blank" rel="noopener">backup and restore scripts</a>.</p>
+<p><b>How.</b> The <a href="https://github.com/Janaka2/spring-angular-production-blueprint/tree/main/performance/k6" target="_blank" rel="noopener">k6 scripts</a> obtain a real token and fail the run when the 95th percentile exceeds the SLO. The restore script restores into a side database and swaps it in, so a bad dump never leaves you with nothing. Rate limiting is at two layers: a filter in the API and a Traefik middleware at the edge. Resilience is honest: the service has one downstream, its database, so there is no circuit breaker to show; the document says where one would go if a second downstream appeared.</p>
+<p><b>Proof.</b> The CI pipeline runs all of it, including a backup-wipe-restore drill that compares row counts. Locally, without Docker, the scans and the drill were not executed; the report says so.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="course-6-dessert">
+    <div class="wrap">
+      <p class="eyebrow">Course 6 · Dessert</p>
+      <h2>Seeing what it does: metrics, logs and traces that agree with each other</h2>
+      <div class="prose rel-body">
+<p><b>Why.</b> At three in the morning the question is not "is it up" but "which request, for whom, failed where". Three signals that share an id answer that in one search.</p>
+<p><b>What.</b> Micrometer metrics to Prometheus, structured JSON logs to Loki, OpenTelemetry traces to Tempo, one collector in between, and a Grafana dashboard that lives in Git with twenty-two panels: request rate, error rate, latency percentiles, JVM, database pool, business counters. Alert rules with a sentence each on why they exist.</p>
+<p><b>How.</b> Every request gets an <code>X-Request-Id</code> (yours or a new one) and a trace id; both go into the MDC so every log line carries them, and the same ids appear in the audit events. The <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/docker-compose.observability.yml" target="_blank" rel="noopener">compose file</a> starts the stack locally; on Kubernetes the same configuration is <a href="https://github.com/Janaka2/spring-angular-production-blueprint/tree/main/deploy/helm/observability" target="_blank" rel="noopener">values for the upstream charts</a>.</p>
+<p><b>Proof.</b> The configuration files are validated in CI. Dashboards showing real traffic require a running stack; on the author's machine there was no Docker daemon, so that is documented as not executed rather than shown with a fake screenshot.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="course-7-coffee">
+    <div class="wrap">
+      <p class="eyebrow">Course 7 · Coffee</p>
+      <h2>Into a container, into a cluster, behind a certificate, every day</h2>
+      <div class="prose rel-body">
+<p><b>Why.</b> A deployment that lives in one person's shell history is not a deployment. It has to be a file, a command and a rollback.</p>
+<p><b>What.</b> Two <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/backend/Dockerfile" target="_blank" rel="noopener">multi-arch, non-root images</a>: the API on a JRE with container-aware heap and graceful shutdown, the SPA on unprivileged nginx with a Content-Security-Policy and a <code>config.json</code> rendered from the environment. A <a href="https://github.com/Janaka2/spring-angular-production-blueprint/tree/main/deploy/helm/assetcare" target="_blank" rel="noopener">Helm chart</a> with probes, resource limits, rolling updates that never drop below capacity, Traefik ingress, cert-manager TLS, a nightly backup CronJob, optional autoscaling, and switches for an external database, identity provider and object storage. Terraform for the <a href="https://github.com/Janaka2/spring-angular-production-blueprint/tree/main/infra/oci" target="_blank" rel="noopener">OCI Always Free VM</a>, an installer for K3s, and three workflows: CI, security, release.</p>
+<p><b>How.</b> The chart's defaults are the free deployment; every enterprise substitution is a value. The release workflow builds for amd64 and arm64, scans the pushed image, signs it with cosign and attaches provenance. The <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/docs/operations/RUNBOOK.md" target="_blank" rel="noopener">runbook</a> is written for the person on call: symptom, check, action, confirmation. The <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/docs/operations/OCI-FREE-TIER.md" target="_blank" rel="noopener">OCI guide</a> says what each step costs beyond the free tier, which is nothing until you exceed 4 cores, 24 GB, 200 GB of disk or 10 TB of traffic.</p>
+<pre><code class="language-bash">helm upgrade --install assetcare deploy/helm/assetcare -n assetcare --create-namespace \
+  --set global.host=assetcare.example.com --set image.tag=1.0.0 \
+  --set api.existingSecret=assetcare-secrets --wait
+scripts/smoke-test.sh https://assetcare.example.com/api</code></pre>
+<p><b>Proof.</b> <code>helm lint</code> and <code>helm template</code> pass for the free and the enterprise value sets, executed locally. Image builds, Trivy and the config render check run in CI. The OCI installation is documented step by step with a verification per step and was not executed by the author's build environment.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="closing-the-kitchen">
+    <div class="wrap">
+      <p class="eyebrow">Closing the kitchen</p>
+      <h2>What you can do now, and what an enterprise would change</h2>
+      <div class="prose rel-body">
+<p>The <a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/docs/DEFINITION-OF-DONE.md" target="_blank" rel="noopener">Definition of Done</a> lists twenty-four capabilities, from "clone and run in ten minutes" to "restore last night's backup" to "explain why the architecture looks like this". The README's verification report marks each check PASS with a date, or NOT EXECUTED with the reason. That honesty is the point: a reference you cannot trust is worse than none.</p>
+<table><thead><tr><th>The reference uses</th><th>An enterprise would use</th><th>Where the seam is</th></tr></thead><tbody><tr><td>PostgreSQL in the cluster</td><td>managed PostgreSQL or Oracle</td><td><code>postgres.enabled=false</code>, <code>docs/architecture/ORACLE-MIGRATION.md</code></td></tr><tr><td>Keycloak in the cluster</td><td>corporate Keycloak, Entra ID, Okta</td><td><code>externalKeycloak.issuer</code>; roles claim mapping in one class</td></tr><tr><td>MinIO</td><td>OCI Object Storage, S3</td><td><code>externalObjectStorage.*</code></td></tr><tr><td>chart-created Secret</td><td>vault with External Secrets Operator</td><td><code>api.existingSecret</code></td></tr><tr><td>one K3s node</td><td>managed Kubernetes, several nodes</td><td><code>api.autoscaling.enabled=true</code></td></tr><tr><td>Caffeine cache</td><td>Redis, when a second instance needs the same cache</td><td>the Spring cache abstraction already in place</td></tr><tr><td>audit table</td><td>Kafka, when another system must consume events</td><td>an outbox next to <code>audit_event</code></td></tr><tr><td><code>helm upgrade</code> from a laptop</td><td>Argo CD</td><td>point it at the chart directory</td></tr></tbody></table>
+<p>Clone it. Run <code>make doctor</code>, <code>docker compose up -d --wait</code>, <code>make backend</code>, <code>make frontend</code>, log in as <code>alice</code>. Then read one ADR a day and change the thing you disagree with. The kitchen is yours.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="next">
+    <div class="wrap">
+      <p class="eyebrow">Reference</p>
+      <h2>Where to go next.</h2>
+      <div class="prose rel-body">
+<ul>
+  <li><a href="https://github.com/Janaka2/spring-angular-production-blueprint" target="_blank" rel="noopener">The repository</a>: README with the run, test and deploy commands and the verification report.</li>
+  <li><a href="https://github.com/Janaka2/spring-angular-production-blueprint/tree/main/docs/adr" target="_blank" rel="noopener">The architecture decision records</a>, one per constraint you will meet.</li>
+  <li><a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/docs/PRODUCTION-GAPS.md" target="_blank" rel="noopener">Production gaps</a>: what the free reference does not do, and what an enterprise replaces.</li>
+  <li>On this site: <a href="/academy/modules/2026/FSE/spring-ecosystem-and-spring-ai.html">the Spring ecosystem and Spring AI</a>, <a href="/academy/modules/2026/FSE/java-evolution-8-to-27.html">Java release by release</a>, and <a href="/academy/modules/2026/FSE/mcp-end-to-end.html">MCP end to end</a>.</li>
+</ul>
+<div class="cta" style="margin-top:22px">
+  <div>
+    <h3>Cook it yourself.</h3>
+    <p>Clone the repository, run the four commands, log in as alice, and change the first decision you disagree with. The ADR tells you what breaks.</p>
+  </div>
+  <div class="actions" style="margin-top:0">
+    <a class="btn primary" href="https://github.com/Janaka2/spring-angular-production-blueprint" target="_blank" rel="noopener">Clone AssetCare ↗</a>
+    <a class="btn" href="/academy/">Back to the Academy</a>
+  </div>
+</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug 🇨🇭</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/ai/">AI</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+<script src="/assets/js/study.js?v=20260916"></script>
+</body>
+</html>
