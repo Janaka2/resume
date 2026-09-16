@@ -1,0 +1,30 @@
+<!--
+  The path from experiment to product: Lab → AI → Products.
+  Shared by /lab/, /ai/ and /products/ so the three read as one story.
+
+  Loaded with assets/js/includes.js:
+      <div data-include="/partials/ai-trail.html"></div>
+  assets/js/site-nav.js marks the panel for the current section .active
+  (via data-nav, the same mechanism as site-nav.html) — do not hard-code it.
+  Styling: .trail in assets/css/subsite.css.
+-->
+<nav class="trail" aria-label="From experiment to product">
+  <a href="/lab/" data-nav="lab">
+    <span class="tstep"><span>01 · Explore</span><span class="here">You are here</span></span>
+    <h3>Lab</h3>
+    <p>Runnable experiments with notes: RAG over local documents, a multi-tool research agent, LLM study notes. Each one exists to answer a question.</p>
+    <span class="go">Open the Lab →</span>
+  </a>
+  <a href="/ai/" data-nav="ai">
+    <span class="tstep"><span>02 · Practice</span><span class="here">You are here</span></span>
+    <h3>AI &amp; Agents</h3>
+    <p>What the experiments taught, written down: an MCP agent blueprint, production patterns for RAG, guardrails and evals, and how AI sits in my own workflow.</p>
+    <span class="go">Read the practice →</span>
+  </a>
+  <a href="/products/" data-nav="products">
+    <span class="tstep"><span>03 · Ship</span><span class="here">You are here</span></span>
+    <h3>Products</h3>
+    <p>Five live, privacy-first apps built solo with AI in the loop and every line reviewed by hand. Finished, in use, open to acquisition or licensing.</p>
+    <span class="go">See the products →</span>
+  </a>
+</nav>

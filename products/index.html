@@ -54,7 +54,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="/assets/css/theme.css?v=20260910">
-  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260910">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916">
   <link rel="manifest" href="/assets/site.webmanifest">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 </head>
@@ -74,6 +74,7 @@
         <span class="badge">5 live products</span>
         <span class="badge">No servers, no accounts</span>
         <span class="badge">Banking-grade engineering</span>
+        <a class="badge" href="/ai/#shipped">Built with AI in the loop →</a>
         <span class="badge hot">Acquisition or licence</span>
       </div>
       <div class="actions">
@@ -397,9 +398,18 @@
         <div class="card">
           <p class="zlabel">How they were built</p>
           <p>Each product was specified, designed, built, written and deployed by one person, with large language models used deliberately at each step and every line reviewed by hand. The same discipline I bring to regulated banking systems applies here: move fast with the model, then hold the result to the standard the domain demands.</p>
-          <p style="margin-top:10px"><a href="/resume/">About the engineer →</a></p>
+          <p style="margin-top:10px"><a href="/ai/#shipped">How I work with AI →</a> &nbsp;·&nbsp; <a href="/resume/">About the engineer →</a></p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="sec" id="practice">
+    <div class="wrap">
+      <p class="eyebrow">From experiment to product</p>
+      <h2>Where these products come from.</h2>
+      <p class="lede">Nothing here was a first attempt. The patterns were tried in the Lab, written down on the AI page, and only then trusted with a product.</p>
+      <div data-include="/partials/ai-trail.html"></div>
     </div>
   </section>
 
@@ -450,6 +460,10 @@
           <p>None. Each app runs entirely in the browser and stores records on the device. Loop and BabyLoop can optionally sync to the user's own Google Drive; that uses an OAuth client you register, so even then no data passes through anyone else's servers.</p>
         </details>
         <details>
+          <summary>How much of this was built with AI?</summary>
+          <p>All of it, and none of it unreviewed. Scope, code, copy and visual identity were produced with large language models in the loop, in tight generate-and-review cycles, and every line was read and understood before release. The workflow is described on the <a href="/ai/#shipped">AI page</a>; the experiments it grew out of are in the <a href="/lab/">Lab</a>.</p>
+        </details>
+        <details>
           <summary>Can I buy more than one?</summary>
           <p>Yes. Loop, BabyLoop and LeftHere share an architecture and pair naturally; nüchtern and Daily Momentum suit a wellness or productivity portfolio. Ask about a combined handover.</p>
         </details>
@@ -472,7 +486,7 @@
 <footer class="sitefoot">
   <div class="wrap">
     <span>&copy; <span id="year"></span> Janaka Premathilaka</span>
-    <span><a href="/products/">Products</a> &middot; <a href="/">janaka.me</a></span>
+    <span><a href="/lab/">Lab</a> &middot; <a href="/ai/">AI</a> &middot; <a href="/">janaka.me</a></span>
   </div>
 </footer>
 

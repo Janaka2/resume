@@ -12,7 +12,7 @@
    "spring"
   ],
   "date": "2026-09-15",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 1954,
   "minutes": 9
  },
@@ -29,7 +29,7 @@
    "mmr"
   ],
   "date": "2026-09-15",
-  "updated": "2026-08-29",
+  "updated": "2026-09-15",
   "words": 1871,
   "minutes": 9
  },
@@ -47,7 +47,7 @@
   ],
   "date": "2026-09-10",
   "updated": "2026-09-15",
-  "words": 1786,
+  "words": 1901,
   "minutes": 9
  },
  {
@@ -139,7 +139,7 @@
   "url": "/ai/index.html",
   "title": "AI Agents in Regulated Systems",
   "section": "ai",
-  "description": "Agents that are readable, reliable and worth shipping. Production patterns for LLM integration, RAG, MCP and evals from banking-grade Java engineering.",
+  "description": "Agents that are readable, reliable and worth shipping. Production patterns for LLM, RAG, MCP and evals, and five live products built with AI in the loop.",
   "tags": [
    "ai",
    "agents",
@@ -148,8 +148,8 @@
   ],
   "date": "2026-08-29",
   "updated": "2026-09-10",
-  "words": 502,
-  "minutes": 3
+  "words": 868,
+  "minutes": 4
  },
  {
   "url": "/academy/modules/2026/FSE/virtual_threads_java_21_academy_page.html",

@@ -389,3 +389,51 @@ html.search-open { overflow: hidden; }
 .lightbox img { display: block; width: 100%; max-height: 82vh; object-fit: contain; background: #FAF8F5; }
 .lightbox-cap { padding: 10px 16px 14px; font-family: var(--font-mono); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--tx2); }
 .lightbox-close { position: absolute; top: 10px; right: 10px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--ln); background: var(--bg2); color: var(--tx); cursor: pointer; font-size: .9rem; }
+
+/* ---- lab → ai → products trail (partials/ai-trail.html) ----
+   Three linked panels; site-nav.js adds .active to the current section. */
+.trail {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 22px;
+  border: 1px solid var(--ln); border-radius: var(--r); background: var(--bg2);
+  box-shadow: var(--shadow); overflow: hidden;
+}
+.trail a {
+  position: relative; display: flex; flex-direction: column; gap: 8px;
+  padding: 22px 22px 20px; text-decoration: none; color: inherit;
+  border-left: 1px solid var(--ln); transition: background .15s ease;
+}
+.trail a:first-child { border-left: none; }
+.trail a:hover { background: color-mix(in srgb, var(--ac) 5%, var(--bg2)); }
+.trail a.active { background: color-mix(in srgb, var(--ac) 8%, var(--bg2)); }
+.trail a.active::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--ac); }
+.trail .tstep {
+  display: flex; justify-content: space-between; gap: 8px;
+  font-family: var(--font-mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ac);
+}
+.trail .here { display: none; color: var(--tx2); letter-spacing: .1em; }
+.trail a.active .here { display: inline; }
+.trail h3 { font-family: var(--font-head); font-weight: 700; font-size: 1.08rem; letter-spacing: -.01em; margin: 2px 0 0; }
+.trail p { color: var(--tx2); font-size: .92rem; }
+.trail .go { margin-top: auto; padding-top: 8px; font-family: var(--font-mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ac); }
+.trail a.active .go { visibility: hidden; }
+@media (max-width: 760px) {
+  .trail { grid-template-columns: 1fr; }
+  .trail a { border-left: none; border-top: 1px solid var(--ln); }
+  .trail a:first-child { border-top: none; }
+  .trail a.active::after { width: 3px; height: auto; bottom: 0; right: auto; }
+}
+
+/* ---- /ai/ : the five products shipped with AI in the loop ---- */
+.ship { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-top: 22px; }
+.ship a { display: flex; flex-direction: column; gap: 8px; padding: 14px; text-decoration: none; color: inherit; }
+.ship picture, .ship img { display: block; width: 100%; height: auto; }
+.ship img { aspect-ratio: 360 / 900; object-fit: cover; object-position: top; border-radius: 18px; border: 1px solid var(--ln); background: var(--bg2); transition: transform .15s ease; }
+.ship a:hover img { transform: translateY(-2px); }
+.ship h3 { font-family: var(--font-head); font-weight: 700; font-size: 1rem; margin: 4px 0 0; }
+.ship .pdom { margin-top: 0; }
+.ship p { color: var(--tx2); font-size: .88rem; }
+.ship .go { margin-top: auto; padding-top: 6px; font-family: var(--font-mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ac); }
+
+/* a badge that is a link (products hero → /ai/) */
+a.badge { text-decoration: none; }
+a.badge:hover { border-color: var(--ac); color: var(--ac); }
