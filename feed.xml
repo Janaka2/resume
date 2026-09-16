@@ -5,15 +5,33 @@
   <link rel="alternate" type="text/html" href="https://janaka.me/"/>
   <link rel="self" type="application/atom+xml" href="https://janaka.me/feed.xml"/>
   <id>https://janaka.me/</id>
-  <updated>2026-09-15T00:00:00Z</updated>
+  <updated>2026-09-16T00:00:00Z</updated>
   <author><name>Janaka Premathilaka</name><uri>https://janaka.me/</uri></author>
   <generator>scripts/gen-feed.py</generator>
+  <entry>
+    <title>The Spring ecosystem, and what Spring AI can do now</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/spring-ecosystem-and-spring-ai.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/spring-ecosystem-and-spring-ai.html</id>
+    <published>2026-09-16T00:00:00Z</published>
+    <updated>2026-09-16T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>Spring Boot from 1.0 to 4.x in working examples, then a hands-on tour of Spring AI 2.0: ChatClient, structured output, tools, memory, RAG, MCP, evaluation and agent patterns.</summary>
+  </entry>
+  <entry>
+    <title>Java, release by release: 8 to 27</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/java-evolution-8-to-27.html"/>
+    <id>https://janaka.me/academy/modules/2026/FSE/java-evolution-8-to-27.html</id>
+    <published>2026-09-16T00:00:00Z</published>
+    <updated>2026-09-16T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>Every Java release from 8 (2014) to 27 (September 2026): the features that mattered, why they mattered, and a working example for each, from lambdas to post-quantum TLS.</summary>
+  </entry>
   <entry>
     <title>Dead-letter topics in Spring Kafka: retries and replay</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/blog/posts/spring-kafka-deadletter.html"/>
     <id>https://janaka.me/blog/posts/spring-kafka-deadletter.html</id>
     <published>2026-09-15T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="blog" label="Blog"/>
     <summary>How to handle poison pills in Spring Kafka with DefaultErrorHandler, @RetryableTopic, DeadLetterPublishingRecoverer and a governed replay path.</summary>
   </entry>
@@ -22,7 +40,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/blog/posts/rag-faiss-patterns.html"/>
     <id>https://janaka.me/blog/posts/rag-faiss-patterns.html</id>
     <published>2026-09-15T00:00:00Z</published>
-    <updated>2026-08-29T00:00:00Z</updated>
+    <updated>2026-09-15T00:00:00Z</updated>
     <category term="blog" label="Blog"/>
     <summary>Why naive top-k retrieval fails, how to chunk and index with FAISS, and how MMR and cross-encoder re-ranking fix it for a regulated bank.</summary>
   </entry>
@@ -259,23 +277,5 @@
     <updated>2026-09-15T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>Cheat Sheet — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
-  </entry>
-  <entry>
-    <title>Agent Prompting</title>
-    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/agents.html"/>
-    <id>https://janaka.me/academy/modules/2026/FSE/promting/agents.html</id>
-    <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-15T00:00:00Z</updated>
-    <category term="academy" label="Academy"/>
-    <summary>Agent Prompting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
-  </entry>
-  <entry>
-    <title>Production One-Liners</title>
-    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/production-one-liners.html"/>
-    <id>https://janaka.me/academy/modules/2026/FSE/production-one-liners.html</id>
-    <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-15T00:00:00Z</updated>
-    <category term="academy" label="Academy"/>
-    <summary>Production One-Liners — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
 </feed>

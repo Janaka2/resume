@@ -437,3 +437,40 @@ html.search-open { overflow: hidden; }
 /* a badge that is a link (products hero → /ai/) */
 a.badge { text-decoration: none; }
 a.badge:hover { border-color: var(--ac); color: var(--ac); }
+
+/* ---- academy: release-by-release guides (Java 8→27, Spring + Spring AI) ---- */
+.tablewrap { overflow-x: auto; }
+.reltable { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.reltable th, .reltable td { text-align: left; padding: 11px 16px; border-bottom: 1px solid var(--ln); vertical-align: top; }
+.reltable th { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--tx2); font-weight: 500; }
+.reltable tbody tr:last-child td { border-bottom: none; }
+.reltable td:first-child { white-space: nowrap; font-weight: 600; }
+.reltable td:first-child a { color: var(--ac); text-decoration: none; }
+.reltable td:first-child a:hover { text-decoration: underline; }
+.reltable td:nth-child(2) { white-space: nowrap; }
+.reltable td:nth-child(2), .reltable td:nth-child(3) { color: var(--tx2); }
+.reltable td:nth-child(3) { min-width: 9ch; }
+.relnav { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.relnav a {
+  font-family: var(--font-mono); font-size: .72rem; letter-spacing: .06em; text-decoration: none;
+  color: var(--tx2); border: 1px solid var(--ln); border-radius: 999px; padding: 4px 10px; background: var(--bg2);
+}
+.relnav a:hover { color: var(--ac); border-color: var(--ac); }
+.relnav a.lts { color: var(--ac); border-color: color-mix(in srgb, var(--ac) 40%, var(--ln)); font-weight: 500; }
+.rel { padding-top: 56px; }
+.rel-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px; }
+.rel-head h2 { margin-bottom: 0; }
+.rel-head .when { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--tx2); }
+.rel-head .badge { padding: 3px 9px; font-size: .66rem; }
+.rel-head .totop { margin-left: auto; font-family: var(--font-mono); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--tx2); text-decoration: none; }
+.rel-head .totop:hover { color: var(--ac); }
+.rel-title { margin-top: 8px; font-family: var(--font-head); font-weight: 600; font-size: 1.12rem; letter-spacing: -.01em; color: var(--tx); }
+.rel .chips { margin-top: 14px; }
+.rel .rel-body { max-width: none; margin-top: 8px; }
+.rel .rel-body > p { max-width: 76ch; }
+.rel .rel-body pre { max-width: 960px; }
+.rel .rel-body .aside-note { max-width: 76ch; }
+.runline { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 10px; }
+.runline > span { font-family: var(--font-mono); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ac); }
+.runline code { font-size: .82rem; }
+.card .runline { margin-top: 8px; }

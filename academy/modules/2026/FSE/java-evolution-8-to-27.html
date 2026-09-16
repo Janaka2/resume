@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Java, release by release: 8 to 27 | Janaka Academy</title>
+  <meta name="description" content="Every Java release from 8 (2014) to 27 (September 2026): the features that mattered, why they mattered, and a working example for each, from lambdas to post-quantum TLS.">
+  <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/java-evolution-8-to-27.html">
+  <link rel="alternate" type="application/atom+xml" title="Janaka Premathilaka" href="/feed.xml">
+  <meta property="og:title" content="Java, release by release: 8 to 27 | Janaka Academy">
+  <meta property="og:description" content="Every Java release from 8 (2014) to 27 (September 2026): the features that mattered, why they mattered, and a working example for each, from lambdas to post-quantum TLS.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://janaka.me/academy/modules/2026/FSE/java-evolution-8-to-27.html">
+  <meta property="og:image" content="https://janaka.me/assets/og/academy.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Java, release by release: 8 to 27 | Janaka Academy">
+  <meta name="twitter:description" content="Every Java release from 8 (2014) to 27 (September 2026): the features that mattered, why they mattered, and a working example for each, from lambdas to post-quantum TLS.">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/academy.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png?v=1">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260916">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div data-include="/partials/site-nav.html"></div>
+
+<main id="main">
+
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/academy/" style="color:inherit;text-decoration:none">&larr; Janaka Academy</a></p>
+      <h1>Java, release by release: 8 to 27.</h1>
+      <p class="lede">Twenty releases in twelve years, from lambdas to post-quantum TLS. For each one: what changed, why it mattered, and a program you can run. Written for engineers who know Java and want the whole arc in one sitting.</p>
+      <div class="badges">
+        <span class="badge hot">Java 27 · 15 Sep 2026</span>
+        <span class="badge">20 releases</span>
+        <span class="badge">5 LTS</span>
+        <span class="badge">Every example runs</span>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="#timeline">See the timeline</a>
+        <a class="btn" href="#run">How to run the examples</a>
+        <a class="btn" href="#java-27">Jump to Java 27</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="timeline">
+    <div class="wrap">
+      <p class="eyebrow">Timeline</p>
+      <h2>Twelve years in one table.</h2>
+      <p class="lede">Since Java 10 a release ships every March and September; an LTS every two years. Each version below links to its own section.</p>
+      <div class="tablewrap card" style="margin-top:18px;padding:0">
+        <table class="reltable">
+          <thead><tr><th>Version</th><th>GA</th><th>Support</th><th>What it is remembered for</th></tr></thead>
+          <tbody>
+            <tr><td><a href="#java-8">Java 8</a></td><td>March 2014</td><td><b>LTS</b></td><td>The language learns functions.</td></tr>
+            <tr><td><a href="#java-9">Java 9</a></td><td>September 2017</td><td>6 months</td><td>Modules, jshell and a tidier standard library.</td></tr>
+            <tr><td><a href="#java-10">Java 10</a></td><td>March 2018</td><td>6 months</td><td>var, and the six-month cadence begins.</td></tr>
+            <tr><td><a href="#java-11">Java 11</a></td><td>September 2018</td><td><b>LTS</b></td><td>The first LTS of the new era.</td></tr>
+            <tr><td><a href="#java-12">Java 12</a></td><td>March 2019</td><td>6 months</td><td>Switch expressions arrive as a preview.</td></tr>
+            <tr><td><a href="#java-13">Java 13</a></td><td>September 2019</td><td>6 months</td><td>Text blocks, and yield in switch.</td></tr>
+            <tr><td><a href="#java-14">Java 14</a></td><td>March 2020</td><td>6 months</td><td>Switch expressions final, helpful NullPointerExceptions.</td></tr>
+            <tr><td><a href="#java-15">Java 15</a></td><td>September 2020</td><td>6 months</td><td>Text blocks final, sealed classes previewed, ZGC production-ready.</td></tr>
+            <tr><td><a href="#java-16">Java 16</a></td><td>March 2021</td><td>6 months</td><td>Records and instanceof patterns are final.</td></tr>
+            <tr><td><a href="#java-17">Java 17</a></td><td>September 2021</td><td><b>LTS</b></td><td>Sealed classes final: the LTS that made pattern matching worthwhile.</td></tr>
+            <tr><td><a href="#java-18">Java 18</a></td><td>March 2022</td><td>6 months</td><td>UTF-8 everywhere, and a web server in the JDK.</td></tr>
+            <tr><td><a href="#java-19">Java 19</a></td><td>September 2022</td><td>6 months</td><td>Virtual threads appear.</td></tr>
+            <tr><td><a href="#java-20">Java 20</a></td><td>March 2023</td><td>6 months</td><td>Record patterns learn to nest.</td></tr>
+            <tr><td><a href="#java-21">Java 21</a></td><td>September 2023</td><td><b>LTS</b></td><td>Virtual threads, pattern matching and sequenced collections: the modern baseline.</td></tr>
+            <tr><td><a href="#java-22">Java 22</a></td><td>March 2024</td><td>6 months</td><td>Native code without JNI, and unnamed variables.</td></tr>
+            <tr><td><a href="#java-23">Java 23</a></td><td>September 2024</td><td>6 months</td><td>Markdown in Javadoc, primitive patterns previewed, ZGC generational by default.</td></tr>
+            <tr><td><a href="#java-24">Java 24</a></td><td>March 2025</td><td>6 months</td><td>Stream gatherers final, ahead-of-time class loading, post-quantum cryptography.</td></tr>
+            <tr><td><a href="#java-25">Java 25</a></td><td>September 2025</td><td><b>LTS</b></td><td>The current LTS: simpler entry points, scoped values, flexible constructors.</td></tr>
+            <tr><td><a href="#java-26">Java 26</a></td><td>March 2026</td><td>6 months</td><td>HTTP/3, lazy constants, and 'final means final'.</td></tr>
+            <tr><td><a href="#java-27">Java 27</a></td><td>September 2026</td><td>6 months</td><td>Post-quantum TLS by default, G1 and compact headers everywhere.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <nav class="relnav" aria-label="Jump to a release">
+        <a href="#java-8" class="lts">8</a>
+        <a href="#java-9">9</a>
+        <a href="#java-10">10</a>
+        <a href="#java-11" class="lts">11</a>
+        <a href="#java-12">12</a>
+        <a href="#java-13">13</a>
+        <a href="#java-14">14</a>
+        <a href="#java-15">15</a>
+        <a href="#java-16">16</a>
+        <a href="#java-17" class="lts">17</a>
+        <a href="#java-18">18</a>
+        <a href="#java-19">19</a>
+        <a href="#java-20">20</a>
+        <a href="#java-21" class="lts">21</a>
+        <a href="#java-22">22</a>
+        <a href="#java-23">23</a>
+        <a href="#java-24">24</a>
+        <a href="#java-25" class="lts">25</a>
+        <a href="#java-26">26</a>
+        <a href="#java-27">27</a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="sec" id="run">
+    <div class="wrap">
+      <p class="eyebrow">Before you start</p>
+      <h2>How to run every example.</h2>
+      <div class="cards2" style="margin-top:18px;align-items:start">
+        <div class="card">
+          <p class="zlabel">One JDK, all versions</p>
+          <p>Install Java 27 with SDKMAN and every example on this page runs on it, including the older ones, because Java keeps source compatibility. Examples marked <em>preview</em> need the flag shown under them.</p>
+<pre><code class="language-bash">sdk install java 27-tem          # Eclipse Temurin build of Java 27
+java -version
+java Java21.java                 # single-file launch, no javac (Java 11+)
+java --enable-preview --source 27 Java27.java    # preview features
+jshell                           # a REPL for trying one line at a time</code></pre>
+        </div>
+        <div class="card">
+          <p class="zlabel">How to read each section</p>
+          <ul>
+            <li><b>Chips</b> list the JEPs that shipped, final and preview.</li>
+            <li><b>The paragraph</b> says what changed and why it was worth a release.</li>
+            <li><b>The code</b> is a complete program with the expected output in comments.</li>
+            <li><b>In practice</b> is the one thing to carry into production code.</li>
+          </ul>
+          <p style="margin-top:12px">Features previewed in one release and finalised later are shown in their final syntax, with the release that finalised them named.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-8">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 8</h2>
+        <span class="when">March 2014</span>
+        <span class="badge hot">LTS</span>
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">The language learns functions.</p>
+      <div class="chips"><span class="chip">Lambdas</span><span class="chip">Streams</span><span class="chip">Optional</span><span class="chip">Default methods</span><span class="chip">java.time</span><span class="chip">CompletableFuture</span><span class="chip">Nashorn</span><span class="chip">PermGen removed</span></div>
+      <div class="prose rel-body">
+
+<p>Java 8 is the release everything after is measured against. Lambdas and method references gave the language first-class behaviour; the Streams API turned collection code from loops into pipelines; <code>Optional</code> made absence explicit; default methods let interfaces evolve without breaking implementations; and <code>java.time</code> finally replaced <code>Date</code> and <code>Calendar</code> with an immutable, timezone-correct model. A great deal of production Java still runs on this version, which is why every later feature is best understood as a refinement of what 8 started.</p>
+<pre><code class="language-java">import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
+
+public class Java8 {
+    static final class Order {
+        final String customer; final double amount; final LocalDate placed;
+        Order(String c, double a, LocalDate p) { customer = c; amount = a; placed = p; }
+    }
+
+    public static void main(String[] args) {
+        List&lt;Order&gt; orders = Arrays.asList(
+            new Order("ACME",   120.0, LocalDate.of(2014, 3, 18)),
+            new Order("ACME",    80.5, LocalDate.of(2014, 4, 2)),
+            new Order("Globex",  42.0, LocalDate.of(2014, 4, 9)));
+
+        // Streams: group, then aggregate, in one readable pipeline
+        Map&lt;String, Double&gt; totalByCustomer = orders.stream()
+            .collect(Collectors.groupingBy(o -&gt; o.customer, Collectors.summingDouble(o -&gt; o.amount)));
+        System.out.println(totalByCustomer);             // {ACME=200.5, Globex=42.0} (order may vary)
+
+        // Optional: the absence of a result is part of the type
+        Optional&lt;Order&gt; biggest = orders.stream().max(Comparator.comparingDouble(o -&gt; o.amount));
+        biggest.map(o -&gt; o.customer).ifPresent(System.out::println);   // ACME
+
+        // java.time: immutable dates with real arithmetic
+        long days = ChronoUnit.DAYS.between(orders.get(0).placed, orders.get(2).placed);
+        System.out.println(days + " days between first and last order");   // 22
+
+        // CompletableFuture: compose async work without callbacks-in-callbacks
+        CompletableFuture&lt;String&gt; price = CompletableFuture.supplyAsync(() -&gt; "CHF 12.50");
+        CompletableFuture&lt;String&gt; stock = CompletableFuture.supplyAsync(() -&gt; "in stock");
+        System.out.println(price.thenCombine(stock, (p, s) -&gt; p + ", " + s).join());
+    }
+}</code></pre>
+<p class="runline"><span>Run</span><code>javac Java8.java &amp;&amp; java Java8</code></p>
+<div class="aside-note"><p><b>In practice.</b> The habit that matters most from Java 8 is not the syntax but the shape: transform data with pure functions, keep state at the edges, and let the pipeline express intent. Everything from records to gatherers builds on that shape.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-9">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 9</h2>
+        <span class="when">September 2017</span>
+        
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">Modules, jshell and a tidier standard library.</p>
+      <div class="chips"><span class="chip">Module system (JPMS)</span><span class="chip">jshell</span><span class="chip">List.of / Map.of</span><span class="chip">Private interface methods</span><span class="chip">Stream takeWhile / dropWhile</span><span class="chip">Optional.ifPresentOrElse</span><span class="chip">Process API</span><span class="chip">Multi-release JARs</span><span class="chip">G1 default</span></div>
+      <div class="prose rel-body">
+
+<p>Java 9 was three years in the making and its headline, the module system, is still the least used feature of the platform. Its lasting value is elsewhere: the JDK itself is modular, which is what allows <code>jlink</code> to build small custom runtimes; the collection factories removed a decade of <code>Arrays.asList</code> workarounds; and <code>jshell</code> gave Java a REPL for trying an API before writing a class around it.</p>
+<pre><code class="language-java">import java.util.*;
+import java.util.stream.*;
+
+public class Java9 {
+    interface Greeter {
+        default String greet(String name) { return prefix() + name; }
+        private String prefix() { return "Hello, "; }          // private interface methods
+    }
+
+    public static void main(String[] args) {
+        List&lt;Integer&gt; readings = List.of(3, 5, 8, 13, 2, 21);   // immutable, null-hostile, compact
+        System.out.println(readings.stream().takeWhile(r -&gt; r &lt; 10).collect(Collectors.toList()));  // [3, 5, 8]
+        System.out.println(Stream.iterate(1, i -&gt; i &lt; 100, i -&gt; i * 2).collect(Collectors.toList())); // 1 … 64
+
+        Optional.of("cache hit").ifPresentOrElse(System.out::println, () -&gt; System.out.println("miss"));
+        System.out.println(new Greeter() {}.greet("Java 9"));
+        System.out.println("pid " + ProcessHandle.current().pid());   // the new Process API
+    }
+}</code></pre>
+<pre><code class="language-java">// module-info.java: the same code as an explicit module
+module ch.janaka.inventory {
+    requires java.logging;
+    exports ch.janaka.inventory.api;   // everything else stays internal, enforced by the JVM
+}</code></pre>
+<p class="runline"><span>Run</span><code>javac Java9.java &amp;&amp; java Java9      # or: jshell, then paste any line</code></p>
+<div class="aside-note"><p><b>In practice.</b> Most applications stay on the classpath, and that is fine. Where modules pay off is in libraries and in shipping: <code>jlink --add-modules java.base,java.logging</code> produces a runtime a fraction of the size of a full JDK, which is exactly what a container image wants.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-10">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 10</h2>
+        <span class="when">March 2018</span>
+        
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">var, and the six-month cadence begins.</p>
+      <div class="chips"><span class="chip">Local-variable type inference (var)</span><span class="chip">Collectors.toUnmodifiableList</span><span class="chip">Optional.orElseThrow()</span><span class="chip">Application CDS</span><span class="chip">Parallel full GC for G1</span><span class="chip">Container awareness</span></div>
+      <div class="prose rel-body">
+
+<p>Java 10 was the first release on the new six-month schedule, and it introduced <code>var</code>. The type is still static and still inferred by the compiler; what changes is how much of it you have to type. Less visibly, Java 10 made the JVM aware of container CPU and memory limits, which is the reason a Spring Boot service in Kubernetes stopped sizing its heap from the host machine.</p>
+<pre><code class="language-java">import java.util.*;
+import java.util.stream.Collectors;
+
+public class Java10 {
+    public static void main(String[] args) {
+        var orders = new ArrayList&lt;Map&lt;String, Integer&gt;&gt;();      // inferred as ArrayList&lt;Map&lt;String,Integer&gt;&gt;
+        orders.add(Map.of("qty", 2));
+        orders.add(Map.of("qty", 5));
+
+        for (var order : orders) {
+            var qty = order.get("qty");                             // int-typed Integer, still checked
+            System.out.println("qty " + qty);
+        }
+
+        var frozen = orders.stream().collect(Collectors.toUnmodifiableList());
+        System.out.println(frozen.size());
+
+        var first = orders.stream().findFirst().orElseThrow();      // no-arg orElseThrow() is new in 10
+        System.out.println(first);
+    }
+}</code></pre>
+<p class="runline"><span>Run</span><code>java -XX:+PrintFlagsFinal -version | grep UseContainerSupport   # true: cgroup limits are respected</code></p>
+<div class="aside-note"><p><b>In practice.</b> Use <code>var</code> when the right-hand side already says the type (<code>new</code>, a factory, a builder) and keep the explicit type when it would not be obvious from the line. That single rule keeps reviews calm.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-11">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 11</h2>
+        <span class="when">September 2018</span>
+        <span class="badge hot">LTS</span>
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">The first LTS of the new era.</p>
+      <div class="chips"><span class="chip">HttpClient (standard)</span><span class="chip">String: isBlank, lines, strip, repeat</span><span class="chip">Files.readString / writeString</span><span class="chip">Run a single file with java</span><span class="chip">var in lambda parameters</span><span class="chip">ZGC (experimental)</span><span class="chip">Flight Recorder open-sourced</span><span class="chip">Java EE and CORBA modules removed</span></div>
+      <div class="prose rel-body">
+
+<p>Java 11 is where most enterprises landed after 8, and it repaid the move with a standard HTTP client that speaks HTTP/2, a set of small string and file conveniences that remove a lot of Apache Commons, and the ability to run a single source file with <code>java File.java</code>. The removal of the Java EE modules (JAXB, JAX-WS, CORBA) was the migration pain everyone remembers; the fix was a dependency, not a rewrite.</p>
+<pre><code class="language-java">import java.net.URI;
+import java.net.http.*;
+import java.nio.file.*;
+import java.util.function.BiFunction;
+
+public class Java11 {
+    public static void main(String[] args) throws Exception {
+        var client = HttpClient.newHttpClient();                   // HTTP/1.1 and HTTP/2, sync and async
+        var request = HttpRequest.newBuilder(URI.create("https://janaka.me/robots.txt")).GET().build();
+        var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println(response.statusCode());
+        response.body().lines().filter(l -&gt; !l.isBlank()).map(String::strip).forEach(System.out::println);
+
+        var tmp = Files.createTempFile("java11", ".txt");
+        Files.writeString(tmp, "=".repeat(20) + "\nwritten with Files.writeString\n");
+        System.out.print(Files.readString(tmp));
+
+        BiFunction&lt;Integer, Integer, Integer&gt; add = (var a, var b) -&gt; a + b;   // var in lambda params
+        System.out.println(add.apply(20, 22));
+    }
+}</code></pre>
+<p class="runline"><span>Run</span><code>java Java11.java      # single-file launch: no javac step</code></p>
+<div class="aside-note"><p><b>In practice.</b> The single-file launcher is the fastest way to try an API or reproduce a bug: one file, no build. Every example on this page runs that way from Java 11 on.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-12">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 12</h2>
+        <span class="when">March 2019</span>
+        
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">Switch expressions arrive as a preview.</p>
+      <div class="chips"><span class="chip">Switch expressions (preview)</span><span class="chip">Collectors.teeing</span><span class="chip">String.indent / transform</span><span class="chip">Compact number formatting</span><span class="chip">Shenandoah GC (experimental)</span><span class="chip">JVM Constants API</span><span class="chip">Microbenchmark suite (JMH)</span></div>
+      <div class="prose rel-body">
+
+<p>Java 12 introduced the preview mechanism in earnest: switch expressions appeared with the arrow form and would be refined for two more releases before becoming final in 14. Of the final features, <code>Collectors.teeing</code> is the one worth knowing, because it lets a single pass produce two aggregates and merge them.</p>
+<pre><code class="language-java">import java.text.NumberFormat;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Java12 {
+    public static void main(String[] args) {
+        var latencies = List.of(120, 340, 95, 410, 230);
+
+        // teeing: two collectors, one pass, one merged result
+        var summary = latencies.stream().collect(Collectors.teeing(
+            Collectors.minBy(Integer::compare),
+            Collectors.averagingInt(Integer::intValue),
+            (min, avg) -&gt; "min=" + min.orElseThrow() + "ms avg=" + avg + "ms"));
+        System.out.println(summary);                              // min=95ms avg=239.0ms
+
+        System.out.print("select *\nfrom orders\n".indent(4));     // indent every line
+        System.out.println("  trim me  ".transform(String::strip) + "|");
+
+        var fmt = NumberFormat.getCompactNumberInstance(Locale.US, NumberFormat.Style.SHORT);
+        System.out.println(fmt.format(1_250_000));                 // 1M
+    }
+}</code></pre>
+<p class="runline"><span>Run</span><code>java Java12.java</code></p>
+<div class="aside-note"><p><b>In practice.</b> Preview features are complete but not yet frozen. They need <code>--enable-preview</code> at compile and run time, and their use in a shipped product is a decision, not an accident. The switch expression preview became final two releases later with the syntax below unchanged.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-13">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 13</h2>
+        <span class="when">September 2019</span>
+        
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">Text blocks, and yield in switch.</p>
+      <div class="chips"><span class="chip">Text blocks (preview)</span><span class="chip">Switch expressions: yield (2nd preview)</span><span class="chip">Dynamic CDS archives</span><span class="chip">ZGC returns unused memory</span><span class="chip">Socket API reimplemented</span></div>
+      <div class="prose rel-body">
+
+<p>Java 13 is a small release with one big quality-of-life change: text blocks. SQL, JSON and HTML embedded in Java stopped being a wall of <code>+ "\n"</code>. The switch expression preview gained <code>yield</code> for blocks that need more than one statement. Both features are shown here in their final form, which is unchanged from the preview.</p>
+<pre><code class="language-java">public class Java13 {
+    public static void main(String[] args) {
+        String json = """
+            {
+              "product": "nüchtern",
+              "madeIn":  "Zug"
+            }
+            """;                                  // closing delimiter position sets the indentation
+        System.out.print(json);
+
+        String size = "M";
+        int weight = switch (size) {
+            case "S" -&gt; 1;
+            case "M" -&gt; 2;
+            default -&gt; {
+                int base = 3;
+                yield base * 2;                     // yield returns a value from a block
+            }
+        };
+        System.out.println(weight);
+    }
+}</code></pre>
+<p class="runline"><span>Run</span><code>java Java13.java      # on 13 itself: java --enable-preview --source 13 Java13.java</code></p>
+<div class="aside-note"><p><b>In practice.</b> Text blocks are also the cleanest way to write a prompt for a language model inside Java code, which matters more now than it did in 2019.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-14">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 14</h2>
+        <span class="when">March 2020</span>
+        
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">Switch expressions final, helpful NullPointerExceptions.</p>
+      <div class="chips"><span class="chip">Switch expressions (final)</span><span class="chip">Helpful NullPointerExceptions</span><span class="chip">Records (preview)</span><span class="chip">Pattern matching for instanceof (preview)</span><span class="chip">JFR event streaming</span><span class="chip">jpackage (incubator)</span><span class="chip">CMS removed</span></div>
+      <div class="prose rel-body">
+
+<p>Java 14 finalised switch expressions and previewed the two features that would change how data is modelled in Java: records and pattern matching. It also shipped the change that saves the most debugging hours per line of implementation: the JVM now tells you <em>which</em> reference was null.</p>
+<pre><code class="language-java">public class Java14 {
+    enum Day { MON, TUE, WED, THU, FRI, SAT, SUN }
+    static String[] names = new String[1];
+
+    public static void main(String[] args) {
+        Day d = Day.SAT;
+        int hours = switch (d) {                          // exhaustive over the enum, no break, no fall-through
+            case MON, TUE, WED, THU, FRI -&gt; 8;
+            case SAT, SUN -&gt; 0;
+        };
+        System.out.println(hours);
+
+        try {
+            System.out.println(names[0].length());
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+            // Cannot invoke "String.length()" because "Java14.names[0]" is null
+        }
+    }
+}</code></pre>
+<p class="runline"><span>Run</span><code>java Java14.java      # on 14 the message needs -XX:+ShowCodeDetailsInExceptionMessages; default since 15</code></p>
+<div class="aside-note"><p><b>In practice.</b> JFR event streaming (<code>jdk.jfr.consumer.RecordingStream</code>) is the other quiet gift of this release: an application can subscribe to its own GC, allocation and lock events and export them to the metrics system without an agent.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-15">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 15</h2>
+        <span class="when">September 2020</span>
+        
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">Text blocks final, sealed classes previewed, ZGC production-ready.</p>
+      <div class="chips"><span class="chip">Text blocks (final)</span><span class="chip">Sealed classes (preview)</span><span class="chip">Hidden classes</span><span class="chip">EdDSA signatures</span><span class="chip">ZGC and Shenandoah production</span><span class="chip">Records (2nd preview)</span><span class="chip">Nashorn removed</span><span class="chip">Biased locking disabled</span></div>
+      <div class="prose rel-body">
+
+<p>Java 15 finalised text blocks and added <code>formatted</code> to <code>String</code>, made ZGC and Shenandoah production features, and added the Ed25519 signature scheme to the standard cryptography. Sealed classes arrived as a preview: a type can now say exactly which types may extend it, which is the missing half of pattern matching.</p>
+<pre><code class="language-java">import java.security.*;
+
+public class Java15 {
+    public static void main(String[] args) throws Exception {
+        String sql = """
+            select id, total
+            from   orders
+            where  customer = '%s'
+            """.formatted("ACME");                         // formatted() is new in 15
+        System.out.print(sql);
+
+        KeyPair kp = KeyPairGenerator.getInstance("Ed25519").generateKeyPair();
+        Signature sig = Signature.getInstance("Ed25519");
+        sig.initSign(kp.getPrivate());
+        sig.update("release notes".getBytes());
+        byte[] signature = sig.sign();
+
+        sig.initVerify(kp.getPublic());
+        sig.update("release notes".getBytes());
+        System.out.println("valid: " + sig.verify(signature));   // valid: true
+    }
+}</code></pre>
+<p class="runline"><span>Run</span><code>java Java15.java</code></p>
+<div class="aside-note"><p><b>In practice.</b> ZGC becoming production-ready is the point where sub-10 ms pauses on large heaps stopped being a research topic. If a service has a latency SLO and a heap over a few gigabytes, <code>-XX:+UseZGC</code> is the first flag to try.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-16">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 16</h2>
+        <span class="when">March 2021</span>
+        
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">Records and instanceof patterns are final.</p>
+      <div class="chips"><span class="chip">Records (final)</span><span class="chip">Pattern matching for instanceof (final)</span><span class="chip">Stream.toList()</span><span class="chip">Stream.mapMulti</span><span class="chip">jpackage</span><span class="chip">Unix-domain sockets</span><span class="chip">Strong encapsulation by default</span><span class="chip">Vector API (incubator)</span><span class="chip">Foreign linker (incubator)</span></div>
+      <div class="prose rel-body">
+
+<p>Java 16 is when modern Java data modelling became real: records give you an immutable, value-based class in one line, with <code>equals</code>, <code>hashCode</code>, <code>toString</code> and accessors generated and a compact constructor for validation. Pattern matching for <code>instanceof</code> removes the cast that followed every type check since 1995.</p>
+<pre><code class="language-java">import java.util.*;
+import java.util.stream.*;
+
+public class Java16 {
+    record Point(int x, int y) {
+        Point {                                                  // compact constructor: validate, then assign
+            if (x &lt; 0 || y &lt; 0) throw new IllegalArgumentException("negative coordinate");
+        }
+        double distance() { return Math.hypot(x, y); }
+    }
+
+    public static void main(String[] args) {
+        Object o = new Point(3, 4);
+        if (o instanceof Point p &amp;&amp; p.distance() == 5.0) {        // bind and use in one expression
+            System.out.println("on the 5-circle: " + p);         // on the 5-circle: Point[x=3, y=4]
+        }
+
+        List&lt;Integer&gt; evens = IntStream.rangeClosed(1, 10).boxed().filter(i -&gt; i % 2 == 0).toList();
+        System.out.println(evens);                               // toList(): unmodifiable, no Collectors
+
+        List&lt;String&gt; expanded = Stream.of("a", "b")
+            .&lt;String&gt;mapMulti((s, sink) -&gt; { sink.accept(s); sink.accept(s.toUpperCase()); })
+            .toList();
+        System.out.println(expanded);                            // [a, A, b, B]
+
+        System.out.println(new Point(1, 2).equals(new Point(1, 2)));   // true: value semantics
+    }
+}</code></pre>
+<p class="runline"><span>Run</span><code>java Java16.java</code></p>
+<div class="aside-note"><p><b>In practice.</b> Records are the right type for DTOs, events, configuration and every value that crosses a boundary. Add validation in the compact constructor and the object cannot exist in an invalid state, which removes a whole class of defensive checks downstream.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-17">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 17</h2>
+        <span class="when">September 2021</span>
+        <span class="badge hot">LTS</span>
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">Sealed classes final: the LTS that made pattern matching worthwhile.</p>
+      <div class="chips"><span class="chip">Sealed classes (final)</span><span class="chip">Pattern matching for switch (preview)</span><span class="chip">RandomGenerator API</span><span class="chip">Strong encapsulation of JDK internals</span><span class="chip">Always-strict floating point</span><span class="chip">Context-specific deserialization filters</span><span class="chip">Applet API deprecated</span><span class="chip">macOS/AArch64 port</span></div>
+      <div class="prose rel-body">
+
+<p>Java 17 is the LTS that Spring Boot 3 chose as its baseline, and the reason is sealed classes. A sealed interface plus records gives Java algebraic data types: the compiler knows every possible case, so a switch over the hierarchy can be checked for exhaustiveness. Pattern matching for switch appeared as a preview here and became final in 21; the example uses the final syntax.</p>
+<pre><code class="language-java">import java.util.random.RandomGenerator;
+
+public class Java17 {
+    sealed interface Payment permits Card, Twint, Invoice {}    // the closed set of implementations
+    record Card(String last4)  implements Payment {}
+    record Twint(String phone) implements Payment {}
+    record Invoice(int days)   implements Payment {}
+
+    static String describe(Payment p) {
+        return switch (p) {                                     // exhaustive: no default needed
+            case Card c    -&gt; "card ending " + c.last4();
+            case Twint t   -&gt; "TWINT " + t.phone();
+            case Invoice i -&gt; "invoice, " + i.days() + " days";
+        };
+    }
+
+    public static void main(String[] args) {
+        System.out.println(describe(new Twint("+41 76 …")));
+        RandomGenerator rng = RandomGenerator.of("L64X128MixRandom");   // pluggable, modern generators
+        System.out.println(rng.nextInt(1, 7));                            // a die roll
+    }
+}</code></pre>
+<p class="runline"><span>Run</span><code>java Java17.java      # pattern switch is final on 21+; on 17: java --enable-preview --source 17 Java17.java</code></p>
+<div class="aside-note"><p><b>In practice.</b> If a new implementation of <code>Payment</code> is added, every switch over it stops compiling until the case is handled. That is the property a regulated system wants: the compiler, not a code review, guarantees that a new case cannot be silently ignored.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-18">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 18</h2>
+        <span class="when">March 2022</span>
+        
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">UTF-8 everywhere, and a web server in the JDK.</p>
+      <div class="chips"><span class="chip">UTF-8 by default</span><span class="chip">jwebserver</span><span class="chip">Code snippets in Javadoc (@snippet)</span><span class="chip">Reflection via method handles</span><span class="chip">Internet-address resolution SPI</span><span class="chip">Finalization deprecated</span><span class="chip">Vector API (3rd incubator)</span><span class="chip">Foreign function &amp; memory (2nd incubator)</span></div>
+      <div class="prose rel-body">
+
+<p>Java 18 closed a thirty-year source of bugs by making UTF-8 the default charset on every operating system, so a file written on a developer's Mac reads the same on a Windows server. It also added a minimal static web server, useful for serving a build output or a documentation folder without installing anything.</p>
+<pre><code class="language-java">public class Java18 {
+    /**
+     * Parses a Swiss postcode.
+     * {@snippet :
+     *   int zug = Java18.parse("6300");   // @highlight substring="parse"
+     * }
+     */
+    static int parse(String s) { return Integer.parseInt(s); }
+
+    public static void main(String[] args) {
+        System.out.println(java.nio.charset.Charset.defaultCharset());   // UTF-8, on every OS, since 18
+        System.out.println(parse("6300"));
+    }
+}</code></pre>
+<p class="runline"><span>Run</span><code>jwebserver -p 8000 -d /path/to/site      # then open http://localhost:8000/</code></p>
+<div class="aside-note"><p><b>In practice.</b> <code>@snippet</code> turns the code in your Javadoc into something the compiler can check and the IDE can highlight, which is the difference between documentation that rots and documentation that is tested.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-19">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 19</h2>
+        <span class="when">September 2022</span>
+        
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">Virtual threads appear.</p>
+      <div class="chips"><span class="chip">Virtual threads (preview)</span><span class="chip">Structured concurrency (incubator)</span><span class="chip">Record patterns (preview)</span><span class="chip">Pattern matching for switch (3rd preview)</span><span class="chip">Foreign function &amp; memory (preview)</span><span class="chip">Vector API (4th incubator)</span><span class="chip">Linux/RISC-V port</span></div>
+      <div class="prose rel-body">
+
+<p>Java 19 previewed Project Loom's virtual threads: threads that cost almost nothing to create and block, scheduled by the JVM onto a small pool of carrier threads. The thread-per-request model that Java servers have used since the servlet era suddenly scales to hundreds of thousands of concurrent requests without a reactive rewrite. The API here is the final one from Java 21.</p>
+<pre><code class="language-java">import java.time.Duration;
+import java.util.concurrent.Executors;
+import java.util.stream.IntStream;
+
+public class Java19 {
+    public static void main(String[] args) throws Exception {
+        long t0 = System.nanoTime();
+        try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            var futures = IntStream.range(0, 10_000)
+                .mapToObj(i -&gt; executor.submit(() -&gt; { Thread.sleep(Duration.ofSeconds(1)); return i; }))
+                .toList();
+            System.out.println(futures.size() + " tasks submitted");
+        }                                                        // close() waits for every task
+        System.out.println("10,000 one-second sleeps finished in "
+            + (System.nanoTime() - t0) / 1_000_000 + " ms");     // roughly 1,0xx ms, not 10,000 s
+    }
+}</code></pre>
+<p class="runline"><span>Run</span><code>java Java19.java      # final on 21+; on 19/20: java --enable-preview --source 19 Java19.java</code></p>
+<div class="aside-note"><p><b>In practice.</b> Ten thousand platform threads would need gigabytes of stack and would be refused by most operating systems. Ten thousand virtual threads are a few megabytes. The code is the same blocking code you already know how to debug.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-20">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 20</h2>
+        <span class="when">March 2023</span>
+        
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">Record patterns learn to nest.</p>
+      <div class="chips"><span class="chip">Record patterns (2nd preview)</span><span class="chip">Scoped values (incubator)</span><span class="chip">Pattern matching for switch (4th preview)</span><span class="chip">Virtual threads (2nd preview)</span><span class="chip">Structured concurrency (2nd incubator)</span><span class="chip">Foreign function &amp; memory (2nd preview)</span></div>
+      <div class="prose rel-body">
+
+<p>Java 20 was a consolidation release: every headline feature was a second or third preview. The interesting refinement was in record patterns, which can now nest, so a switch can take a whole object graph apart in one case label. Final in 21; shown in the final form.</p>
+<pre><code class="language-java">public class Java20 {
+    record Point(int x, int y) {}
+    record Line(Point from, Point to) {}
+
+    static String describe(Object o) {
+        return switch (o) {
+            case Line(Point(var x1, var y1), Point(var x2, var y2)) when x1 == x2
+                -&gt; "vertical line at x=" + x1;                       // nested deconstruction plus a guard
+            case Line(Point from, Point to)
+                -&gt; "line from " + from + " to " + to;
+            default -&gt; "not a line";
+        };
+    }
+
+    public static void main(String[] args) {
+        System.out.println(describe(new Line(new Point(2, 0), new Point(2, 9))));
+        System.out.println(describe(new Line(new Point(0, 0), new Point(3, 4))));
+    }
+}</code></pre>
+<p class="runline"><span>Run</span><code>java Java20.java      # final on 21+</code></p>
+<div class="aside-note"><p><b>In practice.</b> Nested patterns are what make a sealed event hierarchy pleasant to consume: a handler can match on the event type and the shape of its payload in one place instead of a type check followed by three getters.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-21">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 21</h2>
+        <span class="when">September 2023</span>
+        <span class="badge hot">LTS</span>
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">Virtual threads, pattern matching and sequenced collections: the modern baseline.</p>
+      <div class="chips"><span class="chip">Virtual threads (final)</span><span class="chip">Record patterns (final)</span><span class="chip">Pattern matching for switch (final)</span><span class="chip">Sequenced collections</span><span class="chip">Generational ZGC</span><span class="chip">Unnamed patterns and variables (preview)</span><span class="chip">Unnamed classes and instance main (preview)</span><span class="chip">String templates (preview, later withdrawn)</span><span class="chip">Structured concurrency (preview)</span><span class="chip">Scoped values (preview)</span><span class="chip">Key encapsulation mechanism API</span></div>
+      <div class="prose rel-body">
+
+<p>Java 21 is the release to target today if you are not yet on 25. Three multi-year projects landed as final in one LTS: virtual threads, record patterns and pattern matching for switch. Sequenced collections gave every ordered collection <code>getFirst</code>, <code>getLast</code> and <code>reversed</code>. Generational ZGC made the low-pause collector cheap on allocation-heavy workloads.</p>
+<pre><code class="language-java">import java.util.*;
+import java.util.concurrent.*;
+
+public class Java21 {
+    sealed interface Event permits Deposit, Withdrawal {}
+    record Deposit(String account, long cents)    implements Event {}
+    record Withdrawal(String account, long cents) implements Event {}
+
+    static String apply(Event e) {
+        return switch (e) {
+            case Deposit(var acc, var cents)                          -&gt; "+" + cents + " to " + acc;
+            case Withdrawal(var acc, var cents) when cents &gt; 100_000  -&gt; "large withdrawal from " + acc + ", needs review";
+            case Withdrawal(var acc, var cents)                       -&gt; "-" + cents + " from " + acc;
+        };
+    }
+
+    public static void main(String[] args) throws Exception {
+        var steps = new LinkedHashSet&lt;&gt;(List.of("open", "kyc", "funded"));
+        System.out.println(steps.getFirst() + " … " + steps.getLast());   // sequenced collections
+        System.out.println(steps.reversed());                             // [funded, kyc, open]
+
+        try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
+            Future&lt;String&gt; a = pool.submit(() -&gt; apply(new Deposit("CH-1", 5_000)));
+            Future&lt;String&gt; b = pool.submit(() -&gt; apply(new Withdrawal("CH-1", 250_000)));
+            System.out.println(a.get());
+            System.out.println(b.get());
+        }
+        System.out.println(Thread.currentThread().isVirtual());   // false: main is a platform thread
+    }
+}</code></pre>
+<p class="runline"><span>Run</span><code>java Java21.java</code></p>
+<div class="aside-note"><p><b>In practice.</b> In Spring Boot 3.2+, <code>spring.threads.virtual.enabled=true</code> switches Tomcat and the task executors to virtual threads. Keep an eye on <code>synchronized</code> blocks around blocking I/O: until Java 24 they pinned the carrier thread, so prefer <code>ReentrantLock</code> in hot paths.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-22">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 22</h2>
+        <span class="when">March 2024</span>
+        
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">Native code without JNI, and unnamed variables.</p>
+      <div class="chips"><span class="chip">Foreign function &amp; memory API (final)</span><span class="chip">Unnamed variables and patterns (final)</span><span class="chip">Launch multi-file source programs</span><span class="chip">Statements before super() (preview)</span><span class="chip">Stream gatherers (preview)</span><span class="chip">Class-file API (preview)</span><span class="chip">String templates (2nd preview)</span><span class="chip">Implicitly declared classes (2nd preview)</span><span class="chip">Region pinning for G1</span></div>
+      <div class="prose rel-body">
+
+<p>Java 22 finalised Project Panama's foreign function and memory API: Java can call a C function and manage off-heap memory with no JNI glue code, safely, with the lifetime of the memory tied to an <code>Arena</code>. The underscore became a real unnamed variable. And the source launcher learned to compile several files, so a small multi-file program runs without a build tool.</p>
+<pre><code class="language-java">import java.lang.foreign.*;
+import java.lang.invoke.MethodHandle;
+import java.util.List;
+
+public class Java22 {
+    public static void main(String[] args) throws Throwable {
+        Linker linker = Linker.nativeLinker();
+        MethodHandle strlen = linker.downcallHandle(                // bind the C function strlen(const char*)
+            linker.defaultLookup().find("strlen").orElseThrow(),
+            FunctionDescriptor.of(ValueLayout.JAVA_LONG, ValueLayout.ADDRESS));
+
+        try (Arena arena = Arena.ofConfined()) {                    // off-heap memory freed when the arena closes
+            MemorySegment str = arena.allocateFrom("Grüezi Zug");
+            long len = (long) strlen.invokeExact(str);
+            System.out.println(len);                                // 11: ü is two bytes in UTF-8
+        }
+
+        int errors = 0;
+        for (var _ : List.of(1, 2, 3)) errors++;                    // unnamed variable: we only count
+        System.out.println(errors);
+
+        record Pair(Object a, Object b) {}
+        Object o = new Pair("x", 42);
+        if (o instanceof Pair(String s, _)) System.out.println("first is " + s);   // unnamed pattern
+    }
+}</code></pre>
+<p class="runline"><span>Run</span><code>java Java22.java      # multi-file: java Main.java compiles the other .java files it references</code></p>
+<div class="aside-note"><p><b>In practice.</b> FFM is how Java now talks to native tokenizers, vector-search libraries and GPU runtimes, which is why it matters for AI workloads on the JVM. The confined arena gives you deterministic release, something JNI never did.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-23">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 23</h2>
+        <span class="when">September 2024</span>
+        
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">Markdown in Javadoc, primitive patterns previewed, ZGC generational by default.</p>
+      <div class="chips"><span class="chip">Markdown documentation comments</span><span class="chip">Primitive types in patterns (preview)</span><span class="chip">Module import declarations (preview)</span><span class="chip">Flexible constructor bodies (2nd preview)</span><span class="chip">Stream gatherers (2nd preview)</span><span class="chip">Class-file API (2nd preview)</span><span class="chip">Generational ZGC by default</span><span class="chip">String templates dropped</span><span class="chip">Unsafe memory-access methods deprecated</span></div>
+      <div class="prose rel-body">
+
+<p>Java 23 let documentation comments be written in Markdown with a <code>///</code> prefix, which removes most of the HTML from Javadoc. It also made generational mode the default for ZGC, previewed <code>import module</code>, and dropped string templates back to the drawing board rather than finalise a design the team was not happy with. That last decision is worth noting: the six-month cadence does not force features out.</p>
+<pre><code class="language-java">/// Converts Swiss francs to rappen.
+///
+/// - Uses `long` to avoid floating point money.
+/// - The inverse is [#toFrancs(long)].
+///
+/// @param chf amount in francs
+/// @return amount in rappen
+public class Java23 {
+    static long toRappen(long chf) { return chf * 100; }
+    static long toFrancs(long rappen) { return rappen / 100; }
+
+    public static void main(String[] args) {
+        System.out.println(toRappen(12) + " rappen");
+    }
+}</code></pre>
+<p class="runline"><span>Run</span><code>javadoc -d doc Java23.java &amp;&amp; java Java23</code></p>
+<div class="aside-note"><p><b>In practice.</b> The removal of string templates is the release's real lesson. A preview is a question put to the community; if the answer is no, the feature is withdrawn. Do not build a product on a preview unless you are prepared for that outcome.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-24">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 24</h2>
+        <span class="when">March 2025</span>
+        
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">Stream gatherers final, ahead-of-time class loading, post-quantum cryptography.</p>
+      <div class="chips"><span class="chip">Stream gatherers (final)</span><span class="chip">Class-file API (final)</span><span class="chip">Ahead-of-time class loading and linking</span><span class="chip">Compact object headers (experimental)</span><span class="chip">ML-KEM and ML-DSA (post-quantum)</span><span class="chip">Virtual threads: synchronize without pinning</span><span class="chip">Key derivation function API (preview)</span><span class="chip">Security Manager permanently disabled</span><span class="chip">Windows 32-bit x86 port removed</span></div>
+      <div class="prose rel-body">
+
+<p>Java 24 is a large release. Gatherers give the Streams API custom intermediate operations, closing the last gap against what a hand-written loop can do. The ahead-of-time cache (Project Leyden's first delivery) records loaded and linked classes from a training run and replays them, cutting start-up time noticeably for frameworks like Spring. The quantum-resistant ML-KEM and ML-DSA algorithms arrived in the standard providers. And <code>synchronized</code> no longer pins virtual threads to their carriers, removing the main operational caveat of Java 21.</p>
+<pre><code class="language-java">import java.util.*;
+import java.util.stream.*;
+
+public class Java24 {
+    public static void main(String[] args) {
+        var prices = List.of(10, 12, 11, 15, 14, 18);
+
+        // built-in gatherer: a sliding window, here a 3-point moving average
+        System.out.println(prices.stream()
+            .gather(Gatherers.windowSliding(3))
+            .map(w -&gt; w.stream().mapToInt(Integer::intValue).average().orElse(0))
+            .toList());                                          // [11.0, 12.67, 13.33, 15.67]
+
+        // custom gatherer: emit only prices that beat the running maximum
+        Gatherer&lt;Integer, int[], Integer&gt; newHighs = Gatherer.ofSequential(
+            () -&gt; new int[] { Integer.MIN_VALUE },               // state: the max so far
+            (state, price, downstream) -&gt; {
+                if (price &gt; state[0]) { state[0] = price; return downstream.push(price); }
+                return true;                                     // keep going, emit nothing
+            });
+        System.out.println(prices.stream().gather(newHighs).toList());   // [10, 12, 15, 18]
+    }
+}</code></pre>
+<pre><code class="language-bash"># Ahead-of-time class loading and linking (JEP 483): train once, start fast every time
+java -XX:AOTMode=record -XX:AOTConfiguration=app.aotconf -cp app.jar ch.janaka.App   # training run
+java -XX:AOTMode=create -XX:AOTConfiguration=app.aotconf -XX:AOTCache=app.aot -cp app.jar
+java -XX:AOTCache=app.aot -cp app.jar ch.janaka.App                                   # production run</code></pre>
+<p class="runline"><span>Run</span><code>java Java24.java</code></p>
+<div class="aside-note"><p><b>In practice.</b> A gatherer is the right tool when a stream needs state between elements: de-duplication with a window, rate limiting, run-length encoding, or anything you used to drop out to a loop for.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-25">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 25</h2>
+        <span class="when">September 2025</span>
+        <span class="badge hot">LTS</span>
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">The current LTS: simpler entry points, scoped values, flexible constructors.</p>
+      <div class="chips"><span class="chip">Compact source files and instance main methods</span><span class="chip">Module import declarations</span><span class="chip">Flexible constructor bodies</span><span class="chip">Scoped values (final)</span><span class="chip">Compact object headers (final)</span><span class="chip">Generational Shenandoah</span><span class="chip">AOT command-line ergonomics and method profiling</span><span class="chip">JFR CPU-time profiling and method tracing</span><span class="chip">Key derivation function API</span><span class="chip">Stable values (preview)</span><span class="chip">Structured concurrency (5th preview)</span><span class="chip">Primitive types in patterns (3rd preview)</span><span class="chip">PEM encodings (preview)</span><span class="chip">32-bit x86 port removed</span></div>
+      <div class="prose rel-body">
+
+<p>Java 25 is the LTS most vendors will support into the 2030s, and the one Spring Boot 4 recommends. It finalised the features that make Java approachable again: a program can be a single file with a bare <code>void main()</code>, <code>import module java.base</code> replaces a page of imports, and a constructor may validate its arguments before calling <code>super()</code>. Scoped values became the structured, immutable replacement for thread-locals, designed for virtual threads.</p>
+<pre><code class="language-java">// Hello.java: a compact source file. No class declaration, no static, no String[] args.
+import module java.base;                       // every exported package of java.base, one line
+
+void main() {
+    var offices = List.of("Zug", "Zürich", "Basel");
+    IO.println("Offices: " + String.join(", ", offices));   // java.lang.IO: simple console I/O
+}</code></pre>
+<pre><code class="language-java">public class Java25 {
+    // Scoped values: an immutable, inherited context, bound for the extent of a call
+    static final ScopedValue&lt;String&gt; TENANT = ScopedValue.newInstance();
+
+    static String audit(String action) { return TENANT.get() + ": " + action; }
+
+    static class Account {
+        final long balanceCents;
+        Account(long balanceCents) { this.balanceCents = balanceCents; }
+    }
+    static class SavingsAccount extends Account {
+        SavingsAccount(String raw) {
+            long cents = Long.parseLong(raw);                       // flexible constructor bodies:
+            if (cents &lt; 0) throw new IllegalArgumentException("negative opening balance");
+            super(cents);                                           // statements before super() are allowed
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        ScopedValue.where(TENANT, "acme").run(() -&gt; System.out.println(audit("open account")));
+        System.out.println(TENANT.isBound());                       // false: the binding ended with run()
+
+        System.out.println(new SavingsAccount("1250").balanceCents);
+    }
+}</code></pre>
+<pre><code class="language-bash"># AOT cache in one step (JEP 514), then reuse it
+java -XX:AOTCacheOutput=app.aot -cp app.jar ch.janaka.App
+java -XX:AOTCache=app.aot        -cp app.jar ch.janaka.App</code></pre>
+<p class="runline"><span>Run</span><code>java Hello.java &amp;&amp; java Java25.java</code></p>
+<div class="aside-note"><p><b>In practice.</b> Scoped values are the right way to carry a tenant, a trace ID or a principal through a request on virtual threads: the value cannot be changed by a callee, it is visible to child tasks in a structured scope, and it is gone when the scope ends. That is the property a multi-tenant banking service needs from its request context.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-26">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 26</h2>
+        <span class="when">March 2026</span>
+        
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">HTTP/3, lazy constants, and 'final means final'.</p>
+      <div class="chips"><span class="chip">HTTP/3 for the HTTP Client API</span><span class="chip">Prepare to make final mean final</span><span class="chip">AOT object caching with any GC</span><span class="chip">G1: less synchronization, more throughput</span><span class="chip">Lazy constants (2nd preview)</span><span class="chip">Structured concurrency (6th preview)</span><span class="chip">Primitive types in patterns (4th preview)</span><span class="chip">PEM encodings (2nd preview)</span><span class="chip">Vector API (11th incubator)</span><span class="chip">Applet API removed</span></div>
+      <div class="prose rel-body">
+
+<p>Java 26 added HTTP/3 to the client that has shipped since 11, so QUIC transport is one builder call away. It began the road to making <code>final</code> fields truly immutable: deep reflection that mutates a final field now produces a warning, with a command-line option to forbid it, in preparation for that becoming the default. Stable values were renamed lazy constants and refined: a constant initialised at most once, on first use, that the JIT can then treat as truly constant.</p>
+<pre><code class="language-java">import java.net.URI;
+import java.net.http.*;
+
+public class Java26 {
+    public static void main(String[] args) throws Exception {
+        var client = HttpClient.newBuilder()
+            .version(HttpClient.Version.HTTP_3)                    // prefer HTTP/3, fall back transparently
+            .build();
+        var request = HttpRequest.newBuilder(URI.create("https://cloudflare-quic.com/")).GET().build();
+
+        for (int i = 1; i &lt;= 2; i++) {
+            var response = client.send(request, HttpResponse.BodyHandlers.discarding());
+            System.out.println("request " + i + ": " + response.version());
+            // 1: HTTP_2 (learns the Alt-Svc header)   2: HTTP_3 (QUIC, once the server has advertised it)
+        }
+    }
+}</code></pre>
+<pre><code class="language-java">import java.util.logging.Logger;
+
+public class Java26Lazy {
+    // Lazy constant: created on first get(), exactly once, then constant-folded by the JIT
+    private static final LazyConstant&lt;Logger&gt; LOG =
+        LazyConstant.of(() -&gt; Logger.getLogger("orders"));
+
+    public static void main(String[] args) {
+        LOG.get().info("first use creates the logger");
+        LOG.get().info("second use reuses it");
+    }
+}</code></pre>
+<pre><code class="language-bash">java Java26.java
+java --enable-preview --source 26 Java26Lazy.java
+java --illegal-final-field-mutation=deny -cp app.jar ch.janaka.App   # find frameworks that still poke final fields</code></pre>
+<div class="aside-note"><p><b>In practice.</b> Run your test suite once with <code>--illegal-final-field-mutation=deny</code>. Anything that fails is a serialisation or mocking library relying on reflection into final fields, and it needs an upgrade before that setting becomes the default in a later release.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="java-27">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Java 27</h2>
+        <span class="when">September 2026</span>
+        
+        <a class="totop" href="#timeline">timeline ↑</a>
+      </div>
+      <p class="rel-title">Post-quantum TLS by default, G1 and compact headers everywhere.</p>
+      <div class="chips"><span class="chip">Post-quantum hybrid key exchange for TLS 1.3</span><span class="chip">G1 the default GC in all environments</span><span class="chip">Compact object headers by default</span><span class="chip">JFR in-process data redaction</span><span class="chip">Lazy constants (3rd preview)</span><span class="chip">Structured concurrency (7th preview)</span><span class="chip">Primitive types in patterns (5th preview)</span><span class="chip">PEM encodings (3rd preview)</span><span class="chip">Vector API (12th incubator)</span></div>
+      <div class="prose rel-body">
+
+<p>Java 27 reached general availability on 15 September 2026. Its final features are operational rather than syntactic, and all four matter to a regulated system. TLS 1.3 connections now negotiate the hybrid <code>X25519MLKEM768</code> key exchange by default, so traffic captured today cannot be decrypted by a future quantum computer. G1 is the default collector on every machine, including the small containers that used to get Serial. Compact object headers, final in 25, are now on by default and shave roughly a tenth off heap usage. And Flight Recorder can redact secrets from the environment variables, system properties and arguments it records.</p>
+<pre><code class="language-java">import java.util.concurrent.StructuredTaskScope;
+import java.util.concurrent.StructuredTaskScope.Subtask;
+
+public class Java27 {
+    record Quote(String price, String stock) {}
+    static String fetchPrice() throws InterruptedException { Thread.sleep(200); return "CHF 12.50"; }
+    static String fetchStock() throws InterruptedException { Thread.sleep(300); return "in stock"; }
+
+    public static void main(String[] args) throws Exception {
+        // Structured concurrency (preview): subtasks live and die with the scope
+        try (var scope = StructuredTaskScope.open()) {
+            Subtask&lt;String&gt; price = scope.fork(Java27::fetchPrice);
+            Subtask&lt;String&gt; stock = scope.fork(Java27::fetchStock);
+            scope.join();                              // both succeed, or one fails, the other is cancelled, join throws
+            System.out.println(new Quote(price.get(), stock.get()));
+        }
+
+        System.out.println(bucket(503));
+        narrow(42L);
+        narrow(1L &lt;&lt; 40);
+    }
+
+    // Primitive types in patterns (preview): switch and instanceof over int, long, double …
+    static String bucket(int status) {
+        return switch (status) {
+            case 200 -&gt; "ok";
+            case int s when s &gt;= 500 -&gt; "server error " + s;
+            case int s -&gt; "other " + s;
+        };
+    }
+    static void narrow(long id) {
+        if (id instanceof int small) System.out.println("fits in an int: " + small);   // exact, no lossy cast
+        else System.out.println("needs a long: " + id);
+    }
+}</code></pre>
+<pre><code class="language-bash"># run the preview example
+java --enable-preview --source 27 Java27.java
+
+# defaults you get for free on 27
+java -XX:+PrintFlagsFinal -version | grep -E 'UseG1GC|UseCompactObjectHeaders'     # both true
+
+# see the post-quantum key share in the handshake
+java -Djavax.net.debug=ssl:handshake Java11.java 2&gt;&amp;1 | grep -i mlkem          # X25519MLKEM768
+
+# redact secrets before Flight Recorder writes them to disk
+java -XX:FlightRecorderOptions:'redact-key=confidential;secret;*token*' \
+     -XX:StartFlightRecording:filename=app.jfr -cp app.jar ch.janaka.App
+jfr print --events jdk.InitialSystemProperty app.jfr                             # values show as [REDACTED]</code></pre>
+<pre><code class="language-java">// Pin the key-exchange policy in code when a security standard requires it
+var params = sslContext.getDefaultSSLParameters();
+params.setNamedGroups(new String[] { "X25519MLKEM768", "SecP256r1MLKEM768", "x25519", "secp256r1" });</code></pre>
+<div class="aside-note"><p><b>In practice.</b> Nothing in this release needs a code change to benefit from it. Upgrade the runtime, check the GC and heap metrics, confirm the handshake shows a hybrid group, and add a redaction filter to any JFR recording that leaves the machine. That is a release note a bank's change board can approve.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <p class="eyebrow">Where to go next</p>
+      <h2>Reading the arc.</h2>
+      <div class="cards3" style="margin-top:18px">
+        <div class="card">
+          <p class="zlabel">Data</p>
+          <h3>Records, sealed types, patterns</h3>
+          <p style="margin-top:6px">Java 14 to 21 gave the language algebraic data types. Model domain events as a sealed hierarchy of records and let the compiler check every switch.</p>
+        </div>
+        <div class="card">
+          <p class="zlabel">Concurrency</p>
+          <h3>Virtual threads, scoped values, structured scopes</h3>
+          <p style="margin-top:6px">Java 19 to 25 made blocking code scale and gave it a safe request context. Structured concurrency is the last piece, still in preview in 27.</p>
+        </div>
+        <div class="card">
+          <p class="zlabel">Runtime</p>
+          <h3>Start-up, footprint, security</h3>
+          <p style="margin-top:6px">Java 24 to 27 delivered AOT caches, compact headers, G1 everywhere and post-quantum TLS. These are upgrade wins that need no code change.</p>
+        </div>
+      </div>
+      <div class="cta" style="margin-top:22px">
+        <div>
+          <h3>Continue with the Spring side of the story.</h3>
+          <p>The companion guide follows Spring Boot from 1.0 to 4.x and shows what Spring AI 2.0 can do today, with the same working-example approach.</p>
+        </div>
+        <div class="actions" style="margin-top:0">
+          <a class="btn primary" href="./spring-ecosystem-and-spring-ai.html">Spring ecosystem and Spring AI →</a>
+          <a class="btn" href="/academy/">Back to the Academy</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug 🇨🇭</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/ai/">AI</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+</body>
+</html>

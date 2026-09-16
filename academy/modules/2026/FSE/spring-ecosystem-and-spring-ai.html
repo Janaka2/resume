@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Spring ecosystem, and what Spring AI can do now | Janaka Academy</title>
+  <meta name="description" content="Spring Boot from 1.0 to 4.x in working examples, then a hands-on tour of Spring AI 2.0: ChatClient, structured output, tools, memory, RAG, MCP, evaluation and agent patterns.">
+  <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/spring-ecosystem-and-spring-ai.html">
+  <link rel="alternate" type="application/atom+xml" title="Janaka Premathilaka" href="/feed.xml">
+  <meta property="og:title" content="The Spring ecosystem, and what Spring AI can do now | Janaka Academy">
+  <meta property="og:description" content="Spring Boot from 1.0 to 4.x in working examples, then a hands-on tour of Spring AI 2.0: ChatClient, structured output, tools, memory, RAG, MCP, evaluation and agent patterns.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://janaka.me/academy/modules/2026/FSE/spring-ecosystem-and-spring-ai.html">
+  <meta property="og:image" content="https://janaka.me/assets/og/academy.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Spring ecosystem, and what Spring AI can do now | Janaka Academy">
+  <meta name="twitter:description" content="Spring Boot from 1.0 to 4.x in working examples, then a hands-on tour of Spring AI 2.0: ChatClient, structured output, tools, memory, RAG, MCP, evaluation and agent patterns.">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/academy.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png?v=1">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260916">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div data-include="/partials/site-nav.html"></div>
+
+<main id="main">
+
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/academy/" style="color:inherit;text-decoration:none">&larr; Janaka Academy</a></p>
+      <h1>The Spring ecosystem, and what Spring AI can do now.</h1>
+      <p class="lede">Twelve years of Spring Boot in four generations, then the part that changed fastest: Spring AI 2.0, which turns a language model into a Spring bean with tools, memory, retrieval, MCP and evaluation. Every section has code you can drop into a Boot 4 project.</p>
+      <div class="badges">
+        <span class="badge hot">Spring Boot 4.1 · Framework 7</span>
+        <span class="badge hot">Spring AI 2.0.1</span>
+        <span class="badge">Java 17+, 25 recommended</span>
+        <span class="badge">Working examples</span>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="#spring-ai">Jump to Spring AI</a>
+        <a class="btn" href="#boot">Spring Boot, 1.0 to 4.x</a>
+        <a class="btn" href="./java-evolution-8-to-27.html">The Java side →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="boot">
+    <div class="wrap">
+      <p class="eyebrow">Part one</p>
+      <h2>Spring Boot, generation by generation.</h2>
+      <p class="lede">Spring Framework is older than most of its users' careers; Spring Boot is what made it the default way to build a Java service. Four generations, each tied to a Java baseline.</p>
+      <div class="tablewrap card" style="margin-top:18px;padding:0">
+        <table class="reltable">
+          <thead><tr><th>Generation</th><th>GA</th><th>Baseline</th><th>What it is remembered for</th></tr></thead>
+          <tbody>
+            <tr><td><a href="#boot-1">Spring Boot 1.0</a></td><td>April 2014</td><td>Spring Framework 4 · Java 6+</td><td>Convention over configuration, and an executable jar.</td></tr>
+            <tr><td><a href="#boot-2">Spring Boot 2.0</a></td><td>March 2018</td><td>Spring Framework 5 · Java 8+</td><td>Reactive web, Micrometer metrics, Java 8 as the floor.</td></tr>
+            <tr><td><a href="#boot-3">Spring Boot 3.0</a></td><td>November 2022</td><td>Spring Framework 6 · Java 17+ · Jakarta EE 9</td><td>Java 17, Jakarta namespaces, native images, observability.</td></tr>
+            <tr><td><a href="#boot-4">Spring Boot 4.0 and Spring Framework 7</a></td><td>November 2025</td><td>Spring Framework 7 · Java 17+, Java 25 recommended · Jakarta EE 11</td><td>Modular jars, null safety, API versioning, resilience in the core.</td></tr>
+            <tr><td><a href="#spring-ai">Spring AI 1.0 → 2.0</a></td><td>May 2025 → June 2026</td><td>Boot 3.4 → Boot 4.0/4.1</td><td>Language models, tools, RAG and MCP as first-class Spring components.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="boot-1">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Spring Boot 1.0</h2>
+        <span class="when">April 2014</span>
+        <span class="badge">Spring Framework 4 · Java 6+</span>
+        <a class="totop" href="#boot">overview ↑</a>
+      </div>
+      <p class="rel-title">Convention over configuration, and an executable jar.</p>
+      <div class="chips"><span class="chip">Auto-configuration</span><span class="chip">Starters</span><span class="chip">Embedded Tomcat</span><span class="chip">Actuator</span><span class="chip">Executable jar</span></div>
+      <div class="prose rel-body">
+
+<p>Spring Boot 1.0 answered the question every Spring project had been asking since 2004: why does it take a day of XML to serve one HTTP endpoint? Auto-configuration inspects the classpath and configures what it finds; starters bundle coherent dependency sets; the embedded server turns a web application into a process you start with <code>java -jar</code>. Actuator shipped in 1.0 too, which is why health and metrics endpoints are a Spring reflex rather than an afterthought.</p>
+<pre><code class="language-java">@SpringBootApplication                       // @Configuration + @EnableAutoConfiguration + @ComponentScan
+public class Application {
+    public static void main(String[] args) { SpringApplication.run(Application.class, args); }
+}
+
+@RestController
+class HelloController {
+    @RequestMapping("/") String hello() { return "Hello from Spring Boot 1.0"; }
+}</code></pre>
+<div class="aside-note"><p><b>Why it mattered.</b> The deployment unit changed from a WAR dropped into a shared application server to a self-contained process. Every container and cloud practice that followed assumes that shape.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="boot-2">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Spring Boot 2.0</h2>
+        <span class="when">March 2018</span>
+        <span class="badge">Spring Framework 5 · Java 8+</span>
+        <a class="totop" href="#boot">overview ↑</a>
+      </div>
+      <p class="rel-title">Reactive web, Micrometer metrics, Java 8 as the floor.</p>
+      <div class="chips"><span class="chip">Spring WebFlux</span><span class="chip">Reactor</span><span class="chip">Micrometer</span><span class="chip">Java 8 baseline</span><span class="chip">Kotlin support</span><span class="chip">Gradle plugin rewrite</span><span class="chip">HTTP/2</span></div>
+      <div class="prose rel-body">
+
+<p>Boot 2.0 arrived alongside Spring Framework 5 and made Java 8 the minimum, so lambdas and functional bean registration became idiomatic. WebFlux offered a non-blocking stack for the cases that needed it, and Micrometer became the metrics facade, which is how Spring applications learned to speak Prometheus. Spring Boot 2.3 later added buildpack images, layered jars and graceful shutdown; 2.4 through 2.7 refined configuration processing and Java 17 support while 3.0 was being prepared.</p>
+<pre><code class="language-java">@RestController
+class QuoteController {
+    private final WebClient client = WebClient.create("https://api.example.com");
+
+    @GetMapping("/quotes/{isin}")
+    Mono&lt;Quote&gt; quote(@PathVariable String isin) {          // non-blocking end to end
+        return client.get().uri("/quotes/{isin}", isin).retrieve().bodyToMono(Quote.class);
+    }
+}</code></pre>
+<div class="aside-note"><p><b>Why it mattered.</b> WebFlux solved concurrency for the few services that needed it at the cost of a different programming model. Most teams stayed on Spring MVC, and with virtual threads in Boot 3.2 that turned out to be the right call.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="boot-3">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Spring Boot 3.0</h2>
+        <span class="when">November 2022</span>
+        <span class="badge">Spring Framework 6 · Java 17+ · Jakarta EE 9</span>
+        <a class="totop" href="#boot">overview ↑</a>
+      </div>
+      <p class="rel-title">Java 17, Jakarta namespaces, native images, observability.</p>
+      <div class="chips"><span class="chip">Java 17 baseline</span><span class="chip">jakarta.* packages</span><span class="chip">GraalVM native images</span><span class="chip">Micrometer Observation and Tracing</span><span class="chip">Problem Details (RFC 7807)</span><span class="chip">HTTP interface clients</span><span class="chip">Declarative HTTP clients</span></div>
+      <div class="prose rel-body">
+
+<p>Boot 3.0 was the largest migration since 2.0: Java 17 became the floor, every <code>javax.*</code> import became <code>jakarta.*</code>, and GraalVM native compilation went from experiment to supported feature, with start-up in tens of milliseconds. The Micrometer Observation API unified metrics and tracing so a single annotation produces both. Spring Boot 3.2 (November 2023) then delivered the operational win of the generation: virtual threads for Tomcat and every task executor with one property, plus <code>RestClient</code> and <code>JdbcClient</code> as synchronous, fluent replacements for <code>RestTemplate</code> and <code>JdbcTemplate</code>.</p>
+<pre><code class="language-properties"># application.properties, Spring Boot 3.2+
+spring.threads.virtual.enabled=true          # Tomcat, @Async, @Scheduled and task executors on virtual threads
+management.tracing.sampling.probability=1.0  # Micrometer Tracing: one trace per request in dev</code></pre>
+<pre><code class="language-java">@Service
+class PricingService {
+    private final RestClient rest;
+    private final JdbcClient jdbc;
+
+    PricingService(RestClient.Builder builder, JdbcClient jdbc) {
+        this.rest = builder.baseUrl("https://rates.example.com").build();
+        this.jdbc = jdbc;
+    }
+
+    @Observed(name = "pricing.quote")                       // metrics + trace span from one annotation
+    Quote quote(String isin) {
+        BigDecimal rate = rest.get().uri("/fx/CHF").retrieve().body(BigDecimal.class);   // blocking, on a virtual thread
+        return jdbc.sql("select price from quotes where isin = :isin")
+                   .param("isin", isin)
+                   .query((rs, i) -&gt; new Quote(isin, rs.getBigDecimal("price").multiply(rate)))
+                   .single();
+    }
+}</code></pre>
+<div class="aside-note"><p><b>Why it mattered.</b> With virtual threads, the plain servlet stack scales like the reactive one while keeping stack traces, debuggers and the thread-per-request mental model. For a regulated system, that is the more auditable choice.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="boot-4">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Spring Boot 4.0 and Spring Framework 7</h2>
+        <span class="when">November 2025</span>
+        <span class="badge">Spring Framework 7 · Java 17+, Java 25 recommended · Jakarta EE 11</span>
+        <a class="totop" href="#boot">overview ↑</a>
+      </div>
+      <p class="rel-title">Modular jars, null safety, API versioning, resilience in the core.</p>
+      <div class="chips"><span class="chip">70+ focused modules</span><span class="chip">JSpecify null safety</span><span class="chip">Jackson 3</span><span class="chip">API versioning</span><span class="chip">HTTP service clients</span><span class="chip">@Retryable and @ConcurrencyLimit</span><span class="chip">RestTestClient</span><span class="chip">BeanRegistrar</span><span class="chip">Jakarta EE 11: Servlet 6.1, Validation 3.1, Persistence 3.2</span><span class="chip">Spring Boot 4.1: gRPC, SSRF mitigation, OpenTelemetry updates</span></div>
+      <div class="prose rel-body">
+
+<p>Boot 4.0 is the current generation. The codebase was split into focused modules so an application pulls only what it uses. JSpecify annotations across the portfolio give IDEs and Kotlin precise nullability. Jackson 3 is the JSON library. Spring Framework 7 brought three things teams had been building by hand: first-class API versioning in Spring MVC and WebFlux, declarative HTTP service clients with auto-configured groups, and resilience annotations (<code>@Retryable</code>, <code>@ConcurrencyLimit</code>) in the core rather than in a separate project. Spring Boot 4.1 (June 2026) added Spring gRPC support, an SSRF mitigation filter for HTTP clients and updated OpenTelemetry support; 4.2 is in milestones.</p>
+<pre><code class="language-java">// API versioning: the same handler class, two contract versions
+@RestController
+@RequestMapping("/accounts")
+class AccountController {
+    @GetMapping(path = "/{id}", version = "1")
+    AccountV1 v1(@PathVariable String id) { return service.v1(id); }
+
+    @GetMapping(path = "/{id}", version = "2")                 // clients send X-API-Version: 2 or ?version=2
+    AccountV2 v2(@PathVariable String id) { return service.v2(id); }
+}</code></pre>
+<pre><code class="language-java">// HTTP service client: an interface, no implementation, auto-configured by Boot 4
+@HttpExchange("/fx")
+interface RatesClient {
+    @GetExchange("/{currency}")
+    BigDecimal rate(@PathVariable String currency);
+}
+
+@Service
+class QuoteService {
+    private final RatesClient rates;
+    QuoteService(RatesClient rates) { this.rates = rates; }
+
+    @Retryable(maxAttempts = 3, delay = 200)                   // Spring Framework 7 core resilience (@EnableResilientMethods)
+    @ConcurrencyLimit(20)                                      // at most 20 concurrent calls into the rates API
+    BigDecimal chf(String currency) { return rates.rate(currency); }
+}</code></pre>
+<pre><code class="language-properties"># application.properties, Spring Boot 4
+spring.http.client.service.group.rates.base-url=https://rates.example.com
+spring.http.client.service.group.rates.read-timeout=2s
+spring.threads.virtual.enabled=true</code></pre>
+<div class="aside-note"><p><b>Why it mattered.</b> The migration cost of 4.0 is real (Jackson 3, module splits, removed deprecations) but it is the last big move for years: Framework 7 keeps Java 17 as the floor while recommending 25, so the runtime path is clear through the next two LTS releases.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="spring-ai">
+    <div class="wrap">
+      <p class="eyebrow">Part two</p>
+      <h2>What Spring AI can do now.</h2>
+      <p class="lede">Spring AI 1.0 went GA in May 2025; 2.0 followed in June 2026 on the Boot 4 generation, and 2.0.1 is current. The idea is the one Spring applied to databases and messaging twenty years ago: a portable abstraction over the providers, with the cross-cutting concerns as reusable components. Eight capabilities, each with the code.</p>
+      <div class="grid" style="margin-top:18px">
+        <a class="card item" href="#ai-chat" style="text-decoration:none;color:inherit"><span class="tag">ChatClient</span><h3>Talk to a model</h3></a>
+        <a class="card item" href="#ai-structured" style="text-decoration:none;color:inherit"><span class="tag">Structured output</span><h3>Get typed answers back</h3></a>
+        <a class="card item" href="#ai-tools" style="text-decoration:none;color:inherit"><span class="tag">Tool calling and the agent loop</span><h3>Let the model act</h3></a>
+        <a class="card item" href="#ai-memory" style="text-decoration:none;color:inherit"><span class="tag">Chat memory and advisors</span><h3>Remember the conversation</h3></a>
+        <a class="card item" href="#ai-rag" style="text-decoration:none;color:inherit"><span class="tag">Vector stores and RAG</span><h3>Ground answers in your documents</h3></a>
+        <a class="card item" href="#ai-mcp" style="text-decoration:none;color:inherit"><span class="tag">Model Context Protocol</span><h3>Expose and consume tools across processes</h3></a>
+        <a class="card item" href="#ai-evals" style="text-decoration:none;color:inherit"><span class="tag">Evaluation and observability</span><h3>Prove it works, and keep watching</h3></a>
+        <a class="card item" href="#ai-agents" style="text-decoration:none;color:inherit"><span class="tag">Workflow patterns</span><h3>Compose agents</h3></a>
+      </div>
+      <div class="card" style="margin-top:18px">
+        <p class="zlabel">Providers and stores, Spring AI 2.0</p>
+        <p><b>Chat and embeddings:</b> Anthropic, OpenAI, Amazon Bedrock, Google GenAI, Mistral AI, DeepSeek, Ollama, with vendor-maintained extensions for Azure and OCI. <b>Images, audio and transcription</b> where the provider offers them. <b>Vector stores:</b> pgvector, Redis, Elasticsearch, OpenSearch, MongoDB Atlas, Neo4j, Cassandra, Oracle, Pinecone, Qdrant, Weaviate, Milvus, Chroma and more. <b>Memory:</b> in-memory, JDBC, Cassandra, Neo4j. <b>Observability:</b> Micrometer observations for every model, tool and store call.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="ai-chat">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Talk to a model</h2>
+        <span class="when">ChatClient</span>
+        <a class="totop" href="#spring-ai">Spring AI ↑</a>
+      </div>
+      <div class="prose rel-body">
+
+<p><code>ChatClient</code> is the front door: a fluent API in the style of <code>RestClient</code>, built from an auto-configured builder for whichever provider is on the classpath. The same code runs against Anthropic, OpenAI, Amazon Bedrock, Google GenAI, Mistral, DeepSeek or a local Ollama model; the provider is a dependency and a property, not a code path.</p>
+<pre><code class="language-xml">&lt;!-- pom.xml: Spring AI 2.0 BOM plus the Anthropic starter --&gt;
+&lt;dependencyManagement&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.ai&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-ai-bom&lt;/artifactId&gt;
+      &lt;version&gt;2.0.1&lt;/version&gt;
+      &lt;type&gt;pom&lt;/type&gt;
+      &lt;scope&gt;import&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework.ai&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-ai-starter-model-anthropic&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+<pre><code class="language-properties"># application.properties
+spring.ai.anthropic.api-key=${ANTHROPIC_API_KEY}
+spring.ai.anthropic.chat.model=claude-sonnet-5        # Spring AI 2.0 dropped the extra ".options" segment</code></pre>
+<pre><code class="language-java">@RestController
+class AskController {
+    private final ChatClient chat;
+
+    AskController(ChatClient.Builder builder) {
+        this.chat = builder
+            .defaultSystem("You are the support assistant for a Swiss fasting app. Answer in the user's language, briefly.")
+            .build();
+    }
+
+    @GetMapping("/ask")
+    String ask(@RequestParam String q) {
+        return chat.prompt().user(q).call().content();
+    }
+
+    @GetMapping(value = "/ask/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    Flux&lt;String&gt; stream(@RequestParam String q) {
+        return chat.prompt().user(q).stream().content();      // tokens as they arrive
+    }
+}</code></pre>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="ai-structured">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Get typed answers back</h2>
+        <span class="when">Structured output</span>
+        <a class="totop" href="#spring-ai">Spring AI ↑</a>
+      </div>
+      <div class="prose rel-body">
+
+<p>A model's text answer becomes a Java object with <code>.entity()</code>. Spring AI generates a JSON schema from the record, instructs the model to fill it, and maps the response. In 2.0 you can ask the provider to enforce the schema natively and validate the result; a <code>StructuredOutputValidationAdvisor</code> can also repair non-conforming JSON automatically.</p>
+<pre><code class="language-java">record Triage(String category, int priority, List&lt;String&gt; nextSteps) {}
+
+Triage triage = chat.prompt()
+    .system("Classify support tickets for a banking app. Priority 1 is highest.")
+    .user(ticketText)
+    .call()
+    .entity(Triage.class, spec -&gt; spec
+        .useProviderStructuredOutput()                        // the provider's native JSON schema mode
+        .validateSchema());                                   // reject anything that does not match</code></pre>
+<div class="aside-note"><p><b>Why it matters.</b> Typed output is the boundary between a chat toy and a system component. Downstream code deals with a <code>Triage</code>, not with parsing prose, and a schema violation is an exception you can route to a dead-letter queue.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="ai-tools">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Let the model act</h2>
+        <span class="when">Tool calling and the agent loop</span>
+        <a class="totop" href="#spring-ai">Spring AI ↑</a>
+      </div>
+      <div class="prose rel-body">
+
+<p>A <code>@Tool</code> method is a Java method the model may ask to run. Spring AI sends its name, description and parameter schema to the model, executes the call when the model requests it, feeds the result back, and repeats until the model answers. In 2.0 that loop is a <code>ToolCallingAdvisor</code> in the advisor chain, so it is one composable, observable component rather than logic buried in each provider. <code>ToolSearchToolCallingAdvisor</code> indexes a large tool set and lets the model discover only the tools it needs.</p>
+<pre><code class="language-java">@Component
+class AccountTools {
+    private final AccountRepository accounts;
+    AccountTools(AccountRepository accounts) { this.accounts = accounts; }
+
+    @Tool(description = "Get the current balance of an account, in CHF")
+    BigDecimal balance(@ToolParam(description = "IBAN of the account") String iban) {
+        return accounts.balance(iban);
+    }
+
+    @Tool(description = "Block a card. Requires an explicit customer request. Returns the case number.")
+    String blockCard(@ToolParam(description = "last four digits") String last4,
+                     @ToolParam(description = "reason given by the customer") String reason) {
+        return accounts.blockCard(last4, reason);            // the policy check lives here, not in the prompt
+    }
+}
+
+@Service
+class AssistantService {
+    private final ChatClient chat;
+    AssistantService(ChatClient.Builder builder, AccountTools tools) {
+        this.chat = builder.defaultTools(tools).build();      // the tool loop is automatic in 2.0
+    }
+    String handle(String message) {
+        return chat.prompt().user(message).call().content();
+    }
+}</code></pre>
+<div class="aside-note"><p><b>Why it matters.</b> This is the agent pattern from the <a href='/ai/#blueprint'>AI blueprint</a> in Spring form: every action is a typed capability with a description the model can read, and every capability is ordinary Java where authorisation, logging and rollback are enforced before anything happens.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="ai-memory">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Remember the conversation</h2>
+        <span class="when">Chat memory and advisors</span>
+        <a class="totop" href="#spring-ai">Spring AI ↑</a>
+      </div>
+      <div class="prose rel-body">
+
+<p>Advisors are middleware for prompts: each one can read and rewrite the request and the response. Memory, retrieval, guardrails and logging are all advisors, which keeps business code free of them. The memory advisor stores turns per conversation ID in an in-memory, JDBC, Cassandra or Neo4j store, and the window implementation caps how many turns are replayed.</p>
+<pre><code class="language-java">@Configuration
+class ChatConfig {
+    @Bean
+    ChatClient supportChat(ChatClient.Builder builder, ChatMemory memory) {   // ChatMemory auto-configured, JDBC-backed with the starter
+        return builder
+            .defaultAdvisors(
+                MessageChatMemoryAdvisor.builder(memory).build(),
+                SafeGuardAdvisor.builder().sensitiveWords(List.of("password", "PIN")).build(),
+                new SimpleLoggerAdvisor())
+            .build();
+    }
+}
+
+// per call: the conversation ID selects the memory
+String answer = supportChat.prompt()
+    .user(message)
+    .advisors(a -&gt; a.param(ChatMemory.CONVERSATION_ID, sessionId))
+    .call()
+    .content();</code></pre>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="ai-rag">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Ground answers in your documents</h2>
+        <span class="when">Vector stores and RAG</span>
+        <a class="totop" href="#spring-ai">Spring AI ↑</a>
+      </div>
+      <div class="prose rel-body">
+
+<p>Retrieval-augmented generation in Spring AI is an ETL pipeline plus one advisor. Readers (PDF, Tika for Office formats, JSON, Markdown) produce documents; a splitter chunks them; an embedding model turns chunks into vectors; a <code>VectorStore</code> stores them. Twenty stores are supported, from pgvector and Redis to Pinecone, Qdrant, Weaviate, MongoDB Atlas and Oracle. At query time <code>QuestionAnswerAdvisor</code> retrieves the best chunks and appends them to the prompt.</p>
+<pre><code class="language-java">@Service
+class PolicyIngest {
+    private final VectorStore store;
+    PolicyIngest(VectorStore store) { this.store = store; }         // pgvector via spring-ai-starter-vector-store-pgvector
+
+    void ingest(Resource pdf) {
+        List&lt;Document&gt; pages  = new PagePdfDocumentReader(pdf).get();
+        List&lt;Document&gt; chunks = new TokenTextSplitter().apply(pages);
+        store.add(chunks);                                           // embeds and stores in one call
+    }
+}
+
+@Service
+class PolicyAnswers {
+    private final ChatClient chat;
+    PolicyAnswers(ChatClient.Builder builder, VectorStore store) {
+        this.chat = builder
+            .defaultAdvisors(QuestionAnswerAdvisor.builder(store)
+                .searchRequest(SearchRequest.builder().topK(4).similarityThreshold(0.7).build())
+                .build())
+            .build();
+    }
+    String answer(String question) {
+        return chat.prompt().user(question).call().content();       // grounded in the retrieved chunks
+    }
+}</code></pre>
+<div class="aside-note"><p><b>Why it matters.</b> The retrieval step is where privacy lives. Documents never leave the vector store you run; only the retrieved chunks travel to the model, and a similarity threshold stops the model from being fed irrelevant context it might hallucinate around.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="ai-mcp">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Expose and consume tools across processes</h2>
+        <span class="when">Model Context Protocol</span>
+        <a class="totop" href="#spring-ai">Spring AI ↑</a>
+      </div>
+      <div class="prose rel-body">
+
+<p>Spring AI 2.0 ships the MCP Java SDK 2.0 and puts the annotation model in core. A Spring service becomes an MCP server by annotating methods with <code>@McpTool</code>, <code>@McpResource</code> or <code>@McpPrompt</code>; Streamable HTTP is the default transport, with OAuth 2.0 and OpenTelemetry supported out of the box. On the other side, an MCP client connects to any server (yours, a vendor's, or a desktop tool's) and its tools appear to the <code>ChatClient</code> like local ones.</p>
+<pre><code class="language-java">// MCP server: spring-ai-starter-mcp-server-webmvc
+@Component
+class CalendarMcp {
+    @McpTool(name = "free-slots", description = "Free 30-minute slots for a person on a given day")
+    List&lt;String&gt; freeSlots(@McpToolParam(description = "email") String person,
+                           @McpToolParam(description = "ISO date") LocalDate day) {
+        return calendar.freeSlots(person, day);
+    }
+}</code></pre>
+<pre><code class="language-properties"># MCP client: spring-ai-starter-mcp-client, connect to two servers
+spring.ai.mcp.client.streamable-http.connections.calendar.url=http://calendar.internal:8080
+spring.ai.mcp.client.streamable-http.connections.docs.url=http://docs.internal:8080</code></pre>
+<pre><code class="language-java">@Service
+class Scheduler {
+    private final ChatClient chat;
+    Scheduler(ChatClient.Builder builder, ToolCallbackProvider mcpTools) {    // every tool from every connected server
+        this.chat = builder.defaultToolCallbacks(mcpTools).build();
+    }
+    String plan(String request) { return chat.prompt().user(request).call().content(); }
+}</code></pre>
+<div class="aside-note"><p><b>Why it matters.</b> MCP is how an agent reaches systems it does not own without bespoke integrations. The runnable <a href='https://github.com/Janaka2/resume/tree/main/ai/mcp-agent-skeleton' target='_blank' rel='noopener'>MCP agent skeleton</a> shows the same protocol from a Python client; the Spring version above is what it looks like inside a Boot service.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="ai-evals">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Prove it works, and keep watching</h2>
+        <span class="when">Evaluation and observability</span>
+        <a class="totop" href="#spring-ai">Spring AI ↑</a>
+      </div>
+      <div class="prose rel-body">
+
+<p>Spring AI has evaluators that use a model to grade a model: <code>RelevancyEvaluator</code> checks that an answer is relevant to the question and the retrieved context, <code>FactCheckingEvaluator</code> checks claims against the context. They run in ordinary tests. At runtime, every <code>ChatClient</code> call, tool call, embedding and vector search emits Micrometer observations, so token usage, latency and error rates are on the same dashboards as the rest of the service.</p>
+<pre><code class="language-java">@SpringBootTest
+class PolicyAnswersTest {
+    @Autowired ChatClient.Builder builder;
+    @Autowired VectorStore store;
+    @Autowired PolicyAnswers answers;
+
+    @Test
+    void answerIsRelevantAndGrounded() {
+        String question = "How many days do I have to report a lost card?";
+        String answer   = answers.answer(question);
+        List&lt;Document&gt; context = store.similaritySearch(SearchRequest.builder().query(question).topK(4).build());
+
+        var evaluator = new RelevancyEvaluator(builder);
+        EvaluationResponse result = evaluator.evaluate(new EvaluationRequest(question, context, answer));
+
+        assertThat(result.isPass()).as(result.getFeedback()).isTrue();
+    }
+}</code></pre>
+<div class="aside-note"><p><b>Why it matters.</b> An eval suite is the regression test of a prompt. Change the model, the system prompt or the chunking and the build tells you what got worse. The <a href='/blog/posts/ai-evaluation-frameworks.html'>evals article</a> covers how to design the suite.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rel" id="ai-agents">
+    <div class="wrap">
+      <div class="rel-head">
+        <h2>Compose agents</h2>
+        <span class="when">Workflow patterns</span>
+        <a class="totop" href="#spring-ai">Spring AI ↑</a>
+      </div>
+      <div class="prose rel-body">
+
+<p>Spring AI does not impose an agent framework; it gives you the primitives and documents the five patterns that cover most production agents: prompt chaining, routing, parallelisation, orchestrator-workers and evaluator-optimiser. Each is a few lines of ordinary Java over <code>ChatClient</code>, which means each is testable and debuggable like any other service method. The community <code>spring-ai-agent-utils</code> project adds reusable Agent Skills, and <code>spring-ai-session</code> adds event-sourced conversation memory with model-driven compaction.</p>
+<pre><code class="language-java">// Evaluator-optimiser: draft, grade, revise, stop when good enough
+record Grade(boolean pass, String feedback) {}
+
+String draftAndRefine(String brief) {
+    String draft = chat.prompt().user("Write a customer notice: " + brief).call().content();
+    for (int round = 0; round &lt; 3; round++) {
+        Grade grade = chat.prompt()
+            .system("You review customer notices for a Swiss bank. Pass only if it is accurate, calm and under 120 words.")
+            .user("Brief: " + brief + "\n\nNotice:\n" + draft)
+            .call().entity(Grade.class);
+        if (grade.pass()) return draft;
+        draft = chat.prompt().user("Revise this notice. Feedback: " + grade.feedback() + "\n\n" + draft).call().content();
+    }
+    throw new IllegalStateException("could not produce an acceptable notice");   // a human takes over
+}</code></pre>
+<div class="aside-note"><p><b>Why it matters.</b> The loop has a bound, a typed exit condition and a failure path. That is the difference between an agent you can put behind a change-approval board and one you cannot.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <p class="eyebrow">Inside a regulated perimeter</p>
+      <h2>The checklist before an AI feature ships.</h2>
+      <div class="steps" style="margin-top:18px">
+        <div class="step">
+          <h3>Typed boundaries</h3>
+          <p>Structured output in, <code>@Tool</code> methods out. Nothing downstream parses prose; nothing the model can call bypasses the service's own authorisation.</p>
+        </div>
+        <div class="step">
+          <h3>Data stays home</h3>
+          <p>Vector store and chat memory run in your infrastructure. Only retrieved chunks and the current turn travel to the provider, and the provider is a contract you reviewed.</p>
+        </div>
+        <div class="step">
+          <h3>Evals in the build</h3>
+          <p>Relevancy and fact-checking evaluators run as tests. A prompt change without a green eval suite does not merge.</p>
+        </div>
+        <div class="step">
+          <h3>Observed and bounded</h3>
+          <p>Every call has a trace, a token count and a cost. Every agent loop has a maximum number of rounds and a human hand-off when it is reached.</p>
+        </div>
+      </div>
+      <div class="cta" style="margin-top:22px">
+        <div>
+          <h3>See the practice applied.</h3>
+          <p>The AI page collects the production patterns behind this checklist; the Java guide is the language side of the same story.</p>
+        </div>
+        <div class="actions" style="margin-top:0">
+          <a class="btn primary" href="/ai/">AI and agents →</a>
+          <a class="btn" href="./java-evolution-8-to-27.html">Java 8 to 27 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug 🇨🇭</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/ai/">AI</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+</body>
+</html>

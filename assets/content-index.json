@@ -1,5 +1,37 @@
 [
  {
+  "url": "/academy/modules/2026/FSE/spring-ecosystem-and-spring-ai.html",
+  "title": "The Spring ecosystem, and what Spring AI can do now",
+  "section": "academy",
+  "description": "Spring Boot from 1.0 to 4.x in working examples, then a hands-on tour of Spring AI 2.0: ChatClient, structured output, tools, memory, RAG, MCP, evaluation and agent patterns.",
+  "tags": [
+   "academy",
+   "spring",
+   "ecosystem",
+   "can",
+   "now"
+  ],
+  "date": "2026-09-16",
+  "updated": "2026-09-16",
+  "words": 3057,
+  "minutes": 14
+ },
+ {
+  "url": "/academy/modules/2026/FSE/java-evolution-8-to-27.html",
+  "title": "Java, release by release: 8 to 27",
+  "section": "academy",
+  "description": "Every Java release from 8 (2014) to 27 (September 2026): the features that mattered, why they mattered, and a working example for each, from lambdas to post-quantum TLS.",
+  "tags": [
+   "academy",
+   "java",
+   "release"
+  ],
+  "date": "2026-09-16",
+  "updated": "2026-09-16",
+  "words": 6119,
+  "minutes": 28
+ },
+ {
   "url": "/blog/posts/spring-kafka-deadletter.html",
   "title": "Dead-letter topics in Spring Kafka: retries and replay",
   "section": "blog",
@@ -46,7 +78,7 @@
    "apps"
   ],
   "date": "2026-09-10",
-  "updated": "2026-09-15",
+  "updated": "2026-09-16",
   "words": 1901,
   "minutes": 9
  },
@@ -147,7 +179,7 @@
    "systems"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-10",
+  "updated": "2026-09-16",
   "words": 868,
   "minutes": 4
  },
