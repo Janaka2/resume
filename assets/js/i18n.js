@@ -100,6 +100,7 @@ window.JP_I18N = (function () {
     lblBadgeAug26: '✓ Badge · abgeschlossen August 2026',
     lblDoneSep26: '✓ Abgeschlossen September 2026',
     lblViewCert: 'Zertifikat ansehen ↗',
+    lblVerify: 'prüfen ↗',
     lblDone26: '✓ Abgeschlossen Aug. — Sep. 2026',
     lblInProgressSep26: 'In Bearbeitung · September 2026',
     lblExamPrep26: 'Prüfungsvorbereitung · 2026',
