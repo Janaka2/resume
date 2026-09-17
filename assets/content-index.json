@@ -1,5 +1,22 @@
 [
  {
+  "url": "/academy/modules/2026/FSE/mcp-primitives-lab.html",
+  "title": "MCP primitives lab: one server, one client, every feature, both handshakes",
+  "section": "academy",
+  "description": "Learn the Model Context Protocol by watching it run: a verified Python server and client that exercise tools, resources, prompts, sampling, roots, elicitation and progress over stdio and Streamable…",
+  "tags": [
+   "academy",
+   "mcp",
+   "primitives",
+   "lab",
+   "one"
+  ],
+  "date": "2026-09-17",
+  "updated": "2026-09-17",
+  "words": 9624,
+  "minutes": 44
+ },
+ {
   "url": "/academy/production-ready-spring-angular/index.html",
   "title": "From CRUD to production: Angular + Spring Boot, served as a seven-course meal",
   "section": "academy",
@@ -47,7 +64,7 @@
   ],
   "date": "2026-09-16",
   "updated": "2026-09-16",
-  "words": 12876,
+  "words": 12917,
   "minutes": 59
  },
  {

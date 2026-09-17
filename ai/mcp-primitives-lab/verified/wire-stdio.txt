@@ -1,0 +1,39 @@
+== stdio: one JSON-RPC message per line on the child's stdin/stdout; stderr is free for logs ==
+
+-- A. modern handshake (2026-07-28): server/discover, then _meta on every request --
+-> {"jsonrpc": "2.0", "id": 1, "method": "server/discover", "params": {"_meta": {"io.modelcontextprotocol/protocolVersion": "2026-07-28", "io.modelcontextprotocol/clientInfo": {"name": "wire-trace", "version": "1.0.0"}, "io.modelcontextprotocol/clientCapabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}}}}
+   flag: we say which version we speak and what we can do, inside _meta
+<- {"jsonrpc": "2.0", "id": 1, "result": {"cacheScope": "private", "capabilities": {"prompts": {"listChanged": true}, "resources": {"listChanged": true, "subscribe": true}, "tools": {"listChanged": true}}, "instructions": "A teaching server. Call `negotiation` first to see the flags for this connection, then try every tool once. `summarize` uses your own model through sampling, `roots` asks which directories you allow,  …(629 chars)
+   flag: supportedVersions, capabilities, instructions, cacheScope/ttlMs (the client may cache this), serverInfo in _meta
+   supportedVersions=['2026-07-28'] capabilities={"prompts": {"listChanged": true}, "resources": {"listChanged": true, "subscribe": true}, "tools": {"listChanged": true}} cache=private/0ms
+-> {"jsonrpc": "2.0", "id": 2, "method": "tools/call", "params": {"_meta": {"io.modelcontextprotocol/protocolVersion": "2026-07-28", "io.modelcontextprotocol/clientInfo": {"name": "wire-trace", "version": "1.0.0"}, "io.modelcontextprotocol/clientCapabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}}, "name": "echo", "arguments": {"text": "raw bytes"}}}
+   flag: no notifications/initialized; _meta carries the version and capabilities again
+<- {"jsonrpc": "2.0", "id": 2, "result": {"content": [{"text": "raw bytes", "type": "text"}], "isError": false, "resultType": "complete", "structuredContent": {"result": "raw bytes"}, "_meta": {"io.modelcontextprotocol/serverInfo": {"name": "primitives-lab", "version": "1.0.0"}}}}
+   resultType: "complete" — content[] for any client, structuredContent because the SDK derived an output schema
+-> {"jsonrpc": "2.0", "id": 3, "method": "tools/call", "params": {"_meta": {"io.modelcontextprotocol/protocolVersion": "2026-07-28", "io.modelcontextprotocol/clientInfo": {"name": "wire-trace", "version": "1.0.0"}, "io.modelcontextprotocol/clientCapabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}}, "name": "summarize", "arguments": {"text": "MCP separates tools, resources and pro …(429 chars)
+   the server needs OUR model for this one
+<- {"jsonrpc": "2.0", "id": 3, "result": {"inputRequests": {"__main__:ask_client_model": {"method": "sampling/createMessage", "params": {"maxTokens": 120, "messages": [{"content": {"text": "Summarise in one sentence:\n\nMCP separates tools, resources and prompts.", "type": "text"}, "role": "user"}], "modelPreferences": {"hints": [{"name": "claude"}], "intelligencePriority": 0.3, "speedPriority": 0.8}, "systemPrompt": "Y …(993 chars)
+   flag: resultType "input_required" + inputRequests (keyed) + requestState (opaque, encrypted, must go back unchanged)
+   the server asked for sampling/createMessage under key '__main__:ask_client_model'
+-> {"jsonrpc": "2.0", "id": 4, "method": "tools/call", "params": {"_meta": {"io.modelcontextprotocol/protocolVersion": "2026-07-28", "io.modelcontextprotocol/clientInfo": {"name": "wire-trace", "version": "1.0.0"}, "io.modelcontextprotocol/clientCapabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}}, "name": "summarize", "arguments": {"text": "MCP separates tools, resources and pro …(1041 chars)
+   the RETRY: same call, plus inputResponses for that key and the requestState we were given
+<- {"jsonrpc": "2.0", "id": 4, "result": {"content": [{"text": "[stub-model-1] In short: MCP separates tools, resources and prompts.\u2026", "type": "text"}], "isError": false, "resultType": "complete", "structuredContent": {"result": "[stub-model-1] In short: MCP separates tools, resources and prompts.\u2026"}, "_meta": {"io.modelcontextprotocol/serverInfo": {"name": "primitives-lab", "version": "1.0.0"}}}}
+   resultType "complete": the tool ran with the model's answer injected as an argument
+   server exited with code 0 once stdin closed
+
+-- B. legacy handshake (2025-11-25): initialize, reply, notifications/initialized --
+-> {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2026-07-28", "capabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}, "clientInfo": {"name": "wire-trace", "version": "1.0.0"}}}
+   flag: we PROPOSE a protocolVersion
+<- {"jsonrpc": "2.0", "id": 1, "result": {"capabilities": {"experimental": {}, "prompts": {"listChanged": false}, "resources": {"listChanged": false, "subscribe": false}, "tools": {"listChanged": false}}, "instructions": "A teaching server. Call `negotiation` first to see the flags for this connection, then try every tool once. `summarize` uses your own model through sampling, `roots` asks which directories you allow, ` …(551 chars)
+   flag: result.protocolVersion is what the server CONFIRMED (an initialize request lands you on the legacy version)
+   negotiated protocolVersion = 2025-11-25
+-> {"jsonrpc": "2.0", "method": "notifications/initialized"}
+   flag: the handshake is complete only after this notification; before it, only ping and logging are allowed
+-> {"jsonrpc": "2.0", "id": 2, "method": "ping"}
+   ping exists on the legacy version
+<- {"jsonrpc": "2.0", "id": 2, "result": {}}
+   an empty result is the pong
+-> {"jsonrpc": "2.0", "id": 3, "method": "tools/list", "params": {}}
+<- {"jsonrpc": "2.0", "id": 3, "result": {"tools": [{"annotations": {"idempotentHint": true, "openWorldHint": false, "readOnlyHint": true}, "description": "Return the text unchanged. The simplest possible tool: one argument, one result.", "inputSchema": {"properties": {"text": {"title": "Text", "type": "string"}}, "required": ["text"], "type": "object", "title": "echoArguments"}, "name": "echo", "outputSchema": {"proper …(5101 chars)
+   tools = ['echo', 'negotiation', 'count', 'summarize', 'roots', 'add_note', 'delete_note']
+   server exited with code 0 once stdin closed

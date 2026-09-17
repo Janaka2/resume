@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCP primitives lab: one server, one client, every feature, both handshakes | Janaka Academy</title>
+  <meta name="description" content="Learn the Model Context Protocol by watching it run: a verified Python server and client that exercise tools, resources, prompts, sampling, roots, elicitation and progress over stdio and Streamable HTTP, the raw bytes of the 2026-07-28 and 2025-11-25 handshakes, and the flags a host must track.">
+  <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/mcp-primitives-lab.html">
+  <link rel="alternate" type="application/atom+xml" title="Janaka Premathilaka" href="/feed.xml">
+  <meta property="og:title" content="MCP primitives lab: one server, one client, every feature, both handshakes | Janaka Academy">
+  <meta property="og:description" content="Learn the Model Context Protocol by watching it run: a verified Python server and client that exercise tools, resources, prompts, sampling, roots, elicitation and progress over stdio and Streamable HTTP, the raw bytes of the 2026-07-28 and 2025-11-25 handshakes, and the flags a host must track.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://janaka.me/academy/modules/2026/FSE/mcp-primitives-lab.html">
+  <meta property="og:image" content="https://janaka.me/assets/og/academy.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MCP primitives lab: one server, one client, every feature, both handshakes | Janaka Academy">
+  <meta name="twitter:description" content="Learn the Model Context Protocol by watching it run: a verified Python server and client that exercise tools, resources, prompts, sampling, roots, elicitation and progress over stdio and Streamable HTTP, the raw bytes of the 2026-07-28 and 2025-11-25 handshakes, and the flags a host must track.">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/academy.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png?v=1">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260916">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
+  <link rel="stylesheet" href="/assets/css/study.css?v=20260916b">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body class="study">
+<a class="skip" href="#main">Skip to content</a>
+
+<div data-include="/partials/site-nav.html"></div>
+
+<main id="main">
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/academy/" style="color:inherit;text-decoration:none">&larr; Janaka Academy</a> &middot; <a href="/academy/modules/2026/FSE/mcp-end-to-end.html" style="color:inherit;text-decoration:none">MCP end to end</a></p>
+      <h1>MCP primitives lab.</h1>
+      <p class="lede">Learn the Model Context Protocol by watching it run. One small server exposes every feature: tools, resources, prompts, sampling, roots, elicitation, progress. One client exercises each of them and prints the flags it tracks. A raw trace shows the bytes of both handshakes, over stdio and over Streamable HTTP. Every output on this page was produced by the code on this page, on 17 September 2026.</p>
+      <div class="badges">
+        <span class="badge hot">Spec 2026-07-28 and 2025-11-25</span>
+        <span class="badge">Python SDK 2.2</span>
+        <span class="badge">stdio · Streamable HTTP · SSE</span>
+        <span class="badge">5 tests, 3 transports</span>
+        <a class="badge" href="/assets/certificates/anthropic-model-context-protocol-advanced-topics.pdf" target="_blank" rel="noopener" style="text-decoration:none" title="Certificate of completion, Anthropic, 17 September 2026">Anthropic: MCP Advanced Topics ✓</a>
+        <a class="badge" href="/assets/certificates/anthropic-introduction-to-model-context-protocol.pdf" target="_blank" rel="noopener" style="text-decoration:none" title="Certificate of completion, Anthropic, September 2026">Anthropic: Introduction to MCP ✓</a>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="#map">Start with the map</a>
+        <a class="btn" href="#flags">Jump to the flags</a>
+        <a class="btn" href="https://github.com/Janaka2/resume/tree/main/ai/mcp-primitives-lab" target="_blank" rel="noopener">Get the code ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="map">
+    <div class="wrap">
+      <p class="eyebrow">Part one · Orientation</p>
+      <h2>The map: seven primitives, who controls each, and where to look.</h2>
+      <div class="prose rel-body">
+
+<p>MCP has three things a server <em>offers</em> and three things a server may <em>ask for</em>. The first group is controlled by a different party each time; the second always ends at the client, because the client owns the model, the filesystem policy and the person. Progress is the one notification channel that survived the 2026 revision.</p>
+<table><thead><tr><th>Primitive</th><th>Who controls it</th><th>In server.py</th><th>In client.py</th></tr></thead><tbody><tr><td>Tools</td><td>the model</td><td><code>@mcp.tool</code> with <code>ToolAnnotations</code> (read-only, destructive)</td><td><code>list_tools</code>, <code>call_tool</code></td></tr><tr><td>Resources</td><td>the application</td><td><code>lab://notes</code>, template <code>lab://notes/{{note_id}}</code>, dynamic <code>lab://clock</code></td><td><code>list_resources</code>, <code>list_resource_templates</code>, <code>read_resource</code></td></tr><tr><td>Prompts</td><td>the person</td><td><code>@mcp.prompt explain(concept, level)</code></td><td><code>list_prompts</code>, <code>get_prompt</code></td></tr><tr><td>Sampling</td><td>the client's model</td><td><code>Resolve(ask_client_model)</code> returning <code>Sample(...)</code></td><td><code>sampling_callback</code></td></tr><tr><td>Roots</td><td>the client's policy</td><td><code>Resolve(ask_roots)</code> returning <code>ListRoots()</code></td><td><code>list_roots_callback</code></td></tr><tr><td>Elicitation</td><td>the person</td><td><code>Resolve(confirm_delete)</code> returning <code>Elicit(...)</code></td><td><code>elicitation_callback</code></td></tr><tr><td>Progress</td><td>the server</td><td><code>ctx.report_progress(i, n, message)</code></td><td><code>progress_callback=</code> on <code>call_tool</code></td></tr></tbody></table>
+<div class="callout key"><span class="lbl">Run it in five minutes</span><p><code>pip install -r requirements.txt</code>, then <code>python client.py</code>: the client launches the server over stdio and walks through twelve steps. Then <code>python server.py --transport streamable-http</code> in one terminal and <code>python client.py --transport http</code> in another. <code>python wire_trace.py stdio</code> and <code>... http</code> show the raw bytes. <code>pytest -q</code> proves all of it.</p></div>
+<p>The whole server is under 250 lines. Read it once now, then come back to each part below.</p>
+<details class="code-fold"><summary><span>ai/mcp-primitives-lab/server.py · 234 lines</span></summary><pre><code class="language-python">"""
+server.py — the MCP primitives lab: every server-side feature of the protocol in one small server.
+
+    Tools        echo, negotiation, count, summarize, roots, add_note, delete_note
+    Resources    lab://notes (list), lab://notes/{note_id} (template), lab://clock (changes every call)
+    Prompts      explain
+    Sampling     summarize asks the CLIENT's model to write the summary (sampling/createMessage)
+    Roots        roots asks the client which directories it is allowed to touch (roots/list)
+    Elicitation  delete_note asks the person to confirm before it deletes (elicitation/create)
+    Progress     count streams notifications/progress and log messages while it works
+    Transports   --transport stdio | streamable-http  (plus --stateless and --json-response for HTTP)
+
+The `negotiation` tool returns the flags the server sees for the current connection: the protocol
+version that was negotiated, the client's declared capabilities, and, over HTTP, the session id.
+
+Run:   python server.py                                   stdio (a host launches this as a subprocess)
+       python server.py --transport streamable-http       http://127.0.0.1:8765/mcp
+Needs: pip install "mcp&gt;=2.2"
+"""
+from __future__ import annotations
+
+import argparse
+import asyncio
+import datetime as dt
+import logging
+import os
+from typing import Annotated, Any
+
+from pydantic import BaseModel, Field
+
+from mcp.server.mcpserver import Context, Elicit, ListRoots, MCPServer, Resolve, Sample
+from mcp.server.mcpserver.exceptions import ToolError
+from mcp.types import (
+    CreateMessageResult,
+    ListRootsResult,
+    ModelHint,
+    ModelPreferences,
+    SamplingMessage,
+    TextContent,
+    ToolAnnotations,
+)
+
+log = logging.getLogger("primitives-lab")  # stderr only: on stdio, stdout is the protocol channel
+
+mcp = MCPServer(
+    "primitives-lab",
+    version="1.0.0",
+    instructions=(
+        "A teaching server. Call `negotiation` first to see the flags for this connection, "
+        "then try every tool once. `summarize` uses your own model through sampling, "
+        "`roots` asks which directories you allow, `delete_note` asks you to confirm."
+    ),
+)
+
+NOTES: dict[str, str] = {
+    "welcome": "Resources are application-controlled context: the host decides what the model sees.",
+    "flags": "Track: protocolVersion, capabilities on both sides, initialized, and the HTTP session id.",
+}
+
+READ_ONLY = ToolAnnotations(read_only_hint=True, idempotent_hint=True, open_world_hint=False)
+
+
+# ------------------------------------------------------------------ tools
+@mcp.tool(title="Echo", annotations=READ_ONLY)
+def echo(text: str) -&gt; str:
+    """Return the text unchanged. The simplest possible tool: one argument, one result."""
+    return text
+
+
+class Negotiation(BaseModel):
+    protocol_version: str = Field(description="The version both sides agreed on during initialize")
+    client_capabilities: dict[str, Any] = Field(description="What the client declared it can do (sampling, roots, elicitation...)")
+    transport: str = Field(description="How this server was started")
+    http_session_id: str | None = Field(description="Mcp-Session-Id header, present on stateful Streamable HTTP only")
+    request_id: str = Field(description="JSON-RPC id of this very tools/call request")
+
+
+@mcp.tool(title="Show the negotiation", annotations=READ_ONLY)
+def negotiation(ctx: Context) -&gt; Negotiation:
+    """The flags the server sees for this connection: negotiated protocol version, the client's
+    declared capabilities, the transport, the HTTP session id if any, and this request's id."""
+    caps = ctx.client_capabilities
+    try:
+        session_id = ctx.headers.get("mcp-session-id")
+    except Exception:  # no HTTP request behind this call (stdio)
+        session_id = None
+    return Negotiation(
+        protocol_version=str(ctx.protocol_version),
+        client_capabilities=caps.model_dump(exclude_none=True) if caps is not None else {},
+        transport=os.environ.get("LAB_TRANSPORT", "stdio"),
+        http_session_id=session_id,
+        request_id=str(ctx.request_id),
+    )
+
+
+@mcp.tool(title="Count slowly", annotations=READ_ONLY)
+async def count(n: int, ctx: Context) -&gt; str:
+    """Count to n, sending a notifications/progress message for every step.
+    (The separate logging channel, notifications/message, is deprecated as of 2026-07-28: put a
+    human-readable `message` on the progress notification instead, and log to stderr for operators.)"""
+    if n &lt; 1 or n &gt; 50:
+        raise ToolError("n must be between 1 and 50")
+    for i in range(1, n + 1):
+        await ctx.report_progress(progress=i, total=n, message=f"step {i} of {n}")
+        log.info("counted %d", i)  # stderr: never stdout on stdio
+        await asyncio.sleep(0.05)
+    return f"counted to {n}"
+
+
+# --- Server-to-client asks: sampling, roots and elicitation ------------------------------------
+# Up to spec 2025-11-25 the server sent these as JSON-RPC requests BACK over the connection, which
+# needs a back-channel (stdio, or the SSE stream). Since 2026-07-28 they are "input required" rounds:
+# the tool result says what it needs, the client supplies it, and the call is retried with the answer
+# riding along in request_state. That is what lets them work over stateless HTTP. In this SDK you
+# declare the need with a RESOLVER: a function that returns Sample(...), ListRoots() or Elicit(...);
+# the framework runs the round trip and injects the answer as a tool argument the model never sees.
+
+
+def ask_client_model(text: str) -&gt; Sample:
+    """Resolver for `summarize`: what to ask the client's model. Must render identically on every retry round."""
+    return Sample(
+        [SamplingMessage(role="user", content=TextContent(type="text", text=f"Summarise in one sentence:\n\n{text}"))],
+        max_tokens=120,
+        system_prompt="You summarise plainly. One sentence, no preamble.",
+        model_preferences=ModelPreferences(hints=[ModelHint(name="claude")], intelligencePriority=0.3, speedPriority=0.8),
+    )
+
+
+@mcp.tool(title="Summarise with the client's model", annotations=READ_ONLY)
+def summarize(text: str, answer: Annotated[CreateMessageResult, Resolve(ask_client_model)]) -&gt; str:
+    """Ask the CLIENT's language model to summarise the text in one sentence (sampling/createMessage).
+    The server has no model and no API key: the client owns the model, and can review the request."""
+    content = answer.content
+    reply = content.text if isinstance(content, TextContent) else str(content)
+    return f"[{answer.model}] {reply}"
+
+
+def ask_roots() -&gt; ListRoots:
+    """Resolver for `roots`: request the client's roots/list."""
+    return ListRoots()
+
+
+@mcp.tool(title="Which roots may I touch?", annotations=READ_ONLY)
+def roots(allowed: Annotated[ListRootsResult, Resolve(ask_roots)]) -&gt; list[str]:
+    """Ask the client for its roots (roots/list): the directories or URIs this server is allowed to work in."""
+    return [f"{r.name or '(unnamed)'} -&gt; {r.uri}" for r in allowed.roots]
+
+
+@mcp.tool(title="Add a note", annotations=ToolAnnotations(read_only_hint=False, destructive_hint=False, idempotent_hint=True, open_world_hint=False))
+async def add_note(note_id: str, text: str, ctx: Context) -&gt; str:
+    """Create or replace a note, then tell subscribed clients the resource list changed."""
+    if not note_id.isidentifier():
+        raise ToolError("note_id must be a simple identifier, e.g. meeting_notes")
+    NOTES[note_id] = text
+    await ctx.notify_resources_changed()
+    return f"lab://notes/{note_id}"
+
+
+class ConfirmDelete(BaseModel):
+    sure: bool = Field(description="Really delete this note?")
+
+
+def confirm_delete(note_id: str) -&gt; ConfirmDelete | Elicit[ConfirmDelete]:
+    """Resolver for `delete_note`: ask the PERSON (elicitation/create) unless there is nothing to delete."""
+    if note_id not in NOTES:
+        return ConfirmDelete(sure=False)  # nothing to ask; the tool will report the missing note
+    return Elicit(f"Delete the note '{note_id}'? This cannot be undone.", ConfirmDelete)
+
+
+@mcp.tool(title="Delete a note", annotations=ToolAnnotations(read_only_hint=False, destructive_hint=True, idempotent_hint=True, open_world_hint=False))
+async def delete_note(note_id: str, confirm: Annotated[ConfirmDelete, Resolve(confirm_delete)], ctx: Context) -&gt; str:
+    """Delete a note, but only after the person confirms (elicitation/create). The model cannot answer
+    this question: the client shows it to the human and sends back the human's answer."""
+    if note_id not in NOTES:
+        raise ToolError(f"no note called {note_id}")
+    if not confirm.sure:
+        return f"kept {note_id}: the person said no"
+    del NOTES[note_id]
+    await ctx.notify_resources_changed()
+    return f"deleted {note_id}"
+
+
+# ------------------------------------------------------------------ resources
+@mcp.resource("lab://notes", title="All notes", mime_type="application/json")
+def list_notes() -&gt; str:
+    """Every note id with its length. A plain, static-looking resource."""
+    import json
+    return json.dumps({k: len(v) for k, v in NOTES.items()})
+
+
+@mcp.resource("lab://notes/{note_id}", title="One note", mime_type="text/plain")
+def read_note(note_id: str) -&gt; str:
+    """A resource template: the client fills in {note_id}. Unknown ids are an error, not empty text."""
+    if note_id not in NOTES:
+        raise ToolError(f"no note called {note_id}")
+    return NOTES[note_id]
+
+
+@mcp.resource("lab://clock", title="Server clock", mime_type="text/plain")
+def clock() -&gt; str:
+    """Changes on every read: shows that a resource can be dynamic."""
+    return dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
+
+
+# ------------------------------------------------------------------ prompts
+@mcp.prompt(title="Explain a concept")
+def explain(concept: str, level: str = "beginner") -&gt; str:
+    """A reusable prompt template the USER picks (user-controlled), unlike tools the model picks."""
+    return (
+        f"Explain '{concept}' to a {level}. Start with a one-sentence definition, give one concrete "
+        "example, then name the most common mistake people make with it."
+    )
+
+
+# ------------------------------------------------------------------ entry point
+def main() -&gt; None:
+    p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    p.add_argument("--transport", choices=["stdio", "streamable-http"], default=os.environ.get("MCP_TRANSPORT", "stdio"))
+    p.add_argument("--host", default="127.0.0.1")
+    p.add_argument("--port", type=int, default=8765)
+    p.add_argument("--stateless", action="store_true", help="HTTP: no session id, every request stands alone")
+    p.add_argument("--json-response", action="store_true", help="HTTP: answer with application/json instead of an SSE stream")
+    a = p.parse_args()
+    logging.basicConfig(level=logging.INFO, stream=__import__("sys").stderr, format="%(name)s %(levelname)s %(message)s")
+    os.environ["LAB_TRANSPORT"] = a.transport + (" stateless" if a.stateless else "") + (" json" if a.json_response else "")
+    if a.transport == "streamable-http":
+        log.info("Streamable HTTP on http://%s:%d/mcp  stateless=%s json=%s", a.host, a.port, a.stateless, a.json_response)
+        mcp.run(transport="streamable-http", host=a.host, port=a.port, stateless_http=a.stateless, json_response=a.json_response)
+    else:
+        mcp.run(transport="stdio")
+
+
+if __name__ == "__main__":
+    main()</code></pre></details>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="flags">
+    <div class="wrap">
+      <p class="eyebrow">Part one · Orientation</p>
+      <h2>The flags to keep track of.</h2>
+      <div class="prose rel-body">
+
+<p>A host keeps a small amount of state per connection, and most bugs come from getting one of these wrong. The client in this lab keeps them in a dictionary called <code>FLAGS</code> and prints it when the session ends.</p>
+<table><thead><tr><th>Flag</th><th>Where it is set</th><th>Why it matters</th></tr></thead><tbody><tr><td><code>protocol_version</code></td><td><code>server/discover</code> result (<code>supportedVersions</code>), or the <code>initialize</code> reply</td><td>decides which of the rules below apply</td></tr><tr><td><code>server_capabilities</code></td><td>the same reply: <code>tools</code>, <code>resources</code> (<code>subscribe</code>, <code>listChanged</code>), <code>prompts</code></td><td>never call what was not offered</td></tr><tr><td>client capabilities</td><td>implied by the callbacks you register: <code>sampling</code>, <code>roots</code>, <code>elicitation</code></td><td>the server may only ask for what you declared</td></tr><tr><td><code>initialized</code></td><td>legacy only: after <code>notifications/initialized</code></td><td>before it, only <code>ping</code> and logging are allowed</td></tr><tr><td><code>_meta</code> on every request</td><td>modern only: version, clientInfo, clientCapabilities</td><td>replaces per-connection state; this is what makes stateless HTTP possible</td></tr><tr><td><code>Mcp-Session-Id</code></td><td>legacy HTTP: a header on the <code>initialize</code> reply</td><td>echo it on every later request; <code>DELETE</code> ends the session</td></tr><tr><td><code>MCP-Protocol-Version</code>, <code>Mcp-Method</code>, <code>Mcp-Name</code></td><td>modern HTTP request headers</td><td>the transport routes and validates before the body is parsed; header and body must agree</td></tr><tr><td><code>requestState</code></td><td>an <code>input_required</code> result</td><td>opaque and encrypted; send it back unchanged on the retry, with <code>inputResponses</code></td></tr></tbody></table>
+<p>This is the dictionary as the client printed it after a full run over stdio. Every counter is one, because the server asked for the model once, for the roots once and for the person once.</p>
+<div class="msgflow">FLAGS after the session:
+{
+  "initialized": true,
+  "protocol_version": "2026-07-28",
+  "server_info": "primitives-lab 1.0.0",
+  "server_capabilities": {
+    "prompts": {
+      "list_changed": true
+    },
+    "resources": {
+      "subscribe": true,
+      "list_changed": true
+    },
+    "tools": {
+      "list_changed": true
+    }
+  },
+  "client_capabilities_sent": [
+    "sampling",
+    "roots",
+    "elicitation"
+  ],
+  "sampling_requests": 1,
+  "roots_requests": 1,
+  "elicitations": 1,
+  "progress_notifications": 3,
+  "log_messages": 0,
+  "other_notifications": []
+}</div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="discover">
+    <div class="wrap">
+      <p class="eyebrow">Part two · The wire</p>
+      <h2>Handshake A (2026-07-28): server/discover, then _meta on every request.</h2>
+      <div class="prose rel-body">
+
+<p>These are the exact bytes <code>wire_trace.py stdio</code> wrote to the server's stdin and read from its stdout, one JSON-RPC message per line. No SDK is involved on the client side. Watch three things: the request id comes back on the reply; the client declares its version and capabilities inside <code>_meta</code>, and does so again on every later request; and there is no <code>notifications/initialized</code> at all.</p>
+<div class="msgflow">-- A. modern handshake (2026-07-28): server/discover, then _meta on every request --
+-&gt; {"jsonrpc": "2.0", "id": 1, "method": "server/discover", "params": {"_meta": {"io.modelcontextprotocol/protocolVersion": "2026-07-28", "io.modelcontextprotocol/clientInfo": {"name": "wire-trace", "version": "1.0.0"}, "io.modelcontextprotocol/clientCapabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}}}}
+   flag: we say which version we speak and what we can do, inside _meta
+&lt;- {"jsonrpc": "2.0", "id": 1, "result": {"cacheScope": "private", "capabilities": {"prompts": {"listChanged": true}, "resources": {"listChanged": true, "subscribe": true}, "tools": {"listChanged": true}}, "instructions": "A teaching server. Call `negotiation` first to see the flags for this connection, then try every tool once. `summarize` uses your own model through sampling, `roots` asks which directories you allow,  …(629 chars)
+   flag: supportedVersions, capabilities, instructions, cacheScope/ttlMs (the client may cache this), serverInfo in _meta
+   supportedVersions=['2026-07-28'] capabilities={"prompts": {"listChanged": true}, "resources": {"listChanged": true, "subscribe": true}, "tools": {"listChanged": true}} cache=private/0ms
+-&gt; {"jsonrpc": "2.0", "id": 2, "method": "tools/call", "params": {"_meta": {"io.modelcontextprotocol/protocolVersion": "2026-07-28", "io.modelcontextprotocol/clientInfo": {"name": "wire-trace", "version": "1.0.0"}, "io.modelcontextprotocol/clientCapabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}}, "name": "echo", "arguments": {"text": "raw bytes"}}}
+   flag: no notifications/initialized; _meta carries the version and capabilities again
+&lt;- {"jsonrpc": "2.0", "id": 2, "result": {"content": [{"text": "raw bytes", "type": "text"}], "isError": false, "resultType": "complete", "structuredContent": {"result": "raw bytes"}, "_meta": {"io.modelcontextprotocol/serverInfo": {"name": "primitives-lab", "version": "1.0.0"}}}}
+   resultType: "complete" — content[] for any client, structuredContent because the SDK derived an output schema
+-&gt; {"jsonrpc": "2.0", "id": 3, "method": "tools/call", "params": {"_meta": {"io.modelcontextprotocol/protocolVersion": "2026-07-28", "io.modelcontextprotocol/clientInfo": {"name": "wire-trace", "version": "1.0.0"}, "io.modelcontextprotocol/clientCapabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}}, "name": "summarize", "arguments": {"text": "MCP separates tools, resources and pro …(429 chars)
+   the server needs OUR model for this one
+&lt;- {"jsonrpc": "2.0", "id": 3, "result": {"inputRequests": {"__main__:ask_client_model": {"method": "sampling/createMessage", "params": {"maxTokens": 120, "messages": [{"content": {"text": "Summarise in one sentence:\n\nMCP separates tools, resources and prompts.", "type": "text"}, "role": "user"}], "modelPreferences": {"hints": [{"name": "claude"}], "intelligencePriority": 0.3, "speedPriority": 0.8}, "systemPrompt": "Y …(993 chars)
+   flag: resultType "input_required" + inputRequests (keyed) + requestState (opaque, encrypted, must go back unchanged)
+   the server asked for sampling/createMessage under key '__main__:ask_client_model'
+-&gt; {"jsonrpc": "2.0", "id": 4, "method": "tools/call", "params": {"_meta": {"io.modelcontextprotocol/protocolVersion": "2026-07-28", "io.modelcontextprotocol/clientInfo": {"name": "wire-trace", "version": "1.0.0"}, "io.modelcontextprotocol/clientCapabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}}, "name": "summarize", "arguments": {"text": "MCP separates tools, resources and pro …(1041 chars)
+   the RETRY: same call, plus inputResponses for that key and the requestState we were given
+&lt;- {"jsonrpc": "2.0", "id": 4, "result": {"content": [{"text": "[stub-model-1] In short: MCP separates tools, resources and prompts.\u2026", "type": "text"}], "isError": false, "resultType": "complete", "structuredContent": {"result": "[stub-model-1] In short: MCP separates tools, resources and prompts.\u2026"}, "_meta": {"io.modelcontextprotocol/serverInfo": {"name": "primitives-lab", "version": "1.0.0"}}}}
+   resultType "complete": the tool ran with the model's answer injected as an argument
+   server exited with code 0 once stdin closed</div>
+<div class="callout key"><span class="lbl">Why the version rides on every request</span><p>Nothing about the connection is remembered between requests. A server can therefore run stateless behind a load balancer, and a client can cache the <code>server/discover</code> result for <code>ttlMs</code> and skip it next time. The same design is why sampling, roots and elicitation had to change: see <a href='#rounds'>input-required rounds</a>.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="initialize">
+    <div class="wrap">
+      <p class="eyebrow">Part two · The wire</p>
+      <h2>Handshake B (2025-11-25): initialize, reply, notifications/initialized.</h2>
+      <div class="prose rel-body">
+
+<p>Send an <code>initialize</code> request to the same server and it answers on the older protocol, whatever version you proposed. This is the three-step handshake most hosts still speak in 2026: the client proposes a version and capabilities, the server confirms a version and offers its own, and the client closes the handshake with a notification. Only after that notification may normal requests flow; before it, only <code>ping</code> and logging are allowed.</p>
+<div class="msgflow">-- B. legacy handshake (2025-11-25): initialize, reply, notifications/initialized --
+-&gt; {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2026-07-28", "capabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}, "clientInfo": {"name": "wire-trace", "version": "1.0.0"}}}
+   flag: we PROPOSE a protocolVersion
+&lt;- {"jsonrpc": "2.0", "id": 1, "result": {"capabilities": {"experimental": {}, "prompts": {"listChanged": false}, "resources": {"listChanged": false, "subscribe": false}, "tools": {"listChanged": false}}, "instructions": "A teaching server. Call `negotiation` first to see the flags for this connection, then try every tool once. `summarize` uses your own model through sampling, `roots` asks which directories you allow, ` …(551 chars)
+   flag: result.protocolVersion is what the server CONFIRMED (an initialize request lands you on the legacy version)
+   negotiated protocolVersion = 2025-11-25
+-&gt; {"jsonrpc": "2.0", "method": "notifications/initialized"}
+   flag: the handshake is complete only after this notification; before it, only ping and logging are allowed
+-&gt; {"jsonrpc": "2.0", "id": 2, "method": "ping"}
+   ping exists on the legacy version
+&lt;- {"jsonrpc": "2.0", "id": 2, "result": {}}
+   an empty result is the pong
+-&gt; {"jsonrpc": "2.0", "id": 3, "method": "tools/list", "params": {}}
+&lt;- {"jsonrpc": "2.0", "id": 3, "result": {"tools": [{"annotations": {"idempotentHint": true, "openWorldHint": false, "readOnlyHint": true}, "description": "Return the text unchanged. The simplest possible tool: one argument, one result.", "inputSchema": {"properties": {"text": {"title": "Text", "type": "string"}}, "required": ["text"], "type": "object", "title": "echoArguments"}, "name": "echo", "outputSchema": {"proper …(5101 chars)
+   tools = ['echo', 'negotiation', 'count', 'summarize', 'roots', 'add_note', 'delete_note']
+   server exited with code 0 once stdin closed</div>
+<div class="callout "><p><b>Both handshakes, one server.</b> The SDK's <code>MCPServer</code> answers <code>server/discover</code> and <code>initialize</code> alike, so a server you write today works with a host from last year. The client run below negotiated 2026-07-28; the trace's part B negotiated 2025-11-25 on the same binary.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="http">
+    <div class="wrap">
+      <p class="eyebrow">Part two · The wire</p>
+      <h2>Streamable HTTP: one endpoint, three headers, and when SSE appears.</h2>
+      <div class="prose rel-body">
+
+<p>Over HTTP every client message is a <code>POST</code> to one URL. The server answers with plain JSON when there is nothing to stream, or with a <code>text/event-stream</code> body when it may need to send several messages before the result. The client must accept both. On the modern protocol three request headers carry the flags, so a proxy can route and validate without parsing the body: <code>MCP-Protocol-Version</code>, <code>Mcp-Method</code> (which must equal the JSON-RPC method) and <code>Mcp-Name</code> (the tool). The trace sends the first request without them, on purpose, to show what happens.</p>
+<div class="msgflow">-- A. modern (2026-07-28): server/discover, _meta on every POST, no session required --
+-&gt; {"jsonrpc": "2.0", "id": 1, "method": "server/discover", "params": {"_meta": {"io.modelcontextprotocol/protocolVersion": "2026-07-28", "io.modelcontextprotocol/clientInfo": {"name": "wire-trace", "version": "1.0.0"}, "io.modelcontextprotocol/clientCapabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}}}}
+   first, WITHOUT the MCP-Protocol-Version header, to see what the flag does
+&lt;- HTTP 400: '{"jsonrpc":"2.0","id":null,"error":{"code":-32600,"message":"Bad Request: Missing session ID"}}'
+   flag: without the header the server applies the session rules of the older protocol and refuses
+-&gt; {"jsonrpc": "2.0", "id": 1, "method": "server/discover", "params": {"_meta": {"io.modelcontextprotocol/protocolVersion": "2026-07-28", "io.modelcontextprotocol/clientInfo": {"name": "wire-trace", "version": "1.0.0"}, "io.modelcontextprotocol/clientCapabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}}}}
+   again, with headers MCP-Protocol-Version: 2026-07-28 and Mcp-Method: server/discover (Accept lists BOTH media types)
+&lt;- HTTP 200 content-type=application/json Mcp-Session-Id=None
+&lt;- {"jsonrpc": "2.0", "id": 1, "result": {"cacheScope": "private", "capabilities": {"prompts": {"listChanged": true}, "resources": {"listChanged": true, "subscribe": true}, "tools": {"listChanged": true}}, "instructions": "A teaching server. Call `negotiation` first to see the flags for this connection, then try every tool once. `summarize` uses your own model through sampling, `roots` asks which directories you allow,  …(629 chars)
+   flag: no session id issued; the answer is plain JSON because nothing needs streaming
+-&gt; the same body with a WRONG Mcp-Method header
+&lt;- HTTP 400: '{"jsonrpc":"2.0","id":1,"error":{"code":-32020,"message":"mcp-method header does not match the request body\'s '
+   flag: the header and the body must agree; the transport checks it before the method runs
+-&gt; {"jsonrpc": "2.0", "id": 2, "method": "tools/call", "params": {"_meta": {"io.modelcontextprotocol/protocolVersion": "2026-07-28", "io.modelcontextprotocol/clientInfo": {"name": "wire-trace", "version": "1.0.0"}, "io.modelcontextprotocol/clientCapabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}}, "name": "negotiation", "arguments": {}}}
+   a tool call straight away: headers + _meta, no session, no initialized notification (Mcp-Name: negotiation)
+&lt;- HTTP 200
+&lt;- {"protocol_version": "2026-07-28", "client_capabilities": {"sampling": {}, "elicitation": {"form": {}}, "roots": {"list_changed": true}}, "transport": "streamable-http", "http_session_id": null, "request_id": "2"}
+   what the server sees: the version and capabilities we put in _meta</div>
+<p>The legacy path over HTTP adds a session. The <code>initialize</code> reply carries <code>Mcp-Session-Id</code>; every later request must echo it or the server refuses with <code>400 Missing session ID</code>; a notification is acknowledged with <code>202 Accepted</code> and an empty body; a <code>GET</code> with <code>Accept: text/event-stream</code> opens the standalone stream the server uses for server-initiated messages; <code>DELETE</code> ends the session.</p>
+<div class="msgflow">-- B. legacy (2025-11-25): initialize creates a session; every later request must carry its id --
+-&gt; {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2026-07-28", "capabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}, "clientInfo": {"name": "wire-trace", "version": "1.0.0"}}}
+   no session header yet: this request creates the session
+&lt;- HTTP 200 content-type=text/event-stream Mcp-Session-Id=d67f7cc45ef04ea9a80957edf01f3021
+   negotiated protocolVersion = 2025-11-25
+-&gt; {"jsonrpc": "2.0", "method": "notifications/initialized"}
+   flag: a notification -&gt; 202 Accepted, empty body
+&lt;- HTTP 202 (body 0 bytes)
+-&gt; {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}}
+   same POST, now with Mcp-Session-Id and MCP-Protocol-Version headers
+&lt;- HTTP 200 content-type=text/event-stream tools=['echo', 'negotiation', 'count', 'summarize', 'roots', 'add_note', 'delete_note']
+-&gt; the same request WITHOUT the session header
+&lt;- HTTP 400: '{"jsonrpc":"2.0","id":null,"error":{"code":-32600,"message":"Bad Request: Missing session ID"}}'
+   flag: a stateful server rejects requests that do not carry the session id it issued
+-&gt; GET with Accept: text/event-stream opens the standalone stream for server-initiated messages
+&lt;- HTTP 200 content-type=text/event-stream (kept open; nothing to deliver, so we close it)
+-&gt; DELETE with the session id
+&lt;- HTTP 200: the session is over; the id is now invalid</div>
+<table><thead><tr><th>Server flag</th><th>Effect</th><th>When to use it</th></tr></thead><tbody><tr><td>default (stateful)</td><td>issues <code>Mcp-Session-Id</code> on <code>initialize</code>; keeps a session per client; SSE responses</td><td>one process, hosts that speak 2025-11-25, long tool calls with progress</td></tr><tr><td><code>--stateless</code></td><td>no session id; every request stands alone</td><td>behind a load balancer or serverless, modern clients only</td></tr><tr><td><code>--json-response</code></td><td>answers <code>application/json</code> instead of an SSE stream</td><td>simple clients, gateways that cannot read SSE; you lose progress mid-call</td></tr></tbody></table>
+<details class="code-fold"><summary><span>ai/mcp-primitives-lab/wire_trace.py · 208 lines</span></summary><pre><code class="language-python">"""
+wire_trace.py — the handshakes with NO SDK, so you can see exactly what is on the wire.
+
+    python wire_trace.py stdio      spawn server.py and speak newline-delimited JSON-RPC over its stdin/stdout
+    python wire_trace.py http       talk to a running `python server.py --transport streamable-http`
+                                    with plain HTTP requests, and read the SSE stream by hand
+
+Every line marked  -&gt;  is bytes we sent, every line marked  &lt;-  is bytes we received.
+
+Two generations of handshake are shown, because you will meet both:
+
+  2026-07-28  `server/discover`, then every request carries the version and the client's capabilities
+              in `_meta`. No session state is required, so it works over stateless HTTP. A server that
+              needs the client's model, roots or the person answers `resultType: "input_required"` and
+              the client RETRIES the call with `inputResponses` and the opaque `requestState`.
+  2025-11-25  `initialize` -&gt; reply -&gt; `notifications/initialized`. The version and capabilities are
+              fixed once per connection; over HTTP the server issues an `Mcp-Session-Id`.
+
+The flags to keep track of: the request id that must match; the protocol version proposed and
+confirmed; the capabilities each side declares; `initialized` (legacy) or `_meta` on every request
+(modern); over HTTP the `Mcp-Session-Id` and `MCP-Protocol-Version` headers; and, for an input-required
+round, the `requestState` that must go back unchanged.
+"""
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+MODERN = "2026-07-28"
+LEGACY = "2025-11-25"
+CLIENT_CAPS = {"roots": {"listChanged": True}, "sampling": {}, "elicitation": {"form": {}}}
+META = {  # modern: rides on EVERY request instead of being fixed by initialize
+    "io.modelcontextprotocol/protocolVersion": MODERN,
+    "io.modelcontextprotocol/clientInfo": {"name": "wire-trace", "version": "1.0.0"},
+    "io.modelcontextprotocol/clientCapabilities": CLIENT_CAPS,
+}
+
+
+def show(direction: str, payload: dict | str, note: str = "", width: int = 420) -&gt; None:
+    text = payload if isinstance(payload, str) else json.dumps(payload)
+    if len(text) &gt; width:
+        text = text[:width] + f" …({len(text)} chars)"
+    print(f"{direction} {text}")
+    if note:
+        print(f"   {note}")
+
+
+def stub_model_answer(request: dict) -&gt; dict:
+    """What a host would do with a sampling/createMessage request: call its own model. We fake it."""
+    asked = request["params"]["messages"][-1]["content"]["text"]
+    return {"role": "assistant", "model": "stub-model-1", "stopReason": "endTurn",
+            "content": {"type": "text", "text": "In short: " + " ".join(asked.split("\n\n", 1)[-1].split()[:8]) + "…"}}
+
+
+# ------------------------------------------------------------------ stdio
+def trace_stdio() -&gt; None:
+    print("== stdio: one JSON-RPC message per line on the child's stdin/stdout; stderr is free for logs ==")
+
+    def spawn():
+        return subprocess.Popen([sys.executable, str(HERE / "server.py"), "--transport", "stdio"],
+                                stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+                                text=True, encoding="utf-8")
+
+    def rpc(proc, msg: dict, note_out: str = "", note_in: str = "") -&gt; dict | None:
+        show("-&gt;", msg, note_out)
+        proc.stdin.write(json.dumps(msg) + "\n")        # newline-delimited; a message may not contain a raw newline
+        proc.stdin.flush()
+        if "id" not in msg:
+            return None                                 # a notification gets no reply
+        reply = json.loads(proc.stdout.readline())
+        show("&lt;-", reply, note_in)
+        assert reply["id"] == msg["id"], "flag: the reply must carry the request's id"
+        return reply
+
+    print("\n-- A. modern handshake (2026-07-28): server/discover, then _meta on every request --")
+    p = spawn()
+    disc = rpc(p, {"jsonrpc": "2.0", "id": 1, "method": "server/discover", "params": {"_meta": META}},
+               "flag: we say which version we speak and what we can do, inside _meta",
+               "flag: supportedVersions, capabilities, instructions, cacheScope/ttlMs (the client may cache this), serverInfo in _meta")
+    r = disc["result"]
+    print(f"   supportedVersions={r['supportedVersions']} capabilities={json.dumps(r['capabilities'])} cache={r['cacheScope']}/{r['ttlMs']}ms")
+    rpc(p, {"jsonrpc": "2.0", "id": 2, "method": "tools/call", "params": {"_meta": META, "name": "echo", "arguments": {"text": "raw bytes"}}},
+        "flag: no notifications/initialized; _meta carries the version and capabilities again",
+        "resultType: \"complete\" — content[] for any client, structuredContent because the SDK derived an output schema")
+
+    call = {"jsonrpc": "2.0", "id": 3, "method": "tools/call",
+            "params": {"_meta": META, "name": "summarize", "arguments": {"text": "MCP separates tools, resources and prompts."}}}
+    first = rpc(p, call, "the server needs OUR model for this one",
+                "flag: resultType \"input_required\" + inputRequests (keyed) + requestState (opaque, encrypted, must go back unchanged)")
+    res = first["result"]
+    assert res["resultType"] == "input_required"
+    key, req = next(iter(res["inputRequests"].items()))
+    print(f"   the server asked for {req['method']} under key {key!r}")
+    retry = {"jsonrpc": "2.0", "id": 4, "method": "tools/call",
+             "params": {**call["params"], "inputResponses": {key: stub_model_answer(req)}, "requestState": res["requestState"]}}
+    rpc(p, retry, "the RETRY: same call, plus inputResponses for that key and the requestState we were given",
+        "resultType \"complete\": the tool ran with the model's answer injected as an argument")
+    p.stdin.close(); p.wait(timeout=10)
+    print(f"   server exited with code {p.returncode} once stdin closed")
+
+    print("\n-- B. legacy handshake (2025-11-25): initialize, reply, notifications/initialized --")
+    p = spawn()
+    init = rpc(p, {"jsonrpc": "2.0", "id": 1, "method": "initialize",
+                   "params": {"protocolVersion": MODERN, "capabilities": CLIENT_CAPS, "clientInfo": {"name": "wire-trace", "version": "1.0.0"}}},
+               "flag: we PROPOSE a protocolVersion",
+               "flag: result.protocolVersion is what the server CONFIRMED (an initialize request lands you on the legacy version)")
+    print(f"   negotiated protocolVersion = {init['result']['protocolVersion']}")
+    rpc(p, {"jsonrpc": "2.0", "method": "notifications/initialized"},
+        "flag: the handshake is complete only after this notification; before it, only ping and logging are allowed")
+    rpc(p, {"jsonrpc": "2.0", "id": 2, "method": "ping"}, "ping exists on the legacy version", "an empty result is the pong")
+    tools = rpc(p, {"jsonrpc": "2.0", "id": 3, "method": "tools/list", "params": {}})
+    print(f"   tools = {[t['name'] for t in tools['result']['tools']]}")
+    p.stdin.close(); p.wait(timeout=10)
+    print(f"   server exited with code {p.returncode} once stdin closed")
+
+
+# ------------------------------------------------------------------ Streamable HTTP
+def sse_events(body: str) -&gt; list[dict]:
+    """Parse a text/event-stream body: blank-line separated events, `data:` lines carry the JSON."""
+    events = []
+    for block in body.split("\n\n"):
+        data = "\n".join(line[5:].lstrip() for line in block.splitlines() if line.startswith("data:"))
+        if data:
+            events.append(json.loads(data))
+    return events
+
+
+def trace_http(url: str = "http://127.0.0.1:8765/mcp") -&gt; None:
+    import httpx  # pip install httpx
+
+    print(f"== Streamable HTTP: every client message is a POST to {url}; replies come as JSON or as an SSE stream ==")
+    accept = {"Accept": "application/json, text/event-stream", "Content-Type": "application/json"}
+
+    def messages(r: httpx.Response) -&gt; list[dict]:
+        ct = r.headers.get("content-type", "")
+        return sse_events(r.text) if ct.startswith("text/event-stream") else ([r.json()] if r.content else [])
+
+    with httpx.Client(timeout=10) as http:
+        print("\n-- A. modern (2026-07-28): server/discover, _meta on every POST, no session required --")
+        disc = {"jsonrpc": "2.0", "id": 1, "method": "server/discover", "params": {"_meta": META}}
+        show("-&gt;", disc, "first, WITHOUT the MCP-Protocol-Version header, to see what the flag does")
+        r = http.post(url, json=disc, headers=accept)
+        print(f"&lt;- HTTP {r.status_code}: {r.text[:100]!r}")
+        print("   flag: without the header the server applies the session rules of the older protocol and refuses")
+        def modern_headers(method: str, tool: str | None = None) -&gt; dict[str, str]:
+            """The three modern flags ride as HTTP headers so a proxy or cache can route without parsing the body:
+            MCP-Protocol-Version (which rules apply), Mcp-Method (must equal the JSON-RPC method), Mcp-Name (the tool)."""
+            h = {**accept, "MCP-Protocol-Version": MODERN, "Mcp-Method": method}
+            if tool:
+                h["Mcp-Name"] = tool
+            return h
+
+        show("-&gt;", disc, "again, with headers MCP-Protocol-Version: 2026-07-28 and Mcp-Method: server/discover (Accept lists BOTH media types)")
+        r = http.post(url, json=disc, headers=modern_headers("server/discover"))
+        print(f"&lt;- HTTP {r.status_code} content-type={r.headers.get('content-type')} Mcp-Session-Id={r.headers.get('mcp-session-id')}")
+        show("&lt;-", messages(r)[-1], "flag: no session id issued; the answer is plain JSON because nothing needs streaming")
+        r = http.post(url, json=disc, headers={**accept, "MCP-Protocol-Version": MODERN, "Mcp-Method": "tools/list"})
+        print(f"-&gt; the same body with a WRONG Mcp-Method header\n&lt;- HTTP {r.status_code}: {r.text[:110]!r}")
+        print("   flag: the header and the body must agree; the transport checks it before the method runs")
+        call = {"jsonrpc": "2.0", "id": 2, "method": "tools/call", "params": {"_meta": META, "name": "negotiation", "arguments": {}}}
+        show("-&gt;", call, "a tool call straight away: headers + _meta, no session, no initialized notification (Mcp-Name: negotiation)")
+        r = http.post(url, json=call, headers=modern_headers("tools/call", "negotiation"))
+        print(f"&lt;- HTTP {r.status_code}")
+        show("&lt;-", messages(r)[-1]["result"]["structuredContent"], "what the server sees: the version and capabilities we put in _meta")
+
+        print("\n-- B. legacy (2025-11-25): initialize creates a session; every later request must carry its id --")
+        init = {"jsonrpc": "2.0", "id": 1, "method": "initialize",
+                "params": {"protocolVersion": MODERN, "capabilities": CLIENT_CAPS, "clientInfo": {"name": "wire-trace", "version": "1.0.0"}}}
+        show("-&gt;", init, "no session header yet: this request creates the session")
+        r = http.post(url, json=init, headers=accept)
+        session = r.headers.get("mcp-session-id")
+        print(f"&lt;- HTTP {r.status_code} content-type={r.headers.get('content-type')} Mcp-Session-Id={session}")
+        version = messages(r)[-1]["result"]["protocolVersion"]
+        print(f"   negotiated protocolVersion = {version}")
+        head = {**accept, "MCP-Protocol-Version": version, **({"Mcp-Session-Id": session} if session else {})}
+
+        note = {"jsonrpc": "2.0", "method": "notifications/initialized"}
+        show("-&gt;", note, "flag: a notification -&gt; 202 Accepted, empty body")
+        r = http.post(url, json=note, headers=head)
+        print(f"&lt;- HTTP {r.status_code} (body {len(r.content)} bytes)")
+
+        lst = {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}}
+        show("-&gt;", lst, "same POST, now with Mcp-Session-Id and MCP-Protocol-Version headers")
+        r = http.post(url, json=lst, headers=head)
+        print(f"&lt;- HTTP {r.status_code} content-type={r.headers.get('content-type')} tools={[t['name'] for t in messages(r)[-1]['result']['tools']]}")
+
+        if session:
+            r = http.post(url, json=lst, headers=accept)
+            print(f"-&gt; the same request WITHOUT the session header\n&lt;- HTTP {r.status_code}: {r.text[:110]!r}")
+            print("   flag: a stateful server rejects requests that do not carry the session id it issued")
+            print("-&gt; GET with Accept: text/event-stream opens the standalone stream for server-initiated messages")
+            with http.stream("GET", url, headers={"Accept": "text/event-stream", "Mcp-Session-Id": session, "MCP-Protocol-Version": version}) as s:
+                print(f"&lt;- HTTP {s.status_code} content-type={s.headers.get('content-type')} (kept open; nothing to deliver, so we close it)")
+            r = http.delete(url, headers={"Mcp-Session-Id": session, "MCP-Protocol-Version": version})
+            print(f"-&gt; DELETE with the session id\n&lt;- HTTP {r.status_code}: the session is over; the id is now invalid")
+        else:
+            print("   (started with --stateless: no session id was issued, every request stands alone)")
+
+
+if __name__ == "__main__":
+    mode = sys.argv[1] if len(sys.argv) &gt; 1 else "stdio"
+    if mode == "http":
+        trace_http(sys.argv[2] if len(sys.argv) &gt; 2 else "http://127.0.0.1:8765/mcp")
+    else:
+        trace_stdio()</code></pre></details>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="tools">
+    <div class="wrap">
+      <p class="eyebrow">Part three · The server</p>
+      <h2>Tools: the contract is the schema, the annotations and the description.</h2>
+      <div class="prose rel-body">
+
+<p>A tool is a function whose signature becomes <code>inputSchema</code>, whose docstring becomes the description the model reads, and whose return type becomes <code>outputSchema</code> and <code>structuredContent</code>. Annotations are hints for the host, not permissions: a host may ask before a <code>destructiveHint</code> tool and skip the question for a <code>readOnlyHint</code> one.</p>
+<pre><code class="language-python">READ_ONLY = ToolAnnotations(read_only_hint=True, idempotent_hint=True, open_world_hint=False)
+
+
+# ------------------------------------------------------------------ tools
+@mcp.tool(title="Echo", annotations=READ_ONLY)
+def echo(text: str) -&gt; str:
+    """Return the text unchanged. The simplest possible tool: one argument, one result."""
+    return text</code></pre>
+<p><code>negotiation</code> is the tool that makes the flags visible from the server's side. <code>Context</code> gives a tool the negotiated version, the client's declared capabilities, the request id, and, over HTTP, the request headers.</p>
+<pre><code class="language-python">class Negotiation(BaseModel):
+    protocol_version: str = Field(description="The version both sides agreed on during initialize")
+    client_capabilities: dict[str, Any] = Field(description="What the client declared it can do (sampling, roots, elicitation...)")
+    transport: str = Field(description="How this server was started")
+    http_session_id: str | None = Field(description="Mcp-Session-Id header, present on stateful Streamable HTTP only")
+    request_id: str = Field(description="JSON-RPC id of this very tools/call request")
+
+
+@mcp.tool(title="Show the negotiation", annotations=READ_ONLY)
+def negotiation(ctx: Context) -&gt; Negotiation:
+    """The flags the server sees for this connection: negotiated protocol version, the client's
+    declared capabilities, the transport, the HTTP session id if any, and this request's id."""
+    caps = ctx.client_capabilities
+    try:
+        session_id = ctx.headers.get("mcp-session-id")
+    except Exception:  # no HTTP request behind this call (stdio)
+        session_id = None
+    return Negotiation(
+        protocol_version=str(ctx.protocol_version),
+        client_capabilities=caps.model_dump(exclude_none=True) if caps is not None else {},
+        transport=os.environ.get("LAB_TRANSPORT", "stdio"),
+        http_session_id=session_id,
+        request_id=str(ctx.request_id),
+    )</code></pre>
+<p><code>count</code> shows the notification channel that remains in 2026-07-28. Progress carries a number, a total and a human-readable message; the separate logging channel is deprecated, so operators' logs go to stderr, never to stdout, which on stdio is the protocol channel.</p>
+<pre><code class="language-python">@mcp.tool(title="Count slowly", annotations=READ_ONLY)
+async def count(n: int, ctx: Context) -&gt; str:
+    """Count to n, sending a notifications/progress message for every step.
+    (The separate logging channel, notifications/message, is deprecated as of 2026-07-28: put a
+    human-readable `message` on the progress notification instead, and log to stderr for operators.)"""
+    if n &lt; 1 or n &gt; 50:
+        raise ToolError("n must be between 1 and 50")
+    for i in range(1, n + 1):
+        await ctx.report_progress(progress=i, total=n, message=f"step {i} of {n}")
+        log.info("counted %d", i)  # stderr: never stdout on stdio
+        await asyncio.sleep(0.05)
+    return f"counted to {n}"</code></pre>
+<div class="callout key"><span class="lbl">Errors are results</span><p>A <code>ToolError</code> becomes <code>isError: true</code> with the message in <code>content</code>, and the connection stays up. The client run's step 12 shows it: the model can read the message and try again. Reserve JSON-RPC errors for protocol problems, not for a bad argument.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="rounds">
+    <div class="wrap">
+      <p class="eyebrow">Part three · The server</p>
+      <h2>Sampling, roots and elicitation: input-required rounds.</h2>
+      <div class="prose rel-body">
+
+<p>Up to 2025-11-25 a server that needed the client's model, roots or the person sent a JSON-RPC request <em>back</em> over the connection. That needs a back-channel: stdio, or the SSE stream of a stateful HTTP session. Since 2026-07-28 those asks are <b>input-required rounds</b>: the tool result says <code>resultType: "input_required"</code>, lists what it needs under <code>inputRequests</code>, and hands over an opaque <code>requestState</code>. The client answers by retrying the same call with <code>inputResponses</code>. No back-channel, so it works over stateless HTTP.</p>
+<p>In the Python SDK you declare the need with a <em>resolver</em>: a plain function that returns <code>Sample(...)</code>, <code>ListRoots()</code> or <code>Elicit(...)</code>. The framework runs the round trip and injects the answer as a tool argument that the model never sees and cannot fake.</p>
+<pre><code class="language-python"># --- Server-to-client asks: sampling, roots and elicitation ------------------------------------
+# Up to spec 2025-11-25 the server sent these as JSON-RPC requests BACK over the connection, which
+# needs a back-channel (stdio, or the SSE stream). Since 2026-07-28 they are "input required" rounds:
+# the tool result says what it needs, the client supplies it, and the call is retried with the answer
+# riding along in request_state. That is what lets them work over stateless HTTP. In this SDK you
+# declare the need with a RESOLVER: a function that returns Sample(...), ListRoots() or Elicit(...);
+# the framework runs the round trip and injects the answer as a tool argument the model never sees.
+
+
+def ask_client_model(text: str) -&gt; Sample:
+    """Resolver for `summarize`: what to ask the client's model. Must render identically on every retry round."""
+    return Sample(
+        [SamplingMessage(role="user", content=TextContent(type="text", text=f"Summarise in one sentence:\n\n{text}"))],
+        max_tokens=120,
+        system_prompt="You summarise plainly. One sentence, no preamble.",
+        model_preferences=ModelPreferences(hints=[ModelHint(name="claude")], intelligencePriority=0.3, speedPriority=0.8),
+    )
+
+
+@mcp.tool(title="Summarise with the client's model", annotations=READ_ONLY)
+def summarize(text: str, answer: Annotated[CreateMessageResult, Resolve(ask_client_model)]) -&gt; str:
+    """Ask the CLIENT's language model to summarise the text in one sentence (sampling/createMessage).
+    The server has no model and no API key: the client owns the model, and can review the request."""
+    content = answer.content
+    reply = content.text if isinstance(content, TextContent) else str(content)
+    return f"[{answer.model}] {reply}"
+
+
+def ask_roots() -&gt; ListRoots:
+    """Resolver for `roots`: request the client's roots/list."""
+    return ListRoots()
+
+
+@mcp.tool(title="Which roots may I touch?", annotations=READ_ONLY)
+def roots(allowed: Annotated[ListRootsResult, Resolve(ask_roots)]) -&gt; list[str]:
+    """Ask the client for its roots (roots/list): the directories or URIs this server is allowed to work in."""
+    return [f"{r.name or '(unnamed)'} -&gt; {r.uri}" for r in allowed.roots]
+
+
+@mcp.tool(title="Add a note", annotations=ToolAnnotations(read_only_hint=False, destructive_hint=False, idempotent_hint=True, open_world_hint=False))
+async def add_note(note_id: str, text: str, ctx: Context) -&gt; str:
+    """Create or replace a note, then tell subscribed clients the resource list changed."""
+    if not note_id.isidentifier():
+        raise ToolError("note_id must be a simple identifier, e.g. meeting_notes")
+    NOTES[note_id] = text
+    await ctx.notify_resources_changed()
+    return f"lab://notes/{note_id}"
+
+
+class ConfirmDelete(BaseModel):
+    sure: bool = Field(description="Really delete this note?")
+
+
+def confirm_delete(note_id: str) -&gt; ConfirmDelete | Elicit[ConfirmDelete]:
+    """Resolver for `delete_note`: ask the PERSON (elicitation/create) unless there is nothing to delete."""
+    if note_id not in NOTES:
+        return ConfirmDelete(sure=False)  # nothing to ask; the tool will report the missing note
+    return Elicit(f"Delete the note '{note_id}'? This cannot be undone.", ConfirmDelete)
+
+
+@mcp.tool(title="Delete a note", annotations=ToolAnnotations(read_only_hint=False, destructive_hint=True, idempotent_hint=True, open_world_hint=False))
+async def delete_note(note_id: str, confirm: Annotated[ConfirmDelete, Resolve(confirm_delete)], ctx: Context) -&gt; str:
+    """Delete a note, but only after the person confirms (elicitation/create). The model cannot answer
+    this question: the client shows it to the human and sends back the human's answer."""
+    if note_id not in NOTES:
+        raise ToolError(f"no note called {note_id}")
+    if not confirm.sure:
+        return f"kept {note_id}: the person said no"
+    del NOTES[note_id]
+    await ctx.notify_resources_changed()
+    return f"deleted {note_id}"</code></pre>
+<p>On the wire, one such call is two messages. This is the sampling round from the stdio trace, with the client's model answer built by hand:</p>
+<div class="msgflow">   the server needs OUR model for this one
+&lt;- {"jsonrpc": "2.0", "id": 3, "result": {"inputRequests": {"__main__:ask_client_model": {"method": "sampling/createMessage", "params": {"maxTokens": 120, "messages": [{"content": {"text": "Summarise in one sentence:\n\nMCP separates tools, resources and prompts.", "type": "text"}, "role": "user"}], "modelPreferences": {"hints": [{"name": "claude"}], "intelligencePriority": 0.3, "speedPriority": 0.8}, "systemPrompt": "Y …(993 chars)
+   flag: resultType "input_required" + inputRequests (keyed) + requestState (opaque, encrypted, must go back unchanged)
+   the server asked for sampling/createMessage under key '__main__:ask_client_model'
+-&gt; {"jsonrpc": "2.0", "id": 4, "method": "tools/call", "params": {"_meta": {"io.modelcontextprotocol/protocolVersion": "2026-07-28", "io.modelcontextprotocol/clientInfo": {"name": "wire-trace", "version": "1.0.0"}, "io.modelcontextprotocol/clientCapabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}}, "name": "summarize", "arguments": {"text": "MCP separates tools, resources and pro …(1041 chars)
+   the RETRY: same call, plus inputResponses for that key and the requestState we were given
+&lt;- {"jsonrpc": "2.0", "id": 4, "result": {"content": [{"text": "[stub-model-1] In short: MCP separates tools, resources and prompts.\u2026", "type": "text"}], "isError": false, "resultType": "complete", "structuredContent": {"result": "[stub-model-1] In short: MCP separates tools, resources and prompts.\u2026"}, "_meta": {"io.modelcontextprotocol/serverInfo": {"name": "primitives-lab", "version": "1.0.0"}}}}
+   resultType "complete": the tool ran with the model's answer injected as an argument</div>
+<p>The client side is three callbacks. A real host would show the sampling request to the person or filter it, then call its own model; this stub answers deterministically so the lab runs offline.</p>
+<pre><code class="language-python"># ------------------------------------------------------------------ server -&gt; client callbacks
+async def on_sampling(context, params: types.CreateMessageRequestParams):
+    """sampling/createMessage: the server wants a completion from OUR model.
+    A real host would show or filter this, then call its LLM. This stub answers deterministically
+    so the lab runs offline; swap the body for an Anthropic or OpenAI call to make it real."""
+    FLAGS["sampling_requests"] = int(FLAGS["sampling_requests"]) + 1
+    last = params.messages[-1].content
+    asked = last.text if isinstance(last, types.TextContent) else str(last)
+    prefs = params.model_preferences
+    hint = prefs.hints[0].name if prefs and prefs.hints else "any"
+    print(f"     ↳ server asked my model (hint: {hint}, max_tokens={params.max_tokens}): {asked[:70]!r}…")
+    body = asked.split("\n\n", 1)[-1]
+    summary = " ".join(body.split()[:12]) + "…"
+    return types.CreateMessageResult(
+        role="assistant",
+        content=types.TextContent(type="text", text=f"In short: {summary}"),
+        model="stub-model-1",
+        stop_reason="endTurn",
+    )
+
+
+async def on_list_roots(context):
+    """roots/list: the server asks where it may work. We allow exactly this folder."""
+    FLAGS["roots_requests"] = int(FLAGS["roots_requests"]) + 1
+    print("     ↳ server asked for my roots")
+    return types.ListRootsResult(roots=[types.Root(uri=HERE.as_uri(), name="primitives-lab folder")])
+
+
+async def on_elicit(context, params):
+    """elicitation/create: the server needs the PERSON. We auto-accept so the lab runs unattended;
+    a real host renders params.message and the requested schema as a form."""
+    FLAGS["elicitations"] = int(FLAGS["elicitations"]) + 1
+    print(f"     ↳ server asked the person: {getattr(params, 'message', params)!r}")
+    return types.ElicitResult(action="accept", content={"sure": True})</code></pre>
+<div class="callout warn"><p><b>Why the model cannot fake a confirmation.</b> <code>delete_note</code> takes a <code>confirm</code> argument that is not in its input schema: the resolver fills it. The model sees <code>note_id</code> only. The person's answer travels in <code>inputResponses</code>, bound to the <code>requestState</code> the server issued, so a replayed or invented answer is rejected.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="resources">
+    <div class="wrap">
+      <p class="eyebrow">Part three · The server</p>
+      <h2>Resources and prompts.</h2>
+      <div class="prose rel-body">
+
+<p>Resources are the application's context: the host decides what the model sees. A static URI, a template with a parameter, and a dynamic one that changes on every read cover the three shapes you meet. <code>add_note</code> changes the list and tells subscribed clients with <code>notify_resources_changed()</code>. Prompts are templates the <em>person</em> picks; here <code>explain</code> takes a concept and a level and returns the user message.</p>
+<pre><code class="language-python"># ------------------------------------------------------------------ resources
+@mcp.resource("lab://notes", title="All notes", mime_type="application/json")
+def list_notes() -&gt; str:
+    """Every note id with its length. A plain, static-looking resource."""
+    import json
+    return json.dumps({k: len(v) for k, v in NOTES.items()})
+
+
+@mcp.resource("lab://notes/{note_id}", title="One note", mime_type="text/plain")
+def read_note(note_id: str) -&gt; str:
+    """A resource template: the client fills in {note_id}. Unknown ids are an error, not empty text."""
+    if note_id not in NOTES:
+        raise ToolError(f"no note called {note_id}")
+    return NOTES[note_id]
+
+
+@mcp.resource("lab://clock", title="Server clock", mime_type="text/plain")
+def clock() -&gt; str:
+    """Changes on every read: shows that a resource can be dynamic."""
+    return dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
+
+
+# ------------------------------------------------------------------ prompts
+@mcp.prompt(title="Explain a concept")
+def explain(concept: str, level: str = "beginner") -&gt; str:
+    """A reusable prompt template the USER picks (user-controlled), unlike tools the model picks."""
+    return (
+        f"Explain '{concept}' to a {level}. Start with a one-sentence definition, give one concrete "
+        "example, then name the most common mistake people make with it."
+    )</code></pre>
+<p>The client reads them like this, and the run shows the note list growing after <code>add_note</code>:</p>
+<div class="msgflow">[08] resources: list, read a template, read a dynamic one, then change the list
+     resources: ['lab://notes', 'lab://clock']
+     templates: ['lab://notes/{note_id}']
+     lab://notes/welcome -&gt; Resources are application-controlled context: the host decides what the model sees.
+     lab://clock -&gt; 2026-09-17T11:03:37+00:00
+     add_note -&gt; lab://notes/todo
+     lab://notes -&gt; {"welcome": 83, "flags": 89, "todo": 34}
+
+[09] prompts: list and get a user-controlled template
+     prompts: [('explain', ['concept', 'level'])]
+     explain -&gt; Explain 'sampling' to a senior Java engineer. Start with a one-sentence definition, give one con …</div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="client">
+    <div class="wrap">
+      <p class="eyebrow">Part four · The client</p>
+      <h2>The twelve-step walk-through, verified over stdio and over HTTP.</h2>
+      <div class="prose rel-body">
+
+<p>The client is the host side: it owns the model, the roots policy, the person and the log. Its twelve steps go from the handshake to a deliberate error. Every line below was printed by <code>python client.py</code> on 17 September 2026 against the server above; the HTTP run is identical except for the connection line and the <code>transport</code> flag, and both are in the repository under <code>verified/</code>.</p>
+<div class="msgflow">connecting over stdio: C:\Users\hp\AppData\Local\Temp\claude\C--data-dev-claude-code-resume\b0e8be18-216c-4714-bee3-b2192b784284\scratchpad\venv\Scripts\python.exe server.py
+
+[01] initialize: the handshake fixed the flags for this connection
+     protocol 2026-07-28 | server primitives-lab 1.0.0
+     server capabilities: {"prompts": {"list_changed": true}, "resources": {"subscribe": true, "list_changed": true}, "tools": {"list_changed": true}}
+     instructions: A teaching server. Call `negotiation` first to see the flags for this connection, then try…
+
+[02] tools/list: names, schemas and annotations are the contract
+     echo         read-only   args=['text']
+     negotiation  read-only   args=[]
+     count        read-only   args=['n']
+     summarize    read-only   args=['text']
+     roots        read-only   args=[]
+     add_note     writes      args=['note_id', 'text']
+     delete_note  destructive args=['note_id']
+
+[03] tools/call echo: the plain case
+     -&gt; hello, protocol
+
+[04] tools/call negotiation: the flags as the SERVER sees them
+     -&gt; {
+          "protocol_version": "2026-07-28",
+          "client_capabilities": {
+            "sampling": {},
+            "elicitation": {
+              "form": {},
+              "url": {}
+            },
+            "roots": {
+              "list_changed": true
+            }
+          },
+          "transport": "stdio",
+          "http_session_id": null,
+          "request_id": "4"
+        }
+
+[05] tools/call count: progress and log notifications while a tool runs
+     progress 1/3  step 1 of 3
+     progress 2/3  step 2 of 3
+     progress 3/3  step 3 of 3
+     -&gt; counted to 3
+
+[06] tools/call summarize: the server asks OUR model (sampling)
+     ↳ server asked my model (hint: claude, max_tokens=120): 'Summarise in one sentence:\n\nThe Model Context Protocol separates the t'…
+     -&gt; [stub-model-1] In short: The Model Context Protocol separates the three things a model needs: tools…
+
+[07] tools/call roots: the server asks where it may work (roots)
+     ↳ server asked for my roots
+     -&gt; {'result': ['primitives-lab folder -&gt; file:///home/janaka/mcp-primitives-lab']}
+
+[08] resources: list, read a template, read a dynamic one, then change the list
+     resources: ['lab://notes', 'lab://clock']
+     templates: ['lab://notes/{note_id}']
+     lab://notes/welcome -&gt; Resources are application-controlled context: the host decides what the model sees.
+     lab://clock -&gt; 2026-09-17T11:03:37+00:00
+     add_note -&gt; lab://notes/todo
+     lab://notes -&gt; {"welcome": 83, "flags": 89, "todo": 34}
+
+[09] prompts: list and get a user-controlled template
+     prompts: [('explain', ['concept', 'level'])]
+     explain -&gt; Explain 'sampling' to a senior Java engineer. Start with a one-sentence definition, give one con …
+
+[10] tools/call delete_note: the server asks the PERSON first (elicitation)
+     ↳ server asked the person: "Delete the note 'todo'? This cannot be undone."
+     -&gt; deleted todo
+
+[11] ping: a liveness check that 2026-07-28 no longer answers
+     -&gt; server said 'Method not found': on 2026-07-28 liveness belongs to the transport, not the protocol
+
+[12] tools/call with a bad argument: an error result, not a crashed connection
+     -&gt; is_error=True: Error executing tool count: n must be between 1 and 50</div>
+<details class="code-fold"><summary><span>ai/mcp-primitives-lab/client.py · 208 lines</span></summary><pre><code class="language-python">"""
+client.py — an MCP client that exercises every primitive of server.py and prints the flags as it goes.
+
+It is the HOST side of the protocol: it owns the model (sampling), the filesystem policy (roots),
+the person (elicitation) and the log. Every server-to-client request lands in one of the callbacks below.
+
+Run:   python client.py                                      launches server.py over stdio
+       python client.py --transport http                     connects to http://127.0.0.1:8765/mcp
+       python client.py --transport http --url http://127.0.0.1:8765/mcp
+"""
+from __future__ import annotations
+
+import argparse
+import asyncio
+import json
+import sys
+from pathlib import Path
+
+from mcp import types
+from mcp.client import Client
+from mcp.client.stdio import StdioServerParameters
+from mcp.shared.exceptions import MCPError
+
+HERE = Path(__file__).resolve().parent
+
+# The flags a host keeps track of for one connection. Printed at the end.
+FLAGS: dict[str, object] = {
+    "initialized": False,            # true once initialize + notifications/initialized are done
+    "protocol_version": None,        # the version both sides agreed on
+    "server_info": None,             # name/version the server announced
+    "server_capabilities": None,     # tools, resources (subscribe? listChanged?), prompts, logging, completions
+    "client_capabilities_sent": ["sampling", "roots", "elicitation"],   # implied by the callbacks we register
+    "sampling_requests": 0,          # times the server asked our model for a completion
+    "roots_requests": 0,             # times the server asked which directories it may touch
+    "elicitations": 0,               # times the server asked the person a question
+    "progress_notifications": 0,
+    "log_messages": 0,
+    "other_notifications": [],
+}
+
+
+def step(n: int, title: str) -&gt; None:
+    print(f"\n[{n:02d}] {title}")
+
+
+# ------------------------------------------------------------------ server -&gt; client callbacks
+async def on_sampling(context, params: types.CreateMessageRequestParams):
+    """sampling/createMessage: the server wants a completion from OUR model.
+    A real host would show or filter this, then call its LLM. This stub answers deterministically
+    so the lab runs offline; swap the body for an Anthropic or OpenAI call to make it real."""
+    FLAGS["sampling_requests"] = int(FLAGS["sampling_requests"]) + 1
+    last = params.messages[-1].content
+    asked = last.text if isinstance(last, types.TextContent) else str(last)
+    prefs = params.model_preferences
+    hint = prefs.hints[0].name if prefs and prefs.hints else "any"
+    print(f"     ↳ server asked my model (hint: {hint}, max_tokens={params.max_tokens}): {asked[:70]!r}…")
+    body = asked.split("\n\n", 1)[-1]
+    summary = " ".join(body.split()[:12]) + "…"
+    return types.CreateMessageResult(
+        role="assistant",
+        content=types.TextContent(type="text", text=f"In short: {summary}"),
+        model="stub-model-1",
+        stop_reason="endTurn",
+    )
+
+
+async def on_list_roots(context):
+    """roots/list: the server asks where it may work. We allow exactly this folder."""
+    FLAGS["roots_requests"] = int(FLAGS["roots_requests"]) + 1
+    print("     ↳ server asked for my roots")
+    return types.ListRootsResult(roots=[types.Root(uri=HERE.as_uri(), name="primitives-lab folder")])
+
+
+async def on_elicit(context, params):
+    """elicitation/create: the server needs the PERSON. We auto-accept so the lab runs unattended;
+    a real host renders params.message and the requested schema as a form."""
+    FLAGS["elicitations"] = int(FLAGS["elicitations"]) + 1
+    print(f"     ↳ server asked the person: {getattr(params, 'message', params)!r}")
+    return types.ElicitResult(action="accept", content={"sure": True})
+
+
+async def on_log(params: types.LoggingMessageNotificationParams) -&gt; None:
+    FLAGS["log_messages"] = int(FLAGS["log_messages"]) + 1
+    print(f"     log/{params.level}: {params.data}")
+
+
+async def on_progress(progress: float, total: float | None, message: str | None) -&gt; None:
+    FLAGS["progress_notifications"] = int(FLAGS["progress_notifications"]) + 1
+    print(f"     progress {progress:g}/{total:g}  {message or ''}")
+
+
+async def on_message(message) -&gt; None:
+    """Everything else the server sends that is not a request we handle above (e.g. list-changed)."""
+    method = getattr(getattr(message, "root", message), "method", None)
+    if method and method not in ("notifications/progress", "notifications/message"):
+        FLAGS["other_notifications"].append(method)  # type: ignore[union-attr]
+        print(f"     notification: {method}")
+
+
+# ------------------------------------------------------------------ the walk-through
+async def run(client: Client) -&gt; None:
+    step(1, "initialize: the handshake fixed the flags for this connection")
+    FLAGS["initialized"] = True
+    FLAGS["protocol_version"] = str(client.protocol_version)
+    FLAGS["server_info"] = f"{client.server_info.name} {client.server_info.version}"
+    caps = client.server_capabilities
+    FLAGS["server_capabilities"] = caps.model_dump(exclude_none=True) if caps else {}
+    print(f"     protocol {FLAGS['protocol_version']} | server {FLAGS['server_info']}")
+    print(f"     server capabilities: {json.dumps(FLAGS['server_capabilities'])}")
+    print(f"     instructions: {(client.instructions or '')[:90]}…")
+
+    step(2, "tools/list: names, schemas and annotations are the contract")
+    tools = await client.list_tools()
+    for t in tools.tools:
+        a = t.annotations
+        flags = "read-only" if a and a.read_only_hint else ("destructive" if a and a.destructive_hint else "writes")
+        print(f"     {t.name:12} {flags:11} args={list((t.input_schema or {}).get('properties', {}))}")
+
+    step(3, "tools/call echo: the plain case")
+    r = await client.call_tool("echo", {"text": "hello, protocol"})
+    print("     -&gt;", r.content[0].text)
+
+    step(4, "tools/call negotiation: the flags as the SERVER sees them")
+    r = await client.call_tool("negotiation", {})
+    print("     -&gt;", json.dumps(r.structured_content, indent=2).replace("\n", "\n        "))
+
+    step(5, "tools/call count: progress and log notifications while a tool runs")
+    r = await client.call_tool("count", {"n": 3}, progress_callback=on_progress)
+    print("     -&gt;", r.content[0].text)
+
+    step(6, "tools/call summarize: the server asks OUR model (sampling)")
+    r = await client.call_tool("summarize", {"text": NOTE_TEXT})
+    print("     -&gt;", r.content[0].text)
+
+    step(7, "tools/call roots: the server asks where it may work (roots)")
+    r = await client.call_tool("roots", {})
+    print("     -&gt;", r.structured_content)
+
+    step(8, "resources: list, read a template, read a dynamic one, then change the list")
+    res = await client.list_resources()
+    print("     resources:", [str(x.uri) for x in res.resources])
+    tpl = await client.list_resource_templates()
+    print("     templates:", [x.uri_template for x in tpl.resource_templates])
+    note = await client.read_resource("lab://notes/welcome")
+    print("     lab://notes/welcome -&gt;", note.contents[0].text)
+    clock = await client.read_resource("lab://clock")
+    print("     lab://clock -&gt;", clock.contents[0].text)
+    r = await client.call_tool("add_note", {"note_id": "todo", "text": "Read the spec's lifecycle section."})
+    print("     add_note -&gt;", r.content[0].text)
+    print("     lab://notes -&gt;", (await client.read_resource("lab://notes")).contents[0].text)
+
+    step(9, "prompts: list and get a user-controlled template")
+    prompts = await client.list_prompts()
+    print("     prompts:", [(p.name, [a.name for a in (p.arguments or [])]) for p in prompts.prompts])
+    got = await client.get_prompt("explain", {"concept": "sampling", "level": "senior Java engineer"})
+    print("     explain -&gt;", got.messages[0].content.text[:96], "…")
+
+    step(10, "tools/call delete_note: the server asks the PERSON first (elicitation)")
+    r = await client.call_tool("delete_note", {"note_id": "todo"})
+    print("     -&gt;", r.content[0].text)
+
+    step(11, "ping: a liveness check that 2026-07-28 no longer answers")
+    try:
+        await client.send_ping()
+        print("     -&gt; pong (the server negotiated an older protocol, where ping exists)")
+    except MCPError as e:
+        print(f"     -&gt; server said {e.message!r}: on 2026-07-28 liveness belongs to the transport, not the protocol")
+
+    step(12, "tools/call with a bad argument: an error result, not a crashed connection")
+    r = await client.call_tool("count", {"n": 999})
+    print(f"     -&gt; is_error={r.is_error}: {r.content[0].text}")
+
+    print("\nFLAGS after the session:")
+    print(json.dumps(FLAGS, indent=2, default=str))
+
+
+NOTE_TEXT = (
+    "The Model Context Protocol separates the three things a model needs: tools it can call, "
+    "resources the host can show it, and prompts a person can pick. Sampling, roots and elicitation "
+    "run the other way: the server asks the client for a completion, for permitted directories, or for a human answer."
+)
+
+
+async def main() -&gt; None:
+    p = argparse.ArgumentParser()
+    p.add_argument("--transport", choices=["stdio", "http"], default="stdio")
+    p.add_argument("--url", default="http://127.0.0.1:8765/mcp")
+    a = p.parse_args()
+    if a.transport == "stdio":
+        target = StdioServerParameters(command=sys.executable, args=[str(HERE / "server.py"), "--transport", "stdio"])
+        print(f"connecting over stdio: {sys.executable} server.py")
+    else:
+        target = a.url
+        print(f"connecting over Streamable HTTP: {a.url}")
+    async with Client(
+        target,
+        sampling_callback=on_sampling,
+        list_roots_callback=on_list_roots,
+        elicitation_callback=on_elicit,
+        logging_callback=on_log,
+        message_handler=on_message,
+        client_info=types.Implementation(name="primitives-lab-client", version="1.0.0"),
+    ) as client:
+        await run(client)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())</code></pre></details>
+<div class="callout key"><span class="lbl">Step 11 is not a bug</span><p><code>ping</code> answers <code>Method not found</code> on 2026-07-28. Liveness moved to the transport: a stdio child that is alive, an HTTP connection that answers. The client catches the error and says so, which is also how your host should treat any method the negotiated version does not have.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="tests">
+    <div class="wrap">
+      <p class="eyebrow">Part four · The client</p>
+      <h2>Tests: the same assertions on three transports.</h2>
+      <div class="prose rel-body">
+
+<p>One function, <code>exercise_everything</code>, asserts every primitive. Three tests run it in memory (the client talks to the server object, no process), over a stdio subprocess (as Claude Desktop or Claude Code would launch it) and over Streamable HTTP (the server in a subprocess, the client by URL). Two more tests run both wire traces and check the flags appear in their output.</p>
+<div class="msgflow">.....                                                                    [100%]
+5 passed in 14.37s</div>
+<details class="code-fold"><summary><span>ai/mcp-primitives-lab/test_lab.py · 189 lines</span></summary><pre><code class="language-python">"""
+test_lab.py — every primitive, on three transports.
+
+    pytest -q
+
+In-memory: the Client talks to the MCPServer object directly (no process, no socket): fastest, for logic.
+stdio:     the Client launches server.py as a subprocess, as Claude Desktop or Claude Code would.
+HTTP:      server.py --transport streamable-http runs in a subprocess; the Client connects by URL.
+"""
+from __future__ import annotations
+
+import socket
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+import pytest
+
+from mcp import types
+from mcp.client import Client
+from mcp.client.stdio import StdioServerParameters
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import server as lab  # noqa: E402  (the module under test; importing it does not start a transport)
+
+pytestmark = pytest.mark.anyio
+
+
+@pytest.fixture
+def anyio_backend():
+    return "asyncio"
+
+
+# ---------------------------------------------------------------- the host side, recorded
+class Host:
+    """The callbacks a real host implements, with counters so tests can assert they were used."""
+
+    def __init__(self) -&gt; None:
+        self.sampling = 0
+        self.roots = 0
+        self.elicit = 0
+        self.progress: list[tuple[float, float | None, str | None]] = []
+        self.say_yes = True
+
+    async def on_sampling(self, context, params: types.CreateMessageRequestParams):
+        self.sampling += 1
+        return types.CreateMessageResult(role="assistant", model="stub", stop_reason="endTurn",
+                                         content=types.TextContent(type="text", text="a one-sentence summary"))
+
+    async def on_roots(self, context):
+        self.roots += 1
+        return types.ListRootsResult(roots=[types.Root(uri=HERE.as_uri(), name="lab")])
+
+    async def on_elicit(self, context, params):
+        self.elicit += 1
+        return types.ElicitResult(action="accept", content={"sure": self.say_yes})
+
+    async def on_progress(self, progress, total, message):
+        self.progress.append((progress, total, message))
+
+    def client(self, target) -&gt; Client:
+        return Client(target, sampling_callback=self.on_sampling, list_roots_callback=self.on_roots,
+                      elicitation_callback=self.on_elicit,
+                      client_info=types.Implementation(name="test-host", version="0"))
+
+
+async def exercise_everything(client: Client, host: Host) -&gt; None:
+    """The same assertions for every transport."""
+    # negotiation flags
+    assert str(client.protocol_version) == "2026-07-28"
+    assert client.server_info.name == "primitives-lab"
+    caps = client.server_capabilities
+    assert caps.tools is not None and caps.resources is not None and caps.prompts is not None
+
+    # tools/list: names and annotations
+    tools = {t.name: t for t in (await client.list_tools()).tools}
+    assert set(tools) == {"echo", "negotiation", "count", "summarize", "roots", "add_note", "delete_note"}
+    assert tools["echo"].annotations.read_only_hint is True
+    assert tools["delete_note"].annotations.destructive_hint is True
+
+    # plain call, structured result
+    assert (await client.call_tool("echo", {"text": "hi"})).content[0].text == "hi"
+    neg = (await client.call_tool("negotiation", {})).structured_content
+    assert neg["protocol_version"] == "2026-07-28"
+    assert "sampling" in neg["client_capabilities"] and "roots" in neg["client_capabilities"]
+
+    # progress notifications
+    r = await client.call_tool("count", {"n": 3}, progress_callback=host.on_progress)
+    assert r.content[0].text == "counted to 3"
+    assert [p[0] for p in host.progress] == [1, 2, 3] and host.progress[-1][2] == "step 3 of 3"
+
+    # sampling: the server used OUR model
+    r = await client.call_tool("summarize", {"text": "MCP separates tools, resources and prompts."})
+    assert host.sampling == 1 and r.content[0].text == "[stub] a one-sentence summary"
+
+    # roots: the server asked where it may work
+    r = await client.call_tool("roots", {})
+    assert host.roots == 1 and r.structured_content["result"] == [f"lab -&gt; {HERE.as_uri()}"]
+
+    # resources: list, template, dynamic, and a change
+    uris = {str(x.uri) for x in (await client.list_resources()).resources}
+    assert {"lab://notes", "lab://clock"} &lt;= uris
+    assert [t.uri_template for t in (await client.list_resource_templates()).resource_templates] == ["lab://notes/{note_id}"]
+    assert (await client.read_resource("lab://notes/welcome")).contents[0].text.startswith("Resources are")
+    assert "T" in (await client.read_resource("lab://clock")).contents[0].text
+    assert (await client.call_tool("add_note", {"note_id": "t1", "text": "x"})).content[0].text == "lab://notes/t1"
+    assert (await client.read_resource("lab://notes/t1")).contents[0].text == "x"
+
+    # prompts: user-controlled templates
+    assert [p.name for p in (await client.list_prompts()).prompts] == ["explain"]
+    got = await client.get_prompt("explain", {"concept": "roots", "level": "beginner"})
+    assert "Explain 'roots' to a beginner" in got.messages[0].content.text
+
+    # elicitation: the person is asked, and can say no
+    host.say_yes = False
+    assert (await client.call_tool("delete_note", {"note_id": "t1"})).content[0].text.startswith("kept t1")
+    host.say_yes = True
+    assert (await client.call_tool("delete_note", {"note_id": "t1"})).content[0].text == "deleted t1"
+    assert host.elicit == 2
+
+    # errors are results, not crashes
+    r = await client.call_tool("count", {"n": 999})
+    assert r.is_error and "between 1 and 50" in r.content[0].text
+    r = await client.call_tool("delete_note", {"note_id": "nope"})
+    assert r.is_error and "no note called nope" in r.content[0].text
+
+
+# ---------------------------------------------------------------- three transports
+async def test_in_memory():
+    host = Host()
+    async with host.client(lab.mcp) as client:
+        await exercise_everything(client, host)
+
+
+async def test_stdio_subprocess():
+    host = Host()
+    params = StdioServerParameters(command=sys.executable, args=[str(HERE / "server.py"), "--transport", "stdio"])
+    async with host.client(params) as client:
+        await exercise_everything(client, host)
+
+
+def _free_port() -&gt; int:
+    with socket.socket() as s:
+        s.bind(("127.0.0.1", 0))
+        return s.getsockname()[1]
+
+
+@pytest.fixture
+def http_server():
+    port = _free_port()
+    proc = subprocess.Popen([sys.executable, str(HERE / "server.py"), "--transport", "streamable-http", "--port", str(port)],
+                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    try:
+        for _ in range(50):
+            with socket.socket() as s:
+                s.settimeout(0.2)
+                if s.connect_ex(("127.0.0.1", port)) == 0:
+                    break
+            time.sleep(0.2)
+        else:
+            raise RuntimeError("HTTP server did not start")
+        yield f"http://127.0.0.1:{port}/mcp"
+    finally:
+        proc.terminate()
+        proc.wait(timeout=10)
+
+
+async def test_streamable_http(http_server):
+    host = Host()
+    async with host.client(http_server) as client:
+        await exercise_everything(client, host)
+
+
+# ---------------------------------------------------------------- the raw wire, no SDK
+def test_wire_trace_stdio_runs():
+    out = subprocess.run([sys.executable, str(HERE / "wire_trace.py"), "stdio"], capture_output=True, text=True,
+                         encoding="utf-8", timeout=60)
+    assert out.returncode == 0, out.stderr
+    assert '"method": "server/discover"' in out.stdout and 'input_required' in out.stdout
+    assert "negotiated protocolVersion = 2025-11-25" in out.stdout   # the legacy path, for comparison
+
+
+def test_wire_trace_http_runs(http_server):
+    out = subprocess.run([sys.executable, str(HERE / "wire_trace.py"), "http", http_server], capture_output=True,
+                         text=True, encoding="utf-8", timeout=60)
+    assert out.returncode == 0, out.stderr
+    assert "Mcp-Session-Id=" in out.stdout and "HTTP 202" in out.stdout and "Missing session ID" in out.stdout</code></pre></details>
+<div class="callout "><p><b>In-memory first.</b> <code>Client(server_object)</code> is the fastest way to test tool logic, and it still runs the real input-required rounds. Keep the subprocess and HTTP tests for the transport itself: framing, sessions, headers.</p></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="check">
+    <div class="wrap">
+      <p class="eyebrow">Reference</p>
+      <h2>Check yourself.</h2>
+      <div class="prose rel-body">
+
+<p>Answer from memory, then open the trace to confirm.</p>
+<details class="quiz"><summary>1. On 2026-07-28, where do the client's capabilities travel?</summary><p>In <code>_meta</code> on every request (<code>io.modelcontextprotocol/clientCapabilities</code>), not in a one-time <code>initialize</code>. That is what lets the server stay stateless.</p></details>
+<details class="quiz"><summary>2. A tool result arrives with <code>resultType: "input_required"</code>. What does the client do?</summary><p>Answers each <code>inputRequests</code> entry with its own callback, then retries the same call with <code>inputResponses</code> and the unchanged <code>requestState</code>.</p></details>
+<details class="quiz"><summary>3. Why does the raw HTTP trace get <code>400 Missing session ID</code> on its first request?</summary><p>It omitted the <code>MCP-Protocol-Version</code> header, so the server applied the older session rules, under which only <code>initialize</code> may arrive without a session id.</p></details>
+<details class="quiz"><summary>4. Which three headers does a modern HTTP request carry, and what checks them?</summary><p><code>MCP-Protocol-Version</code>, <code>Mcp-Method</code> and, for tool calls, <code>Mcp-Name</code>. The transport validates them before the body is parsed; a mismatching <code>Mcp-Method</code> is refused.</p></details>
+<details class="quiz"><summary>5. What answers a notification over HTTP?</summary><p><code>202 Accepted</code> with an empty body. Notifications have no id and get no JSON-RPC reply.</p></details>
+<details class="quiz"><summary>6. Where must a stdio server write its logs?</summary><p>stderr. stdout is the protocol channel; one stray print corrupts the framing.</p></details>
+<details class="quiz"><summary>7. What is the difference between a <code>readOnlyHint</code> and a permission?</summary><p>A hint is the server's claim, used by the host to decide whether to ask the person. Permissions are the host's decision. Never trust a hint from a server you do not control.</p></details>
+<details class="quiz"><summary>8. What does <code>DELETE /mcp</code> with a session id do?</summary><p>Ends the legacy HTTP session; the id is invalid afterwards. Modern, session-less requests have nothing to delete.</p></details>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="next">
+    <div class="wrap">
+      <p class="eyebrow">Reference</p>
+      <h2>Where to go next.</h2>
+      <div class="prose rel-body">
+
+<div class="callout key"><span class="lbl">Six lines to keep</span><p>Three things a server offers, three it may ask for. The version and capabilities are flags, and on 2026-07-28 they travel with every request. Server asks are input-required rounds, not back-channel requests. Over HTTP: one endpoint, both media types accepted, three headers. stdout is sacred on stdio. Errors are results.</p></div>
+<ul>
+  <li><a href="https://github.com/Janaka2/resume/tree/main/ai/mcp-primitives-lab" target="_blank" rel="noopener">The lab on GitHub</a>: server, client, wire trace, tests and the verified outputs.</li>
+  <li><a href="/academy/modules/2026/FSE/mcp-end-to-end.html">MCP end to end</a>: the full guide, the security model, and a planner server in Python, Java and Spring AI that validates before it saves.</li>
+  <li><a href="https://modelcontextprotocol.io/specification/2026-07-28/changelog" target="_blank" rel="noopener">The 2026-07-28 changelog</a> and the <a href="https://modelcontextprotocol.io/specification/2025-11-25" target="_blank" rel="noopener">2025-11-25 specification</a>; the <a href="https://py.sdk.modelcontextprotocol.io/v2/" target="_blank" rel="noopener">Python SDK 2</a> reference.</li>
+  <li>On this site: <a href="/blog/posts/mcp-agent-integration.html">MCP for agent integrations</a> and <a href="/ai/#blueprint">the agent blueprint</a>.</li>
+</ul>
+<div class="cta" style="margin-top:22px">
+  <div>
+    <h3>Make it yours in an hour.</h3>
+    <p>Replace <code>NOTES</code> with something you own, keep <code>negotiation</code> as your first tool, and add one resolver-backed tool that asks the person before it changes anything. Run the tests on all three transports before you show it to a host.</p>
+  </div>
+  <div class="actions" style="margin-top:0">
+    <a class="btn primary" href="https://github.com/Janaka2/resume/tree/main/ai/mcp-primitives-lab" target="_blank" rel="noopener">Clone the lab ↗</a>
+    <a class="btn" href="/academy/modules/2026/FSE/mcp-end-to-end.html">Read the full guide</a>
+  </div>
+</div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug 🇨🇭</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/academy/modules/2026/FSE/mcp-end-to-end.html">MCP end to end</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+<script src="/assets/js/study.js?v=20260916"></script>
+</body>
+</html>
