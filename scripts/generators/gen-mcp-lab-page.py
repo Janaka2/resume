@@ -192,7 +192,7 @@ parts.append(sec("flags", "Part one · Orientation", "The flags to keep track of
   ["<code>MCP-Protocol-Version</code>, <code>Mcp-Method</code>, <code>Mcp-Name</code>", "modern HTTP request headers", "the transport routes and validates before the body is parsed; header and body must agree"],
   ["<code>requestState</code>", "an <code>input_required</code> result", "opaque and encrypted; send it back unchanged on the retry, with <code>inputResponses</code>"],
 ])}
-<p>This is the dictionary as the client printed it after a full run over stdio. Every counter is one, because the server asked for the model once, for the roots once and for the person once.</p>
+<p>This is the dictionary as the client printed it after a full run over stdio. Each ask counter is one, because the server asked for the model once, for the roots once and for the person once; the three progress notifications came from <code>count</code>.</p>
 {flow(part(V_CLIENT, "FLAGS after the session"))}
 '''))
 
@@ -207,7 +207,7 @@ parts.append(sec("discover", "Part two · The wire", "Handshake A (2026-07-28): 
 parts.append(sec("initialize", "Part two · The wire", "Handshake B (2025-11-25): initialize, reply, notifications/initialized.", f'''
 <p>Send an <code>initialize</code> request to the same server and it answers on the older protocol, whatever version you proposed. This is the three-step handshake most hosts still speak in 2026: the client proposes a version and capabilities, the server confirms a version and offers its own, and the client closes the handshake with a notification. Only after that notification may normal requests flow; before it, only <code>ping</code> and logging are allowed.</p>
 {flow(part(V_WSTDIO, "-- B. legacy handshake"))}
-{note("<b>Both handshakes, one server.</b> The SDK's <code>MCPServer</code> answers <code>server/discover</code> and <code>initialize</code> alike, so a server you write today works with a host from last year. The client run below negotiated 2026-07-28; the trace's part B negotiated 2025-11-25 on the same binary.")}
+{note("<b>Both handshakes, one server.</b> The SDK's <code>MCPServer</code> answers <code>server/discover</code> and <code>initialize</code> alike, so a server you write today works with a host from last year. The client run below negotiated 2026-07-28; the trace's part B negotiated 2025-11-25 against the same server file.")}
 '''))
 
 # ------------------------------------------------------------------ 5 HTTP
@@ -237,10 +237,10 @@ parts.append(sec("tools", "Part three · The server", "Tools: the contract is th
 
 # ------------------------------------------------------------------ 7 rounds
 parts.append(sec("rounds", "Part three · The server", "Sampling, roots and elicitation: input-required rounds.", f'''
-<p>Up to 2025-11-25 a server that needed the client's model, roots or the person sent a JSON-RPC request <em>back</em> over the connection. That needs a back-channel: stdio, or the SSE stream of a stateful HTTP session. Since 2026-07-28 those asks are <b>input-required rounds</b>: the tool result says <code>resultType: "input_required"</code>, lists what it needs under <code>inputRequests</code>, and hands over an opaque <code>requestState</code>. The client answers by retrying the same call with <code>inputResponses</code>. No back-channel, so it works over stateless HTTP.</p>
+<p>Up to 2025-11-25 a server that needed the client's model, roots or the person sent a JSON-RPC request <em>back</em> over the connection. That needs a back-channel: stdio, or the SSE stream of a stateful HTTP session. Since 2026-07-28 those asks are <b>input-required rounds</b>: the tool result says <code>resultType: "input_required"</code>, lists what it needs under <code>inputRequests</code>, and hands over an opaque <code>requestState</code>. The client answers by retrying the same call with <code>inputResponses</code>. No back-channel is needed, so it works over stateless HTTP.</p>
 <p>In the Python SDK you declare the need with a <em>resolver</em>: a plain function that returns <code>Sample(...)</code>, <code>ListRoots()</code> or <code>Elicit(...)</code>. The framework runs the round trip and injects the answer as a tool argument that the model never sees and cannot fake.</p>
 {code(between(SERVER, "# --- Server-to-client asks", "# ------------------------------------------------------------------ resources"))}
-<p>On the wire, one such call is two messages. This is the sampling round from the stdio trace, with the client's model answer built by hand:</p>
+<p>On the wire, one such call is two round trips. This is the sampling round from the stdio trace, with the client's model answer built by hand:</p>
 {flow(part(V_WSTDIO, "the server needs OUR model for this one", "server exited with code"))}
 <p>The client side is three callbacks. A real host would show the sampling request to the person or filter it, then call its own model; this stub answers deterministically so the lab runs offline.</p>
 {code(between(CLIENT, "# ------------------------------------------------------------------ server -> client callbacks", "async def on_log"))}
@@ -265,7 +265,7 @@ parts.append(sec("client", "Part four · The client", "The twelve-step walk-thro
 
 # ------------------------------------------------------------------ 10 tests
 parts.append(sec("tests", "Part four · The client", "Tests: the same assertions on three transports.", f'''
-<p>One function, <code>exercise_everything</code>, asserts every primitive. Three tests run it in memory (the client talks to the server object, no process), over a stdio subprocess (as Claude Desktop or Claude Code would launch it) and over Streamable HTTP (the server in a subprocess, the client by URL). Two more tests run both wire traces and check the flags appear in their output.</p>
+<p>One function, <code>exercise_everything</code>, asserts every primitive. Three tests run it in memory (the client talks to the server object, no process), over a stdio subprocess (as Claude Desktop or Claude Code would launch it) and over Streamable HTTP (the server in a subprocess, the client by URL). Two more tests run both wire traces and check that the flags appear in their output.</p>
 {flow(V_TEST)}
 {fold("test_lab.py", "python", "ai/mcp-primitives-lab/test_lab.py")}
 {note("<b>In-memory first.</b> <code>Client(server_object)</code> is the fastest way to test tool logic, and it still runs the real input-required rounds. Keep the subprocess and HTTP tests for the transport itself: framing, sessions, headers.")}
