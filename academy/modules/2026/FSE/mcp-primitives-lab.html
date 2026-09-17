@@ -329,7 +329,7 @@ if __name__ == "__main__":
 
 <p>A host keeps a small amount of state per connection, and most bugs come from getting one of these wrong. The client in this lab keeps them in a dictionary called <code>FLAGS</code> and prints it when the session ends.</p>
 <table><thead><tr><th>Flag</th><th>Where it is set</th><th>Why it matters</th></tr></thead><tbody><tr><td><code>protocol_version</code></td><td><code>server/discover</code> result (<code>supportedVersions</code>), or the <code>initialize</code> reply</td><td>decides which of the rules below apply</td></tr><tr><td><code>server_capabilities</code></td><td>the same reply: <code>tools</code>, <code>resources</code> (<code>subscribe</code>, <code>listChanged</code>), <code>prompts</code></td><td>never call what was not offered</td></tr><tr><td>client capabilities</td><td>implied by the callbacks you register: <code>sampling</code>, <code>roots</code>, <code>elicitation</code></td><td>the server may only ask for what you declared</td></tr><tr><td><code>initialized</code></td><td>legacy only: after <code>notifications/initialized</code></td><td>before it, only <code>ping</code> and logging are allowed</td></tr><tr><td><code>_meta</code> on every request</td><td>modern only: version, clientInfo, clientCapabilities</td><td>replaces per-connection state; this is what makes stateless HTTP possible</td></tr><tr><td><code>Mcp-Session-Id</code></td><td>legacy HTTP: a header on the <code>initialize</code> reply</td><td>echo it on every later request; <code>DELETE</code> ends the session</td></tr><tr><td><code>MCP-Protocol-Version</code>, <code>Mcp-Method</code>, <code>Mcp-Name</code></td><td>modern HTTP request headers</td><td>the transport routes and validates before the body is parsed; header and body must agree</td></tr><tr><td><code>requestState</code></td><td>an <code>input_required</code> result</td><td>opaque and encrypted; send it back unchanged on the retry, with <code>inputResponses</code></td></tr></tbody></table>
-<p>This is the dictionary as the client printed it after a full run over stdio. Every counter is one, because the server asked for the model once, for the roots once and for the person once.</p>
+<p>This is the dictionary as the client printed it after a full run over stdio. Each ask counter is one, because the server asked for the model once, for the roots once and for the person once; the three progress notifications came from <code>count</code>.</p>
 <div class="msgflow">FLAGS after the session:
 {
   "initialized": true,
@@ -420,7 +420,7 @@ if __name__ == "__main__":
 &lt;- {"jsonrpc": "2.0", "id": 3, "result": {"tools": [{"annotations": {"idempotentHint": true, "openWorldHint": false, "readOnlyHint": true}, "description": "Return the text unchanged. The simplest possible tool: one argument, one result.", "inputSchema": {"properties": {"text": {"title": "Text", "type": "string"}}, "required": ["text"], "type": "object", "title": "echoArguments"}, "name": "echo", "outputSchema": {"proper …(5101 chars)
    tools = ['echo', 'negotiation', 'count', 'summarize', 'roots', 'add_note', 'delete_note']
    server exited with code 0 once stdin closed</div>
-<div class="callout "><p><b>Both handshakes, one server.</b> The SDK's <code>MCPServer</code> answers <code>server/discover</code> and <code>initialize</code> alike, so a server you write today works with a host from last year. The client run below negotiated 2026-07-28; the trace's part B negotiated 2025-11-25 on the same binary.</p></div>
+<div class="callout "><p><b>Both handshakes, one server.</b> The SDK's <code>MCPServer</code> answers <code>server/discover</code> and <code>initialize</code> alike, so a server you write today works with a host from last year. The client run below negotiated 2026-07-28; the trace's part B negotiated 2025-11-25 against the same server file.</p></div>
 
       </div>
     </div>
@@ -749,7 +749,7 @@ async def count(n: int, ctx: Context) -&gt; str:
       <h2>Sampling, roots and elicitation: input-required rounds.</h2>
       <div class="prose rel-body">
 
-<p>Up to 2025-11-25 a server that needed the client's model, roots or the person sent a JSON-RPC request <em>back</em> over the connection. That needs a back-channel: stdio, or the SSE stream of a stateful HTTP session. Since 2026-07-28 those asks are <b>input-required rounds</b>: the tool result says <code>resultType: "input_required"</code>, lists what it needs under <code>inputRequests</code>, and hands over an opaque <code>requestState</code>. The client answers by retrying the same call with <code>inputResponses</code>. No back-channel, so it works over stateless HTTP.</p>
+<p>Up to 2025-11-25 a server that needed the client's model, roots or the person sent a JSON-RPC request <em>back</em> over the connection. That needs a back-channel: stdio, or the SSE stream of a stateful HTTP session. Since 2026-07-28 those asks are <b>input-required rounds</b>: the tool result says <code>resultType: "input_required"</code>, lists what it needs under <code>inputRequests</code>, and hands over an opaque <code>requestState</code>. The client answers by retrying the same call with <code>inputResponses</code>. No back-channel is needed, so it works over stateless HTTP.</p>
 <p>In the Python SDK you declare the need with a <em>resolver</em>: a plain function that returns <code>Sample(...)</code>, <code>ListRoots()</code> or <code>Elicit(...)</code>. The framework runs the round trip and injects the answer as a tool argument that the model never sees and cannot fake.</p>
 <pre><code class="language-python"># --- Server-to-client asks: sampling, roots and elicitation ------------------------------------
 # Up to spec 2025-11-25 the server sent these as JSON-RPC requests BACK over the connection, which
@@ -822,7 +822,7 @@ async def delete_note(note_id: str, confirm: Annotated[ConfirmDelete, Resolve(co
     del NOTES[note_id]
     await ctx.notify_resources_changed()
     return f"deleted {note_id}"</code></pre>
-<p>On the wire, one such call is two messages. This is the sampling round from the stdio trace, with the client's model answer built by hand:</p>
+<p>On the wire, one such call is two round trips. This is the sampling round from the stdio trace, with the client's model answer built by hand:</p>
 <div class="msgflow">   the server needs OUR model for this one
 &lt;- {"jsonrpc": "2.0", "id": 3, "result": {"inputRequests": {"__main__:ask_client_model": {"method": "sampling/createMessage", "params": {"maxTokens": 120, "messages": [{"content": {"text": "Summarise in one sentence:\n\nMCP separates tools, resources and prompts.", "type": "text"}, "role": "user"}], "modelPreferences": {"hints": [{"name": "claude"}], "intelligencePriority": 0.3, "speedPriority": 0.8}, "systemPrompt": "Y …(993 chars)
    flag: resultType "input_required" + inputRequests (keyed) + requestState (opaque, encrypted, must go back unchanged)
@@ -1225,7 +1225,7 @@ if __name__ == "__main__":
       <h2>Tests: the same assertions on three transports.</h2>
       <div class="prose rel-body">
 
-<p>One function, <code>exercise_everything</code>, asserts every primitive. Three tests run it in memory (the client talks to the server object, no process), over a stdio subprocess (as Claude Desktop or Claude Code would launch it) and over Streamable HTTP (the server in a subprocess, the client by URL). Two more tests run both wire traces and check the flags appear in their output.</p>
+<p>One function, <code>exercise_everything</code>, asserts every primitive. Three tests run it in memory (the client talks to the server object, no process), over a stdio subprocess (as Claude Desktop or Claude Code would launch it) and over Streamable HTTP (the server in a subprocess, the client by URL). Two more tests run both wire traces and check that the flags appear in their output.</p>
 <div class="msgflow">.....                                                                    [100%]
 5 passed in 14.37s</div>
 <details class="code-fold"><summary><span>ai/mcp-primitives-lab/test_lab.py · 189 lines</span></summary><pre><code class="language-python">"""

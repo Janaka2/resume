@@ -90,10 +90,10 @@
           <ul>
             <li>Cosine similarity alone rewards redundancy: the top five chunks are often five phrasings of one clause, not five distinct facts.</li>
             <li>Chunk by structure first — recursive or parent-child splitting beats a fixed window on headings, clauses or tables.</li>
-            <li><code>IndexFlatIP</code> for exactness, <code>IndexHNSWFlat</code> for low-latency at a few million vectors, <code>IndexIVFFlat</code>/<code>IndexIVFPQ</code> once the corpus outgrows RAM.</li>
+            <li><code>IndexFlatIP</code> for exactness, <code>IndexHNSWFlat</code> for low latency at a few million vectors, <code>IndexIVFFlat</code>/<code>IndexIVFPQ</code> once the corpus outgrows RAM.</li>
             <li>Maximal Marginal Relevance (Carbonell &amp; Goldstein, 1998) trades relevance against diversity with one parameter, λ.</li>
             <li>A cross-encoder re-ranks the shortlist, not the corpus — score 20–30 candidates, never the whole index.</li>
-            <li>FAISS and the small models it depends on can all run on-premise; the perimeter question is about the chat model and the logs.</li>
+            <li>FAISS and the small models the pipeline depends on can all run on-premises; the perimeter question is about the chat model and the logs.</li>
           </ul>
         </div>
 
@@ -147,7 +147,7 @@ index_ivf.nprobe = 8  # cells searched per query -- trades recall for speed</cod
         <h2>How does Maximal Marginal Relevance add diversity?</h2>
         <p>Maximal Marginal Relevance, from Carbonell and Goldstein's 1998 paper on summarisation and passage re-ranking, re-orders a candidate set to reward relevance and penalise similarity to what is already picked:</p>
         <p><code>MMR = argmax<sub>D<sub>i</sub> ∈ R \ S</sub> [ λ · Sim1(D<sub>i</sub>, Q) − (1 − λ) · max<sub>D<sub>j</sub> ∈ S</sub> Sim2(D<sub>i</sub>, D<sub>j</sub>) ]</code></p>
-        <p>R is the candidate set FAISS returned, S is the set already selected, Q is the query, and λ trades relevance against diversity: λ = 1 is plain similarity ranking, λ = 0 picks purely for novelty. In practice, pull 20–50 candidates from FAISS, then run MMR to select the 4–8 chunks that go into the prompt. A λ around 0.5–0.7 keeps enterprise Q&amp;A leaning toward relevance while still forcing out at least one non-duplicate chunk.</p>
+        <p>R is the candidate set FAISS returned, S is the set already selected, Q is the query, and λ trades relevance against diversity: λ = 1 is plain similarity ranking, λ = 0 picks purely for novelty. In practice, pull 50–100 candidates from FAISS, run MMR to narrow them to a diverse 20–30, and let the re-ranker choose the 4–8 chunks that go into the prompt. A λ around 0.5–0.7 keeps enterprise Q&amp;A leaning towards relevance while still forcing out at least one non-duplicate chunk.</p>
         <pre><code>import numpy as np
 
 def mmr(query_vec, candidate_vecs, k=5, lambda_mult=0.6):
@@ -179,7 +179,7 @@ context = ranked[:6]</code></pre>
         <p>Re-ranking the whole corpus with a cross-encoder defeats the reason you built a vector index in the first place.</p>
 
         <h2>How do you evaluate the pipeline, and what should you log?</h2>
-        <p>Two numbers catch most regressions. <strong>Recall@k</strong> needs a labelled set of question and correct-chunk pairs you maintain yourself: the fraction of questions where the correct chunk lands in the top k, measured before and after re-ranking, so a drop after re-ranking shows a broken filter. <strong>Faithfulness</strong> checks whether each claim in the generated answer is actually supported by retrieved context rather than the model's prior knowledge — I cover it in more depth in the <a href="/blog/posts/ai-evaluation-frameworks.html">evaluation frameworks piece</a> on this blog; frameworks such as Ragas compute it by extracting claims from the answer and checking each against context.</p>
+        <p>Two numbers catch most regressions. <strong>Recall@k</strong> needs a labelled set of question and correct-chunk pairs you maintain yourself: the fraction of questions where the correct chunk lands in the top k, measured before and after re-ranking, so a drop after re-ranking shows a broken filter. <strong>Faithfulness</strong> checks whether each claim in the generated answer is actually supported by retrieved context rather than the model's prior knowledge — I cover it in more depth in the <a href="/blog/posts/ai-evaluation-frameworks.html">evaluation frameworks piece</a> on this blog; frameworks such as Ragas compute it by extracting claims from the answer and checking each against context. Then log, per request:</p>
         <ul>
           <li>the query text, or a hash of it if the content is sensitive</li>
           <li>the chunk ids and raw similarity scores FAISS returned</li>
@@ -190,7 +190,7 @@ context = ranked[:6]</code></pre>
         </ul>
         <p>That log, not the demo, is what an incident review or an audit will ask for. Build it before launch.</p>
 
-        <h2>Can this run on-premise when data may not leave the bank?</h2>
+        <h2>Can this run on-premises when data may not leave the bank?</h2>
         <p>FAISS itself has no network dependency — it is a CPU or GPU library that runs in-process, so once the index is built inside the perimeter, it and the search step never leave. The parts of a RAG pipeline that usually do reach outside are the embedding model and the generation model. An open-weights embedding model such as BAAI/bge or E5, served locally through sentence-transformers or a small inference server, replaces a hosted embeddings API. An open-weights chat model served the same way replaces the hosted LLM. The cross-encoder re-ranker is a similarly small model and stays local for the same reason — none of the document text or embeddings has to cross the perimeter to be scored.</p>
         <p>What is left is not a library choice but a set of decisions: where the index is stored and backed up, who is authorised to call the retrieval service, and whether the query log counts as personal or client data under the bank's classification. Treat those the way an <a href="/blog/posts/mcp-agent-integration.html">agent's tool calls</a> are treated in review — an allow-list, a log line per request, least privilege — rather than something the library resolves on its own.</p>
 
