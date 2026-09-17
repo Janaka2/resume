@@ -1,0 +1,39 @@
+== Streamable HTTP: every client message is a POST to http://127.0.0.1:8765/mcp; replies come as JSON or as an SSE stream ==
+
+-- A. modern (2026-07-28): server/discover, _meta on every POST, no session required --
+-> {"jsonrpc": "2.0", "id": 1, "method": "server/discover", "params": {"_meta": {"io.modelcontextprotocol/protocolVersion": "2026-07-28", "io.modelcontextprotocol/clientInfo": {"name": "wire-trace", "version": "1.0.0"}, "io.modelcontextprotocol/clientCapabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}}}}
+   first, WITHOUT the MCP-Protocol-Version header, to see what the flag does
+<- HTTP 400: '{"jsonrpc":"2.0","id":null,"error":{"code":-32600,"message":"Bad Request: Missing session ID"}}'
+   flag: without the header the server applies the session rules of the older protocol and refuses
+-> {"jsonrpc": "2.0", "id": 1, "method": "server/discover", "params": {"_meta": {"io.modelcontextprotocol/protocolVersion": "2026-07-28", "io.modelcontextprotocol/clientInfo": {"name": "wire-trace", "version": "1.0.0"}, "io.modelcontextprotocol/clientCapabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}}}}
+   again, with headers MCP-Protocol-Version: 2026-07-28 and Mcp-Method: server/discover (Accept lists BOTH media types)
+<- HTTP 200 content-type=application/json Mcp-Session-Id=None
+<- {"jsonrpc": "2.0", "id": 1, "result": {"cacheScope": "private", "capabilities": {"prompts": {"listChanged": true}, "resources": {"listChanged": true, "subscribe": true}, "tools": {"listChanged": true}}, "instructions": "A teaching server. Call `negotiation` first to see the flags for this connection, then try every tool once. `summarize` uses your own model through sampling, `roots` asks which directories you allow,  …(629 chars)
+   flag: no session id issued; the answer is plain JSON because nothing needs streaming
+-> the same body with a WRONG Mcp-Method header
+<- HTTP 400: '{"jsonrpc":"2.0","id":1,"error":{"code":-32020,"message":"mcp-method header does not match the request body\'s '
+   flag: the header and the body must agree; the transport checks it before the method runs
+-> {"jsonrpc": "2.0", "id": 2, "method": "tools/call", "params": {"_meta": {"io.modelcontextprotocol/protocolVersion": "2026-07-28", "io.modelcontextprotocol/clientInfo": {"name": "wire-trace", "version": "1.0.0"}, "io.modelcontextprotocol/clientCapabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}}, "name": "negotiation", "arguments": {}}}
+   a tool call straight away: headers + _meta, no session, no initialized notification (Mcp-Name: negotiation)
+<- HTTP 200
+<- {"protocol_version": "2026-07-28", "client_capabilities": {"sampling": {}, "elicitation": {"form": {}}, "roots": {"list_changed": true}}, "transport": "streamable-http", "http_session_id": null, "request_id": "2"}
+   what the server sees: the version and capabilities we put in _meta
+
+-- B. legacy (2025-11-25): initialize creates a session; every later request must carry its id --
+-> {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2026-07-28", "capabilities": {"roots": {"listChanged": true}, "sampling": {}, "elicitation": {"form": {}}}, "clientInfo": {"name": "wire-trace", "version": "1.0.0"}}}
+   no session header yet: this request creates the session
+<- HTTP 200 content-type=text/event-stream Mcp-Session-Id=d67f7cc45ef04ea9a80957edf01f3021
+   negotiated protocolVersion = 2025-11-25
+-> {"jsonrpc": "2.0", "method": "notifications/initialized"}
+   flag: a notification -> 202 Accepted, empty body
+<- HTTP 202 (body 0 bytes)
+-> {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}}
+   same POST, now with Mcp-Session-Id and MCP-Protocol-Version headers
+<- HTTP 200 content-type=text/event-stream tools=['echo', 'negotiation', 'count', 'summarize', 'roots', 'add_note', 'delete_note']
+-> the same request WITHOUT the session header
+<- HTTP 400: '{"jsonrpc":"2.0","id":null,"error":{"code":-32600,"message":"Bad Request: Missing session ID"}}'
+   flag: a stateful server rejects requests that do not carry the session id it issued
+-> GET with Accept: text/event-stream opens the standalone stream for server-initiated messages
+<- HTTP 200 content-type=text/event-stream (kept open; nothing to deliver, so we close it)
+-> DELETE with the session id
+<- HTTP 200: the session is over; the id is now invalid
