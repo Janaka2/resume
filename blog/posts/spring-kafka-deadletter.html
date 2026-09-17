@@ -91,13 +91,13 @@
             <li>A consumer commits offsets per partition in order, so one record that always throws blocks everything behind it on that partition.</li>
             <li><code>DefaultErrorHandler</code> retries in place, blocking the partition; <code>@RetryableTopic</code> retries on separate topics, so the original partition keeps moving.</li>
             <li><code>DeadLetterPublishingRecoverer</code> ends the story: original topic, partition, offset and exception land in headers, then the offset commits and the consumer moves on.</li>
-            <li>Wrap deserializers in <code>ErrorHandlingDeserializer</code> — a bad payload never reaches your try/catch otherwise, it kills the consumer thread first.</li>
+            <li>Wrap deserializers in <code>ErrorHandlingDeserializer</code> — otherwise a bad payload never reaches your try/catch; it kills the consumer thread first.</li>
             <li>A DLT is a production topic with its own retention, ACLs and PII exposure. Replay from it is a change, not a debugging convenience.</li>
           </ul>
         </div>
 
         <h2>Why does one bad record stall the whole partition?</h2>
-        <p>Kafka's unit of ordering is the partition. One consumer owns a partition and reads it strictly in offset order, because the next <code>poll()</code> only returns records once the previous batch's offsets are committed. If record 1,204 throws every time and your handling just logs and rethrows, the framework retries it forever; offset 1,205 never gets a turn, and lag on that one partition climbs while its siblings keep moving.</p>
+        <p>Kafka's unit of ordering is the partition. One consumer owns a partition and reads it strictly in offset order, because the container only calls <code>poll()</code> again once the previous batch has been processed. If record 1,204 throws every time and your handling just logs and rethrows, the container retries it in place: ten attempts by default, far more if you configured a generous back-off. Offset 1,205 waits the whole time, and lag on that one partition climbs while its siblings keep moving.</p>
         <p>That pattern — one partition frozen, the rest healthy — is the tell. A slow consumer needs more capacity; a poison pill needs somewhere else for the bad record to go.</p>
 
         <h2>How do you retry a failing record without blocking the partition?</h2>
@@ -118,7 +118,7 @@ public DefaultErrorHandler kafkaErrorHandler(KafkaTemplate&lt;Object, Object&gt;
     handler.addNotRetryableExceptions(IllegalArgumentException.class);
     return handler;
 }</code></pre>
-        <p>Once the backoff is exhausted, the handler calls the recoverer and only then does the container commit the offset. That is the step that matters: without a recoverer, exhausting the backoff still throws, and depending on container properties you either seek back to the same offset and loop, or stop the consumer. A recoverer turns "give up" into "move on".</p>
+        <p>Once the backoff is exhausted, the handler calls the recoverer and only then does the container commit the offset. That is the step that matters: without a recoverer of your own, exhausting the back-off hands the record to the default recoverer, which logs it and moves on. The partition is unblocked, but the record is gone and the only trace is a log line. A recoverer turns "give up" into "move on".</p>
 
         <h2>What does @RetryableTopic add, and how are the retry topics named?</h2>
         <p>Blocking retries hold up the partition for as long as the backoff runs — a problem once backoffs reach tens of seconds. Since Spring Kafka 2.7, <code>@RetryableTopic</code> takes the retry off the original partition: each failed attempt republishes to a dedicated retry topic, a listener there picks it up after its own delay, and the original partition stays free throughout.</p>
@@ -138,7 +138,7 @@ public void onDlt(ConsumerRecord&lt;String, Order&gt; record,
                    @Header(KafkaHeaders.DLT_EXCEPTION_MESSAGE) String message) {
     dltAuditRepository.record(record.topic(), record.partition(), record.offset(), message);
 }</code></pre>
-        <p>Spring creates the topics when <code>autoCreateTopics</code> is on, suffixed with their delay by default: <code>orders</code> becomes <code>orders-retry-1000</code>, <code>orders-retry-2000</code>, ending at <code>orders-dlt</code>. Set <code>topicSuffixingStrategy = TopicSuffixingStrategy.SUFFIX_WITH_INDEX_VALUE</code> for <code>orders-retry-0</code>, <code>orders-retry-1</code> instead, and give each retry topic at least as many partitions as the original, or you lose per-key ordering. Skip <code>@DltHandler</code> and Spring wires a <code>DeadLetterPublishingRecoverer</code> automatically.</p>
+        <p>Spring creates the topics when <code>autoCreateTopics</code> is on, suffixed with their delay by default: <code>orders</code> becomes <code>orders-retry-1000</code>, <code>orders-retry-2000</code>, ending at <code>orders-dlt</code>. Set <code>topicSuffixingStrategy = TopicSuffixingStrategy.SUFFIX_WITH_INDEX_VALUE</code> for <code>orders-retry-0</code>, <code>orders-retry-1</code> instead, and give each retry topic at least as many partitions as the original, or you lose per-key ordering. Skip <code>@DltHandler</code> and the record still lands in the DLT; Spring logs it instead of calling your method.</p>
 
         <table>
           <thead><tr><th>Choose</th><th>When</th></tr></thead>
@@ -225,7 +225,7 @@ public class DltReplayService {
         <h2>What should page someone: DLT lag and retry depth</h2>
         <ol>
           <li><strong>DLT lag.</strong> Any consumer-group lag on a <code>*-dlt</code> topic means records are sitting unresolved — nothing reads a DLT automatically, so that lag never falls on its own. Alert on lag above zero sustained past your triage window, not on a threshold count.</li>
-          <li><strong>Retry depth.</strong> With <code>@RetryableTopic</code>, watch how far down the retry chain records land. Volume on <code>orders-retry-8000</code> rather than <code>orders-retry-1000</code> means attempts are failing repeatedly before they reach the DLT — an earlier signal that a dependency is degrading.</li>
+          <li><strong>Retry depth.</strong> With <code>@RetryableTopic</code>, watch how far down the retry chain records land. Volume on <code>orders-retry-4000</code> rather than <code>orders-retry-1000</code> means attempts are failing repeatedly before they reach the DLT — an earlier signal that a dependency is degrading.</li>
         </ol>
         <p>Both are ordinary consumer-group lag metrics, from Micrometer's Kafka bindings or <code>kafka-consumer-groups.sh --describe</code>. The work is deciding these topics deserve their own alert, not lumping them in with the main topic's lag.</p>
 
@@ -241,7 +241,7 @@ public class DltReplayService {
         <h2>Practical takeaways</h2>
         <ol>
           <li>Start with <code>DefaultErrorHandler</code> and a short <code>ExponentialBackOffWithMaxRetries</code>; move to <code>@RetryableTopic</code> only once a backoff would otherwise stall the partition for longer than you can tolerate.</li>
-          <li>Always end the chain in a <code>DeadLetterPublishingRecoverer</code>. Without one, exhausting retries still throws, and a thrown exception is a stalled partition with extra steps.</li>
+          <li>Always end the chain in a <code>DeadLetterPublishingRecoverer</code>. Without one, exhausting retries logs the record and skips it: the partition moves on, and the record is gone.</li>
           <li>Wrap every consumer's deserializer in <code>ErrorHandlingDeserializer</code>, even if you're confident in your schema. It costs nothing when messages are well-formed.</li>
           <li>Design the listener to be idempotent before you need it to be. It is the same property that makes retries, redeliveries and replays all safe.</li>
           <li>Alert on DLT lag and retry-topic depth as their own signals, and build a replay tool with an audit trail before you need one under pressure — not while triaging an incident.</li>
