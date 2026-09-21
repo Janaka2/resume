@@ -107,7 +107,7 @@ Project-level subagents live in `.claude/agents/` and skills in `.claude/skills/
 | `academy/production-ready-spring-angular/index.html` | `docs/academy/ARTICLE.md` in the sibling repo `~/dev/spring-angular-production-blueprint` | `scripts/generators/gen-production-page.py` |
 | `academy/modules/2026/FSE/claude-code-configuration.html` | `scripts/generators/content/claude-code-configuration.md` | `scripts/generators/gen-claude-config-page.py` |
 
-The last two use `scripts/generators/md2academy.py`, a small Markdown-to-study-page renderer whose dialect is documented in
+The last two use `scripts/generators/md2academy.py`, a small Markdown-to-study-page renderer (`<!-- include: @content/x.html -->` pastes an interactive block from `scripts/generators/content/`, which is how the rollout workbench and the system assembly board get into their pages) whose dialect is documented in
 its docstring: `<!-- eyebrow: … -->` before a `##` names the section eyebrow, `<!-- lede -->` marks the hero lede,
 `> **Label** text` becomes a callout whose flavour comes from the label (big idea / keep this → `key`, trap / warning /
 limits → `warn`, memory hook / try → `try`), ```` ```flow ```` is an ASCII diagram in a `.msgflow` box, ```` ```html ````

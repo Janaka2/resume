@@ -9,7 +9,8 @@ Markdown dialect (deliberately small):
   paragraphs, - lists, 1. lists, | tables |, ```lang fences
   ```flow  ... ```             an ASCII diagram in a .msgflow box
   ```html  ... ```             raw HTML passthrough
-  <!-- include: file.html -->  paste a file next to the source verbatim (interactive blocks)
+  <!-- include: file.html -->  paste a file next to the source verbatim (interactive blocks);
+                               @content/name.html resolves to this repo's scripts/generators/content/
   > **Label** text             a callout; label decides the flavour:
                                big idea/keep this/remember -> key, trap/warning/limits -> warn,
                                memory hook/try -> try, anything else -> note
@@ -282,13 +283,15 @@ def page(cfg, lede, body):
 '''
 
 
-def build(cfg, src, out):
+def build(cfg, src, out, extra_md=""):
     import os
-    md = open(src, encoding="utf-8").read()
+    md = open(src, encoding="utf-8").read() + ("\n" + extra_md if extra_md else "")
     # <!-- include: file.html --> pastes a file (relative to the source) verbatim, for interactive blocks
     md = re.sub(
         r"<!-- include: ([^\s]+) -->",
-        lambda m: "```html\n" + open(os.path.join(os.path.dirname(src), m.group(1)), encoding="utf-8").read().rstrip("\n") + "\n```",
+        lambda m: "```html\n" + open(
+            os.path.join(os.path.dirname(os.path.abspath(__file__)), "content", m.group(1)[9:]) if m.group(1).startswith("@content/")
+            else os.path.join(os.path.dirname(src), m.group(1)), encoding="utf-8").read().rstrip("\n") + "\n```",
         md,
     )
     lede, body = render(md)
