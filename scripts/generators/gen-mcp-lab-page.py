@@ -112,7 +112,7 @@ HEAD = f'''<!DOCTYPE html>
   <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="/assets/css/theme.css?v=20260916">
   <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
-  <link rel="stylesheet" href="/assets/css/study.css?v=20260916b">
+  <link rel="stylesheet" href="/assets/css/study.css?v=20260921b">
   <link rel="manifest" href="/assets/site.webmanifest">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 </head>

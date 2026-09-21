@@ -248,6 +248,32 @@ details.quiz p.q { margin: 0; font-weight: 500; }
 details.quiz p.a { margin: 4px 0 0; color: var(--tx2); font-size: .92rem; border-left: 2px solid var(--ln); padding-left: 10px; }
 details.code-fold > .fold-body { padding: 4px 16px 12px; border-top: 1px solid var(--ln); }
 details.code-fold > .fold-body pre { margin: 12px 0 0; }
-body.study .prose .msgflow { font-size: .74rem; line-height: 1.35; width: max-content; min-width: 100%; max-width: min(calc(100vw - 48px), 792px); }
-body.study .prose .wb, body.study .prose .dd { width: min(calc(100vw - 48px), 792px); max-width: none; }
-@media (max-width: 900px) { body.study .prose .msgflow, body.study .prose .wb, body.study .prose .dd { width: auto; max-width: 100%; } }
+body.study .prose .msgflow { font-size: .76rem; line-height: 1.35; width: auto; max-width: 100%; }
+
+/* ---- Wide reading layout (added 2026-09-21) ----
+   The 72ch cap is right for paragraphs and wrong for tables, diagrams, code and interactive blocks: they were
+   forced into a narrow column and needed horizontal scrolling on a wide screen. On study pages the page wrapper
+   grows with the viewport, the prose column is uncapped, and only the text-like children keep a readable measure. */
+body.study main .wrap { max-width: min(1280px, 100% - 48px); }
+body.study main .prose { max-width: none; }
+body.study main .prose > p,
+body.study main .prose > ul,
+body.study main .prose > ol,
+body.study main .prose > h3,
+body.study main .prose > h4,
+body.study main .prose > blockquote,
+body.study main .prose > .callout,
+body.study main .prose > details.quiz { max-width: 78ch; }
+body.study main .prose > .lede,
+body.study main .subhero .lede { max-width: 82ch; }
+body.study main .tablewrap { max-width: none; }
+body.study main .tablewrap table { width: 100%; }
+body.study main .tablewrap td, body.study main .tablewrap th { white-space: normal; overflow-wrap: anywhere; }
+body.study main .tablewrap td code { white-space: normal; }
+body.study main .prose > pre, body.study main .prose details.code-fold { max-width: none; }
+body.study .prose .wb, body.study .prose .dd { width: auto; max-width: none; }
+body.study .prose .wb .wb-grid { grid-template-columns: 220px 280px minmax(0, 1fr); }
+@media (max-width: 900px) {
+  body.study main .wrap { max-width: none; }
+  body.study .prose .wb .wb-grid { grid-template-columns: 1fr; }
+}
