@@ -16,6 +16,26 @@ python3 -m http.server 8000     # then open http://localhost:8000/
 
 There is no lint, build, or test step. Verify changes by loading the page in a browser (check both light and dark theme, and EN/DE on the hub page).
 
+```bash
+# After adding, renaming or rewriting any page: regenerate the derived files, in this order, and commit them
+python3 scripts/gen-sitemap.py          # sitemap.xml (crawls academy/modules/2026; other pages are listed in STATIC)
+python3 scripts/gen-content-index.py    # assets/content-index.json: search, related links, reading times
+python3 scripts/gen-feed.py             # feed.xml, from the content index
+python3 scripts/build-hub.py            # only after editing a hub partial (partials/*.html)
+python3 scripts/gen-og-image.py         # only after changing theme.css tokens (needs Pillow)
+```
+
+A page outside `academy/modules/2026/` (for example `academy/production-ready-spring-angular/`) is invisible to the
+crawlers until it is added to `STATIC` in `scripts/gen-sitemap.py` and to the file list at the top of
+`scripts/gen-content-index.py`.
+
+### Publishing
+
+Work happens on the local branch `cv-photo-alignment`, which tracks `origin/main`; publish with
+`git push origin HEAD:main` (GitHub Pages deploys from `main`). Other sessions and the workflows push to `main` too,
+so `git pull --rebase origin main` first. Conflicts in `sitemap.xml`, `feed.xml`, `assets/content-index.json` or the
+inlined `index.html` are never merged by hand: take either side and rerun the generators above.
+
 The `chatbot/` directory is a Gradio Python app deployed separately (the site embeds the Hugging Face Space `janaka2-claritybot.hf.space` directly in the chat modal, with a waking-up skeleton and an email fallback). It reads `OPENAI_API_KEY`, `ADMIN_PASSWORD`, `RESUME_SOURCE_URL`, `PUSHOVER_*` and `SYSTEM_PROMPT` from `.env`; `chatbot/requirements.txt` pins its dependencies and `.github/workflows/deploy_chatbot.yml` uploads the folder to the Space when it changes.
 
 ## Architecture
@@ -78,9 +98,33 @@ Project-level subagents live in `.claude/agents/` and skills in `.claude/skills/
 | Career facts changed | `cv-sync` agent |
 | Product copy (nüchtern, Daily Momentum) | `product-marketer` agent |
 
+### Generated Academy pages (edit the source, rerun the script, never the HTML)
+
+| Page | Source | Generator |
+|---|---|---|
+| `academy/modules/2026/FSE/mcp-end-to-end.html` | `ai/mcp-momentum-planner/` (Python, Java, Spring code and their verified output) | `scripts/generators/gen-mcp-page.py` |
+| `academy/modules/2026/FSE/mcp-primitives-lab.html` | `ai/mcp-primitives-lab/` | `scripts/generators/gen-mcp-lab-page.py` |
+| `academy/production-ready-spring-angular/index.html` | `docs/academy/ARTICLE.md` in the sibling repo `~/dev/spring-angular-production-blueprint` | `scripts/generators/gen-production-page.py` |
+| `academy/modules/2026/FSE/claude-code-configuration.html` | `scripts/generators/content/claude-code-configuration.md` | `scripts/generators/gen-claude-config-page.py` |
+
+The last two use `scripts/generators/md2academy.py`, a small Markdown-to-study-page renderer whose dialect is documented in
+its docstring: `<!-- eyebrow: … -->` before a `##` names the section eyebrow, `<!-- lede -->` marks the hero lede,
+`> **Label** text` becomes a callout whose flavour comes from the label (big idea / keep this → `key`, trap / warning /
+limits → `warn`, memory hook / try → `try`), ```` ```flow ```` is an ASCII diagram in a `.msgflow` box, ```` ```html ````
+passes through, `::: quiz Title … Answers: …  :::` renders a self-check with hidden answers, `::: fold Title … :::` a
+folded block. New study-guide pages should be written this way: a `.md` under `scripts/generators/content/` plus a
+ten-line config script. Keep `.msgflow` diagrams at or under 110 columns; the study CSS lets them widen to the page.
+
 `ai/mcp-momentum-planner/` is the worked example behind the Academy guide `academy/modules/2026/FSE/mcp-end-to-end.html`: the same MCP server (plan contract, deterministic validator, save with elicitation) in Python (`mcp` 2.2), plain Java (MCP Java SDK 2.0) and Spring Boot 4 + Spring AI 2.0. The page is generated from those files, so change the code there and regenerate rather than editing the page's code blocks; all three were built and run before publishing (Python: `pytest` + `test_client.py`; Java and Spring: compiled with Maven and driven by the same client).
 
 `.github/workflows/weekly_brand_review.yml` runs `/weekly-brand-review` every Monday via the Claude Code GitHub Action and opens a PR; it needs the `ANTHROPIC_API_KEY` repository secret.
+
+### Credentials
+
+Certificate PDFs live in `assets/certificates/` under descriptive names and are public. A new one is added in three
+places: a card in `partials/certifications.html` (then `scripts/build-hub.py`, since the hub inlines it), a line in the
+Anthropic or certifications list in `resume/index.html`, and any new `data-i18n` label in the `DE` dictionary of
+`assets/js/i18n.js`. The MCP course page carries a credential badge in its hero, set in `gen-mcp-page.py`.
 
 ### Archived files
 
