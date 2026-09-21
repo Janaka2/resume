@@ -1,0 +1,647 @@
+<div class="wb" id="wb">
+  <style>
+    .wb { border: 1px solid var(--ln); border-radius: var(--r); background: var(--bg2); margin-top: 16px; overflow: hidden; }
+    .wb * { box-sizing: border-box; }
+    .wb-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 16px; border-bottom: 1px solid var(--ln); }
+    .wb-head .ttl { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--tx2); }
+    .wb-progress { height: 4px; background: var(--ln); }
+    .wb-progress > i { display: block; height: 100%; background: var(--ac); transition: width .25s; }
+    .wb-grid { display: grid; grid-template-columns: 196px 236px minmax(0, 1fr); min-height: 380px; }
+    .wb-steps { border-right: 1px solid var(--ln); padding: 8px; overflow-y: auto; max-height: 460px; }
+    .wb-steps button { display: flex; gap: 8px; align-items: flex-start; width: 100%; text-align: left; background: none; border: 1px solid transparent; border-radius: 8px; padding: 8px 10px; cursor: pointer; color: var(--tx); font: inherit; font-size: .86rem; line-height: 1.3; }
+    .wb-steps button:hover { background: var(--bg); }
+    .wb-steps button.on { background: var(--bg); border-color: var(--ln); }
+    .wb-steps button.done .n { background: var(--ok); color: #fff; border-color: var(--ok); }
+    .wb-steps .n { flex: 0 0 24px; height: 24px; border-radius: 50%; border: 1px solid var(--ln); font-family: var(--font-mono); font-size: .7rem; display: inline-flex; align-items: center; justify-content: center; }
+    .wb-steps small { display: block; color: var(--tx2); font-size: .72rem; margin-top: 2px; }
+    .wb-tree { border-right: 1px solid var(--ln); padding: 10px 12px; font-family: var(--font-mono); font-size: .74rem; line-height: 1.55; overflow: auto; max-height: 460px; white-space: nowrap; }
+    .wb-tree .root { margin-top: 10px; color: var(--tx2); text-transform: uppercase; letter-spacing: .1em; font-size: .62rem; }
+    .wb-tree .root:first-child { margin-top: 0; }
+    .wb-tree .node { display: block; color: var(--tx); text-decoration: none; padding: 1px 4px; border-radius: 4px; }
+    .wb-tree .node.dir { color: var(--tx2); }
+    .wb-tree .node.file { cursor: pointer; }
+    .wb-tree .node.file:hover { background: var(--bg); }
+    .wb-tree .node.file.sel { background: var(--ac); color: #fff; }
+    .wb-tree .node.new::after { content: "new"; margin-left: 8px; font-size: .58rem; letter-spacing: .1em; color: var(--ok); text-transform: uppercase; }
+    .wb-tree .node.ghost { opacity: .32; }
+    .wb-main { padding: 14px 16px; min-width: 0; overflow: auto; max-height: 460px; }
+    .wb-main h4 { margin: 0 0 4px; font-family: var(--font-head); font-size: 1.05rem; }
+    .wb-main .who { display: inline-block; font-family: var(--font-mono); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; background: var(--chip); color: var(--tx2); margin-bottom: 8px; }
+    .wb-main p { margin: 6px 0; font-size: .92rem; }
+    .wb-main .why { border-left: 3px solid var(--ac); padding: 6px 10px; background: var(--bg); border-radius: 0 6px 6px 0; font-size: .86rem; color: var(--tx2); }
+    .wb-main .cmd { font-family: var(--font-mono); font-size: .76rem; background: var(--bg); border: 1px solid var(--ln); border-radius: 6px; padding: 8px 10px; margin: 8px 0; white-space: pre-wrap; }
+    .wb-fileview { border-top: 1px solid var(--ln); padding: 12px 16px; background: var(--bg2); }
+    .wb-file { border: 1px solid var(--ln); border-radius: 8px; background: var(--bg); }
+    .wb-file .path { font-family: var(--font-mono); font-size: .7rem; padding: 6px 10px; border-bottom: 1px solid var(--ln); color: var(--tx2); display: flex; justify-content: space-between; gap: 8px; }
+    .wb-file .path b { color: var(--tx); font-weight: 500; }
+    .wb-file pre { margin: 0; padding: 10px 12px; font-size: .74rem; line-height: 1.45; overflow: auto; max-height: 360px; border: 0; background: transparent; }
+    .wb-file .note { font-size: .8rem; color: var(--tx2); padding: 8px 10px; border-top: 1px solid var(--ln); }
+    .wb-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 16px; border-top: 1px solid var(--ln); flex-wrap: wrap; }
+    .wb-foot .btns { display: flex; gap: 8px; }
+    .wb button.b, .dd button.b { font: inherit; font-size: .84rem; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--ln); background: var(--bg); color: var(--tx); cursor: pointer; }
+    .wb button.b.primary { background: var(--ac); color: #fff; border-color: var(--ac); }
+    .wb button.b:disabled { opacity: .4; cursor: default; }
+    .wb-loop { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin: 10px 0; }
+    .wb-loop .st { border: 1px solid var(--ln); border-radius: 8px; padding: 8px; background: var(--bg); font-size: .78rem; }
+    .wb-loop .st b { display: block; font-family: var(--font-mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ac); margin-bottom: 4px; }
+    .wb-loop .st small { display: block; color: var(--tx2); margin-top: 4px; }
+    /* drag and drop */
+    .dd { margin-top: 14px; }
+    .dd .cards { display: flex; flex-wrap: wrap; gap: 8px; min-height: 44px; padding: 8px; border: 1px dashed var(--ln); border-radius: 8px; }
+    .dd .card-f { font-family: var(--font-mono); font-size: .72rem; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--ln); background: var(--bg); cursor: grab; user-select: none; }
+    .dd .card-f.sel { outline: 2px solid var(--ac); }
+    .dd .card-f.ok { border-color: var(--ok); color: var(--ok); }
+    .dd .card-f.bad { border-color: #d9480f; color: #d9480f; }
+    .dd .buckets { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin-top: 10px; }
+    .dd .bucket { border: 1px solid var(--ln); border-radius: 8px; padding: 8px; min-height: 96px; background: var(--bg); }
+    .dd .bucket.over { border-color: var(--ac); background: var(--bg2); }
+    .dd .bucket h5 { margin: 0 0 2px; font-family: var(--font-mono); font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; color: var(--tx2); }
+    .dd .bucket small { display: block; color: var(--tx2); font-size: .7rem; margin-bottom: 6px; }
+    .dd .bucket .card-f { display: inline-block; margin: 2px 2px 0 0; cursor: default; }
+    .dd .score { margin-top: 10px; font-size: .88rem; }
+    @media (max-width: 900px) {
+      .wb-grid { grid-template-columns: 1fr; }
+      .wb-steps, .wb-tree { border-right: 0; border-bottom: 1px solid var(--ln); max-height: 220px; }
+      .wb-main { max-height: none; }
+    }
+  </style>
+
+  <div class="wb-head">
+    <span class="ttl">Rollout workbench · Alpine Bank, payments-portal team</span>
+    <span class="ttl" id="wb-count">step 1 of 10</span>
+  </div>
+  <div class="wb-progress"><i id="wb-bar" style="width:10%"></i></div>
+  <div class="wb-grid">
+    <nav class="wb-steps" id="wb-steps" aria-label="Rollout steps"></nav>
+    <div class="wb-tree" id="wb-tree" aria-label="Where the files live"></div>
+    <div class="wb-main" id="wb-main"></div>
+  </div>
+  <div class="wb-fileview" id="wb-file"></div>
+  <div class="wb-foot">
+    <span class="ttl">Click a file in the tree to read it. Every file is a realistic, working example.</span>
+    <span class="btns">
+      <button class="b" id="wb-prev">← Previous</button>
+      <button class="b primary" id="wb-next">Next step →</button>
+    </span>
+  </div>
+
+  <!-- ===== file contents: one template per file. `<` is written as &lt; ===== -->
+  <template data-file="/Library/Application Support/ClaudeCode/managed-settings.json">{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+
+  "permissions": {
+    "deny": [
+      "Bash(sudo *)",
+      "Bash(rm -rf /*)",
+      "Bash(curl * | sh)",
+      "Read(**/.env)",
+      "Read(**/secrets/**)"
+    ]
+  },
+
+  "allowManagedPermissionRulesOnly": false,
+  "allowManagedHooksOnly": false,
+  "strictPluginOnlyCustomization": false,
+
+  "env": {
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "HTTPS_PROXY": "http://proxy.alpinebank.internal:3128"
+  },
+
+  "availableModels": ["claude-opus-5", "claude-sonnet-5", "claude-haiku-4-5-20251001"],
+
+  "enabledPlugins": {
+    "alpine-review-kit@alpine-marketplace": true
+  }
+}</template>
+  <template data-file="/Library/Application Support/ClaudeCode/CLAUDE.md"># Alpine Bank: rules for every Claude Code session
+
+These rules apply in every repository. They cannot be removed by a project or a person.
+
+## Data
+- Never paste customer data, account numbers, card numbers or production secrets into a prompt.
+- Test data comes from `test-data/` fixtures or the synthetic-data generator, never from production exports.
+
+## Change control
+- Every change goes through a pull request. Do not push to `main`.
+- Reference the Jira ticket (PAY-1234) in every commit message and PR title.
+
+## Where to ask
+- Platform questions: #claude-code-help on Slack. Security questions: security@alpinebank.internal.</template>
+  <template data-file="/Library/Application Support/ClaudeCode/managed-mcp.json">{
+  "mcpServers": {
+    "jira": {
+      "type": "http",
+      "url": "https://mcp.alpinebank.internal/jira",
+      "headers": { "Authorization": "Bearer ${JIRA_MCP_TOKEN}" }
+    },
+    "confluence": {
+      "type": "http",
+      "url": "https://mcp.alpinebank.internal/confluence"
+    }
+  }
+}</template>
+  <template data-file="payments-portal/CLAUDE.md"># payments-portal
+
+Customer-facing payments portal: Angular 22 SPA (`frontend/`), Spring Boot 4 API (`backend/`),
+PostgreSQL with Liquibase (`db/`). Ticket prefix PAY-. Read `docs/ARCHITECTURE.md` before a structural change.
+
+## Commands
+- Everything: `make dev` (starts PostgreSQL + Keycloak in Docker, then API and SPA)
+- Backend: `cd backend && ./mvnw -q test` (unit), `./mvnw -q verify` (integration, needs Docker)
+- Frontend: `cd frontend && npm test -- --watch=false`, `npm run lint`, `npm run e2e`
+- One backend test: `./mvnw -q -Dtest=PaymentServiceTest test`
+
+## Rules that apply everywhere in this repo
+- Clean architecture: `domain` never imports Spring; enforced by `ArchitectureTest`. Move code, do not weaken the test.
+- Money is `BigDecimal` + ISO currency, never `double`.
+- Every API error is RFC 9457 Problem Details. Every write records an audit event.
+- Schema changes are Liquibase changesets with a rollback (see `db/CLAUDE.md`).
+- Commit messages: `feat(PAY-1234): ...`, `fix(...)`, `test(...)`, `docs(...)`, `chore(...)`.
+
+## Folder-specific standards
+`frontend/CLAUDE.md`, `backend/CLAUDE.md` and `db/CLAUDE.md` load automatically when you work in those folders.</template>
+  <template data-file="payments-portal/.claude/settings.json">{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+
+  "permissions": {
+    "allow": [
+      "Bash(./mvnw *)",
+      "Bash(npm test*)",
+      "Bash(npm run lint*)",
+      "Bash(npm run build*)",
+      "Bash(git status*)", "Bash(git diff*)", "Bash(git log*)", "Bash(git add*)", "Bash(git commit*)",
+      "Bash(make dev)", "Bash(make test)"
+    ],
+    "ask": [
+      "Bash(git push*)",
+      "Bash(docker compose down*)",
+      "Bash(npm install*)"
+    ],
+    "deny": [
+      "Bash(git push --force*)",
+      "Read(**/application-prod.yml)"
+    ]
+  },
+
+  "env": {
+    "SPRING_PROFILES_ACTIVE": "dev"
+  },
+
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [ { "type": "command", "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/session-context.sh" } ] }
+    ],
+    "PreToolUse": [
+      { "matcher": "Bash",
+        "hooks": [ { "type": "command", "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/block-dangerous.sh", "timeout": 10 } ] }
+    ],
+    "PostToolUse": [
+      { "matcher": "Edit|Write",
+        "hooks": [ { "type": "command", "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/format.sh", "timeout": 30 } ] }
+    ]
+  }
+}</template>
+  <template data-file="payments-portal/.claude/hooks/session-context.sh">#!/usr/bin/env bash
+# SessionStart hook: whatever this prints becomes context for the session.
+# Tells Claude which ticket the branch is for, so it does not have to ask.
+branch=$(git branch --show-current 2>/dev/null)
+ticket=$(printf '%s' "$branch" | grep -oE 'PAY-[0-9]+' | head -1)
+echo "Current branch: ${branch:-unknown}."
+[ -n "$ticket" ] &amp;&amp; echo "Work is for Jira ticket $ticket; use it in commit messages and the PR title."
+echo "Uncommitted files: $(git status --porcelain 2>/dev/null | wc -l | tr -d ' ')."</template>
+  <template data-file="payments-portal/.claude/hooks/format.sh">#!/usr/bin/env bash
+# PostToolUse hook (matcher Edit|Write): format the file Claude just changed, so reviews are about logic, not style.
+# Exit 0 always: formatting must never block the agent.
+file=$(jq -r '.tool_input.file_path // empty')
+[ -z "$file" ] &amp;&amp; exit 0
+case "$file" in
+  *.ts|*.html|*.scss) (cd "${CLAUDE_PROJECT_DIR}/frontend" &amp;&amp; npx prettier --write "$file" >/dev/null 2>&amp;1) ;;
+  *.java)             (cd "${CLAUDE_PROJECT_DIR}/backend" &amp;&amp; ./mvnw -q spotless:apply -DspotlessFiles="$file" >/dev/null 2>&amp;1) ;;
+esac
+exit 0</template>
+  <template data-file="payments-portal/.claude/hooks/block-dangerous.sh">#!/usr/bin/env bash
+# PreToolUse hook (matcher Bash): deny the catastrophic, ask before the risky, silent otherwise.
+# This is the full script from Level 5 of this page (Appendix). Short version of what it does:
+#   rm -rf on / ~ . .. * or a system folder      -> deny
+#   curl|wget piped into a shell, mkfs, dd of=/dev -> deny
+#   git push --force, git reset --hard, git clean -f,
+#   terraform destroy, kubectl delete, DROP/TRUNCATE -> ask
+#   everything else                               -> no output (your permission rules decide)
+# Requires jq. Fails closed if jq is missing (exit 2).
+set -uo pipefail
+command -v jq >/dev/null || { echo "jq missing: Bash blocked" >&amp;2; exit 2; }
+# ... see Level 5 for the checks ...</template>
+  <template data-file="payments-portal/frontend/CLAUDE.md"># frontend (Angular 22)
+
+Loads automatically when Claude reads a file under `frontend/`. Adds to the root CLAUDE.md, never contradicts it.
+
+- Standalone components, signals for state, typed reactive forms. No NgModules, no `any`.
+- Every screen has four states: loading, empty, error, forbidden. Use `shared/state.ts`.
+- Material components only; no custom CSS for things Material provides.
+- Money is displayed with the `currency` pipe and the amount's own currency, never a hard-coded CHF.
+- A component file has its `*.spec.ts` next to it. Run `npm test -- --watch=false` before you say a change is done.
+- Accessibility is not optional: labels on every control, keyboard reachable, colour never the only signal.</template>
+  <template data-file="payments-portal/backend/CLAUDE.md"># backend (Spring Boot 4, Java 25)
+
+- Packages: `domain` (rules, no framework), `application` (use cases and ports), `adapter/in/web`, `adapter/out/persistence`, `infrastructure`.
+- Constructor injection, records for DTOs and value objects, `@NullMarked` packages. No Lombok.
+- Authorization decisions live in `application/AuthorizationPolicy`, never in a controller.
+- Optimistic locking: reads return an ETag, updates require If-Match. Do not remove `@Version`.
+- Tests: `*Test` are unit tests (no Spring), `*IT` run on PostgreSQL through Testcontainers. A new use case gets both.
+- Logs are structured JSON; never log a token, a card number or a full request body.</template>
+  <template data-file="payments-portal/db/CLAUDE.md"># db (Liquibase, PostgreSQL 18)
+
+- One changeset per concern in `db/changelog/changes/NNN-topic.yaml`, included from the master changelog in order.
+- Every changeset has a `comment:` that says why and a `rollback:` block. Never edit a changeset that has run anywhere.
+- Rolling deploys run old and new code together: add columns nullable first, backfill, constrain in a later release. Never rename or drop a column the previous version reads.
+- Money columns are `numeric(19,4)`; ids are `uuid`; times are `timestamp with time zone`.
+- Name every constraint and index (`fk_`, `uq_`, `ck_`, `ix_`), and say which query an index serves.</template>
+  <template data-file="payments-portal/.claude/rules/security.md">---
+paths:
+  - "backend/src/main/java/**/adapter/in/web/**"
+  - "frontend/src/app/core/auth/**"
+---
+# Security rules for the web edge and the auth code
+
+These load only when Claude reads a matching file, so they cost nothing the rest of the time.
+
+- Every endpoint checks authorization through `AuthorizationPolicy`; authentication alone is never enough.
+- Validate input at the boundary with Bean Validation; never build SQL, shell commands or file paths from request data.
+- Tokens are read from the Authorization header only; never from a query string; never logged.
+- A 403 must not reveal whether the resource exists.</template>
+  <template data-file="payments-portal/.claude/skills/new-endpoint/SKILL.md">---
+name: new-endpoint
+description: Add a REST endpoint to the payments API as a full vertical slice - domain rule, use case, port, adapter, DTO validation, Problem Details, OpenAPI, integration test. Use when asked to add or change an API operation.
+---
+# New endpoint, inside out
+
+1. Domain: put the rule in the entity as a method with a verb; throw a `domain/exception` type when violated. Unit test it with a fixed Clock.
+2. Application: extend the use case service: load → `AuthorizationPolicy` → domain method → save → `AuditRecorder.record(...)`. New persistence need = new method on the port interface, not a Spring Data call in the service.
+3. Adapters: implement the port in `adapter/out/persistence`; add the controller method with DTO records + validation, `If-Match` for updates, `@Operation` docs.
+4. Integration test: extend `*IT` using `PostgresIT` and `TestUsers.jwt(...)`: the happy path, each 4xx, and that an audit event exists.
+5. Done when `./mvnw -q verify` passes and `/v3/api-docs` shows the operation. Commit as `feat(PAY-xxxx): ...`.</template>
+  <template data-file="payments-portal/.claude/skills/liquibase-migration/SKILL.md">---
+name: liquibase-migration
+description: Write a Liquibase changeset for the payments database with a reason, named constraints, indexes, a rollback and expand/contract safety for rolling deployments. Use for any table or column change.
+---
+# Migration checklist
+- Next free number in `db/changelog/changes/`, one concern per file, include it in the master changelog.
+- `comment:` says why (which query, which rule). `rollback:` is explicit for anything but createTable/addColumn/createIndex.
+- Expand/contract: nullable first, NOT NULL next release; never rename or drop a column the running version reads.
+- Verify: `./mvnw -q liquibase:updateSQL` to read the SQL; `./mvnw -q verify` (SchemaIT validates the mapping).
+- Update `docs/DATABASE-MODEL.md` (diagram + table section).</template>
+  <template data-file="payments-portal/.claude/skills/story-refinement/SKILL.md">---
+name: story-refinement
+description: Turn a rough Jira story into a refined one with acceptance criteria in Given/When/Then, edge cases, data and security questions, and a test outline. Use when a BA or PO asks to refine, split or estimate a story.
+disable-model-invocation: true
+---
+# Refine a story (BA workflow, run with /story-refinement PAY-1234)
+1. Fetch the story with the Jira MCP tool. Summarise it in one sentence with the actor.
+2. Write acceptance criteria as Given/When/Then, at most seven. Mark any that need a decision with [DECIDE].
+3. List edge cases: empty, limits, currency, time zone, concurrent edit, permission of another user.
+4. List questions for security and data protection (personal data? retention? audit?).
+5. Outline the tests that would prove each criterion; name the layer (unit, API, e2e).
+6. Post the result back to the ticket as a comment through the Jira MCP tool; do not change the story text itself.</template>
+  <template data-file="payments-portal/.claude/agents/code-reviewer.md">---
+name: code-reviewer
+description: Reviews code changes for bugs, security issues and maintainability problems against the payments-portal standards. Use proactively after writing or modifying code, and before every commit.
+tools: Read, Grep, Glob, Bash
+model: sonnet
+maxTurns: 25
+skills:
+  - new-endpoint
+memory: project
+---
+You are a senior reviewer at Alpine Bank. You review; you never modify files.
+1. `git diff HEAD` (or `git diff main...HEAD` if clean). Read each changed file and enough context.
+2. Check against the root CLAUDE.md and the folder CLAUDE.md of each changed file; check your memory for recurring issues.
+3. Report Critical / Warning / Suggestion with file:line, the problem, a concrete fix. Verdict: APPROVE or REQUEST CHANGES.
+4. Note any new recurring pattern in your memory.</template>
+  <template data-file="payments-portal/.claude/agents/test-writer.md">---
+name: test-writer
+description: Writes and runs missing tests for a change - unit tests for rules, integration tests for the API, Playwright for user-visible flows. Use when a tester or developer asks for test coverage of a story or a diff.
+tools: Read, Grep, Glob, Bash, Edit, Write
+model: sonnet
+maxTurns: 40
+---
+You write tests only; you do not change production code. If a test reveals a bug, report it, do not fix it.
+1. Read the story's acceptance criteria (Jira MCP) and the diff.
+2. For each criterion decide the cheapest layer that proves it: domain unit test, `*IT` on PostgreSQL, or Playwright.
+3. Write the tests next to the existing ones, following their style. Run them (`./mvnw -q test`, `./mvnw -q verify`, `npm run e2e`).
+4. Return: which criteria are now covered, which failed and why, and what could not be tested automatically.</template>
+  <template data-file="payments-portal/.mcp.json">{
+  "mcpServers": {
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": { "Authorization": "Bearer ${GITHUB_MCP_TOKEN}" }
+    },
+    "payments-docs": {
+      "command": "npx",
+      "args": ["-y", "@alpinebank/docs-mcp", "--root", "./docs"]
+    }
+  }
+}</template>
+  <template data-file="~/.claude/settings.json">{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "model": "claude-sonnet-5",
+  "permissions": {
+    "allow": ["Bash(ls*)", "Bash(cat*)", "Read(~/notes/**)"]
+  },
+  "hooks": {
+    "Notification": [
+      { "hooks": [ { "type": "command", "command": "osascript -e 'display notification \"Claude needs you\" with title \"Claude Code\"'" } ] }
+    ]
+  }
+}</template>
+  <template data-file="~/.claude/CLAUDE.md"># How I like to work (personal, every project)
+
+- Explain a plan in three bullets before changing more than one file.
+- Prefer small commits. Ask before adding a dependency.
+- When a test fails, show me the failing assertion before you change anything.
+- I work in Europe/Zurich; dates in messages in that zone.</template>
+  <template data-file="payments-portal/.claude/settings.local.json">{
+  "permissions": {
+    "allow": ["Bash(docker compose logs*)", "Bash(open http://localhost:4200)"]
+  },
+  "env": {
+    "ASSETCARE_LOG_SQL": "DEBUG"
+  }
+}</template>
+  <template data-file="payments-portal/CLAUDE.local.md"># My notes for this repo (git-ignored)
+
+- My local Keycloak runs on 8082, not 8081: `KEYCLOAK_PORT=8082` in `.env`.
+- Ticket I am on this sprint: PAY-1342 (payment limits). Branch `feat/PAY-1342-limits`.</template>
+  <template data-file="payments-portal/.github/workflows/ci.yml">name: ci
+on:
+  pull_request:
+  push: { branches: [main] }
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with: { distribution: temurin, java-version: "25", cache: maven }
+      - run: cd backend &amp;&amp; ./mvnw -B verify         # unit + ArchUnit + Testcontainers ITs
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with: { node-version: "24", cache: npm, cache-dependency-path: frontend/package-lock.json }
+      - run: cd frontend &amp;&amp; npm ci &amp;&amp; npm run lint &amp;&amp; npm test -- --watch=false &amp;&amp; npm run build
+  e2e:
+    needs: [backend, frontend]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: docker compose up -d --wait &amp;&amp; make e2e   # Playwright against the real stack
+  deploy-test:
+    if: github.ref == 'refs/heads/main'
+    needs: [e2e]
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - run: helm upgrade --install payments-portal deploy/helm -n test --set image.tag=${{ github.sha }}</template>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('wb');
+  if (!root) return;
+
+  // ---- the rollout, one entry per step --------------------------------------------------------
+  var STEPS = [
+    { who: 'Platform team (IT)', title: 'Set the organization baseline',
+      files: ['/Library/Application Support/ClaudeCode/managed-settings.json', '/Library/Application Support/ClaudeCode/CLAUDE.md', '/Library/Application Support/ClaudeCode/managed-mcp.json'],
+      what: 'Before anyone opens Claude Code, IT deploys three files to every laptop through MDM (macOS: the folder shown; Linux: /etc/claude-code/; Windows: C:\\Program Files\\ClaudeCode\\). They set the hard floor: what can never run, which models are allowed, the proxy, the approved plugins, and the company-wide instructions.',
+      why: 'These cannot be overridden by a project or a person. A deny rule here is the only kind of "never" that is really never. Everything below this line is a team or personal choice.',
+      cmd: '# on a laptop, verify what arrived\nclaude\n> /status        # shows "managed" among the settings sources' },
+    { who: 'Tech lead', title: 'Create the project CLAUDE.md with /init',
+      files: ['payments-portal/CLAUDE.md'],
+      what: 'The tech lead opens the repository and runs /init. Claude reads the code and drafts CLAUDE.md at the repo root. The lead edits it down to what every task needs: the commands, the architecture rule, the conventions, and where the folder-specific standards live.',
+      why: 'CLAUDE.md is loaded in full into every session, so it must be short and true. It is guidance: Claude reads it, nothing enforces it. Rules that must be enforced go into settings and hooks in the next steps.',
+      cmd: 'cd payments-portal\nclaude\n> /init          # writes ./CLAUDE.md; edit it, then commit it' },
+    { who: 'Tech lead', title: 'Team permissions in .claude/settings.json',
+      files: ['payments-portal/.claude/settings.json'],
+      what: 'The team\u2019s settings file, committed to git. It pre-approves the boring commands (tests, lint, git status) so nobody is asked forty times a day, asks before the risky ones (push, docker down) and denies force-push. Hooks are registered here too; the scripts come in the next step.',
+      why: 'Settings are merged key by key across scopes: managed wins, then this file, then each person\u2019s local overrides. The allow list is what makes Claude Code pleasant; the deny list is what makes it safe.',
+      cmd: '> /config       # or edit .claude/settings.json and commit\n> /status       # confirm "project" is now a settings source' },
+    { who: 'Tech lead', title: 'Three hooks every company wants',
+      files: ['payments-portal/.claude/hooks/session-context.sh', 'payments-portal/.claude/hooks/block-dangerous.sh', 'payments-portal/.claude/hooks/format.sh'],
+      what: 'Three scripts under .claude/hooks/, referenced from settings.json. SessionStart tells Claude the current branch and Jira ticket. PreToolUse guards Bash against catastrophic commands. PostToolUse formats every file Claude edits, so pull requests are about logic, not whitespace.',
+      why: 'Hooks are the enforced layer: they run outside the model at fixed points of the loop. Remember the exit codes: 0 go, 2 no, anything else is a non-blocking shrug. Run chmod +x, and test each script once with echo \u2018{...}\u2019 | script.',
+      cmd: 'chmod +x .claude/hooks/*.sh\necho \'{"tool_input":{"command":"rm -rf ~"}}\' | .claude/hooks/block-dangerous.sh   # prints a deny\n> /hooks        # the three hooks appear, labelled Project Settings' },
+    { who: 'Tech lead + area owners', title: 'Different standards per folder',
+      files: ['payments-portal/frontend/CLAUDE.md', 'payments-portal/backend/CLAUDE.md', 'payments-portal/db/CLAUDE.md', 'payments-portal/.claude/rules/security.md'],
+      what: 'The frontend, the backend and the database have different rules, so each folder gets its own CLAUDE.md. They load only when Claude reads a file under that folder and add to the root file. A path-scoped rule in .claude/rules/ does the same for a topic (security) across folders.',
+      why: 'Nested CLAUDE.md files keep the root short and let the Angular lead own the Angular rules. Because they load on use, they cost nothing while you work elsewhere. They must add, never contradict, the root.',
+      cmd: '> /context      # after reading a file in frontend/, shows frontend/CLAUDE.md among the loaded memory files' },
+    { who: 'Tech lead, BA lead', title: 'Skills: the team\u2019s runbooks',
+      files: ['payments-portal/.claude/skills/new-endpoint/SKILL.md', 'payments-portal/.claude/skills/liquibase-migration/SKILL.md', 'payments-portal/.claude/skills/story-refinement/SKILL.md'],
+      what: 'Know-how that is needed sometimes goes into skills, one folder each. new-endpoint and liquibase-migration are picked up by Claude when the task matches their description. story-refinement is a BA workflow marked user-only: it costs nothing until someone types /story-refinement.',
+      why: 'A skill\u2019s name and description are always listed; its body loads only when used. That is why a 3,000-line runbook belongs in a skill, not in CLAUDE.md. The description is what Claude matches on, so write it like a job advert: what it does, when to use it.',
+      cmd: '> /story-refinement PAY-1342     # a BA runs the user-only skill\n> add an endpoint to cancel a payment   # Claude picks new-endpoint by its description' },
+    { who: 'Tech lead, test lead', title: 'Subagents: reviewer and test writer',
+      files: ['payments-portal/.claude/agents/code-reviewer.md', 'payments-portal/.claude/agents/test-writer.md'],
+      what: 'Two specialists with their own context window. code-reviewer is read-only and proactive: it reviews before every commit and remembers recurring issues in its project memory. test-writer is what testers call to turn acceptance criteria into tests; it may write test files but never production code.',
+      why: 'A subagent does noisy work (hundreds of file reads) without flooding the main conversation; only its summary comes back. Only name and description are required; tools, model, maxTurns, skills and memory tune it. Edits hot-reload.',
+      cmd: '> @"code-reviewer (agent)" review my changes\n> @"test-writer (agent)" cover PAY-1342\u2019s acceptance criteria' },
+    { who: 'Tech lead', title: 'Connect the tools: MCP servers',
+      files: ['payments-portal/.mcp.json'],
+      what: 'The team\u2019s .mcp.json adds GitHub and an internal docs server; the organization already provided Jira and Confluence through managed-mcp.json. Tokens come from environment variables, never from the file.',
+      why: 'MCP is how Claude reaches systems outside the repo. Tool names load at start, schemas on use. Same-name servers resolve local over project over user; the managed file can also restrict which servers are allowed at all.',
+      cmd: 'claude mcp add --scope project github --transport http https://api.githubcopilot.com/mcp/\n> /mcp          # lists jira, confluence (managed), github, payments-docs (project)' },
+    { who: 'Every developer, BA and tester', title: 'Each person\u2019s own layer',
+      files: ['~/.claude/settings.json', '~/.claude/CLAUDE.md', 'payments-portal/.claude/settings.local.json', 'payments-portal/CLAUDE.local.md'],
+      what: 'Five developers, three BAs, two testers: each installs Claude Code, signs in, and adds a personal layer. ~/.claude/ follows the person to every repo (preferred model, a desktop notification hook, working style). settings.local.json and CLAUDE.local.md are for this repo only and stay out of git.',
+      why: 'The personal layer can add convenience but never remove a managed rule. BAs mostly use plan mode and the story skill; testers use the test-writer agent; developers use everything. Nobody edits the team files without a pull request.',
+      cmd: 'claude            # sign in once; trust the folder\n> /config         # personal settings\n> /memory         # CLAUDE.md and auto memory' },
+    { who: 'The whole team, every day', title: 'The daily loop: prompt, implement, push, pipeline, deploy, test',
+      files: ['payments-portal/.github/workflows/ci.yml'],
+      what: 'Setup is done. A developer opens a ticket branch; SessionStart announces the ticket; the developer prompts; hooks format and guard; the reviewer agent checks; a commit and a pull request follow; CI runs tests, scans and Playwright; main deploys to the test environment; testers verify with the test-writer agent and Playwright; lessons go back into CLAUDE.md and the skills.',
+      why: 'Claude Code covers the inner loop on the laptop. The pipeline is the outer loop and is exactly the same as without AI: the PR and the tests are still the gate. What changed is how fast a well-configured team gets to that gate.',
+      loop: true,
+      cmd: 'git switch -c feat/PAY-1342-limits\nclaude\n> add a per-customer daily payment limit (PAY-1342): plan first\n... implement, review, commit ...\ngit push -u origin feat/PAY-1342-limits && gh pr create' }
+  ];
+
+  // ---- the tree: every path that will exist by the end; nodes appear as steps progress ---------
+  var ROOTS = [
+    { label: 'Organization (managed by IT)', prefix: '/Library/Application Support/ClaudeCode/' },
+    { label: 'Home folder (each person)', prefix: '~/' },
+    { label: 'Repository payments-portal (git)', prefix: 'payments-portal/' }
+  ];
+  var contents = {};
+  root.querySelectorAll('template[data-file]').forEach(function (t) { contents[t.getAttribute('data-file')] = t.innerHTML.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>'); });
+  var order = [];
+  STEPS.forEach(function (s, i) { s.files.forEach(function (f) { order.push({ path: f, step: i }); }); });
+  var stepOf = {}; order.forEach(function (o) { stepOf[o.path] = o.step; });
+
+  var notes = {
+    'payments-portal/.claude/settings.local.json': 'Git-ignored automatically. Personal overrides for this repo.',
+    'payments-portal/CLAUDE.local.md': 'Add to .gitignore. Loads after CLAUDE.md for you only.',
+    '~/.claude/CLAUDE.md': 'Loads in every repository you open, before the project files.',
+    '/Library/Application Support/ClaudeCode/CLAUDE.md': 'Guidance only. The technical locks are in managed-settings.json.',
+    'payments-portal/.claude/rules/security.md': 'The paths: frontmatter makes this load only when a matching file is read.',
+    'payments-portal/.claude/skills/story-refinement/SKILL.md': 'disable-model-invocation: true makes it user-only: invisible until someone types /story-refinement.',
+    'payments-portal/.mcp.json': 'Committed for the team. Secrets come from ${ENV_VARS}, never from the file.'
+  };
+
+  var stepsEl = document.getElementById('wb-steps'), treeEl = document.getElementById('wb-tree'), mainEl = document.getElementById('wb-main');
+  var cur = 0, selected = null;
+
+  function treeLines(prefix, step) {
+    var paths = order.filter(function (o) { return o.path.indexOf(prefix) === 0; }).map(function (o) { return o; });
+    // build directory structure
+    var lines = [], seen = {};
+    paths.forEach(function (o) {
+      var rel = o.path.slice(prefix.length), parts = rel.split('/');
+      var acc = '';
+      for (var i = 0; i < parts.length; i++) {
+        acc += (i ? '/' : '') + parts[i];
+        var isFile = i === parts.length - 1;
+        if (seen[acc]) continue; seen[acc] = true;
+        lines.push({ depth: i, name: parts[i] + (isFile ? '' : '/'), path: isFile ? o.path : null, step: o.step, isFile: isFile });
+      }
+    });
+    return lines;
+  }
+
+  function renderTree() {
+    treeEl.innerHTML = '';
+    ROOTS.forEach(function (r) {
+      var h = document.createElement('div'); h.className = 'root'; h.textContent = r.label; treeEl.appendChild(h);
+      treeLines(r.prefix).forEach(function (l) {
+        var el = document.createElement(l.isFile ? 'a' : 'span');
+        el.className = 'node ' + (l.isFile ? 'file' : 'dir');
+        var visible = l.isFile ? stepOf[l.path] <= cur : true;
+        if (l.isFile && stepOf[l.path] > cur) el.classList.add('ghost');
+        if (l.isFile && stepOf[l.path] === cur) el.classList.add('new');
+        if (l.isFile && l.path === selected) el.classList.add('sel');
+        el.style.paddingLeft = (6 + l.depth * 14) + 'px';
+        el.textContent = (l.isFile ? '\u2514 ' : '') + l.name;
+        if (l.isFile) { el.href = '#'; el.setAttribute('role', 'button'); el.addEventListener('click', function (e) { e.preventDefault(); if (stepOf[l.path] > cur) { cur = stepOf[l.path]; } selected = l.path; render(); }); }
+        treeEl.appendChild(el);
+      });
+    });
+  }
+
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+  function renderMain() {
+    var s = STEPS[cur];
+    var html = '<span class="who">' + esc(s.who) + '</span><h4>Step ' + (cur + 1) + ' \u00b7 ' + esc(s.title) + '</h4>';
+    html += '<p>' + esc(s.what) + '</p><p class="why">' + esc(s.why) + '</p>';
+    if (s.loop) {
+      html += '<div class="wb-loop">' + [
+        ['1 prompt', 'developer describes the ticket; plan mode first', 'SessionStart hook names the ticket'],
+        ['2 implement', 'Claude edits; hooks format and guard', 'skills give the recipe'],
+        ['3 review', 'code-reviewer agent, then a human', 'own context, summary back'],
+        ['4 push + PR', 'feat(PAY-1342): ...', 'ask-permission on git push'],
+        ['5 pipeline', 'tests, ArchUnit, ITs, scans, Playwright', 'the gate is unchanged'],
+        ['6 deploy', 'main \u2192 test environment via Helm', 'same image to prod later'],
+        ['7 verify', 'testers run test-writer + Playwright', 'findings become tickets'],
+        ['8 learn', 'lessons into CLAUDE.md and skills', 'the loop gets faster']
+      ].map(function (x) { return '<div class="st"><b>' + x[0] + '</b>' + esc(x[1]) + '<small>' + esc(x[2]) + '</small></div>'; }).join('') + '</div>';
+    }
+    if (s.cmd) html += '<div class="cmd">' + esc(s.cmd) + '</div>';
+    mainEl.innerHTML = html;
+    mainEl.scrollTop = 0;
+    var file = selected && stepOf[selected] <= cur ? selected : s.files[0];
+    selected = file;
+    var fv = document.getElementById('wb-file'), fh = '';
+    if (file) {
+      var idx = s.files.indexOf(file);
+      fh += '<div class="wb-file"><div class="path"><b>' + esc(file) + '</b><span>' + esc(idx >= 0 ? 'file ' + (idx + 1) + ' of ' + s.files.length + ' in this step' : 'from step ' + (stepOf[file] + 1)) + '</span></div>';
+      fh += '<pre><code>' + esc(contents[file] || '(no example yet)') + '</code></pre>';
+      if (notes[file]) fh += '<div class="note">' + esc(notes[file]) + '</div>';
+      fh += '</div>';
+    }
+    fv.innerHTML = fh;
+  }
+
+  function renderSteps() {
+    stepsEl.innerHTML = '';
+    STEPS.forEach(function (s, i) {
+      var b = document.createElement('button');
+      b.className = (i === cur ? 'on ' : '') + (i < cur ? 'done' : '');
+      b.innerHTML = '<span class="n">' + (i + 1) + '</span><span>' + esc(s.title) + '<small>' + esc(s.who) + '</small></span>';
+      b.addEventListener('click', function () { cur = i; selected = null; render(); });
+      stepsEl.appendChild(b);
+    });
+    document.getElementById('wb-count').textContent = 'step ' + (cur + 1) + ' of ' + STEPS.length;
+    document.getElementById('wb-bar').style.width = ((cur + 1) / STEPS.length * 100) + '%';
+    document.getElementById('wb-prev').disabled = cur === 0;
+    document.getElementById('wb-next').textContent = cur === STEPS.length - 1 ? 'Done: try the exercise below \u2193' : 'Next step \u2192';
+  }
+
+  function render() { renderSteps(); renderTree(); renderMain(); }
+  document.getElementById('wb-prev').addEventListener('click', function () { if (cur > 0) { cur--; selected = null; render(); } });
+  document.getElementById('wb-next').addEventListener('click', function () {
+    if (cur < STEPS.length - 1) { cur++; selected = null; render(); }
+    else { var dd = document.getElementById('dd'); if (dd) dd.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+  render();
+})();
+</script>
+
+<div class="dd" id="dd">
+  <p><b>Exercise: where does each file live?</b> Drag every file card into the scope it belongs to. On a phone, tap a card, then tap a scope. Green means right; red means try again.</p>
+  <div class="cards" id="dd-cards" aria-label="Files to place"></div>
+  <div class="buckets" id="dd-buckets"></div>
+  <p class="score" id="dd-score"></p>
+  <p><button class="b" id="dd-reset">Reset the exercise</button></p>
+</div>
+<script>
+(function () {
+  var FILES = [
+    ['managed-settings.json', 'org'], ['managed CLAUDE.md', 'org'], ['managed-mcp.json', 'org'],
+    ['~/.claude/settings.json', 'user'], ['~/.claude/CLAUDE.md', 'user'], ['~/.claude.json (app state)', 'user'],
+    ['CLAUDE.md (repo root)', 'project'], ['.claude/settings.json', 'project'], ['.claude/hooks/format.sh', 'project'],
+    ['.claude/skills/new-endpoint/SKILL.md', 'project'], ['.claude/agents/code-reviewer.md', 'project'], ['.mcp.json', 'project'],
+    ['frontend/CLAUDE.md', 'sub'], ['db/CLAUDE.md', 'sub'], ['.claude/rules/security.md (paths:)', 'sub'],
+    ['.claude/settings.local.json', 'local'], ['CLAUDE.local.md', 'local']
+  ];
+  var BUCKETS = [
+    ['org', 'Organization', 'IT deploys it; nobody overrides'],
+    ['user', 'User', 'follows the person to every repo'],
+    ['project', 'Project', 'the team, committed to git'],
+    ['sub', 'Subfolder or path-scoped', 'loads when a matching file is read'],
+    ['local', 'Local', 'this repo, this person, git-ignored']
+  ];
+  var cardsEl = document.getElementById('dd-cards'), bucketsEl = document.getElementById('dd-buckets'), scoreEl = document.getElementById('dd-score');
+  var selectedCard = null, placed = 0, right = 0;
+
+  function build() {
+    cardsEl.innerHTML = ''; bucketsEl.innerHTML = ''; placed = 0; right = 0; selectedCard = null; scoreEl.textContent = '';
+    FILES.slice().sort(function () { return Math.random() - 0.5; }).forEach(function (f) {
+      var c = document.createElement('div'); c.className = 'card-f'; c.textContent = f[0]; c.draggable = true; c.dataset.scope = f[1];
+      c.addEventListener('dragstart', function (e) { e.dataTransfer.setData('text/plain', f[0]); selectedCard = c; });
+      c.addEventListener('click', function () { if (c.parentNode !== cardsEl) return; cardsEl.querySelectorAll('.card-f').forEach(function (x) { x.classList.remove('sel'); }); c.classList.add('sel'); selectedCard = c; });
+      cardsEl.appendChild(c);
+    });
+    BUCKETS.forEach(function (b) {
+      var el = document.createElement('div'); el.className = 'bucket'; el.dataset.scope = b[0];
+      el.innerHTML = '<h5>' + b[1] + '</h5><small>' + b[2] + '</small>';
+      el.addEventListener('dragover', function (e) { e.preventDefault(); el.classList.add('over'); });
+      el.addEventListener('dragleave', function () { el.classList.remove('over'); });
+      el.addEventListener('drop', function (e) { e.preventDefault(); el.classList.remove('over'); place(el); });
+      el.addEventListener('click', function () { place(el); });
+      bucketsEl.appendChild(el);
+    });
+  }
+  function place(bucket) {
+    var c = selectedCard; if (!c || c.parentNode !== cardsEl) return;
+    c.classList.remove('sel'); c.draggable = false;
+    var ok = c.dataset.scope === bucket.dataset.scope;
+    c.classList.add(ok ? 'ok' : 'bad');
+    if (!ok) { c.title = 'Not here. Think about who owns it and whether it is committed to git.'; setTimeout(function () { c.classList.remove('bad'); c.draggable = true; }, 1200); selectedCard = null; return; }
+    bucket.appendChild(c); placed++; right++; selectedCard = null;
+    scoreEl.textContent = placed === FILES.length ? 'All ' + FILES.length + ' placed. You can redraw the map.' : placed + ' of ' + FILES.length + ' placed.';
+  }
+  document.getElementById('dd-reset').addEventListener('click', build);
+  build();
+})();
+</script>

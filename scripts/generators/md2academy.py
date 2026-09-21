@@ -9,6 +9,7 @@ Markdown dialect (deliberately small):
   paragraphs, - lists, 1. lists, | tables |, ```lang fences
   ```flow  ... ```             an ASCII diagram in a .msgflow box
   ```html  ... ```             raw HTML passthrough
+  <!-- include: file.html -->  paste a file next to the source verbatim (interactive blocks)
   > **Label** text             a callout; label decides the flavour:
                                big idea/keep this/remember -> key, trap/warning/limits -> warn,
                                memory hook/try -> try, anything else -> note
@@ -168,6 +169,14 @@ def render(md):
         if l.strip() == "":
             i += 1
             continue
+        if l.startswith("<") and not l.startswith("<!--"):
+            # raw HTML block: pass through until a blank line
+            buf = []
+            while i < n and lines[i].strip() != "":
+                buf.append(lines[i])
+                i += 1
+            out.append("\n".join(buf) + "\n")
+            continue
         buf = []
         while i < n and lines[i].strip() and not re.match(r"(#|```|\||> |[-*] |\d+\. |<!--|::: )", lines[i]):
             buf.append(lines[i].strip())
@@ -276,6 +285,12 @@ def page(cfg, lede, body):
 def build(cfg, src, out):
     import os
     md = open(src, encoding="utf-8").read()
+    # <!-- include: file.html --> pastes a file (relative to the source) verbatim, for interactive blocks
+    md = re.sub(
+        r"<!-- include: ([^\s]+) -->",
+        lambda m: "```html\n" + open(os.path.join(os.path.dirname(src), m.group(1)), encoding="utf-8").read().rstrip("\n") + "\n```",
+        md,
+    )
     lede, body = render(md)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     html_page = page(cfg, lede, body)

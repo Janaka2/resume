@@ -249,4 +249,5 @@ details.quiz p.a { margin: 4px 0 0; color: var(--tx2); font-size: .92rem; border
 details.code-fold > .fold-body { padding: 4px 16px 12px; border-top: 1px solid var(--ln); }
 details.code-fold > .fold-body pre { margin: 12px 0 0; }
 body.study .prose .msgflow { font-size: .74rem; line-height: 1.35; width: max-content; min-width: 100%; max-width: min(calc(100vw - 48px), 792px); }
-@media (max-width: 900px) { body.study .prose .msgflow { width: auto; max-width: 100%; } }
+body.study .prose .wb, body.study .prose .dd { width: min(calc(100vw - 48px), 792px); max-width: none; }
+@media (max-width: 900px) { body.study .prose .msgflow, body.study .prose .wb, body.study .prose .dd { width: auto; max-width: 100%; } }

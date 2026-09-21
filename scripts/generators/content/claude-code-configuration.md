@@ -50,6 +50,7 @@ PACKAGING  a PLUGIN is one folder shipping skills + agents + hooks + MCP servers
 
 | Level | Zooms into | After it you can |
 |---|---|---|
+| Rollout | the whole map, in order | walk a company from nothing to a working team, and say which file goes where |
 | 1 | the two columns | say which of the eight pieces is guidance and which is enforced, and which to use for which job |
 | 2 | the four scopes | name every file, its scope, and who wins a conflict |
 | 3 | the three request boxes | recite the startup order and what survives `/compact` |
@@ -58,6 +59,24 @@ PACKAGING  a PLUGIN is one folder shipping skills + agents + hooks + MCP servers
 | 6, 7, 8 | Skill, Agent, Plugin | write each file and explain its fields |
 | 9, 10 | commands, recap | pick the right command; revise in five minutes |
 | 11, 12 | practice, answers | pass the fifteen questions and explain every distractor |
+
+<!-- eyebrow: Rollout · A company, step by step -->
+## From an empty laptop to a team shipping with Claude Code.
+
+The map shows what exists. This workbench shows the order in which a company creates it, who does each step, and
+exactly where every file lives. Alpine Bank’s payments-portal team is fictional; the files are real, working examples
+you can copy. Walk the ten steps with the buttons, click any file in the tree to read it, then place the files
+yourself in the exercise below.
+
+> **Big idea** Set up top down, in the same order as the scopes: the organization floor first (IT), then the project
+> (tech lead, one pull request), then each person’s own layer. Enforced things (settings, hooks) before guidance
+> (CLAUDE.md, skills). Only then does the daily loop start, and the pipeline stays the gate it always was.
+
+<!-- include: claude-code-workbench.html -->
+
+> **Keep this** Ten steps, three owners. IT: managed-settings.json, managed CLAUDE.md, managed-mcp.json. Tech lead:
+> /init, .claude/settings.json, hooks, folder CLAUDE.md files and path rules, skills, agents, .mcp.json, all through
+> one pull request. Each person: ~/.claude/ for every repo, settings.local.json and CLAUDE.local.md for this one.
 
 <!-- eyebrow: Level 1 · Two layers, eight pieces -->
 ## Guidance versus enforcement, and which piece for which job.
