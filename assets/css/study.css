@@ -233,3 +233,20 @@ details.code-fold > summary::after { content: "show"; color: var(--tx2); text-tr
 details.code-fold[open] > summary::after { content: "hide"; }
 details.code-fold > pre { margin: 0; border: none; border-top: 1px solid var(--ln); border-radius: 0 0 var(--r) var(--r); }
 body.study main .msgflow { font-family: var(--font-mono); font-size: .8rem; line-height: 1.5; white-space: pre; overflow-x: auto; padding: 14px 16px; border: 1px dashed var(--ln); border-radius: var(--r); background: var(--bg2); margin-top: 14px; color: var(--tx); }
+
+/* ---- Warning callouts, self-check quizzes and folded blocks (added 2026-09-21) ---- */
+.callout.warn { border-left-color: #d9480f; }
+.callout.warn .lbl { color: #d9480f; }
+details.quiz { margin: 18px 0; border: 1px solid var(--ln); border-left: 4px solid var(--ok); border-radius: var(--r); background: var(--bg2); }
+details.quiz > summary { cursor: pointer; list-style: none; padding: 12px 16px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+details.quiz > summary::-webkit-details-marker { display: none; }
+details.quiz > summary .hint { font-family: var(--font-mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--tx2); }
+details.quiz[open] > summary .hint { display: none; }
+details.quiz ol { margin: 0; padding: 0 16px 12px 36px; }
+details.quiz li { margin: 8px 0; }
+details.quiz p.q { margin: 0; font-weight: 500; }
+details.quiz p.a { margin: 4px 0 0; color: var(--tx2); font-size: .92rem; border-left: 2px solid var(--ln); padding-left: 10px; }
+details.code-fold > .fold-body { padding: 4px 16px 12px; border-top: 1px solid var(--ln); }
+details.code-fold > .fold-body pre { margin: 12px 0 0; }
+body.study .prose .msgflow { font-size: .74rem; line-height: 1.35; width: max-content; min-width: 100%; max-width: min(calc(100vw - 48px), 792px); }
+@media (max-width: 900px) { body.study .prose .msgflow { width: auto; max-width: 100%; } }

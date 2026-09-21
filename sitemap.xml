@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://janaka.me/</loc><lastmod>2026-09-17</lastmod></url>
-  <url><loc>https://janaka.me/blog/</loc><lastmod>2026-09-15</lastmod></url>
-  <url><loc>https://janaka.me/blog/posts/ai-evaluation-frameworks.html</loc><lastmod>2026-09-10</lastmod></url>
-  <url><loc>https://janaka.me/blog/posts/machine-learning-blog.html</loc><lastmod>2026-09-10</lastmod></url>
-  <url><loc>https://janaka.me/blog/posts/mcp-agent-integration.html</loc><lastmod>2026-09-10</lastmod></url>
-  <url><loc>https://janaka.me/blog/posts/rag-faiss-patterns.html</loc><lastmod>2026-09-15</lastmod></url>
-  <url><loc>https://janaka.me/blog/posts/spring-kafka-deadletter.html</loc><lastmod>2026-09-15</lastmod></url>
-  <url><loc>https://janaka.me/lab/</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/products/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/blog/</loc><lastmod>2026-09-17</lastmod></url>
+  <url><loc>https://janaka.me/blog/posts/ai-evaluation-frameworks.html</loc><lastmod>2026-09-17</lastmod></url>
+  <url><loc>https://janaka.me/blog/posts/machine-learning-blog.html</loc><lastmod>2026-09-17</lastmod></url>
+  <url><loc>https://janaka.me/blog/posts/mcp-agent-integration.html</loc><lastmod>2026-09-17</lastmod></url>
+  <url><loc>https://janaka.me/blog/posts/rag-faiss-patterns.html</loc><lastmod>2026-09-17</lastmod></url>
+  <url><loc>https://janaka.me/blog/posts/spring-kafka-deadletter.html</loc><lastmod>2026-09-17</lastmod></url>
+  <url><loc>https://janaka.me/lab/</loc><lastmod>2026-09-17</lastmod></url>
+  <url><loc>https://janaka.me/products/</loc><lastmod>2026-09-17</lastmod></url>
   <url><loc>https://janaka.me/lab/Notes/hand-book-note1.html</loc><lastmod>2026-09-15</lastmod></url>
   <url><loc>https://janaka.me/lab/Notes/hand-book-note2.html</loc><lastmod>2026-09-15</lastmod></url>
   <url><loc>https://janaka.me/lab/Notes/hand-book-note3.html</loc><lastmod>2026-09-15</lastmod></url>
@@ -23,6 +23,7 @@
   <url><loc>https://janaka.me/academy/modules/2026/FSE/awk-sed-mastery.html</loc><lastmod>2026-09-16</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/bash_shell_scripting_guide_blog.html</loc><lastmod>2026-09-16</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/capstone.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/claude-code-configuration.html</loc><lastmod>2026-09-21</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/csv_operation.html</loc><lastmod>2026-09-16</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/day-01.html</loc><lastmod>2026-09-16</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/design-patterns-architecture-playbook.html</loc><lastmod>2026-09-16</lastmod></url>
@@ -51,22 +52,6 @@
   <url><loc>https://janaka.me/academy/modules/2026/FSE/troubleshooting-resources.html</loc><lastmod>2026-09-16</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/vi-editor-complete.html</loc><lastmod>2026-09-16</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/virtual_threads_java_21_academy_page.html</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/academy/modules/2026/FSE/entanglement/career-roadmap.html</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/academy/modules/2026/FSE/entanglement/entanglement.html</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/academy/modules/2026/FSE/entanglement/</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/academy/modules/2026/FSE/entanglement/quantum-computing.html</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/academy/modules/2026/FSE/entanglement/references.html</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/academy/modules/2026/FSE/entanglement/use-cases.html</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/awk-sed-mastery.html</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/file-handling.html</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/log-investigation-techniques.html</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/production-one-liners.html</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/top-100-linux-commands.html</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/top-50-debugging-commands.html</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/troubleshooting-resources.html</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/vi-editor-complete.html</loc><lastmod>2026-09-16</lastmod></url>
-  <url><loc>https://janaka.me/academy/modules/2026/FSE/performanceTuning/DBPerformanceTuning.html</loc><lastmod>2026-09-16</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/promting/agents.html</loc><lastmod>2026-09-16</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/promting/cheatsheet.html</loc><lastmod>2026-09-16</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/promting/comparison.html</loc><lastmod>2026-09-16</lastmod></url>
@@ -82,4 +67,20 @@
   <url><loc>https://janaka.me/academy/modules/2026/FSE/promting/references.html</loc><lastmod>2026-09-16</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/promting/strategies.html</loc><lastmod>2026-09-16</lastmod></url>
   <url><loc>https://janaka.me/academy/modules/2026/FSE/promting/templates.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/performanceTuning/DBPerformanceTuning.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/awk-sed-mastery.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/file-handling.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/log-investigation-techniques.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/production-one-liners.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/top-100-linux-commands.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/top-50-debugging-commands.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/troubleshooting-resources.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/Linux/vi-editor-complete.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/entanglement/career-roadmap.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/entanglement/entanglement.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/entanglement/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/entanglement/quantum-computing.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/entanglement/references.html</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://janaka.me/academy/modules/2026/FSE/entanglement/use-cases.html</loc><lastmod>2026-09-16</lastmod></url>
 </urlset>

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code configuration, top down: CLAUDE.md, settings, hooks, skills, subagents, plugins and context | Janaka Academy</title>
+  <meta name="description" content="One diagram of how Claude Code is configured, then twelve levels that zoom into it: the two layers, where every file lives and who wins, what loads into context and when, the agent loop and its 33 hooks, a tested guard hook, skills, subagents, plugins, a commands cheat sheet, a five-minute recap and fifteen exam-style questions with an answer key. Checked against Claude Code v2.1.278.">
+  <link rel="canonical" href="https://janaka.me/academy/modules/2026/FSE/claude-code-configuration.html">
+  <link rel="alternate" type="application/atom+xml" title="Janaka Premathilaka" href="/feed.xml">
+  <meta property="og:title" content="Claude Code configuration, top down: CLAUDE.md, settings, hooks, skills, subagents, plugins and context | Janaka Academy">
+  <meta property="og:description" content="One diagram of how Claude Code is configured, then twelve levels that zoom into it: the two layers, where every file lives and who wins, what loads into context and when, the agent loop and its 33 hooks, a tested guard hook, skills, subagents, plugins, a commands cheat sheet, a five-minute recap and fifteen exam-style questions with an answer key. Checked against Claude Code v2.1.278.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://janaka.me/academy/modules/2026/FSE/claude-code-configuration.html">
+  <meta property="og:image" content="https://janaka.me/assets/og/academy.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Claude Code configuration, top down: CLAUDE.md, settings, hooks, skills, subagents, plugins and context | Janaka Academy">
+  <meta name="twitter:description" content="One diagram of how Claude Code is configured, then twelve levels that zoom into it: the two layers, where every file lives and who wins, what loads into context and when, the agent loop and its 33 hooks, a tested guard hook, skills, subagents, plugins, a commands cheat sheet, a five-minute recap and fifteen exam-style questions with an answer key. Checked against Claude Code v2.1.278.">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/academy.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png?v=1">
+
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260916">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
+  <link rel="stylesheet" href="/assets/css/study.css?v=20260921">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body class="study">
+<a class="skip" href="#main">Skip to content</a>
+
+<div data-include="/partials/site-nav.html"></div>
+
+<main id="main">
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/academy/" style="color:inherit;text-decoration:none">&larr; Janaka Academy</a></p>
+      <h1>Claude Code configuration, top down.</h1>
+      <p class="lede">CLAUDE.md, settings, hooks, skills, subagents, plugins, MCP and the context window, learned from the whole picture down to the last field. Start with one diagram you can redraw from memory; every later section is a zoom into one box of it. Facts follow the official documentation at code.claude.com, checked against Claude Code v2.1.278 on 21 September 2026; re-check version-specific details before an exam. Maps to CCAR-F Domain 2 (Claude Code Configuration and Workflows) and part of Domain 5 (Context Management and Reliability).</p>
+      <div class="badges">
+        <span class="badge hot">Claude Code v2.1.278</span>
+        <span class="badge">CCAR-F Domain 2 and 5</span>
+        <span class="badge">12 levels, top down</span>
+        <span class="badge">15 practice questions</span>
+        <span class="badge">Java anchors</span>
+        </div>
+      <div class="actions">
+        <a class="btn primary" href="#level-0-the-whole-picture">Start with the map</a>
+        <a class="btn" href="#level-11-practice">Jump to the practice questions</a>
+        <a class="btn" href="https://code.claude.com/docs/en/features-overview" target="_blank" rel="noopener">Official docs ↗</a>
+        </div>
+    </div>
+  </section>
+
+  <section class="sec" id="level-0-the-whole-picture">
+    <div class="wrap">
+      <p class="eyebrow">Level 0 · The whole picture</p>
+      <h2>One diagram to hold everything.</h2>
+      <div class="prose rel-body">
+<p>Before any detail, the map. Read it top to bottom: where configuration comes from, what it turns into when a session starts, and what happens on every turn. Every later section zooms into one box.</p>
+<div class="msgflow">WHERE IT COMES FROM  (four scopes, widest authority first)
+┌──────────────────────────────────────────────────────────────────────────────────────┐
+│ ORGANIZATION  managed-settings.json · managed CLAUDE.md · managed-mcp.json · agents/ │ IT deploys
+│ USER          ~/.claude/: CLAUDE.md · settings.json · rules/ skills/ agents/ · memory│ you, everywhere
+│ PROJECT       ./CLAUDE.md · .claude/settings.json · rules/ skills/ agents/ · .mcp.json│ team, in git
+│ LOCAL         CLAUDE.local.md · .claude/settings.local.json                          │ you, this repo
+└───────────────┬───────────────────────────────────┬──────────────────────────────────┘
+                │ text Claude READS (guidance)       │ config the harness APPLIES (enforced)
+                ▼                                   ▼
+WHAT A REQUEST LOOKS LIKE  (stable first, so the prompt cache works)
+┌──────────────────────────┐  ┌──────────────────────────┐  ┌──────────────────────────┐
+│ 1 SYSTEM PROMPT          │  │ 2 PROJECT CONTEXT        │  │ 3 CONVERSATION           │
+│ core instructions        │+ │ CLAUDE.md: org → user →  │+ │ your prompts, replies,   │
+│ tools (MCP: names only)  │  │ project · unscoped rules │  │ tool results, invoked    │
+│ environment, git snapshot│  │ first 200 lines MEMORY.md│  │ SKILL.md bodies          │
+└──────────────────────────┘  └──────────────────────────┘  └──────────────────────────┘
+        settings · permission rules · hooks · modes decide what each turn may DO
+                │
+                ▼
+WHAT HAPPENS ON EVERY TURN  (the agent loop, your hooks at fixed points)
+SessionStart ▶ UserPromptSubmit ▶ ┌▶ PreToolUse ▶ permission ▶ tool runs ▶ PostToolUse ┐▶ Stop ▶ SessionEnd
+                                  └──────────── repeat until Claude has its answer ◀───┘
+                                       tool = Skill   → the full SKILL.md joins this context
+                                       tool = Agent   → a SUBAGENT loops in its OWN window, returns a summary
+                                       tool = mcp__*  → an MCP SERVER outside Claude Code does the work
+
+PACKAGING  a PLUGIN is one folder shipping skills + agents + hooks + MCP servers, versioned and installable</div>
+<div class="callout key"><span class="lbl">Keep this</span><p>Everything in Claude Code is one of two things. Text Claude <em>reads</em> (CLAUDE.md, rules, memory, skills, a subagent's prompt): guidance it can occasionally drift from. Configuration the harness <em>applies</em> (settings, permission rules, hooks, modes): enforced, whatever Claude intends. Plugins only package; MCP servers only connect.</p></div>
+<div class="callout "><span class="lbl">Java anchor</span><p>CLAUDE.md is the team's coding-standards wiki: developers read it, nothing forces them. Settings, permissions and hooks are Spring Security configuration and servlet filters: the framework applies them whatever the developer intends. MCP is to external tools what JDBC is to databases: one interface, many vendor servers.</p></div>
+<h3>How to study this page</h3>
+<ol><li>Redraw the diagram above from memory. Until you can, do not go on; everything else hangs off it.</li><li>Each level has the same rhythm: big idea, a Java anchor, the facts, exam traps, a self-check. Answer the self-check out loud before opening it.</li><li>Finish with the fifteen scenario questions at the end and only then open the answer key.</li></ol>
+<table><thead><tr><th>Level</th><th>Zooms into</th><th>After it you can</th></tr></thead><tbody><tr><td>1</td><td>the two columns</td><td>say which of the eight pieces is guidance and which is enforced, and which to use for which job</td></tr><tr><td>2</td><td>the four scopes</td><td>name every file, its scope, and who wins a conflict</td></tr><tr><td>3</td><td>the three request boxes</td><td>recite the startup order and what survives <code>/compact</code></td></tr><tr><td>4</td><td>the loop</td><td>place each hook event and predict what an exit code does</td></tr><tr><td>5</td><td>one hook</td><td>read and adapt a real PreToolUse guard hook</td></tr><tr><td>6, 7, 8</td><td>Skill, Agent, Plugin</td><td>write each file and explain its fields</td></tr><tr><td>9, 10</td><td>commands, recap</td><td>pick the right command; revise in five minutes</td></tr><tr><td>11, 12</td><td>practice, answers</td><td>pass the fifteen questions and explain every distractor</td></tr></tbody></table>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="level-1-two-layers-eight-pieces">
+    <div class="wrap">
+      <p class="eyebrow">Level 1 · Two layers, eight pieces</p>
+      <h2>Guidance versus enforcement, and which piece for which job.</h2>
+      <div class="prose rel-body">
+<div class="callout key"><span class="lbl">Big idea</span><p>Sort every feature into one of two columns first. If you need something to <em>always</em> or <em>never</em> happen, it must live in the enforced column. If it is know-how, it lives in the guidance column and costs context.</p></div>
+<table><thead><tr><th>Claude reads it (guidance)</th><th>The harness applies it (enforced)</th></tr></thead><tbody><tr><td>CLAUDE.md files and rules</td><td>settings.json: permissions, env, model, plugins</td></tr><tr><td>Auto memory (MEMORY.md)</td><td>managed-settings.json: organization policy</td></tr><tr><td>Skills: description always, body on use</td><td>Permission rules: allow, ask, deny</td></tr><tr><td>A subagent's prompt, in its own context window</td><td>Hooks: your scripts at lifecycle events</td></tr><tr><td>Output style, part of the system prompt</td><td>Permission modes: default, acceptEdits, auto, plan, …</td></tr></tbody></table>
+<p>Two more words complete the vocabulary. A <b>plugin</b> bundles skills, agents, hooks and MCP servers into one installable unit. An <b>MCP server</b> gives Claude external tools and data.</p>
+<h3>The eight building blocks</h3>
+<table><thead><tr><th>Piece</th><th>Lives in</th><th>Enters Claude's context</th><th>Triggered by</th><th>Create with</th></tr></thead><tbody><tr><td><b>CLAUDE.md + rules</b></td><td><code>CLAUDE.md</code>, <code>.claude/rules/*.md</code></td><td>Full text every session. Subfolder files and path-scoped rules when Claude reads matching files.</td><td>Automatic</td><td><code>/init</code>, then edit (or <code>/memory</code>)</td></tr><tr><td><b>Auto memory</b></td><td><code>~/.claude/projects/&lt;repo&gt;/memory/MEMORY.md</code></td><td>First 200 lines or 25 KB, every session</td><td>Claude writes it itself</td><td>Automatic; toggle in <code>/memory</code></td></tr><tr><td><b>Skill</b></td><td><code>skills/&lt;name&gt;/SKILL.md</code> + extra files</td><td>Name and description always; full body only when used</td><td>You (<code>/name</code>) or Claude (description match)</td><td>Create the folder, or ask Claude</td></tr><tr><td><b>Subagent</b></td><td><code>agents/&lt;name&gt;.md</code></td><td>Only its description. It works in its own window and returns a summary.</td><td>The main session's Agent tool</td><td>Ask Claude, or write the file</td></tr><tr><td><b>Hook</b></td><td><code>"hooks"</code> key in <code>settings.json</code></td><td>Nothing, unless it returns output</td><td>Claude Code, at lifecycle events</td><td>Edit the JSON, or ask Claude</td></tr><tr><td><b>Settings</b></td><td><code>settings.json</code>, <code>settings.local.json</code>, <code>managed-settings.json</code></td><td>Nothing; they configure the harness</td><td>Read at startup, reloaded on save</td><td><code>/config</code>, "don't ask again" approvals, or edit</td></tr><tr><td><b>MCP server</b></td><td><code>.mcp.json</code>, <code>~/.claude.json</code></td><td>Tool names at start; full schemas when needed</td><td>Claude calls its tools</td><td><code>claude mcp add --scope project</code></td></tr><tr><td><b>Plugin</b></td><td><code>.claude-plugin/plugin.json</code> + folders</td><td>Whatever it bundles, prefixed like <code>plugin:skill</code></td><td>Switched on via <code>enabledPlugins</code></td><td><code>/plugin</code> to install; <code>claude plugin init &lt;name&gt;</code></td></tr></tbody></table>
+<h3>Which piece for which job</h3>
+<table><thead><tr><th>You need</th><th>Use</th><th>Because</th></tr></thead><tbody><tr><td>Rules for every task: build commands, conventions</td><td><b>CLAUDE.md</b></td><td>loaded in full every session</td></tr><tr><td>Know-how for some tasks: runbooks, checklists</td><td><b>Skill</b></td><td>costs tokens only when used</td></tr><tr><td>To isolate noisy work: big reviews, research</td><td><b>Subagent</b></td><td>own context; only a summary returns</td></tr><tr><td>To guarantee something always or never happens</td><td><b>Hook or permission rule</b></td><td>enforced by the harness, not by Claude</td></tr><tr><td>To reach an external system</td><td><b>MCP server</b></td><td>gives Claude tools it can call</td></tr><tr><td>To share all of the above</td><td><b>Plugin</b></td><td>one versioned, installable package</td></tr></tbody></table>
+<div class="callout try"><span class="lbl">Memory hook: ALON</span><p>When does it load? <b>A</b>lways: CLAUDE.md files, unscoped rules, the first 200 lines of MEMORY.md. <b>L</b>isted: skill and subagent descriptions, MCP tool names. <b>O</b>n use: full SKILL.md, path-scoped rules, nested CLAUDE.md, MCP tool schemas. <b>N</b>ever in the main context: settings, hooks, a subagent's own work (only its summary comes back). Read it as "alone": the less that loads, the less Claude carries.</p></div>
+<h3>Seven myths, fixed</h3>
+<table><thead><tr><th>Myth</th><th>Reality</th></tr></thead><tbody><tr><td>"Settings are XML."</td><td>They are JSON: <code>settings.json</code>. The organization file is <code>managed-settings.json</code>.</td></tr><tr><td>"<code>/init</code> writes <code>.claude/CLAUDE.md</code>."</td><td>It writes <code>./CLAUDE.md</code> at the project root (<code>./.claude/CLAUDE.md</code> also works). If one exists, <code>/init</code> suggests improvements instead.</td></tr><tr><td>"Skills live in one skills.md."</td><td>One folder per skill: <code>.claude/skills/&lt;name&gt;/SKILL.md</code>.</td></tr><tr><td>"Proactive subagents start themselves."</td><td>The main session, or a parent subagent up to three levels deep, always launches them through the Agent tool. "Use proactively" only makes delegation more eager.</td></tr><tr><td>"<code>/agents</code> creates agents."</td><td>The <code>/agents</code> wizard was removed in v2.1.198. Ask Claude, or write the file.</td></tr><tr><td>"<code>/hooks</code> edits hooks."</td><td><code>/hooks</code> is a read-only browser. Edit <code>settings.json</code>, or ask Claude.</td></tr><tr><td>"CLAUDE.md rules are enforced."</td><td>CLAUDE.md is guidance. Only settings, permission rules and hooks enforce.</td></tr></tbody></table>
+<details class="quiz"><summary>Check yourself: level 1<span class="hint">answer out loud, then open</span></summary><ol><li><p class="q">Which two things are in Claude's context in full from the very first message?</p><p class="a">CLAUDE.md files (with unscoped rules) and the first 200 lines or 25 KB of MEMORY.md.</p></li><li><p class="q">Who launches a subagent, and through which tool?</p><p class="a">The main session, or a parent subagent, through the Agent tool.</p></li><li><p class="q">Where does <code>/init</code> write CLAUDE.md?</p><p class="a"><code>./CLAUDE.md</code> at the project root.</p></li><li><p class="q">You must guarantee a command never runs. Which pieces can do that?</p><p class="a">A permission deny rule or a hook. Not CLAUDE.md.</p></li></ol></details>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="level-2-where-every-file-lives">
+    <div class="wrap">
+      <p class="eyebrow">Level 2 · Where every file lives</p>
+      <h2>Four scopes, one precedence chain, and how an organization enforces policy.</h2>
+      <div class="prose rel-body">
+<div class="callout key"><span class="lbl">Big idea</span><p>Four scopes, from widest authority to most personal: Organization (managed by IT) → User (<code>~/.claude</code>, all your projects) → Project (the repo, shared through git) → Local (you, this repo only, git-ignored).</p></div>
+<div class="callout "><span class="lbl">Java anchor</span><p>Spring Boot externalized configuration: several property sources merged by precedence. The difference is that the organization layer sits on top and cannot be overridden, like a bank-wide security baseline pushed by group policy.</p></div>
+<h3>The file map</h3>
+<div class="msgflow">ORGANIZATION: IT deploys it, you can&#x27;t override it
+  macOS    /Library/Application Support/ClaudeCode/
+  Linux    /etc/claude-code/
+  Windows  C:\Program Files\ClaudeCode\
+  ├── managed-settings.json      permissions, locks, env, allowed plugins
+  ├── managed-settings.d/*.json  optional drop-ins, merged alphabetically
+  ├── managed-mcp.json           MCP servers the org provides or restricts
+  ├── CLAUDE.md                  org-wide instructions (can&#x27;t be excluded)
+  └── .claude/agents/            org-wide subagents
+  (or delivered via MDM/registry, or the claude.ai admin console)
+
+USER: ~/  (you, every project, never committed)
+  ├── .claude.json               app state: login, folder trust, your MCP servers
+  └── .claude/
+      ├── CLAUDE.md              your personal instructions
+      ├── settings.json          your permissions, hooks, env, model, plugins
+      ├── rules/  skills/  agents/  commands/  output-styles/
+      ├── projects/&lt;repo&gt;/memory/MEMORY.md    auto memory (Claude writes it)
+      ├── projects/&lt;repo&gt;/*.jsonl             session transcripts
+      └── plugins/               installed plugins + marketplaces
+
+PROJECT: ~/pro/  (team, commit to git)
+  ├── CLAUDE.md                  ← /init creates this
+  ├── CLAUDE.local.md            LOCAL: your private notes; add to .gitignore
+  ├── AGENTS.md                  read instead, only if no CLAUDE.md exists
+  ├── .mcp.json                  team MCP servers
+  └── .claude/
+      ├── settings.json          team permissions, hooks, env, plugins
+      ├── settings.local.json    LOCAL: your overrides (auto-gitignored)
+      ├── rules/*.md             topic rules; &quot;paths:&quot; frontmatter = load on match
+      ├── skills/&lt;name&gt;/SKILL.md (+ scripts/, reference files)
+      ├── agents/&lt;name&gt;.md       subagents
+      ├── hooks/*.sh             scripts your hooks call (a convention, not auto-loaded)
+      └── commands/  output-styles/  workflows/  agent-memory/   (less common)</div>
+<h3>Who wins a conflict</h3>
+<table><thead><tr><th>What</th><th>Rule</th><th>Order, highest first</th></tr></thead><tbody><tr><td><b>Settings</b></td><td>Merged key by key. List keys such as <code>permissions.allow</code> are combined across files.</td><td>managed → <code>--settings</code> flag → <code>.claude/settings.local.json</code> → <code>.claude/settings.json</code> → <code>~/.claude/settings.json</code></td></tr><tr><td><b>CLAUDE.md</b></td><td>Additive: every level loads. The most specific is read last and usually wins.</td><td>managed → user → project, from the filesystem root down to your folder</td></tr><tr><td><b>Skills</b> (same name)</td><td>Override</td><td>managed &gt; user &gt; project</td></tr><tr><td><b>Subagents</b> (same name)</td><td>Override</td><td>managed &gt; <code>--agents</code> flag &gt; project &gt; user &gt; plugin</td></tr><tr><td><b>MCP servers</b> (same name)</td><td>Override</td><td>local &gt; project &gt; user</td></tr><tr><td><b>Hooks</b></td><td>Merge: every matching hook runs</td><td>An organization can allow managed hooks only</td></tr></tbody></table>
+<div class="callout try"><span class="lbl">Memory hook</span><p>Settings order M-C-L-P-U: "My Cat Likes Purple Umbrellas" = Managed, CLI, Local, Project, User.</p></div>
+<div class="callout warn"><span class="lbl">Exam traps</span><p>Skills and subagents break user-versus-project ties in opposite directions: a personal skill beats a project skill, but a project subagent beats a personal one. <code>~/.claude.json</code> (app state, folder trust, your MCP servers) is a different file from <code>~/.claude/settings.json</code>. A managed CLAUDE.md is only guidance; the technical lock is managed settings. <code>CLAUDE.local.md</code> and <code>settings.local.json</code> are personal: keep them out of git (<code>settings.local.json</code> is git-ignored automatically).</p></div>
+<h3>Enforcing policy for an organization</h3>
+<ul><li><b>Three delivery channels.</b> A <code>managed-settings.json</code> file in the system folder (plus <code>managed-settings.d/*.json</code> drop-ins, merged alphabetically); OS policy via MDM (macOS plist domain <code>com.anthropic.claudecode</code>, Windows registry <code>HKLM\SOFTWARE\Policies\ClaudeCode</code>); or server-managed settings from the claude.ai admin console.</li><li><b>System folders.</b> macOS <code>/Library/Application Support/ClaudeCode/</code>; Linux and WSL <code>/etc/claude-code/</code>; Windows <code>C:\Program Files\ClaudeCode\</code>.</li><li><b>Useful locks.</b> <code>permissions.deny</code> rules, <code>allowManagedHooksOnly</code>, <code>allowManagedPermissionRulesOnly</code>, and <code>strictPluginOnlyCustomization</code>, which blocks skills, agents, hooks and MCP servers from user and project sources.</li><li><b>Also managed.</b> <code>managed-mcp.json</code> for MCP servers, a managed CLAUDE.md for behavioural guidance, and <code>.claude/agents/</code> in the managed folder for org-wide subagents.</li></ul>
+<details class="quiz"><summary>Check yourself: level 2<span class="hint">answer out loud, then open</span></summary><ol><li><p class="q">Managed settings deny <code>Bash(sudo *)</code>; your <code>settings.local.json</code> allows it. What happens?</p><p class="a">Denied: managed settings win.</p></li><li><p class="q">A personal and a project skill are both called <code>deploy</code>. Which runs? And if they were subagents?</p><p class="a">Skill: the personal one. Subagent: the project one.</p></li><li><p class="q">Name the three ways to deliver managed settings.</p><p class="a">A <code>managed-settings.json</code> file (with <code>.d</code> drop-ins), MDM or registry policy, or server-managed settings from the admin console.</p></li><li><p class="q">Two CLAUDE.md files give conflicting instructions. Which applies?</p><p class="a">Both load; Claude usually follows the more specific one, which is read last.</p></li></ol></details>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="level-3-what-loads-and-when">
+    <div class="wrap">
+      <p class="eyebrow">Level 3 · What loads, and when</p>
+      <h2>The three request layers, the startup order, and what survives /compact.</h2>
+      <div class="prose rel-body">
+<div class="callout key"><span class="lbl">Big idea</span><p>Every request is built in three layers, most stable first, so the prompt cache can reuse the front of it: System prompt → Project context → Conversation.</p></div>
+<div class="callout "><span class="lbl">Java anchor</span><p>Startup configuration versus request scope. CLAUDE.md is bound once at startup, like <code>@ConfigurationProperties</code> without <code>@RefreshScope</code>: an edit needs a "restart" (<code>/clear</code>, <code>/compact</code> or a new session). Settings files, by contrast, are watched and hot-reloaded.</p></div>
+<div class="msgflow"> ┌─ SYSTEM PROMPT (cached prefix) ──────────────────────────────────────────────────────┐
+ │ 1 core instructions (+ output style, + --append-system-prompt)                       │
+ │ 2 tool definitions: Read, Edit, Bash, Grep, Agent, Skill…   MCP tools: names only    │
+ │ 3 environment: cwd, platform, shell, OS, git repo?, auto-memory paths                │
+ │ 4 git snapshot: branch, status, recent commits          ← taken ONCE, at startup     │
+ ├─ PROJECT CONTEXT (a user message after the system prompt) ───────────────────────────┤
+ │ 5 managed CLAUDE.md                                                                  │
+ │ 6 ~/.claude/CLAUDE.md, then ~/.claude/rules/            user rules load first,       │
+ │ 7 project CLAUDE.md files, root → your folder;            so project rules win       │
+ │   in each folder CLAUDE.md then CLAUDE.local.md; unscoped rules; @imports (4 hops)   │
+ │ 8 auto memory: first 200 lines / 25 KB of MEMORY.md                                  │
+ │ – skill listing, subagent descriptions, SessionStart hook output (position undocumented) │
+ ├─ CONVERSATION ───────────────────────────────────────────────────────────────────────┤
+ │ your prompts · replies · tool results · invoked SKILL.md bodies · plan mode          │
+ │ path-scoped rules and nested CLAUDE.md when a matching file is read                  │
+ │ MCP tool schemas when a specific tool is needed                                      │
+ └──────────────────────────────────────────────────────────────────────────────────────┘</div>
+<h3>Startup order, as a table</h3>
+<table><thead><tr><th>#</th><th>Layer</th><th>What loads</th></tr></thead><tbody><tr><td>1</td><td>System prompt</td><td>Claude Code's core instructions (not published). An output style replaces the default software-engineering instructions unless it sets <code>keep-coding-instructions: true</code>. Any <code>--append-system-prompt</code> text is added.</td></tr><tr><td>2</td><td>System prompt</td><td>Built-in tool definitions (Read, Edit, Bash, Grep, Agent, Skill, …). MCP tools are deferred: names only, full schemas when needed.</td></tr><tr><td>3</td><td>System prompt</td><td>Environment: working directory, platform, shell, OS version, whether it is a git repo, and your auto-memory paths.</td></tr><tr><td>4</td><td>System prompt</td><td>A git snapshot at the very end: branch, status, recent commits. Taken once at startup.</td></tr><tr><td>5</td><td>Project context</td><td>Managed (organization) CLAUDE.md.</td></tr><tr><td>6</td><td>Project context</td><td><code>~/.claude/CLAUDE.md</code>, then <code>~/.claude/rules/</code>. User rules load before project rules, so project rules win.</td></tr><tr><td>7</td><td>Project context</td><td>Project CLAUDE.md files from the filesystem root down to your folder; in each folder CLAUDE.md, then CLAUDE.local.md. Rules without paths load with <code>.claude/CLAUDE.md</code> priority. <code>@imports</code> expand (max 4 hops); HTML comments are stripped. No CLAUDE.md anywhere? <code>AGENTS.md</code> is read instead.</td></tr><tr><td>8</td><td>Project context</td><td>Auto memory: the first 200 lines or 25 KB of MEMORY.md.</td></tr><tr><td>–</td><td>Before your first prompt</td><td>The skill listing (model-invocable skills only), subagent descriptions, and SessionStart hook output. Their exact position is not documented.</td></tr></tbody></table>
+<p>The project-context layer is sent as a <b>user message after the system prompt</b>, not inside it.</p>
+<h3>During the conversation</h3>
+<ul><li>Full SKILL.md bodies and plan mode are <b>appended as messages</b>, so the cached prefix stays intact.</li><li>Path-scoped rules and nested CLAUDE.md files load when Claude reads a matching file.</li><li>MCP tool schemas load when Claude needs a specific tool.</li><li><b>Never loaded until needed:</b> user-only skills (until you type <code>/name</code>), a skill's supporting files, auto-memory topic files, and CLAUDE.md in <code>--add-dir</code> folders.</li></ul>
+<h3>After /compact</h3>
+<table><thead><tr><th>Item</th><th>What happens</th></tr></thead><tbody><tr><td>System prompt</td><td>Stays</td></tr><tr><td>Project-root CLAUDE.md, unscoped rules, auto memory</td><td>Re-read from disk and re-injected</td></tr><tr><td>Skills you invoked</td><td>Re-injected, capped at 5,000 tokens each (25,000 total)</td></tr><tr><td>Recently modified files</td><td>Up to 5 re-read</td></tr><tr><td><b>Skill listing</b></td><td><b>Not re-injected</b></td></tr><tr><td>Path-scoped rules, nested CLAUDE.md</td><td>Only when a matching file is read again</td></tr></tbody></table>
+<h3>A subagent's own stack</h3>
+<p>Its own system prompt (which replaces Claude Code's; only environment details are added), plus CLAUDE.md files (not for the built-in Explore and Plan agents), plus preloaded skills, plus a git status snapshot, plus the task Claude wrote for it. <b>Not</b> your conversation, and <b>not</b> your main auto memory.</p>
+<div class="callout try"><span class="lbl">Memory hook</span><p>S → P → C: "Stable first, Chatty last." System prompt, Project context, Conversation.</p></div>
+<div class="callout warn"><span class="lbl">Exam traps</span><p>Editing CLAUDE.md mid-session has no effect until <code>/clear</code>, <code>/compact</code> or a restart; settings and agent files hot-reload. The skill listing does not survive <code>/compact</code>, only skills you actually invoked do. CLAUDE.md is delivered as a user message after the system prompt, not inside it. A subagent never sees your conversation, only the task it was given. Verify in a real session: <code>/context</code> shows the live breakdown, including which memory files loaded; <code>/status</code> shows the active settings sources.</p></div>
+<details class="quiz"><summary>Check yourself: level 3<span class="hint">answer out loud, then open</span></summary><ol><li><p class="q">You edit CLAUDE.md mid-session. When does Claude see the change?</p><p class="a">After <code>/clear</code>, <code>/compact</code> or a restart.</p></li><li><p class="q">Is the git status in context refreshed during the session?</p><p class="a">No, it is a snapshot taken at startup.</p></li><li><p class="q">Which startup item is not re-injected after <code>/compact</code>?</p><p class="a">The skill listing.</p></li><li><p class="q">Name the three request layers in order.</p><p class="a">System prompt → project context → conversation.</p></li></ol></details>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="level-4-the-loop-and-its-hooks">
+    <div class="wrap">
+      <p class="eyebrow">Level 4 · The loop and its hooks</p>
+      <h2>Where each hook event fires, what a hook can do, and why exit codes matter.</h2>
+      <div class="prose rel-body">
+<div class="callout key"><span class="lbl">Big idea</span><p>Hooks are your code at fixed points of the agent loop. They run outside the model, deterministically, and can allow, block, rewrite or add context.</p></div>
+<div class="callout "><span class="lbl">Java anchor</span><p>Servlet filters and Spring <code>HandlerInterceptor</code>s around the agent loop. PreToolUse ≈ <code>preHandle</code> (can reject the call). PostToolUse ≈ <code>postHandle</code> (cannot undo, can report). SessionStart ≈ <code>ApplicationReadyEvent</code>. SessionEnd ≈ <code>@PreDestroy</code>.</p></div>
+<div class="msgflow">   ① session starts ──────────── SessionStart ──── inject context via stdout
+          │
+   ② you send a prompt ────────── UserPromptSubmit ─ block it, or add context
+          │
+   ┌──────▼───────────────────────────────────────────────────────────────────────┐
+   │ ③ Claude calls a tool ─────── PreToolUse ────── allow · deny · ask · edit input │
+   │ ④ permission check ────────── PermissionRequest  approve or deny for the user   │
+   │ ⑤ tool runs, result returns ─ PostToolUse ────── format, lint, feed errors back │   ↻ repeats until
+   │        tool = Skill  → full SKILL.md joins the context                           │     Claude has
+   │        tool = Agent  → subagent loop, wrapped by SubagentStart / SubagentStop    │     its answer
+   └──────┬───────────────────────────────────────────────────────────────────────┘
+   ⑥ Claude finishes its reply ─ Stop ──────────── block it: Claude keeps working
+          │
+   ⑦ session ends ────────────── SessionEnd ─────── cleanup, logging (cannot block)
+   any time: PreCompact · PostCompact · Notification</div>
+<h3>All 33 hook events</h3>
+<table><thead><tr><th>Group</th><th>Events</th></tr></thead><tbody><tr><td>Session</td><td>SessionStart, Setup, SessionEnd</td></tr><tr><td>Prompt</td><td>UserPromptSubmit, UserPromptExpansion</td></tr><tr><td>Tools</td><td>PreToolUse, PermissionRequest, PermissionDenied, PostToolUse, PostToolUseFailure, PostToolBatch</td></tr><tr><td>End of turn</td><td>Stop, StopFailure</td></tr><tr><td>Subagents and teams</td><td>SubagentStart, SubagentStop, TaskCreated, TaskCompleted, TeammateIdle</td></tr><tr><td>Context and config</td><td>InstructionsLoaded, ConfigChange, PreCompact, PostCompact, PreModelSwitch, PostModelSwitch</td></tr><tr><td>Files and workspace</td><td>CwdChanged, DirectoryAdded, FileChanged, WorktreeCreate, WorktreeRemove</td></tr><tr><td>UI and MCP</td><td>Notification, MessageDisplay, Elicitation, ElicitationResult</td></tr></tbody></table>
+<p><code>Setup</code> fires for <code>claude --init-only</code> (or <code>--init</code> / <code>--maintenance</code> with <code>-p</code>). It has nothing to do with the <code>/init</code> command.</p>
+<h3>Anatomy of a hook</h3>
+<p>Event, optional matcher, handler:</p>
+<pre><code class="language-json">&quot;hooks&quot;: {
+  &quot;PreToolUse&quot;: [                                  // ← event
+    {
+      &quot;matcher&quot;: &quot;Bash&quot;,                           // ← which tool; a regex like &quot;Edit|Write&quot; or &quot;mcp__github__.*&quot;
+      &quot;hooks&quot;: [
+        { &quot;type&quot;: &quot;command&quot;,                       // ← handler: command | http | mcp_tool | prompt | agent
+          &quot;command&quot;: &quot;${CLAUDE_PROJECT_DIR}/.claude/hooks/block-dangerous.sh&quot;,
+          &quot;args&quot;: [], &quot;timeout&quot;: 10 }
+      ]
+    }
+  ]
+}</code></pre>
+<table><thead><tr><th>Where a hook can live</th><th>Active when</th></tr></thead><tbody><tr><td>Any settings file: user, project, local, managed</td><td>The whole session, and also inside subagents</td></tr><tr><td>A plugin's <code>hooks/hooks.json</code></td><td>While the plugin is enabled, and also inside subagents</td></tr><tr><td>A subagent's frontmatter (<code>hooks:</code>)</td><td>Only while that subagent runs (Stop becomes SubagentStop)</td></tr><tr><td>A skill's frontmatter (<code>hooks:</code>)</td><td>From the skill's first use until the session ends</td></tr></tbody></table>
+<table><thead><tr><th>Handler type</th><th>What runs</th></tr></thead><tbody><tr><td><code>command</code></td><td>A shell command; the event JSON arrives on stdin</td></tr><tr><td><code>http</code></td><td>The event JSON is POSTed to a URL</td></tr><tr><td><code>mcp_tool</code></td><td>An MCP tool is called</td></tr><tr><td><code>prompt</code></td><td>A one-turn model evaluation decides</td></tr><tr><td><code>agent</code></td><td>A subagent that can read files before deciding</td></tr></tbody></table>
+<h3>What the exit code means</h3>
+<table><thead><tr><th>Exit code</th><th>Meaning</th><th>Effect</th></tr></thead><tbody><tr><td><b>0</b></td><td>Proceed</td><td>JSON on stdout is parsed. For SessionStart and UserPromptSubmit, plain stdout becomes context.</td></tr><tr><td><b>2</b></td><td>Block</td><td>Blocks events that can block: PreToolUse stops the call, UserPromptSubmit rejects the prompt, Stop makes Claude continue. stderr becomes the reason.</td></tr><tr><td><b>Anything else, including 1</b></td><td>Non-blocking error</td><td>The action <b>goes ahead</b>.</td></tr></tbody></table>
+<p>JSON output (exit 0 plus JSON on stdout):</p>
+<pre><code class="language-json">{
+  &quot;hookSpecificOutput&quot;: {
+    &quot;hookEventName&quot;: &quot;PreToolUse&quot;,
+    &quot;permissionDecision&quot;: &quot;deny&quot;,              // allow | deny | ask
+    &quot;permissionDecisionReason&quot;: &quot;Recursive delete of ~ ...&quot;
+  }
+}</code></pre>
+<p>Other fields: <code>updatedInput</code> rewrites the tool call, <code>additionalContext</code> adds text Claude sees, <code>continue: false</code> stops everything, <code>systemMessage</code> shows a message to the user.</p>
+<div class="callout try"><span class="lbl">Memory hook</span><p>0 = go, 2 = no, anything else = shrug. And silence is not a "yes".</p></div>
+<div class="callout warn"><span class="lbl">Exam traps</span><p>Exit 1 never blocks. A policy hook must exit 2 or return a JSON deny. A hook that times out, or whose script path is wrong or not executable, is a non-blocking error: the gate is silently off. Exit 0 with no output is not approval; the normal permission flow still decides. For a fixed hard rule, a <code>permissions.deny</code> entry is the most reliable lock; use hooks when the decision needs logic. <code>/hooks</code> only displays hooks. Settings, managed and plugin hooks already fire inside subagents; do not repeat them in subagent frontmatter.</p></div>
+<details class="quiz"><summary>Check yourself: level 4<span class="hint">answer out loud, then open</span></summary><ol><li><p class="q">Your guard hook exits 1 on <code>rm -rf ~</code>. What happens?</p><p class="a">The command runs: exit 1 is non-blocking.</p></li><li><p class="q">Which event would auto-format files after Claude edits them?</p><p class="a">PostToolUse with matcher <code>Edit|Write</code>.</p></li><li><p class="q">Which event can stop Claude from ending its turn?</p><p class="a">Stop (block → Claude continues).</p></li><li><p class="q">Which handler type lets a model make the decision?</p><p class="a"><code>prompt</code> (or <code>agent</code>, if it needs to read files first).</p></li></ol></details>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="level-5-worked-example">
+    <div class="wrap">
+      <p class="eyebrow">Level 5 · Worked example</p>
+      <h2>A real PreToolUse guard hook, tested against 66 commands.</h2>
+      <div class="prose rel-body">
+<div class="callout key"><span class="lbl">Big idea</span><p>Deny the catastrophic, ask before the risky, stay silent for everything else, and pair the hook with a <code>permissions.deny</code> floor.</p></div>
+<div class="callout "><span class="lbl">Java anchor</span><p>A web application firewall in front of a payment API: a deny list, step-up approval for risky operations, pass-through for normal traffic. Pattern matching can be bypassed, so it complements authorization (permission rules) rather than replacing it.</p></div>
+<h3>What it decides</h3>
+<table><thead><tr><th>Decision</th><th>Examples</th><th>Effect</th></tr></thead><tbody><tr><td><b>Deny</b></td><td><code>rm -rf</code> on <code>/</code>, <code>~</code>, <code>$HOME</code>, <code>.</code>, <code>..</code>, <code>*</code> or system folders; curl or wget piped into a shell; <code>mkfs</code>; <code>dd</code> onto a device; disk erase; <code>find -delete</code> across <code>/</code> or <code>~</code>; fork bomb</td><td>Blocked. Claude sees the reason and picks a safer route.</td></tr><tr><td><b>Ask</b></td><td><code>git push --force</code>, <code>git reset --hard</code>, <code>git clean -f</code>, <code>terraform destroy</code>, <code>kubectl delete</code>, <code>DROP</code> or <code>TRUNCATE</code>, <code>chmod -R 777</code></td><td>You approve or reject.</td></tr><tr><td><b>Silent</b></td><td>Everything else, such as <code>npm test</code> or <code>rm -rf node_modules</code></td><td>Your normal permission rules decide.</td></tr></tbody></table>
+<h3>How it works</h3>
+<ul><li>Reads the event JSON from stdin with <code>jq</code>, then lowercases and normalises the command.</li><li>Splits compound commands (<code>;</code>, <code>&amp;&amp;</code>, <code>|</code>, <code>$(…)</code>, backticks) and strips wrappers (<code>sudo</code>, <code>env</code>, <code>bash -c</code>, <code>xargs</code>, …), so each simple command is checked on its own.</li><li>Prints a JSON <code>permissionDecision</code> (deny beats ask), or nothing for "no opinion".</li><li>Fails <b>closed</b> on its own errors: missing <code>jq</code> or unreadable input → exit 2.</li><li>Fails <b>open</b> on setup errors: wrong path or missing <code>chmod +x</code> → Claude Code treats it as a non-blocking error.</li></ul>
+<h3>The settings that wire it in</h3>
+<pre><code class="language-json">{
+  &quot;$schema&quot;: &quot;https://json.schemastore.org/claude-code-settings.json&quot;,
+  &quot;permissions&quot;: {
+    &quot;deny&quot;: [&quot;Bash(sudo *)&quot;]
+  },
+  &quot;hooks&quot;: {
+    &quot;PreToolUse&quot;: [
+      {
+        &quot;matcher&quot;: &quot;Bash&quot;,
+        &quot;hooks&quot;: [
+          {
+            &quot;type&quot;: &quot;command&quot;,
+            &quot;command&quot;: &quot;${CLAUDE_PROJECT_DIR}/.claude/hooks/block-dangerous.sh&quot;,
+            &quot;args&quot;: [],
+            &quot;timeout&quot;: 10
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+<p>The <code>sudo</code> deny rule is the hard floor for a fixed pattern. The hook adds judgement a fixed rule cannot express: <code>rm -rf build/</code> is fine, <code>rm -rf ~</code> is not.</p>
+<h3>Install and test</h3>
+<pre><code class="language-bash">cd ~/pro
+mkdir -p .claude/hooks
+cp ~/Downloads/block-dangerous.sh .claude/hooks/
+chmod +x .claude/hooks/block-dangerous.sh
+echo &#x27;{&quot;tool_input&quot;:{&quot;command&quot;:&quot;rm -rf ~&quot;}}&#x27; | .claude/hooks/block-dangerous.sh   # prints a deny decision
+echo &#x27;{&quot;tool_input&quot;:{&quot;command&quot;:&quot;npm test&quot;}}&#x27;  | .claude/hooks/block-dangerous.sh   # prints nothing</code></pre>
+<p>Then run <code>/hooks</code> in Claude Code: the hook should appear under PreToolUse, labelled Project Settings.</p>
+<details class="code-fold"><summary>The full script: block-dangerous.sh (shellcheck-clean)</summary><div class="fold-body"><pre><code class="language-bash">#!/usr/bin/env bash
+# .claude/hooks/block-dangerous.sh
+#
+# PreToolUse hook for Claude Code&#x27;s Bash tool.
+# Reads the hook event JSON on stdin and answers with one of:
+#   deny        -&gt; the command is blocked and Claude is told why
+#   ask         -&gt; you get a permission prompt, even if a rule would allow it
+#   (no output) -&gt; no opinion; your normal permission rules decide
+#
+# Pattern matching is best effort: a seatbelt against accidents,
+# not a security boundary. Requires jq.
+set -uo pipefail
+
+# Fail closed: without jq the command can&#x27;t be inspected, so block it.
+if ! command -v jq &gt;/dev/null 2&gt;&amp;1; then
+  echo &quot;block-dangerous.sh: jq is not installed (brew install jq / apt install jq). Bash is blocked until it is.&quot; &gt;&amp;2
+  exit 2
+fi
+cmd=$(jq -r &#x27;.tool_input.command // empty&#x27;) || {
+  echo &quot;block-dangerous.sh: could not parse the hook input.&quot; &gt;&amp;2
+  exit 2
+}
+[ -z &quot;$cmd&quot; ] &amp;&amp; exit 0
+
+# Normalise: join line continuations, turn newlines into &#x27;;&#x27;,
+# lowercase everything and squeeze whitespace to single spaces.
+cmd=${cmd//$&#x27;\\\n&#x27;/ }
+lc=$(printf &#x27;%s&#x27; &quot;$cmd&quot; | tr &#x27;\n&#x27; &#x27;;&#x27; | tr &#x27;[:upper:]&#x27; &#x27;[:lower:]&#x27; | tr -s &#x27;[:space:]&#x27; &#x27; &#x27;)
+
+verdict=&quot;&quot; reason=&quot;&quot;
+flag() {   # flag deny|ask &quot;reason&quot;   (deny beats ask; first reason wins)
+  case &quot;$verdict:$1&quot; in
+    deny:*|ask:ask) ;;
+    *) verdict=$1 reason=$2 ;;
+  esac
+}
+check() {  # check deny|ask &#x27;regex&#x27; &quot;reason&quot;   (tested against the current segment $s)
+  if [[ $s =~ $2 ]]; then flag &quot;$1&quot; &quot;$3&quot;; fi
+}
+
+# ---- Checks on the whole command (these span pipes) -------------------------
+re_pipe_shell=&#x27;(curl|wget).*\| *(sudo +)?(ba|z|da|k)?sh( |$)|(ba|z|da|k)?sh &lt;\( *(curl|wget)&#x27;
+re_forkbomb=&#x27;:\(\) *\{ *:\|:&#x27;
+[[ $lc =~ $re_pipe_shell ]] &amp;&amp; flag deny &quot;Piping a downloaded script into a shell. Download it first, show the user what it does, then run it.&quot;
+[[ $lc =~ $re_forkbomb ]] &amp;&amp; flag deny &quot;Fork bomb.&quot;
+
+# ---- Checks per simple command ----------------------------------------------
+# Split on ; &amp; | ( ) and backticks, so &quot;cd x &amp;&amp; rm -rf ~&quot; and &quot;$(rm -rf /)&quot;
+# are each checked on their own.
+segments=$(printf &#x27;%s\n&#x27; &quot;$lc&quot; | sed &#x27;s/[;&amp;|()`]/\n/g&#x27;)
+
+# Wrappers and shell keywords to peel off the front: VAR=x, sudo, env, xargs -0, bash -c, then ...
+re_prefix=&#x27;^([a-z_][a-z0-9_]*=[^ ]*|sudo|doas|env|command|builtin|exec|eval|nohup|nice|time|xargs|if|then|else|elif|do|while|until|!|\{|(ba|z|da|k)?sh -c|-[a-z0-9-]+) &#x27;
+re_rm=&#x27;^([^ ]*/)?rm &#x27;
+re_recursive=&#x27; (-[a-z]*r[a-z]*|--recursive)( |$)&#x27;
+re_target=&#x27; (/|~|\$home|\$\{home\}|\.|\.\.|\*|/(applications|bin|boot|dev|etc|home|lib|library|opt|root|sbin|system|users|usr|var))(/?\*|/)?( |$)&#x27;
+
+while IFS= read -r s; do
+  s=${s//\&quot;/}; s=${s//\&#x27;/}        # rm -rf &quot;/&quot; is the same as rm -rf /
+  s=${s# }
+  while [[ $s =~ $re_prefix ]]; do s=${s#&quot;${BASH_REMATCH[0]}&quot;}; done
+  [ -z &quot;$s&quot; ] &amp;&amp; continue
+
+  # DENY: irreversible, never OK from an agent
+  if [[ $s =~ $re_rm &amp;&amp; $s =~ $re_recursive &amp;&amp; $s =~ $re_target ]]; then
+    flag deny &quot;Recursive delete of /, ~, \$HOME, ., .., * or a system folder. Delete specific paths instead, e.g. rm -rf build/.&quot;
+  fi
+  check deny &#x27;^find (/|~|\$home)( |$).*-delete&#x27;             &quot;find -delete across / or the home folder.&quot;
+  check deny &#x27;^mkfs&#x27;                                          &quot;Formatting a filesystem.&quot;
+  check deny &#x27;^dd .*of=/dev/&#x27;                                 &quot;Writing raw bytes to a device.&quot;
+  check deny &#x27;^diskutil (erase|zero|secureerase|partition)&#x27;   &quot;Erasing or repartitioning a disk.&quot;
+  check deny &#x27;&gt; ?/dev/(sd|hd|vd|xvd|nvme|disk)&#x27;               &quot;Redirecting output onto a raw disk.&quot;
+
+  # ASK: sometimes legitimate, so a human decides
+  check ask &#x27;^git push( .*)? (-f|--force[a-z-]*|\+[^ ]+)( |=|$)&#x27;  &quot;Force push rewrites shared history.&quot;
+  check ask &#x27;^git reset( .*)? --hard( |$)&#x27;                        &quot;git reset --hard throws away uncommitted work.&quot;
+  check ask &#x27;^git clean( .*)? -[a-z]*f&#x27;                           &quot;git clean -f deletes untracked files.&quot;
+  check ask &#x27;^terraform (destroy|apply( .*)? -auto-approve)&#x27;      &quot;Changes or destroys infrastructure without review.&quot;
+  check ask &#x27;^kubectl delete &#x27;                                    &quot;Deletes Kubernetes resources.&quot;
+  check ask &#x27;^chmod (-r|--recursive) ([^ ]+ )*(777|a\+rwx)&#x27;       &quot;Makes files world-writable, recursively.&quot;
+  check ask &#x27;(^| )(drop (table|database|schema)|truncate table)( |$)&#x27; &quot;Destructive SQL.&quot;
+done &lt;&lt;&lt; &quot;$segments&quot;
+
+# ---- Answer ------------------------------------------------------------------
+[ -z &quot;$verdict&quot; ] &amp;&amp; exit 0      # silent = no opinion
+[ &quot;$verdict&quot; = deny ] &amp;&amp; reason=&quot;$reason If it is truly needed, ask the user to run it themselves.&quot;
+jq -n --arg d &quot;$verdict&quot; --arg r &quot;block-dangerous hook: $reason&quot; &#x27;{
+  hookSpecificOutput: {
+    hookEventName: &quot;PreToolUse&quot;,
+    permissionDecision: $d,
+    permissionDecisionReason: $r
+  }
+}&#x27;</code></pre>
+</div></details>
+<div class="callout key"><span class="lbl">Limits to remember</span><p>It is pattern matching: a seatbelt against accidents, not a security boundary. A deliberately disguised command can get past it. Run the two-line test once: a setup mistake silently disables the gate. Needs <code>jq</code>. Works on macOS, Linux and WSL; the hooks reference has a PowerShell version for native Windows.</p></div>
+<details class="quiz"><summary>Check yourself: level 5<span class="hint">answer out loud, then open</span></summary><ol><li><p class="q">Why does the script print JSON for "ask" cases instead of exiting 2?</p><p class="a">Exit 2 can only block; "ask" needs the JSON <code>permissionDecision</code>.</p></li><li><p class="q">What happens if you forget <code>chmod +x</code>?</p><p class="a">The hook cannot start → non-blocking error → commands run unchecked.</p></li><li><p class="q">Why keep the <code>Bash(sudo *)</code> deny rule when the hook exists?</p><p class="a">Deny rules are the most reliable lock for a fixed pattern; hooks can fail open.</p></li></ol></details>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="level-6-skills">
+    <div class="wrap">
+      <p class="eyebrow">Level 6 · Skills</p>
+      <h2>Know-how that costs almost nothing until it is used.</h2>
+      <div class="prose rel-body">
+<div class="callout key"><span class="lbl">Big idea</span><p>A skill is a folder of instructions, plus optional scripts and reference files. Its description is always listed; its body loads only when it is used.</p></div>
+<div class="callout "><span class="lbl">Java anchor</span><p>A <code>@Lazy</code> bean: the definition (name and description) is registered at startup, and the full bean is created only on first use.</p></div>
+<table><thead><tr><th>Aspect</th><th>Rule</th></tr></thead><tbody><tr><td>File</td><td><code>skills/&lt;name&gt;/SKILL.md</code>: frontmatter (<code>name</code>, <code>description</code>), then instructions. Extra files sit beside it.</td></tr><tr><td>Where</td><td><code>~/.claude/skills/</code> (personal), <code>.claude/skills/</code> (project), a plugin's <code>skills/</code> (as <code>plugin:skill</code>), managed</td></tr><tr><td>In context</td><td>Name and description always; full body when invoked; supporting files only when read</td></tr><tr><td>Invoked by</td><td>Claude, when the description matches the task, or you, by typing <code>/name</code></td></tr><tr><td>User-only</td><td><code>disable-model-invocation: true</code> → not listed, zero cost until you type <code>/name</code>, and cannot be preloaded into subagents</td></tr><tr><td>Commands</td><td><code>.claude/commands/*.md</code> is the older, single-file form of the same mechanism</td></tr><tr><td>Name clash</td><td>managed &gt; user &gt; project</td></tr><tr><td>Hooks in frontmatter</td><td>Active from the skill's first use until the session ends</td></tr><tr><td>After <code>/compact</code></td><td>The listing is gone; invoked bodies are re-injected (capped)</td></tr><tr><td>In subagents</td><td>The <code>skills:</code> field preloads full content. With <code>Skill</code> in its tools, a subagent can invoke other skills.</td></tr></tbody></table>
+<h3>Example frontmatter</h3>
+<pre><code class="language-markdown">---
+name: review-checklist
+description: Checklist for reviewing code changes - correctness, security, tests and maintainability. Use when reviewing a diff, a pull request or a commit.
+---
+# Code review checklist
+Work through every section for each changed file. Report only real findings.
+...</code></pre>
+<details class="code-fold"><summary>The full review-checklist skill</summary><div class="fold-body"><pre><code class="language-markdown">---
+name: review-checklist
+description: Checklist for reviewing code changes - correctness, security, tests and maintainability. Use when reviewing a diff, a pull request or a commit.
+---
+# Code review checklist
+
+Work through every section for each changed file. Report only real findings, not ticked boxes.
+
+## Correctness
+- Edge cases: empty, null, zero, very large, unicode, time zones
+- Errors handled at the right level; nothing swallowed silently
+- Concurrency: shared state, thread safety, retries that are safe to repeat
+- Resources closed on every path (connections, streams, files)
+
+## Security
+- Input validated at every trust boundary
+- No SQL, shell commands or file paths built from untrusted input
+- Authorization checked on every endpoint and service call, not only authentication
+- No secrets, tokens or personal data in code, logs or error messages
+- No untrusted data into deserialization, reflection or templates
+
+## Tests
+- New behaviour is tested, including the failure path
+- Tests assert outcomes, not implementation details
+- No test depends on ordering, the clock or the network without a stub
+
+## Maintainability
+- Names say what things are; no dead or commented-out code
+- Each function does one thing; duplication extracted
+- Public API changes are backward compatible, or flagged as breaking</code></pre>
+</div></details>
+<div class="callout warn"><span class="lbl">Exam traps</span><p>A skill adds instructions to the current context; a subagent works in a separate one. Loading a big skill isolates nothing. The description is what Claude matches on: a vague description means the skill never fires. Personal beats project for skills, the opposite of subagents.</p></div>
+<details class="quiz"><summary>Check yourself: level 6<span class="hint">answer out loud, then open</span></summary><ol><li><p class="q">What does a skill cost in context before it is used?</p><p class="a">Its name and description in the listing.</p></li><li><p class="q">How do you make a skill that only you can trigger?</p><p class="a">Set <code>disable-model-invocation: true</code>.</p></li><li><p class="q">Skill or CLAUDE.md for a 3,000-line runbook used once a month?</p><p class="a">Skill: it costs tokens only when used.</p></li></ol></details>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="level-7-subagents">
+    <div class="wrap">
+      <p class="eyebrow">Level 7 · Subagents</p>
+      <h2>Specialists with their own context window: the definition file and all 18 fields.</h2>
+      <div class="prose rel-body">
+<div class="callout key"><span class="lbl">Big idea</span><p>A subagent is a specialist with its own context window, system prompt and tool limits. The main session delegates through the Agent tool and gets back only a summary.</p></div>
+<div class="callout "><span class="lbl">Java anchor</span><p>Calling a downstream microservice with its own bounded context: you send a request DTO (the task), it works with its own state and permissions, and it returns a response DTO (the summary). It never sees your session.</p></div>
+<h3>How it is invoked</h3>
+<ul><li><b>Automatically</b>, when your request matches its description. "Use proactively…" makes this eager.</li><li><b>Explicitly</b>: <code>@"code-reviewer (agent)" review my changes</code>.</li><li><b>As the whole session</b>: <code>claude --agent code-reviewer</code>, which also sends its <code>initialPrompt</code>.</li><li>Subagents can launch their own subagents, up to three levels deep by default. In interactive sessions they run in the background by default.</li><li><b>Where</b>: <code>.claude/agents/</code> (project), <code>~/.claude/agents/</code> (user), a plugin's <code>agents/</code>, managed, the <code>--agents</code> flag. Edits hot-reload within seconds; restart only after the first file in a brand-new agents folder.</li></ul>
+<h3>Example: .claude/agents/code-reviewer.md</h3>
+<pre><code class="language-markdown">---
+name: code-reviewer
+description: Reviews code changes for bugs, security issues and maintainability problems. Use proactively after writing or modifying code, and before every commit.
+tools: Read, Grep, Glob, Bash
+model: sonnet
+effort: high
+maxTurns: 25
+skills:
+  - review-checklist
+memory: project
+color: purple
+initialPrompt: Review the current changes and give your verdict.
+---
+You are a senior code reviewer. You review code; you never modify it.
+
+When invoked:
+1. Run `git status` and `git diff HEAD` to see uncommitted changes. If there are none,
+   review the branch against the default branch instead (e.g. `git diff main...HEAD`).
+   If the task names specific files, focus on those.
+2. Read each changed file and enough surrounding code to understand it.
+3. Check your agent memory for this codebase&#x27;s conventions and recurring issues.
+
+Review for:
+- Correctness: logic errors, edge cases, null handling, concurrency, error handling
+- Security: injection, missing authorization checks, secrets in code, unsafe deserialization
+- Maintainability: naming, duplication, complexity, missing or weak tests
+
+Report findings grouped as Critical (must fix), Warnings (should fix) and Suggestions.
+For each finding give file:line, the problem, and a concrete fix.
+End with a one-line verdict: APPROVE or REQUEST CHANGES.
+
+Before you finish, add any new recurring pattern or convention you noticed to your agent memory.</code></pre>
+<p>Everything below the second <code>---</code> is the agent's <b>entire system prompt</b>: it replaces Claude Code's own. Only <code>name</code> and <code>description</code> are required.</p>
+<h3>Fields used in the example</h3>
+<table><thead><tr><th>Field</th><th>What it does</th><th>Watch out</th></tr></thead><tbody><tr><td><code>name</code> (required)</td><td>The agent's ID: lowercase letters and hyphens. What you @-mention; hooks see it as <code>agent_type</code>. The filename need not match.</td><td>A <code>:</code> (reserved for plugin agents) or a leading <code>-</code> → file skipped silently. Duplicate names in one folder → only one loads, unpredictably.</td></tr><tr><td><code>description</code> (required)</td><td>What Claude matches your request against when deciding to delegate. "Use proactively…" makes it delegate on its own.</td><td>Always in the main context. All descriptions together above 15,000 tokens → warning.</td></tr><tr><td><code>tools</code></td><td>Allowlist. Omit it to inherit every tool available to subagents. Accepts MCP patterns like <code>mcp__github</code>.</td><td>Nothing resolves → the agent usually will not launch. Preload skills with <code>skills</code>, not <code>Skill</code>.</td></tr><tr><td><code>model</code></td><td><code>sonnet</code>, <code>opus</code>, <code>haiku</code>, <code>fable</code>, a full ID like <code>claude-opus-5</code>, or <code>inherit</code>.</td><td>A model passed for one call overrides it. If omitted: <code>CLAUDE_CODE_SUBAGENT_MODEL</code>, then your main model. The org's <code>availableModels</code> can swap it.</td></tr><tr><td><code>effort</code></td><td><code>low</code>, <code>medium</code>, <code>high</code>, <code>xhigh</code> or <code>max</code> while it runs.</td><td>Available levels depend on the model.</td></tr><tr><td><code>maxTurns</code></td><td>Hard cap on the agent's turns.</td><td>At the cap you get partial output; Claude can resume the agent.</td></tr><tr><td><code>skills</code></td><td>Skills injected in full at startup.</td><td>Missing ones are skipped (debug log only). User-only skills cannot be preloaded.</td></tr><tr><td><code>memory</code></td><td>Notes kept across sessions. <code>project</code> → <code>.claude/agent-memory/&lt;name&gt;/</code>, <code>local</code> → <code>.claude/agent-memory-local/&lt;name&gt;/</code>, <code>user</code> → <code>~/.claude/agent-memory/&lt;name&gt;/</code>. The first 200 lines or 25 KB of its MEMORY.md load each run.</td><td>Also turns on Read, Write and Edit, even for an agent meant to be read-only. No effect if auto memory is off.</td></tr><tr><td><code>color</code></td><td>Colour in the task list and transcript: red, blue, green, yellow, purple, orange, pink, cyan.</td><td>Cosmetic.</td></tr><tr><td><code>initialPrompt</code></td><td>First message sent automatically when the agent runs as the whole session (<code>claude --agent</code>).</td><td>Only used in that case.</td></tr></tbody></table>
+<h3>The other fields</h3>
+<table><thead><tr><th>Field</th><th>What it does</th><th>Watch out</th></tr></thead><tbody><tr><td><code>disallowedTools</code></td><td>Denylist: inherit every tool except these. Applied before <code>tools</code>.</td><td><code>Bash(git push *)</code> removes all of Bash. Block single commands with <code>permissions.deny</code>.</td></tr><tr><td><code>permissionMode</code></td><td><code>default</code> (Manual), <code>acceptEdits</code>, <code>auto</code>, <code>dontAsk</code>, <code>bypassPermissions</code> or <code>plan</code>.</td><td>Ignored while the main session is in auto, acceptEdits or bypass mode (auto is the default on Pro, Max and Team). <code>bypassPermissions</code> here never escalates.</td></tr><tr><td><code>mcpServers</code></td><td>MCP servers only this agent gets: a configured server's name or an inline definition.</td><td>Inline servers keep their tools out of your main context. They connect when the agent starts and disconnect when it ends.</td></tr><tr><td><code>hooks</code></td><td>Hooks active only while the agent runs; Stop becomes SubagentStop.</td><td>Project agents: only after you trust the folder. Settings and plugin hooks already fire inside subagents.</td></tr><tr><td><code>background</code></td><td><code>true</code> keeps it in the background even when Claude wants to wait.</td><td>Interactive sessions already run subagents in the background by default.</td></tr><tr><td><code>isolation</code></td><td><code>worktree</code>: runs in a temporary git worktree, removed if nothing changed.</td><td>Branches from the <b>default branch</b>, not your HEAD, so it does not see uncommitted work.</td></tr><tr><td><code>omitClaudeMd</code></td><td><code>true</code>: start without user, project and local CLAUDE.md (managed still loads).</td><td>For agents that get everything from the task. Needs v2.1.271 or later.</td></tr><tr><td><code>experimental</code></td><td><code>cacheTtl: 5m</code> or <code>1h</code>: prompt-cache lifetime for this agent's requests.</td><td>Must be nested under <code>experimental</code>. <code>1h</code> is ignored on usage credits.</td></tr></tbody></table>
+<div class="callout warn"><span class="lbl">Exam traps</span><p><code>permissionMode</code> is ignored while the main session is in auto, acceptEdits or bypass mode. <code>isolation: worktree</code> branches from the default branch, not HEAD: wrong for reviewing uncommitted work, right for parallel edits. <code>memory</code> quietly adds Write and Edit. Plugin agents ignore <code>hooks</code>, <code>mcpServers</code> and <code>permissionMode</code>, and do not support <code>color</code> or <code>initialPrompt</code>. A subagent returns only its summary; its file reads never reach your context.</p></div>
+<details class="quiz"><summary>Check yourself: level 7<span class="hint">answer out loud, then open</span></summary><ol><li><p class="q">A subagent sets <code>permissionMode: plan</code>; the main session runs in auto. Which mode applies?</p><p class="a">Auto.</p></li><li><p class="q">What returns to the main context when a subagent finishes?</p><p class="a">Only its summary.</p></li><li><p class="q">Why is <code>isolation: worktree</code> wrong for reviewing uncommitted changes?</p><p class="a">The worktree branches from the default branch, so uncommitted changes are not in it.</p></li><li><p class="q">Which two fields are required?</p><p class="a"><code>name</code> and <code>description</code>.</p></li></ol></details>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="level-8-plugins">
+    <div class="wrap">
+      <p class="eyebrow">Level 8 · Plugins</p>
+      <h2>One folder that packages everything, so it can be versioned and shared.</h2>
+      <div class="prose rel-body">
+<div class="callout key"><span class="lbl">Big idea</span><p>A plugin is a folder that packages skills, agents, hooks, MCP and LSP servers and more, so they can be installed, versioned and shared as one unit. Only <code>.claude-plugin/plugin.json</code> has a fixed location, and even the manifest is optional: without it, components are found in their default folders and the plugin is named after the folder.</p></div>
+<div class="callout "><span class="lbl">Java anchor</span><p>A Spring Boot starter published to Artifactory: one versioned artifact that auto-configures several components. The marketplace is your Maven repository, and <code>enabledPlugins</code> is your dependency list. Setting <code>version</code> is like releasing 1.0.0 instead of a SNAPSHOT: consumers only move when you publish a new version.</p></div>
+<div class="msgflow">my-plugin/
+├── .claude-plugin/
+│   └── plugin.json          manifest: the only file in this folder
+├── skills/&lt;name&gt;/SKILL.md   skills, invoked as /my-plugin:&lt;name&gt;
+├── commands/*.md            single-file skills (older form)
+├── agents/*.md              subagents, shown as my-plugin:&lt;name&gt;
+├── workflows/*.js           dynamic workflow scripts
+├── hooks/hooks.json         hooks, same format as the &quot;hooks&quot; key in settings.json
+├── .mcp.json                MCP servers, started when the plugin is enabled
+├── .lsp.json                language servers for code intelligence
+├── monitors/monitors.json   background watchers (experimental)
+├── output-styles/*.md       output styles
+├── themes/*.json            color themes (experimental)
+├── bin/                     executables added to the Bash tool&#x27;s PATH
+├── settings.json            defaults; only &quot;agent&quot; and &quot;subagentStatusLine&quot; are read
+└── scripts/                 files your hooks and servers call (not auto-loaded)</div>
+<h3>Five rules</h3>
+<ol><li><b>Keep <code>.claude-plugin/</code> for the manifest only.</b> Every other folder sits at the plugin root.</li><li><b>A CLAUDE.md in a plugin is not loaded.</b> Ship instructions as a skill instead.</li><li><b>Everything is prefixed with the plugin name</b>, so several plugins can each ship a <code>review</code> skill without clashing.</li><li><b>Plugin agents ignore <code>hooks</code>, <code>mcpServers</code> and <code>permissionMode</code></b> for security. Put hooks in <code>hooks/hooks.json</code>.</li><li><b>Point at bundled files with <code>${CLAUDE_PLUGIN_ROOT}</code>.</b> Its path changes on every update, so keep lasting state in <code>${CLAUDE_PLUGIN_DATA}</code>. A plugin cannot reference files outside its own folder.</li></ol>
+<h3>plugin.json (from the review-kit plugin)</h3>
+<pre><code class="language-json">{
+  &quot;$schema&quot;: &quot;https://json.schemastore.org/claude-code-plugin-manifest.json&quot;,
+  &quot;name&quot;: &quot;review-kit&quot;,
+  &quot;displayName&quot;: &quot;Review Kit&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Code-review subagent, a review checklist skill, and a hook that blocks dangerous shell commands.&quot;,
+  &quot;author&quot;: { &quot;name&quot;: &quot;Janaka&quot; },
+  &quot;license&quot;: &quot;MIT&quot;,
+  &quot;keywords&quot;: [&quot;code-review&quot;, &quot;security&quot;, &quot;hooks&quot;, &quot;subagent&quot;]
+}</code></pre>
+<h3>Every manifest field</h3>
+<table><thead><tr><th>Field</th><th>What it does</th></tr></thead><tbody><tr><td><code>name</code></td><td>The only required field, in kebab-case. It becomes the prefix for every skill and agent.</td></tr><tr><td><code>version</code></td><td>A semantic version. Once set, users only get updates when you bump it.</td></tr><tr><td><code>displayName</code>, <code>description</code></td><td>What people see in the <code>/plugin</code> browser. <code>displayName</code> is never used for lookup.</td></tr><tr><td><code>author</code>, <code>homepage</code>, <code>repository</code>, <code>license</code>, <code>keywords</code></td><td>Optional metadata.</td></tr><tr><td><code>$schema</code></td><td>Editor autocomplete and validation. Ignored when loading.</td></tr><tr><td><code>defaultEnabled</code></td><td><code>false</code> installs the plugin switched off until the user enables it.</td></tr><tr><td><code>skills</code></td><td>Extra skill folders, loaded on top of the default <code>skills/</code>.</td></tr><tr><td><code>commands</code>, <code>agents</code>, <code>workflows</code>, <code>outputStyles</code></td><td>Custom paths that <b>replace</b> the default folder. List the default too if you want to keep it.</td></tr><tr><td><code>hooks</code>, <code>mcpServers</code>, <code>lspServers</code></td><td>A path to a config file, or the config written inline.</td></tr><tr><td><code>userConfig</code></td><td>Values asked for when the plugin is enabled. <code>sensitive: true</code> stores them in secure storage instead of <code>settings.json</code>.</td></tr><tr><td><code>dependencies</code></td><td>Other plugins this one needs, optionally with version ranges like <code>~2.1.0</code>.</td></tr><tr><td><code>experimental</code></td><td>Paths for themes, monitors and evals, whose format may still change.</td></tr><tr><td><code>channels</code></td><td>Message channels (Slack- or Telegram-style) that push content into the session through the plugin's MCP server.</td></tr><tr><td><code>metadata</code></td><td>A free-form object for your own data. Claude Code ignores it.</td></tr></tbody></table>
+<p>All paths in the manifest are relative to the plugin folder and start with <code>./</code>.</p>
+<h3>The review-kit plugin, built and tested</h3>
+<p>Contents: <code>agents/code-reviewer.md</code> (the level 7 reviewer adapted for plugins: it lists <code>Skill</code> in its tools, its first step loads <code>review-kit:review-checklist</code>, and it drops <code>color</code> and <code>initialPrompt</code>), <code>skills/review-checklist/SKILL.md</code>, <code>hooks/hooks.json</code> plus <code>scripts/block-dangerous.sh</code>, and a README. Checked with Claude Code v2.1.278: <code>claude plugin validate --strict</code> passed, and <code>plugin details</code> found 1 skill, 1 agent and 1 PreToolUse hook, adding about 84 tokens to each session.</p>
+<pre><code class="language-bash">unzip review-kit.zip
+claude plugin validate ./review-kit     # schema check
+claude --plugin-dir ./review-kit        # load it for one session
+cp -r review-kit ~/.claude/skills/      # load it in every project, from the next session</code></pre>
+<pre><code class="language-json">{
+  &quot;description&quot;: &quot;Deny catastrophic shell commands, ask before risky ones&quot;,
+  &quot;hooks&quot;: {
+    &quot;PreToolUse&quot;: [
+      {
+        &quot;matcher&quot;: &quot;Bash&quot;,
+        &quot;hooks&quot;: [
+          { &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;${CLAUDE_PLUGIN_ROOT}/scripts/block-dangerous.sh&quot;, &quot;args&quot;: [], &quot;timeout&quot;: 10 }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+<p><b>Sharing.</b> Publish the plugin in a marketplace (a git repo with <code>.claude-plugin/marketplace.json</code>). Teammates add it with <code>/plugin marketplace add owner/repo</code> and install with project scope, which records it under <code>enabledPlugins</code> in the committed <code>.claude/settings.json</code>.</p>
+<div class="callout warn"><span class="lbl">Exam traps</span><p>Only <code>plugin.json</code> goes inside <code>.claude-plugin/</code>. A plugin's CLAUDE.md is never loaded. With <code>version</code> set, new commits do not reach users until you bump it. If the same hook is in <code>settings.json</code> and in a plugin, both copies run.</p></div>
+<details class="quiz"><summary>Check yourself: level 8<span class="hint">answer out loud, then open</span></summary><ol><li><p class="q">Where does a plugin's hook configuration go?</p><p class="a"><code>hooks/hooks.json</code> at the plugin root, or inline in <code>plugin.json</code>.</p></li><li><p class="q">You pushed fixes, but users do not get them. Why?</p><p class="a"><code>version</code> is set and was not bumped.</p></li><li><p class="q">How do you try a plugin for one session without installing it?</p><p class="a"><code>claude --plugin-dir ./my-plugin</code>.</p></li><li><p class="q">What does the <code>commands</code> field do to the default <code>commands/</code> folder?</p><p class="a">Replaces it, unless you list the default too.</p></li></ol></details>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="level-9-commands">
+    <div class="wrap">
+      <p class="eyebrow">Level 9 · Commands</p>
+      <h2>The commands cheat sheet.</h2>
+      <div class="prose rel-body">
+<table><thead><tr><th>Command</th><th>What it does</th></tr></thead><tbody><tr><td><b>Inside a session</b></td><td></td></tr><tr><td><code>/init</code></td><td>Generates a starter <code>./CLAUDE.md</code>; suggests improvements if one exists</td></tr><tr><td><code>/memory</code></td><td>Opens CLAUDE.md and auto memory; toggles auto memory</td></tr><tr><td><code>/context</code></td><td>Live context breakdown by category and tokens, including loaded memory files</td></tr><tr><td><code>/status</code></td><td>Shows the active settings sources, including managed</td></tr><tr><td><code>/hooks</code></td><td>Read-only browser of every hook and where it came from</td></tr><tr><td><code>/config</code></td><td>Change settings</td></tr><tr><td><code>/plugin</code></td><td>Browse, install and enable plugins and marketplaces</td></tr><tr><td><code>/compact</code></td><td>Summarises the conversation and reloads startup content</td></tr><tr><td><code>/clear</code></td><td>Starts fresh; picks up CLAUDE.md edits</td></tr><tr><td><code>@"name (agent)"</code></td><td>Forces a specific subagent</td></tr><tr><td><b>In the terminal</b></td><td></td></tr><tr><td><code>claude mcp add --scope project</code></td><td>Adds an MCP server to <code>.mcp.json</code> (<code>--scope user</code> writes to <code>~/.claude.json</code>)</td></tr><tr><td><code>claude plugin init &lt;name&gt;</code></td><td>Scaffolds a plugin in <code>~/.claude/skills/&lt;name&gt;/</code></td></tr><tr><td><code>claude plugin validate &lt;path&gt; --strict</code></td><td>Checks a plugin</td></tr><tr><td><code>claude plugin details &lt;name&gt;</code></td><td>Component inventory and token cost</td></tr><tr><td><code>claude --plugin-dir &lt;path&gt;</code></td><td>Loads a plugin for one session</td></tr><tr><td><code>claude --agent &lt;name&gt;</code></td><td>Runs a subagent definition as the whole session</td></tr><tr><td><code>CLAUDE_CODE_NEW_INIT=1</code></td><td>Interactive <code>/init</code> that can also set up skills and hooks</td></tr></tbody></table>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="level-10-recap">
+    <div class="wrap">
+      <p class="eyebrow">Level 10 · Recap</p>
+      <h2>The whole page in five minutes.</h2>
+      <div class="prose rel-body">
+<div class="callout key"><span class="lbl">Keep this</span><p>Two layers: Claude <em>reads</em> CLAUDE.md, rules, memory, skills and agent prompts; the harness <em>applies</em> settings, permissions and hooks. Plugins package; MCP connects. ALON: Always (CLAUDE.md, MEMORY.md), Listed (skill and agent descriptions, MCP names), On use (SKILL.md, path rules, schemas), Never (settings, hooks, subagent work). Scopes: Organization → User → Project → Local. Settings follow M-C-L-P-U. CLAUDE.md is additive. Skills: managed &gt; user &gt; project. Subagents: managed &gt; CLI &gt; project &gt; user &gt; plugin. Hooks merge. Requests: S → P → C. CLAUDE.md is a user message after the system prompt, read once at startup. Settings hot-reload; CLAUDE.md does not. <code>/compact</code>: startup content reloads, the skill listing does not, invoked skills do (capped). Hooks: 33 events; the core loop is SessionStart → UserPromptSubmit → [PreToolUse → PermissionRequest → PostToolUse]↻ → Stop → SessionEnd. Exit codes: 0 go, 2 no, anything else shrug; silence is not approval; timeouts and missing scripts fail open. Hard rule → <code>permissions.deny</code>; rule with logic → hook. Subagents: own context, summary back, launched via the Agent tool; <code>permissionMode</code> ignored in auto, acceptEdits and bypass; worktree branches from the default branch. Plugins: only <code>plugin.json</code> in <code>.claude-plugin/</code>, no CLAUDE.md, everything prefixed, <code>version</code> pins updates.</p></div>
+<div class="msgflow">              guidance (Claude reads)              enforced (harness applies)
+  ALWAYS      CLAUDE.md · rules · MEMORY.md         settings · permission rules · modes
+  LISTED      skill + agent descriptions · MCP names
+  ON USE      SKILL.md · path rules · nested CLAUDE.md · MCP schemas
+  NEVER       a subagent&#x27;s own work (summary only)   hooks (they run, they don&#x27;t load)
+
+  scopes      ORG ▶ USER ▶ PROJECT ▶ LOCAL          settings win order  M ▶ C ▶ L ▶ P ▶ U
+  request     SYSTEM ▶ PROJECT CONTEXT ▶ CONVERSATION
+  loop        SessionStart ▶ UserPromptSubmit ▶ [PreToolUse ▶ Permission ▶ PostToolUse]↻ ▶ Stop ▶ SessionEnd
+  exit codes  0 go · 2 no · other shrug · silence ≠ yes</div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="level-11-practice">
+    <div class="wrap">
+      <p class="eyebrow">Level 11 · Practice</p>
+      <h2>Fifteen exam-style questions.</h2>
+      <div class="prose rel-body">
+<p>Four options, one best answer. Written from the docs as practice, not taken from the real exam. Tags: [D2] Claude Code Configuration and Workflows, [D5] Context Management and Reliability. Answer all fifteen before opening the answer key in the next section.</p>
+<ol><li><b>[D2]</b> A bank's platform team must guarantee that no developer's Claude Code session can run <code>sudo</code>, whatever developers put in their own or project settings. What should they do? <b>A.</b> Add "Never use sudo" to the managed CLAUDE.md. <b>B.</b> Add a PreToolUse hook that blocks sudo to each repository's <code>.claude/settings.json</code>. <b>C.</b> Add a <code>Bash(sudo *)</code> deny rule to managed settings. <b>D.</b> Add <code>disallowedTools: Bash(sudo *)</code> to every subagent.</li><li><b>[D5]</b> A developer adds a new rule to CLAUDE.md halfway through a session, but Claude keeps ignoring it. What is the most likely reason? <b>A.</b> CLAUDE.md is read once at session start; the edit loads after <code>/clear</code>, <code>/compact</code> or a restart. <b>B.</b> The rule must be moved into <code>.claude/CLAUDE.md</code> to be read. <b>C.</b> CLAUDE.md is only read by subagents. <b>D.</b> The rule needs a SessionStart hook to activate.</li><li><b>[D5]</b> Your team has a 3,000-line migration runbook that Claude needs only when a migration task comes up. You do not want to pay its tokens in every session. What is the best option? <b>A.</b> Paste it into the project CLAUDE.md. <b>B.</b> Print it from a SessionStart hook. <b>C.</b> Put it into the output style. <b>D.</b> Package it as a skill with a clear description.</li><li><b>[D5]</b> You need Claude to audit a large codebase for security issues without flooding the main conversation with hundreds of file reads. What is the best approach? <b>A.</b> Load a security-checklist skill in the main session. <b>B.</b> Delegate the audit to a subagent that returns a summary. <b>C.</b> Add a PostToolUse hook that scans each file Claude reads. <b>D.</b> Run <code>/compact</code> after every few file reads.</li><li><b>[D2]</b> A PreToolUse policy hook meant to stop <code>rm -rf ~</code> writes an error to stderr and exits with code 1. Claude runs <code>rm -rf ~</code>. What happens? <b>A.</b> The command is blocked and Claude sees the stderr text. <b>B.</b> Claude Code asks the user for permission. <b>C.</b> The command runs, because exit 1 is a non-blocking error. <b>D.</b> The session ends.</li><li><b>[D5]</b> After <code>/compact</code>, Claude stops picking up several skills it used to use automatically, although a skill it invoked earlier still works. Why? <b>A.</b> The skill listing is not re-injected after compaction; only invoked skill bodies are. <b>B.</b> Compaction disables all model-invocable skills until restart. <b>C.</b> After compaction, skills load only inside subagents. <b>D.</b> Compaction clears the skill folders' cache on disk.</li><li><b>[D2]</b> <code>~/.claude/settings.json</code> sets the model to haiku, the project's <code>.claude/settings.json</code> sets opus, and <code>.claude/settings.local.json</code> sets sonnet. There are no CLI flags or managed settings. Which model is used? <b>A.</b> opus, because shared project settings keep the team consistent. <b>B.</b> haiku, because user settings follow you everywhere. <b>C.</b> Whichever file was saved most recently. <b>D.</b> sonnet, because local project settings override shared project settings.</li><li><b>[D2]</b> A subagent's frontmatter sets <code>permissionMode: plan</code>, but the developer runs the main session in auto mode. How does the subagent run? <b>A.</b> In plan mode, as its frontmatter says. <b>B.</b> In auto mode, because the main session's mode wins when it is auto, acceptEdits or bypassPermissions. <b>C.</b> In default (Manual) mode. <b>D.</b> It refuses to launch because the modes conflict.</li><li><b>[D2]</b> You give a subagent <code>isolation: worktree</code> so it can try refactors safely. It reports that it cannot find changes you made this morning and have not committed. Why? <b>A.</b> Worktrees are read-only. <b>B.</b> Worktree subagents cannot use Bash. <b>C.</b> The worktree branches from the default branch, not your current HEAD, so uncommitted work is not there. <b>D.</b> The worktree is deleted before the subagent starts.</li><li><b>[D2]</b> Where should a plugin's hook configuration live? <b>A.</b> <code>hooks/hooks.json</code> at the plugin root, or inline in <code>plugin.json</code>. <b>B.</b> <code>.claude-plugin/hooks.json</code>. <b>C.</b> In the frontmatter of the plugin's agents. <b>D.</b> In a CLAUDE.md at the plugin root.</li><li><b>[D2]</b> A skill named <code>deploy</code> exists in <code>~/.claude/skills/deploy/</code> and another in the repo's <code>.claude/skills/deploy/</code>. There is no managed skill. Which one does Claude use? <b>A.</b> The project one, because project configuration always beats personal configuration. <b>B.</b> Both, merged into one skill. <b>C.</b> Neither, because Claude Code refuses duplicate names. <b>D.</b> The personal one, because for skills user beats project.</li><li><b>[D2]</b> Your plugin's <code>plugin.json</code> has <code>"version": "1.0.0"</code>. You push several fixes without changing it. What do users get? <b>A.</b> The fixes, automatically, on next startup. <b>B.</b> Nothing new: with a version set, users only get updates when you bump it. <b>C.</b> An error because the version is stale. <b>D.</b> A prompt asking whether to update.</li><li><b>[D2]</b> A PreToolUse hook exits 0 with no output for a command. What does that mean? <b>A.</b> The command is approved and skips permission checks. <b>B.</b> The command is denied. <b>C.</b> The hook has no opinion; the normal permission flow decides. <b>D.</b> Claude is asked to retry the tool call.</li><li><b>[D2]</b> Which of these is NOT a way to deliver organization-managed Claude Code settings? <b>A.</b> A <code>managed-settings.json</code> file in the system configuration folder. <b>B.</b> MDM or OS policy (macOS plist, Windows registry). <b>C.</b> Server-managed settings from the claude.ai admin console. <b>D.</b> A <code>"managed": true</code> flag inside <code>~/.claude/settings.json</code>.</li><li><b>[D5]</b> Which of these belongs to the system-prompt layer of a Claude Code request, rather than the project-context layer? <b>A.</b> Tool definitions and the git status snapshot. <b>B.</b> <code>~/.claude/CLAUDE.md</code>. <b>C.</b> The first 200 lines of MEMORY.md. <b>D.</b> Unscoped rules in <code>.claude/rules/</code>.</li></ol>
+<p>Score: ____ / 15. For every miss, re-read the level named in the answer key.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="level-12-answer-key">
+    <div class="wrap">
+      <p class="eyebrow">Level 12 · Answer key</p>
+      <h2>Why each answer is right, and why each distractor is wrong.</h2>
+      <div class="prose rel-body">
+<details class="code-fold"><summary>Open the answer key only after answering all fifteen</summary><div class="fold-body"><ol><li><b>C</b> (level 2). Managed settings sit at the top of the precedence chain and cannot be overridden, and deny rules are enforced by the harness. A: CLAUDE.md is guidance. B: developers can edit project files, and a hook that times out or cannot start fails open. D: covers subagents only, and <code>Bash(sudo *)</code> in <code>disallowedTools</code> removes all of Bash.</li><li><b>A</b> (level 3). CLAUDE.md is read once at startup and held in memory. B: <code>./CLAUDE.md</code> and <code>./.claude/CLAUDE.md</code> both work. C: the main session loads it. D: no hook is needed; the file just has not been re-read.</li><li><b>D</b> (levels 1 and 6). Only the skill's name and description are listed; the body loads when the task matches. A: CLAUDE.md loads in full every session. B: SessionStart output is added at every start. C: the output style is part of every request's system prompt.</li><li><b>B</b> (level 7). The subagent's reads stay in its own context; only the summary returns. A: a skill adds instructions to the current context, and the reads still land there. C: a hook runs a script per tool call; it does not move the work out of the main context. D: compaction loses detail and still processes every read first.</li><li><b>C</b> (level 4). Only exit 2, or a JSON deny, blocks. A describes exit 2. B describes the JSON <code>permissionDecision</code> "ask". D: hooks do not end sessions like this.</li><li><b>A</b> (level 3). The listing is the only startup content not re-injected; invoked skills are preserved (capped). B: skills are not disabled. C: invented behaviour. D: compaction does not touch files on disk.</li><li><b>D</b> (level 2). Local &gt; Project &gt; User (M-C-L-P-U). A: project ranks below local. B: user is the lowest file scope. C: precedence is fixed, not time-based.</li><li><b>B</b> (level 7). In auto, acceptEdits or bypass mode, the subagent runs in the main session's mode and its <code>permissionMode</code> is ignored. A: the field applies only when the main session is in default, dontAsk or plan. C: nothing resets to default. D: there is no conflict error.</li><li><b>C</b> (level 7). A worktree branches from the default branch, not HEAD. A: worktrees are writable; that is their point. B: tools are set by <code>tools</code> and <code>disallowedTools</code>, not by isolation. D: a worktree is removed only after the run, and only if nothing changed.</li><li><b>A</b> (level 8). B: <code>.claude-plugin/</code> may contain only <code>plugin.json</code>. C: plugin agents ignore <code>hooks</code>. D: a plugin's CLAUDE.md is not loaded.</li><li><b>D</b> (level 2). Skills resolve managed &gt; user &gt; project. A: that is the subagent rule, a classic mix-up. B: skills do not merge. C: duplicates resolve by priority.</li><li><b>B</b> (level 8). A set version pins the plugin; new commits under the same version are not delivered. A: would need a version bump. C and D: no such error or prompt exists.</li><li><b>C</b> (level 4). Silence means no opinion. A: approval must be returned explicitly as JSON. B: denial needs exit 2 or a JSON deny. D: there is no retry mechanism.</li><li><b>D</b> (level 2). There is no such flag, and user settings are the lowest file scope, editable by the user. A, B, C: all three are documented delivery channels.</li><li><b>A</b> (level 3). Tool definitions are in the system prompt, and the git snapshot is its last block. B, C, D: all three are project context, sent as a message after the system prompt.</li></ol>
+</div></details>
+<h3>Sources</h3>
+<ul><li><a href="https://code.claude.com/docs/en/claude-directory" target="_blank" rel="noopener">Explore the .claude directory</a>: every file and where it lives</li><li><a href="https://code.claude.com/docs/en/features-overview" target="_blank" rel="noopener">Extend Claude Code</a>: when to use each feature and how they layer</li><li><a href="https://code.claude.com/docs/en/settings" target="_blank" rel="noopener">Settings</a>: scopes and precedence</li><li><a href="https://code.claude.com/docs/en/managed-settings" target="_blank" rel="noopener">Managed settings</a>: organization policy</li><li><a href="https://code.claude.com/docs/en/memory" target="_blank" rel="noopener">Memory</a>: CLAUDE.md, rules and auto memory</li><li><a href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">Explore the context window</a>: what loads and when</li><li><a href="https://code.claude.com/docs/en/prompt-caching" target="_blank" rel="noopener">Prompt caching</a>: the three request layers</li><li><a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">Hooks reference</a>: events, exit codes, JSON output</li><li><a href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener">Subagents</a>: definition files and fields</li><li><a href="https://code.claude.com/docs/en/plugins-reference" target="_blank" rel="noopener">Plugins reference</a>: layout and plugin.json</li><li>On this site: <a href="/academy/modules/2026/FSE/mcp-end-to-end.html">MCP end to end</a>, the protocol behind the MCP box in the map.</li></ul>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy &middot; Zug 🇨🇭</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/ai/">AI</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+<script src="/assets/js/study.js?v=20260916"></script>
+</body>
+</html>
