@@ -11,6 +11,9 @@
  *   - a floating "outline · n/m" pill once the reader has scrolled past the outline
  *   - copy buttons on code blocks, and a horizontal-scroll wrapper on wide tables
  *   - a "continue where you left off" prompt when returning to a long page
+ *   - a glossary: the first occurrence of each abbreviation in every section (from
+ *     /assets/glossary.json) becomes a dotted, click-to-reveal definition; nothing
+ *     pops up on hover, so the reading flow is not interrupted
  *
  * State lives in localStorage under "jp-study:<pathname>" and never leaves the browser.
  * Boots on partials:loaded (see includes.js) so the shared nav exists first.
@@ -42,6 +45,148 @@
       if (now - t > ms) { t = now; fn(); }
       else if (!pending) { pending = setTimeout(function () { pending = null; t = Date.now(); fn(); }, ms); }
     };
+  }
+
+  /* =====================================================================
+     Glossary — click-to-reveal definitions for abbreviations
+     Terms come from /assets/glossary.json ({ "API": [expansion, meaning] }).
+     The first occurrence of a term in each H2 section (headings, code, links
+     and buttons excluded) is wrapped in <button class="gl">. One shared
+     popover is positioned under the clicked term and closes on outside click,
+     Esc, scroll or resize. Add data-no-gloss to any element to opt it out.
+     ===================================================================== */
+  var SKIP = 'pre, code, kbd, samp, a, button, h1, h2, h3, h4, h5, h6, script, style, svg, textarea, input, select, label, .gl, .study-toc, .study-meta, .study-how, .msgflow, .modnav, .badge, .badges, .chips, [data-no-gloss]';
+
+  function escapeRe(t) { return t.replace(/[.*+?^${}()|[\]\\\/]/g, '\\$&'); }
+  function escapeHtml(t) { return String(t).replace(/[<>&"]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]; }); }
+
+  function glossary(main) {
+    if (!window.fetch || main.querySelector('.gl')) return;
+    fetch('/assets/glossary.json', { credentials: 'same-origin' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (g) { if (g) applyGlossary(main, g); })
+      .catch(function () {});
+  }
+
+  function applyGlossary(main, g) {
+    var terms = Object.keys(g).filter(function (k) { return k.charAt(0) !== '_' && Array.isArray(g[k]); });
+    if (!terms.length) return;
+    terms.sort(function (a, b) { return b.length - a.length; });                // longest first: "CI/CD" before "CI"
+    // A term must stand on its own: not glued to letters, digits or a slash. A trailing "s" (APIs, ADRs) is captured.
+    var re = new RegExp('(^|[^A-Za-z0-9_/])(' + terms.map(escapeRe).join('|') + ')(s?)(?![A-Za-z0-9_/])', 'g');
+
+    var walker = document.createTreeWalker(main, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) {
+        if (n.nodeType === 1) {
+          if (n.tagName === 'H2') return NodeFilter.FILTER_ACCEPT;             // section boundary
+          return n.matches(SKIP) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_SKIP;
+        }
+        if (n.parentNode.closest('h2')) return NodeFilter.FILTER_REJECT;       // the H2 itself is only a marker
+        return n.nodeValue.length > 1 && /[A-Za-z]/.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+      }
+    });
+
+    var nodes = [], n, count = 0;
+    while ((n = walker.nextNode())) nodes.push(n.nodeType === 1 ? null : n);   // null = new section
+    var seen = {};
+    nodes.forEach(function (node) {
+      if (node === null) { seen = {}; return; }
+      var s = node.nodeValue;
+      re.lastIndex = 0;
+      var m, last = 0, frag = null;
+      while ((m = re.exec(s))) {
+        var term = m[2], plural = m[3];
+        if (seen[term]) continue;
+        if (plural && term !== term.toUpperCase()) continue;                   // "OAuths" is not a plural we know
+        seen[term] = true;
+        frag = frag || document.createDocumentFragment();
+        var start = m.index + m[1].length;
+        frag.appendChild(document.createTextNode(s.slice(last, start)));
+        var b = el('button', 'gl', escapeHtml(term + plural));
+        b.type = 'button';
+        b.setAttribute('data-term', term);
+        b.setAttribute('aria-expanded', 'false');
+        b.setAttribute('aria-label', term + ', ' + g[term][0] + '. Show definition');
+        frag.appendChild(b);
+        last = start + term.length + plural.length;
+        count++;
+      }
+      if (frag) {
+        frag.appendChild(document.createTextNode(s.slice(last)));
+        node.parentNode.replaceChild(frag, node);
+      }
+    });
+    if (!count) return;
+
+    /* ---- one shared popover ---- */
+    var pop = el('div', 'glpop');
+    pop.setAttribute('role', 'dialog');
+    pop.setAttribute('aria-modal', 'false');
+    pop.setAttribute('tabindex', '-1');
+    pop.hidden = true;
+    document.body.appendChild(pop);
+    var current = null, scrollAt = 0;
+
+    function close(refocus) {
+      if (!current) return;
+      var b = current;
+      current = null;
+      pop.hidden = true;
+      pop.classList.remove('show');
+      b.setAttribute('aria-expanded', 'false');
+      if (refocus) b.focus();
+    }
+    function place(b) {
+      var r = b.getBoundingClientRect();
+      var margin = 12, gap = 8;
+      var pw = pop.offsetWidth, ph = pop.offsetHeight;
+      var left = Math.min(Math.max(margin, r.left + r.width / 2 - pw / 2), window.innerWidth - pw - margin);
+      var below = r.bottom + gap + ph <= window.innerHeight - margin || r.top - gap - ph < margin;
+      var top = below ? r.bottom + gap : r.top - gap - ph;
+      pop.style.left = Math.round(left) + 'px';
+      pop.style.top = Math.round(top) + 'px';
+      pop.classList.toggle('above', !below);
+      pop.style.setProperty('--gl-arrow', Math.round(r.left + r.width / 2 - left) + 'px');
+    }
+    function open(b) {
+      if (current === b) { close(false); return; }
+      close(false);
+      var term = b.getAttribute('data-term'), d = g[term];
+      pop.innerHTML =
+        '<div class="glhead"><b class="glterm">' + escapeHtml(term) + '</b>' +
+        '<button type="button" class="glclose" aria-label="Close">&times;</button></div>' +
+        '<div class="glx">' + escapeHtml(d[0]) + '</div>' +
+        (d[1] ? '<p>' + escapeHtml(d[1]) + '</p>' : '');
+      pop.setAttribute('aria-label', term + ': ' + d[0]);
+      pop.querySelector('.glclose').addEventListener('click', function () { close(true); });
+      pop.hidden = false;
+      current = b;
+      scrollAt = window.scrollY;
+      b.setAttribute('aria-expanded', 'true');
+      place(b);
+      void pop.offsetWidth;                                                   // commit the hidden state so the fade runs
+      pop.classList.add('show');
+    }
+
+    main.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('.gl');
+      if (!b) return;
+      e.preventDefault();
+      open(b);
+    });
+    document.addEventListener('click', function (e) {
+      if (!current) return;
+      if (pop.contains(e.target) || (e.target.closest && e.target.closest('.gl'))) return;
+      close(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && current) { e.preventDefault(); close(true); }
+    });
+    window.addEventListener('scroll', function () {
+      if (!current) return;
+      if (Math.abs(window.scrollY - scrollAt) > 60) close(false); else place(current);
+    }, { passive: true });
+    window.addEventListener('resize', function () { if (current) place(current); });
   }
 
   function boot() {
@@ -96,6 +241,7 @@
         '<li><b>Close the page and say it back.</b> Recall what the section claimed before checking. Retrieval is what makes it stick.</li>' +
         '<li><b>Run the code, then change it.</b> Predict the output first, then run it, then break it on purpose.</li>' +
         '<li><b>Come back in a few days.</b> The outline shows what you marked done; re-read only what you cannot recall.</li>' +
+        '<li><b>Dotted terms are abbreviations.</b> Click one for its full name and a one-line meaning; press Esc or click anywhere to close.</li>' +
         '</ol>');
       h1.parentNode.appendChild(how);
     }
@@ -214,6 +360,9 @@
       t.parentNode.insertBefore(w, t);
       w.appendChild(t);
     });
+
+    /* ---- glossary (async; needs no per-page markup) ---- */
+    glossary(main);
 
     /* ---- resume where you left off ---- */
     var saveY = throttle(function () {

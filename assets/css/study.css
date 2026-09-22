@@ -277,3 +277,46 @@ body.study .prose .wb .wb-grid { grid-template-columns: 220px 280px minmax(0, 1f
   body.study main .wrap { max-width: none; }
   body.study .prose .wb .wb-grid { grid-template-columns: 1fr; }
 }
+
+/* ---- glossary: click-to-reveal definitions for abbreviations (study.js) ----
+   The term itself stays inline text with a quiet dotted underline; nothing
+   appears on hover, so scanning a paragraph is undisturbed. One popover is
+   shared by every term and positioned under (or above) the clicked word. */
+.gl {
+  all: unset; cursor: pointer; font: inherit; color: inherit;
+  text-decoration: underline dotted;
+  text-decoration-color: color-mix(in srgb, var(--ac) 55%, transparent);
+  text-decoration-thickness: 1.5px; text-underline-offset: 3px;
+  border-radius: 3px; transition: text-decoration-color .15s ease, background-color .15s ease;
+}
+.gl:hover, .gl[aria-expanded="true"] { text-decoration-color: var(--ac); text-decoration-style: solid; }
+.gl[aria-expanded="true"] { background: color-mix(in srgb, var(--ac) 12%, transparent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ac) 12%, transparent); }
+.gl:focus-visible { outline: 2px solid var(--ac); outline-offset: 2px; }
+
+.glpop {
+  position: fixed; z-index: 80; width: min(340px, calc(100vw - 24px));
+  padding: 12px 14px 12px; font-size: .88rem; line-height: 1.5; color: var(--tx);
+  background: var(--bg2); border: 1px solid var(--ln); border-radius: var(--r); box-shadow: var(--shadow);
+  opacity: 0; transform: translateY(-4px); transition: opacity .14s ease, transform .14s ease;
+}
+.glpop.above { transform: translateY(4px); }
+.glpop.show { opacity: 1; transform: none; }
+.glpop::before {
+  content: ""; position: absolute; left: var(--gl-arrow, 50%); top: -6px; width: 10px; height: 10px;
+  margin-left: -5px; transform: rotate(45deg);
+  background: var(--bg2); border-left: 1px solid var(--ln); border-top: 1px solid var(--ln);
+}
+.glpop.above::before { top: auto; bottom: -6px; border: 0; border-right: 1px solid var(--ln); border-bottom: 1px solid var(--ln); }
+.glpop .glhead { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.glpop .glterm { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ac); }
+.glpop .glx { font-family: var(--font-head); font-weight: 700; font-size: .98rem; margin-top: 2px; }
+.glpop p { margin: 6px 0 0; color: var(--tx2); }
+.glpop .glclose {
+  all: unset; cursor: pointer; flex: none; width: 24px; height: 24px; margin: -4px -6px 0 0;
+  display: inline-grid; place-items: center; border-radius: 999px; font-size: 1.1rem; line-height: 1; color: var(--tx2);
+}
+.glpop .glclose:hover { color: var(--tx); background: var(--chip); }
+.glpop .glclose:focus-visible { outline: 2px solid var(--ac); outline-offset: 1px; }
+.glpop:focus { outline: none; }
+@media (prefers-reduced-motion: reduce) { .glpop, .gl { transition: none; } .glpop { transform: none; } }
+@media print { .gl { text-decoration: none; } .glpop { display: none; } }
