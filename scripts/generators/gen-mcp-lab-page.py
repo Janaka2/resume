@@ -155,7 +155,7 @@ FOOT = '''</main>
 
 <script src="/assets/js/includes.js?v=20260910"></script>
 <script src="/assets/js/site-nav.js?v=20260910"></script>
-<script src="/assets/js/study.js?v=20260922"></script>
+<script src="/assets/js/study.js?v=20260922b"></script>
 </body>
 </html>
 '''
