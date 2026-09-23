@@ -103,6 +103,12 @@ window.JP_I18N = (function () {
     pjAcqH: 'Jedes der fünf Produkte könnte ein besseres Zuhause finden.',
     pjAcqP: 'Alle fünf sind unabhängig von meiner Anstellung entstanden und stehen mir daher frei zur Weitergabe. Wenn eines davon in ein Portfolio passt, das Sie aufbauen, spreche ich gerne über Übernahme oder Lizenzierung — Quellcode, Marke, gegebenenfalls Domain und eine dokumentierte Übergabe.',
     pjCatBtn: 'Zum Produktkatalog →',
+    pjAcSub: 'Referenzanwendung, Open Source, nicht zu verkaufen',
+    pjAcLive: 'Live',
+    pjAcP: 'Das sechste Projekt hat bewusst ein Backend. Eine vollständige Anwendung für Asset- und Wartungsverwaltung auf Java 25, Spring Boot 4.1 und Angular 22, mit Keycloak, PostgreSQL und Objektspeicher, auf Kubernetes mit Helm und Terraform deployt und von aussen verifiziert. Wo die fünf Produkte Zurückhaltung zeigen, zeigt dieses den vollständigen Weg in die Produktion.',
+    pjAcBtn: 'Zur Fallstudie',
+    pjAcOpen: 'Live-Demo öffnen ↗',
+    pjAcSrc: 'Quellcode ↗',
     pjAcqBtn: 'Per E-Mail anfragen',
 
     /* ---- certifications ---- */
@@ -166,6 +172,7 @@ window.JP_I18N = (function () {
     j5e: '<h3>UBS</h3><p class="jw">2024 — heute</p><p>Senior Full-Stack Solution Engineer (Lead)</p><p>KI-Integration &amp; LLMs</p>',
     j6a: '<h3>KI innerhalb des Perimeters</h3><p class="jw">2026 — 2027</p><p>LLM-, RAG- und Agenten-Automatisierung im Schweizer Banking führen</p><p>Die Daten bleiben drinnen; das Modell verdient sich seinen Platz mit Evals, nicht mit Folien</p>',
     j6b: '<h3>Fünf Produkte, und es werden mehr</h3><p class="jw">Jetzt</p><p>nüchtern · Daily Momentum · Loop · BabyLoop · LeftHere</p><p>Software, der Menschen vertrauen — allein gebaut, live, zu verkaufen</p>',
+    j6f: '<h3>AssetCare in Produktion</h3><p class="jw">Sep 2026</p><p>Java 25 · Spring Boot · Angular · Kubernetes</p><p>Von der Idee zur Live-URL, KI-gestützt, Engineering-geführt</p>',
     j6c: '<h3>Fliessend Deutsch</h3><p class="jw">B1 → C1</p><p>Zug, Schweiz</p><p>Ganz dazugehören, in der Sprache des Ortes</p>',
     j6d: '<h3>Den Master abschliessen</h3><p class="jw">Pausiert seit 2008</p><p>University of Moratuwa</p><p>Offene Rechnung, auf der Liste</p>',
     j6e: '<h3>Janaka Academy</h3><p class="jw">Gestartet am 2. November 2025</p><p>Tausend Engineers, die ihren Lehrer übertreffen</p><p>Tägliche Notizen und Lernpfade, öffentlich gebaut</p>',
