@@ -28,6 +28,8 @@ EXPLICIT = [
     ("ai/index.html", "ai"),
     ("products/index.html", "products"),
     ("academy/production-ready-spring-angular/index.html", "academy"),
+    ("academy/assetcare/index.html", "academy"),
+    ("lab/assetcare/index.html", "lab"),
 ]
 # Directories: (repo-relative dir, section, recursive)
 DIRS = [

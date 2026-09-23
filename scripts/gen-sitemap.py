@@ -23,11 +23,13 @@ EXPLICIT = [
     "",                     # hub
     "blog/",
     "blog/posts/ai-evaluation-frameworks.html",
+    "blog/posts/assetcare-idea-to-production.html",
     "blog/posts/machine-learning-blog.html",
     "blog/posts/mcp-agent-integration.html",
     "blog/posts/rag-faiss-patterns.html",
     "blog/posts/spring-kafka-deadletter.html",
     "lab/",
+    "lab/assetcare/",
     "products/",
     "lab/Notes/hand-book-note1.html",
     "lab/Notes/hand-book-note2.html",
@@ -38,6 +40,7 @@ EXPLICIT = [
     "resume/",               # the CV; /cv/ is a redirect stub
     "academy/",
     "academy/production-ready-spring-angular/",
+    "academy/assetcare/",
 ]
 # Directory trees crawled for every *.html (recursively).
 CRAWL_DIRS = ["academy/modules/2026"]

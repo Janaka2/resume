@@ -4,7 +4,7 @@ assets/og-image.png (hub, kept for older links) and one image per page
 under assets/og/ (hub, cv, products, blog, lab, ai, academy).
 Re-run after changing the design tokens in assets/css/theme.css."""
 from PIL import Image, ImageDraw, ImageFont
-import os, re
+import os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 css = open(os.path.join(ROOT, "assets/css/theme.css")).read()
@@ -16,7 +16,7 @@ BG, BG2, TX, TX2, AC = (tok(n, dark) for n in ("bg", "bg2", "tx", "tx2", "ac"))
 W, H = 1200, 630
 
 def font(bold, size):
-    for p in ([ "/System/Library/Fonts/Supplemental/Arial Bold.ttf"] if bold else ["/System/Library/Fonts/Supplemental/Arial.ttf"]) + ["/System/Library/Fonts/Helvetica.ttc"]:
+    for p in ([ "/System/Library/Fonts/Supplemental/Arial Bold.ttf", "C:/Windows/Fonts/arialbd.ttf"] if bold else ["/System/Library/Fonts/Supplemental/Arial.ttf", "C:/Windows/Fonts/arial.ttf"]) + ["/System/Library/Fonts/Helvetica.ttc"]:
         if os.path.exists(p):
             try: return ImageFont.truetype(p, size)
             except OSError: pass
@@ -76,7 +76,10 @@ PAGES = {
     "lab": ("Lab", ["Experiments and demos,", "with notes."], None, "janaka.me/lab/"),
     "ai": ("AI", ["Agents that are readable,", "reliable and worth shipping."], None, "janaka.me/ai/"),
     "academy": ("Academy", ["Engineers who surpass", "their teacher."], None, "janaka.me/academy/"),
+    "assetcare": ("Case study · live", ["AssetCare, in production.", "Java 25 · Spring Boot", "Angular · Kubernetes"], "K3s · Helm · Keycloak · PostgreSQL · Hetzner · AI-assisted engineering", "janaka.me/lab/assetcare/"),
 }
+# Optional: python3 scripts/gen-og-image.py assetcare   (only that page image; the hub images are left alone)
+ONLY = set(sys.argv[1:])
 
 def save(im, rel):
     out = os.path.join(ROOT, rel)
@@ -84,9 +87,10 @@ def save(im, rel):
     im.save(out, optimize=True)
     print("wrote", rel, os.path.getsize(out)//1024, "KB")
 
-hub = hub_image()
-save(hub, "assets/og-image.png")
-save(hub, "assets/og/hub.png")
+if not ONLY:
+    hub = hub_image()
+    save(hub, "assets/og-image.png")
+    save(hub, "assets/og/hub.png")
 for name, spec in PAGES.items():
-    if spec:
+    if spec and (not ONLY or name in ONLY):
         save(page_image(*spec), "assets/og/%s.png" % name)

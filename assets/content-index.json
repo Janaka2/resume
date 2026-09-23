@@ -1,5 +1,85 @@
 [
  {
+  "url": "/lab/assetcare/index.html",
+  "title": "AssetCare case study: Java 25, Spring Boot, Angular and Kubernetes in production",
+  "section": "lab",
+  "description": "AssetCare is a production-deployed Java 25, Spring Boot, Angular and Kubernetes application demonstrating modern full-stack, cloud-native and AI-assisted software engineering. Architecture…",
+  "tags": [
+   "Java 25",
+   "Spring Boot",
+   "Angular",
+   "Kubernetes",
+   "K3s",
+   "Helm",
+   "Docker",
+   "PostgreSQL",
+   "Keycloak",
+   "cloud native",
+   "full stack Java",
+   "software architecture",
+   "AI-assisted software engineering",
+   "production deployment"
+  ],
+  "date": "2026-09-23",
+  "updated": "2026-09-23",
+  "words": 3521,
+  "minutes": 17
+ },
+ {
+  "url": "/blog/posts/assetcare-idea-to-production.html",
+  "title": "From Idea to Production: Building AssetCare with Java 25, Spring Boot, Angular, Kubernetes and AI",
+  "section": "blog",
+  "description": "How a Java 25, Spring Boot 4.1 and Angular 22 application went from a prototype to a live Kubernetes deployment on Hetzner with Helm, Keycloak, PostgreSQL and Let's Encrypt, what broke on the way…",
+  "tags": [
+   "Java 25",
+   "Spring Boot 4",
+   "Angular 22",
+   "Kubernetes",
+   "K3s",
+   "Helm",
+   "Docker",
+   "PostgreSQL",
+   "Keycloak",
+   "Terraform",
+   "cloud native",
+   "full stack Java",
+   "AI-assisted software engineering",
+   "production deployment"
+  ],
+  "date": "2026-09-23",
+  "updated": "2026-09-23",
+  "words": 3528,
+  "minutes": 17
+ },
+ {
+  "url": "/academy/assetcare/index.html",
+  "title": "From code to production: building AssetCare — a learning series",
+  "section": "academy",
+  "description": "A fourteen-module learning series on the AssetCare reference application: architecture, Spring Boot, Angular, PostgreSQL and Liquibase, Keycloak, Docker, Kubernetes, Helm, Terraform, HTTPS, CI/CD…",
+  "tags": [
+   "Java 25",
+   "Spring Boot",
+   "Angular",
+   "Kubernetes",
+   "K3s",
+   "Helm",
+   "Docker",
+   "PostgreSQL",
+   "Liquibase",
+   "Keycloak",
+   "Terraform",
+   "cert-manager",
+   "CI/CD",
+   "observability",
+   "AI-assisted software engineering",
+   "learning series"
+  ],
+  "date": "2026-09-23",
+  "updated": "2026-09-23",
+  "words": 1045,
+  "minutes": 5
+ },
+ {
   "url": "/academy/modules/2026/FSE/claude-code-configuration.html",
   "title": "Claude Code configuration, top down: CLAUDE.md, settings, hooks, skills, subagents, plugins and context",
   "section": "academy",
@@ -12,7 +92,7 @@
    "top"
   ],
   "date": "2026-09-21",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 9831,
   "minutes": 45
  },
@@ -29,7 +109,7 @@
    "one"
   ],
   "date": "2026-09-17",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 9638,
   "minutes": 44
  },
@@ -46,8 +126,8 @@
    "spring"
   ],
   "date": "2026-09-16",
-  "updated": "2026-09-21",
-  "words": 2774,
+  "updated": "2026-09-23",
+  "words": 2827,
   "minutes": 13
  },
  {
@@ -63,7 +143,7 @@
    "now"
   ],
   "date": "2026-09-16",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 3078,
   "minutes": 14
  },
@@ -80,7 +160,7 @@
    "java"
   ],
   "date": "2026-09-16",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 12977,
   "minutes": 59
  },
@@ -95,7 +175,7 @@
    "release"
   ],
   "date": "2026-09-16",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 6119,
   "minutes": 28
  },
@@ -146,9 +226,9 @@
    "apps"
   ],
   "date": "2026-09-10",
-  "updated": "2026-09-17",
-  "words": 1905,
-  "minutes": 9
+  "updated": "2026-09-23",
+  "words": 2304,
+  "minutes": 11
  },
  {
   "url": "/lab/Notes/llm-study-notes-handwritten-style.html",
@@ -247,9 +327,9 @@
    "systems"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-16",
-  "words": 892,
-  "minutes": 5
+  "updated": "2026-09-23",
+  "words": 1369,
+  "minutes": 7
  },
  {
   "url": "/academy/modules/2026/FSE/virtual_threads_java_21_academy_page.html",
@@ -263,7 +343,7 @@
    "threads"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 1374,
   "minutes": 7
  },
@@ -277,7 +357,7 @@
    "editor"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 279,
   "minutes": 2
  },
@@ -294,7 +374,7 @@
    "troubleshooting"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 213,
   "minutes": 1
  },
@@ -310,7 +390,7 @@
    "commands"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 605,
   "minutes": 3
  },
@@ -326,7 +406,7 @@
    "commands"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 832,
   "minutes": 4
  },
@@ -342,7 +422,7 @@
    "ecosystem"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 135,
   "minutes": 1
  },
@@ -359,7 +439,7 @@
    "engineering"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 133,
   "minutes": 1
  },
@@ -373,7 +453,7 @@
    "templates"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 209,
   "minutes": 1
  },
@@ -387,7 +467,7 @@
    "strategies"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 223,
   "minutes": 2
  },
@@ -402,7 +482,7 @@
    "source"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 164,
   "minutes": 1
  },
@@ -417,7 +497,7 @@
    "prompting"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 192,
   "minutes": 1
  },
@@ -433,7 +513,7 @@
    "handbook"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 197,
   "minutes": 1
  },
@@ -448,7 +528,7 @@
    "prompting"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 386,
   "minutes": 2
  },
@@ -464,7 +544,7 @@
    "english"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 187,
   "minutes": 1
  },
@@ -480,7 +560,7 @@
    "prompting"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 347,
   "minutes": 2
  },
@@ -494,7 +574,7 @@
    "foundations"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 295,
   "minutes": 2
  },
@@ -509,7 +589,7 @@
    "prompts"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 174,
   "minutes": 1
  },
@@ -526,7 +606,7 @@
    "task"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 459,
   "minutes": 3
  },
@@ -541,7 +621,7 @@
    "playbook"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 167,
   "minutes": 1
  },
@@ -558,7 +638,7 @@
    "differences"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 269,
   "minutes": 2
  },
@@ -573,7 +653,7 @@
    "sheet"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 126,
   "minutes": 1
  },
@@ -588,7 +668,7 @@
    "prompting"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 178,
   "minutes": 1
  },
@@ -604,7 +684,7 @@
    "liners"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 269,
   "minutes": 2
  },
@@ -621,7 +701,7 @@
    "problems"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 2186,
   "minutes": 10
  },
@@ -638,7 +718,7 @@
    "study"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 1517,
   "minutes": 7
  },
@@ -655,7 +735,7 @@
    "systems"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 135,
   "minutes": 1
  },
@@ -671,7 +751,7 @@
    "techniques"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 266,
   "minutes": 2
  },
@@ -688,7 +768,7 @@
    "java"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 407,
   "minutes": 2
  },
@@ -705,7 +785,7 @@
    "excellence"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 133,
   "minutes": 1
  },
@@ -722,7 +802,7 @@
    "driven"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 135,
   "minutes": 1
  },
@@ -738,7 +818,7 @@
    "mastery"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 137,
   "minutes": 1
  },
@@ -754,7 +834,7 @@
    "mastery"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 240,
   "minutes": 2
  },
@@ -771,7 +851,7 @@
    "java"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 2194,
   "minutes": 10
  },
@@ -788,7 +868,7 @@
    "setup"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 1019,
   "minutes": 5
  },
@@ -803,7 +883,7 @@
    "handling"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 215,
   "minutes": 1
  },
@@ -819,7 +899,7 @@
    "cases"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 323,
   "minutes": 2
  },
@@ -833,7 +913,7 @@
    "references"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 90,
   "minutes": 1
  },
@@ -849,7 +929,7 @@
    "explained"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 343,
   "minutes": 2
  },
@@ -865,7 +945,7 @@
    "computing"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 268,
   "minutes": 2
  },
@@ -880,7 +960,7 @@
    "explained"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 302,
   "minutes": 2
  },
@@ -895,7 +975,7 @@
    "roadmap"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 272,
   "minutes": 2
  },
@@ -912,7 +992,7 @@
    "kubernetes"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 138,
   "minutes": 1
  },
@@ -929,7 +1009,7 @@
    "playground"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 359,
   "minutes": 2
  },
@@ -945,7 +1025,7 @@
    "mastery"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 252,
   "minutes": 2
  },
@@ -962,7 +1042,7 @@
    "csv"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 339,
   "minutes": 2
  },
@@ -979,7 +1059,7 @@
    "logistics"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 153,
   "minutes": 1
  },
@@ -995,7 +1075,7 @@
    "scripting"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 2294,
   "minutes": 11
  },
@@ -1011,7 +1091,7 @@
    "mastery"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 198,
   "minutes": 1
  },
@@ -1028,7 +1108,7 @@
    "systems"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 140,
   "minutes": 1
  },
@@ -1042,7 +1122,7 @@
    "editor"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 523,
   "minutes": 3
  },
@@ -1059,7 +1139,7 @@
    "troubleshooting"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 366,
   "minutes": 2
  },
@@ -1075,7 +1155,7 @@
    "commands"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 612,
   "minutes": 3
  },
@@ -1091,7 +1171,7 @@
    "commands"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 839,
   "minutes": 4
  },
@@ -1107,7 +1187,7 @@
    "liners"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 376,
   "minutes": 2
  },
@@ -1123,7 +1203,7 @@
    "techniques"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 342,
   "minutes": 2
  },
@@ -1139,7 +1219,7 @@
    "mastery"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 201,
   "minutes": 1
  },
@@ -1154,7 +1234,7 @@
    "handling"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 217,
   "minutes": 1
  },
@@ -1170,7 +1250,7 @@
    "mastery"
   ],
   "date": "2026-08-29",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "words": 426,
   "minutes": 2
  },
@@ -1204,7 +1284,7 @@
    "evaluation"
   ],
   "date": "2025-10-29",
-  "updated": "2026-09-17",
+  "updated": "2026-09-22",
   "words": 18477,
   "minutes": 84
  },

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From code to production: building AssetCare — a learning series | Janaka Academy</title>
+  <meta name="description" content="A fourteen-module learning series on the AssetCare reference application: architecture, Spring Boot, Angular, PostgreSQL and Liquibase, Keycloak, Docker, Kubernetes, Helm, Terraform, HTTPS, CI/CD, observability, health checks and the AI-assisted engineering workflow.">
+  <link rel="canonical" href="https://janaka.me/academy/assetcare/">
+  <link rel="alternate" type="application/atom+xml" title="Janaka Premathilaka" href="/feed.xml">
+  <meta property="og:title" content="From code to production: building AssetCare | Janaka Academy">
+  <meta property="og:description" content="Fourteen modules from architecture to a live Kubernetes deployment, taught on a real Java 25, Spring Boot and Angular application you can clone and run.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://janaka.me/academy/assetcare/">
+  <meta property="og:image" content="https://janaka.me/assets/og/assetcare.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="From code to production: building AssetCare | Janaka Academy">
+  <meta name="twitter:description" content="Fourteen modules from architecture to a live Kubernetes deployment, on a real Java 25, Spring Boot and Angular application.">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/assetcare.png">
+  <meta name="keywords" content="Java 25, Spring Boot, Angular, Kubernetes, K3s, Helm, Docker, PostgreSQL, Liquibase, Keycloak, Terraform, cert-manager, CI/CD, observability, AI-assisted software engineering, learning series">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "From code to production: building AssetCare",
+    "description": "A learning series on taking a Java 25, Spring Boot 4.1 and Angular 22 application from architecture to a live Kubernetes deployment, with the AI-assisted engineering workflow that built it.",
+    "url": "https://janaka.me/academy/assetcare/",
+    "isAccessibleForFree": true,
+    "provider": { "@type": "Person", "name": "Janaka Premathilaka", "url": "https://janaka.me" },
+    "hasCourseInstance": { "@type": "CourseInstance", "courseMode": "online", "courseWorkload": "PT8H" }
+  }
+  </script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260910">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div data-include="/partials/site-nav.html"></div>
+
+<main id="main">
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/academy/" style="color:inherit;text-decoration:none">&larr; Janaka Academy</a> · Learning series</p>
+      <h1>From code to production: building AssetCare.</h1>
+      <p class="lede">Fourteen modules that follow one real application from its first architecture decision to a public URL on Kubernetes. The application is <a href="https://assetcare.janaka.me" target="_blank" rel="noopener">AssetCare</a>, live today on Java 25, Spring Boot 4.1, Angular 22, PostgreSQL, Keycloak, K3s and Helm; the repository is open, so every module ends with something you can run. This is a case study and engineering walkthrough, published progressively: what is written today is linked, what is still to come is labelled as such.</p>
+      <div class="badges">
+        <span class="badge hot">Case study · engineering walkthrough</span>
+        <span class="badge">Java 25 · Spring Boot 4.1 · Angular 22</span>
+        <span class="badge">Kubernetes · Helm · Terraform</span>
+        <span class="badge">Live reference deployment</span>
+        <span class="badge">Coming progressively</span>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="#modules">See the modules</a>
+        <a class="btn" href="/academy/production-ready-spring-angular/">Read the seven-course walkthrough</a>
+        <a class="btn" href="https://github.com/Janaka2/spring-angular-production-blueprint" target="_blank" rel="noopener">Clone the repository ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="how">
+    <div class="wrap">
+      <p class="eyebrow">How to use this series</p>
+      <h2>Read a module, then run the thing it describes.</h2>
+      <div class="cards3" style="margin-top:18px">
+        <div class="card">
+          <p class="zlabel">Who it is for</p>
+          <p>Engineers who can write a Spring or Angular application and want to see, on a real codebase, everything that surrounds it in production: identity, migrations, containers, a cluster, TLS, a pipeline, backups and operations.</p>
+        </div>
+        <div class="card">
+          <p class="zlabel">What you need</p>
+          <p>Java 25, Node 24, Docker. <code>make doctor</code> in the repository checks all three. The setup guide starts from an empty machine and verifies every step. A cloud account is needed only from module 09 onwards.</p>
+        </div>
+        <div class="card">
+          <p class="zlabel">Where the material lives today</p>
+          <p>The <a href="/academy/production-ready-spring-angular/">seven-course walkthrough</a> already covers most modules with why, what, how and proof. The <a href="/lab/assetcare/">case study</a> covers the live deployment and its verification. Dedicated lessons with exercises are added module by module.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="modules">
+    <div class="wrap">
+      <p class="eyebrow">Modules</p>
+      <h2>Fourteen steps from architecture to operations.</h2>
+      <p class="lede">Each card says where the material is now. "Read now" links to the existing walkthrough or case study section; "lesson coming" means a dedicated lesson with exercises has not been produced yet.</p>
+
+      <div class="grid" style="margin-top:20px">
+        <article class="card item">
+          <p class="sub">01 · Architecture</p>
+          <h3>Decisions before code</h3>
+          <p>Clean architecture with the dependency direction enforced by ArchUnit, a version matrix checked against release pages, eleven ADRs, a definition of done.</p>
+          <div class="chips"><span class="chip">Read now</span></div>
+          <div class="links"><a href="/academy/production-ready-spring-angular/#course-1-mise-en-place">Course 1 · Mise en place →</a></div>
+        </article>
+        <article class="card item">
+          <p class="sub">02 · Spring Boot backend</p>
+          <h3>The API on Java 25 and Spring Boot 4.1</h3>
+          <p>Use cases and ports, Problem Details errors, optimistic locking with If-Match, idempotency keys, an audit event for every write, authorization as a policy.</p>
+          <div class="chips"><span class="chip">Read now</span></div>
+          <div class="links"><a href="/academy/production-ready-spring-angular/#course-3-soup">Course 3 · Soup →</a></div>
+        </article>
+        <article class="card item">
+          <p class="sub">03 · Angular frontend</p>
+          <h3>The Angular 22 application</h3>
+          <p>URL-held list state, conflict detection, drafts, attachments, a command menu, design tokens, dark mode, phone layout, accessibility rules, a strict CSP in the production build.</p>
+          <div class="chips"><span class="chip">Read now</span></div>
+          <div class="links"><a href="/academy/production-ready-spring-angular/#course-4-main-course">Course 4 · Main course →</a></div>
+        </article>
+        <article class="card item">
+          <p class="sub">04 · PostgreSQL and Liquibase</p>
+          <h3>Schema as changesets, validated by Hibernate</h3>
+          <p>The database model with every column, constraint and index; changesets with rollbacks; dev and prod contexts; Testcontainers to prove the changelog and the entities agree.</p>
+          <div class="chips"><span class="chip">Read now</span></div>
+          <div class="links"><a href="/academy/production-ready-spring-angular/#course-2-starter">Course 2 · Starter →</a></div>
+        </article>
+        <article class="card item">
+          <p class="sub">05 · Authentication with Keycloak</p>
+          <h3>OpenID Connect with PKCE and a resource server</h3>
+          <p>Realm, clients and roles; the SPA's authorization-code flow; JWT validation in the API; USER, ADMIN and AUDITOR; what the UI hides and what the API refuses regardless.</p>
+          <div class="chips"><span class="chip">Read now</span><span class="chip">Lesson coming</span></div>
+          <div class="links"><a href="/lab/assetcare/#security">Case study · Security →</a> <a href="/academy/production-ready-spring-angular/#course-3-soup">Course 3 →</a></div>
+        </article>
+        <article class="card item">
+          <p class="sub">06 · Docker</p>
+          <h3>Multi-arch, non-root images</h3>
+          <p>A JRE image with a container-aware heap and graceful shutdown; unprivileged nginx rendering its runtime config; Compose for the stateful parts; Trivy and SBOM on every build.</p>
+          <div class="chips"><span class="chip">Read now</span><span class="chip">Lesson coming</span></div>
+          <div class="links"><a href="/academy/production-ready-spring-angular/#course-7-coffee">Course 7 · Coffee →</a></div>
+        </article>
+        <article class="card item">
+          <p class="sub">07 · Kubernetes and K3s</p>
+          <h3>One node, every object in its place</h3>
+          <p>Why K3s, what the installer does, probes that drive restarts and traffic, what the ingress exposes and what stays inside, and the interactive board that assembles the cluster step by step.</p>
+          <div class="chips"><span class="chip">Read now</span><span class="chip">Lesson coming</span></div>
+          <div class="links"><a href="/academy/production-ready-spring-angular/#the-whole-picture-assembled-step-by-step">The system assembled →</a></div>
+        </article>
+        <article class="card item">
+          <p class="sub">08 · Helm</p>
+          <h3>The chart as the deployment unit</h3>
+          <p>Every environment difference as a value; enterprise switches for an external database, identity provider, object storage and vault secrets; lint and template in CI; rollback.</p>
+          <div class="chips"><span class="chip">Read now</span><span class="chip">Lesson coming</span></div>
+          <div class="links"><a href="/academy/production-ready-spring-angular/#course-7-coffee">Course 7 · Coffee →</a></div>
+        </article>
+        <article class="card item">
+          <p class="sub">09 · Infrastructure with Terraform</p>
+          <h3>A server, a firewall and backups as code</h3>
+          <p>Hetzner Cloud with the hcloud provider: the CX33, a cloud firewall, a cloud-init user, nightly server backups; why the free tier was abandoned and what that decision cost.</p>
+          <div class="chips"><span class="chip">Read now</span><span class="chip">Lesson coming</span></div>
+          <div class="links"><a href="/lab/assetcare/#operations">Case study · Infrastructure →</a></div>
+        </article>
+        <article class="card item">
+          <p class="sub">10 · HTTPS with cert-manager</p>
+          <h3>Certificates without a human</h3>
+          <p>ClusterIssuers for staging and production, HTTP-01 through Traefik, DNS, the moment the certificate goes Ready, and automatic renewal.</p>
+          <div class="chips"><span class="chip">Read now</span><span class="chip">Lesson coming</span></div>
+          <div class="links"><a href="/blog/posts/assetcare-idea-to-production.html">Engineering article →</a></div>
+        </article>
+        <article class="card item">
+          <p class="sub">11 · CI/CD</p>
+          <h3>Three workflows: ci, security, release</h3>
+          <p>Tests at every level, Playwright against the production image, a restore drill, Helm and Terraform validation, image scans, CodeQL, gitleaks, signed multi-arch releases with SBOM and provenance.</p>
+          <div class="chips"><span class="chip">Read now</span></div>
+          <div class="links"><a href="/lab/assetcare/#delivery">Case study · CI/CD →</a> <a href="/academy/production-ready-spring-angular/#course-5-side-dishes">Course 5 →</a></div>
+        </article>
+        <article class="card item">
+          <p class="sub">12 · Observability</p>
+          <h3>Logs, metrics and traces that share an id</h3>
+          <p>Structured logs with request and trace ids, Micrometer, OpenTelemetry, and the optional profile with Prometheus, Grafana, Loki and Tempo that runs locally and is not yet deployed on the small production server.</p>
+          <div class="chips"><span class="chip">Read now</span></div>
+          <div class="links"><a href="/academy/production-ready-spring-angular/#course-6-dessert">Course 6 · Dessert →</a> <a href="/lab/assetcare/#observability">Status in production →</a></div>
+        </article>
+        <article class="card item">
+          <p class="sub">13 · Production health checks</p>
+          <h3>Probes, smoke test, health script, runbook</h3>
+          <p>Liveness and readiness groups, what was verified from outside the server and how, the one-command health summary, backups with a rehearsed restore, and the "the VM is gone" procedure.</p>
+          <div class="chips"><span class="chip">Read now</span><span class="chip">Lesson coming</span></div>
+          <div class="links"><a href="/lab/assetcare/#verified">Case study · Verified →</a></div>
+        </article>
+        <article class="card item">
+          <p class="sub">14 · AI-assisted engineering workflow</p>
+          <h3>Speed inside written rules</h3>
+          <p>A CLAUDE.md with the non-negotiables, project skills for the common changes, what the assistant accelerated, what stayed with the engineer, and how the verification report keeps both honest.</p>
+          <div class="chips"><span class="chip">Read now</span><span class="chip">Lesson coming</span></div>
+          <div class="links"><a href="/lab/assetcare/#ai">Case study · AI-assisted →</a> <a href="/ai/#practice">AI page →</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="run">
+    <div class="wrap">
+      <div class="cards2">
+        <article class="card" style="min-width:0;overflow:hidden">
+          <h3>Run it before you read it</h3>
+          <pre style="margin-top:10px;overflow-x:auto"><code>git clone https://github.com/Janaka2/spring-angular-production-blueprint.git
+cd spring-angular-production-blueprint
+cp .env.example .env          # development credentials, labelled as such
+docker compose up -d --wait   # PostgreSQL 18, Keycloak 26, MinIO
+make backend                  # API on :8080
+make frontend                 # SPA on :4200</code></pre>
+          <p class="sub" style="margin-top:10px">Then <code>make test</code>, <code>make e2e</code>, and <code>make observability</code> for the dashboards.</p>
+        </article>
+        <article class="card">
+          <h3>Or look at the finished thing first</h3>
+          <p style="margin-top:8px">The live deployment has a public demo account with fictional sample data. Sign in, change something, upload a file, read the audit trail, then come back and find the code that did it.</p>
+          <div class="actions">
+            <a class="btn primary" href="https://assetcare.janaka.me" target="_blank" rel="noopener">Open the live demo ↗</a>
+            <a class="btn" href="/lab/assetcare/#demo">Demo account and what to try</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Academy · Zug 🇨🇭</span>
+    <span><a href="/academy/">Academy</a> &middot; <a href="/lab/assetcare/">Case study</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+</body>
+</html>

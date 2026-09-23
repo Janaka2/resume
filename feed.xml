@@ -5,15 +5,42 @@
   <link rel="alternate" type="text/html" href="https://janaka.me/"/>
   <link rel="self" type="application/atom+xml" href="https://janaka.me/feed.xml"/>
   <id>https://janaka.me/</id>
-  <updated>2026-09-21T00:00:00Z</updated>
+  <updated>2026-09-23T00:00:00Z</updated>
   <author><name>Janaka Premathilaka</name><uri>https://janaka.me/</uri></author>
   <generator>scripts/gen-feed.py</generator>
+  <entry>
+    <title>AssetCare case study: Java 25, Spring Boot, Angular and Kubernetes in production</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/lab/assetcare/index.html"/>
+    <id>https://janaka.me/lab/assetcare/index.html</id>
+    <published>2026-09-23T00:00:00Z</published>
+    <updated>2026-09-23T00:00:00Z</updated>
+    <category term="lab" label="Lab"/>
+    <summary>AssetCare is a production-deployed Java 25, Spring Boot, Angular and Kubernetes application demonstrating modern full-stack, cloud-native and AI-assisted software engineering. Architecture…</summary>
+  </entry>
+  <entry>
+    <title>From Idea to Production: Building AssetCare with Java 25, Spring Boot, Angular, Kubernetes and AI</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/blog/posts/assetcare-idea-to-production.html"/>
+    <id>https://janaka.me/blog/posts/assetcare-idea-to-production.html</id>
+    <published>2026-09-23T00:00:00Z</published>
+    <updated>2026-09-23T00:00:00Z</updated>
+    <category term="blog" label="Blog"/>
+    <summary>How a Java 25, Spring Boot 4.1 and Angular 22 application went from a prototype to a live Kubernetes deployment on Hetzner with Helm, Keycloak, PostgreSQL and Let's Encrypt, what broke on the way…</summary>
+  </entry>
+  <entry>
+    <title>From code to production: building AssetCare — a learning series</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/academy/assetcare/index.html"/>
+    <id>https://janaka.me/academy/assetcare/index.html</id>
+    <published>2026-09-23T00:00:00Z</published>
+    <updated>2026-09-23T00:00:00Z</updated>
+    <category term="academy" label="Academy"/>
+    <summary>A fourteen-module learning series on the AssetCare reference application: architecture, Spring Boot, Angular, PostgreSQL and Liquibase, Keycloak, Docker, Kubernetes, Helm, Terraform, HTTPS, CI/CD…</summary>
+  </entry>
   <entry>
     <title>Claude Code configuration, top down: CLAUDE.md, settings, hooks, skills, subagents, plugins and context</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/claude-code-configuration.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/claude-code-configuration.html</id>
     <published>2026-09-21T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>One diagram of how Claude Code is configured, then twelve levels that zoom into it: the two layers, where every file lives and who wins, what loads into context and when, the agent loop and its 33…</summary>
   </entry>
@@ -22,7 +49,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/mcp-primitives-lab.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/mcp-primitives-lab.html</id>
     <published>2026-09-17T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>Learn the Model Context Protocol by watching it run: a verified Python server and client that exercise tools, resources, prompts, sampling, roots, elicitation and progress over stdio and Streamable…</summary>
   </entry>
@@ -31,7 +58,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/production-ready-spring-angular/index.html"/>
     <id>https://janaka.me/academy/production-ready-spring-angular/index.html</id>
     <published>2026-09-16T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-23T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>AssetCare, a complete Angular 22 + Spring Boot 4.1 reference application built in the open: architecture, PostgreSQL migrations, a production API, the SPA, tests and scans, observability, Helm, K3s…</summary>
   </entry>
@@ -40,7 +67,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/spring-ecosystem-and-spring-ai.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/spring-ecosystem-and-spring-ai.html</id>
     <published>2026-09-16T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>Spring Boot from 1.0 to 4.x in working examples, then a hands-on tour of Spring AI 2.0: ChatClient, structured output, tools, memory, RAG, MCP, evaluation and agent patterns.</summary>
   </entry>
@@ -49,7 +76,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/mcp-end-to-end.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/mcp-end-to-end.html</id>
     <published>2026-09-16T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>The Model Context Protocol from first principles to production: the wire format, tools, resources, prompts, elicitation, transports, the 2026 stateless revision, security, and a verified Java…</summary>
   </entry>
@@ -58,7 +85,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/java-evolution-8-to-27.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/java-evolution-8-to-27.html</id>
     <published>2026-09-16T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>Every Java release from 8 (2014) to 27 (September 2026): the features that mattered, why they mattered, and a working example for each, from lambdas to post-quantum TLS.</summary>
   </entry>
@@ -130,7 +157,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/virtual_threads_java_21_academy_page.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/virtual_threads_java_21_academy_page.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>In Java applications in 2026, one of the most important concurrency upgrades is virtual threads in Java 21. They let me keep the simple thread-per-task programming model, but at a scale that was not…</summary>
   </entry>
@@ -139,7 +166,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/vi-editor-complete.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/vi-editor-complete.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>VI Editor Complete — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
@@ -148,7 +175,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/troubleshooting-resources.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/troubleshooting-resources.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>Disk Memory CPU Troubleshooting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
@@ -157,7 +184,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/top-50-debugging-commands.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/top-50-debugging-commands.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>Top 50 Debugging Commands — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
@@ -166,7 +193,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/top-100-linux-commands.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/top-100-linux-commands.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>Top 100 Linux Commands — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
@@ -175,7 +202,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/spring-boot.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/spring-boot.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>← Janaka Academy</summary>
   </entry>
@@ -184,7 +211,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/react.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/react.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>← Janaka Academy</summary>
   </entry>
@@ -193,7 +220,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/templates.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/templates.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>Templates — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
@@ -202,7 +229,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/strategies.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/strategies.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>Strategies — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
@@ -211,7 +238,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/references.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/references.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>References and Source Notes — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
@@ -220,7 +247,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/rag.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/rag.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>RAG Prompting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
@@ -229,7 +256,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/index.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/index.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>← Janaka Academy</summary>
   </entry>
@@ -238,7 +265,7 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/gpt54.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/gpt54.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>GPT-5.4 Prompting Guide — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
@@ -247,35 +274,8 @@
     <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/glossary.html"/>
     <id>https://janaka.me/academy/modules/2026/FSE/promting/glossary.html</id>
     <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
+    <updated>2026-09-22T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>Glossary in Easy English — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
-  </entry>
-  <entry>
-    <title>Latest Gemini Prompting Guide</title>
-    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/gemini.html"/>
-    <id>https://janaka.me/academy/modules/2026/FSE/promting/gemini.html</id>
-    <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
-    <category term="academy" label="Academy"/>
-    <summary>Latest Gemini Prompting Guide — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
-  </entry>
-  <entry>
-    <title>Foundations</title>
-    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/foundations.html"/>
-    <id>https://janaka.me/academy/modules/2026/FSE/promting/foundations.html</id>
-    <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
-    <category term="academy" label="Academy"/>
-    <summary>Foundations — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
-  </entry>
-  <entry>
-    <title>Developer Prompts</title>
-    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/promting/developer.html"/>
-    <id>https://janaka.me/academy/modules/2026/FSE/promting/developer.html</id>
-    <published>2026-08-29T00:00:00Z</published>
-    <updated>2026-09-21T00:00:00Z</updated>
-    <category term="academy" label="Academy"/>
-    <summary>Developer Prompts — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
 </feed>
