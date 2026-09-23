@@ -1,3 +1,5 @@
+![visitors](https://visitor-badge.laobi.icu/badge?page_id=janaka.me.visitor-badge)
+
 # janaka.me — personal site of Janaka Premathilaka
 
 **Senior Java Engineer & Solution Architect, Zug 🇨🇭.** Banking-grade Java engineering, now bringing practical AI into regulated systems. Hub for the blog, lab, AI notes, CV, Janaka Academy and five products: [nüchtern](https://nuechtern.app/), [Daily Momentum](https://daily-momentum.com/), [Loop](https://loop.janaka.me/), [BabyLoop](https://babyloop.janaka.me/) and [LeftHere](https://here.janaka.me/).
