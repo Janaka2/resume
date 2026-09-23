@@ -76,6 +76,7 @@
         <span class="badge">Banking-grade engineering</span>
         <a class="badge" href="/ai/#shipped">Built with AI in the loop →</a>
         <span class="badge hot">Acquisition or licence</span>
+        <a class="badge" href="#assetcare">+ AssetCare, a live reference app →</a>
       </div>
       <div class="actions">
         <a class="btn primary" href="mailto:janaka2@gmail.com?subject=Product%20enquiry">✉&nbsp; Enquire by email</a>
@@ -333,6 +334,59 @@
         </aside>
       </article>
 
+    </div>
+  </section>
+
+  <section class="sec" id="assetcare">
+    <div class="wrap">
+      <p class="eyebrow">Reference application · open source</p>
+      <h2>AssetCare: a production-grade full-stack asset management reference application.</h2>
+      <p class="lede">A different kind of evidence from the five apps above. AssetCare is not for sale and has a backend by design: a complete Java 25, Spring Boot 4.1 and Angular 22 application with Keycloak identity, PostgreSQL and object storage, containerised, secured and deployed on Kubernetes with Helm, Terraform and a Let's Encrypt certificate, live at <a href="https://assetcare.janaka.me" target="_blank" rel="noopener">assetcare.janaka.me</a>. Apache-2.0, built with AI-assisted engineering, and documented down to what was and was not executed.</p>
+
+      <article class="card listing" style="margin-top:22px">
+        <div class="listing-main">
+          <div class="proj-head">
+            <div>
+              <h3>AssetCare</h3>
+              <p class="sub">assetcare.janaka.me · asset and maintenance management</p>
+            </div>
+            <span class="proj-live"><span class="dot"></span><span>Live</span></span>
+          </div>
+          <div class="listing-body">
+            <div>
+          <p>People own assets, assets need maintenance on a schedule, and someone has to prove what was done and when. Dashboard with due work, assets with URL-held search and filters, edit with conflict detection, maintenance planning and service history, attachments with preview, an audit trail of every write, three roles, dark mode, phone layout, a command menu.</p>
+          <p class="who"><b>Fits:</b> a team that wants a proven starting point for a Spring and Angular system, or an engineering manager who wants to see the whole production path executed rather than described.</p>
+          <div class="chips" style="margin-top:12px">
+            <span class="chip">Java 25</span><span class="chip">Spring Boot 4.1</span><span class="chip">Angular 22</span><span class="chip">TypeScript</span><span class="chip">PostgreSQL 18</span><span class="chip">Liquibase</span><span class="chip">Keycloak · OIDC</span><span class="chip">Docker</span><span class="chip">Kubernetes · K3s</span><span class="chip">Helm</span><span class="chip">Traefik</span><span class="chip">cert-manager</span><span class="chip">MinIO · S3</span><span class="chip">Terraform · Hetzner</span><span class="chip">GitHub Actions</span><span class="chip">OpenTelemetry</span><span class="chip">AI-assisted</span>
+          </div>
+            </div>
+          </div>
+          <div class="proj-actions">
+            <a class="btn primary" href="https://assetcare.janaka.me" target="_blank" rel="noopener">Live demo ↗</a>
+            <a class="btn" href="https://github.com/Janaka2/spring-angular-production-blueprint" target="_blank" rel="noopener">Source on GitHub ↗</a>
+            <a class="btn" href="/lab/assetcare/#architecture">Architecture</a>
+            <a class="btn" href="/lab/assetcare/">Case study</a>
+          </div>
+        </div>
+        <aside class="listing-spec" aria-label="AssetCare at a glance">
+          <dl>
+            <dt>Status</dt><dd>Live reference deployment, public demo account, sample data only</dd>
+            <dt>Backend</dt><dd>Java 25, Spring Boot 4.1, clean architecture enforced by ArchUnit</dd>
+            <dt>Frontend</dt><dd>Angular 22, Angular Material, strict CSP</dd>
+            <dt>Identity</dt><dd>Keycloak 26, OpenID Connect with PKCE, roles USER / ADMIN / AUDITOR</dd>
+            <dt>Database</dt><dd>PostgreSQL 18, Liquibase changesets with rollbacks, audit trail</dd>
+            <dt>Storage</dt><dd>MinIO, S3-compatible; attachments with SHA-256</dd>
+            <dt>Deployment</dt><dd>K3s on one Hetzner CX33 created by Terraform; Helm chart; Traefik; cert-manager with Let's Encrypt</dd>
+            <dt>Security</dt><dd>401 for anonymous calls, security headers, rate limiting, non-root images, Trivy, CodeQL, gitleaks, signed releases</dd>
+            <dt>Testing</dt><dd>Unit, ArchUnit, Testcontainers, Vitest, Playwright against the production image, restore drill</dd>
+            <dt>CI/CD</dt><dd>GitHub Actions: ci, security, release with SBOM and cosign</dd>
+            <dt>Observability</dt><dd>Instrumented (logs, metrics, traces); Prometheus, Grafana, Loki, Tempo as an optional profile, not deployed on the small server</dd>
+            <dt>Backups</dt><dd>Nightly pg_dump CronJob, Hetzner server backups, restore rehearsed in CI</dd>
+            <dt>Licence</dt><dd>Apache-2.0</dd>
+          </dl>
+          <p class="avail"><span class="chip">Open source</span> <span class="chip">Not for sale</span></p>
+        </aside>
+      </article>
     </div>
   </section>
 

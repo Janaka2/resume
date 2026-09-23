@@ -115,6 +115,15 @@ passes through, `::: quiz Title … Answers: …  :::` renders a self-check with
 folded block. New study-guide pages should be written this way: a `.md` under `scripts/generators/content/` plus a
 ten-line config script. Keep `.msgflow` diagrams at or under 110 columns; the study CSS lets them widen to the page.
 
+**AssetCare** (https://assetcare.janaka.me, repo `Janaka2/spring-angular-production-blueprint`, cloned locally at
+`C:\data\dev\claude code\crud\spring-angular-production-blueprint`; pull it before regenerating) is the live reference
+application. It appears on the site as: the hub partial `partials/featured-build.html` (rebuild the hub after editing),
+the case study `lab/assetcare/index.html` (architecture, security, verification, AI-assisted workflow, honest gaps),
+the blog article `blog/posts/assetcare-idea-to-production.html`, the learning series index `academy/assetcare/index.html`,
+sections on `products/`, `ai/#practice`, `lab/#production` and `academy/`, and the social image `assets/og/assetcare.png`
+(`python3 scripts/gen-og-image.py assetcare` renders only that one). Facts and approved wording are in the brand-voice
+skill; the observability stack is an optional profile and must never be described as running in production.
+
 `ai/mcp-momentum-planner/` is the worked example behind the Academy guide `academy/modules/2026/FSE/mcp-end-to-end.html`: the same MCP server (plan contract, deterministic validator, save with elicitation) in Python (`mcp` 2.2), plain Java (MCP Java SDK 2.0) and Spring Boot 4 + Spring AI 2.0. The page is generated from those files, so change the code there and regenerate rather than editing the page's code blocks; all three were built and run before publishing (Python: `pytest` + `test_client.py`; Java and Spring: compiled with Maven and driven by the same client).
 
 `.github/workflows/weekly_brand_review.yml` runs `/weekly-brand-review` every Monday via the Claude Code GitHub Action and opens a PR; it needs the `ANTHROPIC_API_KEY` repository secret.

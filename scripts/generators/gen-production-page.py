@@ -20,17 +20,19 @@ CFG = {
     "title": "From CRUD to production: Angular + Spring Boot, served as a seven-course meal",
     "h1": "From CRUD to production.",
     "description": ("AssetCare, a complete Angular 22 + Spring Boot 4.1 reference application built in the open: architecture, "
-                    "PostgreSQL migrations, a production API, the SPA, tests and scans, observability, Helm, K3s on a free OCI "
-                    "machine and CI/CD. Every course says why, what, how, and what proves it."),
+                    "PostgreSQL migrations, a production API, the SPA, tests and scans, observability, Helm, K3s on one small "
+                    "Hetzner server, CI/CD, and the live deployment at assetcare.janaka.me. Every course says why, what, how, and what proves it."),
     "url": "https://janaka.me/academy/production-ready-spring-angular/",
-    "badges": ["Angular 22 · Spring Boot 4.1 · Java 25", "PostgreSQL 18 · Keycloak 26", "Helm · K3s · OCI free tier", "Interactive system assembly", "Verified build, honest report"],
-    "actions": [("Start at the beginning", "#before-we-sit-down"), ("See the system assembled", "#the-whole-picture-assembled-step-by-step"), ("Get the repository ↗", REPO)],
+    "badges": ["Angular 22 · Spring Boot 4.1 · Java 25", "PostgreSQL 18 · Keycloak 26", "Helm · K3s · Hetzner CX33", "Interactive system assembly", "Verified build, honest report"],
+    "actions": [("Start at the beginning", "#before-we-sit-down"), ("See the system assembled", "#the-whole-picture-assembled-step-by-step"), ("Open the live demo ↗", "https://assetcare.janaka.me"), ("Get the repository ↗", REPO)],
 }
 EXTRA = f"""
 <!-- eyebrow: Reference -->
 ## Where to go next.
 
+- [The live deployment](https://assetcare.janaka.me) and its [case study on this site](/lab/assetcare/): what runs on the Hetzner server today, what was verified, and how AI-assisted engineering was used.
 - [The repository]({REPO}): README with the run, test and deploy commands and the verification report.
+- [The engineering article](/blog/posts/assetcare-idea-to-production.html): what broke on the way to production and what AI accelerated.
 - [The architecture decision records]({REPO}/tree/main/docs/adr), one per constraint you will meet.
 - [Production gaps]({REPO}/blob/main/docs/PRODUCTION-GAPS.md): what the free reference does not do, and what an enterprise replaces.
 - [Environment setup from zero]({REPO}/blob/main/docs/ENVIRONMENT-SETUP.md) and the [plain-language operations guide]({REPO}/blob/main/docs/operations/OPERATIONS-GUIDE.md).

@@ -57,8 +57,61 @@
       <p class="lede">A practical blueprint for modern agentic systems: crisp interfaces, safer workflows, faster iteration loops, and a clear direction for the team building them. Proven on <a href="#shipped">five live products</a> built with AI in the loop, and tested first in <a href="/lab/">the Lab</a>.</p>
       <div class="actions">
         <a class="btn primary" href="#shipped">See what it has shipped</a>
+        <a class="btn" href="#practice">AI-assisted engineering in practice</a>
         <a class="btn" href="#blueprint">Explore the blueprint</a>
         <a class="btn" href="#roadmap">See the 2026 roadmap</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="practice">
+    <div class="wrap">
+      <p class="eyebrow">AI-assisted engineering in practice</p>
+      <h2>AI increases engineering velocity. Engineering discipline makes the result production-worthy.</h2>
+      <p class="lede">The flagship example is <a href="/lab/assetcare/">AssetCare</a>, a Java 25, Spring Boot 4.1 and Angular 22 application taken from architecture to a live Kubernetes deployment at <a href="https://assetcare.janaka.me" target="_blank" rel="noopener">assetcare.janaka.me</a>. This is the workflow rather than a slogan: what the assistant did, what the engineer kept, and how the two are kept honest.</p>
+
+      <div class="steps" style="margin-top:22px">
+        <div class="step">
+          <h3>Rules first</h3>
+          <p>The repository carries a short <code>CLAUDE.md</code> with the non-negotiables (dependency direction, migrations as changesets, archive not delete, an audit event per write, Problem Details, authorization as a policy, no secrets in Git) and project skills for the common changes. The assistant works inside those rules from the first prompt.</p>
+        </div>
+        <div class="step">
+          <h3>Generate and review</h3>
+          <p>Options drafted against the model and cut down by hand; adapter and test code generated in small units and read before it is kept. Nothing is merged that I cannot explain line by line.</p>
+        </div>
+        <div class="step">
+          <h3>Verify by machine</h3>
+          <p>An ArchUnit test enforces the architecture, Testcontainers prove the migrations, Playwright runs against the production image, CI scans, signs and rehearses the restore. The assistant's output has to pass the same gates as mine.</p>
+        </div>
+        <div class="step">
+          <h3>Decide and record</h3>
+          <p>Every decision that constrains the future is an ADR with the options that lost. The verification report marks a check as passed only when it was run. The engineer signs both.</p>
+        </div>
+      </div>
+
+      <div class="cards2" style="margin-top:22px">
+        <article class="card">
+          <p class="zlabel">AI-assisted, on AssetCare</p>
+          <ul>
+            <li><b>Architectural exploration</b>: identity, persistence, state management and storage options, before the ADRs were written.</li>
+            <li><b>Code generation</b> inside the written rules: use cases, adapters, DTOs, tests, the Angular screens.</li>
+            <li><b>Debugging and migration analysis</b>: Spring Boot 4.1 start-up failures, an <code>inject()</code> after <code>await</code>, a lazy-association failure, Keycloak's <code>iss</code> parameter in the URL.</li>
+            <li><b>Kubernetes and deployment investigation</b>: an iptables rule that failed on Hetzner's image, a Helm wait that hung on an unbound volume, a compose race.</li>
+            <li><b>Test generation, documentation and infrastructure iteration</b>: the beginner's setup guide, the runbook, the health script, Terraform for the second cloud, dashboards and alert rules.</li>
+            <li><b>Operational diagnostics</b>: reading logs and probe output together, faster than an evening with search results.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <p class="zlabel">Engineering responsibility, kept</p>
+          <ul>
+            <li><b>Architecture</b>: one modular service, PostgreSQL, Keycloak, K3s on one server, and the documented seams to an enterprise platform.</li>
+            <li><b>Security</b>: the threat model, the authorization model, the header policy, pinning Tomcat for three critical CVEs, rotating development passwords before the demo went public.</li>
+            <li><b>Trade-offs</b>: leaving a free cloud that could not deliver a VM and paying a few euros a month for one that could.</li>
+            <li><b>Validation and verification</b>: running every check, marking the rest as not executed, confirming the 401 and the certificate from outside.</li>
+            <li><b>Production decisions and deployment</b>: what the ingress exposes, when to tag a release, what a public demo account may do.</li>
+          </ul>
+          <p style="margin-top:12px"><a href="/lab/assetcare/#ai">The full account in the case study →</a> &nbsp;·&nbsp; <a href="/blog/posts/assetcare-idea-to-production.html">The engineering article →</a></p>
+        </article>
       </div>
     </div>
   </section>
@@ -67,7 +120,7 @@
     <div class="wrap">
       <p class="eyebrow">Applied</p>
       <h2>Five products, built with AI in the loop.</h2>
-      <p class="lede">The practice on this page is not theoretical. Five privacy-first web apps went from blank page to public URL by one engineer, with large language models used deliberately at every step and every line reviewed by hand. They are live, in use, and <a href="/products/">available for acquisition or licensing</a>.</p>
+      <p class="lede">The practice on this page is not theoretical. Beyond <a href="#practice">AssetCare</a>, five privacy-first web apps went from blank page to public URL by one engineer, with large language models used deliberately at every step and every line reviewed by hand. They are live, in use, and <a href="/products/">available for acquisition or licensing</a>.</p>
 
       <div class="steps" style="margin-top:22px">
         <div class="step">

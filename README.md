@@ -17,6 +17,7 @@ Plain HTML/CSS/JavaScript. No frameworks, no build step — host it anywhere (Gi
 | `assets/js/main.js` | Theme switch, language switch, tabs, collapsible work history, chat popup. |
 | `partials/*.pdf` | Downloadable CV (EN) and Lebenslauf (DE). |
 | `cv/print/index.html` | A4 print source for the CV PDF (`scripts/export-cv-pdf.py`); noindex, unlinked, intentionally print-styled. |
+| `lab/assetcare/`, `academy/assetcare/`, `blog/posts/assetcare-idea-to-production.html`, `partials/featured-build.html` | AssetCare, the live Java 25 + Spring Boot + Angular + Kubernetes reference application (assetcare.janaka.me): case study, learning series, engineering article and the hub section. |
 | `chatbot/` | Python backend powering the AI assistant (deployed separately; the site embeds it from `janaka2.github.io/pa/`). |
 
 ## Conventions

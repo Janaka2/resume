@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AssetCare case study: Java 25, Spring Boot, Angular and Kubernetes in production | Janaka Premathilaka</title>
+  <meta name="description" content="AssetCare is a production-deployed Java 25, Spring Boot, Angular and Kubernetes application demonstrating modern full-stack, cloud-native and AI-assisted software engineering. Architecture, security, K3s on Hetzner, Helm, HTTPS, CI/CD and what was verified.">
+  <link rel="canonical" href="https://janaka.me/lab/assetcare/">
+  <link rel="alternate" type="application/atom+xml" title="Janaka Premathilaka" href="/feed.xml">
+  <meta property="og:title" content="AssetCare: Java 25, Spring Boot, Angular and Kubernetes, live in production">
+  <meta property="og:description" content="A production-deployed reference application on K3s, Helm, Keycloak, PostgreSQL and Let's Encrypt. Architecture, security, delivery pipeline and the AI-assisted engineering workflow behind it.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://janaka.me/lab/assetcare/">
+  <meta property="og:image" content="https://janaka.me/assets/og/assetcare.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="article:published_time" content="2026-09-23">
+  <meta property="article:modified_time" content="2026-09-23">
+  <meta property="article:author" content="https://janaka.me">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AssetCare: Java 25, Spring Boot, Angular and Kubernetes, live in production">
+  <meta name="twitter:description" content="A production-deployed reference application on K3s, Helm, Keycloak, PostgreSQL and Let's Encrypt, built with AI-assisted engineering.">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/assetcare.png">
+  <meta name="keywords" content="Java 25, Spring Boot, Angular, Kubernetes, K3s, Helm, Docker, PostgreSQL, Keycloak, cloud native, full stack Java, software architecture, AI-assisted software engineering, production deployment">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "AssetCare",
+        "description": "A production-deployed Java 25, Spring Boot, Angular and Kubernetes reference application: asset and maintenance management with Keycloak identity, PostgreSQL, Liquibase, MinIO, Helm, K3s, cert-manager and GitHub Actions.",
+        "codeRepository": "https://github.com/Janaka2/spring-angular-production-blueprint",
+        "programmingLanguage": ["Java", "TypeScript"],
+        "runtimePlatform": ["Java 25", "Spring Boot 4.1", "Angular 22", "Kubernetes"],
+        "license": "https://www.apache.org/licenses/LICENSE-2.0",
+        "url": "https://assetcare.janaka.me",
+        "author": { "@type": "Person", "name": "Janaka Premathilaka", "url": "https://janaka.me" }
+      },
+      {
+        "@type": "TechArticle",
+        "headline": "AssetCare case study: Java 25, Spring Boot, Angular and Kubernetes in production",
+        "description": "Architecture, security, delivery pipeline, infrastructure and the AI-assisted engineering workflow behind a production-deployed reference application.",
+        "datePublished": "2026-09-23",
+        "dateModified": "2026-09-23",
+        "author": { "@type": "Person", "name": "Janaka Premathilaka", "url": "https://janaka.me" },
+        "publisher": { "@type": "Person", "name": "Janaka Premathilaka", "url": "https://janaka.me" },
+        "image": "https://janaka.me/assets/og/assetcare.png",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://janaka.me/lab/assetcare/" }
+      }
+    ]
+  }
+  </script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260910">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div data-include="/partials/site-nav.html"></div>
+
+<main id="main">
+  <section class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/lab/" style="color:inherit;text-decoration:none">&larr; Lab</a> · Case study</p>
+      <h1>AssetCare: from an idea to a live Kubernetes deployment.</h1>
+      <p class="lede">A complete asset-maintenance application, designed, built, containerised, secured and deployed by one engineer, running today at <a href="https://assetcare.janaka.me" target="_blank" rel="noopener">assetcare.janaka.me</a>. Java 25 and Spring Boot 4.1 behind an Angular 22 front end, Keycloak for identity, PostgreSQL 18, S3-compatible object storage, all on K3s with Helm, Traefik and Let's Encrypt on one Hetzner Cloud server. AI-assisted engineering accelerated the implementation, the investigation and the documentation; the architecture, the security decisions, the validation and the production delivery stayed engineering-led.</p>
+      <div class="badges">
+        <span class="badge hot"><span class="dot" aria-hidden="true"></span> Live · production demonstration</span>
+        <span class="badge">Java 25 · Spring Boot 4.1</span>
+        <span class="badge">Angular 22 · TypeScript</span>
+        <span class="badge">Kubernetes (K3s) · Helm</span>
+        <span class="badge">Keycloak · PostgreSQL 18</span>
+        <span class="badge hot">AI-assisted engineering</span>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://assetcare.janaka.me" target="_blank" rel="noopener">Open the live demo ↗</a>
+        <a class="btn" href="#architecture">See the architecture</a>
+        <a class="btn" href="https://github.com/Janaka2/spring-angular-production-blueprint" target="_blank" rel="noopener">Source on GitHub ↗</a>
+        <a class="btn" href="/blog/posts/assetcare-idea-to-production.html">Read the engineering article</a>
+      </div>
+
+      <div class="stats" role="list">
+        <div class="stat" role="listitem"><b>1</b><span>cloud server, Kubernetes on top</span></div>
+        <div class="stat" role="listitem"><b>5</b><span>workloads: SPA, API, PostgreSQL, Keycloak, MinIO</span></div>
+        <div class="stat" role="listitem"><b>401</b><span>for every anonymous API call</span></div>
+        <div class="stat" role="listitem"><b>HTTPS</b><span>Let's Encrypt via cert-manager</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="why">
+    <div class="wrap">
+      <p class="eyebrow">Why it exists</p>
+      <h2>Not another CRUD demo. The whole production path, executed.</h2>
+      <div class="cards2" style="margin-top:18px">
+        <div class="card">
+          <p>Most reference projects stop at "runs on my laptop". AssetCare was built to go the rest of the way: a real identity provider, migrations, container images that run as non-root, a Helm chart, a cloud server created from Terraform, Kubernetes, a certificate that renews itself, health probes, backups, and a public URL that a stranger can log into.</p>
+          <p style="margin-top:10px">The domain is deliberately small. People own assets (a car, a boiler, a laptop), assets need maintenance on a schedule, and someone has to prove what was done and when. Small enough to hold in your head, rich enough to need every piece of a serious system.</p>
+        </div>
+        <div class="card">
+          <p class="zlabel">What it demonstrates</p>
+          <ul>
+            <li><b>Enterprise Java, current generation.</b> Java 25, Spring Boot 4.1, Spring Security 7, Hibernate 7, Liquibase 5, clean architecture enforced by an ArchUnit test.</li>
+            <li><b>Cloud-native delivery.</b> Multi-architecture images, a Helm chart, K3s, Traefik, cert-manager, Terraform, GitHub Actions with scans, SBOM and signed images.</li>
+            <li><b>Production discipline.</b> Probes, secrets, rate limiting, security headers, audit trail, backup CronJob with a tested restore, a runbook written for the person on call.</li>
+            <li><b>AI as an accelerator, not a substitute.</b> Coding assistants worked inside a repository with written rules, and every decision that constrains the system is an ADR a human signed off.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="demo">
+    <div class="wrap">
+      <p class="eyebrow">Live demo</p>
+      <h2>Try it yourself.</h2>
+      <div class="cards2" style="margin-top:18px">
+        <div class="card">
+          <h3>Sign in with the public demo account</h3>
+          <p style="margin-top:8px">Open <a href="https://assetcare.janaka.me" target="_blank" rel="noopener">assetcare.janaka.me</a> and use the shared demo account. It is deliberately public, holds only fictional sample data (a household and home office in Zug) and has the plain <code>USER</code> role.</p>
+          <div class="card" style="margin-top:12px;padding:12px 16px">
+            <p class="mono" style="font-family:var(--font-mono);font-size:.9rem">Username: <b>demo</b><br>Password: <b>AssetCare-Demo-2026</b></p>
+          </div>
+          <p class="sub" style="margin-top:10px">Read/write demo environment, sample data only. Other visitors see and can change the same data; it is reseeded from time to time. No administrator, database or infrastructure credential is public anywhere.</p>
+          <div class="actions" style="margin-top:14px">
+            <a class="btn primary" href="https://assetcare.janaka.me" target="_blank" rel="noopener">Open the live demo ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Worth trying once you are in</h3>
+          <ul>
+            <li>The dashboard: status tiles, the agenda of overdue and upcoming maintenance.</li>
+            <li>Press <kbd>Ctrl</kbd>&nbsp;<kbd>K</kbd> (or <kbd>⌘</kbd>&nbsp;<kbd>K</kbd>) for the command menu: jump to a page, find an asset by name, tag or serial.</li>
+            <li>Open an asset in two tabs, save in both: the second save gets a conflict, not a silent overwrite (optimistic locking with <code>If-Match</code>).</li>
+            <li>Upload an attachment (image preview, SHA-256 recorded) and complete a maintenance: a service record and the next occurrence appear, and the History tab shows the audit trail.</li>
+            <li>Filter, sort and page the asset list, then copy the URL: the state travels with it. Export the list as CSV.</li>
+            <li>Switch to dark mode, narrow the window to phone width, go offline: the interface says so.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="architecture">
+    <div class="wrap">
+      <p class="eyebrow">Architecture</p>
+      <h2>One door, one writer, everything else replaceable.</h2>
+      <p class="lede">Traefik is the only public entry point. The Angular SPA is static files behind nginx. The Spring Boot API is the only process that writes to the database. Identity is external. Attachments live in object storage. Every one of the stateful pieces can be swapped for a managed service by changing a Helm value, not code.</p>
+
+      <div class="cards2" style="margin-top:20px">
+        <div class="card prose" style="max-width:none;min-width:0;overflow:hidden">
+          <p class="zlabel">Runtime</p>
+<pre style="overflow-x:auto"><code>Browser
+  │  HTTPS (Let's Encrypt, renewed by cert-manager)
+  ▼
+Traefik ingress  (rate limit on /api, TLS termination)
+  ├── /            → Angular 22 SPA  (nginx, strict CSP, non-root)
+  ├── /api/v1/**   → Spring Boot 4.1 API on Java 25
+  │                    ├── PostgreSQL 18   (Liquibase migrations, audit trail)
+  │                    ├── Keycloak 26     (JWT verification, roles)
+  │                    └── MinIO / S3      (attachments, SHA-256)
+  ├── /auth/**     → Keycloak  (OpenID Connect, Authorization Code + PKCE)
+  └── /actuator/health, /actuator/info  → API probes (nothing else exposed)</code></pre>
+        </div>
+        <div class="card prose" style="max-width:none;min-width:0;overflow:hidden">
+          <p class="zlabel">Infrastructure and delivery</p>
+<pre style="overflow-x:auto"><code>Hetzner Cloud CX33 (4 vCPU, 8 GB, EU)
+  → created by Terraform: server, cloud firewall (22 from one IP, 80, 443),
+    cloud-init user, nightly server backups
+  → Ubuntu 24.04
+  → K3s (Kubernetes 1.37, single node, Traefik bundled)
+  → cert-manager + ClusterIssuer (staging first, then production)
+  → Helm release "assetcare": deployments, statefulsets, PVCs,
+    ingress, secrets refs, backup CronJob
+
+GitHub
+  → pull request → ci (tests, Playwright, restore drill, helm lint,
+    terraform validate, image build, Trivy)
+  → security (CodeQL, Trivy, gitleaks, dependency review)
+  → tag v1.0.0 → release (amd64 + arm64 images, SBOM, cosign
+    signature, provenance, chart on the GitHub release)
+  → ghcr.io images → helm upgrade → smoke test → health check</code></pre>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <p class="zlabel">Each part, in one line</p>
+        <div class="tablewrap">
+        <table>
+          <thead><tr><th>Part</th><th>Role</th><th>Why this choice</th></tr></thead>
+          <tbody>
+            <tr><td>Traefik</td><td>The only public door: routes, terminates TLS, rate-limits <code>/api</code></td><td>Bundled with K3s; one IP, one certificate, several services</td></tr>
+            <tr><td>Angular 22 SPA</td><td>Static bundle on unprivileged nginx; runtime <code>config.json</code> rendered from the environment</td><td>One image for every environment; strict Content-Security-Policy without inline scripts</td></tr>
+            <tr><td>Spring Boot 4.1 API</td><td>Business rules, authorization policy, audit events, Problem Details errors, Liquibase at start-up</td><td>Clean architecture with the dependency direction enforced by ArchUnit</td></tr>
+            <tr><td>PostgreSQL 18</td><td>All business data, the audit trail and idempotency keys, on a persistent volume</td><td>Managed PostgreSQL or Oracle is a values change; the migration path is documented</td></tr>
+            <tr><td>Keycloak 26</td><td>Login, roles USER / ADMIN / AUDITOR, JWT issuance; the application never sees a password</td><td>Standard OIDC with PKCE; swapping in a corporate identity provider is configuration</td></tr>
+            <tr><td>MinIO</td><td>S3-compatible storage for attachment bytes, outside the database</td><td>The API speaks S3, so any object storage replaces it</td></tr>
+            <tr><td>cert-manager</td><td>Asks Let's Encrypt for the certificate and renews it before expiry</td><td>HTTPS without a human in the loop</td></tr>
+            <tr><td>Helm chart</td><td>One command creates or upgrades every object; every environment difference is a value</td><td>Rollback is <code>helm rollback</code>; enterprise switches for external DB, IdP, storage and vault secrets</td></tr>
+            <tr><td>Terraform</td><td>The server, its firewall and backups as code</td><td>The VM can be destroyed and recreated in a minute from the repository</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="stack">
+    <div class="wrap">
+      <p class="eyebrow">Technology stack</p>
+      <h2>Current versions, checked against their release pages.</h2>
+      <div class="cards3" style="margin-top:18px">
+        <div class="card">
+          <p class="zlabel">Backend</p>
+          <div class="chips">
+            <span class="chip">Java 25 (LTS)</span><span class="chip">Spring Boot 4.1</span><span class="chip">Spring Security 7</span><span class="chip">Spring Data</span><span class="chip">Hibernate 7</span><span class="chip">Liquibase 5</span><span class="chip">PostgreSQL 18</span><span class="chip">Micrometer</span><span class="chip">OpenTelemetry</span><span class="chip">springdoc-openapi</span>
+          </div>
+          <p class="sub" style="margin-top:10px">Tests: JUnit 6, AssertJ, Mockito, Testcontainers, ArchUnit. Build: Maven wrapper.</p>
+        </div>
+        <div class="card">
+          <p class="zlabel">Frontend</p>
+          <div class="chips">
+            <span class="chip">Angular 22</span><span class="chip">TypeScript 6</span><span class="chip">Angular Material</span><span class="chip">angular-oauth2-oidc (PKCE)</span><span class="chip">Vitest</span><span class="chip">Playwright</span><span class="chip">ESLint · Prettier</span><span class="chip">nginx (unprivileged)</span>
+          </div>
+          <p class="sub" style="margin-top:10px">One set of design tokens, dark mode, phone layout, command menu, skeleton loading, accessibility lint rules.</p>
+        </div>
+        <div class="card">
+          <p class="zlabel">Platform and delivery</p>
+          <div class="chips">
+            <span class="chip">Docker (multi-arch)</span><span class="chip">Kubernetes · K3s 1.37</span><span class="chip">Helm 4</span><span class="chip">Traefik</span><span class="chip">cert-manager</span><span class="chip">Let's Encrypt</span><span class="chip">Keycloak 26</span><span class="chip">MinIO</span><span class="chip">Terraform · Hetzner Cloud</span><span class="chip">GitHub Actions</span><span class="chip">Trivy · CodeQL · gitleaks</span><span class="chip">cosign · CycloneDX SBOM</span>
+          </div>
+          <p class="sub" style="margin-top:10px">Observability profile: Prometheus, Alertmanager, Grafana, Loki, Tempo, OpenTelemetry Collector (see below for its status).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="security">
+    <div class="wrap">
+      <p class="eyebrow">Security</p>
+      <h2>The backend is the authority. The UI only shapes what it shows.</h2>
+      <div class="cards2" style="margin-top:18px">
+        <div class="card">
+          <p class="zlabel">Identity and authorization</p>
+          <ul>
+            <li>Keycloak issues OpenID Connect tokens; the SPA uses Authorization Code with PKCE; the API is a resource server that validates every JWT.</li>
+            <li>Every endpoint requires a valid token. Anonymous calls get <code>401</code>, verified on the live host on 23 September 2026.</li>
+            <li>Roles from the token: <code>USER</code> sees own assets, <code>AUDITOR</code> reads everything and writes nothing, <code>ADMIN</code> manages configuration and can restore or hard-delete. One <code>AuthorizationPolicy</code> decides; controllers never check roles.</li>
+            <li>Ownership is checked per aggregate: 404 for what you may not see, 403 for what you may see but not change.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="zlabel">Edges and supply chain</p>
+          <ul>
+            <li>The live front end sends a strict Content-Security-Policy, <code>X-Frame-Options: DENY</code>, <code>nosniff</code>, a Referrer-Policy and a Permissions-Policy (observed in the response headers).</li>
+            <li>Rate limiting on <code>/api</code> at the Traefik ingress; the API answers <code>429</code> with Problem Details if a per-user limit is hit.</li>
+            <li>Errors are RFC 9457 Problem Details. Updates need <code>If-Match</code> (428 without it, 409 when stale). Creates accept an <code>Idempotency-Key</code>.</li>
+            <li>Uploads: content-type allowlist, size limit, sanitised filename, bytes stored outside the database under a generated key, SHA-256 recorded.</li>
+            <li>Images run as non-root with all capabilities dropped; CI scans dependencies and images with Trivy and CodeQL, runs gitleaks over the full history, and the release is signed with cosign and carries a CycloneDX SBOM.</li>
+            <li>No secret in Git. Production secrets are Kubernetes Secrets created once on the cluster; the development credentials in the repository are labelled as such and were rotated on the cluster before the demo went public.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="delivery">
+    <div class="wrap">
+      <p class="eyebrow">Testing and CI/CD</p>
+      <h2>Nothing reaches main untested. Nothing reaches the cluster unsigned.</h2>
+      <div class="cards3" style="margin-top:18px">
+        <div class="card">
+          <h3>ci, on every push</h3>
+          <ul>
+            <li>Backend unit and ArchUnit tests, then integration tests against PostgreSQL 18 in Testcontainers.</li>
+            <li>Frontend lint, format check, Vitest unit tests, production build under budget.</li>
+            <li>Playwright end to end against the production frontend image with a real Keycloak and API; the same smoke test later runs against the deployment.</li>
+            <li>A backup, damage, restore drill: dump, break the database, restore, compare row counts.</li>
+            <li>Helm lint and template, the observability compose file, Terraform format and validate; image builds with a Trivy gate.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>security, weekly and on change</h3>
+          <ul>
+            <li>CodeQL for Java and TypeScript.</li>
+            <li>Trivy on dependencies and configuration.</li>
+            <li>gitleaks over the full history.</li>
+            <li>Dependency review on pull requests; Dependabot keeps images and libraries current.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>release, on a version tag</h3>
+          <ul>
+            <li>Native amd64 and arm64 builds, one manifest per image, pushed to GHCR.</li>
+            <li>Scan, SBOM, keyless cosign signature and build provenance.</li>
+            <li>The packaged Helm chart attached to the GitHub release. v1.0.0 shipped this way on 23 September 2026.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="operations">
+    <div class="wrap">
+      <p class="eyebrow">Infrastructure and operations</p>
+      <h2>Rebuildable from files in the repository.</h2>
+      <div class="cards2" style="margin-top:18px">
+        <div class="card">
+          <p class="zlabel">Infrastructure as code</p>
+          <ul>
+            <li><b>Terraform</b> (provider <code>hetznercloud/hcloud</code>) creates the CX33, a stateful cloud firewall that admits SSH from the operator's IP and HTTP/HTTPS from anywhere, a cloud-init <code>ubuntu</code> user with root login disabled, and nightly Hetzner server backups. The API token lives only in an environment variable.</li>
+            <li><b>K3s</b> installed by one script; <b>cert-manager</b> with a staging issuer first, then production; DNS pointed at the server; the certificate went <code>Ready</code> and the padlock appeared.</li>
+            <li><b>Helm</b> installs the release with production values and an <code>existingSecret</code>; the chart's probes, resource requests and limits keep the whole stack inside 8 GB with headroom.</li>
+            <li>Why Hetzner and not a free tier: the earlier Oracle Cloud Always Free attempt could not be created on demand. ADR-012 records the decision and its cost.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="zlabel">Day two</p>
+          <ul>
+            <li><b>Health.</b> Liveness and readiness probes drive restarts and traffic; only <code>/actuator/health</code> and <code>/actuator/info</code> are exposed through the ingress. Metrics and everything else stay inside the cluster. A one-command health script prints OK / WARN / FAIL for pods, probes, certificate, backup age and the HTTP checks, naming the runbook section for anything wrong.</li>
+            <li><b>Backups.</b> A CronJob runs a compressed, checksummed <code>pg_dump</code> nightly at 02:30 UTC, keeps fourteen, and can upload to any S3-compatible bucket; Hetzner server backups give an off-VM copy. The restore is a script that CI rehearses on every run. Recovery objective of the reference deployment: 24 hours.</li>
+            <li><b>Runbook.</b> Symptom, check, action, confirmation, including "the VM is gone": Terraform, install script, chart, latest dump, DNS, new certificate, under an hour once the VM exists.</li>
+            <li><b>Demo data.</b> Seeded through the real API by a script, so every write is authorized, validated and audited like a user's; reset by giving the demo account a fresh identity.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="observability">
+    <div class="wrap">
+      <p class="eyebrow">Observability</p>
+      <h2>Instrumented in production. The full stack is a profile, not yet deployed.</h2>
+      <div class="cards2" style="margin-top:18px">
+        <div class="card">
+          <p class="zlabel">Running on the live server</p>
+          <ul>
+            <li>Structured JSON logs where every line carries <code>requestId</code>, <code>traceId</code> and <code>spanId</code>; a request id enters with or comes back in the response.</li>
+            <li>Micrometer metrics (HTTP, JVM, GC, HikariCP, cache, business counters) on the internal <code>/actuator/prometheus</code> endpoint, not exposed publicly.</li>
+            <li>OpenTelemetry tracing instrumented through <code>spring-boot-starter-opentelemetry</code>; telemetry is exported over OTLP only when a collector is present.</li>
+            <li>Business audit events in the database, each with its request and trace id.</li>
+            <li>Liveness, readiness and dependency health groups, verified from outside.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="zlabel">Available as an observability profile</p>
+          <p>Prometheus, Alertmanager, the blackbox exporter, Grafana (a 22-panel dashboard in Git), Loki, Tempo and the OpenTelemetry Collector, with thirteen alert rules that each link to a runbook section. The profile starts locally with <code>make observability</code> and has Helm values for the cluster.</p>
+          <p style="margin-top:10px"><b>Status, honestly:</b> it is <em>not</em> running on the production server. The 8 GB CX33 holds the core chart with headroom; the observability profile needs a larger node or a second server, which the project's production-gaps document records. It is architecture and configuration ready to enable, not a monitoring capability currently in operation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="journey">
+    <div class="wrap">
+      <p class="eyebrow">The engineering journey</p>
+      <h2>From a prototype to a public URL, in the order it happened.</h2>
+      <ul class="tl" style="margin-top:22px">
+        <li>
+          <p class="when"><b>01</b> · Architecture and standards</p>
+          <h3>Decisions before code</h3>
+          <p class="org">version matrix · ADRs · definition of done · clean architecture</p>
+          <ul class="points">
+            <li>Every version checked against its official release page. Eleven ADRs for the choices that constrain the future, from PostgreSQL to "archive instead of delete".</li>
+            <li>The dependency direction written as an ArchUnit test, so it is enforced rather than described.</li>
+          </ul>
+        </li>
+        <li>
+          <p class="when"><b>02</b> · Local environment</p>
+          <h3>Docker Compose for the stateful parts</h3>
+          <p class="org">PostgreSQL 18 · Keycloak 26 with the realm · MinIO</p>
+          <ul class="points"><li>The same images as production, in one command, so every laptop and CI run the same versions.</li></ul>
+        </li>
+        <li>
+          <p class="when"><b>03</b> · Data and migrations</p>
+          <h3>Liquibase changesets with rollbacks</h3>
+          <p class="org">Hibernate validates the schema; nothing is created by the ORM</p>
+          <ul class="points"><li>Audit columns and optimistic-locking versions on every entity; a full audit event for every write, in the same transaction.</li></ul>
+        </li>
+        <li>
+          <p class="when"><b>04</b> · Authentication</p>
+          <h3>Keycloak, OIDC with PKCE, a resource server</h3>
+          <p class="org">roles USER · ADMIN · AUDITOR</p>
+          <ul class="points"><li>The application never sees a password. One authorization policy, tested, decides what each role may do.</li></ul>
+        </li>
+        <li>
+          <p class="when"><b>05</b> · Backend and frontend</p>
+          <h3>The API and the Angular application</h3>
+          <p class="org">Problem Details · If-Match · Idempotency-Key · CSV export · attachments · command menu</p>
+          <ul class="points"><li>Search, filters, sort and paging in the URL; conflict detection; drafts and unsaved-change protection; dark mode and phone layout.</li></ul>
+        </li>
+        <li>
+          <p class="when"><b>06</b> · Testing and CI</p>
+          <h3>Tests at every level, then a machine that runs them</h3>
+          <p class="org">unit · ArchUnit · Testcontainers · Vitest · Playwright · restore drill</p>
+          <ul class="points"><li>Rehearsing the CI jobs locally found a critical Tomcat CVE, invalid Terraform, missing security headers and a production build blocked by its own CSP, before the first GitHub run.</li></ul>
+        </li>
+        <li>
+          <p class="when"><b>07</b> · Containers and registry</p>
+          <h3>Multi-arch, non-root images on GHCR</h3>
+          <p class="org">amd64 + arm64 · Trivy · SBOM · cosign · provenance</p>
+          <ul class="points"><li>v1.0.0 released with signed images and the packaged chart; <code>cosign verify</code> passes.</li></ul>
+        </li>
+        <li>
+          <p class="when"><b>08</b> · Infrastructure</p>
+          <h3>Terraform on Hetzner Cloud</h3>
+          <p class="org">CX33 · cloud firewall · cloud-init · server backups</p>
+          <ul class="points"><li>After the free Oracle Cloud path failed to produce a server on demand, the trial moved to a small paid VM. The chart, installer and images were provider-neutral, so it was a change of VM, not of architecture.</li></ul>
+        </li>
+        <li>
+          <p class="when"><b>09</b> · Kubernetes and Helm</p>
+          <h3>K3s, cert-manager, the release</h3>
+          <p class="org">one node · Traefik bundled · probes · resource limits · secrets created on the cluster</p>
+          <ul class="points"><li>The installer learned to open ports 80 and 443 only when the image's firewall rejects them, a difference between Oracle's and Hetzner's Ubuntu images found during the install.</li></ul>
+        </li>
+        <li>
+          <p class="when"><b>10</b> · HTTPS</p>
+          <h3>DNS, staging issuer, production issuer</h3>
+          <p class="org">Let's Encrypt · HTTP-01 through Traefik · certificate issued 23 September 2026</p>
+          <ul class="points"><li>Staging first, so a mistake does not burn the rate limit; then production, then the padlock.</li></ul>
+        </li>
+        <li>
+          <p class="when"><b>11</b> · Health verification</p>
+          <h3>Probes, smoke test, login</h3>
+          <p class="org">liveness UP · readiness UP · database reachable · anonymous 401 · Keycloak discovery 200</p>
+          <ul class="points"><li>The same checks are repeated below, as run from outside the server.</li></ul>
+        </li>
+        <li class="live">
+          <p class="when"><b>12</b> · Live</p>
+          <h3>assetcare.janaka.me, with a public demo account</h3>
+          <p class="org">showcase data seeded through the API · development passwords rotated on the cluster</p>
+          <ul class="points"><li>A stranger can log in, change data, upload a file and read the audit trail of what they did.</li></ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="verified">
+    <div class="wrap">
+      <p class="eyebrow">Verified</p>
+      <h2>What was checked, and when.</h2>
+      <p class="lede">Checked from outside the server on 23 September 2026. The repository's own verification report follows the same rule: a check is marked as passed only when it was run.</p>
+      <div class="card" style="margin-top:18px">
+        <div class="tablewrap">
+        <table>
+          <thead><tr><th>Check</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr><td><code>GET https://assetcare.janaka.me/</code></td><td>200, valid certificate, issuer Let's Encrypt, subject <code>assetcare.janaka.me</code></td></tr>
+            <tr><td>Response headers on the SPA</td><td>Content-Security-Policy, X-Frame-Options DENY, X-Content-Type-Options nosniff, Referrer-Policy, Permissions-Policy, Cache-Control no-store on the shell</td></tr>
+            <tr><td><code>GET /api/v1/assets</code> without a token</td><td>401 Unauthorized</td></tr>
+            <tr><td><code>GET /actuator/health</code></td><td><code>{"status":"UP"}</code> with the groups <code>dependencies</code>, <code>liveness</code>, <code>readiness</code></td></tr>
+            <tr><td><code>/actuator/health/liveness</code>, <code>/readiness</code></td><td>200, UP, UP</td></tr>
+            <tr><td><code>/actuator/info</code></td><td>artifact <code>assetcare-api</code>, version 1.0.0, built 23 September 2026</td></tr>
+            <tr><td><code>/auth/realms/assetcare/.well-known/openid-configuration</code></td><td>200, Keycloak serving the realm behind the same host</td></tr>
+            <tr><td><code>/actuator/prometheus</code>, <code>/grafana/</code></td><td>not routed: the SPA shell answers, as the ingress intends</td></tr>
+            <tr><td>GitHub Actions</td><td>ci, security and release workflows green on 23 September 2026 (run ids in the repository's path-to-production document)</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="ai">
+    <div class="wrap">
+      <p class="eyebrow">AI-assisted engineering</p>
+      <h2>AI increased the velocity. Engineering discipline made it production-worthy.</h2>
+      <p class="lede">This project was also an experiment in how far AI-assisted engineering can accelerate a senior engineer without removing the discipline. The answer was: a long way on implementation, investigation and documentation, and not at all on the decisions that decide whether a system deserves to be in production.</p>
+      <div class="cards2" style="margin-top:18px">
+        <div class="card">
+          <p class="zlabel">What the assistant accelerated</p>
+          <ul>
+            <li><b>Architectural exploration.</b> Options for identity, persistence, state management and object storage drafted against a model, then decided and recorded as ADRs.</li>
+            <li><b>Code generation inside written rules.</b> The repository's <code>CLAUDE.md</code> states the non-negotiables: dependency direction, migrations only as changesets, archive instead of delete, an audit event for every write, Problem Details, authorization as a policy. Project skills (<code>/add-feature</code>, <code>/add-migration</code>, <code>/write-adr</code>, <code>/architecture-review</code>, <code>/operate</code>, <code>/release</code>) encode the playbook the assistant follows.</li>
+            <li><b>Debugging and migration analysis.</b> Spring Boot 4.1 start-up failures (ambiguous CORS and upload-size beans), a lazy-association failure on list endpoints, an <code>inject()</code> after <code>await</code> that froze the SPA at "Loading", Keycloak's <code>iss</code> parameter left in the URL.</li>
+            <li><b>Kubernetes and deployment investigation.</b> The iptables rule position that failed on Hetzner's image, a MinIO image tag that could not be pulled, a race in <code>docker compose up --wait</code>, a backups volume that had to be bound at install for <code>helm --wait</code> to succeed.</li>
+            <li><b>Tests, documentation and operations text.</b> Test scaffolds, the setup guide written for a beginner, the runbook, the health script, dashboards and alert rules.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="zlabel">What stayed with the engineer</p>
+          <ul>
+            <li><b>Architecture and trade-offs.</b> One modular service before microservices, PostgreSQL before Oracle, Keycloak, K3s on one small server and the documented seams to an enterprise platform.</li>
+            <li><b>Security.</b> The threat model, the authorization model, the header policy, the decision to pin Tomcat for three critical CVEs that the Spring Boot BOM did not yet manage, the rotation of the development passwords before the demo went public.</li>
+            <li><b>Validation.</b> Every check in the verification report was run, and anything not run is marked as not executed. A reference nobody has run is a hypothesis.</li>
+            <li><b>Production decisions and delivery.</b> Moving off the free tier that could not deliver a VM, when to tag v1.0.0, what to expose through the ingress, what a public demo account may and may not do.</li>
+            <li><b>Verification.</b> Reading the generated code, running the tests, watching the certificate go Ready, checking the 401 from outside.</li>
+          </ul>
+          <p style="margin-top:12px"><a href="/ai/#practice">How this workflow generalises, on the AI page →</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="gaps">
+    <div class="wrap">
+      <p class="eyebrow">What it is not</p>
+      <h2>A production-style reference deployment, not an enterprise platform.</h2>
+      <div class="card" style="margin-top:18px">
+        <p>The point of the project is the honest boundary. The application code is written so that an enterprise replaces the pieces on the right without a rewrite; the reference deployment deliberately stops short of them.</p>
+        <ul style="margin-top:10px">
+          <li><b>One node, one disk.</b> A VM failure is an outage. No pod disruption budgets, no multi-zone, no autoscaling turned on.</li>
+          <li><b>Keycloak runs in development mode in the chart</b>, with its realm imported from Git. Production mode on PostgreSQL is an open item.</li>
+          <li><b>Secrets are Kubernetes Secrets</b>, created once on the cluster, not sourced from a vault.</li>
+          <li><b>The observability profile is not deployed</b> on the 8 GB server (above).</li>
+          <li><b>Container root filesystems are writable</b>; the Security tab reports it and the fix is documented.</li>
+          <li><b>No customers, no user numbers, no availability figure.</b> It is a demonstration with a shared demo account and sample data, and it is described as such everywhere.</li>
+        </ul>
+        <p style="margin-top:12px"><a href="https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/docs/PRODUCTION-GAPS.md" target="_blank" rel="noopener">The full production-gaps table in the repository ↗</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="more">
+    <div class="wrap">
+      <p class="eyebrow">Go deeper</p>
+      <h2>The same project, from four angles.</h2>
+      <div class="grid" style="margin-top:18px">
+        <article class="card item">
+          <p class="sub">Blog · engineering article</p>
+          <h3>From idea to production</h3>
+          <p>What broke on the way to a public URL, what AI accelerated and what still needed judgement.</p>
+          <div class="links"><a href="/blog/posts/assetcare-idea-to-production.html">Read the article →</a></div>
+        </article>
+        <article class="card item">
+          <p class="sub">Academy · course</p>
+          <h3>From CRUD to production</h3>
+          <p>The seven-course walkthrough of the repository, with an interactive board that assembles the system step by step.</p>
+          <div class="links"><a href="/academy/production-ready-spring-angular/">Open the course →</a> <a href="/academy/assetcare/">Learning series →</a></div>
+        </article>
+        <article class="card item">
+          <p class="sub">AI · practice</p>
+          <h3>AI-assisted engineering in practice</h3>
+          <p>The workflow behind this and the five products: what the model does, what the engineer keeps.</p>
+          <div class="links"><a href="/ai/#practice">Read the practice →</a></div>
+        </article>
+        <article class="card item">
+          <p class="sub">Repository</p>
+          <h3>Source, ADRs, runbook</h3>
+          <p>Apache-2.0. Clone it, run four commands, and change the first decision you disagree with.</p>
+          <div class="links"><a href="https://github.com/Janaka2/spring-angular-production-blueprint" target="_blank" rel="noopener">GitHub ↗</a> <a href="https://github.com/Janaka2/spring-angular-production-blueprint/tree/main/docs/adr" target="_blank" rel="noopener">ADRs ↗</a></div>
+        </article>
+      </div>
+
+      <div class="cta" style="margin-top:22px">
+        <div>
+          <h3>This is the standard I bring to a team.</h3>
+          <p>Twenty-two years of enterprise Java, the current cloud-native stack, and AI used to move faster without lowering the bar. If that is the problem on your desk, my inbox is open.</p>
+        </div>
+        <div class="actions" style="margin-top:0">
+          <a class="btn primary" href="mailto:janaka2@gmail.com?subject=AssetCare%20via%20janaka.me">Email me</a>
+          <a class="btn" href="/resume/">View my CV</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Janaka Premathilaka · Zug 🇨🇭</span>
+    <span><a href="/lab/">Lab</a> &middot; <a href="/ai/">AI</a> &middot; <a href="/products/">Products</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+</body>
+</html>

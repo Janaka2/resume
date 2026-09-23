@@ -54,11 +54,38 @@
     <div class="wrap">
       <p class="eyebrow">Lab</p>
       <h1>Experiments &amp; demos.</h1>
-      <p class="lede">Live demos, small tools and proofs of concept exploring AI, automation and productivity. Rough by design — each one exists to answer a question. What holds up becomes a pattern on the <a href="/ai/">AI page</a>; what earns its place ships as a <a href="/products/">product</a>.</p>
+      <p class="lede">Live demos, small tools and proofs of concept exploring AI, automation and productivity, and one that went all the way to <a href="#production">production on Kubernetes</a>. The experiments are rough by design — each one exists to answer a question. What holds up becomes a pattern on the <a href="/ai/">AI page</a>; what earns its place ships as a <a href="/products/">product</a>.</p>
       <div class="actions">
-        <a class="btn primary" href="#experiments">See the experiments</a>
+        <a class="btn primary" href="#production">AssetCare, live</a>
+        <a class="btn" href="#experiments">See the experiments</a>
         <a class="btn" href="/ai/">The practice behind them →</a>
         <a class="btn" href="/products/">What has shipped →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="production">
+    <div class="wrap">
+      <p class="eyebrow">Production demonstration</p>
+      <h2>AssetCare: the Lab project that went all the way.</h2>
+      <div class="card proj" style="margin-top:18px">
+        <div class="proj-head">
+          <div>
+            <h3>AssetCare</h3>
+            <p class="sub">Java 25 · Spring Boot 4.1 · Angular 22 · Kubernetes</p>
+          </div>
+          <span class="proj-live"><span class="dot"></span><span>Live</span></span>
+        </div>
+        <p>Unlike the experiments below, this one is finished and running: a full asset-maintenance application with Keycloak identity, PostgreSQL and object storage, deployed on K3s with Helm, Traefik and a Let's Encrypt certificate on a Hetzner server created from Terraform, with a public demo account. The engineering journey, in the order it happened:</p>
+        <div class="chips" aria-label="Engineering journey">
+          <span class="chip">Prototype</span><span class="chip">Local environment</span><span class="chip">Docker</span><span class="chip">Authentication</span><span class="chip">Database migrations</span><span class="chip">CI</span><span class="chip">Container registry</span><span class="chip">Terraform</span><span class="chip">Kubernetes</span><span class="chip">Helm</span><span class="chip">HTTPS</span><span class="chip">Health verification</span><span class="chip">Live deployment</span>
+        </div>
+        <div class="proj-actions">
+          <a class="btn primary" href="/lab/assetcare/">Read the case study</a>
+          <a class="btn" href="https://assetcare.janaka.me" target="_blank" rel="noopener">Open the live demo ↗</a>
+          <a class="btn" href="/lab/assetcare/#architecture">Architecture</a>
+          <a class="btn" href="https://github.com/Janaka2/spring-angular-production-blueprint" target="_blank" rel="noopener">Source ↗</a>
+        </div>
       </div>
     </div>
   </section>
@@ -125,7 +152,7 @@
     <div class="wrap">
       <p class="eyebrow">From experiment to product</p>
       <h2>Where the experiments go.</h2>
-      <p class="lede">The Lab is the first step, not the last. The RAG and agent work here became the blueprint and production patterns on the AI page, and the same generate-and-review discipline built five products that are live today.</p>
+      <p class="lede">The Lab is the first step, not the last. The RAG and agent work here became the blueprint and production patterns on the AI page, and the same generate-and-review discipline built five products that are live today and took <a href="/lab/assetcare/">AssetCare</a> to a live Kubernetes deployment.</p>
       <div data-include="/partials/ai-trail.html"></div>
       <div class="cta" style="margin-top:22px">
         <div>

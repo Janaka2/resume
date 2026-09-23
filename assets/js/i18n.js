@@ -23,7 +23,7 @@ window.JP_I18N = (function () {
     heroStatus: 'prod · stabil seit 2004 · Pikett: geleistet · Audits: bestanden',
     heroRole: 'Senior Java Engineer &amp; Solution Architect',
     heroHook: '<b>Ich baue grundsolide Enterprise-Java-Systeme — und führe sie ins KI-Zeitalter.</b><br>Über 22 Jahre geschäftskritische Software für Banken und den öffentlichen Sektor — UBS, Credit Suisse und die Europäische Kommission.',
-    heroBadges: '<span class="badge">Zug, Schweiz 🇨🇭</span><span class="badge">Niederlassungsbewilligung C</span><span class="badge hot">Deutsch B1 ↗</span><span class="badge">Banking-IT · regulierte Systeme</span><span class="badge hot">KI · LLM · Agentic RAG</span>',
+    heroBadges: '<span class="badge">Zug, Schweiz 🇨🇭</span><span class="badge">Niederlassungsbewilligung C</span><span class="badge hot">Deutsch B1 ↗</span><span class="badge">Banking-IT · regulierte Systeme</span><span class="badge hot">KI · LLM · Agentic RAG</span><a class="badge hot" href="/lab/assetcare/">Neu: AssetCare, live auf Kubernetes →</a>',
     btnViewCv: 'Mein aktueller Lebenslauf',
     btnEmail: 'E-Mail',
     btnPdf: 'PDF-Lebenslauf',
@@ -33,9 +33,21 @@ window.JP_I18N = (function () {
     aboutEyebrow: 'Profil',
     aboutH2: 'Bewährte Enterprise-Technologie, praktische KI.',
     aboutP1: 'Ich bin der Engineer, den Teams rufen, wenn ein reguliertes System nicht ausfallen darf. In über 22 Jahren Banken- und Behördensoftware habe ich sechs Enterprise-Anwendungen durch die Fusion von Credit Suisse und UBS stabil gehalten, ein auditpflichtiges Archivierungsprogramm termingerecht geliefert und eine Front-Office-FX-Plattform rund 20 % schneller gemacht.',
-    aboutP2: 'Heute bringe ich dieselbe Disziplin zu LLMs, RAG und Agenten-Automatisierung innerhalb des Bankperimeters — Spring Boot mit LangChain, LangGraph, CrewAI, AutoGen und dem OpenAI Agents SDK — gemessen am Massstab, den die Domäne verlangt. Ruhig unter Druck, klar bei Abwägungen, und fertig heisst: läuft in Produktion.',
+    aboutP2: 'Heute bringe ich dieselbe Disziplin zu LLMs, RAG und Agenten-Automatisierung innerhalb des Bankperimeters — Spring Boot mit LangChain, LangGraph, CrewAI, AutoGen und dem OpenAI Agents SDK — gemessen am Massstab, den die Domäne verlangt. Ruhig unter Druck, klar bei Abwägungen, und fertig heisst: läuft in Produktion. Der jüngste Beleg ist <a href="/lab/assetcare/">AssetCare</a>: eine Java-25-, Spring-Boot- und Angular-Anwendung, die ich von der Architektur bis zum Live-Betrieb auf Kubernetes gebracht habe — mit KI als Beschleuniger des Engineerings, nicht als Ersatz dafür.',
     academyBtn: 'Janaka Academy beitreten',
     academyP: 'Ausserdem führe ich die Janaka Academy: tägliche Notizen und Lernpfade für Engineers, die ihren Lehrer übertreffen wollen.',
+
+    /* ---- featured build (AssetCare) ---- */
+    fbEyebrow: 'Aktuelles Projekt',
+    fbH2: 'AssetCare: eine produktiv deployte Java-, Angular- und Kubernetes-Anwendung.',
+    fbSub: 'Asset- und Wartungsverwaltung, Referenzanwendung',
+    fbLive: 'Live',
+    fbP: 'Von der Idee zur öffentlichen URL, von einem Engineer: Java 25 und Spring Boot 4.1 hinter einem Angular-22-Frontend, Keycloak für die Identität, PostgreSQL 18 mit Liquibase, S3-kompatibler Speicher, alles auf Kubernetes (K3s) mit Helm, Traefik und einem Let’s-Encrypt-Zertifikat auf einem per Terraform erstellten Hetzner-Cloud-Server. Auf jeder Ebene getestet, gescannt, signiert und über GitHub Actions released. KI-gestütztes Engineering hat Umsetzung, Analyse und Dokumentation beschleunigt; Architektur, Sicherheit, Validierung und Produktionsentscheidungen blieben beim Engineer.',
+    fbBadges: '<span class="badge hot">Live · Produktionsdemonstration</span><span class="badge">Java 25 · Spring Boot 4.1</span><span class="badge">Angular 22</span><span class="badge">Kubernetes · Helm · Terraform</span><span class="badge">Keycloak · PostgreSQL</span><span class="badge hot">KI-gestütztes Engineering</span>',
+    fbBtnExplore: 'AssetCare entdecken',
+    fbBtnDemo: 'Live-Demo öffnen ↗',
+    fbBtnArch: 'Architektur ansehen',
+    fbFoot: 'Öffentliches Demo-Konto, nur Beispieldaten. Die Geschichte aus vier Blickwinkeln: der <a href="/blog/posts/assetcare-idea-to-production.html">Engineering-Artikel</a>, der <a href="/academy/production-ready-spring-angular/">Academy-Kurs</a>, der <a href="/ai/#practice">KI-gestützte Workflow</a> und das <a href="https://github.com/Janaka2/spring-angular-production-blueprint" target="_blank" rel="noopener">Open-Source-Repository</a>.',
 
     /* ---- contact / skills / languages cards ---- */
     cContactH: 'Kontakt',

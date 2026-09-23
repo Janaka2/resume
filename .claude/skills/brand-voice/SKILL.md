@@ -37,6 +37,7 @@ Janaka Premathilaka — Senior Java Engineer & Solution Architect, Zug, Switzerl
 - Stack signals: Java, Spring Boot, Kafka, Kubernetes, Oracle/PostgreSQL, REST, microservices, CI/CD; AI: LLM integration, RAG, LangChain, LangGraph, CrewAI, AutoGen, OpenAI Agents SDK, MCP servers and clients, AI-assisted engineering with Claude Code and OpenAI Codex
 - Location: Zug; work radius Zürich, Zug, Basel, remote
 - Products are Swiss made (engineered in Zug); the quality claim is always backed by the habits behind it (hand-reviewed code, no servers or dependencies to fail, privacy by design), never used as a bare sticker
+- AssetCare (assetcare.janaka.me): a production-deployed reference application, Java 25 + Spring Boot 4.1 + Angular 22, Keycloak, PostgreSQL 18, Liquibase, MinIO, K3s + Helm + Traefik + cert-manager on one Hetzner CX33 created by Terraform, GitHub Actions ci/security/release with signed multi-arch images. Verified live on 2026-09-23 (Let's Encrypt, anonymous API 401, health UP). Public demo account `demo` / `AssetCare-Demo-2026` (published in the repo README; USER role, sample data only). Say "production-style", "production-deployed reference application" or "production engineering demonstration"; never customers, user numbers, availability figures. The observability stack (Prometheus, Grafana, Loki, Tempo, OTel) is an optional profile, NOT running in production. AI framing: "AI-assisted engineering accelerated implementation, investigation, documentation and iteration; architecture, decisions, validation and production delivery stayed engineering-led." Never "AI built it".
 - Products: nüchtern (nuechtern.app), Daily Momentum (daily-momentum.com), Loop (loop.janaka.me), BabyLoop (babyloop.janaka.me) and LeftHere (here.janaka.me), all live, all privacy by construction (on-device, or storage the user owns), all built solo with AI in the loop, all open to acquisition or licensing. Loop is the name and loop.janaka.me the address (renamed from RepeatCycle in September 2026; never use the old name)
 
 ## Ecosystem one-liners (use consistently)
@@ -50,6 +51,7 @@ Janaka Premathilaka — Senior Java Engineer & Solution Architect, Zug, Switzerl
 | AI | janaka.me/ai/ | Agents that are readable, reliable and worth shipping |
 | CV | janaka.me/cv/ | Two decades of critical systems, case studies and stack. The PDF is exported from `cv/print/index.html` via `scripts/export-cv-pdf.py` |
 | Academy | janaka.me/academy/ | Engineers who surpass their teacher: daily notes and learning paths |
+| AssetCare | assetcare.janaka.me · case study janaka.me/lab/assetcare/ | A production-deployed Java 25, Spring Boot, Angular and Kubernetes application demonstrating modern full-stack, cloud-native and AI-assisted software engineering |
 | nüchtern | nuechtern.app | Fasting companion that keeps the biology visible, offline, DE/EN |
 | Daily Momentum | daily-momentum.com | A quiet record of where the day went, one tap, on-device only |
 | Loop | loop.janaka.me | Remembers what repeats, learns the rhythm from your own history, on your device or your own Drive |
@@ -58,7 +60,7 @@ Janaka Premathilaka — Senior Java Engineer & Solution Architect, Zug, Switzerl
 
 ## Target keywords (for titles, descriptions, chips, posts)
 
-Senior Java Engineer Switzerland · Solution Architect Zürich Zug · Spring Boot · Apache Kafka · Kubernetes · Banking software · Regulated environments · LLM integration · RAG · Agentic AI · MCP · AI evaluation · Java 21+ virtual threads
+Senior Java Engineer Switzerland · Solution Architect Zürich Zug · Spring Boot · Apache Kafka · Kubernetes · Banking software · Regulated environments · LLM integration · RAG · Agentic AI · MCP · AI evaluation · Java 21+ virtual threads · Java 25 · Angular · K3s · Helm · Docker · PostgreSQL · Keycloak · Cloud native · AI-assisted software engineering · production deployment
 
 ## CTA hierarchy
 
