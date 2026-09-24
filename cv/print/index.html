@@ -18,7 +18,7 @@
     :root { --tx:#16181D; --tx2:#5C6168; --ln:#D9D9D5; --ac:#2F4A6D; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { background: #fff; color: var(--tx); }
-    body { font: 400 9.1pt/1.33 "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { font: 400 9pt/1.32 "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .page { max-width: 180mm; margin: 0 auto; padding: 10mm 0; }
     @media print { .page { max-width: none; padding: 0; } }
     h1 { font: 800 21pt/1.05 "Archivo", "Helvetica Neue", Arial, sans-serif; letter-spacing: -.02em; }
@@ -30,8 +30,8 @@
     .facts div { display: grid; grid-template-columns: 64pt 1fr; gap: 6pt; }
     .facts b { font-weight: 500; color: var(--tx2); }
     .facts a { color: inherit; text-decoration: none; }
-    h2 { font: 700 8.8pt/1.2 "Archivo", sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--ac); margin: 9pt 0 4pt; padding-bottom: 2.5pt; border-bottom: .6pt solid var(--ln); }
-    .job { display: grid; break-inside: auto; grid-template-columns: 32mm 1fr; gap: 5mm; margin-bottom: 6pt; }
+    h2 { font: 700 8.8pt/1.2 "Archivo", sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--ac); margin: 7pt 0 3pt; padding-bottom: 2pt; border-bottom: .6pt solid var(--ln); }
+    .job { display: grid; break-inside: auto; grid-template-columns: 32mm 1fr; gap: 5mm; margin-bottom: 5pt; }
     .when { font-size: 8.6pt; color: var(--tx2); line-height: 1.35; }
     .when b { display: block; color: var(--tx); font-weight: 600; }
     .job h3 { font: 700 10.2pt/1.25 "Archivo", sans-serif; }
@@ -45,7 +45,7 @@
     .skills p { margin-top: 2.6pt; }
     .skills b { font-weight: 600; }
     .lang p { margin-top: 2.6pt; }
-    .refs { margin-top: 10pt; padding-top: 5pt; border-top: .6pt solid var(--ln); color: var(--tx2); font-size: 8.8pt; }
+    .refs { margin-top: 6pt; padding-top: 4pt; border-top: .6pt solid var(--ln); color: var(--tx2); font-size: 8.8pt; }
     .keep { break-inside: avoid; }
   </style>
 </head>
@@ -151,6 +151,17 @@
     </div>
   </div>
 
+  <h2>Independent work</h2>
+  <div class="job keep">
+    <div class="when"><b>09.2026</b>assetcare.janaka.me</div>
+    <div>
+      <h3>AssetCare, production-deployed reference application (open source)</h3>
+      <ul>
+        <li>Angular 22 · Spring Boot 4.1 on Java 25 · PostgreSQL 18 with Liquibase · Keycloak 26 (OIDC/PKCE) · Testcontainers, ArchUnit, Playwright, k6 · signed multi-arch images via GitHub Actions · Helm on K3s, Terraform on Hetzner Cloud · OpenTelemetry with Prometheus, Grafana, Loki, Tempo. Case study: janaka.me/lab/assetcare · source: github.com/Janaka2/spring-angular-production-blueprint.</li>
+      </ul>
+    </div>
+  </div>
+
   <h2>Education &amp; certifications</h2>
   <div class="job">
     <div class="when"><b>1999 – 2004</b>Sri Lanka</div>
@@ -167,14 +178,14 @@
   <h2>Technical skills &amp; languages</h2>
   <div class="two">
     <div class="skills">
-      <p><b>Languages:</b> Java (11–17), SQL, TypeScript, Python</p>
+      <p><b>Languages:</b> Java (17 at the bank, 25 in AssetCare), SQL, TypeScript, Python</p>
       <p><b>AI / LLM engineering:</b> LangChain, LangGraph, LlamaIndex, CrewAI, AutoGen, OpenAI Agents SDK, RAG/CAG patterns, agentic workflows (n8n), local LLM inference (Llama 3), prompt and parameter tuning, evaluation</p>
       <p><b>Agent integration:</b> Model Context Protocol (MCP) servers and clients, tool allow-listing, audit logging, Spring AI</p>
       <p><b>AI-assisted engineering:</b> Claude Code, OpenAI Codex, specification-first and review-gated delivery</p>
-      <p><b>Architecture:</b> Microservices, solution architecture, event-driven (Kafka), multithreading, GraphQL, REST</p>
-      <p><b>Frameworks:</b> Spring Boot, Hibernate, React, Angular</p>
-      <p><b>DevOps &amp; cloud:</b> Kubernetes/OpenShift, Docker, Jenkins, Grafana, Splunk</p>
-      <p><b>Testing &amp; agile:</b> TDD, JUnit, Mockito, Cucumber, Jira, Scrum/SAFe</p>
+      <p><b>Architecture:</b> Microservices, clean architecture, event-driven (Kafka), multithreading, GraphQL, REST, PostgreSQL/Oracle, OAuth2/OIDC</p>
+      <p><b>Frameworks:</b> Spring Boot 4.1, Spring Security, Hibernate, Liquibase, Angular 22, React</p>
+      <p><b>DevOps &amp; cloud:</b> Kubernetes/OpenShift/K3s, Helm, Terraform, Docker, Jenkins, GitHub Actions, OpenTelemetry (Prometheus, Grafana, Loki, Tempo), Splunk</p>
+      <p><b>Testing &amp; agile:</b> TDD, JUnit, Mockito, Testcontainers, ArchUnit, Playwright, k6, Cucumber, Jira, Scrum/SAFe</p>
     </div>
     <div class="lang">
       <p><b>English</b> — full professional (C1/C2)</p>

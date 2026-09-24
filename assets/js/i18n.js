@@ -57,6 +57,7 @@ window.JP_I18N = (function () {
     cSkG2: 'KI / LLM-Engineering',
     cSkC2: '<span class="chip">LangChain</span><span class="chip">LlamaIndex</span><span class="chip">RAG / CAG</span><span class="chip">Agentic Workflows</span><span class="chip">lokale LLMs</span><span class="chip">MCP</span><span class="chip">Claude Code</span><span class="chip">OpenAI Codex</span>',
     cSkG3: 'DevOps &amp; Cloud',
+    cSkRef: 'Versionen, wie sie heute in <a href="#assetcare">AssetCare</a> laufen: Java 25, Spring Boot 4.1, Angular 22, PostgreSQL 18, Keycloak 26, Helm auf K3s. Java 17, Kafka, Oracle und OpenShift sind der Bank-Stack.',
     cLangsH: 'Sprachen',
     lgEnN: 'Englisch', lgEnL: 'Verhandlungssicher · <b>C1/C2</b>',
     lgDeN: 'Deutsch', lgDeL: 'Mittelstufe · <b>B1 ↗ in aktiver Weiterbildung</b>',
