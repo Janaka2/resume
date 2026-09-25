@@ -70,6 +70,59 @@ cross-domain conflict.
   blocks deletions and workflow edits, re-runs every check and commits to a `maintenance/*` branch (optionally a PR,
   draft if facts changed or a check failed). It never touches the working tree or `main`.
 
+## Pending work (handover, 2026-09-25)
+
+State: commit `4b22b92` on `main` shipped the platform (canonical content, discovery files, JSON-LD, WebMCP,
+validator, tests, CI, guardian agents, autonomous maintenance). Site checks and Pages deploy are green; the maintenance
+radar ran once and opened issue #18. Start a new session with `git pull`, then `npm run check`. Tick items off here
+when done, and delete this section once it is empty.
+
+Needs Janaka (manual, outside the repo):
+- [ ] Google Search Console: verify janaka.me, submit `https://janaka.me/sitemap.xml`, URL-inspect `/`, `/resume/`,
+      `/products/`, `/lab/assetcare/`, one post, one Academy page; check that an alias such as
+      `/academy/modules/2026/FSE/awk-sed-mastery.html` resolves to its `FSE/Linux/` canonical. Checklist:
+      `docs/ai/discovery.md`.
+- [ ] WebMCP origin trial (optional, trial ends 2026-11-16): register at developer.chrome.com/origintrials and paste
+      the token into `WEBMCP_OT_TOKEN` in `assets/js/includes.js`, or leave WebMCP flag-only. `docs/ai/webmcp.md`.
+- [ ] Review `academy/modules/2026/FSE/modenizeJava.html`: it asks visitors for their own Gemini API key; decide
+      whether to keep the feature, and if so say where the key is stored.
+- [ ] Answer watchlist `cert-architect-exam` (status of "Claude Certified Architect – Professional") by 2026-12-31.
+- [ ] Approve the "22+" → "23+ years" update across all copies before 2027-05-01 (watchlist `experience-years`).
+
+Proposals from the maintenance runs (reports/maintenance-2026-09-25.md, issue #18):
+- [ ] GitHub Actions majors: the maintenance run reported v7 of `actions/checkout`, `setup-python`, `setup-node`
+      (workflows pin v4/v5/v4). Verify on the release pages first, then bump in `site-checks.yml`,
+      `maintenance-radar.yml`, `daily_learning_generator.yml`, `daily_update.yml`, and set `checked` on watchlist
+      `github-actions-versions`. That closes issue #18.
+- [ ] Shorten 8 meta descriptions to about 160 chars (validator WARN): `resume/index.html` (202),
+      `lab/assetcare/index.html` (257), `blog/posts/assetcare-idea-to-production.html` (257),
+      `academy/assetcare/index.html` (267), `academy/production-ready-spring-angular/index.html` (335, generated:
+      fix `docs/academy/ARTICLE.md` in the blueprint repo), `academy/modules/2026/FSE/claude-code-configuration.html`
+      (387, generated: `scripts/generators/content/claude-code-configuration.md`), `mcp-end-to-end.html` (263) and
+      `mcp-primitives-lab.html` (295, generated: `scripts/generators/gen-mcp-page.py` / `gen-mcp-lab-page.py`).
+      Wording is Janaka's call (brand-voice), then `python3 scripts/build.py`.
+- [ ] Optional: `<link rel="describedby" href="/llms.txt">` in page heads (llms.txt v2 suggestion); `dateModified`
+      on the ProfilePage node in `scripts/gen-structured-data.py`.
+- [ ] Four external links return 403 (bot-blocking, not gone): dl.acm.org, medium.com, lyzr.ai, scientific.net
+      pages. Check by hand; replace only if actually dead.
+
+Not yet verified:
+- [ ] Real-browser WebMCP test: headless Chromium in WSL lacks `libnspr4`. Test in desktop Chrome with
+      `chrome://flags/#enable-webmcp-testing`, `python3 -m http.server 8000`, then `window.__jpWebMCP.tools` on `/`,
+      `/products/` and a blog post.
+- [ ] First scheduled `--pr` run of `scripts/run-maintenance.sh` (the Windows task, Monday 2026-09-28 09:00) and
+      that it opens a PR correctly. The local run without `--pr` already worked.
+
+Machine-specific (exists only on the original Windows/WSL PC, not in git):
+- Windows Task Scheduler task "janaka.me maintenance" (Mondays 09:00) → `wsl.exe -d Ubuntu -e bash -lc
+  /home/janaka/.local/bin/janaka-maintenance` (wrapper that runs `scripts/run-maintenance.sh --pr`; logs in
+  `~/.cache/janaka-maintenance/`). To move the schedule to another PC, recreate the wrapper and the task there (see
+  "Autonomous maintenance" in `docs/maintenance/claude-code.md`) and remove it on the old one with
+  `Unregister-ScheduledTask -TaskName "janaka.me maintenance"`, so the two machines don't both run it.
+- Local branch `maintenance/2026-09-25-1530` (a test run; it only touches the report) and untracked `reports/audit/`
+  (old audit scratch files). Neither was pushed; both are safe to delete.
+- Repo config `core.autocrlf=true` (needed only on Windows checkouts used from WSL).
+
 ## Repo specifics worth knowing
 
 - Publish with `git push origin HEAD:main` after `git pull --rebase origin main`. This checkout was made by Windows
