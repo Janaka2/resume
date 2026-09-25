@@ -1,0 +1,47 @@
+{
+ "apiVersion": "1",
+ "canonical": "https://janaka.me/lab/assetcare/",
+ "project": {
+  "slug": "assetcare",
+  "name": "AssetCare",
+  "kind": "reference-application",
+  "summary": "A production-deployed Java 25, Spring Boot, Angular and Kubernetes application demonstrating modern full-stack, cloud-native and AI-assisted software engineering.",
+  "url": "https://assetcare.janaka.me/",
+  "page": "https://janaka.me/lab/assetcare/",
+  "source": "https://github.com/Janaka2/spring-angular-production-blueprint",
+  "license": "https://www.apache.org/licenses/LICENSE-2.0",
+  "status": "live",
+  "availability": "Open source reference application, not for sale.",
+  "applicationCategory": "BusinessApplication",
+  "programmingLanguages": [
+   "Java",
+   "TypeScript"
+  ],
+  "stack": [
+   "Java 25",
+   "Spring Boot 4.1",
+   "Angular 22",
+   "Keycloak",
+   "PostgreSQL 18",
+   "Liquibase",
+   "MinIO",
+   "K3s",
+   "Helm",
+   "Traefik",
+   "cert-manager",
+   "Terraform",
+   "GitHub Actions"
+  ],
+  "notes": [
+   "Runs on one Hetzner CX33 created by Terraform; CI, security and release pipelines on GitHub Actions with signed multi-arch images.",
+   "The observability stack (Prometheus, Grafana, Loki, Tempo, OpenTelemetry) is an optional profile and is not running in production."
+  ],
+  "related": [
+   "https://janaka.me/blog/posts/assetcare-idea-to-production.html",
+   "https://janaka.me/academy/assetcare/",
+   "https://janaka.me/academy/production-ready-spring-angular/",
+   "https://janaka.me/products/#assetcare"
+  ],
+  "api": "https://janaka.me/api/public/v1/projects/assetcare.json"
+ }
+}

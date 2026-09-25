@@ -1,0 +1,43 @@
+{
+  "$comment": "Canonical identity facts for Janaka Premathilaka. Consumed by scripts/gen-jsonld.py (Person, WebSite, ProfilePage), scripts/gen-public-data.py (api/public/v1/profile.json, llms.txt) and through them by the WebMCP tools. Visible copy lives in partials/*.html and resume/index.html; scripts/validate-site.py checks that the two agree. Approved wording: .claude/skills/brand-voice/SKILL.md. Never add a fact that is not already published on the site.",
+  "id": "https://janaka.me/#me",
+  "name": "Janaka Premathilaka",
+  "jobTitle": "Senior Java Engineer & Solution Architect",
+  "positioning": "Banking-grade Java engineering, now bringing practical AI into regulated systems.",
+  "description": "22+ years of banking-grade Java at UBS, Credit Suisse and the European Commission. Now bringing LLM, RAG and agentic AI into regulated systems. Zug.",
+  "url": "https://janaka.me/",
+  "image": "https://janaka.me/assets/portrait-516.jpg",
+  "location": {
+    "locality": "Zug",
+    "country": "CH",
+    "workRadius": ["Zürich", "Zug", "Basel", "Remote"]
+  },
+  "contact": {
+    "email": "janaka2@gmail.com",
+    "page": "https://janaka.me/#contact"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/janakapremathilaka/",
+    "https://github.com/Janaka2",
+    "https://javawithme.wordpress.com/"
+  ],
+  "languages": [
+    { "code": "en", "name": "English", "level": "Full professional (C1/C2)" },
+    { "code": "de", "name": "German", "level": "Intermediate (B1, improving)" },
+    { "code": "si", "name": "Sinhala", "level": "Native" },
+    { "code": "fr", "name": "French", "level": "Basic" },
+    { "code": "nl", "name": "Dutch", "level": "Basic" }
+  ],
+  "knowsAbout": [
+    "Java", "Spring Boot", "Angular", "PostgreSQL", "Kubernetes", "Helm", "Terraform", "OpenTelemetry",
+    "Apache Kafka", "LLM integration", "RAG", "Agentic AI", "Claude Code", "Model Context Protocol",
+    "Banking systems", "Solution architecture"
+  ],
+  "cv": {
+    "page": "https://janaka.me/resume/",
+    "pdf": {
+      "en": "https://janaka.me/partials/Janaka_Premathilaka_CV_2026.pdf",
+      "de": "https://janaka.me/partials/Janaka_Premathilaka_Lebenslauf_2026_DE.pdf"
+    }
+  }
+}

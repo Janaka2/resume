@@ -1,0 +1,114 @@
+{
+ "apiVersion": "1",
+ "canonical": "https://janaka.me/products/",
+ "projects": [
+  {
+   "slug": "assetcare",
+   "name": "AssetCare",
+   "kind": "reference-application",
+   "summary": "A production-deployed Java 25, Spring Boot, Angular and Kubernetes application demonstrating modern full-stack, cloud-native and AI-assisted software engineering.",
+   "url": "https://assetcare.janaka.me/",
+   "page": "https://janaka.me/lab/assetcare/",
+   "source": "https://github.com/Janaka2/spring-angular-production-blueprint",
+   "license": "https://www.apache.org/licenses/LICENSE-2.0",
+   "status": "live",
+   "availability": "Open source reference application, not for sale.",
+   "applicationCategory": "BusinessApplication",
+   "programmingLanguages": [
+    "Java",
+    "TypeScript"
+   ],
+   "stack": [
+    "Java 25",
+    "Spring Boot 4.1",
+    "Angular 22",
+    "Keycloak",
+    "PostgreSQL 18",
+    "Liquibase",
+    "MinIO",
+    "K3s",
+    "Helm",
+    "Traefik",
+    "cert-manager",
+    "Terraform",
+    "GitHub Actions"
+   ],
+   "notes": [
+    "Runs on one Hetzner CX33 created by Terraform; CI, security and release pipelines on GitHub Actions with signed multi-arch images.",
+    "The observability stack (Prometheus, Grafana, Loki, Tempo, OpenTelemetry) is an optional profile and is not running in production."
+   ],
+   "related": [
+    "https://janaka.me/blog/posts/assetcare-idea-to-production.html",
+    "https://janaka.me/academy/assetcare/",
+    "https://janaka.me/academy/production-ready-spring-angular/",
+    "https://janaka.me/products/#assetcare"
+   ],
+   "api": "https://janaka.me/api/public/v1/projects/assetcare.json"
+  },
+  {
+   "slug": "nuechtern",
+   "name": "nüchtern",
+   "kind": "product",
+   "summary": "Fasting companion that keeps the biology visible: phase timer, hydration, electrolytes. Offline, German and English.",
+   "url": "https://nuechtern.app/",
+   "page": "https://janaka.me/products/#nuechtern",
+   "status": "live",
+   "availability": "Open to acquisition or licensing.",
+   "applicationCategory": "HealthApplication",
+   "privacy": "Records stay on the user's device.",
+   "api": "https://janaka.me/api/public/v1/projects/nuechtern.json"
+  },
+  {
+   "slug": "daily-momentum",
+   "name": "Daily Momentum",
+   "kind": "product",
+   "summary": "A quiet record of where the day went: one tap says what you are doing, everything else is derived. On-device only.",
+   "url": "https://daily-momentum.com/",
+   "page": "https://janaka.me/products/#daily-momentum",
+   "status": "live",
+   "availability": "Open to acquisition or licensing.",
+   "applicationCategory": "ProductivityApplication",
+   "privacy": "Records stay on the user's device.",
+   "api": "https://janaka.me/api/public/v1/projects/daily-momentum.json"
+  },
+  {
+   "slug": "loop",
+   "name": "Loop",
+   "kind": "product",
+   "summary": "Remembers what repeats and learns the rhythm from your own history, on your device or your own Drive.",
+   "url": "https://loop.janaka.me/",
+   "page": "https://janaka.me/products/#loop",
+   "status": "live",
+   "availability": "Open to acquisition or licensing.",
+   "applicationCategory": "ProductivityApplication",
+   "privacy": "Records stay on the user's device or in storage the user owns.",
+   "api": "https://janaka.me/api/public/v1/projects/loop.json"
+  },
+  {
+   "slug": "babyloop",
+   "name": "BabyLoop",
+   "kind": "product",
+   "summary": "Two-tap care log for babies and toddlers, with a daily summary and a PDF for the paediatrician. On your device or your own Drive.",
+   "url": "https://babyloop.janaka.me/",
+   "page": "https://janaka.me/products/#babyloop",
+   "status": "live",
+   "availability": "Open to acquisition or licensing.",
+   "applicationCategory": "LifestyleApplication",
+   "privacy": "Records stay on the user's device or in storage the user owns.",
+   "api": "https://janaka.me/api/public/v1/projects/babyloop.json"
+  },
+  {
+   "slug": "lefthere",
+   "name": "LeftHere",
+   "kind": "product",
+   "summary": "Take a photo and it remembers where you left the car, keys, bag or a favourite place; the map walks you back. On your device or your own Drive.",
+   "url": "https://here.janaka.me/",
+   "page": "https://janaka.me/products/#lefthere",
+   "status": "live",
+   "availability": "Open to acquisition or licensing.",
+   "applicationCategory": "UtilitiesApplication",
+   "privacy": "Records stay on the user's device or in storage the user owns.",
+   "api": "https://janaka.me/api/public/v1/projects/lefthere.json"
+  }
+ ]
+}

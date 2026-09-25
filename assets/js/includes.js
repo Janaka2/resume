@@ -21,3 +21,27 @@ async function loadPartials() {
   window.dispatchEvent(new Event('partials:loaded'));
 }
 document.addEventListener('DOMContentLoaded', loadPartials);
+
+/*
+ * WebMCP: expose the site's read-only tools to in-browser AI agents
+ * (assets/js/agent/, docs/ai/webmcp.md). Progressive enhancement: the adapter
+ * is fetched only when the browser exposes the API, so every other visitor
+ * pays one property check. Chrome needs an origin-trial token for janaka.me;
+ * paste it into WEBMCP_OT_TOKEN (empty = only browsers with the flag on).
+ */
+(function () {
+  var WEBMCP_OT_TOKEN = '';
+  try {
+    if (WEBMCP_OT_TOKEN && !document.querySelector('meta[http-equiv="origin-trial"]')) {
+      var m = document.createElement('meta');
+      m.httpEquiv = 'origin-trial';
+      m.content = WEBMCP_OT_TOKEN;
+      document.head.appendChild(m);
+    }
+    if (document.modelContext && window.isSecureContext) {
+      import('/assets/js/agent/webmcp.js')
+        .then(function (mod) { mod.start(window); })
+        .catch(function (e) { console.warn('[webmcp] adapter unavailable', e); });
+    }
+  } catch (e) { /* never let an optional feature break the page */ }
+})();

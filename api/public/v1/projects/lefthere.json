@@ -1,0 +1,17 @@
+{
+ "apiVersion": "1",
+ "canonical": "https://janaka.me/products/#lefthere",
+ "project": {
+  "slug": "lefthere",
+  "name": "LeftHere",
+  "kind": "product",
+  "summary": "Take a photo and it remembers where you left the car, keys, bag or a favourite place; the map walks you back. On your device or your own Drive.",
+  "url": "https://here.janaka.me/",
+  "page": "https://janaka.me/products/#lefthere",
+  "status": "live",
+  "availability": "Open to acquisition or licensing.",
+  "applicationCategory": "UtilitiesApplication",
+  "privacy": "Records stay on the user's device or in storage the user owns.",
+  "api": "https://janaka.me/api/public/v1/projects/lefthere.json"
+ }
+}

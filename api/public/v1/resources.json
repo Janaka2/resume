@@ -1,0 +1,1240 @@
+{
+ "apiVersion": "1",
+ "canonical": "https://janaka.me/",
+ "resources": [
+  {
+   "url": "https://janaka.me/lab/assetcare/",
+   "path": "/lab/assetcare/",
+   "title": "AssetCare case study: Java 25, Spring Boot, Angular and Kubernetes in production",
+   "section": "lab",
+   "sectionName": "Lab",
+   "description": "AssetCare is a production-deployed Java 25, Spring Boot, Angular and Kubernetes application demonstrating modern full-stack, cloud-native and AI-assisted software engineering. Architecture…",
+   "tags": [
+    "Java 25",
+    "Spring Boot",
+    "Angular",
+    "Kubernetes",
+    "K3s",
+    "Helm",
+    "Docker",
+    "PostgreSQL",
+    "Keycloak",
+    "cloud native",
+    "full stack Java",
+    "software architecture",
+    "AI-assisted software engineering",
+    "production deployment"
+   ],
+   "published": "2026-09-23",
+   "updated": "2026-09-25",
+   "readingMinutes": 17
+  },
+  {
+   "url": "https://janaka.me/blog/posts/assetcare-idea-to-production.html",
+   "path": "/blog/posts/assetcare-idea-to-production.html",
+   "title": "From Idea to Production: Building AssetCare with Java 25, Spring Boot, Angular, Kubernetes and AI",
+   "section": "blog",
+   "sectionName": "Blog",
+   "description": "How a Java 25, Spring Boot 4.1 and Angular 22 application went from a prototype to a live Kubernetes deployment on Hetzner with Helm, Keycloak, PostgreSQL and Let's Encrypt, what broke on the way…",
+   "tags": [
+    "Java 25",
+    "Spring Boot 4",
+    "Angular 22",
+    "Kubernetes",
+    "K3s",
+    "Helm",
+    "Docker",
+    "PostgreSQL",
+    "Keycloak",
+    "Terraform",
+    "cloud native",
+    "full stack Java",
+    "AI-assisted software engineering",
+    "production deployment"
+   ],
+   "published": "2026-09-23",
+   "updated": "2026-09-25",
+   "readingMinutes": 17
+  },
+  {
+   "url": "https://janaka.me/academy/assetcare/",
+   "path": "/academy/assetcare/",
+   "title": "From code to production: building AssetCare — a learning series",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "A fourteen-module learning series on the AssetCare reference application: architecture, Spring Boot, Angular, PostgreSQL and Liquibase, Keycloak, Docker, Kubernetes, Helm, Terraform, HTTPS, CI/CD…",
+   "tags": [
+    "Java 25",
+    "Spring Boot",
+    "Angular",
+    "Kubernetes",
+    "K3s",
+    "Helm",
+    "Docker",
+    "PostgreSQL",
+    "Liquibase",
+    "Keycloak",
+    "Terraform",
+    "cert-manager",
+    "CI/CD",
+    "observability",
+    "AI-assisted software engineering",
+    "learning series"
+   ],
+   "published": "2026-09-23",
+   "updated": "2026-09-25",
+   "readingMinutes": 5
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/claude-code-configuration.html",
+   "path": "/academy/modules/2026/FSE/claude-code-configuration.html",
+   "title": "Claude Code configuration, top down: CLAUDE.md, settings, hooks, skills, subagents, plugins and context",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "One diagram of how Claude Code is configured, then twelve levels that zoom into it: the two layers, where every file lives and who wins, what loads into context and when, the agent loop and its 33…",
+   "tags": [
+    "academy",
+    "claude",
+    "code",
+    "configuration",
+    "top"
+   ],
+   "published": "2026-09-21",
+   "updated": "2026-09-25",
+   "readingMinutes": 45
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/mcp-primitives-lab.html",
+   "path": "/academy/modules/2026/FSE/mcp-primitives-lab.html",
+   "title": "MCP primitives lab: one server, one client, every feature, both handshakes",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Learn the Model Context Protocol by watching it run: a verified Python server and client that exercise tools, resources, prompts, sampling, roots, elicitation and progress over stdio and Streamable…",
+   "tags": [
+    "academy",
+    "mcp",
+    "primitives",
+    "lab",
+    "one"
+   ],
+   "published": "2026-09-17",
+   "updated": "2026-09-25",
+   "readingMinutes": 44
+  },
+  {
+   "url": "https://janaka.me/academy/production-ready-spring-angular/",
+   "path": "/academy/production-ready-spring-angular/",
+   "title": "From CRUD to production: Angular + Spring Boot, served as a seven-course meal",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "AssetCare, a complete Angular 22 + Spring Boot 4.1 reference application built in the open: architecture, PostgreSQL migrations, a production API, the SPA, tests and scans, observability, Helm, K3s…",
+   "tags": [
+    "academy",
+    "crud",
+    "production",
+    "angular",
+    "spring"
+   ],
+   "published": "2026-09-16",
+   "updated": "2026-09-25",
+   "readingMinutes": 13
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/spring-ecosystem-and-spring-ai.html",
+   "path": "/academy/modules/2026/FSE/spring-ecosystem-and-spring-ai.html",
+   "title": "The Spring ecosystem, and what Spring AI can do now",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Spring Boot from 1.0 to 4.x in working examples, then a hands-on tour of Spring AI 2.0: ChatClient, structured output, tools, memory, RAG, MCP, evaluation and agent patterns.",
+   "tags": [
+    "academy",
+    "spring",
+    "ecosystem",
+    "can",
+    "now"
+   ],
+   "published": "2026-09-16",
+   "updated": "2026-09-25",
+   "readingMinutes": 14
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/mcp-end-to-end.html",
+   "path": "/academy/modules/2026/FSE/mcp-end-to-end.html",
+   "title": "MCP end to end: protocol, Java and Python servers, and the agent that uses them",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "The Model Context Protocol from first principles to production: the wire format, tools, resources, prompts, elicitation, transports, the 2026 stateless revision, security, and a verified Java…",
+   "tags": [
+    "academy",
+    "mcp",
+    "end",
+    "protocol",
+    "java"
+   ],
+   "published": "2026-09-16",
+   "updated": "2026-09-25",
+   "readingMinutes": 59
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/java-evolution-8-to-27.html",
+   "path": "/academy/modules/2026/FSE/java-evolution-8-to-27.html",
+   "title": "Java, release by release: 8 to 27",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Every Java release from 8 (2014) to 27 (September 2026): the features that mattered, why they mattered, and a working example for each, from lambdas to post-quantum TLS.",
+   "tags": [
+    "academy",
+    "java",
+    "release"
+   ],
+   "published": "2026-09-16",
+   "updated": "2026-09-25",
+   "readingMinutes": 28
+  },
+  {
+   "url": "https://janaka.me/blog/posts/spring-kafka-deadletter.html",
+   "path": "/blog/posts/spring-kafka-deadletter.html",
+   "title": "Dead-letter topics in Spring Kafka: retries and replay",
+   "section": "blog",
+   "sectionName": "Blog",
+   "description": "How to handle poison pills in Spring Kafka with DefaultErrorHandler, @RetryableTopic, DeadLetterPublishingRecoverer and a governed replay path.",
+   "tags": [
+    "blog",
+    "dead",
+    "letter",
+    "topics",
+    "spring"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 10
+  },
+  {
+   "url": "https://janaka.me/blog/posts/rag-faiss-patterns.html",
+   "path": "/blog/posts/rag-faiss-patterns.html",
+   "title": "RAG with FAISS: Chunking, MMR and Re-Ranking",
+   "section": "blog",
+   "sectionName": "Blog",
+   "description": "Why naive top-k retrieval fails, how to chunk and index with FAISS, and how MMR and cross-encoder re-ranking fix it for a regulated bank.",
+   "tags": [
+    "blog",
+    "rag",
+    "faiss",
+    "chunking",
+    "mmr"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 9
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/promting/templates.html",
+   "path": "/academy/modules/2026/FSE/promting/templates.html",
+   "title": "Templates",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Templates — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "templates"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/promting/strategies.html",
+   "path": "/academy/modules/2026/FSE/promting/strategies.html",
+   "title": "Strategies",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Strategies — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "strategies"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/promting/references.html",
+   "path": "/academy/modules/2026/FSE/promting/references.html",
+   "title": "References and Source Notes",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "References and Source Notes — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "references",
+    "source"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/promting/rag.html",
+   "path": "/academy/modules/2026/FSE/promting/rag.html",
+   "title": "RAG Prompting",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "RAG Prompting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "rag",
+    "prompting"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/promting/gpt54.html",
+   "path": "/academy/modules/2026/FSE/promting/gpt54.html",
+   "title": "GPT-5.4 Prompting Guide",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "GPT-5.4 Prompting Guide — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "gpt",
+    "prompting"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/promting/glossary.html",
+   "path": "/academy/modules/2026/FSE/promting/glossary.html",
+   "title": "Glossary in Easy English",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Glossary in Easy English — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "glossary",
+    "easy",
+    "english"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/promting/gemini.html",
+   "path": "/academy/modules/2026/FSE/promting/gemini.html",
+   "title": "Latest Gemini Prompting Guide",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Latest Gemini Prompting Guide — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "latest",
+    "gemini",
+    "prompting"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/promting/foundations.html",
+   "path": "/academy/modules/2026/FSE/promting/foundations.html",
+   "title": "Foundations",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Foundations — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "foundations"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/promting/developer.html",
+   "path": "/academy/modules/2026/FSE/promting/developer.html",
+   "title": "Developer Prompts",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Developer Prompts — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "developer",
+    "prompts"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/promting/developer-tasks.html",
+   "path": "/academy/modules/2026/FSE/promting/developer-tasks.html",
+   "title": "Most Useful Developer Task Prompts",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Most Useful Developer Task Prompts — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "most",
+    "useful",
+    "developer",
+    "task"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 3
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/promting/debugging.html",
+   "path": "/academy/modules/2026/FSE/promting/debugging.html",
+   "title": "Debugging Playbook",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Debugging Playbook — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "debugging",
+    "playbook"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/promting/comparison.html",
+   "path": "/academy/modules/2026/FSE/promting/comparison.html",
+   "title": "GPT-5.4 vs Gemini: Practical Prompting Differences",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "GPT-5.4 vs Gemini: Practical Prompting Differences — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "gpt",
+    "gemini",
+    "prompting",
+    "differences"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/promting/cheatsheet.html",
+   "path": "/academy/modules/2026/FSE/promting/cheatsheet.html",
+   "title": "Cheat Sheet",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Cheat Sheet — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "cheat",
+    "sheet"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/promting/agents.html",
+   "path": "/academy/modules/2026/FSE/promting/agents.html",
+   "title": "Agent Prompting",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Agent Prompting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "agent",
+    "prompting"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/entanglement/use-cases.html",
+   "path": "/academy/modules/2026/FSE/entanglement/use-cases.html",
+   "title": "Quantum Use Cases",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Quantum Use Cases — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "quantum",
+    "use",
+    "cases"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/entanglement/references.html",
+   "path": "/academy/modules/2026/FSE/entanglement/references.html",
+   "title": "References",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "References — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "references"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/entanglement/quantum-computing.html",
+   "path": "/academy/modules/2026/FSE/entanglement/quantum-computing.html",
+   "title": "Quantum Computing Explained",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Quantum Computing Explained — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "quantum",
+    "computing",
+    "explained"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/entanglement/entanglement.html",
+   "path": "/academy/modules/2026/FSE/entanglement/entanglement.html",
+   "title": "Entanglement Explained",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Entanglement Explained — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "entanglement",
+    "explained"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/entanglement/career-roadmap.html",
+   "path": "/academy/modules/2026/FSE/entanglement/career-roadmap.html",
+   "title": "Career Roadmap",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Career Roadmap — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "career",
+    "roadmap"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/day-01.html",
+   "path": "/academy/modules/2026/FSE/day-01.html",
+   "title": "Linux CLI Mastery",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Linux CLI Mastery — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "linux",
+    "cli",
+    "mastery"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/csv_operation.html",
+   "path": "/academy/modules/2026/FSE/csv_operation.html",
+   "title": "CLI Data Mastery: CSV & Shell Scripting",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "CLI Data Mastery: CSV & Shell Scripting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
+   "tags": [
+    "academy",
+    "cli",
+    "data",
+    "mastery",
+    "csv"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/Linux/vi-editor-complete.html",
+   "path": "/academy/modules/2026/FSE/Linux/vi-editor-complete.html",
+   "title": "VI Editor Complete",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+   "tags": [
+    "academy",
+    "editor"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 3
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/Linux/troubleshooting-resources.html",
+   "path": "/academy/modules/2026/FSE/Linux/troubleshooting-resources.html",
+   "title": "Disk Memory CPU Troubleshooting",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+   "tags": [
+    "academy",
+    "disk",
+    "memory",
+    "cpu",
+    "troubleshooting"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/Linux/top-50-debugging-commands.html",
+   "path": "/academy/modules/2026/FSE/Linux/top-50-debugging-commands.html",
+   "title": "Top 50 Debugging Commands",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+   "tags": [
+    "academy",
+    "top",
+    "debugging",
+    "commands"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 3
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/Linux/top-100-linux-commands.html",
+   "path": "/academy/modules/2026/FSE/Linux/top-100-linux-commands.html",
+   "title": "Top 100 Linux Commands",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+   "tags": [
+    "academy",
+    "top",
+    "linux",
+    "commands"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 4
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/Linux/production-one-liners.html",
+   "path": "/academy/modules/2026/FSE/Linux/production-one-liners.html",
+   "title": "Production One-Liners",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+   "tags": [
+    "academy",
+    "production",
+    "one",
+    "liners"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/Linux/log-investigation-techniques.html",
+   "path": "/academy/modules/2026/FSE/Linux/log-investigation-techniques.html",
+   "title": "Log Investigation Techniques",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+   "tags": [
+    "academy",
+    "log",
+    "investigation",
+    "techniques"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/Linux/file-handling.html",
+   "path": "/academy/modules/2026/FSE/Linux/file-handling.html",
+   "title": "File Handling",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+   "tags": [
+    "academy",
+    "file",
+    "handling"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/Linux/awk-sed-mastery.html",
+   "path": "/academy/modules/2026/FSE/Linux/awk-sed-mastery.html",
+   "title": "awk + sed Mastery",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
+   "tags": [
+    "academy",
+    "awk",
+    "sed",
+    "mastery"
+   ],
+   "published": "2026-09-15",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/products/",
+   "path": "/products/",
+   "title": "Products for Sale — Privacy-First Apps",
+   "section": "products",
+   "sectionName": "Products",
+   "description": "Swiss-made, privacy-first web apps, finished and live, available for acquisition or licensing: nüchtern, Daily Momentum, Loop, BabyLoop and LeftHere. Built in Zug to banking-grade standards.",
+   "tags": [
+    "products",
+    "sale",
+    "privacy",
+    "first",
+    "apps"
+   ],
+   "published": "2026-09-10",
+   "updated": "2026-09-25",
+   "readingMinutes": 11
+  },
+  {
+   "url": "https://janaka.me/lab/Notes/llm-study-notes-handwritten-style.html",
+   "path": "/lab/Notes/llm-study-notes-handwritten-style.html",
+   "title": "LLM Study Notes — Interactive Highlighter Toolbox",
+   "section": "lab",
+   "sectionName": "Lab",
+   "description": "Interactive study notes on assessing large language models with a highlighter toolbox, sticky notes, and explain, analogy and ELI5 helpers.",
+   "tags": [
+    "lab",
+    "llm",
+    "study",
+    "interactive",
+    "highlighter"
+   ],
+   "published": "2026-09-09",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/lab/Notes/llm-hand%E2%80%91annotated-demo5.html",
+   "path": "/lab/Notes/llm-hand%E2%80%91annotated-demo5.html",
+   "title": "LLM Notes — Hand‑Annotated Highlights Demo + Toolbox",
+   "section": "lab",
+   "sectionName": "Lab",
+   "description": "Interactive hand-annotated notes on large language models with a highlighter toolbox: mark up, add sticky notes, save, load and export your annotations.",
+   "tags": [
+    "lab",
+    "llm",
+    "hand",
+    "annotated",
+    "highlights"
+   ],
+   "published": "2026-09-09",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/lab/Notes/hand-book-note3.html",
+   "path": "/lab/Notes/hand-book-note3.html",
+   "title": "LLM Study Notes — Assessing LLMs, Handwritten Style",
+   "section": "lab",
+   "sectionName": "Lab",
+   "description": "Handwritten-style study notes on assessing large language models: why they are large, how self-attention works, and why hallucination is the big problem.",
+   "tags": [
+    "lab",
+    "llm",
+    "study",
+    "assessing",
+    "llms"
+   ],
+   "published": "2026-09-09",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/lab/Notes/hand-book-note2.html",
+   "path": "/lab/Notes/hand-book-note2.html",
+   "title": "Study‑Style Notes: Aspects & Assessment of LLMs",
+   "section": "lab",
+   "sectionName": "Lab",
+   "description": "Study-style notes on assessing large language models: factuality, reasoning, safety, latency and cost, with the retrieval, QA and generation metrics.",
+   "tags": [
+    "lab",
+    "study",
+    "style",
+    "aspects",
+    "assessment"
+   ],
+   "published": "2026-09-09",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/lab/Notes/hand-book-note1.html",
+   "path": "/lab/Notes/hand-book-note1.html",
+   "title": "LLM Notes — Hand‑Annotated Highlights Demo",
+   "section": "lab",
+   "sectionName": "Lab",
+   "description": "Hand-annotated study notes on what large language models are used for: retrieval and RAG, content generation, reasoning, coding and agents.",
+   "tags": [
+    "lab",
+    "llm",
+    "hand",
+    "annotated",
+    "highlights"
+   ],
+   "published": "2026-09-09",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/ai/",
+   "path": "/ai/",
+   "title": "AI Agents in Regulated Systems",
+   "section": "ai",
+   "sectionName": "AI",
+   "description": "Agents that are readable, reliable and worth shipping. Production patterns for LLM, RAG, MCP and evals, and five live products built with AI in the loop.",
+   "tags": [
+    "ai",
+    "agents",
+    "regulated",
+    "systems"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 7
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/virtual_threads_java_21_academy_page.html",
+   "path": "/academy/modules/2026/FSE/virtual_threads_java_21_academy_page.html",
+   "title": "Java 21 Virtual Threads - Complete Practical Guide",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Java 21 virtual threads in practice: what they are, when to use them and when not to, with examples and production considerations for senior engineers.",
+   "tags": [
+    "academy",
+    "java",
+    "virtual",
+    "threads"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 7
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/spring-boot.html",
+   "path": "/academy/modules/2026/FSE/spring-boot.html",
+   "title": "Spring Boot 3.3 Ecosystem",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Study roadmap for Spring Boot: REST APIs with validation and OpenAPI, JPA and migrations, OAuth2/JWT security, and tests, metrics, tracing and health probes.",
+   "tags": [
+    "academy",
+    "spring",
+    "boot",
+    "ecosystem"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/react.html",
+   "path": "/academy/modules/2026/FSE/react.html",
+   "title": "React 19 + TypeScript Frontend Engineering",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Study roadmap for React 19 with TypeScript: accessible components, state and async data flows, forms and error boundaries, testing, linting and performance budgets.",
+   "tags": [
+    "academy",
+    "react",
+    "typescript",
+    "frontend",
+    "engineering"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/promting/",
+   "path": "/academy/modules/2026/FSE/promting/",
+   "title": "Prompt Engineering Handbook",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Prompt engineering handbook for software engineers: foundations, templates and strategies for LLMs, agent workflows, RAG, debugging and daily coding.",
+   "tags": [
+    "academy",
+    "prompt",
+    "engineering",
+    "handbook"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/performanceTuning/DBPerformanceTuning.html",
+   "path": "/academy/modules/2026/FSE/performanceTuning/DBPerformanceTuning.html",
+   "title": "Learn How to Solve Critical Performance Problems with Step by Step Approach!",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "A step-by-step Oracle performance handbook for real incidents: DB time, SQL monitoring, execution plans, indexing, optimizer statistics and plan stability.",
+   "tags": [
+    "academy",
+    "solve",
+    "critical",
+    "performance",
+    "problems"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 10
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/modenizeJava.html",
+   "path": "/academy/modules/2026/FSE/modenizeJava.html",
+   "title": "Modernizing the Java Journey: A Comprehensive Study Guide",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "A study guide to restarting with Java in 2026: the state of the platform, choosing among ecosystem options, virtual threads, and automated migration tools.",
+   "tags": [
+    "academy",
+    "modernizing",
+    "java",
+    "journey",
+    "study"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 7
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/microservices.html",
+   "path": "/academy/modules/2026/FSE/microservices.html",
+   "title": "Advanced Microservices & Distributed Systems",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Study roadmap for microservices: bounded contexts and contracts, timeouts, retries, circuit breakers and bulkheads, sagas, API versioning and platform guardrails.",
+   "tags": [
+    "academy",
+    "advanced",
+    "microservices",
+    "distributed",
+    "systems"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/linux.html",
+   "path": "/academy/modules/2026/FSE/linux.html",
+   "title": "Linux & CLI Mastery for Java Developers",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Linux and CLI quick reference for Java backend engineers: filesystem layout, file operations, search and filtering, text processing and everyday production commands.",
+   "tags": [
+    "academy",
+    "linux",
+    "cli",
+    "mastery",
+    "java"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/leadership.html",
+   "path": "/academy/modules/2026/FSE/leadership.html",
+   "title": "Leadership, Communication & Delivery Excellence",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Study roadmap for engineering leadership: explaining architecture trade-offs, planning and risk management, mentoring, incident response and blameless postmortems.",
+   "tags": [
+    "academy",
+    "leadership",
+    "communication",
+    "delivery",
+    "excellence"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/kafka.html",
+   "path": "/academy/modules/2026/FSE/kafka.html",
+   "title": "Apache Kafka 4.x & Event-Driven Architecture",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Study roadmap for Apache Kafka 4.x: topics, partitions and keys, reliable producers and consumers, schema evolution, retries, DLQs and exactly-once trade-offs.",
+   "tags": [
+    "academy",
+    "apache",
+    "kafka",
+    "event",
+    "driven"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/java-core.html",
+   "path": "/academy/modules/2026/FSE/java-core.html",
+   "title": "Core Java Mastery (Java 22)",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Study roadmap for modern core Java: records, sealed hierarchies and immutability, virtual threads and structured concurrency, JVM profiling, testing and secure defaults.",
+   "tags": [
+    "academy",
+    "core",
+    "java",
+    "mastery"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/hexagonal-architecture-guide.html",
+   "path": "/academy/modules/2026/FSE/hexagonal-architecture-guide.html",
+   "title": "Hexagonal Architecture for Senior Java Developers (2026 Edition)",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Hexagonal architecture (ports and adapters) for Java and Spring: what it is, how to apply it without over-engineering, and how it improves testability and evolution.",
+   "tags": [
+    "academy",
+    "hexagonal",
+    "architecture",
+    "senior",
+    "java"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 10
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/foundation.html",
+   "path": "/academy/modules/2026/FSE/foundation.html",
+   "title": "Foundation: Engineering Mindset & Setup",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "The first Academy module: engineering mindset, a working development setup, Git discipline and clean code habits from day one.",
+   "tags": [
+    "academy",
+    "foundation",
+    "engineering",
+    "mindset",
+    "setup"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 5
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/entanglement/",
+   "path": "/academy/modules/2026/FSE/entanglement/",
+   "title": "Practical Quantum Entanglement and Quantum Computing",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Quantum entanglement and quantum computing explained simply for software engineers: what entanglement means, real use cases, current limits and a career roadmap.",
+   "tags": [
+    "academy",
+    "quantum",
+    "entanglement",
+    "computing"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/devops-cloud.html",
+   "path": "/academy/modules/2026/FSE/devops-cloud.html",
+   "title": "DevOps & Cloud: Docker · Kubernetes · CI/CD",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Study roadmap for DevOps and cloud: multi-stage Docker builds, production-safe Kubernetes manifests, CI/CD gates and rollouts, observability and incident response.",
+   "tags": [
+    "academy",
+    "devops",
+    "cloud",
+    "docker",
+    "kubernetes"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/design-patterns-architecture-playbook.html",
+   "path": "/academy/modules/2026/FSE/design-patterns-architecture-playbook.html",
+   "title": "Design Patterns & Architecture Playground",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Java design patterns chosen by business situation: which pattern fits, why, and the trade-offs to explain, with a quick selection playbook and a learning path.",
+   "tags": [
+    "academy",
+    "design",
+    "patterns",
+    "architecture",
+    "playground"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 2
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/capstone.html",
+   "path": "/academy/modules/2026/FSE/capstone.html",
+   "title": "Enterprise Capstone: Global Logistics Platform",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Capstone study roadmap: design a full-stack logistics platform on Spring Boot, React, Kafka, Postgres and Kubernetes, with observability, security and chaos drills.",
+   "tags": [
+    "academy",
+    "enterprise",
+    "capstone",
+    "global",
+    "logistics"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/bash_shell_scripting_guide_blog.html",
+   "path": "/academy/modules/2026/FSE/bash_shell_scripting_guide_blog.html",
+   "title": "Bash Shell Scripting Guide",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "A step-by-step Bash scripting guide: first scripts, variables, arguments, input, arrays, conditionals, loops, functions, debugging and practical scripting habits.",
+   "tags": [
+    "academy",
+    "bash",
+    "shell",
+    "scripting"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 11
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/ai-integration.html",
+   "path": "/academy/modules/2026/FSE/ai-integration.html",
+   "title": "AI Integration for Enterprise Java Systems",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Study roadmap for AI in enterprise Java: LLM calls from Java services, RAG with embeddings and vector search, guardrails, and evaluation of quality, cost and latency.",
+   "tags": [
+    "academy",
+    "integration",
+    "enterprise",
+    "java",
+    "systems"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/academy/modules/2026/FSE/Linux/",
+   "path": "/academy/modules/2026/FSE/Linux/",
+   "title": "Linux CLI Mastery",
+   "section": "academy",
+   "sectionName": "Academy",
+   "description": "Linux CLI handbook for backend engineers: top commands, debugging commands, awk and sed, file handling, log investigation, one-liners, vi and troubleshooting.",
+   "tags": [
+    "academy",
+    "linux",
+    "cli",
+    "mastery"
+   ],
+   "published": "2026-08-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 1
+  },
+  {
+   "url": "https://janaka.me/blog/posts/machine-learning-blog.html",
+   "path": "/blog/posts/machine-learning-blog.html",
+   "title": "Machine Learning: A Comprehensive Top-Down Guide",
+   "section": "blog",
+   "sectionName": "Blog",
+   "description": "A top-down introduction to machine learning: the workflow, the algorithms and the evaluation.",
+   "tags": [
+    "blog",
+    "machine",
+    "learning",
+    "top",
+    "down"
+   ],
+   "published": "2025-10-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 35
+  },
+  {
+   "url": "https://janaka.me/blog/posts/ai-evaluation-frameworks.html",
+   "path": "/blog/posts/ai-evaluation-frameworks.html",
+   "title": "Evals — Designing and Interpreting AI Evaluation Frameworks",
+   "section": "blog",
+   "sectionName": "Blog",
+   "description": "Building and reading AI evaluation pipelines: metrics, tooling and agentic behaviour.",
+   "tags": [
+    "blog",
+    "evals",
+    "designing",
+    "interpreting",
+    "evaluation"
+   ],
+   "published": "2025-10-29",
+   "updated": "2026-09-25",
+   "readingMinutes": 84
+  },
+  {
+   "url": "https://janaka.me/blog/posts/mcp-agent-integration.html",
+   "path": "/blog/posts/mcp-agent-integration.html",
+   "title": "MCP for Agent Integrations: the Model Context Protocol",
+   "section": "blog",
+   "sectionName": "Blog",
+   "description": "What the Model Context Protocol is, its three primitives and two transports, a minimal Python server, and how to run it safely in a regulated bank.",
+   "tags": [
+    "blog",
+    "mcp",
+    "agent",
+    "integrations",
+    "model"
+   ],
+   "published": "2025-10-19",
+   "updated": "2026-09-25",
+   "readingMinutes": 8
+  }
+ ]
+}

@@ -27,26 +27,31 @@
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "SoftwareSourceCode",
-        "name": "AssetCare",
-        "description": "A production-deployed Java 25, Spring Boot, Angular and Kubernetes reference application: asset and maintenance management with Keycloak identity, PostgreSQL, Liquibase, MinIO, Helm, K3s, cert-manager and GitHub Actions.",
-        "codeRepository": "https://github.com/Janaka2/spring-angular-production-blueprint",
-        "programmingLanguage": ["Java", "TypeScript"],
-        "runtimePlatform": ["Java 25", "Spring Boot 4.1", "Angular 22", "Kubernetes"],
-        "license": "https://www.apache.org/licenses/LICENSE-2.0",
-        "url": "https://assetcare.janaka.me",
-        "author": { "@type": "Person", "name": "Janaka Premathilaka", "url": "https://janaka.me" }
-      },
-      {
         "@type": "TechArticle",
         "headline": "AssetCare case study: Java 25, Spring Boot, Angular and Kubernetes in production",
         "description": "Architecture, security, delivery pipeline, infrastructure and the AI-assisted engineering workflow behind a production-deployed reference application.",
         "datePublished": "2026-09-23",
         "dateModified": "2026-09-23",
-        "author": { "@type": "Person", "name": "Janaka Premathilaka", "url": "https://janaka.me" },
-        "publisher": { "@type": "Person", "name": "Janaka Premathilaka", "url": "https://janaka.me" },
+        "author": {
+          "@type": "Person",
+          "@id": "https://janaka.me/#me",
+          "name": "Janaka Premathilaka",
+          "url": "https://janaka.me/"
+        },
+        "publisher": {
+          "@type": "Person",
+          "@id": "https://janaka.me/#me",
+          "name": "Janaka Premathilaka",
+          "url": "https://janaka.me/"
+        },
         "image": "https://janaka.me/assets/og/assetcare.png",
-        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://janaka.me/lab/assetcare/" }
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://janaka.me/lab/assetcare/"
+        },
+        "about": {
+          "@id": "https://janaka.me/lab/assetcare/#assetcare"
+        }
       }
     ]
   }
@@ -75,6 +80,68 @@
   <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
   <link rel="manifest" href="/assets/site.webmanifest">
   <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script type="application/ld+json" data-generated="gen-structured-data">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareSourceCode",
+        "@id": "https://janaka.me/lab/assetcare/#assetcare",
+        "name": "AssetCare",
+        "description": "A production-deployed Java 25, Spring Boot, Angular and Kubernetes application demonstrating modern full-stack, cloud-native and AI-assisted software engineering.",
+        "url": "https://assetcare.janaka.me/",
+        "author": {
+          "@id": "https://janaka.me/#me"
+        },
+        "codeRepository": "https://github.com/Janaka2/spring-angular-production-blueprint",
+        "programmingLanguage": [
+          "Java",
+          "TypeScript"
+        ],
+        "runtimePlatform": [
+          "Java 25",
+          "Spring Boot 4.1",
+          "Angular 22",
+          "Keycloak",
+          "PostgreSQL 18",
+          "Liquibase",
+          "MinIO",
+          "K3s",
+          "Helm",
+          "Traefik",
+          "cert-manager",
+          "Terraform",
+          "GitHub Actions"
+        ],
+        "license": "https://www.apache.org/licenses/LICENSE-2.0"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://janaka.me/lab/assetcare/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://janaka.me/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Lab",
+            "item": "https://janaka.me/lab/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "AssetCare case study: Java 25, Spring Boot, Angular and Kubernetes in production",
+            "item": "https://janaka.me/lab/assetcare/"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>

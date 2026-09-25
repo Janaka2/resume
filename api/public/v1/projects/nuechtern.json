@@ -1,0 +1,17 @@
+{
+ "apiVersion": "1",
+ "canonical": "https://janaka.me/products/#nuechtern",
+ "project": {
+  "slug": "nuechtern",
+  "name": "nüchtern",
+  "kind": "product",
+  "summary": "Fasting companion that keeps the biology visible: phase timer, hydration, electrolytes. Offline, German and English.",
+  "url": "https://nuechtern.app/",
+  "page": "https://janaka.me/products/#nuechtern",
+  "status": "live",
+  "availability": "Open to acquisition or licensing.",
+  "applicationCategory": "HealthApplication",
+  "privacy": "Records stay on the user's device.",
+  "api": "https://janaka.me/api/public/v1/projects/nuechtern.json"
+ }
+}

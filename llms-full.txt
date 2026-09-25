@@ -1,0 +1,196 @@
+# Janaka Premathilaka
+
+> Senior Java Engineer & Solution Architect, Zug, Switzerland. Banking-grade Java engineering, now bringing practical AI into regulated systems.
+
+Every page linked here is plain HTML that reads without JavaScript. The same facts are available as JSON under /api/public/v1/ and as Schema.org JSON-LD in each page.
+
+## Profile
+
+- [Home](https://janaka.me/): 22+ years of banking-grade Java at UBS, Credit Suisse and the European Commission. Now bringing LLM, RAG and agentic AI into regulated systems. Zug.
+- [CV](https://janaka.me/resume/): experience, certifications, education and stack, English and German
+- [Profile JSON](https://janaka.me/api/public/v1/profile.json): the CV as structured data
+- [Contact](https://janaka.me/#contact): email janaka2@gmail.com
+
+### Experience
+
+- 01.2024 — present · Senior Full-Stack Solution Engineer (Lead), UBS / Cognizant (Zürich, Switzerland)
+  - Full ownership of six enterprise applications through the Credit Suisse–UBS merger — system stability and zero operational interruptions under sustained pressure.
+  - Led teams through multi-platform migrations and technology decommissioning, resolving high-priority production incidents with calm, decisive execution.
+  - Led the application-archiving initiative to 100% on-time delivery under audit-grade deadlines; built Linux + Oracle CLI pipelines for multi-gigabyte regulated data feeds.
+  - Designed and shipped LLM and agentic-RAG automations for internal banking workflows, integrated with existing Java services — including local Llama 3 inference for data that cannot leave the bank’s perimeter.
+  - Hands-on with the OpenAI Agents SDK and Model Context Protocol (MCP): multi-tool orchestration, guardrails, and RAG-powered enterprise applications in Python.
+  - Mentor junior engineers, lead code reviews, carry the on-call (Pikett) pager.
+- 05.2019 — 01.2024 · IT Solution Developer, Credit Suisse / Cognizant (Zürich, Switzerland · remote from the UK 2019–2020)
+  - 100% ownership of the mission-critical Master Data Management tool, built from scratch — the bank’s golden data source for search and reporting.
+  - Architected and delivered three cloud-native applications end-to-end (Spring Boot, React, Oracle, microservices), including a web application for dynamic consumer endpoints and case-management tools with streaming integration.
+  - Low-latency front-office FX trading platform (Java 11–17): ≈20% responsiveness gain through multithreading and memory tuning.
+  - Built the team’s CI/CD, Kubernetes/Docker and observability pipelines; championed TDD with JUnit and Mockito.
+- 01.2018 — 05.2019 · IT Solution Development Specialist, UBS / Cognizant (Zürich, Switzerland)
+  - Modernised 20+ legacy components into Spring Boot microservices with robust solution architectures.
+  - Automated Jenkins delivery pipelines; migrated the codebase from SVN to Git.
+  - Strengthened testing with JUnit, integration tests and Cucumber BDD.
+- 06.2011 — 01.2018 · Senior Full-Stack Java/JEE Developer, European Commission (DIGIT Division) (Brussels, Belgium)
+  - Engineered and maintained the EU’s core e-procurement system — mission-critical, multi-language, public-sector — over a 6.5-year tenure; the system contributed about 40% of the department’s total revenue.
+  - Distributed integration flows with Spring Integration; JBPM workflows for approvals, escalations and audit trails.
+  - Full-stack delivery (Angular, Spring/Hibernate, EJB3, Oracle, WebLogic); release ownership and L3 production support.
+- 05.2004 — 06.2011 · Senior Java/JEE Consultant & Engineer, Johnson & Johnson · Nokia Siemens · Union Bank of Colombo · and others (Belgium & Sri Lanka)
+  - Core technical consultant across healthcare, telecom, banking and e-commerce — enterprise-grade Java/JEE solutions.
+  - Union Bank of Colombo: core banking modules — loan system, lease schedules, cheque and passbook printing (EJB2, JSP, DB2 on AS/400).
+  - Modernised architectures in Agile/Scrum settings; SOAP/REST integration; Oracle/MySQL optimisation.
+
+### Certifications and courses
+
+- Claude Code 101 (Anthropic): ✓ Badge · completed August 2026
+- Claude Code in Action (Anthropic): ✓ Badge · completed August 2026
+- AI Fluency: Framework & Foundations (Anthropic): ✓ Completed September 2026
+- AI Fluency for Builders (Anthropic): ✓ Completed August — September 2026
+- AI Fluency for educators (Anthropic): ✓ Completed August — September 2026
+- AI Fluency for students (Anthropic): ✓ Completed August — September 2026
+- Introduction to agent skills (Anthropic · Claude Code): ✓ Completed September 2026
+- Introduction to Model Context Protocol (Anthropic): ✓ Completed September 2026
+- Model Context Protocol: Advanced Topics (Anthropic): ✓ Completed September 2026
+- Claude Certified Architect — Professional (Anthropic): Exam preparation · 2026
+- CKA — Certified Kubernetes Administrator (The Linux Foundation / CNCF): Issued 2024
+- AI Automation: Build LLM Apps & AI-Agents with n8n & APIs (Arnold Oberleiter): ✓ 100% complete
+- AZ-900: Microsoft Azure Fundamentals Exam test 2025 (480Q) (Global Edtech): ✓ 100% complete
+- Helm 3 — Package Manager For Kubernetes (Himanshu Sharma): ✓ 100% complete
+- The Complete Agentic AI Engineering Course (2025) (Ed Donner, Ligency Team): Completed 21 September 2025; ✓ 100% complete
+- IntelliJ IDEA Tricks to Boost Productivity for Java Devs (Tao W., James Lee, Jiarui Zhou): ✓ 100% complete
+- Ready for Production with Spring Boot Actuator (John Thompson, Spring Ahead Code Academy): ✓ 100% complete
+- Escalate Scala Training — Setup Instructions (Dick Wall): ✓ 100% complete
+- SQL Programming Basics (Global Academy): ✓ 100% complete
+- Communication & Social Skills (MicroLearn Ltd): ✓ 100% complete
+- Remember the German Articles der, die, das (Mini-Course) (Anja Winter): ✓ 100% complete
+- Mental Health First Aid Skills (Mark Paddock): ✓ 100% complete
+- Mastering Success: Achieve Happiness, Wealth & Health (Chris Croft, CRFT Productions): 98% complete
+- First Aid (Arthur Jackson): ✓ 100% complete
+- Sun Certified Enterprise Architect (SCEA) (Sun Microsystems): Issued January 2006
+- Sun Certified Business Component Developer (SCBCD) (Sun Microsystems): Issued January 2006
+- Sun Certified Java Programmer (SCJP) (Sun Microsystems): Issued January 2006
+
+### Education
+
+- University of Sri Jayewardenepura: BSc — Computer Science, Statistics & Mathematics, 1999 — 2004
+- University of Colombo: BIT — Bachelor of Information Technology, 1999 — 2004 · 6 semesters completed
+- University of Moratuwa: Master’s in Computer Engineering, 2007 — 2008 · paused on relocating to Belgium
+
+### Languages
+
+- English: Full professional (C1/C2)
+- German: Intermediate (B1, improving)
+- Sinhala: Native
+- French: Basic
+- Dutch: Basic
+
+## Projects and products
+
+- [AssetCare](https://janaka.me/lab/assetcare/): A production-deployed Java 25, Spring Boot, Angular and Kubernetes application demonstrating modern full-stack, cloud-native and AI-assisted software engineering. Open source reference application, not for sale.
+  - Live: https://assetcare.janaka.me/ · Source: https://github.com/Janaka2/spring-angular-production-blueprint
+  - Stack: Java 25, Spring Boot 4.1, Angular 22, Keycloak, PostgreSQL 18, Liquibase, MinIO, K3s, Helm, Traefik, cert-manager, Terraform, GitHub Actions
+  - Runs on one Hetzner CX33 created by Terraform; CI, security and release pipelines on GitHub Actions with signed multi-arch images.
+  - The observability stack (Prometheus, Grafana, Loki, Tempo, OpenTelemetry) is an optional profile and is not running in production.
+- [nüchtern](https://janaka.me/products/#nuechtern): Fasting companion that keeps the biology visible: phase timer, hydration, electrolytes. Offline, German and English. Open to acquisition or licensing.
+  - Live: https://nuechtern.app/
+- [Daily Momentum](https://janaka.me/products/#daily-momentum): A quiet record of where the day went: one tap says what you are doing, everything else is derived. On-device only. Open to acquisition or licensing.
+  - Live: https://daily-momentum.com/
+- [Loop](https://janaka.me/products/#loop): Remembers what repeats and learns the rhythm from your own history, on your device or your own Drive. Open to acquisition or licensing.
+  - Live: https://loop.janaka.me/
+- [BabyLoop](https://janaka.me/products/#babyloop): Two-tap care log for babies and toddlers, with a daily summary and a PDF for the paediatrician. On your device or your own Drive. Open to acquisition or licensing.
+  - Live: https://babyloop.janaka.me/
+- [LeftHere](https://janaka.me/products/#lefthere): Take a photo and it remembers where you left the car, keys, bag or a favourite place; the map walks you back. On your device or your own Drive. Open to acquisition or licensing.
+  - Live: https://here.janaka.me/
+
+## Blog
+
+- [Blog](https://janaka.me/blog/): Clear, hands-on articles on Java, Kafka, RAG, agents and evals.
+- [From Idea to Production: Building AssetCare with Java 25, Spring Boot, Angular, Kubernetes and AI](https://janaka.me/blog/posts/assetcare-idea-to-production.html): How a Java 25, Spring Boot 4.1 and Angular 22 application went from a prototype to a live Kubernetes deployment on Hetzner with Helm, Keycloak, PostgreSQL and Let's Encrypt, what broke on the way…
+- [Dead-letter topics in Spring Kafka: retries and replay](https://janaka.me/blog/posts/spring-kafka-deadletter.html): How to handle poison pills in Spring Kafka with DefaultErrorHandler, @RetryableTopic, DeadLetterPublishingRecoverer and a governed replay path.
+- [RAG with FAISS: Chunking, MMR and Re-Ranking](https://janaka.me/blog/posts/rag-faiss-patterns.html): Why naive top-k retrieval fails, how to chunk and index with FAISS, and how MMR and cross-encoder re-ranking fix it for a regulated bank.
+- [Machine Learning: A Comprehensive Top-Down Guide](https://janaka.me/blog/posts/machine-learning-blog.html): A top-down introduction to machine learning: the workflow, the algorithms and the evaluation.
+- [Evals — Designing and Interpreting AI Evaluation Frameworks](https://janaka.me/blog/posts/ai-evaluation-frameworks.html): Building and reading AI evaluation pipelines: metrics, tooling and agentic behaviour.
+- [MCP for Agent Integrations: the Model Context Protocol](https://janaka.me/blog/posts/mcp-agent-integration.html): What the Model Context Protocol is, its three primitives and two transports, a minimal Python server, and how to run it safely in a regulated bank.
+
+## AI
+
+- [AI](https://janaka.me/ai/): Agents that are readable, reliable and worth shipping.
+
+## Lab
+
+- [Lab](https://janaka.me/lab/): Experiments and demos, runnable, with notes.
+- [AssetCare case study: Java 25, Spring Boot, Angular and Kubernetes in production](https://janaka.me/lab/assetcare/): AssetCare is a production-deployed Java 25, Spring Boot, Angular and Kubernetes application demonstrating modern full-stack, cloud-native and AI-assisted software engineering. Architecture…
+- [LLM Study Notes — Interactive Highlighter Toolbox](https://janaka.me/lab/Notes/llm-study-notes-handwritten-style.html): Interactive study notes on assessing large language models with a highlighter toolbox, sticky notes, and explain, analogy and ELI5 helpers.
+- [LLM Notes — Hand‑Annotated Highlights Demo + Toolbox](https://janaka.me/lab/Notes/llm-hand%E2%80%91annotated-demo5.html): Interactive hand-annotated notes on large language models with a highlighter toolbox: mark up, add sticky notes, save, load and export your annotations.
+- [LLM Study Notes — Assessing LLMs, Handwritten Style](https://janaka.me/lab/Notes/hand-book-note3.html): Handwritten-style study notes on assessing large language models: why they are large, how self-attention works, and why hallucination is the big problem.
+- [Study‑Style Notes: Aspects & Assessment of LLMs](https://janaka.me/lab/Notes/hand-book-note2.html): Study-style notes on assessing large language models: factuality, reasoning, safety, latency and cost, with the retrieval, QA and generation metrics.
+- [LLM Notes — Hand‑Annotated Highlights Demo](https://janaka.me/lab/Notes/hand-book-note1.html): Hand-annotated study notes on what large language models are used for: retrieval and RAG, content generation, reasoning, coding and agents.
+
+## Academy
+
+- [Academy](https://janaka.me/academy/): Engineers who surpass their teacher: daily notes and learning paths.
+- [From code to production: building AssetCare — a learning series](https://janaka.me/academy/assetcare/): A fourteen-module learning series on the AssetCare reference application: architecture, Spring Boot, Angular, PostgreSQL and Liquibase, Keycloak, Docker, Kubernetes, Helm, Terraform, HTTPS, CI/CD…
+- [Claude Code configuration, top down: CLAUDE.md, settings, hooks, skills, subagents, plugins and context](https://janaka.me/academy/modules/2026/FSE/claude-code-configuration.html): One diagram of how Claude Code is configured, then twelve levels that zoom into it: the two layers, where every file lives and who wins, what loads into context and when, the agent loop and its 33…
+- [MCP primitives lab: one server, one client, every feature, both handshakes](https://janaka.me/academy/modules/2026/FSE/mcp-primitives-lab.html): Learn the Model Context Protocol by watching it run: a verified Python server and client that exercise tools, resources, prompts, sampling, roots, elicitation and progress over stdio and Streamable…
+- [From CRUD to production: Angular + Spring Boot, served as a seven-course meal](https://janaka.me/academy/production-ready-spring-angular/): AssetCare, a complete Angular 22 + Spring Boot 4.1 reference application built in the open: architecture, PostgreSQL migrations, a production API, the SPA, tests and scans, observability, Helm, K3s…
+- [The Spring ecosystem, and what Spring AI can do now](https://janaka.me/academy/modules/2026/FSE/spring-ecosystem-and-spring-ai.html): Spring Boot from 1.0 to 4.x in working examples, then a hands-on tour of Spring AI 2.0: ChatClient, structured output, tools, memory, RAG, MCP, evaluation and agent patterns.
+- [MCP end to end: protocol, Java and Python servers, and the agent that uses them](https://janaka.me/academy/modules/2026/FSE/mcp-end-to-end.html): The Model Context Protocol from first principles to production: the wire format, tools, resources, prompts, elicitation, transports, the 2026 stateless revision, security, and a verified Java…
+- [Java, release by release: 8 to 27](https://janaka.me/academy/modules/2026/FSE/java-evolution-8-to-27.html): Every Java release from 8 (2014) to 27 (September 2026): the features that mattered, why they mattered, and a working example for each, from lambdas to post-quantum TLS.
+- [Templates](https://janaka.me/academy/modules/2026/FSE/promting/templates.html): Templates — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [Strategies](https://janaka.me/academy/modules/2026/FSE/promting/strategies.html): Strategies — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [References and Source Notes](https://janaka.me/academy/modules/2026/FSE/promting/references.html): References and Source Notes — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [RAG Prompting](https://janaka.me/academy/modules/2026/FSE/promting/rag.html): RAG Prompting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [GPT-5.4 Prompting Guide](https://janaka.me/academy/modules/2026/FSE/promting/gpt54.html): GPT-5.4 Prompting Guide — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [Glossary in Easy English](https://janaka.me/academy/modules/2026/FSE/promting/glossary.html): Glossary in Easy English — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [Latest Gemini Prompting Guide](https://janaka.me/academy/modules/2026/FSE/promting/gemini.html): Latest Gemini Prompting Guide — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [Foundations](https://janaka.me/academy/modules/2026/FSE/promting/foundations.html): Foundations — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [Developer Prompts](https://janaka.me/academy/modules/2026/FSE/promting/developer.html): Developer Prompts — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [Most Useful Developer Task Prompts](https://janaka.me/academy/modules/2026/FSE/promting/developer-tasks.html): Most Useful Developer Task Prompts — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [Debugging Playbook](https://janaka.me/academy/modules/2026/FSE/promting/debugging.html): Debugging Playbook — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [GPT-5.4 vs Gemini: Practical Prompting Differences](https://janaka.me/academy/modules/2026/FSE/promting/comparison.html): GPT-5.4 vs Gemini: Practical Prompting Differences — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [Cheat Sheet](https://janaka.me/academy/modules/2026/FSE/promting/cheatsheet.html): Cheat Sheet — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [Agent Prompting](https://janaka.me/academy/modules/2026/FSE/promting/agents.html): Agent Prompting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [Quantum Use Cases](https://janaka.me/academy/modules/2026/FSE/entanglement/use-cases.html): Quantum Use Cases — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [References](https://janaka.me/academy/modules/2026/FSE/entanglement/references.html): References — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [Quantum Computing Explained](https://janaka.me/academy/modules/2026/FSE/entanglement/quantum-computing.html): Quantum Computing Explained — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [Entanglement Explained](https://janaka.me/academy/modules/2026/FSE/entanglement/entanglement.html): Entanglement Explained — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [Career Roadmap](https://janaka.me/academy/modules/2026/FSE/entanglement/career-roadmap.html): Career Roadmap — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [Linux CLI Mastery](https://janaka.me/academy/modules/2026/FSE/day-01.html): Linux CLI Mastery — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [CLI Data Mastery: CSV & Shell Scripting](https://janaka.me/academy/modules/2026/FSE/csv_operation.html): CLI Data Mastery: CSV & Shell Scripting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.
+- [VI Editor Complete](https://janaka.me/academy/modules/2026/FSE/Linux/vi-editor-complete.html): Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.
+- [Disk Memory CPU Troubleshooting](https://janaka.me/academy/modules/2026/FSE/Linux/troubleshooting-resources.html): Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.
+- [Top 50 Debugging Commands](https://janaka.me/academy/modules/2026/FSE/Linux/top-50-debugging-commands.html): Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.
+- [Top 100 Linux Commands](https://janaka.me/academy/modules/2026/FSE/Linux/top-100-linux-commands.html): Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.
+- [Production One-Liners](https://janaka.me/academy/modules/2026/FSE/Linux/production-one-liners.html): Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.
+- [Log Investigation Techniques](https://janaka.me/academy/modules/2026/FSE/Linux/log-investigation-techniques.html): Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.
+- [File Handling](https://janaka.me/academy/modules/2026/FSE/Linux/file-handling.html): Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.
+- [awk + sed Mastery](https://janaka.me/academy/modules/2026/FSE/Linux/awk-sed-mastery.html): Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.
+- [Java 21 Virtual Threads - Complete Practical Guide](https://janaka.me/academy/modules/2026/FSE/virtual_threads_java_21_academy_page.html): Java 21 virtual threads in practice: what they are, when to use them and when not to, with examples and production considerations for senior engineers.
+- [Spring Boot 3.3 Ecosystem](https://janaka.me/academy/modules/2026/FSE/spring-boot.html): Study roadmap for Spring Boot: REST APIs with validation and OpenAPI, JPA and migrations, OAuth2/JWT security, and tests, metrics, tracing and health probes.
+- [React 19 + TypeScript Frontend Engineering](https://janaka.me/academy/modules/2026/FSE/react.html): Study roadmap for React 19 with TypeScript: accessible components, state and async data flows, forms and error boundaries, testing, linting and performance budgets.
+- [Prompt Engineering Handbook](https://janaka.me/academy/modules/2026/FSE/promting/): Prompt engineering handbook for software engineers: foundations, templates and strategies for LLMs, agent workflows, RAG, debugging and daily coding.
+- [Learn How to Solve Critical Performance Problems with Step by Step Approach!](https://janaka.me/academy/modules/2026/FSE/performanceTuning/DBPerformanceTuning.html): A step-by-step Oracle performance handbook for real incidents: DB time, SQL monitoring, execution plans, indexing, optimizer statistics and plan stability.
+- [Modernizing the Java Journey: A Comprehensive Study Guide](https://janaka.me/academy/modules/2026/FSE/modenizeJava.html): A study guide to restarting with Java in 2026: the state of the platform, choosing among ecosystem options, virtual threads, and automated migration tools.
+- [Advanced Microservices & Distributed Systems](https://janaka.me/academy/modules/2026/FSE/microservices.html): Study roadmap for microservices: bounded contexts and contracts, timeouts, retries, circuit breakers and bulkheads, sagas, API versioning and platform guardrails.
+- [Linux & CLI Mastery for Java Developers](https://janaka.me/academy/modules/2026/FSE/linux.html): Linux and CLI quick reference for Java backend engineers: filesystem layout, file operations, search and filtering, text processing and everyday production commands.
+- [Leadership, Communication & Delivery Excellence](https://janaka.me/academy/modules/2026/FSE/leadership.html): Study roadmap for engineering leadership: explaining architecture trade-offs, planning and risk management, mentoring, incident response and blameless postmortems.
+- [Apache Kafka 4.x & Event-Driven Architecture](https://janaka.me/academy/modules/2026/FSE/kafka.html): Study roadmap for Apache Kafka 4.x: topics, partitions and keys, reliable producers and consumers, schema evolution, retries, DLQs and exactly-once trade-offs.
+- [Core Java Mastery (Java 22)](https://janaka.me/academy/modules/2026/FSE/java-core.html): Study roadmap for modern core Java: records, sealed hierarchies and immutability, virtual threads and structured concurrency, JVM profiling, testing and secure defaults.
+- [Hexagonal Architecture for Senior Java Developers (2026 Edition)](https://janaka.me/academy/modules/2026/FSE/hexagonal-architecture-guide.html): Hexagonal architecture (ports and adapters) for Java and Spring: what it is, how to apply it without over-engineering, and how it improves testability and evolution.
+- [Foundation: Engineering Mindset & Setup](https://janaka.me/academy/modules/2026/FSE/foundation.html): The first Academy module: engineering mindset, a working development setup, Git discipline and clean code habits from day one.
+- [Practical Quantum Entanglement and Quantum Computing](https://janaka.me/academy/modules/2026/FSE/entanglement/): Quantum entanglement and quantum computing explained simply for software engineers: what entanglement means, real use cases, current limits and a career roadmap.
+- [DevOps & Cloud: Docker · Kubernetes · CI/CD](https://janaka.me/academy/modules/2026/FSE/devops-cloud.html): Study roadmap for DevOps and cloud: multi-stage Docker builds, production-safe Kubernetes manifests, CI/CD gates and rollouts, observability and incident response.
+- [Design Patterns & Architecture Playground](https://janaka.me/academy/modules/2026/FSE/design-patterns-architecture-playbook.html): Java design patterns chosen by business situation: which pattern fits, why, and the trade-offs to explain, with a quick selection playbook and a learning path.
+- [Enterprise Capstone: Global Logistics Platform](https://janaka.me/academy/modules/2026/FSE/capstone.html): Capstone study roadmap: design a full-stack logistics platform on Spring Boot, React, Kafka, Postgres and Kubernetes, with observability, security and chaos drills.
+- [Bash Shell Scripting Guide](https://janaka.me/academy/modules/2026/FSE/bash_shell_scripting_guide_blog.html): A step-by-step Bash scripting guide: first scripts, variables, arguments, input, arrays, conditionals, loops, functions, debugging and practical scripting habits.
+- [AI Integration for Enterprise Java Systems](https://janaka.me/academy/modules/2026/FSE/ai-integration.html): Study roadmap for AI in enterprise Java: LLM calls from Java services, RAG with embeddings and vector search, guardrails, and evaluation of quality, cost and latency.
+- [Linux CLI Mastery](https://janaka.me/academy/modules/2026/FSE/Linux/): Linux CLI handbook for backend engineers: top commands, debugging commands, awk and sed, file handling, log investigation, one-liners, vi and troubleshooting.
+
+## Products
+
+- [Products](https://janaka.me/products/): Finished, live, privacy-first apps available for acquisition or licensing.
+
+## Optional
+
+- [Full version of this file](https://janaka.me/llms-full.txt): profile, experience and every page summary
+- [Public JSON catalogue](https://janaka.me/api/public/v1/index.json)
+- [Atom feed](https://janaka.me/feed.xml)
+- [Sitemap](https://janaka.me/sitemap.xml)

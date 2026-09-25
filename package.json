@@ -1,0 +1,13 @@
+{
+  "name": "janaka.me",
+  "private": true,
+  "description": "Scripts only; the site has no dependencies and no build step beyond scripts/build.py. See AGENTS.md.",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "python3 scripts/build.py",
+    "validate": "python3 scripts/validate-site.py",
+    "test": "node --test \"tests/js/*.test.mjs\" && python3 -m unittest discover -s tests/python",
+    "check": "python3 scripts/build.py --check && python3 scripts/validate-site.py && npm test"
+  }
+}

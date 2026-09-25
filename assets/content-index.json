@@ -1,6 +1,6 @@
 [
  {
-  "url": "/lab/assetcare/index.html",
+  "url": "/lab/assetcare/",
   "title": "AssetCare case study: Java 25, Spring Boot, Angular and Kubernetes in production",
   "section": "lab",
   "description": "AssetCare is a production-deployed Java 25, Spring Boot, Angular and Kubernetes application demonstrating modern full-stack, cloud-native and AI-assisted software engineering. Architecture…",
@@ -21,7 +21,7 @@
    "production deployment"
   ],
   "date": "2026-09-23",
-  "updated": "2026-09-23",
+  "updated": "2026-09-25",
   "words": 3521,
   "minutes": 17
  },
@@ -47,12 +47,12 @@
    "production deployment"
   ],
   "date": "2026-09-23",
-  "updated": "2026-09-23",
+  "updated": "2026-09-25",
   "words": 3528,
   "minutes": 17
  },
  {
-  "url": "/academy/assetcare/index.html",
+  "url": "/academy/assetcare/",
   "title": "From code to production: building AssetCare — a learning series",
   "section": "academy",
   "description": "A fourteen-module learning series on the AssetCare reference application: architecture, Spring Boot, Angular, PostgreSQL and Liquibase, Keycloak, Docker, Kubernetes, Helm, Terraform, HTTPS, CI/CD…",
@@ -75,7 +75,7 @@
    "learning series"
   ],
   "date": "2026-09-23",
-  "updated": "2026-09-23",
+  "updated": "2026-09-25",
   "words": 1045,
   "minutes": 5
  },
@@ -92,7 +92,7 @@
    "top"
   ],
   "date": "2026-09-21",
-  "updated": "2026-09-22",
+  "updated": "2026-09-25",
   "words": 9831,
   "minutes": 45
  },
@@ -109,12 +109,12 @@
    "one"
   ],
   "date": "2026-09-17",
-  "updated": "2026-09-22",
+  "updated": "2026-09-25",
   "words": 9638,
   "minutes": 44
  },
  {
-  "url": "/academy/production-ready-spring-angular/index.html",
+  "url": "/academy/production-ready-spring-angular/",
   "title": "From CRUD to production: Angular + Spring Boot, served as a seven-course meal",
   "section": "academy",
   "description": "AssetCare, a complete Angular 22 + Spring Boot 4.1 reference application built in the open: architecture, PostgreSQL migrations, a production API, the SPA, tests and scans, observability, Helm, K3s…",
@@ -126,7 +126,7 @@
    "spring"
   ],
   "date": "2026-09-16",
-  "updated": "2026-09-23",
+  "updated": "2026-09-25",
   "words": 2827,
   "minutes": 13
  },
@@ -143,7 +143,7 @@
    "now"
   ],
   "date": "2026-09-16",
-  "updated": "2026-09-22",
+  "updated": "2026-09-25",
   "words": 3078,
   "minutes": 14
  },
@@ -160,7 +160,7 @@
    "java"
   ],
   "date": "2026-09-16",
-  "updated": "2026-09-22",
+  "updated": "2026-09-25",
   "words": 12977,
   "minutes": 59
  },
@@ -175,7 +175,7 @@
    "release"
   ],
   "date": "2026-09-16",
-  "updated": "2026-09-22",
+  "updated": "2026-09-25",
   "words": 6119,
   "minutes": 28
  },
@@ -192,7 +192,7 @@
    "spring"
   ],
   "date": "2026-09-15",
-  "updated": "2026-09-17",
+  "updated": "2026-09-25",
   "words": 1991,
   "minutes": 10
  },
@@ -209,239 +209,9 @@
    "mmr"
   ],
   "date": "2026-09-15",
-  "updated": "2026-09-17",
+  "updated": "2026-09-25",
   "words": 1886,
   "minutes": 9
- },
- {
-  "url": "/products/index.html",
-  "title": "Products for Sale — Privacy-First Apps",
-  "section": "products",
-  "description": "Swiss-made, privacy-first web apps, finished and live, available for acquisition or licensing: nüchtern, Daily Momentum, Loop, BabyLoop and LeftHere. Built in Zug to banking-grade standards.",
-  "tags": [
-   "products",
-   "sale",
-   "privacy",
-   "first",
-   "apps"
-  ],
-  "date": "2026-09-10",
-  "updated": "2026-09-23",
-  "words": 2304,
-  "minutes": 11
- },
- {
-  "url": "/lab/Notes/llm-study-notes-handwritten-style.html",
-  "title": "LLM Study Notes — Interactive Highlighter Toolbox",
-  "section": "lab",
-  "description": "Interactive study notes on assessing large language models with a highlighter toolbox, sticky notes, and explain, analogy and ELI5 helpers.",
-  "tags": [
-   "lab",
-   "llm",
-   "study",
-   "interactive",
-   "highlighter"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-15",
-  "words": 340,
-  "minutes": 2
- },
- {
-  "url": "/lab/Notes/llm-hand%E2%80%91annotated-demo5.html",
-  "title": "LLM Notes — Hand‑Annotated Highlights Demo + Toolbox",
-  "section": "lab",
-  "description": "Interactive hand-annotated notes on large language models with a highlighter toolbox: mark up, add sticky notes, save, load and export your annotations.",
-  "tags": [
-   "lab",
-   "llm",
-   "hand",
-   "annotated",
-   "highlights"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-15",
-  "words": 369,
-  "minutes": 2
- },
- {
-  "url": "/lab/Notes/hand-book-note3.html",
-  "title": "LLM Study Notes — Assessing LLMs, Handwritten Style",
-  "section": "lab",
-  "description": "Handwritten-style study notes on assessing large language models: why they are large, how self-attention works, and why hallucination is the big problem.",
-  "tags": [
-   "lab",
-   "llm",
-   "study",
-   "assessing",
-   "llms"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-15",
-  "words": 286,
-  "minutes": 2
- },
- {
-  "url": "/lab/Notes/hand-book-note2.html",
-  "title": "Study‑Style Notes: Aspects & Assessment of LLMs",
-  "section": "lab",
-  "description": "Study-style notes on assessing large language models: factuality, reasoning, safety, latency and cost, with the retrieval, QA and generation metrics.",
-  "tags": [
-   "lab",
-   "study",
-   "style",
-   "aspects",
-   "assessment"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-15",
-  "words": 329,
-  "minutes": 2
- },
- {
-  "url": "/lab/Notes/hand-book-note1.html",
-  "title": "LLM Notes — Hand‑Annotated Highlights Demo",
-  "section": "lab",
-  "description": "Hand-annotated study notes on what large language models are used for: retrieval and RAG, content generation, reasoning, coding and agents.",
-  "tags": [
-   "lab",
-   "llm",
-   "hand",
-   "annotated",
-   "highlights"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-15",
-  "words": 359,
-  "minutes": 2
- },
- {
-  "url": "/ai/index.html",
-  "title": "AI Agents in Regulated Systems",
-  "section": "ai",
-  "description": "Agents that are readable, reliable and worth shipping. Production patterns for LLM, RAG, MCP and evals, and five live products built with AI in the loop.",
-  "tags": [
-   "ai",
-   "agents",
-   "regulated",
-   "systems"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-23",
-  "words": 1369,
-  "minutes": 7
- },
- {
-  "url": "/academy/modules/2026/FSE/virtual_threads_java_21_academy_page.html",
-  "title": "Java 21 Virtual Threads - Complete Practical Guide",
-  "section": "academy",
-  "description": "In Java applications in 2026, one of the most important concurrency upgrades is virtual threads in Java 21. They let me keep the simple thread-per-task programming model, but at a scale that was not…",
-  "tags": [
-   "academy",
-   "java",
-   "virtual",
-   "threads"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 1374,
-  "minutes": 7
- },
- {
-  "url": "/academy/modules/2026/FSE/vi-editor-complete.html",
-  "title": "VI Editor Complete",
-  "section": "academy",
-  "description": "VI Editor Complete — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
-  "tags": [
-   "academy",
-   "editor"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 279,
-  "minutes": 2
- },
- {
-  "url": "/academy/modules/2026/FSE/troubleshooting-resources.html",
-  "title": "Disk Memory CPU Troubleshooting",
-  "section": "academy",
-  "description": "Disk Memory CPU Troubleshooting — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
-  "tags": [
-   "academy",
-   "disk",
-   "memory",
-   "cpu",
-   "troubleshooting"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 213,
-  "minutes": 1
- },
- {
-  "url": "/academy/modules/2026/FSE/top-50-debugging-commands.html",
-  "title": "Top 50 Debugging Commands",
-  "section": "academy",
-  "description": "Top 50 Debugging Commands — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
-  "tags": [
-   "academy",
-   "top",
-   "debugging",
-   "commands"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 605,
-  "minutes": 3
- },
- {
-  "url": "/academy/modules/2026/FSE/top-100-linux-commands.html",
-  "title": "Top 100 Linux Commands",
-  "section": "academy",
-  "description": "Top 100 Linux Commands — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
-  "tags": [
-   "academy",
-   "top",
-   "linux",
-   "commands"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 832,
-  "minutes": 4
- },
- {
-  "url": "/academy/modules/2026/FSE/spring-boot.html",
-  "title": "Spring Boot 3.3 Ecosystem",
-  "section": "academy",
-  "description": "← Janaka Academy",
-  "tags": [
-   "academy",
-   "spring",
-   "boot",
-   "ecosystem"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 135,
-  "minutes": 1
- },
- {
-  "url": "/academy/modules/2026/FSE/react.html",
-  "title": "React 19 + TypeScript Frontend Engineering",
-  "section": "academy",
-  "description": "← Janaka Academy",
-  "tags": [
-   "academy",
-   "react",
-   "typescript",
-   "frontend",
-   "engineering"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 133,
-  "minutes": 1
  },
  {
   "url": "/academy/modules/2026/FSE/promting/templates.html",
@@ -452,8 +222,8 @@
    "academy",
    "templates"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 209,
   "minutes": 1
  },
@@ -466,8 +236,8 @@
    "academy",
    "strategies"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 223,
   "minutes": 2
  },
@@ -481,8 +251,8 @@
    "references",
    "source"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 164,
   "minutes": 1
  },
@@ -496,25 +266,9 @@
    "rag",
    "prompting"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 192,
-  "minutes": 1
- },
- {
-  "url": "/academy/modules/2026/FSE/promting/index.html",
-  "title": "Prompt Engineering Handbook",
-  "section": "academy",
-  "description": "← Janaka Academy",
-  "tags": [
-   "academy",
-   "prompt",
-   "engineering",
-   "handbook"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 197,
   "minutes": 1
  },
  {
@@ -527,8 +281,8 @@
    "gpt",
    "prompting"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 386,
   "minutes": 2
  },
@@ -543,8 +297,8 @@
    "easy",
    "english"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 187,
   "minutes": 1
  },
@@ -559,8 +313,8 @@
    "gemini",
    "prompting"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 347,
   "minutes": 2
  },
@@ -573,8 +327,8 @@
    "academy",
    "foundations"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 295,
   "minutes": 2
  },
@@ -588,8 +342,8 @@
    "developer",
    "prompts"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 174,
   "minutes": 1
  },
@@ -605,8 +359,8 @@
    "developer",
    "task"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 459,
   "minutes": 3
  },
@@ -620,8 +374,8 @@
    "debugging",
    "playbook"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 167,
   "minutes": 1
  },
@@ -637,8 +391,8 @@
    "prompting",
    "differences"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 269,
   "minutes": 2
  },
@@ -652,8 +406,8 @@
    "cheat",
    "sheet"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 126,
   "minutes": 1
  },
@@ -667,224 +421,9 @@
    "agent",
    "prompting"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 178,
-  "minutes": 1
- },
- {
-  "url": "/academy/modules/2026/FSE/production-one-liners.html",
-  "title": "Production One-Liners",
-  "section": "academy",
-  "description": "Production One-Liners — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
-  "tags": [
-   "academy",
-   "production",
-   "one",
-   "liners"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 269,
-  "minutes": 2
- },
- {
-  "url": "/academy/modules/2026/FSE/performanceTuning/DBPerformanceTuning.html",
-  "title": "Learn How to Solve Critical Performance Problems with Step by Step Approach!",
-  "section": "academy",
-  "description": "Use this as your checklist. This page is intentionally “study-friendly”: you can tick items as you learn.",
-  "tags": [
-   "academy",
-   "solve",
-   "critical",
-   "performance",
-   "problems"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 2186,
-  "minutes": 10
- },
- {
-  "url": "/academy/modules/2026/FSE/modenizeJava.html",
-  "title": "Modernizing the Java Journey: A Comprehensive Study Guide",
-  "section": "academy",
-  "description": "Java has evolved from a slow-moving language with releases every four or five years to a vibrant, fast-paced ecosystem. As of 2026, the platform follows a strict \"release on the clock\" schedule…",
-  "tags": [
-   "academy",
-   "modernizing",
-   "java",
-   "journey",
-   "study"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 1517,
-  "minutes": 7
- },
- {
-  "url": "/academy/modules/2026/FSE/microservices.html",
-  "title": "Advanced Microservices & Distributed Systems",
-  "section": "academy",
-  "description": "← Janaka Academy",
-  "tags": [
-   "academy",
-   "advanced",
-   "microservices",
-   "distributed",
-   "systems"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 135,
-  "minutes": 1
- },
- {
-  "url": "/academy/modules/2026/FSE/log-investigation-techniques.html",
-  "title": "Log Investigation Techniques",
-  "section": "academy",
-  "description": "Log Investigation Techniques — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
-  "tags": [
-   "academy",
-   "log",
-   "investigation",
-   "techniques"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 266,
-  "minutes": 2
- },
- {
-  "url": "/academy/modules/2026/FSE/linux.html",
-  "title": "Linux & CLI Mastery for Java Developers",
-  "section": "academy",
-  "description": "← Janaka Academy",
-  "tags": [
-   "academy",
-   "linux",
-   "cli",
-   "mastery",
-   "java"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 407,
-  "minutes": 2
- },
- {
-  "url": "/academy/modules/2026/FSE/leadership.html",
-  "title": "Leadership, Communication & Delivery Excellence",
-  "section": "academy",
-  "description": "← Janaka Academy",
-  "tags": [
-   "academy",
-   "leadership",
-   "communication",
-   "delivery",
-   "excellence"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 133,
-  "minutes": 1
- },
- {
-  "url": "/academy/modules/2026/FSE/kafka.html",
-  "title": "Apache Kafka 4.x & Event-Driven Architecture",
-  "section": "academy",
-  "description": "← Janaka Academy",
-  "tags": [
-   "academy",
-   "apache",
-   "kafka",
-   "event",
-   "driven"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 135,
-  "minutes": 1
- },
- {
-  "url": "/academy/modules/2026/FSE/java-core.html",
-  "title": "Core Java Mastery (Java 22)",
-  "section": "academy",
-  "description": "← Janaka Academy",
-  "tags": [
-   "academy",
-   "core",
-   "java",
-   "mastery"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 137,
-  "minutes": 1
- },
- {
-  "url": "/academy/modules/2026/FSE/index.html",
-  "title": "Linux CLI Mastery",
-  "section": "academy",
-  "description": "Linux CLI mastery handbook with practical commands, scripting patterns, debugging tools, and production-focused references.",
-  "tags": [
-   "academy",
-   "linux",
-   "cli",
-   "mastery"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 240,
-  "minutes": 2
- },
- {
-  "url": "/academy/modules/2026/FSE/hexagonal-architecture-guide.html",
-  "title": "Hexagonal Architecture for Senior Java Developers (2026 Edition)",
-  "section": "academy",
-  "description": "A practical, modern guide to understanding Hexagonal Architecture deeply, applying it with current Java and Spring, avoiding over-engineering, and using it in a way that actually improves…",
-  "tags": [
-   "academy",
-   "hexagonal",
-   "architecture",
-   "senior",
-   "java"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 2194,
-  "minutes": 10
- },
- {
-  "url": "/academy/modules/2026/FSE/foundation.html",
-  "title": "Foundation: Engineering Mindset & Setup",
-  "section": "academy",
-  "description": "← Janaka Academy",
-  "tags": [
-   "academy",
-   "foundation",
-   "engineering",
-   "mindset",
-   "setup"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 1019,
-  "minutes": 5
- },
- {
-  "url": "/academy/modules/2026/FSE/file-handling.html",
-  "title": "File Handling",
-  "section": "academy",
-  "description": "File Handling — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
-  "tags": [
-   "academy",
-   "file",
-   "handling"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 215,
   "minutes": 1
  },
  {
@@ -898,8 +437,8 @@
    "use",
    "cases"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 323,
   "minutes": 2
  },
@@ -912,8 +451,8 @@
    "academy",
    "references"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 90,
   "minutes": 1
  },
@@ -928,25 +467,9 @@
    "computing",
    "explained"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 343,
-  "minutes": 2
- },
- {
-  "url": "/academy/modules/2026/FSE/entanglement/index.html",
-  "title": "Practical Quantum Entanglement and Quantum Computing",
-  "section": "academy",
-  "description": "← Janaka Academy",
-  "tags": [
-   "academy",
-   "quantum",
-   "entanglement",
-   "computing"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 268,
   "minutes": 2
  },
  {
@@ -959,8 +482,8 @@
    "entanglement",
    "explained"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 302,
   "minutes": 2
  },
@@ -974,43 +497,9 @@
    "career",
    "roadmap"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 272,
-  "minutes": 2
- },
- {
-  "url": "/academy/modules/2026/FSE/devops-cloud.html",
-  "title": "DevOps & Cloud: Docker · Kubernetes · CI/CD",
-  "section": "academy",
-  "description": "← Janaka Academy",
-  "tags": [
-   "academy",
-   "devops",
-   "cloud",
-   "docker",
-   "kubernetes"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 138,
-  "minutes": 1
- },
- {
-  "url": "/academy/modules/2026/FSE/design-patterns-architecture-playbook.html",
-  "title": "Design Patterns & Architecture Playground",
-  "section": "academy",
-  "description": "Most developers learn design patterns as theory. In real projects, the challenge is different: you must pick the right pattern quickly, explain trade-offs clearly, and deliver maintainable code.…",
-  "tags": [
-   "academy",
-   "design",
-   "patterns",
-   "architecture",
-   "playground"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 359,
   "minutes": 2
  },
  {
@@ -1024,8 +513,8 @@
    "cli",
    "mastery"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 252,
   "minutes": 2
  },
@@ -1041,76 +530,10 @@
    "mastery",
    "csv"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 339,
   "minutes": 2
- },
- {
-  "url": "/academy/modules/2026/FSE/capstone.html",
-  "title": "Enterprise Capstone: Global Logistics Platform",
-  "section": "academy",
-  "description": "← Janaka Academy",
-  "tags": [
-   "academy",
-   "enterprise",
-   "capstone",
-   "global",
-   "logistics"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 153,
-  "minutes": 1
- },
- {
-  "url": "/academy/modules/2026/FSE/bash_shell_scripting_guide_blog.html",
-  "title": "Bash Shell Scripting Guide",
-  "section": "academy",
-  "description": "This is a clean, blog-ready learning guide inspired by a Bash shell scripting tutorial page. It keeps the same full learning journey and topic coverage in an original rewritten format: what Bash is…",
-  "tags": [
-   "academy",
-   "bash",
-   "shell",
-   "scripting"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 2294,
-  "minutes": 11
- },
- {
-  "url": "/academy/modules/2026/FSE/awk-sed-mastery.html",
-  "title": "awk sed mastery",
-  "section": "academy",
-  "description": "awk sed mastery — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.",
-  "tags": [
-   "academy",
-   "awk",
-   "sed",
-   "mastery"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 198,
-  "minutes": 1
- },
- {
-  "url": "/academy/modules/2026/FSE/ai-integration.html",
-  "title": "AI Integration for Enterprise Java Systems",
-  "section": "academy",
-  "description": "← Janaka Academy",
-  "tags": [
-   "academy",
-   "integration",
-   "enterprise",
-   "java",
-   "systems"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 140,
-  "minutes": 1
  },
  {
   "url": "/academy/modules/2026/FSE/Linux/vi-editor-complete.html",
@@ -1121,8 +544,8 @@
    "academy",
    "editor"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 523,
   "minutes": 3
  },
@@ -1138,8 +561,8 @@
    "cpu",
    "troubleshooting"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 366,
   "minutes": 2
  },
@@ -1154,8 +577,8 @@
    "debugging",
    "commands"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 612,
   "minutes": 3
  },
@@ -1170,8 +593,8 @@
    "linux",
    "commands"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 839,
   "minutes": 4
  },
@@ -1186,8 +609,8 @@
    "one",
    "liners"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 376,
   "minutes": 2
  },
@@ -1202,26 +625,10 @@
    "investigation",
    "techniques"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 342,
   "minutes": 2
- },
- {
-  "url": "/academy/modules/2026/FSE/Linux/index.html",
-  "title": "Linux CLI Mastery",
-  "section": "academy",
-  "description": "← Janaka Academy",
-  "tags": [
-   "academy",
-   "linux",
-   "cli",
-   "mastery"
-  ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
-  "words": 201,
-  "minutes": 1
  },
  {
   "url": "/academy/modules/2026/FSE/Linux/file-handling.html",
@@ -1233,8 +640,8 @@
    "file",
    "handling"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 217,
   "minutes": 1
  },
@@ -1249,10 +656,461 @@
    "sed",
    "mastery"
   ],
-  "date": "2026-08-29",
-  "updated": "2026-09-22",
+  "date": "2026-09-15",
+  "updated": "2026-09-25",
   "words": 426,
   "minutes": 2
+ },
+ {
+  "url": "/products/",
+  "title": "Products for Sale — Privacy-First Apps",
+  "section": "products",
+  "description": "Swiss-made, privacy-first web apps, finished and live, available for acquisition or licensing: nüchtern, Daily Momentum, Loop, BabyLoop and LeftHere. Built in Zug to banking-grade standards.",
+  "tags": [
+   "products",
+   "sale",
+   "privacy",
+   "first",
+   "apps"
+  ],
+  "date": "2026-09-10",
+  "updated": "2026-09-25",
+  "words": 2304,
+  "minutes": 11
+ },
+ {
+  "url": "/lab/Notes/llm-study-notes-handwritten-style.html",
+  "title": "LLM Study Notes — Interactive Highlighter Toolbox",
+  "section": "lab",
+  "description": "Interactive study notes on assessing large language models with a highlighter toolbox, sticky notes, and explain, analogy and ELI5 helpers.",
+  "tags": [
+   "lab",
+   "llm",
+   "study",
+   "interactive",
+   "highlighter"
+  ],
+  "date": "2026-09-09",
+  "updated": "2026-09-25",
+  "words": 340,
+  "minutes": 2
+ },
+ {
+  "url": "/lab/Notes/llm-hand%E2%80%91annotated-demo5.html",
+  "title": "LLM Notes — Hand‑Annotated Highlights Demo + Toolbox",
+  "section": "lab",
+  "description": "Interactive hand-annotated notes on large language models with a highlighter toolbox: mark up, add sticky notes, save, load and export your annotations.",
+  "tags": [
+   "lab",
+   "llm",
+   "hand",
+   "annotated",
+   "highlights"
+  ],
+  "date": "2026-09-09",
+  "updated": "2026-09-25",
+  "words": 369,
+  "minutes": 2
+ },
+ {
+  "url": "/lab/Notes/hand-book-note3.html",
+  "title": "LLM Study Notes — Assessing LLMs, Handwritten Style",
+  "section": "lab",
+  "description": "Handwritten-style study notes on assessing large language models: why they are large, how self-attention works, and why hallucination is the big problem.",
+  "tags": [
+   "lab",
+   "llm",
+   "study",
+   "assessing",
+   "llms"
+  ],
+  "date": "2026-09-09",
+  "updated": "2026-09-25",
+  "words": 286,
+  "minutes": 2
+ },
+ {
+  "url": "/lab/Notes/hand-book-note2.html",
+  "title": "Study‑Style Notes: Aspects & Assessment of LLMs",
+  "section": "lab",
+  "description": "Study-style notes on assessing large language models: factuality, reasoning, safety, latency and cost, with the retrieval, QA and generation metrics.",
+  "tags": [
+   "lab",
+   "study",
+   "style",
+   "aspects",
+   "assessment"
+  ],
+  "date": "2026-09-09",
+  "updated": "2026-09-25",
+  "words": 329,
+  "minutes": 2
+ },
+ {
+  "url": "/lab/Notes/hand-book-note1.html",
+  "title": "LLM Notes — Hand‑Annotated Highlights Demo",
+  "section": "lab",
+  "description": "Hand-annotated study notes on what large language models are used for: retrieval and RAG, content generation, reasoning, coding and agents.",
+  "tags": [
+   "lab",
+   "llm",
+   "hand",
+   "annotated",
+   "highlights"
+  ],
+  "date": "2026-09-09",
+  "updated": "2026-09-25",
+  "words": 359,
+  "minutes": 2
+ },
+ {
+  "url": "/ai/",
+  "title": "AI Agents in Regulated Systems",
+  "section": "ai",
+  "description": "Agents that are readable, reliable and worth shipping. Production patterns for LLM, RAG, MCP and evals, and five live products built with AI in the loop.",
+  "tags": [
+   "ai",
+   "agents",
+   "regulated",
+   "systems"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 1369,
+  "minutes": 7
+ },
+ {
+  "url": "/academy/modules/2026/FSE/virtual_threads_java_21_academy_page.html",
+  "title": "Java 21 Virtual Threads - Complete Practical Guide",
+  "section": "academy",
+  "description": "Java 21 virtual threads in practice: what they are, when to use them and when not to, with examples and production considerations for senior engineers.",
+  "tags": [
+   "academy",
+   "java",
+   "virtual",
+   "threads"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 1374,
+  "minutes": 7
+ },
+ {
+  "url": "/academy/modules/2026/FSE/spring-boot.html",
+  "title": "Spring Boot 3.3 Ecosystem",
+  "section": "academy",
+  "description": "Study roadmap for Spring Boot: REST APIs with validation and OpenAPI, JPA and migrations, OAuth2/JWT security, and tests, metrics, tracing and health probes.",
+  "tags": [
+   "academy",
+   "spring",
+   "boot",
+   "ecosystem"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 135,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/react.html",
+  "title": "React 19 + TypeScript Frontend Engineering",
+  "section": "academy",
+  "description": "Study roadmap for React 19 with TypeScript: accessible components, state and async data flows, forms and error boundaries, testing, linting and performance budgets.",
+  "tags": [
+   "academy",
+   "react",
+   "typescript",
+   "frontend",
+   "engineering"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 133,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/promting/",
+  "title": "Prompt Engineering Handbook",
+  "section": "academy",
+  "description": "Prompt engineering handbook for software engineers: foundations, templates and strategies for LLMs, agent workflows, RAG, debugging and daily coding.",
+  "tags": [
+   "academy",
+   "prompt",
+   "engineering",
+   "handbook"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 197,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/performanceTuning/DBPerformanceTuning.html",
+  "title": "Learn How to Solve Critical Performance Problems with Step by Step Approach!",
+  "section": "academy",
+  "description": "A step-by-step Oracle performance handbook for real incidents: DB time, SQL monitoring, execution plans, indexing, optimizer statistics and plan stability.",
+  "tags": [
+   "academy",
+   "solve",
+   "critical",
+   "performance",
+   "problems"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 2186,
+  "minutes": 10
+ },
+ {
+  "url": "/academy/modules/2026/FSE/modenizeJava.html",
+  "title": "Modernizing the Java Journey: A Comprehensive Study Guide",
+  "section": "academy",
+  "description": "A study guide to restarting with Java in 2026: the state of the platform, choosing among ecosystem options, virtual threads, and automated migration tools.",
+  "tags": [
+   "academy",
+   "modernizing",
+   "java",
+   "journey",
+   "study"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 1517,
+  "minutes": 7
+ },
+ {
+  "url": "/academy/modules/2026/FSE/microservices.html",
+  "title": "Advanced Microservices & Distributed Systems",
+  "section": "academy",
+  "description": "Study roadmap for microservices: bounded contexts and contracts, timeouts, retries, circuit breakers and bulkheads, sagas, API versioning and platform guardrails.",
+  "tags": [
+   "academy",
+   "advanced",
+   "microservices",
+   "distributed",
+   "systems"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 135,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/linux.html",
+  "title": "Linux & CLI Mastery for Java Developers",
+  "section": "academy",
+  "description": "Linux and CLI quick reference for Java backend engineers: filesystem layout, file operations, search and filtering, text processing and everyday production commands.",
+  "tags": [
+   "academy",
+   "linux",
+   "cli",
+   "mastery",
+   "java"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 407,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/leadership.html",
+  "title": "Leadership, Communication & Delivery Excellence",
+  "section": "academy",
+  "description": "Study roadmap for engineering leadership: explaining architecture trade-offs, planning and risk management, mentoring, incident response and blameless postmortems.",
+  "tags": [
+   "academy",
+   "leadership",
+   "communication",
+   "delivery",
+   "excellence"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 133,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/kafka.html",
+  "title": "Apache Kafka 4.x & Event-Driven Architecture",
+  "section": "academy",
+  "description": "Study roadmap for Apache Kafka 4.x: topics, partitions and keys, reliable producers and consumers, schema evolution, retries, DLQs and exactly-once trade-offs.",
+  "tags": [
+   "academy",
+   "apache",
+   "kafka",
+   "event",
+   "driven"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 135,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/java-core.html",
+  "title": "Core Java Mastery (Java 22)",
+  "section": "academy",
+  "description": "Study roadmap for modern core Java: records, sealed hierarchies and immutability, virtual threads and structured concurrency, JVM profiling, testing and secure defaults.",
+  "tags": [
+   "academy",
+   "core",
+   "java",
+   "mastery"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 137,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/hexagonal-architecture-guide.html",
+  "title": "Hexagonal Architecture for Senior Java Developers (2026 Edition)",
+  "section": "academy",
+  "description": "Hexagonal architecture (ports and adapters) for Java and Spring: what it is, how to apply it without over-engineering, and how it improves testability and evolution.",
+  "tags": [
+   "academy",
+   "hexagonal",
+   "architecture",
+   "senior",
+   "java"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 2194,
+  "minutes": 10
+ },
+ {
+  "url": "/academy/modules/2026/FSE/foundation.html",
+  "title": "Foundation: Engineering Mindset & Setup",
+  "section": "academy",
+  "description": "The first Academy module: engineering mindset, a working development setup, Git discipline and clean code habits from day one.",
+  "tags": [
+   "academy",
+   "foundation",
+   "engineering",
+   "mindset",
+   "setup"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 1019,
+  "minutes": 5
+ },
+ {
+  "url": "/academy/modules/2026/FSE/entanglement/",
+  "title": "Practical Quantum Entanglement and Quantum Computing",
+  "section": "academy",
+  "description": "Quantum entanglement and quantum computing explained simply for software engineers: what entanglement means, real use cases, current limits and a career roadmap.",
+  "tags": [
+   "academy",
+   "quantum",
+   "entanglement",
+   "computing"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 268,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/devops-cloud.html",
+  "title": "DevOps & Cloud: Docker · Kubernetes · CI/CD",
+  "section": "academy",
+  "description": "Study roadmap for DevOps and cloud: multi-stage Docker builds, production-safe Kubernetes manifests, CI/CD gates and rollouts, observability and incident response.",
+  "tags": [
+   "academy",
+   "devops",
+   "cloud",
+   "docker",
+   "kubernetes"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 138,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/design-patterns-architecture-playbook.html",
+  "title": "Design Patterns & Architecture Playground",
+  "section": "academy",
+  "description": "Java design patterns chosen by business situation: which pattern fits, why, and the trade-offs to explain, with a quick selection playbook and a learning path.",
+  "tags": [
+   "academy",
+   "design",
+   "patterns",
+   "architecture",
+   "playground"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 359,
+  "minutes": 2
+ },
+ {
+  "url": "/academy/modules/2026/FSE/capstone.html",
+  "title": "Enterprise Capstone: Global Logistics Platform",
+  "section": "academy",
+  "description": "Capstone study roadmap: design a full-stack logistics platform on Spring Boot, React, Kafka, Postgres and Kubernetes, with observability, security and chaos drills.",
+  "tags": [
+   "academy",
+   "enterprise",
+   "capstone",
+   "global",
+   "logistics"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 153,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/bash_shell_scripting_guide_blog.html",
+  "title": "Bash Shell Scripting Guide",
+  "section": "academy",
+  "description": "A step-by-step Bash scripting guide: first scripts, variables, arguments, input, arrays, conditionals, loops, functions, debugging and practical scripting habits.",
+  "tags": [
+   "academy",
+   "bash",
+   "shell",
+   "scripting"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 2294,
+  "minutes": 11
+ },
+ {
+  "url": "/academy/modules/2026/FSE/ai-integration.html",
+  "title": "AI Integration for Enterprise Java Systems",
+  "section": "academy",
+  "description": "Study roadmap for AI in enterprise Java: LLM calls from Java services, RAG with embeddings and vector search, guardrails, and evaluation of quality, cost and latency.",
+  "tags": [
+   "academy",
+   "integration",
+   "enterprise",
+   "java",
+   "systems"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 140,
+  "minutes": 1
+ },
+ {
+  "url": "/academy/modules/2026/FSE/Linux/",
+  "title": "Linux CLI Mastery",
+  "section": "academy",
+  "description": "Linux CLI handbook for backend engineers: top commands, debugging commands, awk and sed, file handling, log investigation, one-liners, vi and troubleshooting.",
+  "tags": [
+   "academy",
+   "linux",
+   "cli",
+   "mastery"
+  ],
+  "date": "2026-08-29",
+  "updated": "2026-09-25",
+  "words": 201,
+  "minutes": 1
  },
  {
   "url": "/blog/posts/machine-learning-blog.html",
@@ -1267,7 +1125,7 @@
    "down"
   ],
   "date": "2025-10-29",
-  "updated": "2026-09-17",
+  "updated": "2026-09-25",
   "words": 7653,
   "minutes": 35
  },
@@ -1284,7 +1142,7 @@
    "evaluation"
   ],
   "date": "2025-10-29",
-  "updated": "2026-09-22",
+  "updated": "2026-09-25",
   "words": 18477,
   "minutes": 84
  },
@@ -1301,7 +1159,7 @@
    "model"
   ],
   "date": "2025-10-19",
-  "updated": "2026-09-17",
+  "updated": "2026-09-25",
   "words": 1656,
   "minutes": 8
  }

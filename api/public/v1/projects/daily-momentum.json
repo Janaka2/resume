@@ -1,0 +1,17 @@
+{
+ "apiVersion": "1",
+ "canonical": "https://janaka.me/products/#daily-momentum",
+ "project": {
+  "slug": "daily-momentum",
+  "name": "Daily Momentum",
+  "kind": "product",
+  "summary": "A quiet record of where the day went: one tap says what you are doing, everything else is derived. On-device only.",
+  "url": "https://daily-momentum.com/",
+  "page": "https://janaka.me/products/#daily-momentum",
+  "status": "live",
+  "availability": "Open to acquisition or licensing.",
+  "applicationCategory": "ProductivityApplication",
+  "privacy": "Records stay on the user's device.",
+  "api": "https://janaka.me/api/public/v1/projects/daily-momentum.json"
+ }
+}

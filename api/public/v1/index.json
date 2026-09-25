@@ -1,0 +1,78 @@
+{
+ "apiVersion": "1",
+ "canonical": "https://janaka.me/",
+ "name": "Janaka Premathilaka",
+ "description": "Banking-grade Java engineering, now bringing practical AI into regulated systems.",
+ "person": "https://janaka.me/#me",
+ "sections": [
+  {
+   "id": "hub",
+   "name": "Home",
+   "path": "/",
+   "summary": "Senior Java Engineer & Solution Architect, Zug.",
+   "url": "https://janaka.me/"
+  },
+  {
+   "id": "resume",
+   "name": "CV",
+   "path": "/resume/",
+   "summary": "Two decades of critical systems, case studies and stack.",
+   "url": "https://janaka.me/resume/"
+  },
+  {
+   "id": "products",
+   "name": "Products",
+   "path": "/products/",
+   "summary": "Finished, live, privacy-first apps available for acquisition or licensing.",
+   "url": "https://janaka.me/products/"
+  },
+  {
+   "id": "lab",
+   "name": "Lab",
+   "path": "/lab/",
+   "summary": "Experiments and demos, runnable, with notes.",
+   "url": "https://janaka.me/lab/"
+  },
+  {
+   "id": "ai",
+   "name": "AI",
+   "path": "/ai/",
+   "summary": "Agents that are readable, reliable and worth shipping.",
+   "url": "https://janaka.me/ai/"
+  },
+  {
+   "id": "blog",
+   "name": "Blog",
+   "path": "/blog/",
+   "summary": "Clear, hands-on articles on Java, Kafka, RAG, agents and evals.",
+   "url": "https://janaka.me/blog/"
+  },
+  {
+   "id": "academy",
+   "name": "Academy",
+   "path": "/academy/",
+   "summary": "Engineers who surpass their teacher: daily notes and learning paths.",
+   "url": "https://janaka.me/academy/"
+  }
+ ],
+ "endpoints": {
+  "profile": "https://janaka.me/api/public/v1/profile.json",
+  "projects": "https://janaka.me/api/public/v1/projects.json",
+  "project": "https://janaka.me/api/public/v1/projects/{slug}.json",
+  "resources": "https://janaka.me/api/public/v1/resources.json"
+ },
+ "projectSlugs": [
+  "assetcare",
+  "nuechtern",
+  "daily-momentum",
+  "loop",
+  "babyloop",
+  "lefthere"
+ ],
+ "discovery": {
+  "sitemap": "https://janaka.me/sitemap.xml",
+  "feed": "https://janaka.me/feed.xml",
+  "llms": "https://janaka.me/llms.txt",
+  "llmsFull": "https://janaka.me/llms-full.txt"
+ }
+}

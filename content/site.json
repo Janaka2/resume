@@ -1,0 +1,54 @@
+{
+  "$comment": "The one page inventory for janaka.me. scripts/site_lib.py reads it for the sitemap, the content index, the feed, JSON-LD breadcrumbs, llms.txt and the public JSON. A page outside the crawl roots is invisible until it is listed under pages. kind: 'landing' pages go in the sitemap only; 'resource' pages also go in the content index, feed (blog/academy/lab), search, llms.txt and the WebMCP tools. aliases maps a near-duplicate file to the page that is canonical for it: the alias carries rel=canonical to its target and stays out of every derived output.",
+  "origin": "https://janaka.me",
+  "name": "Janaka Premathilaka",
+  "language": "en",
+  "sections": [
+    { "id": "hub",      "name": "Home",     "path": "/",          "summary": "Senior Java Engineer & Solution Architect, Zug." },
+    { "id": "resume",   "name": "CV",       "path": "/resume/",   "summary": "Two decades of critical systems, case studies and stack." },
+    { "id": "products", "name": "Products", "path": "/products/", "summary": "Finished, live, privacy-first apps available for acquisition or licensing." },
+    { "id": "lab",      "name": "Lab",      "path": "/lab/",      "summary": "Experiments and demos, runnable, with notes." },
+    { "id": "ai",       "name": "AI",       "path": "/ai/",       "summary": "Agents that are readable, reliable and worth shipping." },
+    { "id": "blog",     "name": "Blog",     "path": "/blog/",     "summary": "Clear, hands-on articles on Java, Kafka, RAG, agents and evals." },
+    { "id": "academy",  "name": "Academy",  "path": "/academy/",  "summary": "Engineers who surpass their teacher: daily notes and learning paths." }
+  ],
+  "pages": [
+    { "path": "index.html",                                          "section": "hub",      "kind": "landing" },
+    { "path": "resume/index.html",                                   "section": "resume",   "kind": "landing" },
+    { "path": "products/index.html",                                 "section": "products", "kind": "resource" },
+    { "path": "lab/index.html",                                      "section": "lab",      "kind": "landing" },
+    { "path": "lab/assetcare/index.html",                            "section": "lab",      "kind": "resource" },
+    { "path": "ai/index.html",                                       "section": "ai",       "kind": "resource" },
+    { "path": "blog/index.html",                                     "section": "blog",     "kind": "landing" },
+    { "path": "academy/index.html",                                  "section": "academy",  "kind": "landing" },
+    { "path": "academy/production-ready-spring-angular/index.html",  "section": "academy",  "kind": "resource" },
+    { "path": "academy/assetcare/index.html",                        "section": "academy",  "kind": "resource" }
+  ],
+  "crawl": [
+    { "dir": "blog/posts",               "section": "blog",    "recursive": false },
+    { "dir": "lab/Notes",                "section": "lab",     "recursive": false },
+    { "dir": "academy/modules/2026",     "section": "academy", "recursive": true }
+  ],
+  "landingPatterns": [
+    "^academy/modules/2026/FSE/Elite[^/]*Edition\\.html$",
+    "(^|/)notes-index\\.html$"
+  ],
+  "exclude": [
+    "^academy/modules/2025/",
+    "BK",
+    "^partials/",
+    "coming_soon[^/]*\\.html$",
+    "^academy/modules/2026/FSE/java/"
+  ],
+  "aliases": {
+    "academy/modules/2026/FSE/index.html":                        "academy/modules/2026/FSE/Linux/index.html",
+    "academy/modules/2026/FSE/awk-sed-mastery.html":              "academy/modules/2026/FSE/Linux/awk-sed-mastery.html",
+    "academy/modules/2026/FSE/file-handling.html":                "academy/modules/2026/FSE/Linux/file-handling.html",
+    "academy/modules/2026/FSE/log-investigation-techniques.html": "academy/modules/2026/FSE/Linux/log-investigation-techniques.html",
+    "academy/modules/2026/FSE/production-one-liners.html":        "academy/modules/2026/FSE/Linux/production-one-liners.html",
+    "academy/modules/2026/FSE/top-100-linux-commands.html":       "academy/modules/2026/FSE/Linux/top-100-linux-commands.html",
+    "academy/modules/2026/FSE/top-50-debugging-commands.html":    "academy/modules/2026/FSE/Linux/top-50-debugging-commands.html",
+    "academy/modules/2026/FSE/troubleshooting-resources.html":    "academy/modules/2026/FSE/Linux/troubleshooting-resources.html",
+    "academy/modules/2026/FSE/vi-editor-complete.html":           "academy/modules/2026/FSE/Linux/vi-editor-complete.html"
+  }
+}

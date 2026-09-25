@@ -1,0 +1,61 @@
+# Janaka Premathilaka
+
+> Senior Java Engineer & Solution Architect, Zug, Switzerland. Banking-grade Java engineering, now bringing practical AI into regulated systems.
+
+Every page linked here is plain HTML that reads without JavaScript. The same facts are available as JSON under /api/public/v1/ and as Schema.org JSON-LD in each page.
+
+## Profile
+
+- [Home](https://janaka.me/): 22+ years of banking-grade Java at UBS, Credit Suisse and the European Commission. Now bringing LLM, RAG and agentic AI into regulated systems. Zug.
+- [CV](https://janaka.me/resume/): experience, certifications, education and stack, English and German
+- [Profile JSON](https://janaka.me/api/public/v1/profile.json): the CV as structured data
+- [Contact](https://janaka.me/#contact): email janaka2@gmail.com
+
+## Projects and products
+
+- [AssetCare](https://janaka.me/lab/assetcare/): A production-deployed Java 25, Spring Boot, Angular and Kubernetes application demonstrating modern full-stack, cloud-native and AI-assisted software engineering.
+- [nüchtern](https://janaka.me/products/#nuechtern): Fasting companion that keeps the biology visible: phase timer, hydration, electrolytes. Offline, German and English.
+- [Daily Momentum](https://janaka.me/products/#daily-momentum): A quiet record of where the day went: one tap says what you are doing, everything else is derived. On-device only.
+- [Loop](https://janaka.me/products/#loop): Remembers what repeats and learns the rhythm from your own history, on your device or your own Drive.
+- [BabyLoop](https://janaka.me/products/#babyloop): Two-tap care log for babies and toddlers, with a daily summary and a PDF for the paediatrician. On your device or your own Drive.
+- [LeftHere](https://janaka.me/products/#lefthere): Take a photo and it remembers where you left the car, keys, bag or a favourite place; the map walks you back. On your device or your own Drive.
+
+## Blog
+
+- [Blog](https://janaka.me/blog/): Clear, hands-on articles on Java, Kafka, RAG, agents and evals.
+- [From Idea to Production: Building AssetCare with Java 25, Spring Boot, Angular, Kubernetes and AI](https://janaka.me/blog/posts/assetcare-idea-to-production.html): How a Java 25, Spring Boot 4.1 and Angular 22 application went from a prototype to a live Kubernetes deployment on Hetzner with Helm, Keycloak, PostgreSQL and Let's Encrypt, what broke on the way…
+- [Dead-letter topics in Spring Kafka: retries and replay](https://janaka.me/blog/posts/spring-kafka-deadletter.html): How to handle poison pills in Spring Kafka with DefaultErrorHandler, @RetryableTopic, DeadLetterPublishingRecoverer and a governed replay path.
+- [RAG with FAISS: Chunking, MMR and Re-Ranking](https://janaka.me/blog/posts/rag-faiss-patterns.html): Why naive top-k retrieval fails, how to chunk and index with FAISS, and how MMR and cross-encoder re-ranking fix it for a regulated bank.
+- [Machine Learning: A Comprehensive Top-Down Guide](https://janaka.me/blog/posts/machine-learning-blog.html): A top-down introduction to machine learning: the workflow, the algorithms and the evaluation.
+- [Evals — Designing and Interpreting AI Evaluation Frameworks](https://janaka.me/blog/posts/ai-evaluation-frameworks.html): Building and reading AI evaluation pipelines: metrics, tooling and agentic behaviour.
+- [MCP for Agent Integrations: the Model Context Protocol](https://janaka.me/blog/posts/mcp-agent-integration.html): What the Model Context Protocol is, its three primitives and two transports, a minimal Python server, and how to run it safely in a regulated bank.
+
+## AI
+
+- [AI](https://janaka.me/ai/): Agents that are readable, reliable and worth shipping.
+
+## Lab
+
+- [Lab](https://janaka.me/lab/): Experiments and demos, runnable, with notes.
+- [AssetCare case study: Java 25, Spring Boot, Angular and Kubernetes in production](https://janaka.me/lab/assetcare/): AssetCare is a production-deployed Java 25, Spring Boot, Angular and Kubernetes application demonstrating modern full-stack, cloud-native and AI-assisted software engineering. Architecture…
+- [LLM Study Notes — Interactive Highlighter Toolbox](https://janaka.me/lab/Notes/llm-study-notes-handwritten-style.html): Interactive study notes on assessing large language models with a highlighter toolbox, sticky notes, and explain, analogy and ELI5 helpers.
+- [LLM Notes — Hand‑Annotated Highlights Demo + Toolbox](https://janaka.me/lab/Notes/llm-hand%E2%80%91annotated-demo5.html): Interactive hand-annotated notes on large language models with a highlighter toolbox: mark up, add sticky notes, save, load and export your annotations.
+- [LLM Study Notes — Assessing LLMs, Handwritten Style](https://janaka.me/lab/Notes/hand-book-note3.html): Handwritten-style study notes on assessing large language models: why they are large, how self-attention works, and why hallucination is the big problem.
+- [Study‑Style Notes: Aspects & Assessment of LLMs](https://janaka.me/lab/Notes/hand-book-note2.html): Study-style notes on assessing large language models: factuality, reasoning, safety, latency and cost, with the retrieval, QA and generation metrics.
+- [LLM Notes — Hand‑Annotated Highlights Demo](https://janaka.me/lab/Notes/hand-book-note1.html): Hand-annotated study notes on what large language models are used for: retrieval and RAG, content generation, reasoning, coding and agents.
+
+## Academy
+
+- [Academy](https://janaka.me/academy/): Engineers who surpass their teacher: daily notes and learning paths.
+- [From code to production: building AssetCare — a learning series](https://janaka.me/academy/assetcare/): A fourteen-module learning series on the AssetCare reference application: architecture, Spring Boot, Angular, PostgreSQL and Liquibase, Keycloak, Docker, Kubernetes, Helm, Terraform, HTTPS, CI/CD…
+- [From CRUD to production: Angular + Spring Boot, served as a seven-course meal](https://janaka.me/academy/production-ready-spring-angular/): AssetCare, a complete Angular 22 + Spring Boot 4.1 reference application built in the open: architecture, PostgreSQL migrations, a production API, the SPA, tests and scans, observability, Helm, K3s…
+- [Prompt Engineering Handbook](https://janaka.me/academy/modules/2026/FSE/promting/): Prompt engineering handbook for software engineers: foundations, templates and strategies for LLMs, agent workflows, RAG, debugging and daily coding.
+- [Practical Quantum Entanglement and Quantum Computing](https://janaka.me/academy/modules/2026/FSE/entanglement/): Quantum entanglement and quantum computing explained simply for software engineers: what entanglement means, real use cases, current limits and a career roadmap.
+- [Linux CLI Mastery](https://janaka.me/academy/modules/2026/FSE/Linux/): Linux CLI handbook for backend engineers: top commands, debugging commands, awk and sed, file handling, log investigation, one-liners, vi and troubleshooting.
+
+## Optional
+
+- [Full version of this file](https://janaka.me/llms-full.txt): profile, experience and every page summary
+- [Public JSON catalogue](https://janaka.me/api/public/v1/index.json)
+- [Atom feed](https://janaka.me/feed.xml)
+- [Sitemap](https://janaka.me/sitemap.xml)

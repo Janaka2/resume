@@ -1,0 +1,17 @@
+{
+ "apiVersion": "1",
+ "canonical": "https://janaka.me/products/#loop",
+ "project": {
+  "slug": "loop",
+  "name": "Loop",
+  "kind": "product",
+  "summary": "Remembers what repeats and learns the rhythm from your own history, on your device or your own Drive.",
+  "url": "https://loop.janaka.me/",
+  "page": "https://janaka.me/products/#loop",
+  "status": "live",
+  "availability": "Open to acquisition or licensing.",
+  "applicationCategory": "ProductivityApplication",
+  "privacy": "Records stay on the user's device or in storage the user owns.",
+  "api": "https://janaka.me/api/public/v1/projects/loop.json"
+ }
+}

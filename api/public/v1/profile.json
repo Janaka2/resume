@@ -1,0 +1,450 @@
+{
+ "apiVersion": "1",
+ "canonical": "https://janaka.me/",
+ "person": {
+  "id": "https://janaka.me/#me",
+  "name": "Janaka Premathilaka",
+  "jobTitle": "Senior Java Engineer & Solution Architect",
+  "positioning": "Banking-grade Java engineering, now bringing practical AI into regulated systems.",
+  "description": "22+ years of banking-grade Java at UBS, Credit Suisse and the European Commission. Now bringing LLM, RAG and agentic AI into regulated systems. Zug.",
+  "url": "https://janaka.me/",
+  "image": "https://janaka.me/assets/portrait-516.jpg",
+  "location": {
+   "locality": "Zug",
+   "country": "CH",
+   "workRadius": [
+    "Zürich",
+    "Zug",
+    "Basel",
+    "Remote"
+   ]
+  },
+  "contact": {
+   "email": "janaka2@gmail.com",
+   "page": "https://janaka.me/#contact"
+  },
+  "sameAs": [
+   "https://www.linkedin.com/in/janakapremathilaka/",
+   "https://github.com/Janaka2",
+   "https://javawithme.wordpress.com/"
+  ],
+  "languages": [
+   {
+    "code": "en",
+    "name": "English",
+    "level": "Full professional (C1/C2)"
+   },
+   {
+    "code": "de",
+    "name": "German",
+    "level": "Intermediate (B1, improving)"
+   },
+   {
+    "code": "si",
+    "name": "Sinhala",
+    "level": "Native"
+   },
+   {
+    "code": "fr",
+    "name": "French",
+    "level": "Basic"
+   },
+   {
+    "code": "nl",
+    "name": "Dutch",
+    "level": "Basic"
+   }
+  ],
+  "knowsAbout": [
+   "Java",
+   "Spring Boot",
+   "Angular",
+   "PostgreSQL",
+   "Kubernetes",
+   "Helm",
+   "Terraform",
+   "OpenTelemetry",
+   "Apache Kafka",
+   "LLM integration",
+   "RAG",
+   "Agentic AI",
+   "Claude Code",
+   "Model Context Protocol",
+   "Banking systems",
+   "Solution architecture"
+  ],
+  "cv": {
+   "page": "https://janaka.me/resume/",
+   "pdf": {
+    "en": "https://janaka.me/partials/Janaka_Premathilaka_CV_2026.pdf",
+    "de": "https://janaka.me/partials/Janaka_Premathilaka_Lebenslauf_2026_DE.pdf"
+   }
+  }
+ },
+ "experience": [
+  {
+   "period": "01.2024 — present",
+   "location": "Zürich, Switzerland",
+   "title": "Senior Full-Stack Solution Engineer (Lead)",
+   "organisation": "UBS / Cognizant",
+   "highlights": [
+    "Full ownership of six enterprise applications through the Credit Suisse–UBS merger — system stability and zero operational interruptions under sustained pressure.",
+    "Led teams through multi-platform migrations and technology decommissioning, resolving high-priority production incidents with calm, decisive execution.",
+    "Led the application-archiving initiative to 100% on-time delivery under audit-grade deadlines; built Linux + Oracle CLI pipelines for multi-gigabyte regulated data feeds.",
+    "Designed and shipped LLM and agentic-RAG automations for internal banking workflows, integrated with existing Java services — including local Llama 3 inference for data that cannot leave the bank’s perimeter.",
+    "Hands-on with the OpenAI Agents SDK and Model Context Protocol (MCP): multi-tool orchestration, guardrails, and RAG-powered enterprise applications in Python.",
+    "Mentor junior engineers, lead code reviews, carry the on-call (Pikett) pager."
+   ],
+   "technologies": [
+    "Java 17",
+    "Spring Boot",
+    "Kafka",
+    "Oracle",
+    "OpenShift / Kubernetes",
+    "React",
+    "GraphQL",
+    "Jenkins",
+    "n8n",
+    "LangChain",
+    "LlamaIndex",
+    "RAG / CAG",
+    "OpenAI Agents SDK",
+    "MCP"
+   ]
+  },
+  {
+   "period": "05.2019 — 01.2024",
+   "location": "Zürich, Switzerland · remote from the UK 2019–2020",
+   "title": "IT Solution Developer",
+   "organisation": "Credit Suisse / Cognizant",
+   "highlights": [
+    "100% ownership of the mission-critical Master Data Management tool, built from scratch — the bank’s golden data source for search and reporting.",
+    "Architected and delivered three cloud-native applications end-to-end (Spring Boot, React, Oracle, microservices), including a web application for dynamic consumer endpoints and case-management tools with streaming integration.",
+    "Low-latency front-office FX trading platform (Java 11–17): ≈20% responsiveness gain through multithreading and memory tuning.",
+    "Built the team’s CI/CD, Kubernetes/Docker and observability pipelines; championed TDD with JUnit and Mockito."
+   ],
+   "technologies": [
+    "Java 11–17",
+    "Spring Boot",
+    "React",
+    "GraphQL",
+    "Kafka",
+    "Liquibase",
+    "Oracle / PL-SQL",
+    "OpenShift",
+    "Helm",
+    "Splunk",
+    "Grafana"
+   ]
+  },
+  {
+   "period": "01.2018 — 05.2019",
+   "location": "Zürich, Switzerland",
+   "title": "IT Solution Development Specialist",
+   "organisation": "UBS / Cognizant",
+   "highlights": [
+    "Modernised 20+ legacy components into Spring Boot microservices with robust solution architectures.",
+    "Automated Jenkins delivery pipelines; migrated the codebase from SVN to Git.",
+    "Strengthened testing with JUnit, integration tests and Cucumber BDD."
+   ],
+   "technologies": []
+  },
+  {
+   "period": "06.2011 — 01.2018",
+   "location": "Brussels, Belgium",
+   "title": "Senior Full-Stack Java/JEE Developer",
+   "organisation": "European Commission (DIGIT Division)",
+   "highlights": [
+    "Engineered and maintained the EU’s core e-procurement system — mission-critical, multi-language, public-sector — over a 6.5-year tenure; the system contributed about 40% of the department’s total revenue.",
+    "Distributed integration flows with Spring Integration; JBPM workflows for approvals, escalations and audit trails.",
+    "Full-stack delivery (Angular, Spring/Hibernate, EJB3, Oracle, WebLogic); release ownership and L3 production support."
+   ],
+   "technologies": [
+    "JEE",
+    "Angular",
+    "JBPM",
+    "SOA"
+   ]
+  },
+  {
+   "period": "05.2004 — 06.2011",
+   "location": "Belgium & Sri Lanka",
+   "title": "Senior Java/JEE Consultant & Engineer",
+   "organisation": "Johnson & Johnson · Nokia Siemens · Union Bank of Colombo · and others",
+   "highlights": [
+    "Core technical consultant across healthcare, telecom, banking and e-commerce — enterprise-grade Java/JEE solutions.",
+    "Union Bank of Colombo: core banking modules — loan system, lease schedules, cheque and passbook printing (EJB2, JSP, DB2 on AS/400).",
+    "Modernised architectures in Agile/Scrum settings; SOAP/REST integration; Oracle/MySQL optimisation."
+   ],
+   "technologies": []
+  }
+ ],
+ "certifications": [
+  {
+   "group": "Anthropic Claude Academy (2026)",
+   "name": "Claude Code 101",
+   "issuer": "Anthropic",
+   "status": [
+    "✓ Badge · completed August 2026"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Anthropic Claude Academy (2026)",
+   "name": "Claude Code in Action",
+   "issuer": "Anthropic",
+   "status": [
+    "✓ Badge · completed August 2026"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Anthropic Claude Academy (2026)",
+   "name": "AI Fluency: Framework & Foundations",
+   "issuer": "Anthropic",
+   "status": [
+    "✓ Completed September 2026"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Anthropic Claude Academy (2026)",
+   "name": "AI Fluency for Builders",
+   "issuer": "Anthropic",
+   "status": [
+    "✓ Completed August — September 2026"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Anthropic Claude Academy (2026)",
+   "name": "AI Fluency for educators",
+   "issuer": "Anthropic",
+   "status": [
+    "✓ Completed August — September 2026"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Anthropic Claude Academy (2026)",
+   "name": "AI Fluency for students",
+   "issuer": "Anthropic",
+   "status": [
+    "✓ Completed August — September 2026"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Anthropic Claude Academy (2026)",
+   "name": "Introduction to agent skills",
+   "issuer": "Anthropic · Claude Code",
+   "status": [
+    "✓ Completed September 2026"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Anthropic Claude Academy (2026)",
+   "name": "Introduction to Model Context Protocol",
+   "issuer": "Anthropic",
+   "status": [
+    "✓ Completed September 2026"
+   ],
+   "evidence": [
+    "https://janaka.me/assets/certificates/anthropic-introduction-to-model-context-protocol.pdf"
+   ]
+  },
+  {
+   "group": "Anthropic Claude Academy (2026)",
+   "name": "Model Context Protocol: Advanced Topics",
+   "issuer": "Anthropic",
+   "status": [
+    "✓ Completed September 2026"
+   ],
+   "evidence": [
+    "https://janaka.me/assets/certificates/anthropic-model-context-protocol-advanced-topics.pdf",
+    "https://verify.skilljar.com/c/zbrvxyppiy3b"
+   ]
+  },
+  {
+   "group": "Anthropic Claude Academy (2026)",
+   "name": "Claude Certified Architect — Professional",
+   "issuer": "Anthropic",
+   "status": [
+    "Exam preparation · 2026"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Cloud, AI & Automation",
+   "name": "CKA — Certified Kubernetes Administrator",
+   "issuer": "The Linux Foundation / CNCF",
+   "status": [
+    "Issued 2024"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Cloud, AI & Automation",
+   "name": "AI Automation: Build LLM Apps & AI-Agents with n8n & APIs",
+   "issuer": "Arnold Oberleiter",
+   "status": [
+    "✓ 100% complete"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Cloud, AI & Automation",
+   "name": "AZ-900: Microsoft Azure Fundamentals Exam test 2025 (480Q)",
+   "issuer": "Global Edtech",
+   "status": [
+    "✓ 100% complete"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Cloud, AI & Automation",
+   "name": "Helm 3 — Package Manager For Kubernetes",
+   "issuer": "Himanshu Sharma",
+   "status": [
+    "✓ 100% complete"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Cloud, AI & Automation",
+   "name": "The Complete Agentic AI Engineering Course (2025)",
+   "issuer": "Ed Donner, Ligency Team",
+   "status": [
+    "Completed 21 September 2025",
+    "✓ 100% complete"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Java, Spring & Dev Productivity",
+   "name": "IntelliJ IDEA Tricks to Boost Productivity for Java Devs",
+   "issuer": "Tao W., James Lee, Jiarui Zhou",
+   "status": [
+    "✓ 100% complete"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Java, Spring & Dev Productivity",
+   "name": "Ready for Production with Spring Boot Actuator",
+   "issuer": "John Thompson, Spring Ahead Code Academy",
+   "status": [
+    "✓ 100% complete"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Java, Spring & Dev Productivity",
+   "name": "Escalate Scala Training — Setup Instructions",
+   "issuer": "Dick Wall",
+   "status": [
+    "✓ 100% complete"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Data & SQL",
+   "name": "SQL Programming Basics",
+   "issuer": "Global Academy",
+   "status": [
+    "✓ 100% complete"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Languages & Soft Skills",
+   "name": "Communication & Social Skills",
+   "issuer": "MicroLearn Ltd",
+   "status": [
+    "✓ 100% complete"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Languages & Soft Skills",
+   "name": "Remember the German Articles der, die, das (Mini-Course)",
+   "issuer": "Anja Winter",
+   "status": [
+    "✓ 100% complete"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Languages & Soft Skills",
+   "name": "Mental Health First Aid Skills",
+   "issuer": "Mark Paddock",
+   "status": [
+    "✓ 100% complete"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Languages & Soft Skills",
+   "name": "Mastering Success: Achieve Happiness, Wealth & Health",
+   "issuer": "Chris Croft, CRFT Productions",
+   "status": [
+    "98% complete"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Languages & Soft Skills",
+   "name": "First Aid",
+   "issuer": "Arthur Jackson",
+   "status": [
+    "✓ 100% complete"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Sun Certifications (since 2006)",
+   "name": "Sun Certified Enterprise Architect (SCEA)",
+   "issuer": "Sun Microsystems",
+   "status": [
+    "Issued January 2006"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Sun Certifications (since 2006)",
+   "name": "Sun Certified Business Component Developer (SCBCD)",
+   "issuer": "Sun Microsystems",
+   "status": [
+    "Issued January 2006"
+   ],
+   "evidence": []
+  },
+  {
+   "group": "Sun Certifications (since 2006)",
+   "name": "Sun Certified Java Programmer (SCJP)",
+   "issuer": "Sun Microsystems",
+   "status": [
+    "Issued January 2006"
+   ],
+   "evidence": []
+  }
+ ],
+ "education": [
+  {
+   "institution": "University of Sri Jayewardenepura",
+   "degree": "BSc — Computer Science, Statistics & Mathematics",
+   "period": "1999 — 2004"
+  },
+  {
+   "institution": "University of Colombo",
+   "degree": "BIT — Bachelor of Information Technology",
+   "period": "1999 — 2004 · 6 semesters completed"
+  },
+  {
+   "institution": "University of Moratuwa",
+   "degree": "Master’s in Computer Engineering",
+   "period": "2007 — 2008 · paused on relocating to Belgium"
+  }
+ ]
+}

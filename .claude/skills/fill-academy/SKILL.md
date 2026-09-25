@@ -10,4 +10,5 @@ description: Batch-fill empty auto-generated Janaka Academy daily pages with rea
 3. Delegate each page to the `content-writer` agent with: file path, topic slug, list of sibling H1s to avoid, and the instruction to replace only the placeholder sections (What I learned / Key commands / Practical takeaways, or the note sections) while keeping `<title>`, canonical, chrome and footer as generated. Run up to five in parallel.
 4. After each returns, verify: no placeholder text remains, exactly one H1, file still contains `site-nav.html` include and both stylesheet links.
 5. Update the `<title>` and `<h1>` to the specific sub-topic if the writer chose one, keeping the date suffix pattern `TITLE - YYYY-MM-DD` in the title.
-6. Commit as `Fill academy pages: <dates>` with the standard trailers.
+6. Remove the `<meta name="robots" content="noindex">` from each filled page, write a real meta description from its content, then run `python3 scripts/build.py` (the page now enters the sitemap, feed, search, llms.txt and public JSON) and `python3 scripts/validate-site.py`.
+7. Commit the pages and the regenerated files together as `Fill academy pages: <dates>` with the standard trailers.

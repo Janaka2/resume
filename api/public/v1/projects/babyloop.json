@@ -1,0 +1,17 @@
+{
+ "apiVersion": "1",
+ "canonical": "https://janaka.me/products/#babyloop",
+ "project": {
+  "slug": "babyloop",
+  "name": "BabyLoop",
+  "kind": "product",
+  "summary": "Two-tap care log for babies and toddlers, with a daily summary and a PDF for the paediatrician. On your device or your own Drive.",
+  "url": "https://babyloop.janaka.me/",
+  "page": "https://janaka.me/products/#babyloop",
+  "status": "live",
+  "availability": "Open to acquisition or licensing.",
+  "applicationCategory": "LifestyleApplication",
+  "privacy": "Records stay on the user's device or in storage the user owns.",
+  "api": "https://janaka.me/api/public/v1/projects/babyloop.json"
+ }
+}

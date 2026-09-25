@@ -1,0 +1,48 @@
+name: Site checks
+
+# The safety net for janaka.me: whoever or whatever changed the repository
+# (a person, Claude Code, another coding agent, the daily bots), the derived
+# files must be current and the deterministic checks must pass.
+# Local equivalent: npm run check   (docs/maintenance/claude-code.md)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # sitemap/feed dates come from git history
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Derived files are current (sitemap, feed, index, JSON-LD, llms.txt, api/public/v1)
+        run: python3 scripts/build.py --check
+
+      - name: Validate site (meta, canonical, JSON-LD, sitemap, robots, links, llms, public data, sync, WebMCP wiring)
+        run: python3 scripts/validate-site.py
+
+      - name: WebMCP and agent capability tests
+        run: node --test "tests/js/*.test.mjs"
+
+      - name: Generator and validator tests
+        run: python3 -m unittest discover -s tests/python -v

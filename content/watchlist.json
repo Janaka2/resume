@@ -1,0 +1,188 @@
+{
+  "$comment": "Time-sensitive facts and standards janaka.me depends on. scripts/maintenance-scan.py reports every item whose review date has passed or is within 21 days; the autonomous maintenance run (scheduled-maintenance skill) rechecks it against the listed sources, updates `checked` with evidence, and applies or proposes the `action`. `checked: null` means never verified. Use `every_days` for recurring checks or `review_by` for a fixed date. `authority`: 'agent' = the run may act within its policy; 'janaka' = propose only, never change the fact.",
+  "items": [
+    {
+      "id": "webmcp-origin-trial",
+      "topic": "WebMCP Chrome origin trial (Chrome 149-156) ends 2026-11-16; an origin-trial token in WEBMCP_OT_TOKEN stops working then.",
+      "where": [
+        "assets/js/includes.js",
+        "docs/ai/webmcp.md"
+      ],
+      "sources": [
+        "https://developer.chrome.com/origintrials/",
+        "https://developer.chrome.com/docs/ai/webmcp"
+      ],
+      "checked": "2026-09-25",
+      "review_by": "2026-11-01",
+      "authority": "agent",
+      "action": "Check whether WebMCP ships by default or the trial is extended. Update docs/ai/webmcp.md; propose token renewal or removal to Janaka (tokens come from Janaka's Chrome origin-trials account)."
+    },
+    {
+      "id": "webmcp-spec",
+      "topic": "WebMCP API shape: document.modelContext.registerTool(tool, {signal}), annotations, lifecycle.",
+      "where": [
+        "assets/js/agent/webmcp.js",
+        "docs/ai/webmcp.md",
+        "tests/js/agent.test.mjs"
+      ],
+      "sources": [
+        "https://webmachinelearning.github.io/webmcp/",
+        "https://github.com/webmachinelearning/webmcp"
+      ],
+      "checked": "2026-09-25",
+      "every_days": 60,
+      "authority": "agent",
+      "action": "Run standards-refresh webmcp. A changed API shape is fixed in webmcp.js only (plus the test fake), never in capabilities.js."
+    },
+    {
+      "id": "claude-code-conventions",
+      "topic": "Claude Code project conventions: CLAUDE.md @imports, .claude/rules paths frontmatter, SKILL.md and agent frontmatter, hooks schema.",
+      "where": [
+        "CLAUDE.md",
+        ".claude/",
+        "scripts/hooks/stop-check.py"
+      ],
+      "sources": [
+        "https://code.claude.com/docs/en/memory",
+        "https://code.claude.com/docs/en/skills",
+        "https://code.claude.com/docs/en/sub-agents",
+        "https://code.claude.com/docs/en/hooks"
+      ],
+      "checked": "2026-09-25",
+      "every_days": 90,
+      "authority": "agent",
+      "action": "Run standards-refresh claude-code. Migrate deprecated syntax in place; never delete an agent or skill (merge or mark superseded instead)."
+    },
+    {
+      "id": "claude-cli-headless",
+      "topic": "Claude Code CLI flags used by scripts/run-maintenance.sh: -p, --agent, --permission-mode acceptEdits, --allowedTools, --disallowedTools; authentication through the local login (no API key).",
+      "where": [
+        "scripts/run-maintenance.sh"
+      ],
+      "sources": [
+        "https://code.claude.com/docs/en/cli-reference",
+        "https://code.claude.com/docs/en/headless"
+      ],
+      "checked": "2026-09-25",
+      "every_days": 90,
+      "authority": "agent",
+      "action": "Compare the flags with the CLI reference (`claude --help` on the machine). Fix renamed or deprecated flags in run-maintenance.sh only; never add an API key."
+    },
+    {
+      "id": "github-actions-versions",
+      "topic": "Pinned GitHub Actions majors (actions/checkout, setup-python, setup-node) in .github/workflows.",
+      "where": [
+        ".github/workflows/"
+      ],
+      "sources": [
+        "https://github.com/actions/checkout/releases",
+        "https://github.com/actions/setup-python/releases",
+        "https://github.com/actions/setup-node/releases"
+      ],
+      "checked": null,
+      "every_days": 180,
+      "authority": "janaka",
+      "action": "List newer majors and breaking notes; propose the YAML diff (maintenance runs never edit workflows)."
+    },
+    {
+      "id": "google-search-guidance",
+      "topic": "Google Search guidance on AI features, structured data eligibility (ProfilePage, Article, BreadcrumbList), sitemaps and canonicalization.",
+      "where": [
+        "scripts/gen-structured-data.py",
+        "scripts/gen-sitemap.py",
+        "docs/ai/discovery.md"
+      ],
+      "sources": [
+        "https://developers.google.com/search/docs"
+      ],
+      "checked": "2026-09-25",
+      "every_days": 180,
+      "authority": "agent",
+      "action": "Run standards-refresh search and schema. Change generators only for breaking or deprecated guidance; list optional items."
+    },
+    {
+      "id": "llms-txt-format",
+      "topic": "llms.txt conventions (H1, summary blockquote, H2 link lists, Optional section).",
+      "where": [
+        "scripts/gen-public-data.py"
+      ],
+      "sources": [
+        "https://llmstxt.org"
+      ],
+      "checked": "2026-09-25",
+      "every_days": 180,
+      "authority": "agent",
+      "action": "Align render_llms() with the current convention if it changed; keep llms.txt short."
+    },
+    {
+      "id": "assetcare-live",
+      "topic": "AssetCare is described as live and production-deployed (brand voice: verified live 2026-09-23).",
+      "where": [
+        "content/projects.json",
+        ".claude/skills/brand-voice/SKILL.md",
+        "lab/assetcare/index.html"
+      ],
+      "sources": [
+        "https://assetcare.janaka.me/"
+      ],
+      "checked": "2026-09-23",
+      "every_days": 60,
+      "authority": "janaka",
+      "action": "curl the live URL. If it is down or changed, report it prominently; never edit the 'live' claim without Janaka."
+    },
+    {
+      "id": "products-live",
+      "topic": "The five products are described as live: nuechtern.app, daily-momentum.com, loop.janaka.me, babyloop.janaka.me, here.janaka.me.",
+      "where": [
+        "content/projects.json",
+        "partials/side-projects.html",
+        "products/index.html"
+      ],
+      "sources": [
+        "https://nuechtern.app/",
+        "https://daily-momentum.com/",
+        "https://loop.janaka.me/",
+        "https://babyloop.janaka.me/",
+        "https://here.janaka.me/"
+      ],
+      "checked": "2026-09-25",
+      "every_days": 30,
+      "authority": "janaka",
+      "action": "Check each URL answers. Report any that fail; never change status or copy without Janaka."
+    },
+    {
+      "id": "experience-years",
+      "topic": "The '22+ years' claim counts from the first role in 05.2004; it becomes 23+ in May 2027.",
+      "where": [
+        "partials/",
+        "resume/index.html",
+        "content/profile.json",
+        "assets/js/i18n.js",
+        "chatbot/config.py",
+        ".claude/skills/brand-voice/SKILL.md"
+      ],
+      "sources": [
+        "partials/experience.html"
+      ],
+      "checked": "2026-09-25",
+      "review_by": "2027-05-01",
+      "authority": "janaka",
+      "action": "Propose the exact '22+' -> '23+' (and 'Jahre') edits across every copy for Janaka to approve; the content-guardian agent applies them after approval."
+    },
+    {
+      "id": "cert-architect-exam",
+      "topic": "Certifications list 'Claude Certified Architect - Professional' as 'Exam preparation · 2026'.",
+      "where": [
+        "partials/certifications.html",
+        "resume/index.html"
+      ],
+      "sources": [
+        "partials/certifications.html"
+      ],
+      "checked": "2026-09-25",
+      "review_by": "2026-12-31",
+      "authority": "janaka",
+      "action": "Ask Janaka whether the status changed; never change a certification status on your own."
+    }
+  ]
+}

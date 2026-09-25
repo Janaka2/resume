@@ -78,9 +78,10 @@ def main():
 
     minidom.parseString(xml.encode("utf-8"))   # raises on malformed output
 
-    with open(OUT, "w", encoding="utf-8") as fh:
-        fh.write(xml)
-    print(f"wrote {OUT}: {len(entries)} entries")
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import site_lib
+    site_lib.write_if_changed(OUT, xml)
+    print(f"feed.xml: {len(entries)} entries")
 
 
 if __name__ == "__main__":

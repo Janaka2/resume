@@ -1,0 +1,85 @@
+name: Maintenance radar
+
+# Keyless weekly check: no AI, no API key, no secrets. Runs the deterministic
+# obsolescence radar (scripts/maintenance-scan.py + content/watchlist.json), the
+# build freshness check, the validator and the tests, then keeps ONE open issue
+# labelled `maintenance` up to date with what is due. The AI part runs on
+# Janaka's own Claude login via scripts/run-maintenance.sh (docs/maintenance/claude-code.md).
+
+on:
+  schedule:
+    - cron: "23 4 * * 1"          # Mondays 04:23 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: maintenance-radar
+  cancel-in-progress: false
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Scan and check
+        id: scan
+        run: |
+          set +e
+          python3 scripts/maintenance-scan.py --links > /tmp/scan.md
+          python3 scripts/maintenance-scan.py --links --json > /tmp/scan.json
+          python3 scripts/build.py --check > /tmp/build.txt 2>&1;          b=$?
+          python3 scripts/validate-site.py --quiet > /tmp/validate.txt 2>&1; v=$?
+          node --test "tests/js/*.test.mjs" > /tmp/js.txt 2>&1;             j=$?
+          python3 -m unittest discover -s tests/python > /tmp/py.txt 2>&1;  p=$?
+          set -e
+          due=$(python3 -c "import json;d=json.load(open('/tmp/scan.json'));print(len(d['watchlist'])+len(d['stale_years'])+len(d.get('links',{}).get('failing',[])))")
+          checks_failed=$(( b | v | j | p ))
+          res() { [ "$1" = 0 ] && echo PASS || echo FAIL; }
+          {
+            echo "_Updated by the Maintenance radar workflow on $(date -u +%F). No AI ran; this is the deterministic scan._"
+            echo
+            echo "| Check | Result |"; echo "|---|---|"
+            echo "| build --check (derived files current) | $(res $b) |"
+            echo "| validate-site | $(res $v) |"
+            echo "| JS tests | $(res $j) |"
+            echo "| Python tests | $(res $p) |"
+            echo
+            if [ $v -ne 0 ]; then echo '```'; tail -n 30 /tmp/validate.txt; echo '```'; echo; fi
+            sed '1d' /tmp/scan.md
+            echo
+            echo "**Next step:** on your machine run \`bash scripts/run-maintenance.sh --pr\` (uses your Claude login, no API key)."
+            echo "The agent rechecks the due items against official sources, fixes what its policy allows and opens a PR."
+          } > /tmp/body.md
+          echo "due=$due" >> "$GITHUB_OUTPUT"
+          echo "failed=$checks_failed" >> "$GITHUB_OUTPUT"
+          cat /tmp/body.md
+
+      - name: Open, update or close the maintenance issue
+        run: |
+          gh label create maintenance --color 2F4A6D --description "Maintenance radar" --force >/dev/null
+          num=$(gh issue list --label maintenance --state open --json number --jq '.[0].number // empty')
+          if [ "${{ steps.scan.outputs.due }}" = "0" ] && [ "${{ steps.scan.outputs.failed }}" = "0" ]; then
+            if [ -n "$num" ]; then gh issue close "$num" --comment "Radar is clear as of $(date -u +%F)."; fi
+            echo "Nothing due."
+          elif [ -n "$num" ]; then
+            gh issue edit "$num" --body-file /tmp/body.md
+          else
+            gh issue create --title "Maintenance due" --label maintenance --body-file /tmp/body.md
+          fi

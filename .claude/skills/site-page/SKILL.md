@@ -98,3 +98,5 @@ Read `CLAUDE.md` for the architecture. This skill is the copy-paste template.
 - [ ] title, description, canonical, og:*, twitter:card
 - [ ] one H1, no hard-coded colours
 - [ ] page is linked from its section index (and, for academy, the log/nav block)
+- [ ] outside `blog/posts`, `lab/Notes`, `academy/modules/2026`? add it to `pages` in `content/site.json`
+- [ ] `python3 scripts/build.py` (JSON-LD block, sitemap, feed, index, llms.txt, public JSON) and `python3 scripts/validate-site.py` OK

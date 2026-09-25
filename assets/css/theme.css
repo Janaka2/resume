@@ -7,7 +7,7 @@
 /* ============ tokens ============ */
 :root{
   --bg:#FAFAF8; --bg2:#FFFFFF; --tx:#16181D; --tx2:#63686F;
-  --ln:#E4E4E0; --ac:#2F4A6D; --ok:#5C8A72; --chip:#F2F2EF;
+  --ln:#E4E4E0; --ac:#2F4A6D; --ok:#4E7560; --chip:#F2F2EF;
   --shadow:0 1px 2px rgba(22,24,29,.04),0 8px 24px rgba(22,24,29,.05);
   --r:12px;
   --font-sans:"IBM Plex Sans",system-ui,sans-serif;
