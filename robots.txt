@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /partials/
+Disallow: /resume/recommendations/
 Sitemap: https://janaka.me/sitemap.xml

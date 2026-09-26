@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recommendations — Janaka Premathilaka</title>
+<meta name="description" content="What colleagues say about Janaka Premathilaka, counted: seven written recommendations from 2011 to 2026. Shared on request.">
+<!--
+  Shared on request. This page is outside the crawl roots in content/site.json,
+  so it is not in the sitemap, feed, search index, llms.txt or WebMCP; it is
+  noindex and robots.txt disallows it. Access is the password prompt in the
+  first script below, handed out personally; it is not a security boundary.
+  Design: like resume/index.html it is standalone (tokens inline, kept in sync
+  with theme.css) so it renders exactly like the rest of the site.
+-->
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="canonical" href="https://janaka.me/resume/recommendations/">
+<meta property="og:title" content="Recommendations — Janaka Premathilaka">
+<meta property="og:description" content="Seven written recommendations from colleagues, 2011 to 2026. Shared on request.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://janaka.me/resume/recommendations/">
+<meta property="og:image" content="https://janaka.me/assets/og/cv.png">
+<meta name="twitter:card" content="summary">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png">
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+<script>
+  (function(){
+    try {
+      var t = localStorage.getItem("jp-theme");
+      if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    } catch (e) {}
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =====================================================================
+   janaka.me — Recommendations page
+   Tokens and base rules are copied from assets/css/theme.css so this
+   single file renders exactly like the rest of the site. Everything
+   page-specific is prefixed rc- and built from the same tokens.
+   ===================================================================== */
+
+/* ============ tokens (same values as theme.css) ============ */
+:root{
+  --bg:#FAFAF8; --bg2:#FFFFFF; --tx:#16181D; --tx2:#63686F;
+  --ln:#E4E4E0; --ac:#2F4A6D; --ok:#5C8A72; --chip:#F2F2EF;
+  --shadow:0 1px 2px rgba(22,24,29,.04),0 8px 24px rgba(22,24,29,.05);
+  --r:12px;
+  --font-sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --font-head:"Archivo","Helvetica Neue",Arial,sans-serif;
+  /* data hues: one per kind of quality. Checked for colour-blind
+     separation (all pairs) and 3:1 contrast on both surfaces. */
+  --g-craft:#2F5990; --g-drive:#B5651D; --g-people:#2E8F6B;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1114; --bg2:#16191E; --tx:#ECEDEF; --tx2:#9A9FA8;
+    --ln:#272B32; --ac:#9BB4D6; --ok:#7FAF93; --chip:#1D2127;
+    --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.4);
+    --g-craft:#5F85CB; --g-drive:#B87333; --g-people:#37A885;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1114; --bg2:#16191E; --tx:#ECEDEF; --tx2:#9A9FA8;
+  --ln:#272B32; --ac:#9BB4D6; --ok:#7FAF93; --chip:#1D2127;
+  --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.4);
+  --g-craft:#5F85CB; --g-drive:#B87333; --g-people:#37A885;
+  color-scheme:dark;
+}
+
+/* ============ base (from theme.css) ============ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--tx);
+  font:400 1rem/1.65 var(--font-sans);
+  -webkit-font-smoothing:antialiased;
+  transition:background .25s ease,color .25s ease;
+  overflow-x:hidden;
+}
+section{scroll-margin-top:84px}
+.wrap{max-width:1020px;margin:0 auto;padding:0 24px}
+@media(max-width:480px){.wrap{padding:0 16px}}
+a{color:var(--ac)}
+img{max-width:100%}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:4px}
+.mono{font-family:var(--font-mono)}
+.eyebrow{
+  font-family:var(--font-mono);font-size:.72rem;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:10px;
+}
+h1{
+  font-family:var(--font-head);font-weight:800;
+  font-size:clamp(1.9rem,4.4vw,2.7rem);line-height:1.06;letter-spacing:-.022em;text-wrap:balance;
+}
+h2{font-family:var(--font-head);font-weight:700;font-size:clamp(1.45rem,3vw,1.9rem);letter-spacing:-.01em;margin-bottom:12px;text-wrap:balance}
+.sec{padding:72px 0 0}
+.lede{color:var(--tx2);max-width:62ch}
+
+.topbar{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:50;
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--ln);
+}
+.topbar .wrap{display:flex;align-items:center;gap:18px;min-height:56px}
+.logo{font-family:var(--font-head);font-weight:800;font-size:1.05rem;color:var(--tx);text-decoration:none;letter-spacing:-.02em;flex-shrink:0}
+.logo b{color:var(--ac)}
+.topbar nav{margin-left:auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap;row-gap:6px;justify-content:flex-end}
+.topbar nav a{
+  font-family:var(--font-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--tx2);text-decoration:none;
+}
+.topbar nav a:hover{color:var(--ac)}
+.iconbtn{
+  border:1px solid var(--ln);background:var(--bg2);color:var(--tx);border-radius:8px;
+  height:34px;cursor:pointer;line-height:1;
+}
+.iconbtn:hover{border-color:var(--ac)}
+#themeBtn{width:34px;font-size:.95rem}
+@media(max-width:370px){.topbar nav a.rc-nav-x{display:none}}
+@media(max-width:560px){
+  .topbar .wrap{padding-top:10px;padding-bottom:10px}
+  .topbar nav{gap:10px}
+  .topbar nav a{font-size:.68rem;letter-spacing:.1em}
+}
+
+.status{
+  font-family:var(--font-mono);font-size:.78rem;color:var(--tx2);
+  display:flex;align-items:flex-start;gap:8px;min-height:1.3em;
+}
+.status .dot{margin-top:.4em}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);flex:0 0 auto;animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 45%,transparent)}55%{box-shadow:0 0 0 7px transparent}}
+
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer;
+  font:500 .86rem/1 var(--font-sans);border-radius:10px;padding:11px 16px;
+  border:1px solid var(--ln);background:var(--bg2);color:var(--tx);
+  transition:transform .12s ease,border-color .12s ease,background .12s ease;
+}
+.btn:hover{transform:translateY(-1px);border-color:var(--ac)}
+.btn.primary{background:var(--ac);border-color:var(--ac);color:var(--bg)}
+.btn.primary:hover{filter:brightness(1.06)}
+
+.card{border:1px solid var(--ln);border-radius:var(--r);background:var(--bg2);padding:20px;box-shadow:var(--shadow)}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  font-family:var(--font-mono);font-size:.74rem;color:var(--tx);
+  background:var(--chip);border:1px solid var(--ln);border-radius:7px;padding:5px 9px;
+}
+.cta{
+  display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;
+  border:1px solid color-mix(in srgb,var(--ac) 40%,var(--ln));border-radius:var(--r);
+  background:linear-gradient(135deg,color-mix(in srgb,var(--ac) 7%,var(--bg2)),var(--bg2) 60%);
+  padding:24px;box-shadow:var(--shadow);
+}
+.cta h3{font-family:var(--font-head);font-weight:700;font-size:1.15rem;margin-bottom:4px}
+.cta p{color:var(--tx2);max-width:52ch}
+.skip{
+  position:absolute;left:-9999px;top:8px;z-index:100;
+  font-family:var(--font-mono);font-size:.74rem;letter-spacing:.06em;
+  background:var(--ac);color:var(--bg);text-decoration:none;
+  padding:8px 14px;border-radius:999px;box-shadow:var(--shadow);
+}
+.skip:focus,.skip:focus-visible{left:12px;outline:2px solid var(--ac);outline-offset:2px}
+.sitefoot{margin-top:72px;border-top:1px solid var(--ln);background:var(--bg2)}
+.sitefoot .wrap{
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;
+  padding-top:22px;padding-bottom:22px;
+  font-family:var(--font-mono);font-size:.7rem;color:var(--tx2);
+}
+.sitefoot a{color:var(--tx2);text-decoration:none}
+.sitefoot a:hover{color:var(--ac)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+
+/* =====================================================================
+   page-specific — rc-*
+   ===================================================================== */
+
+.rc-draft{background:color-mix(in srgb,var(--g-drive) 14%,var(--bg2));border-bottom:1px solid color-mix(in srgb,var(--g-drive) 45%,var(--ln));font-family:var(--font-mono);font-size:.7rem;letter-spacing:.04em;line-height:1.45;color:var(--tx);padding:8px 0}
+
+/* ---- hero ---- */
+.rc-hero{padding:30px 0 0}
+.rc-top{display:flex;flex-direction:column-reverse;gap:18px;margin-bottom:10px}
+.rc-top .eyebrow{margin-bottom:0}
+.rc-id{display:flex;align-items:center;gap:12px}
+@media(min-width:760px){
+  .rc-top{flex-direction:row;align-items:center;justify-content:space-between;gap:24px;margin-bottom:6px}
+}
+.rc-id img{width:46px;height:46px;border-radius:12px;object-fit:cover;object-position:50% 18%;border:1px solid var(--ln);display:block}
+.rc-id b{display:block;font-family:var(--font-head);font-weight:700;font-size:.98rem;letter-spacing:-.01em;line-height:1.25}
+.rc-id span{display:block;font-family:var(--font-mono);font-size:.7rem;color:var(--tx2);letter-spacing:.04em;line-height:1.4}
+.rc-hero .lede{margin-top:12px;font-size:1.02rem}
+.rc-hero .status{margin-top:14px}
+@media(max-width:480px){
+  .rc-hero{padding-top:24px}
+  .rc-id img{width:40px;height:40px;border-radius:10px}
+  .rc-hero .lede{font-size:.98rem}
+  .rc-hero .status{font-size:.7rem}
+}
+
+/* ---- legend ---- */
+.rc-legend{
+  display:flex;flex-wrap:nowrap;gap:10px 22px;align-items:center;justify-content:space-between;
+  margin-top:20px;padding:10px 0;border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);
+}
+.rc-keys{display:flex;flex-wrap:wrap;gap:6px 18px;list-style:none}
+.rc-keys li{display:flex;align-items:baseline;gap:8px;font-size:.86rem;color:var(--tx2)}
+.rc-keys b{font-family:var(--font-head);font-weight:700;color:var(--tx);font-size:.9rem}
+.rc-swatch{
+  width:11px;height:11px;border-radius:50%;flex:0 0 auto;align-self:center;
+  background:color-mix(in srgb,var(--g) 22%,var(--bg2));border:2px solid var(--g);
+}
+.rc-sizekey{display:flex;align-items:center;gap:12px;flex:0 0 auto}
+.rc-cap{font-family:var(--font-mono);font-size:.66rem;line-height:1.4;color:var(--tx2);letter-spacing:.04em;text-align:right}
+@media(max-width:560px){.rc-cap{display:none}}
+.rc-legend svg{display:block;flex:0 0 auto;overflow:visible}
+@media(max-width:760px){.rc-blurb{display:none}.rc-keys{gap:4px 14px}}
+.rc-legend circle{fill:none;stroke:var(--tx2);stroke-width:1}
+.rc-legend text{font-family:var(--font-mono);font-size:9.5px;fill:var(--tx2)}
+.rc-legend line{stroke:var(--tx2);stroke-width:.75}
+
+[data-g="craft"]{--g:var(--g-craft)}
+[data-g="drive"]{--g:var(--g-drive)}
+[data-g="people"]{--g:var(--g-people)}
+
+/* ---- map: field + panel ---- */
+.rc-map{display:grid;grid-template-columns:1fr;gap:0;margin-top:18px}
+.rc-field{position:relative;width:100%;min-height:320px}
+.rc-field noscript p{color:var(--tx2);font-size:.92rem;padding:24px 0}
+.rc-bub{
+  position:absolute;left:0;top:0;width:var(--d);height:var(--d);
+  transform:translate(var(--x),var(--y));
+  border-radius:50%;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  border:1.5px solid color-mix(in srgb,var(--g) 78%,var(--bg2));
+  background:color-mix(in srgb,var(--g) 11%,var(--bg2));
+  color:var(--tx);text-align:center;padding:0;
+  font-family:var(--font-head);
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .45s cubic-bezier(.2,.7,.2,1),background .18s ease,border-color .18s ease,box-shadow .18s ease,opacity .18s ease;
+  animation:rc-in .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i) * 28ms);
+}
+@keyframes rc-in{from{opacity:0;scale:.86}to{opacity:1;scale:1}}
+.rc-bub:hover{background:color-mix(in srgb,var(--g) 18%,var(--bg2));border-color:var(--g);scale:1.025}
+.rc-bub[aria-pressed="true"]{
+  background:color-mix(in srgb,var(--g) 24%,var(--bg2));border-color:var(--g);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--g) 30%,transparent),var(--shadow);
+}
+.rc-bub:focus-visible{outline:2px solid var(--g);outline-offset:3px;border-radius:50%}
+.rc-bub-l{display:block;font-weight:700;line-height:1.08;letter-spacing:-.012em;font-size:var(--fs);white-space:nowrap}
+.rc-bub-n{display:block;font-family:var(--font-mono);font-weight:500;font-size:var(--fn);letter-spacing:.06em;color:var(--tx2);text-transform:uppercase;white-space:nowrap}
+.rc-field.is-dim .rc-bub:not([aria-pressed="true"]){opacity:.82}
+
+/* panel (desktop: sticky column · phone: bottom sheet) */
+.rc-panel{
+  border:1px solid var(--ln);border-radius:var(--r);background:var(--bg2);box-shadow:var(--shadow);
+  padding:22px 22px 20px;
+}
+.rc-panel .zlabel{
+  font-family:var(--font-mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--tx2);display:flex;align-items:center;gap:8px;margin-bottom:8px;
+}
+.rc-panel h3{font-family:var(--font-head);font-weight:800;font-size:1.5rem;letter-spacing:-.02em;line-height:1.1}
+.rc-panel .rc-said{font-family:var(--font-mono);font-size:.74rem;color:var(--tx2);margin-top:8px;letter-spacing:.02em}
+.rc-meter{display:inline-flex;gap:4px;vertical-align:middle;margin-right:8px}
+.rc-meter i{width:16px;height:6px;border-radius:3px;background:var(--chip);border:1px solid var(--ln);display:block}
+.rc-meter i.f{background:var(--g);border-color:var(--g)}
+.rc-ev{list-style:none;margin-top:18px;display:grid;gap:0}
+.rc-ev li{padding:14px 0;border-top:1px solid var(--ln)}
+.rc-ev li:last-child{padding-bottom:2px}
+.rc-ev q{quotes:none;display:block;font-size:.96rem;line-height:1.6;color:color-mix(in srgb,var(--tx) 88%,var(--tx2))}
+.rc-ev mark,.rc-q mark{
+  background:color-mix(in srgb,var(--g) 20%,transparent);color:var(--tx);
+  padding:1px 3px;border-radius:4px;font-weight:500;
+  box-decoration-break:clone;-webkit-box-decoration-break:clone;
+}
+.rc-who{display:flex;flex-wrap:wrap;gap:0 10px;margin-top:8px;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.04em;color:var(--tx2)}
+.rc-who span{white-space:nowrap}
+.rc-who a{color:var(--tx);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--ac) 45%,transparent)}
+.rc-who a:hover{color:var(--ac)}
+.rc-close{
+  display:none;position:absolute;top:14px;right:14px;background:var(--bg2);border:1px solid var(--ln);border-radius:8px;color:var(--tx2);
+  width:36px;height:36px;cursor:pointer;font-size:1rem;line-height:1;
+}
+.rc-close:hover{border-color:var(--ac);color:var(--ac)}
+.rc-hint{font-family:var(--font-mono);font-size:.72rem;color:var(--tx2);letter-spacing:.04em;margin-top:14px}
+
+@media(min-width:900px){
+  .rc-map{grid-template-columns:minmax(0,1.62fr) minmax(0,1fr);gap:28px;align-items:start;margin-top:22px}
+  .rc-panel{position:sticky;top:76px;max-height:calc(100vh - 96px);overflow:auto}
+  .rc-hint.is-phone{display:none}
+}
+@media(max-width:899.98px){
+  .rc-panel{
+    position:fixed;left:0;right:0;bottom:0;z-index:60;
+    border-radius:16px 16px 0 0;border-bottom:none;
+    max-height:min(64vh,560px);overflow:auto;overscroll-behavior:contain;
+    padding:18px 18px calc(18px + env(safe-area-inset-bottom,0px));
+    box-shadow:0 -10px 40px rgba(0,0,0,.18);
+    transform:translateY(105%);visibility:hidden;
+    transition:transform .32s cubic-bezier(.2,.7,.2,1),visibility 0s linear .32s;
+  }
+  .rc-panel.is-open{transform:none;visibility:visible;transition:transform .32s cubic-bezier(.2,.7,.2,1),visibility 0s}
+  .rc-panel h3{font-size:1.3rem;padding-right:48px}
+  .rc-panel .zlabel{padding-right:48px}
+  .rc-close{display:inline-flex;align-items:center;justify-content:center}
+  .rc-hint.is-desk{display:none}
+}
+
+/* ---- matrix ---- */
+.rc-matrix-wrap{margin-top:22px;overflow-x:auto;border:1px solid var(--ln);border-radius:var(--r);background:var(--bg2);box-shadow:var(--shadow)}
+.rc-matrix{width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+.rc-matrix th,.rc-matrix td{padding:0;text-align:center;vertical-align:middle;border-top:1px solid var(--ln)}
+.rc-matrix thead th{
+  border-top:none;padding:14px 2px 10px;font-weight:400;vertical-align:bottom;
+  font-family:var(--font-mono);font-size:.66rem;letter-spacing:.04em;color:var(--tx2);line-height:1.35;
+}
+.rc-matrix thead th b{display:block;font-weight:500;color:var(--tx);font-size:.7rem}
+.rc-matrix thead th a{color:inherit;text-decoration:none;display:block}
+.rc-matrix thead th a:hover b{color:var(--ac)}
+.rc-matrix thead th:first-child,.rc-matrix tbody th{text-align:left;padding-left:18px}
+.rc-matrix thead th:last-child,.rc-matrix tbody td:last-child{padding-right:16px;text-align:right;width:3.2rem}
+.rc-matrix tbody th{font-weight:400;width:38%}
+.rc-matrix .rc-grow th{
+  padding:16px 18px 8px;border-top:1px solid var(--ln);
+  font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--tx2);font-weight:500;
+}
+.rc-matrix .rc-grow th > span{display:inline-flex;align-items:center;gap:8px}
+.rc-matrix .rc-grow + tr th,.rc-matrix .rc-grow + tr td{border-top:none}
+.rc-rowbtn{
+  display:block;width:100%;text-align:left;background:none;border:none;cursor:pointer;color:var(--tx);
+  font:500 .92rem/1.3 var(--font-sans);padding:11px 8px 11px 0;
+}
+.rc-rowbtn:hover{color:var(--ac)}
+.rc-matrix tr.is-on th,.rc-matrix tr.is-on td{background:color-mix(in srgb,var(--g) 8%,transparent)}
+.rc-matrix tr.is-on .rc-rowbtn{font-weight:600}
+.rc-cell{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:middle}
+.rc-cell.f{background:var(--g)}
+.rc-cell.e{width:4px;height:4px;background:var(--ln)}
+.rc-total{font-family:var(--font-mono);font-size:.78rem;color:var(--tx2)}
+.rc-total b{color:var(--tx);font-weight:500}
+@media(max-width:560px){
+  .rc-matrix{table-layout:fixed}
+  .rc-matrix thead th:first-child{width:39%}
+  .rc-matrix thead th:last-child{width:13%}
+  .rc-matrix thead th b{writing-mode:vertical-rl;transform:rotate(180deg);display:inline-block;margin-bottom:6px;font-size:.7rem;letter-spacing:.02em}
+  .rc-matrix thead th a{display:flex;flex-direction:column;align-items:center}
+  .rc-matrix thead th:first-child,.rc-matrix tbody th{padding-left:12px}
+  .rc-matrix .rc-grow th{padding-left:12px}
+  .rc-matrix thead th:last-child,.rc-matrix tbody td:last-child{padding-right:10px;width:2.4rem}
+  .rc-rowbtn{font-size:.84rem;padding:10px 4px 10px 0}
+  .rc-matrix thead th{font-size:.58rem;letter-spacing:0}
+  .rc-matrix thead th b{font-size:.62rem}
+  .rc-cell{width:10px;height:10px}
+}
+
+/* ---- record ledger ---- */
+.rc-ledger{margin-top:22px;padding:4px 22px}
+.rc-row{display:grid;grid-template-columns:190px 1fr auto;gap:18px;align-items:baseline;padding:16px 0;border-top:1px solid var(--ln)}
+.rc-row:first-child{border-top:none}
+.rc-row h3{font-family:var(--font-head);font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+.rc-row p{font-size:.95rem;color:color-mix(in srgb,var(--tx) 88%,var(--tx2))}
+.rc-row a{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.rc-row a:hover{text-decoration:underline}
+@media(max-width:720px){
+  .rc-ledger{padding:4px 18px}
+  .rc-row{grid-template-columns:1fr auto;row-gap:4px}
+  .rc-row p{grid-column:1/-1;grid-row:2}
+}
+
+/* ---- full quotes ---- */
+.rc-quotes{margin-top:22px;columns:2;column-gap:14px}
+.rc-q{break-inside:avoid;margin:0 0 14px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:84px}
+.rc-q blockquote{display:grid;gap:10px;font-size:.97rem;line-height:1.62;color:color-mix(in srgb,var(--tx) 90%,var(--tx2))}
+.rc-q blockquote::before{
+  content:"\201C";font-family:var(--font-head);font-weight:800;font-size:2.2rem;line-height:.6;
+  color:color-mix(in srgb,var(--ac) 55%,var(--ln));display:block;margin-top:8px;
+}
+.rc-q figcaption{border-top:1px solid var(--ln);padding-top:12px;display:grid;gap:2px}
+.rc-q figcaption b{font-family:var(--font-head);font-weight:700;font-size:.98rem}
+.rc-q figcaption span{font-family:var(--font-mono);font-size:.7rem;color:var(--tx2);letter-spacing:.03em;line-height:1.5}
+.rc-tagbtn{
+  font-family:var(--font-mono);font-size:.68rem;color:var(--tx);cursor:pointer;
+  background:color-mix(in srgb,var(--g) 9%,var(--bg2));
+  border:1px solid color-mix(in srgb,var(--g) 45%,var(--ln));border-radius:999px;padding:4px 10px;
+}
+.rc-tagbtn:hover{border-color:var(--g)}
+.rc-q:target{border-color:var(--ac)}
+@media(max-width:760px){.rc-quotes{columns:1}}
+
+/* ---- method ---- */
+.rc-method{display:grid;gap:12px;max-width:68ch;color:color-mix(in srgb,var(--tx) 88%,var(--tx2));font-size:.97rem}
+.rc-method + .cta{margin-top:30px}
+
+/* ---- motion & print ---- */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+@media print{
+  .topbar,.actions,.rc-panel,.rc-hint,.skip,#themeBtn{display:none!important}
+  body{background:#fff;color:#000}
+  .sec{padding-top:28px}
+  .rc-q,.card{break-inside:avoid;box-shadow:none}
+}
+
+/* ============ gate: the page is shared on request ============ */
+[hidden]{display:none!important}
+.rc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+body.rc-locked main,body.rc-locked .sitefoot{display:none}
+.rc-gate{display:none;padding:56px 0 80px}
+body.rc-locked .rc-gate{display:block}
+.rc-gate .card{max-width:560px;margin:0 auto;padding:28px}
+@media(max-width:480px){.rc-gate{padding:32px 0 56px}.rc-gate .card{padding:22px}}
+.rc-gate-title{
+  font-family:var(--font-head);font-weight:700;font-size:clamp(1.45rem,3vw,1.9rem);
+  letter-spacing:-.01em;line-height:1.15;margin-bottom:12px;text-wrap:balance;
+}
+.rc-gate p{color:var(--tx2)}
+.rc-gate form{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 8px}
+.rc-gate input{
+  flex:1 1 200px;min-width:0;font:400 .95rem/1.2 var(--font-sans);padding:11px 14px;
+  border:1px solid var(--ln);border-radius:10px;background:var(--bg);color:var(--tx);
+}
+.rc-gate input:focus{border-color:var(--ac);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--ac) 22%,transparent)}
+.rc-gate input[aria-invalid="true"]{border-color:var(--g-drive)}
+.rc-gate-err{font-family:var(--font-mono);font-size:.78rem;min-height:1.3em}
+.rc-gate-ask{border-top:1px solid var(--ln);margin-top:20px;padding-top:18px}
+.rc-gate-ask .actions{margin-top:12px}
+</style>
+</head>
+<body class="rc-locked">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="logo" title="janaka.me" href="/">Janaka<b>.</b></a>
+    <nav aria-label="Sections">
+      <a href="/resume/">CV</a>
+      <a href="/products/">Products</a>
+      <a class="rc-nav-x" href="/blog/">Blog</a>
+      <a class="rc-nav-x" href="/academy/">Academy</a>
+      <button id="themeBtn" class="iconbtn" type="button" aria-label="Switch between light and dark theme">◐</button>
+    </nav>
+  </div>
+</header>
+
+<section class="rc-gate" id="rcGate" aria-labelledby="rcGateTitle">
+  <div class="wrap">
+    <div class="card">
+      <p class="eyebrow">Recommendations · shared on request</p>
+      <p class="rc-gate-title" id="rcGateTitle">Seven colleagues, in their own words.</p>
+      <p>Seven people I worked with between 2011 and 2026 put their recommendation in writing. Their names and full words are on this page, so I share it personally rather than publicly. If you have the password, enter it below. If not, ask me and you will have it the same day.</p>
+      <form id="rcGateForm" autocomplete="off" novalidate>
+        <label class="rc-sr" for="rcPw">Password</label>
+        <input id="rcPw" type="password" placeholder="Password" spellcheck="false" autocapitalize="off" aria-describedby="rcGateErr">
+        <button class="btn primary" type="submit">Open the map</button>
+      </form>
+      <p class="rc-gate-err" id="rcGateErr" aria-live="polite"></p>
+      <div class="rc-gate-ask">
+        <p>No password yet? One line is enough: who you are and what you are looking at me for.</p>
+        <div class="actions">
+          <a class="btn" id="rcAskMail" href="mailto:janaka2@gmail.com?subject=Recommendation%20map%3A%20access%20request&amp;body=Hi%20Janaka%2C%0A%0ACould%20you%20send%20me%20the%20password%20for%20janaka.me%2Fresume%2Frecommendations%2F%3F%0A%0AI%20am%20">Ask by email</a>
+          <a class="btn" id="rcAskWa" href="#" hidden target="_blank" rel="noopener">Ask on WhatsApp</a>
+        </div>
+      </div>
+      <noscript><p class="rc-gate-err">The password check runs in your browser and needs JavaScript.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<main id="main">
+  <section class="rc-hero">
+    <div class="wrap">
+      <div class="rc-top">
+        <p class="eyebrow">Recommendations</p>
+        <div class="rc-id">
+          <img src="data:image/webp;base64,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" alt="Portrait photo of Janaka Premathilaka" width="46" height="46" decoding="async">
+          <div><b>Janaka Premathilaka</b><span>Senior Java Engineer &amp; Solution Architect</span></div>
+        </div>
+      </div>
+      <h1>What colleagues say, counted.</h1>
+      <p class="lede">Seven people who worked with me put it in writing. The larger the circle, the more of them said it. Pick a circle to read their exact words.</p>
+      <p class="status"><span class="dot" aria-hidden="true"></span><span>7 recommendations · 2011—2026 · 40 mentions</span></p>
+
+      <div class="rc-legend">
+        <ul class="rc-keys" aria-label="Colour shows the kind of quality"><li data-g="craft"><span class="rc-swatch" aria-hidden="true"></span><b>Craft</b><span class="rc-blurb">skill and judgement</span></li><li data-g="drive"><span class="rc-swatch" aria-hidden="true"></span><b>Drive</b><span class="rc-blurb">commitment and delivery</span></li><li data-g="people"><span class="rc-swatch" aria-hidden="true"></span><b>People</b><span class="rc-blurb">working with me</span></li></ul>
+        <div class="rc-sizekey">
+          <span class="rc-cap">circle area =<br>people who said it</span>
+          <svg id="rcSizeKey" width="80" height="60" role="img" aria-label="Circle area shows how many of the seven people said it"></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="map" aria-label="Map of qualities">
+    <div class="wrap">
+      <div class="rc-map">
+        <div class="rc-field" id="rcField">
+          <noscript><p>The interactive map needs JavaScript. The same data is in the table below, and every recommendation is printed in full further down.</p></noscript>
+        </div>
+        <aside class="rc-panel" id="rcPanel" role="region" aria-label="Their words for the selected quality" aria-live="polite">
+          <button type="button" class="rc-close" id="rcClose" aria-label="Close">✕</button>
+          <div id="rcPanelBody"></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="pattern">
+    <div class="wrap">
+      <p class="eyebrow">The pattern</p>
+      <h2>Fifteen years, the same story.</h2>
+      <p class="lede">I read recommendations the way I read production logs: what repeats is what matters. One column per person, oldest first. Technical mastery shows up in 2011 and again in 2026.</p>
+      <div class="rc-matrix-wrap"><table class="rc-matrix"><caption class="vh">Which person mentioned which quality, oldest recommendation first</caption><thead><tr><th scope="col">Quality</th><th scope="col"><a href="#q-dirk"><b>Dirk</b>2011</a></th><th scope="col"><a href="#q-gunther"><b>Günther</b>2011</a></th><th scope="col"><a href="#q-nico"><b>Nico</b>2016</a></th><th scope="col"><a href="#q-fausto"><b>Fausto</b>2017</a></th><th scope="col"><a href="#q-airy"><b>Airy</b>2023</a></th><th scope="col"><a href="#q-amitabh"><b>Amitabh</b>2026</a></th><th scope="col"><a href="#q-michael"><b>Michael</b>2026</a></th><th scope="col">People</th></tr></thead><tbody><tr class="rc-grow" data-g="craft"><th colspan="9" scope="colgroup"><span><span class="rc-swatch" aria-hidden="true"></span>Craft<span class="rc-blurb"> · skill and judgement</span></span></th></tr><tr data-g="craft" data-theme-id="technical"><th scope="row"><button type="button" class="rc-rowbtn" data-select="technical">Technical mastery</button></th><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td class="rc-total"><b>6</b>/7</td></tr><tr data-g="craft" data-theme-id="solving"><th scope="row"><button type="button" class="rc-rowbtn" data-select="solving">Problem-solving</button></th><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td class="rc-total"><b>4</b>/7</td></tr><tr data-g="craft" data-theme-id="quality"><th scope="row"><button type="button" class="rc-rowbtn" data-select="quality">Quality</button></th><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td class="rc-total"><b>3</b>/7</td></tr><tr data-g="craft" data-theme-id="learner"><th scope="row"><button type="button" class="rc-rowbtn" data-select="learner">Quick learner</button></th><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td class="rc-total"><b>1</b>/7</td></tr><tr data-g="craft" data-theme-id="business"><th scope="row"><button type="button" class="rc-rowbtn" data-select="business">Understands the business</button></th><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td class="rc-total"><b>1</b>/7</td></tr><tr data-g="craft" data-theme-id="risk"><th scope="row"><button type="button" class="rc-rowbtn" data-select="risk">Risk-aware</button></th><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td class="rc-total"><b>1</b>/7</td></tr><tr class="rc-grow" data-g="drive"><th colspan="9" scope="colgroup"><span><span class="rc-swatch" aria-hidden="true"></span>Drive<span class="rc-blurb"> · commitment and delivery</span></span></th></tr><tr data-g="drive" data-theme-id="delivers"><th scope="row"><button type="button" class="rc-rowbtn" data-select="delivers">Delivers</button></th><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td class="rc-total"><b>4</b>/7</td></tr><tr data-g="drive" data-theme-id="reliable"><th scope="row"><button type="button" class="rc-rowbtn" data-select="reliable">Reliable</button></th><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td class="rc-total"><b>3</b>/7</td></tr><tr data-g="drive" data-theme-id="committed"><th scope="row"><button type="button" class="rc-rowbtn" data-select="committed">Committed</button></th><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td class="rc-total"><b>3</b>/7</td></tr><tr data-g="drive" data-theme-id="hard"><th scope="row"><button type="button" class="rc-rowbtn" data-select="hard">Hard-working</button></th><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td class="rc-total"><b>1</b>/7</td></tr><tr data-g="drive" data-theme-id="through"><th scope="row"><button type="button" class="rc-rowbtn" data-select="through">Sees it through</button></th><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td class="rc-total"><b>1</b>/7</td></tr><tr data-g="drive" data-theme-id="ownership"><th scope="row"><button type="button" class="rc-rowbtn" data-select="ownership">Ownership</button></th><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td class="rc-total"><b>1</b>/7</td></tr><tr class="rc-grow" data-g="people"><th colspan="9" scope="colgroup"><span><span class="rc-swatch" aria-hidden="true"></span>People<span class="rc-blurb"> · working with me</span></span></th></tr><tr data-g="people" data-theme-id="team"><th scope="row"><button type="button" class="rc-rowbtn" data-select="team">Team player</button></th><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td class="rc-total"><b>4</b>/7</td></tr><tr data-g="people" data-theme-id="warm"><th scope="row"><button type="button" class="rc-rowbtn" data-select="warm">Good to work with</button></th><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td class="rc-total"><b>4</b>/7</td></tr><tr data-g="people" data-theme-id="comms"><th scope="row"><button type="button" class="rc-rowbtn" data-select="comms">Communication</button></th><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td class="rc-total"><b>1</b>/7</td></tr><tr data-g="people" data-theme-id="feedback"><th scope="row"><button type="button" class="rc-rowbtn" data-select="feedback">Open to feedback</button></th><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td class="rc-total"><b>1</b>/7</td></tr><tr data-g="people" data-theme-id="positive"><th scope="row"><button type="button" class="rc-rowbtn" data-select="positive">Positive attitude</button></th><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell e" aria-hidden="true"></span><span class="vh">no</span></td><td><span class="rc-cell f" aria-hidden="true"></span><span class="vh">yes</span></td><td class="rc-total"><b>1</b>/7</td></tr></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="sec" id="record">
+    <div class="wrap">
+      <p class="eyebrow">Beyond the quotes</p>
+      <h2>What the record adds.</h2>
+      <p class="lede">Some things nobody wrote down, so they are not in the circles. The record speaks for them instead.</p>
+      <div class="card rc-ledger"><div class="rc-row"><h3>Takes initiative</h3><p>Five products specified, designed, built and deployed solo, on evenings and weekends. Janaka Academy launched on 2 November 2025.</p><a href="/#projects">Projects →</a></div><div class="rc-row"><h3>Keeps learning</h3><p>Sun Certified Enterprise Architect in 2006. Certified Kubernetes Administrator in 2024. Agentic AI engineering in 2025. Nine Anthropic Claude Academy courses in 2026.</p><a href="/#certifications">Certifications →</a></div><div class="rc-row"><h3>Steady under pressure</h3><p>Full ownership of six enterprise applications through the Credit Suisse–UBS merger, with zero operational interruptions. I carry the on-call pager.</p><a href="/#experience">Experience →</a></div><div class="rc-row"><h3>Unafraid of change</h3><p>Sri Lanka to Belgium in 2008. Belgium to Switzerland in 2018. Healthcare, telecom, public sector, banking. Now bringing LLMs and agentic automation inside the bank’s perimeter.</p><a href="/#journey">Journey →</a></div><div class="rc-row"><h3>Consistent</h3><p>In continuous engineering work since 2004, with one planned pause while relocating.</p><a href="/#experience">Experience →</a></div></div>
+    </div>
+  </section>
+
+  <section class="sec" id="words">
+    <div class="wrap">
+      <p class="eyebrow">In their words</p>
+      <h2>The seven recommendations, unedited.</h2>
+      <p class="lede">Three managers, a client and three colleagues. Every word as written. The tags under each one show how I coded it; pick a tag to see who else said the same.</p>
+      <div class="rc-quotes"><figure class="rc-q card" id="q-michael"><blockquote><p>The engagement with Janaka is ending soon. I like to take this opportunity to highlight his performance over the last two years. Overall, you have an outstanding performing employee and I am so glad that we have had the opportunity to hire him for my application portfolio.</p><p>Janaka has been a reliable and highly committed member of the team, demonstrating strong ownership across a broad portfolio of business-critical applications (about 7 applications from medium to high complexity). He consistently delivered high-quality operational support, successfully managed production releases, and played an important role in migration, modernization, and decommissioning initiatives. He showed excellent problem-solving skills when addressing complex production issues and data-related challenges, while maintaining a strong focus on operational stability and risk management. I consider him as a very senior software engineer/architect with lots of potential for other roles and technologies.</p><p>Beyond his technical contributions, Janaka built strong working relationships with stakeholders across UBS through his collaborative approach, professionalism, and dependable execution. His commitment to documentation, knowledge sharing, compliance activities, and team support helped reduce operational risk and improve overall team effectiveness. He has been a trusted contributor whose dedication and positive attitude have had a meaningful impact on the team’s success. He received direct recognition from business and IT stakeholders for successful project deliveries, deployment activities, and overall project contributions.</p><p>Thanks again for having him in my team. I wish Janaka all the best for the future and I am convinced that he will do a great job in other engagements.</p></blockquote><figcaption><b>Michael Rein</b><span>UBS</span><span>Line manager · 25 August 2026 · Written feedback to my employer</span></figcaption><div class="chips" aria-label="Qualities coded from this recommendation"><button type="button" class="rc-tagbtn" data-g="craft" data-select="technical">Technical mastery</button><button type="button" class="rc-tagbtn" data-g="craft" data-select="solving">Problem-solving</button><button type="button" class="rc-tagbtn" data-g="drive" data-select="delivers">Delivers</button><button type="button" class="rc-tagbtn" data-g="people" data-select="team">Team player</button><button type="button" class="rc-tagbtn" data-g="people" data-select="warm">Good to work with</button><button type="button" class="rc-tagbtn" data-g="drive" data-select="reliable">Reliable</button><button type="button" class="rc-tagbtn" data-g="drive" data-select="committed">Committed</button><button type="button" class="rc-tagbtn" data-g="craft" data-select="quality">Quality</button><button type="button" class="rc-tagbtn" data-g="people" data-select="positive">Positive attitude</button><button type="button" class="rc-tagbtn" data-g="drive" data-select="ownership">Ownership</button><button type="button" class="rc-tagbtn" data-g="craft" data-select="risk">Risk-aware</button></div></figure><figure class="rc-q card" id="q-amitabh"><blockquote><p>Janaka was responsible for developing several key features for a new web application that we rolled out at our branches. Along with his full-stack expertise, he successfully handled the technical challenges of connecting with third-party software, which was crucial for our rollout. He is a good collaborator, works well with a team, and I wish him the best in his future projects.</p></blockquote><figcaption><b>Amitabh Kozhiparambil Shivji</b><span>Technology Leader &amp; Senior Enterprise Architect</span><span>Client · 18 May 2026 · LinkedIn recommendation</span></figcaption><div class="chips" aria-label="Qualities coded from this recommendation"><button type="button" class="rc-tagbtn" data-g="craft" data-select="technical">Technical mastery</button><button type="button" class="rc-tagbtn" data-g="craft" data-select="solving">Problem-solving</button><button type="button" class="rc-tagbtn" data-g="drive" data-select="delivers">Delivers</button><button type="button" class="rc-tagbtn" data-g="people" data-select="team">Team player</button></div></figure><figure class="rc-q card" id="q-airy"><blockquote><p>Having worked with Janaka for almost two years, I must say he is an experienced professional developer, focused on delivering quality software. He has been an asset in our project and I really appreciated working with him ; he is always welcoming feedback and making improvements. Plus, he also possesses excellent communication skills. I have no hesitation in recommending Janaka.</p></blockquote><figcaption><b>Airy Lenglet</b><span>Software Engineer, Credit Suisse</span><span>Teammate · 12 September 2023 · LinkedIn recommendation</span></figcaption><div class="chips" aria-label="Qualities coded from this recommendation"><button type="button" class="rc-tagbtn" data-g="craft" data-select="technical">Technical mastery</button><button type="button" class="rc-tagbtn" data-g="people" data-select="team">Team player</button><button type="button" class="rc-tagbtn" data-g="people" data-select="warm">Good to work with</button><button type="button" class="rc-tagbtn" data-g="craft" data-select="quality">Quality</button><button type="button" class="rc-tagbtn" data-g="people" data-select="comms">Communication</button><button type="button" class="rc-tagbtn" data-g="people" data-select="feedback">Open to feedback</button></div></figure><figure class="rc-q card" id="q-fausto"><blockquote><p>I worked with Janaka on very complex projects in the e-Procurement domain. Janaka proved to be reliable and committed, always able to meet and exceed the expectations of the project. Janaka has a very strong technical background, which allows him to always find the best technical solutions to fulfil the business needs. This, combined with a very good understanding of the business challenges, made Janaka one of the most valuable team members.</p></blockquote><figcaption><b>Fausto Rubino</b><span>Director and co-founder, Byfar</span><span>Direct manager · 3 March 2017 · LinkedIn recommendation</span></figcaption><div class="chips" aria-label="Qualities coded from this recommendation"><button type="button" class="rc-tagbtn" data-g="craft" data-select="technical">Technical mastery</button><button type="button" class="rc-tagbtn" data-g="craft" data-select="solving">Problem-solving</button><button type="button" class="rc-tagbtn" data-g="drive" data-select="delivers">Delivers</button><button type="button" class="rc-tagbtn" data-g="people" data-select="team">Team player</button><button type="button" class="rc-tagbtn" data-g="drive" data-select="reliable">Reliable</button><button type="button" class="rc-tagbtn" data-g="drive" data-select="committed">Committed</button><button type="button" class="rc-tagbtn" data-g="craft" data-select="business">Understands the business</button></div></figure><figure class="rc-q card" id="q-nico"><blockquote><p>During most of my time at the European Commission, Janaka was a technical mastermind we could always rely on. Great friend to have around too.</p></blockquote><figcaption><b>Nico Debackere</b><span>Technologist, SWIFT</span><span>Teammate · 23 May 2016 · LinkedIn recommendation</span></figcaption><div class="chips" aria-label="Qualities coded from this recommendation"><button type="button" class="rc-tagbtn" data-g="craft" data-select="technical">Technical mastery</button><button type="button" class="rc-tagbtn" data-g="people" data-select="warm">Good to work with</button><button type="button" class="rc-tagbtn" data-g="drive" data-select="reliable">Reliable</button></div></figure><figure class="rc-q card" id="q-gunther"><blockquote><p>Janaka has worked as a Java Developer on a Spring-MVC/JPA-based application we were carrying out for a major player in the pharmaceutical sector.</p><p>He was part of a team of 4 people, consisting out of 2 people internal to our company and 2 external resources (Janaka and a freelance contractor).</p><p>The project has had its difficulties for a number of reasons, but Janaka has shown clear commitment to come to a solution for each problem encountered throughout the project.</p><p>He has been working quite hard to get the open issues list cleared in the final phase of the project.</p><p>His Java developer skills and friendly personality make working with him on a development project a pleasant experience.</p></blockquote><figcaption><b>Günther Van Roey</b><span>XT-I (Xplore Group)</span><span>Project colleague · February 2011 · Written reference, published on my blog</span></figcaption><div class="chips" aria-label="Qualities coded from this recommendation"><button type="button" class="rc-tagbtn" data-g="craft" data-select="technical">Technical mastery</button><button type="button" class="rc-tagbtn" data-g="craft" data-select="solving">Problem-solving</button><button type="button" class="rc-tagbtn" data-g="people" data-select="warm">Good to work with</button><button type="button" class="rc-tagbtn" data-g="drive" data-select="committed">Committed</button><button type="button" class="rc-tagbtn" data-g="drive" data-select="hard">Hard-working</button><button type="button" class="rc-tagbtn" data-g="drive" data-select="through">Sees it through</button></div></figure><figure class="rc-q card" id="q-dirk"><blockquote><p>Janaka, from the period you worked for Devoteam, you showed to be a quick learner. The implementation of a new interface from the NSN content manager server to the Arris video server was done in a timely and qualitative manner, so for sure a good piece of work as first task in this environment.</p><p>After that, you started enabling for working in the new release. A pitty that workload unexpectedly went down shortly after, forcing our paths to separate …</p></blockquote><figcaption><b>Dirk Vandeplas</b><span>R&amp;D manager for Nokia Siemens Networks, Devoteam</span><span>R&amp;D manager · February 2011 · Written reference, published on my blog</span></figcaption><div class="chips" aria-label="Qualities coded from this recommendation"><button type="button" class="rc-tagbtn" data-g="drive" data-select="delivers">Delivers</button><button type="button" class="rc-tagbtn" data-g="craft" data-select="quality">Quality</button><button type="button" class="rc-tagbtn" data-g="craft" data-select="learner">Quick learner</button></div></figure></div>
+    </div>
+  </section>
+
+  <section class="sec" id="method">
+    <div class="wrap">
+      <p class="eyebrow">Method</p>
+      <h2>How this was counted.</h2>
+      <div class="rc-method">
+        <p>I tagged every phrase that names a quality. A circle’s area is the number of different people who mentioned it: never more than one count per person, and no weighting for how strongly they put it. One sentence can support more than one quality.</p>
+        <p>The labels are mine. The words behind them are theirs. Four recommendations are public on my LinkedIn profile; two are written references from 2011 that I published on my blog at the time; one is written feedback from my line manager at UBS to my employer. Titles are as shown on LinkedIn today, or as given in the reference.</p>
+      </div>
+      <div class="cta">
+        <div>
+          <h3>References available on request.</h3>
+          <p>From UBS, Credit Suisse and the European Commission. The four LinkedIn recommendations can be read in full on my profile.</p>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="mailto:janaka2@gmail.com?subject=Reference%20request%20via%20janaka.me">Email me</a>
+          <a class="btn" href="/resume/">View my CV</a>
+          <a class="btn" href="https://www.linkedin.com/in/janakapremathilaka/details/recommendations/" target="_blank" rel="noopener">Read them on LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>&copy; <span id="year">2026</span> Janaka Premathilaka · Zug</span>
+    <span><a href="/">janaka.me</a> &middot; <a href="/resume/">CV</a> &middot; built by hand, no frameworks</span>
+  </div>
+</footer>
+
+<script>
+/* Gate: the page is shared on request. The password is deliberately a plain
+   constant: it keeps who-sees-it a personal decision, not a security boundary.
+   Change PASSWORD to rotate it; set WHATSAPP (digits only, country code first,
+   e.g. "41791234567") to show the WhatsApp button. */
+(function () {
+  "use strict";
+  var PASSWORD = "what-repeats-matters";
+  var WHATSAPP = "";
+  var body = document.body;
+  var form = document.getElementById("rcGateForm");
+  var input = document.getElementById("rcPw");
+  var err = document.getElementById("rcGateErr");
+  var wa = document.getElementById("rcAskWa");
+
+  function open() {
+    body.classList.remove("rc-locked");
+    try { sessionStorage.setItem("jp-rc-open", "1"); } catch (e) {}
+    /* the map measures its container, which was display:none until now */
+    window.dispatchEvent(new Event("resize"));
+    var h1 = document.querySelector("main h1");
+    if (h1) { h1.setAttribute("tabindex", "-1"); h1.focus({ preventScroll: true }); }
+  }
+  function norm(s) { return String(s || "").trim().toLowerCase(); }
+
+  if (wa && WHATSAPP) {
+    wa.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(
+      "Hi Janaka, could you send me the password for janaka.me/resume/recommendations/? I am ");
+    wa.hidden = false;
+  }
+  var remembered = false;
+  try { remembered = sessionStorage.getItem("jp-rc-open") === "1"; } catch (e) {}
+  if (remembered) { open(); return; }
+
+  if (form && input) {
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      if (norm(input.value) === norm(PASSWORD)) { err.textContent = ""; open(); return; }
+      input.setAttribute("aria-invalid", "true");
+      err.textContent = "That is not the current password. Ask me and I will send it.";
+      input.select();
+    });
+    input.addEventListener("input", function () { input.removeAttribute("aria-invalid"); err.textContent = ""; });
+    input.focus();
+  }
+})();
+</script>
+
+<script>
+/* Recommendations map — plain JS, no dependencies.
+   Bubble area = number of different people who mentioned the quality. */
+(function () {
+  "use strict";
+  var DATA = {"groups":[{"id":"craft","label":"Craft","blurb":"skill and judgement"},{"id":"drive","label":"Drive","blurb":"commitment and delivery"},{"id":"people","label":"People","blurb":"working with me"}],"people":[{"id":"michael","named":true,"name":"Michael Rein","anon":"My line manager at UBS","rel":"Line manager","year":2026},{"id":"amitabh","named":true,"name":"Amitabh Kozhiparambil Shivji","anon":"A client, enterprise architect","rel":"Client","year":2026},{"id":"airy","named":true,"name":"Airy Lenglet","anon":"A teammate at Credit Suisse","rel":"Teammate","year":2023},{"id":"fausto","named":true,"name":"Fausto Rubino","anon":"A direct manager, e-Procurement","rel":"Direct manager","year":2017},{"id":"nico","named":true,"name":"Nico Debackere","anon":"A teammate at the European Commission","rel":"Teammate","year":2016},{"id":"gunther","named":true,"name":"Günther Van Roey","anon":"A project colleague, pharmaceutical sector","rel":"Project colleague","year":2011},{"id":"dirk","named":true,"name":"Dirk Vandeplas","anon":"An R&D manager, telecom","rel":"R&D manager","year":2011}],"themes":[{"id":"technical","group":"craft","label":"Technical mastery","lines":["Technical","mastery"],"evidence":[{"p":"michael","ex":"I consider him as a very senior software engineer/architect with lots of potential for other roles and technologies.","hl":["a very senior software engineer/architect"]},{"p":"amitabh","ex":"Along with his full-stack expertise, he successfully handled the technical challenges of connecting with third-party software, which was crucial for our rollout.","hl":["full-stack expertise"]},{"p":"airy","ex":"Having worked with Janaka for almost two years, I must say he is an experienced professional developer, focused on delivering quality software.","hl":["an experienced professional developer"]},{"p":"fausto","ex":"Janaka has a very strong technical background, which allows him to always find the best technical solutions to fulfil the business needs.","hl":["a very strong technical background"]},{"p":"nico","ex":"During most of my time at the European Commission, Janaka was a technical mastermind we could always rely on.","hl":["a technical mastermind"]},{"p":"gunther","ex":"His Java developer skills and friendly personality make working with him on a development project a pleasant experience.","hl":["His Java developer skills"]}]},{"id":"solving","group":"craft","label":"Problem-solving","lines":["Problem-","solving"],"evidence":[{"p":"michael","ex":"He showed excellent problem-solving skills when addressing complex production issues and data-related challenges, while maintaining a strong focus on operational stability and risk management.","hl":["excellent problem-solving skills"]},{"p":"amitabh","ex":"Along with his full-stack expertise, he successfully handled the technical challenges of connecting with third-party software, which was crucial for our rollout.","hl":["successfully handled the technical challenges"]},{"p":"fausto","ex":"Janaka has a very strong technical background, which allows him to always find the best technical solutions to fulfil the business needs.","hl":["always find the best technical solutions"]},{"p":"gunther","ex":"The project has had its difficulties for a number of reasons, but Janaka has shown clear commitment to come to a solution for each problem encountered throughout the project.","hl":["a solution for each problem encountered"]}]},{"id":"delivers","group":"drive","label":"Delivers","lines":["Delivers"],"evidence":[{"p":"michael","ex":"He consistently delivered high-quality operational support, successfully managed production releases, and played an important role in migration, modernization, and decommissioning initiatives.","hl":["consistently delivered","successfully managed production releases"]},{"p":"amitabh","ex":"Janaka was responsible for developing several key features for a new web application that we rolled out at our branches.","hl":["developing several key features","rolled out at our branches"]},{"p":"fausto","ex":"Janaka proved to be reliable and committed, always able to meet and exceed the expectations of the project.","hl":["always able to meet and exceed the expectations"]},{"p":"dirk","ex":"The implementation of a new interface from the NSN content manager server to the Arris video server was done in a timely and qualitative manner, so for sure a good piece of work as first task in this environment.","hl":["timely"]}]},{"id":"team","group":"people","label":"Team player","lines":["Team","player"],"evidence":[{"p":"michael","ex":"Beyond his technical contributions, Janaka built strong working relationships with stakeholders across UBS through his collaborative approach, professionalism, and dependable execution.","hl":["his collaborative approach"]},{"p":"amitabh","ex":"He is a good collaborator, works well with a team, and I wish him the best in his future projects.","hl":["a good collaborator, works well with a team"]},{"p":"airy","ex":"He has been an asset in our project and I really appreciated working with him ; he is always welcoming feedback and making improvements.","hl":["an asset in our project"]},{"p":"fausto","ex":"This, combined with a very good understanding of the business challenges, made Janaka one of the most valuable team members.","hl":["one of the most valuable team members"]}]},{"id":"warm","group":"people","label":"Good to work with","lines":["Good to","work with"],"evidence":[{"p":"michael","ex":"Beyond his technical contributions, Janaka built strong working relationships with stakeholders across UBS through his collaborative approach, professionalism, and dependable execution.","hl":["built strong working relationships with stakeholders"]},{"p":"airy","ex":"He has been an asset in our project and I really appreciated working with him ; he is always welcoming feedback and making improvements.","hl":["I really appreciated working with him"]},{"p":"nico","ex":"Great friend to have around too.","hl":["Great friend to have around"]},{"p":"gunther","ex":"His Java developer skills and friendly personality make working with him on a development project a pleasant experience.","hl":["friendly personality","a pleasant experience"]}]},{"id":"reliable","group":"drive","label":"Reliable","lines":["Reliable"],"evidence":[{"p":"michael","ex":"Janaka has been a reliable and highly committed member of the team, demonstrating strong ownership across a broad portfolio of business-critical applications (about 7 applications from medium to high complexity).","hl":["reliable"]},{"p":"fausto","ex":"Janaka proved to be reliable and committed, always able to meet and exceed the expectations of the project.","hl":["reliable"]},{"p":"nico","ex":"During most of my time at the European Commission, Janaka was a technical mastermind we could always rely on.","hl":["we could always rely on"]}]},{"id":"committed","group":"drive","label":"Committed","lines":["Committed"],"evidence":[{"p":"michael","ex":"Janaka has been a reliable and highly committed member of the team, demonstrating strong ownership across a broad portfolio of business-critical applications (about 7 applications from medium to high complexity).","hl":["highly committed"]},{"p":"fausto","ex":"Janaka proved to be reliable and committed, always able to meet and exceed the expectations of the project.","hl":["committed"]},{"p":"gunther","ex":"The project has had its difficulties for a number of reasons, but Janaka has shown clear commitment to come to a solution for each problem encountered throughout the project.","hl":["shown clear commitment"]}]},{"id":"quality","group":"craft","label":"Quality","lines":["Quality"],"evidence":[{"p":"michael","ex":"He consistently delivered high-quality operational support, successfully managed production releases, and played an important role in migration, modernization, and decommissioning initiatives.","hl":["high-quality operational support"]},{"p":"airy","ex":"Having worked with Janaka for almost two years, I must say he is an experienced professional developer, focused on delivering quality software.","hl":["focused on delivering quality software"]},{"p":"dirk","ex":"The implementation of a new interface from the NSN content manager server to the Arris video server was done in a timely and qualitative manner, so for sure a good piece of work as first task in this environment.","hl":["qualitative manner","a good piece of work"]}]},{"id":"comms","group":"people","label":"Communication","lines":["Communication"],"evidence":[{"p":"airy","ex":"Plus, he also possesses excellent communication skills.","hl":["excellent communication skills"]}]},{"id":"feedback","group":"people","label":"Open to feedback","lines":["Open to","feedback"],"evidence":[{"p":"airy","ex":"He has been an asset in our project and I really appreciated working with him ; he is always welcoming feedback and making improvements.","hl":["always welcoming feedback and making improvements"]}]},{"id":"learner","group":"craft","label":"Quick learner","lines":["Quick","learner"],"evidence":[{"p":"dirk","ex":"Janaka, from the period you worked for Devoteam, you showed to be a quick learner.","hl":["a quick learner"]}]},{"id":"business","group":"craft","label":"Understands the business","lines":["Understands","the business"],"evidence":[{"p":"fausto","ex":"This, combined with a very good understanding of the business challenges, made Janaka one of the most valuable team members.","hl":["a very good understanding of the business challenges"]}]},{"id":"hard","group":"drive","label":"Hard-working","lines":["Hard-working"],"evidence":[{"p":"gunther","ex":"He has been working quite hard to get the open issues list cleared in the final phase of the project.","hl":["working quite hard"]}]},{"id":"through","group":"drive","label":"Sees it through","lines":["Sees it","through"],"evidence":[{"p":"gunther","ex":"The project has had its difficulties for a number of reasons, but Janaka has shown clear commitment to come to a solution for each problem encountered throughout the project. He has been working quite hard to get the open issues list cleared in the final phase of the project.","hl":["The project has had its difficulties","a solution for each problem encountered throughout the project","get the open issues list cleared in the final phase"]}]},{"id":"positive","group":"people","label":"Positive attitude","lines":["Positive","attitude"],"evidence":[{"p":"michael","ex":"He has been a trusted contributor whose dedication and positive attitude have had a meaningful impact on the team’s success.","hl":["dedication and positive attitude"]}]},{"id":"ownership","group":"drive","label":"Ownership","lines":["Ownership"],"evidence":[{"p":"michael","ex":"Janaka has been a reliable and highly committed member of the team, demonstrating strong ownership across a broad portfolio of business-critical applications (about 7 applications from medium to high complexity).","hl":["demonstrating strong ownership"]}]},{"id":"risk","group":"craft","label":"Risk-aware","lines":["Risk-aware"],"evidence":[{"p":"michael","ex":"He showed excellent problem-solving skills when addressing complex production issues and data-related challenges, while maintaining a strong focus on operational stability and risk management.","hl":["a strong focus on operational stability and risk management"]}]}]};
+
+  var field = document.getElementById("rcField");
+  var panel = document.getElementById("rcPanel");
+  var panelBody = document.getElementById("rcPanelBody");
+  var sizeKey = document.getElementById("rcSizeKey");
+  if (!field || !panel || !DATA) return;
+
+  var phone = window.matchMedia("(max-width: 899.98px)");
+  var people = {}, groups = {};
+  DATA.people.forEach(function (p) { people[p.id] = p; });
+  DATA.groups.forEach(function (g) { groups[g.id] = g; });
+  var N = DATA.people.length;
+  var themes = DATA.themes.map(function (t) {
+    return { id: t.id, group: t.group, label: t.label, lines: t.lines, evidence: t.evidence, count: t.evidence.length };
+  }).sort(function (a, b) { return b.count - a.count; });
+  var byId = {};
+  themes.forEach(function (t) { byId[t.id] = t; });
+  var selected = themes[0].id;
+  var lastW = 0, scaleK = 0;
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function who(p) { return p.named ? p.name : p.anon; }
+
+  /* ---------- layout: cooled spring-and-collide packing, deterministic ---------- */
+  function overlap(nodes, gap) {
+    var worst = 0, i, j, d;
+    for (i = 0; i < nodes.length; i++) for (j = i + 1; j < nodes.length; j++) {
+      d = nodes[i].r + nodes[j].r + gap - Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y);
+      if (d > worst) worst = d;
+    }
+    return worst;
+  }
+  function settle(nodes, W, H, gap, passes) {
+    var n = nodes.length, p, i, j, a, b, dx, dy, d, min, push, ma, mb;
+    for (p = 0; p < passes; p++) {
+      for (i = 0; i < n; i++) for (j = i + 1; j < n; j++) {
+        a = nodes[i]; b = nodes[j];
+        dx = b.x - a.x; dy = b.y - a.y; d = Math.hypot(dx, dy) || 0.01;
+        min = a.r + b.r + gap;
+        if (d < min) {
+          push = (min - d) / d; ma = a.r * a.r; mb = b.r * b.r;
+          a.x -= dx * push * mb / (ma + mb); a.y -= dy * push * mb / (ma + mb);
+          b.x += dx * push * ma / (ma + mb); b.y += dy * push * ma / (ma + mb);
+        }
+      }
+      for (i = 0; i < n; i++) {
+        a = nodes[i];
+        a.x = Math.max(a.r + 2, Math.min(W - a.r - 2, a.x));
+        a.y = Math.max(a.r + 2, Math.min(H - a.r - 2, a.y));
+      }
+    }
+  }
+  function simulate(nodes, W, H, gap) {
+    var cx = W / 2, cy = H / 2, n = nodes.length, i, it, nd, an, alpha;
+    var kx = H / W, ky = W / H;                       // fill the box, whatever its shape
+    var tall = H > W * 1.05;
+    var anchors = tall
+      ? { craft: [0.40, 0.24], drive: [0.62, 0.60], people: [0.40, 0.86] }
+      : { craft: [0.27, 0.42], drive: [0.70, 0.30], people: [0.66, 0.78] };
+    for (i = 0; i < n; i++) {
+      an = anchors[nodes[i].group];
+      nodes[i].x = an[0] * W + Math.cos(i * 2.399963) * (8 + i * 3);
+      nodes[i].y = an[1] * H + Math.sin(i * 2.399963) * (8 + i * 3);
+    }
+    var ITER = 640;
+    for (it = 0; it < ITER; it++) {
+      alpha = 1 - it / ITER;
+      for (i = 0; i < n; i++) {
+        nd = nodes[i]; an = anchors[nd.group];
+        nd.x += ((cx - nd.x) * 0.030 * kx + (an[0] * W - nd.x) * 0.022) * alpha;
+        nd.y += ((cy - nd.y) * 0.030 * ky + (an[1] * H - nd.y) * 0.022) * alpha;
+      }
+      settle(nodes, W, H, gap, 3);
+    }
+    settle(nodes, W, H, gap, 120);
+  }
+  function pack(W) {
+    var k = W < 340 ? 38 : Math.max(41, Math.min(50, W * 0.083));
+    var gap = W < 520 ? 5 : 7, area = 0, H, tries;
+    var nodes = themes.map(function (t) {
+      var r = k * Math.sqrt(t.count);
+      area += Math.PI * (r + gap / 2) * (r + gap / 2);
+      return { id: t.id, group: t.group, r: r, x: 0, y: 0 };
+    });
+    H = Math.max(area / 0.76 / W, nodes[0].r * 2 + 12);
+    for (tries = 0; tries < 16; tries++) {
+      simulate(nodes, W, H, gap);
+      if (overlap(nodes, gap) < 0.75) break;
+      H *= 1.045;
+    }
+    var top = Infinity, bot = -Infinity;
+    nodes.forEach(function (nd) { top = Math.min(top, nd.y - nd.r); bot = Math.max(bot, nd.y + nd.r); });
+    nodes.forEach(function (nd) { nd.y -= top - 4; });
+    return { nodes: nodes, height: bot - top + 8, k: k };
+  }
+
+  /* ---------- text fitting: a label never touches the ring ---------- */
+  var ctx = document.createElement("canvas").getContext("2d");
+  function textW(s, fs) {
+    ctx.font = "700 " + fs + "px Archivo, 'Helvetica Neue', Arial, sans-serif";
+    return ctx.measureText(s).width;
+  }
+  function fit(t, r) {
+    var inner = r - 7, showN = t.count >= 2;
+    var fs = Math.max(10.5, Math.min(25, r * 0.255)), fn, ok, i, blockH, y0, yFar, chord;
+    for (; fs >= 9; fs -= 0.5) {
+      fn = showN ? Math.max(9.5, Math.min(11, r * 0.13)) : 0;
+      blockH = t.lines.length * fs * 1.08 + (showN ? 3 + fn * 1.25 : 0);
+      y0 = -blockH / 2; ok = true;
+      for (i = 0; i < t.lines.length; i++) {
+        yFar = Math.max(Math.abs(y0 + i * fs * 1.08), Math.abs(y0 + (i + 1) * fs * 1.08));
+        if (yFar >= inner) { ok = false; break; }
+        chord = 2 * Math.sqrt(inner * inner - yFar * yFar);
+        if (textW(t.lines[i], fs) > chord) { ok = false; break; }
+      }
+      if (ok) break;
+    }
+    return { fs: Math.max(fs, 9), fn: fn, showN: showN };
+  }
+
+  /* ---------- render ---------- */
+  var bubs = {};
+  function buildBubbles() {
+    themes.forEach(function (t, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "rc-bub"; b.id = "rcBub-" + t.id;
+      b.setAttribute("data-g", t.group);
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", t.label + ": mentioned by " + t.count + " of " + N + " people. Show their words.");
+      b.style.setProperty("--i", i);
+      b.innerHTML = '<span class="rc-bub-l">' + t.lines.map(esc).join("<br>") + "</span>" +
+        (t.count >= 2 ? '<span class="rc-bub-n">' + t.count + " of " + N + "</span>" : "");
+      b.addEventListener("click", function () { select(t.id, true); });
+      field.appendChild(b); bubs[t.id] = b;
+    });
+  }
+  function place(force) {
+    var W = Math.floor(field.clientWidth);
+    if (!W || (!force && Math.abs(W - lastW) < 2)) return;
+    lastW = W;
+    var res = pack(W); scaleK = res.k;
+    field.style.height = Math.ceil(res.height) + "px";
+    res.nodes.forEach(function (nd) {
+      var b = bubs[nd.id], f = fit(byId[nd.id], nd.r);
+      b.style.setProperty("--d", (nd.r * 2).toFixed(1) + "px");
+      b.style.setProperty("--x", (nd.x - nd.r).toFixed(1) + "px");
+      b.style.setProperty("--y", (nd.y - nd.r).toFixed(1) + "px");
+      b.style.setProperty("--fs", f.fs + "px");
+      b.style.setProperty("--fn", (f.fn || 10) + "px");
+    });
+    drawSizeKey();
+  }
+  function drawSizeKey() {
+    if (!sizeKey) return;
+    var top = themes[0].count, s = 0.23, vals = [top, Math.ceil(top / 2), 1], R = scaleK * Math.sqrt(top) * s, w = R * 2 + 46, h = R * 2 + 4, out = "";
+    vals.forEach(function (v) {
+      var r = scaleK * Math.sqrt(v) * s, cy = h - 2 - r;
+      out += '<circle cx="' + (R + 1) + '" cy="' + cy.toFixed(1) + '" r="' + r.toFixed(1) + '"></circle>' +
+        '<line x1="' + (R + 1) + '" x2="' + (R * 2 + 12) + '" y1="' + (cy - r).toFixed(1) + '" y2="' + (cy - r).toFixed(1) + '"></line>' +
+        '<text x="' + (R * 2 + 15) + '" y="' + (cy - r + 3).toFixed(1) + '">' + v + "</text>";
+    });
+    sizeKey.setAttribute("width", w.toFixed(0)); sizeKey.setAttribute("height", h.toFixed(0));
+    sizeKey.setAttribute("viewBox", "0 0 " + w.toFixed(0) + " " + h.toFixed(0));
+    sizeKey.innerHTML = out;
+  }
+
+  function markUp(ex, hls) {
+    var spans = [], out = "", pos = 0;
+    hls.forEach(function (h) { var at = ex.indexOf(h); if (at >= 0) spans.push([at, at + h.length]); });
+    spans.sort(function (a, b) { return a[0] - b[0]; });
+    spans.forEach(function (sp) {
+      if (sp[0] < pos) return;
+      out += esc(ex.slice(pos, sp[0])) + "<mark>" + esc(ex.slice(sp[0], sp[1])) + "</mark>"; pos = sp[1];
+    });
+    return out + esc(ex.slice(pos));
+  }
+  function renderPanel() {
+    var t = byId[selected], g = groups[t.group], i, meter = "";
+    for (i = 0; i < N; i++) meter += '<i class="' + (i < t.count ? "f" : "") + '"></i>';
+    var html = '<p class="zlabel"><span class="rc-swatch" aria-hidden="true"></span>' + esc(g.label) + "</p>" +
+      "<h3>" + esc(t.label) + "</h3>" +
+      '<p class="rc-said"><span class="rc-meter" aria-hidden="true">' + meter + "</span>said by " + t.count + " of " + N + "</p>" +
+      '<ul class="rc-ev">';
+    t.evidence.forEach(function (ev) {
+      var p = people[ev.p];
+      html += "<li><q>“" + markUp(ev.ex, ev.hl) + "”</q>" +
+        '<span class="rc-who"><span>— <a href="#q-' + p.id + '">' + esc(who(p)) + "</a></span><span>" + esc(p.rel) + " · " + p.year + "</span></span></li>";
+    });
+    panelBody.setAttribute("data-g", t.group);
+    panelBody.innerHTML = html + "</ul>";
+  }
+  function paint(on) {
+    Object.keys(bubs).forEach(function (k) { bubs[k].setAttribute("aria-pressed", on && k === selected ? "true" : "false"); });
+    field.classList.toggle("is-dim", !!on);
+    Array.prototype.forEach.call(document.querySelectorAll(".rc-matrix tr[data-theme-id]"), function (tr) {
+      tr.classList.toggle("is-on", !!on && tr.getAttribute("data-theme-id") === selected);
+    });
+  }
+  function select(id, open) {
+    if (!byId[id]) return;
+    selected = id;
+    renderPanel();
+    /* on a phone the evidence lives in a bottom sheet, so nothing is marked until it is open */
+    paint(!phone.matches || open || panel.classList.contains("is-open"));
+    if (open && phone.matches) { panel.classList.add("is-open"); panel.scrollTop = 0; keepInView(bubs[id]); }
+  }
+  /* phone: the sheet covers the lower screen, so nudge the page until the picked circle sits above it */
+  function keepInView(b) {
+    if (!b) return;
+    window.requestAnimationFrame(function () {
+      var r = b.getBoundingClientRect(), free = window.innerHeight - panel.offsetHeight - 14, top = 70;
+      if (r.bottom <= free && r.top >= top) return;
+      var dy = r.bottom > free ? r.bottom - free : r.top - top;
+      if (r.bottom > free && r.top - dy < top) dy = r.top - top;      /* taller than the gap: align its top */
+      window.scrollBy({ top: dy, behavior: "smooth" });
+    });
+  }
+  function closeSheet() {
+    if (!panel.classList.contains("is-open")) return;
+    panel.classList.remove("is-open");
+    if (phone.matches) paint(false);
+  }
+
+  /* ---------- wire up ---------- */
+  buildBubbles();
+  place(true);
+  select(selected, false);
+
+  var rz;
+  window.addEventListener("resize", function () { clearTimeout(rz); rz = setTimeout(function () { place(false); }, 120); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { place(true); });
+  window.addEventListener("load", function () { place(true); });
+
+  var onMode = function () { panel.classList.remove("is-open"); paint(!phone.matches); };
+  if (phone.addEventListener) phone.addEventListener("change", onMode); else if (phone.addListener) phone.addListener(onMode);
+
+  var closeBtn = document.getElementById("rcClose");
+  if (closeBtn) closeBtn.addEventListener("click", closeSheet);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeSheet(); });
+  panel.addEventListener("click", function (e) { if (e.target.closest && e.target.closest("a")) closeSheet(); });
+
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest ? e.target.closest("[data-select]") : null;
+    if (!el) return;
+    select(el.getAttribute("data-select"), true);
+    if (!phone.matches) {
+      var map = document.getElementById("map");
+      if (map) map.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+
+  /* theme toggle: same key and behaviour as the rest of janaka.me */
+  var themeBtn = document.getElementById("themeBtn");
+  if (themeBtn) themeBtn.addEventListener("click", function () {
+    var root = document.documentElement, cur = root.getAttribute("data-theme");
+    if (!cur) cur = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    var next = cur === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("jp-theme", next); } catch (err) {}
+  });
+  var yr = document.getElementById("year");
+  if (yr) yr.textContent = new Date().getFullYear();
+})();
+</script>
+
+</body>
+</html>
