@@ -1,0 +1,35 @@
+# Maintenance scan 2026-09-28
+
+## Watchlist
+
+| Item | Status | Due | Authority | Action |
+|---|---|---|---|---|
+| `github-actions-versions` | never-checked | – | janaka | List newer majors and breaking notes; propose the YAML diff (maintenance runs never edit workflows). |
+
+## Pages naming a past year
+
+None.
+
+## GitHub Actions pins
+
+- daily_learning_generator.yml: `actions/checkout@v4`
+- daily_learning_generator.yml: `actions/setup-python@v5`
+- daily_update.yml: `actions/checkout@v4`
+- daily_update.yml: `actions/setup-python@v5`
+- maintenance-radar.yml: `actions/checkout@v4`
+- maintenance-radar.yml: `actions/setup-python@v5`
+- maintenance-radar.yml: `actions/setup-node@v4`
+- site-checks.yml: `actions/checkout@v4`
+- site-checks.yml: `actions/setup-python@v5`
+- site-checks.yml: `actions/setup-node@v4`
+
+## Noindex / scaffold pages: 0
+
+
+## External links: 106 checked, 4 failing
+
+- https://dl.acm.org/doi/10.1145/290941.291025 → 403
+- https://medium.com/@bayrarnorkunor/confusion-matrix-an-evaluation-tool-in-classification-problems-78eb062e7fe2 → 403
+- https://www.lyzr.ai/glossaries/cross-validation/ → 403
+- https://www.scientific.net/EI.4.47.pdf → 403
+

@@ -1,0 +1,13 @@
+inlined 12 partials into index.html
+  (build-hub.py 0.0s)
+structured data: 0 pages updated
+  (gen-structured-data.py 4.2s)
+assets/content-index.json: 70 entries
+  (gen-content-index.py 0.3s)
+sitemap.xml: 77 URLs
+  (gen-sitemap.py 0.2s)
+feed.xml: 30 entries
+  (gen-feed.py 0.0s)
+public data: 12 files, 0 changed
+  (gen-public-data.py 0.0s)
+derived files are current

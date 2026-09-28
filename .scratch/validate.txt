@@ -1,0 +1,21 @@
+PASS  inventory
+WARN  meta  (0 fail, 8 warn)
+      · resume/index.html: description is 202 chars (search shows ~160)
+      · lab/assetcare/index.html: description is 257 chars (search shows ~160)
+      · academy/production-ready-spring-angular/index.html: description is 335 chars (search shows ~160)
+      · academy/assetcare/index.html: description is 267 chars (search shows ~160)
+      · blog/posts/assetcare-idea-to-production.html: description is 257 chars (search shows ~160)
+      · academy/modules/2026/FSE/claude-code-configuration.html: description is 387 chars (search shows ~160)
+      · academy/modules/2026/FSE/mcp-end-to-end.html: description is 263 chars (search shows ~160)
+      · academy/modules/2026/FSE/mcp-primitives-lab.html: description is 295 chars (search shows ~160)
+PASS  jsonld
+PASS  sitemap
+PASS  robots
+PASS  feed
+PASS  links
+PASS  llms
+PASS  public
+PASS  sync
+PASS  webmcp
+PASS  watchlist
+OK — 77 pages
