@@ -47,7 +47,7 @@ window.JP_I18N = (function () {
     fbBtnExplore: 'AssetCare entdecken',
     fbBtnDemo: 'Live-Demo öffnen ↗',
     fbBtnArch: 'Architektur ansehen',
-    fbFoot: 'Öffentliches Demo-Konto, nur Beispieldaten. Die Geschichte aus vier Blickwinkeln: der <a href="/blog/posts/assetcare-idea-to-production.html">Engineering-Artikel</a>, der <a href="/academy/production-ready-spring-angular/">Academy-Kurs</a>, der <a href="/ai/#practice">KI-gestützte Workflow</a> und das <a href="https://github.com/Janaka2/spring-angular-production-blueprint" target="_blank" rel="noopener">Open-Source-Repository</a>.',
+    fbFoot: 'Öffentliches Demo-Konto, nur Beispieldaten. Die Geschichte aus vier Blickwinkeln: der <a href="/blog/posts/assetcare-idea-to-production.html">Engineering-Artikel</a>, der <a href="/academy/production-ready-spring-angular/">Academy-Kurs</a>, der <a href="/ai/#practice">KI-gestützte Workflow</a> und der <a href="https://github.com/Janaka2/spring-angular-production-blueprint" target="_blank" rel="noopener">öffentliche Showcase</a> (Quellcode auf Anfrage).',
 
     /* ---- contact / skills / languages cards ---- */
     cContactH: 'Kontakt',
@@ -104,12 +104,12 @@ window.JP_I18N = (function () {
     pjAcqH: 'Jedes der fünf Produkte könnte ein besseres Zuhause finden.',
     pjAcqP: 'Alle fünf sind unabhängig von meiner Anstellung entstanden und stehen mir daher frei zur Weitergabe. Wenn eines davon in ein Portfolio passt, das Sie aufbauen, spreche ich gerne über Übernahme oder Lizenzierung — Quellcode, Marke, gegebenenfalls Domain und eine dokumentierte Übergabe.',
     pjCatBtn: 'Zum Produktkatalog →',
-    pjAcSub: 'Referenzanwendung, Open Source, nicht zu verkaufen',
+    pjAcSub: 'Referenzanwendung, Quellcode auf Anfrage, nicht zu verkaufen',
     pjAcLive: 'Live',
     pjAcP: 'Das sechste Projekt hat bewusst ein Backend. Eine vollständige Anwendung für Asset- und Wartungsverwaltung auf Java 25, Spring Boot 4.1 und Angular 22, mit Keycloak, PostgreSQL und Objektspeicher, auf Kubernetes mit Helm und Terraform deployt und von aussen verifiziert. Wo die fünf Produkte Zurückhaltung zeigen, zeigt dieses den vollständigen Weg in die Produktion.',
     pjAcBtn: 'Zur Fallstudie',
     pjAcOpen: 'Live-Demo öffnen ↗',
-    pjAcSrc: 'Quellcode ↗',
+    pjAcSrc: 'Showcase ↗',
     pjAcqBtn: 'Per E-Mail anfragen',
 
     /* ---- certifications ---- */

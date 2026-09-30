@@ -137,8 +137,12 @@ Machine-specific (exists only on the original Windows/WSL PC, not in git):
 - Credentials: a new certificate PDF goes in `assets/certificates/`, a card in `partials/certifications.html`, a line
   in `resume/index.html`, any new `data-i18n` key in `assets/js/i18n.js`; then `scripts/build.py` (the hub inlines
   it and `api/public/v1/profile.json` picks it up).
-- AssetCare (assetcare.janaka.me; repo `Janaka2/spring-angular-production-blueprint`, local clone
-  `C:\data\dev\claude code\crud\spring-angular-production-blueprint`) is the live reference application. Facts live in
+- AssetCare (assetcare.janaka.me) is the live reference application. Since 2026-09-30 its full source is private
+  (`Janaka2/assetcare-core`, proprietary licence; v1.0.0 and earlier were Apache-2.0); the old public URL
+  `Janaka2/spring-angular-production-blueprint` is a view-only showcase (README, architecture docs, ADRs, a few
+  excerpts, `ACCESS.md`). Never call AssetCare open source or tell readers to clone it; say "source on request" and
+  link only showcase paths that exist. Local clone of the private repo is unchanged:
+  `C:\data\dev\claude code\crud\spring-angular-production-blueprint`. Facts live in
   `content/projects.json` and the brand-voice skill; the observability stack is an optional profile and must never be
   described as running in production. Surfaces: `partials/featured-build.html`, `lab/assetcare/`,
   `blog/posts/assetcare-idea-to-production.html`, `academy/assetcare/`, sections of `/products/`, `/ai/`, `/lab/`,
@@ -153,7 +157,7 @@ Machine-specific (exists only on the original Windows/WSL PC, not in git):
 |---|---|---|
 | `academy/modules/2026/FSE/mcp-end-to-end.html` | `ai/mcp-momentum-planner/` | `scripts/generators/gen-mcp-page.py` |
 | `academy/modules/2026/FSE/mcp-primitives-lab.html` | `ai/mcp-primitives-lab/` | `scripts/generators/gen-mcp-lab-page.py` |
-| `academy/production-ready-spring-angular/index.html` | `docs/academy/ARTICLE.md` in `~/dev/spring-angular-production-blueprint` | `scripts/generators/gen-production-page.py` |
+| `academy/production-ready-spring-angular/index.html` | `docs/academy/ARTICLE.md` in the private AssetCare repo (local clone `../crud/spring-angular-production-blueprint`) | `scripts/generators/gen-production-page.py` |
 | `academy/modules/2026/FSE/claude-code-configuration.html` | `scripts/generators/content/claude-code-configuration.md` | `scripts/generators/gen-claude-config-page.py` |
 
 These generators rewrite the whole page, so run `python3 scripts/build.py` afterwards to restore its JSON-LD block.

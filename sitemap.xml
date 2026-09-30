@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://janaka.me/</loc><lastmod>2026-09-25</lastmod></url>
-  <url><loc>https://janaka.me/resume/</loc><lastmod>2026-09-26</lastmod></url>
-  <url><loc>https://janaka.me/products/</loc><lastmod>2026-09-25</lastmod></url>
-  <url><loc>https://janaka.me/lab/</loc><lastmod>2026-09-25</lastmod></url>
-  <url><loc>https://janaka.me/lab/assetcare/</loc><lastmod>2026-09-25</lastmod></url>
+  <url><loc>https://janaka.me/</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://janaka.me/resume/</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://janaka.me/products/</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://janaka.me/lab/</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://janaka.me/lab/assetcare/</loc><lastmod>2026-09-30</lastmod></url>
   <url><loc>https://janaka.me/ai/</loc><lastmod>2026-09-25</lastmod></url>
   <url><loc>https://janaka.me/blog/</loc><lastmod>2026-09-25</lastmod></url>
-  <url><loc>https://janaka.me/academy/</loc><lastmod>2026-09-25</lastmod></url>
-  <url><loc>https://janaka.me/academy/production-ready-spring-angular/</loc><lastmod>2026-09-25</lastmod></url>
-  <url><loc>https://janaka.me/academy/assetcare/</loc><lastmod>2026-09-25</lastmod></url>
+  <url><loc>https://janaka.me/academy/</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://janaka.me/academy/production-ready-spring-angular/</loc><lastmod>2026-09-30</lastmod></url>
+  <url><loc>https://janaka.me/academy/assetcare/</loc><lastmod>2026-09-30</lastmod></url>
   <url><loc>https://janaka.me/blog/posts/ai-evaluation-frameworks.html</loc><lastmod>2026-09-25</lastmod></url>
-  <url><loc>https://janaka.me/blog/posts/assetcare-idea-to-production.html</loc><lastmod>2026-09-25</lastmod></url>
+  <url><loc>https://janaka.me/blog/posts/assetcare-idea-to-production.html</loc><lastmod>2026-09-30</lastmod></url>
   <url><loc>https://janaka.me/blog/posts/machine-learning-blog.html</loc><lastmod>2026-09-25</lastmod></url>
   <url><loc>https://janaka.me/blog/posts/mcp-agent-integration.html</loc><lastmod>2026-09-25</lastmod></url>
   <url><loc>https://janaka.me/blog/posts/rag-faiss-patterns.html</loc><lastmod>2026-09-25</lastmod></url>

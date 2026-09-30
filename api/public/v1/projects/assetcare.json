@@ -9,9 +9,9 @@
   "url": "https://assetcare.janaka.me/",
   "page": "https://janaka.me/lab/assetcare/",
   "source": "https://github.com/Janaka2/spring-angular-production-blueprint",
-  "license": "https://www.apache.org/licenses/LICENSE-2.0",
+  "license": "https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/LICENSE",
   "status": "live",
-  "availability": "Open source reference application, not for sale.",
+  "availability": "Reference application, not for sale. Public showcase and live demo; full source available on request.",
   "applicationCategory": "BusinessApplication",
   "programmingLanguages": [
    "Java",
