@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BlitzMath: A Live Classroom Maths Game with One Durable Object per Room</title>
+  <meta name="description" content="How BlitzMath runs live maths games for a whole class on Cloudflare Workers: one Durable Object per room as referee, alarms as the clock, no database or accounts.">
+  <link rel="canonical" href="https://janaka.me/blog/posts/blitzmath-realtime-classroom-game.html">
+  <meta property="og:title" content="BlitzMath: A Live Classroom Maths Game with One Durable Object per Room">
+  <meta property="og:description" content="A whole class answers the same question at the same time. One Durable Object per room is the referee, alarms are the clock, and there is no database and no account.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://janaka.me/blog/posts/blitzmath-realtime-classroom-game.html">
+  <meta property="og:image" content="https://janaka.me/assets/og/blitzmath.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="article:published_time" content="2026-10-02">
+  <meta property="article:modified_time" content="2026-10-02">
+  <meta property="article:author" content="https://janaka.me">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BlitzMath: A Live Classroom Maths Game with One Durable Object per Room">
+  <meta name="twitter:description" content="One Durable Object per room is the referee, alarms are the clock, and there is no database and no account.">
+  <meta name="twitter:image" content="https://janaka.me/assets/og/blitzmath.png">
+  <meta name="keywords" content="Cloudflare Workers, Durable Objects, WebSockets, real-time multiplayer, TypeScript, React 19, progressive web app, privacy by design, children's software, AI-assisted software engineering">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "BlitzMath: A Live Classroom Maths Game with One Durable Object per Room",
+    "description": "How BlitzMath runs live maths games for a whole class on Cloudflare Workers: one Durable Object per room as referee, alarms as the clock, no database or accounts.",
+    "datePublished": "2026-10-02",
+    "dateModified": "2026-10-02",
+    "author": {
+      "@type": "Person",
+      "@id": "https://janaka.me/#me",
+      "name": "Janaka Premathilaka",
+      "url": "https://janaka.me/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "@id": "https://janaka.me/#me",
+      "name": "Janaka Premathilaka",
+      "url": "https://janaka.me/"
+    },
+    "image": "https://janaka.me/assets/og/blitzmath.png",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://janaka.me/blog/posts/blitzmath-realtime-classroom-game.html"
+    }
+  }
+  </script>
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png?v=1">
+  <!-- Apply the stored theme before first paint to avoid a flash -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem("jp-theme");
+        if (t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="/assets/css/theme.css?v=20260910">
+  <link rel="stylesheet" href="/assets/css/subsite.css?v=20260916b">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <script type="application/ld+json" data-generated="gen-structured-data">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://janaka.me/blog/posts/blitzmath-realtime-classroom-game.html#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://janaka.me/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://janaka.me/blog/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "BlitzMath: A Live Classroom Maths Game with One Durable Object per Room",
+            "item": "https://janaka.me/blog/posts/blitzmath-realtime-classroom-game.html"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div data-include="/partials/site-nav.html"></div>
+
+<main id="main">
+  <article class="sec subhero">
+    <div class="wrap">
+      <p class="eyebrow"><a href="/blog/" style="color:inherit;text-decoration:none">← Blog</a></p>
+      <h1>BlitzMath: a live classroom maths game with one Durable Object per room</h1>
+      <p class="when" style="font-family:var(--font-mono);font-size:.74rem;letter-spacing:.06em;color:var(--tx2);margin-top:12px">Published 2 Oct 2026 · 8 min read · <a href="https://bm.janaka.me/" target="_blank" rel="noopener">bm.janaka.me</a> · <a href="/products/#blitzmath">product page</a></p>
+
+      <div class="prose" style="margin-top:32px">
+        <p>BlitzMath is a maths game for classrooms and families. A teacher or parent hosts a game on the big screen, children join with a six-digit code on their own device, and everyone answers the same questions at the same time. Children can also practise alone, take a daily challenge and battle friends. It is live at <a href="https://bm.janaka.me/" target="_blank" rel="noopener">bm.janaka.me</a>, in English, German, French and Italian. This article is about the engineering under it: how a whole class plays in real time with no database and no accounts, and why the server, not the child's device, decides everything that matters.</p>
+
+        <div class="aside-note">
+          <p><strong>Takeaways</strong></p>
+          <ul>
+            <li>Make the server the referee. A browser sends "I pick answer 2" and nothing else; the questions, the clock and the scores never leave the room object.</li>
+            <li>One Durable Object per room replaces a database, a message broker and a scheduler for this kind of workload.</li>
+            <li>Keep the game rules in pure code with no network in it. The same module then runs on the server, in the browser and under a fake clock in the tests.</li>
+            <li>The safest data about a child is data you never have. Leave it out of the design instead of protecting it afterwards.</li>
+            <li>Write product values as code. "Speed never earns points" is a three-line function with a test, not a guideline.</li>
+          </ul>
+        </div>
+
+        <h2>The problem</h2>
+        <p>Thirty children on thirty devices have to see the same question at the same moment, and the result has to be fair. If the device decided the score, any child who opened the browser tools could win. If the answer travelled with the question, it could be read before the time was up. And the players are children, so the product should know as little about them as possible: no accounts, no email addresses, no chat.</p>
+        <p>The first prototype planned a static host with a hosted realtime database. That design puts the rules in the browser and the data behind database rules that have to be exactly right. I moved it to a design where one small server object per game owns everything.</p>
+
+        <h2>Architecture</h2>
+        <pre><code>Teacher's browser ─┐
+                   ├─ HTTPS: create, look up, join ──► Worker
+Player's browser ──┤                                     │
+                   │                                     ▼
+                   └─ WebSocket: the live game ──► Room Durable Object
+                                                   one per game code
+                                                   questions · clock · scores
+                                                   rules: shared/engine.ts
+
+The React app (a PWA) is served as static files next to the Worker.</code></pre>
+        <p>Three parts, all TypeScript:</p>
+        <ul>
+          <li><b>The game core</b> is pure TypeScript with no network or storage code: the question generator, the scoring, the nickname filter and the rules of a room as a state machine, <code>lobby → countdown → question → reveal → … → ended</code>. It takes events (join, answer, host action, clock tick) and says what to send.</li>
+          <li><b>The server</b> is a Cloudflare Worker with a small HTTP API and one Durable Object per room, addressed by the room code. The object wraps the game core, keeps the state in its own storage and talks to every connected browser.</li>
+          <li><b>The app</b> is React 19 built with Vite, with no router library and no state library. It installs as a progressive web app, and solo practice works without a network because the browser runs the same question generator.</li>
+        </ul>
+        <p>Both sides compile against one protocol file, so a message the server sends is a type the browser already knows.</p>
+
+        <h2>The server is the referee</h2>
+        <p>The room object keeps four rules:</p>
+        <ol>
+          <li>The answer and its explanation are never in a message while the question is open.</li>
+          <li>Points are added when the result is shown, not when an answer arrives, so nobody can see early who was right.</li>
+          <li>Credentials travel in the first WebSocket message, never in a URL, because URLs end up in logs.</li>
+          <li>A room deletes itself: two hours after the last activity in the lobby, one hour in a game, 45 minutes after the end.</li>
+        </ol>
+        <p>The fourth rule is why there is no database. A game is short-lived state with one owner. When it is over, the object's storage is cleared and nothing about the game or its players remains on the server.</p>
+
+        <h2>Alarms are the clock</h2>
+        <p>A Durable Object cannot run a timer loop while it sleeps, and it should sleep: a lobby waiting for a class to arrive must cost nothing. Two platform features make that work. WebSocket hibernation lets the object leave memory while the connections stay open. An alarm wakes it at the moment the current phase ends.</p>
+        <pre><code>override async alarm(): Promise&lt;void&gt; {
+  const engine = this.engine;
+  if (!engine) return;
+  const now = Date.now();
+  if (engine.isExpired(now)) {
+    await this.destroy();
+    return;
+  }
+  await this.apply(engine.tick(now), null, now);
+  await this.ctx.storage.setAlarm(engine.nextAlarm());
+}</code></pre>
+        <p>The engine knows when the next thing happens; the object only asks. Each message to the browsers carries the server's own time and the time the phase ends, so every device lines its display up with the server instead of trusting its own clock.</p>
+
+        <h2>One game core, three places to run it</h2>
+        <p>Because the rules have no network in them, the same code runs in the room object, in the browser for solo practice, and in the unit tests with a fake clock. Questions come from a seed, so a test can ask for the same question twice. Wrong choices come from typical mistakes: for <code>2 + 3 × 4</code>, one wrong choice is <code>20</code>.</p>
+        <p>Every question has four different choices and exactly one right answer, and the tests check that for every topic and level. For the exam-level skills, the tests work each task out a second time with different code from the generator, so a mistake has to be made twice to get through. Those skills do all arithmetic in whole numbers (tenths, rappen), never floating point, and written answers are compared exactly, as fractions: <code>3.5</code> and <code>3,50</code> are the same answer.</p>
+
+        <h2>Calm competition, written as code</h2>
+        <p>Timed, ranked drills put the most pressure on the children who need the practice most. So the rules are calm on purpose, and they are enforced where the points are made:</p>
+        <pre><code>export const POINTS_PER_CORRECT = 100;
+
+/** Points for one answer: accuracy only. Speed never earns points. */
+export function pointsFor(correct: boolean): number {
+  return correct ? POINTS_PER_CORRECT : 0;
+}</code></pre>
+        <p>Time is used only to break a tie between equal scores. No clock is shown unless the adult turns it on. A child sees the top three and their own result, never a list that shows who is last. Nothing is lost by staying away: there is no streak that resets. When heads are tired, the host can start a break in which the whole group lights one shared night sky; it gives no points and ends by itself.</p>
+
+        <h2>Privacy by leaving things out</h2>
+        <p>The server knows a nickname, an avatar and the answers of the current game, and only while the room is open. An avatar is three numbers picked from fixed lists, so no image travels between children. There is no free text between children either; the only signal is one of six fixed emoji. A child's progress (levels, badges, topic stars) is stored on the child's own device.</p>
+        <p>I still need to know whether the product is used. The usage dashboard therefore counts things, never people: a second Durable Object keeps daily totals, and a browser reports "first open today" without any id for the device or the person. The server learns "one more", never "who".</p>
+
+        <h2>Testing and release</h2>
+        <p>One command runs typecheck, lint, the unit tests and a production build; on 1 October 2026 that was 260 unit tests. A second script plays a full live game over WebSockets with robot players, from creating the room to the final results, and runs against production after every deploy. The same robots fill a room during development, so a class game can be tried without a class.</p>
+        <p>The honest boundary: so far the games have been played by robot players and by hand in a desktop browser. A trial with a real class and a teacher's read of the task wording are the next step, and the French and Italian texts still need a native speaker.</p>
+
+        <h2>What AI accelerated, and what stayed mine</h2>
+        <p>AI-assisted engineering accelerated the implementation, the investigation, the documentation and the iteration. The architecture, the decisions, the validation and the production delivery stayed engineering-led. In practice that meant written rules the assistant works inside: a priority order that starts with child safety and mathematical correctness, a decision log, and one rule above the others: never claim a check passed that was not run. This is the same practice that took <a href="/blog/posts/assetcare-idea-to-production.html">AssetCare</a> to production on Kubernetes, applied to a very different stack.</p>
+
+        <h2>Practical takeaways</h2>
+        <ul>
+          <li>For a short-lived multiplayer session, start from one stateful object per session and ask what a database would add. Often the answer is only a liability.</li>
+          <li>Never send what the client must not know yet. Hiding an answer in the interface is not hiding it.</li>
+          <li>Put the clock on the server and send the deadline, not the remaining time.</li>
+          <li>Keep the rules free of I/O. Tests get faster, and offline play comes almost for free.</li>
+          <li>Check generated content with a second, independent calculation.</li>
+          <li>Measure usage with counts that need no identity. It is enough to plan with.</li>
+        </ul>
+
+        <h2>Try it</h2>
+        <p>Open <a href="https://bm.janaka.me/" target="_blank" rel="noopener">bm.janaka.me</a>, choose "Host a class game" and join from a phone with the code. There is no sign-up. The <a href="/products/#blitzmath">product page</a> has the facts at a glance, and the <a href="/lab/">Lab</a> lists the other recent builds.</p>
+
+        <h2>Sources</h2>
+        <ul>
+          <li><a href="https://developers.cloudflare.com/durable-objects/" target="_blank" rel="noopener">Cloudflare Durable Objects</a>, the <a href="https://developers.cloudflare.com/durable-objects/api/alarms/" target="_blank" rel="noopener">Alarms API</a> and <a href="https://developers.cloudflare.com/durable-objects/best-practices/websockets/" target="_blank" rel="noopener">WebSockets with hibernation</a>.</li>
+          <li>The BlitzMath repository is private. The two code excerpts above are taken from it unchanged apart from shortened comments.</li>
+          <li>Related: <a href="/blog/posts/assetcare-idea-to-production.html">From idea to production: building AssetCare</a>.</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="sitefoot">
+  <div class="wrap">
+    <span>© <span id="year"></span> Janaka Premathilaka · Zug 🇨🇭</span>
+    <span><a href="/blog/">Blog</a> &middot; <a href="/products/#blitzmath">BlitzMath</a> &middot; <a href="/">janaka.me</a></span>
+  </div>
+</footer>
+
+<script src="/assets/js/includes.js?v=20260910"></script>
+<script src="/assets/js/site-nav.js?v=20260910"></script>
+</body>
+</html>

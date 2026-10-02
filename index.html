@@ -122,6 +122,9 @@
             "@id": "https://janaka.me/lab/assetcare/#assetcare"
           },
           {
+            "@id": "https://janaka.me/products/#blitzmath"
+          },
+          {
             "@id": "https://janaka.me/products/#nuechtern"
           },
           {
@@ -135,6 +138,9 @@
           },
           {
             "@id": "https://janaka.me/products/#lefthere"
+          },
+          {
+            "@id": "https://janaka.me/lab/#mp3-alarm-clock"
           }
         ]
       },
@@ -168,6 +174,18 @@
           "GitHub Actions"
         ],
         "license": "https://github.com/Janaka2/spring-angular-production-blueprint/blob/main/LICENSE"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://janaka.me/products/#blitzmath",
+        "name": "BlitzMath",
+        "description": "Live maths battles for classrooms and families: a teacher or parent hosts, children join with a six-digit code on their own device, and everyone answers the same questions at the same time. No accounts, no ads, no chat.",
+        "url": "https://bm.janaka.me/",
+        "author": {
+          "@id": "https://janaka.me/#me"
+        },
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web"
       },
       {
         "@type": "SoftwareApplication",
@@ -228,6 +246,28 @@
         },
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Web"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "@id": "https://janaka.me/lab/#mp3-alarm-clock",
+        "name": "MP3 Alarm Clock",
+        "description": "A desktop alarm clock that plays an MP3 or your own recorded voice at a scheduled time, keeps the computer awake and wakes it from sleep, with family schedules and a phone remote. One Python file, macOS, Windows and Linux.",
+        "url": "https://github.com/Janaka2/mp3-alarm-clock",
+        "author": {
+          "@id": "https://janaka.me/#me"
+        },
+        "codeRepository": "https://github.com/Janaka2/mp3-alarm-clock",
+        "programmingLanguage": [
+          "Python"
+        ],
+        "runtimePlatform": [
+          "Python 3.10+",
+          "Tkinter",
+          "pygame-ce",
+          "sounddevice",
+          "yt-dlp"
+        ],
+        "license": "https://github.com/Janaka2/mp3-alarm-clock/blob/main/LICENSE"
       }
     ]
   }
@@ -572,6 +612,19 @@
         <a class="btn primary" href="/lab/assetcare/" data-i18n="pjAcBtn">Read the case study</a>
         <a class="btn" href="https://assetcare.janaka.me" target="_blank" rel="noopener" data-i18n="pjAcOpen">Open the live demo ↗</a>
         <a class="btn" href="https://github.com/Janaka2/spring-angular-production-blueprint" target="_blank" rel="noopener" data-i18n="pjAcSrc">Showcase ↗</a>
+      </div>
+    </div>
+    <div class="card plist" style="margin-top:14px" role="list">
+      <p class="zlabel" style="margin-top:14px" data-i18n="pjNewLabel">New in autumn 2026</p>
+      <div class="prow" role="listitem">
+        <div class="pname"><h3>BlitzMath</h3><span class="pdom">bm.janaka.me</span></div>
+        <p class="pline" data-i18n="plBm">Live maths battles for classrooms and families. Children join with a six-digit code and everyone answers at the same time; one Cloudflare Durable Object per room is the referee. No accounts, no ads, no chat. <a href="/blog/posts/blitzmath-realtime-classroom-game.html">How it is built</a>.</p>
+        <a class="popen" href="https://bm.janaka.me/" target="_blank" rel="noopener" aria-label="Open BlitzMath"><span class="dot" aria-hidden="true"></span><span data-i18n="pjOpen">Open</span> ↗</a>
+      </div>
+      <div class="prow" role="listitem">
+        <div class="pname"><h3>MP3 Alarm Clock</h3><span class="pdom">github.com/Janaka2</span></div>
+        <p class="pline" data-i18n="plAc">A desktop alarm clock that plays an MP3 or your own recorded voice, keeps the computer awake and wakes it from sleep. One Python file, open source under the MIT licence.</p>
+        <a class="popen" href="https://github.com/Janaka2/mp3-alarm-clock" target="_blank" rel="noopener" aria-label="MP3 Alarm Clock source on GitHub"><span data-i18n="pjSrc">Source</span> ↗</a>
       </div>
     </div>
     <div class="card" style="margin-top:14px">

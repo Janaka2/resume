@@ -1,0 +1,29 @@
+{
+ "apiVersion": "1",
+ "canonical": "https://janaka.me/lab/#mp3-alarm-clock",
+ "project": {
+  "slug": "mp3-alarm-clock",
+  "name": "MP3 Alarm Clock",
+  "kind": "open-source-tool",
+  "summary": "A desktop alarm clock that plays an MP3 or your own recorded voice at a scheduled time, keeps the computer awake and wakes it from sleep, with family schedules and a phone remote. One Python file, macOS, Windows and Linux.",
+  "url": "https://github.com/Janaka2/mp3-alarm-clock",
+  "page": "https://janaka.me/lab/#mp3-alarm-clock",
+  "source": "https://github.com/Janaka2/mp3-alarm-clock",
+  "license": "https://github.com/Janaka2/mp3-alarm-clock/blob/main/LICENSE",
+  "status": "released",
+  "availability": "Free and open source under the MIT licence.",
+  "applicationCategory": "UtilitiesApplication",
+  "programmingLanguages": [
+   "Python"
+  ],
+  "stack": [
+   "Python 3.10+",
+   "Tkinter",
+   "pygame-ce",
+   "sounddevice",
+   "yt-dlp"
+  ],
+  "privacy": "Alarms, recordings and logs live in the folder next to the app. The phone remote works on the home Wi-Fi only.",
+  "api": "https://janaka.me/api/public/v1/projects/mp3-alarm-clock.json"
+ }
+}

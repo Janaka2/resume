@@ -63,11 +63,13 @@
  },
  "projectSlugs": [
   "assetcare",
+  "blitzmath",
   "nuechtern",
   "daily-momentum",
   "loop",
   "babyloop",
-  "lefthere"
+  "lefthere",
+  "mp3-alarm-clock"
  ],
  "discovery": {
   "sitemap": "https://janaka.me/sitemap.xml",

@@ -147,6 +147,12 @@ Machine-specific (exists only on the original Windows/WSL PC, not in git):
   described as running in production. Surfaces: `partials/featured-build.html`, `lab/assetcare/`,
   `blog/posts/assetcare-idea-to-production.html`, `academy/assetcare/`, sections of `/products/`, `/ai/`, `/lab/`,
   `/academy/`, and `assets/og/assetcare.png` (`python3 scripts/gen-og-image.py assetcare`).
+- BlitzMath (bm.janaka.me; private repo `Janaka2/blitzmath`, local clone `~/dev/BlitzMath`) and MP3 Alarm Clock
+  (public repo `Janaka2/mp3-alarm-clock`, MIT) were added on 2026-10-01 as kinds `app` and `open-source-tool` in
+  `content/projects.json`: neither is in the for-sale catalogue, and AssetCare stays the lead project everywhere.
+  Surfaces: `/products/#blitzmath` (section `#new`), `/lab/#shipped`, `blog/posts/blitzmath-realtime-classroom-game.html`,
+  the hub row "New in autumn 2026" in `partials/side-projects.html`, `resume/index.html#reference`, one bullet in
+  `cv/print/index.html`, `chatbot/config.py`. Facts: the brand-voice skill and BlitzMath's `docs/STATUS.md`.
 - Daily Academy workflows (`.github/workflows/daily_*.yml`) are off on schedule since 2026-09-15 (they published
   empty placeholders) and run only on `workflow_dispatch`; their templates are inline Python, so update them when the
   shared page chrome changes. Scaffold pages carry `noindex` and are excluded from every derived output.

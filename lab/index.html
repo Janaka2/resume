@@ -82,6 +82,7 @@
       <p class="lede">Live demos, small tools and proofs of concept exploring AI, automation and productivity, and one that went all the way to <a href="#production">production on Kubernetes</a>. The experiments are rough by design — each one exists to answer a question. What holds up becomes a pattern on the <a href="/ai/">AI page</a>; what earns its place ships as a <a href="/products/">product</a>.</p>
       <div class="actions">
         <a class="btn primary" href="#production">AssetCare, live</a>
+        <a class="btn" href="#shipped">New: BlitzMath and an alarm clock</a>
         <a class="btn" href="#experiments">See the experiments</a>
         <a class="btn" href="/ai/">The practice behind them →</a>
         <a class="btn" href="/products/">What has shipped →</a>
@@ -111,6 +112,44 @@
           <a class="btn" href="/lab/assetcare/#architecture">Architecture</a>
           <a class="btn" href="https://github.com/Janaka2/spring-angular-production-blueprint" target="_blank" rel="noopener">Showcase ↗</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="shipped">
+    <div class="wrap">
+      <p class="eyebrow">New builds · autumn 2026</p>
+      <h2>Two more that left the Lab.</h2>
+      <p class="lede">Each began as a question. Can one small server object per room referee a whole class playing at once? Can a single Python file wake a sleeping computer on time, every morning?</p>
+      <div class="grid" style="margin-top:18px">
+
+        <article class="card item" id="blitzmath">
+          <h3>BlitzMath</h3>
+          <p class="sub">TypeScript · React 19 · Cloudflare Workers · Durable Objects</p>
+          <p>Live maths battles for classrooms and families. A teacher hosts, children join with a six-digit code, and everyone answers the same questions at the same time. One Durable Object per room holds the questions, the clock and the scores, so the server is the referee and nothing can be faked from a child's device. No database, no accounts.</p>
+          <div class="chips">
+            <span class="chip">Real time</span><span class="chip">WebSockets</span><span class="chip">PWA</span><span class="chip">EN · DE · FR · IT</span>
+          </div>
+          <div class="links">
+            <a href="https://bm.janaka.me/" target="_blank" rel="noopener">Open the live app ↗</a>
+            <a href="/blog/posts/blitzmath-realtime-classroom-game.html">How it is built →</a>
+            <a href="/products/#blitzmath">Product page →</a>
+          </div>
+        </article>
+
+        <article class="card item" id="mp3-alarm-clock">
+          <h3>MP3 Alarm Clock</h3>
+          <p class="sub">Python · Tkinter · pygame-ce · macOS, Windows, Linux</p>
+          <p>A desktop alarm clock that plays an MP3 or your own recorded voice at a scheduled time, keeps the computer awake and registers a real wake from sleep with the operating system. Family schedules play a recorded message per event on a chosen speaker, and a PIN-protected phone remote on the home Wi-Fi stops, skips and records. One file, started with a double-click, and the whole folder is portable.</p>
+          <div class="chips">
+            <span class="chip">Desktop</span><span class="chip">Single file</span><span class="chip">Open source</span><span class="chip">MIT</span>
+          </div>
+          <div class="links">
+            <a href="https://github.com/Janaka2/mp3-alarm-clock" target="_blank" rel="noopener">Source on GitHub ↗</a>
+            <a href="https://github.com/Janaka2/mp3-alarm-clock#user-manual" target="_blank" rel="noopener">User manual ↗</a>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
@@ -177,7 +216,7 @@
     <div class="wrap">
       <p class="eyebrow">From experiment to product</p>
       <h2>Where the experiments go.</h2>
-      <p class="lede">The Lab is the first step, not the last. The RAG and agent work here became the blueprint and production patterns on the AI page, and the same generate-and-review discipline built five products that are live today and took <a href="/lab/assetcare/">AssetCare</a> to a live Kubernetes deployment.</p>
+      <p class="lede">The Lab is the first step, not the last. The RAG and agent work here became the blueprint and production patterns on the AI page, and the same generate-and-review discipline built five products that are live today, took <a href="/lab/assetcare/">AssetCare</a> to a live Kubernetes deployment, and most recently shipped <a href="#blitzmath">BlitzMath</a>.</p>
       <div data-include="/partials/ai-trail.html"></div>
       <div class="cta" style="margin-top:22px">
         <div>

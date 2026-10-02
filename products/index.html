@@ -166,7 +166,7 @@
     <div class="wrap">
       <p class="eyebrow">Products</p>
       <h1>Finished software, ready for a new owner.</h1>
-      <p class="lede">Five live, privacy-first web apps, each taken from idea to production by one engineer. They are not experiments: they have real users, real domains and a settled design. Swiss made in Zug, to the standard of the banking systems I build by day. Each is available for acquisition or licensing, with source, brand and a documented handover. Alongside them, one that is not for sale: <a href="#assetcare">AssetCare</a>, a live Java, Angular and Kubernetes reference application built to the same standard.</p>
+      <p class="lede">Five live, privacy-first web apps, each taken from idea to production by one engineer. They are not experiments: they have real users, real domains and a settled design. Swiss made in Zug, to the standard of the banking systems I build by day. Each is available for acquisition or licensing, with source, brand and a documented handover. Alongside them, one that is not for sale: <a href="#assetcare">AssetCare</a>, a live Java, Angular and Kubernetes reference application built to the same standard. The newest build is <a href="#blitzmath">BlitzMath</a>, a live maths game for classrooms and families.</p>
       <div class="badges">
         <span class="badge hot">Swiss made 🇨🇭</span>
         <span class="badge">5 live products</span>
@@ -175,6 +175,7 @@
         <a class="badge" href="/ai/#shipped">Built with AI in the loop →</a>
         <span class="badge hot">Acquisition or licence</span>
         <a class="badge" href="#assetcare">+ AssetCare, a live reference app →</a>
+        <a class="badge" href="#blitzmath">New: BlitzMath, live classroom maths →</a>
       </div>
       <div class="actions">
         <a class="btn primary" href="mailto:janaka2@gmail.com?subject=Product%20enquiry">✉&nbsp; Enquire by email</a>
@@ -240,6 +241,82 @@
           <p class="avail"><span class="chip">Source on request</span> <span class="chip">Not for sale</span></p>
         </aside>
       </article>
+    </div>
+  </section>
+
+  <section class="sec" id="new">
+    <div class="wrap">
+      <p class="eyebrow">New · October 2026</p>
+      <h2>BlitzMath: live maths battles for classrooms and families.</h2>
+      <p class="lede">The newest product, and the first with a real-time backend. A teacher or parent hosts a game on the big screen, children join with a six-digit code on their own device, and everyone answers the same questions at the same time. Live at <a href="https://bm.janaka.me/" target="_blank" rel="noopener">bm.janaka.me</a>, free to play, and not part of the catalogue below.</p>
+
+      <article class="card listing" id="blitzmath" style="margin-top:22px">
+        <div class="listing-main">
+          <div class="proj-head">
+            <div>
+              <h3>BlitzMath</h3>
+              <p class="sub">bm.janaka.me · live maths game for classes and families</p>
+            </div>
+            <span class="proj-live"><span class="dot"></span><span>Live</span></span>
+          </div>
+          <div class="listing-body">
+            <div>
+          <p>The players are children, so the rules are calm on purpose. Only right answers score and speed never adds points. A child sees the top three and their own result, never who came last. There are no accounts, no ads and no chat.</p>
+          <p class="who"><b>Fits:</b> a teacher who wants a whole class answering at once, a family around one table, or a child practising alone for the Gymnasium entrance exam.</p>
+          <ul>
+            <li>Class games for up to 60 players with code and QR, teams, pause and skip, results and CSV export. Friend battles for up to eight. Solo practice that adapts the level, with a daily challenge.</li>
+            <li>Eight topics at five levels, plus 17 skills at the level of the Swiss Gymnasium entrance exam after 6th class and 18 skills for the Short Gymnasium after Sek. Answers are tapped, or written on the app's own number pad.</li>
+            <li>English, German, French and Italian. Installs as an app, and solo practice works without a network.</li>
+            <li>A break for tired heads: three small cooperative games that light one shared night sky. No points, no ranking, and it ends by itself.</li>
+          </ul>
+            </div>
+            <a class="shot" href="https://bm.janaka.me/" target="_blank" rel="noopener" aria-label="Open BlitzMath">
+            <picture>
+              <source type="image/webp" srcset="/products/assets/blitzmath-home.webp">
+              <img src="/products/assets/blitzmath-home.jpg" width="180" alt="BlitzMath home screen: join with a game code, play and practise, or host a class game" loading="lazy" decoding="async">
+            </picture>
+            <span class="shot-cap">Open the app ↗</span>
+          </a>
+          </div>
+          <div class="proj-actions">
+            <a class="btn primary" href="https://bm.janaka.me/" target="_blank" rel="noopener">Open the live app ↗</a>
+            <a class="btn" href="/blog/posts/blitzmath-realtime-classroom-game.html">How it is built</a>
+          </div>
+        </div>
+        <aside class="listing-spec" aria-label="BlitzMath at a glance">
+          <dl>
+            <dt>Category</dt><dd>Education</dd>
+            <dt>Platform</dt><dd>Progressive web app, installable; solo practice offline</dd>
+            <dt>Frontend</dt><dd>React 19, TypeScript, Vite</dd>
+            <dt>Backend</dt><dd>Cloudflare Worker; one Durable Object per game room, WebSockets</dd>
+            <dt>Referee</dt><dd>Questions, clock and scores live on the server; a browser only sends its answer</dd>
+            <dt>Data</dt><dd>No accounts. Progress stays on the child's device; a room deletes itself after the game</dd>
+            <dt>Languages</dt><dd>English, German, French, Italian</dd>
+            <dt>Testing</dt><dd>Unit tests on the shared game core; a full live game over WebSockets played by robot players</dd>
+            <dt>Parents' packs</dt><dd>Stripe checkout and licence codes: built, not yet on sale</dd>
+            <dt>Made in</dt><dd>Zug, Switzerland</dd>
+            <dt>Source</dt><dd>Private</dd>
+          </dl>
+          <p class="avail"><span class="chip">Free to play</span> <span class="chip">Not in the catalogue</span></p>
+        </aside>
+      </article>
+
+      <div class="card proj" id="mp3-alarm-clock" style="margin-top:14px">
+        <div class="proj-head">
+          <div>
+            <h3>MP3 Alarm Clock</h3>
+            <p class="sub">github.com/Janaka2/mp3-alarm-clock · desktop app, free and open source</p>
+          </div>
+        </div>
+        <p>Also new, and free. A desktop alarm clock that plays an MP3 or your own recorded voice at a set time, keeps the computer awake and wakes it from sleep when the alarm is due. Family schedules play a recorded message per event on the speaker in the right room, and a phone remote on the home Wi-Fi stops, skips and records. One Python file for macOS, Windows and Linux, under the MIT licence.</p>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">Tkinter</span><span class="chip">pygame-ce</span><span class="chip">macOS · Windows · Linux</span><span class="chip">MIT</span>
+        </div>
+        <div class="proj-actions">
+          <a class="btn" href="https://github.com/Janaka2/mp3-alarm-clock" target="_blank" rel="noopener">Source on GitHub ↗</a>
+          <a class="btn" href="/lab/#mp3-alarm-clock">In the Lab</a>
+        </div>
+      </div>
     </div>
   </section>
 

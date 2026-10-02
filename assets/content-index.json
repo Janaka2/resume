@@ -1,5 +1,27 @@
 [
  {
+  "url": "/blog/posts/blitzmath-realtime-classroom-game.html",
+  "title": "BlitzMath: A Live Classroom Maths Game with One Durable Object per Room",
+  "section": "blog",
+  "description": "How BlitzMath runs live maths games for a whole class on Cloudflare Workers: one Durable Object per room as referee, alarms as the clock, no database or accounts.",
+  "tags": [
+   "Cloudflare Workers",
+   "Durable Objects",
+   "WebSockets",
+   "real-time multiplayer",
+   "TypeScript",
+   "React 19",
+   "progressive web app",
+   "privacy by design",
+   "children's software",
+   "AI-assisted software engineering"
+  ],
+  "date": "2026-10-02",
+  "updated": "2026-10-02",
+  "words": 1654,
+  "minutes": 8
+ },
+ {
   "url": "/lab/assetcare/",
   "title": "AssetCare case study: Java 25, Spring Boot, Angular and Kubernetes in production",
   "section": "lab",
@@ -674,9 +696,9 @@
    "apps"
   ],
   "date": "2026-09-10",
-  "updated": "2026-09-30",
-  "words": 2313,
-  "minutes": 11
+  "updated": "2026-10-02",
+  "words": 2813,
+  "minutes": 13
  },
  {
   "url": "/lab/Notes/llm-study-notes-handwritten-style.html",

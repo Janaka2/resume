@@ -77,8 +77,9 @@ PAGES = {
     "ai": ("AI", ["Agents that are readable,", "reliable and worth shipping."], None, "janaka.me/ai/"),
     "academy": ("Academy", ["Engineers who surpass", "their teacher."], None, "janaka.me/academy/"),
     "assetcare": ("Case study · live", ["AssetCare, in production.", "Java 25 · Spring Boot", "Angular · Kubernetes"], "K3s · Helm · Keycloak · PostgreSQL · Hetzner · AI-assisted engineering", "janaka.me/lab/assetcare/"),
+    "blitzmath": ("Article · live", ["BlitzMath, live.", "One Durable Object", "per classroom game."], "TypeScript · React · Cloudflare Workers · WebSockets · no accounts", "janaka.me/blog/"),
 }
-# Optional: python3 scripts/gen-og-image.py assetcare   (only that page image; the hub images are left alone)
+# Optional: python3 scripts/gen-og-image.py assetcare blitzmath   (only those page images; the hub images are left alone)
 ONLY = set(sys.argv[1:])
 
 def save(im, rel):

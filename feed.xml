@@ -5,9 +5,18 @@
   <link rel="alternate" type="text/html" href="https://janaka.me/"/>
   <link rel="self" type="application/atom+xml" href="https://janaka.me/feed.xml"/>
   <id>https://janaka.me/</id>
-  <updated>2026-09-30T00:00:00Z</updated>
+  <updated>2026-10-02T00:00:00Z</updated>
   <author><name>Janaka Premathilaka</name><uri>https://janaka.me/</uri></author>
   <generator>scripts/gen-feed.py</generator>
+  <entry>
+    <title>BlitzMath: A Live Classroom Maths Game with One Durable Object per Room</title>
+    <link rel="alternate" type="text/html" href="https://janaka.me/blog/posts/blitzmath-realtime-classroom-game.html"/>
+    <id>https://janaka.me/blog/posts/blitzmath-realtime-classroom-game.html</id>
+    <published>2026-10-02T00:00:00Z</published>
+    <updated>2026-10-02T00:00:00Z</updated>
+    <category term="blog" label="Blog"/>
+    <summary>How BlitzMath runs live maths games for a whole class on Cloudflare Workers: one Durable Object per room as referee, alarms as the clock, no database or accounts.</summary>
+  </entry>
   <entry>
     <title>AssetCare case study: Java 25, Spring Boot, Angular and Kubernetes in production</title>
     <link rel="alternate" type="text/html" href="https://janaka.me/lab/assetcare/"/>
@@ -268,14 +277,5 @@
     <updated>2026-09-25T00:00:00Z</updated>
     <category term="academy" label="Academy"/>
     <summary>Entanglement Explained — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
-  </entry>
-  <entry>
-    <title>Career Roadmap</title>
-    <link rel="alternate" type="text/html" href="https://janaka.me/academy/modules/2026/FSE/entanglement/career-roadmap.html"/>
-    <id>https://janaka.me/academy/modules/2026/FSE/entanglement/career-roadmap.html</id>
-    <published>2026-09-15T00:00:00Z</published>
-    <updated>2026-09-25T00:00:00Z</updated>
-    <category term="academy" label="Academy"/>
-    <summary>Career Roadmap — a Janaka Academy module from the Elite Full-Stack Engineering 2026 curriculum by Janaka Premathilaka.</summary>
   </entry>
 </feed>

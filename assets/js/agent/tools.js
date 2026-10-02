@@ -60,15 +60,18 @@ export const TOOLS = [
     name: 'list_projects',
     title: 'Products and reference projects',
     description:
-      'The live products (privacy-first web apps open to acquisition or licensing) and reference applications ' +
-      'Janaka built, each with a slug, one-line summary, live URL and the janaka.me page that presents it.',
+      'The live products (privacy-first web apps open to acquisition or licensing), reference applications, ' +
+      'other live apps and open-source tools Janaka built, each with a slug, one-line summary, live URL and the ' +
+      'janaka.me page that presents it.',
     inputSchema: {
       type: 'object',
       properties: {
         kind: {
           type: 'string',
-          enum: ['all', 'product', 'reference-application'],
-          description: 'Filter: product (for sale or licence) or reference-application. Default all.',
+          enum: ['all', 'product', 'reference-application', 'app', 'open-source-tool'],
+          description:
+            'Filter: product (for sale or licence), reference-application, app (live, not for sale) or ' +
+            'open-source-tool. Default all.',
         },
       },
       additionalProperties: false,

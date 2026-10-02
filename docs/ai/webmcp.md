@@ -47,7 +47,7 @@ All are read-only (`readOnlyHint: true`), have no side effects, validate input a
 |---|---|---|---|
 | `get_profile` | every page | – | name, title, positioning, summary, location, work radius, languages, skills, contact email and page, links |
 | `get_experience` | `/`, `/resume/` | `include_highlights?: boolean` | roles (period, title, organisation, location[, highlights, technologies]), certifications, education |
-| `list_projects` | `/`, `/products/`, `/lab/…`, `/ai/…` | `kind?: all \| product \| reference-application` | slug, name, kind, summary, live URL, janaka.me page |
+| `list_projects` | `/`, `/products/`, `/lab/…`, `/ai/…` | `kind?: all \| product \| reference-application \| app \| open-source-tool` | slug, name, kind, summary, live URL, janaka.me page |
 | `get_project` | same as above | `slug` (`^[a-z0-9-]{1,40}$`) | full project record (stack, source, status, availability, privacy, related pages) |
 | `search_site` | every page | `query` (2–100 chars), `section?`, `limit?` 1–10 | total and top matches: title, URL, section, description |
 | `list_resources` | `/blog/…`, `/academy/…`, `/lab/…`, `/ai/…` | `section`, `limit?` 1–20, `offset?` 0–500 | newest-first page list with dates |

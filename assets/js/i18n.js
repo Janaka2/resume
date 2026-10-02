@@ -111,6 +111,10 @@ window.JP_I18N = (function () {
     pjAcOpen: 'Live-Demo öffnen ↗',
     pjAcSrc: 'Showcase ↗',
     pjAcqBtn: 'Per E-Mail anfragen',
+    pjNewLabel: 'Neu im Herbst 2026',
+    plBm: 'Live-Mathe-Duelle für Schulklassen und Familien. Kinder treten mit einem sechsstelligen Code bei, und alle beantworten dieselben Fragen zur selben Zeit; ein Cloudflare Durable Object pro Raum ist der Schiedsrichter. Keine Konten, keine Werbung, kein Chat. <a href="/blog/posts/blitzmath-realtime-classroom-game.html">So ist es gebaut</a>.',
+    plAc: 'Ein Desktop-Wecker, der eine MP3 oder die eigene aufgenommene Stimme abspielt, den Computer wach hält und ihn aus dem Ruhezustand weckt. Eine einzige Python-Datei, Open Source unter der MIT-Lizenz.',
+    pjSrc: 'Quellcode',
 
     /* ---- certifications ---- */
     certEyebrow: 'Zertifizierungen &amp; Kurse',

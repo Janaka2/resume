@@ -354,6 +354,9 @@ details .points{margin-top:10px}
             "@id": "https://janaka.me/lab/assetcare/#assetcare"
           },
           {
+            "@id": "https://janaka.me/products/#blitzmath"
+          },
+          {
             "@id": "https://janaka.me/products/#nuechtern"
           },
           {
@@ -367,6 +370,9 @@ details .points{margin-top:10px}
           },
           {
             "@id": "https://janaka.me/products/#lefthere"
+          },
+          {
+            "@id": "https://janaka.me/lab/#mp3-alarm-clock"
           }
         ]
       },
@@ -597,6 +603,16 @@ details .points{margin-top:10px}
         <a class="btn" href="/academy/production-ready-spring-angular/" data-i18n="refCourse">Academy course</a>
       </div>
     </div>
+    <div class="card" style="margin-top:14px">
+      <p class="zlabel" data-i18n="ref2Label">BlitzMath · bm.janaka.me · October 2026</p>
+      <p data-i18n="ref2P">A live maths game for classrooms and families, on a different stack from AssetCare by design: a React 19 and TypeScript progressive web app on Cloudflare Workers, with one Durable Object per game room as the server-side referee for questions, clock and scores over WebSockets. No database and no accounts. The game core is pure TypeScript, shared by server and browser and covered by unit tests, and a full live game is played end to end by robot players after each deploy. English, German, French and Italian.</p>
+      <div class="chips" style="margin-top:12px"><span class="chip">TypeScript</span><span class="chip">React 19</span><span class="chip">Vite</span><span class="chip">Cloudflare Workers</span><span class="chip">Durable Objects</span><span class="chip">WebSockets</span><span class="chip">PWA · offline</span><span class="chip">Vitest</span></div>
+      <div class="actions" style="margin-top:16px">
+        <a class="btn primary" href="https://bm.janaka.me/" target="_blank" rel="noopener" data-i18n="ref2Open">Open the live app ↗</a>
+        <a class="btn" href="/blog/posts/blitzmath-realtime-classroom-game.html" data-i18n="ref2How">How it is built</a>
+      </div>
+      <p class="sub" style="margin-top:14px" data-i18n="ref2Also">Also open source: <a href="https://github.com/Janaka2/mp3-alarm-clock" target="_blank" rel="noopener">MP3 Alarm Clock</a>, a single-file Python desktop app for macOS, Windows and Linux (MIT).</p>
+    </div>
   </div>
 </section>
 
@@ -760,6 +776,10 @@ details .points{margin-top:10px}
     refLabel: "AssetCare · assetcare.janaka.me · Quellcode auf Anfrage · September 2026",
     refP: "Eine vollständige Anwendung für Asset- und Wartungsverwaltung, die ich in meiner Freizeit von der Architektur bis zum Live-Deployment auf Kubernetes gebracht habe: Angular 22 vor Spring Boot 4.1 auf Java 25, PostgreSQL 18 mit Liquibase, Keycloak 26 für die Identität, S3-kompatibler Objektspeicher, OpenTelemetry-Instrumentierung mit einem Prometheus-, Grafana-, Loki- und Tempo-Stack, Tests auf jeder Ebene (Testcontainers, ArchUnit, Playwright, k6), signierte Multi-Arch-Images über GitHub Actions, ein Helm-Chart auf K3s und ein per Terraform erstellter Hetzner-Cloud-Server. KI hat das Engineering beschleunigt; Architektur, Sicherheit und Verifikation blieben bei mir.",
     refCase: "Zur Fallstudie", refOpen: "Live-Demo öffnen ↗", refRepo: "Showcase ↗", refCourse: "Academy-Kurs",
+    ref2Label: "BlitzMath · bm.janaka.me · Oktober 2026",
+    ref2P: "Ein Live-Mathespiel für Schulklassen und Familien, bewusst auf einem anderen Stack als AssetCare: eine Progressive Web App mit React 19 und TypeScript auf Cloudflare Workers, mit einem Durable Object pro Spielraum als serverseitigem Schiedsrichter für Fragen, Uhr und Punkte über WebSockets. Keine Datenbank und keine Konten. Der Spielkern ist reines TypeScript, wird von Server und Browser gemeinsam genutzt und ist durch Unit-Tests abgedeckt; nach jedem Deployment spielen Roboter-Spieler ein vollständiges Live-Spiel von Anfang bis Ende durch. Englisch, Deutsch, Französisch und Italienisch.",
+    ref2Open: "Live-App öffnen ↗", ref2How: "So ist es gebaut",
+    ref2Also: "Ausserdem Open Source: <a href=\"https://github.com/Janaka2/mp3-alarm-clock\" target=\"_blank\" rel=\"noopener\">MP3 Alarm Clock</a>, eine Python-Desktop-App in einer einzigen Datei für macOS, Windows und Linux (MIT).",
     skNote: "Java 17, Kafka, Oracle und OpenShift sind mein Stack in der Bank. Java 25, Spring Boot 4.1, Angular 22, PostgreSQL 18, Helm, Terraform und der OpenTelemetry-Stack laufen in <a href=\"#reference\">AssetCare</a>.",
     role: "Senior Java Engineer &amp; Solution Architect",
     hook: "<b>Ich schreibe Java für Banken — und bringe KI hinter den Perimeter.</b><br>Geschäftskritisch, reguliert, auditiert — und darf nicht ausfallen. Über 22 Jahre bei UBS, Credit Suisse, der Europäischen Kommission und der Union Bank of Colombo.",

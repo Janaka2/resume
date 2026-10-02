@@ -89,6 +89,12 @@ Every page linked here is plain HTML that reads without JavaScript. The same fac
   - Stack: Java 25, Spring Boot 4.1, Angular 22, Keycloak, PostgreSQL 18, Liquibase, MinIO, K3s, Helm, Traefik, cert-manager, Terraform, GitHub Actions
   - Runs on one Hetzner CX33 created by Terraform; CI, security and release pipelines on GitHub Actions with signed multi-arch images.
   - The observability stack (Prometheus, Grafana, Loki, Tempo, OpenTelemetry) is an optional profile and is not running in production.
+- [BlitzMath](https://janaka.me/products/#blitzmath): Live maths battles for classrooms and families: a teacher or parent hosts, children join with a six-digit code on their own device, and everyone answers the same questions at the same time. No accounts, no ads, no chat. Free to play. Not part of the for-sale catalogue.
+  - Live: https://bm.janaka.me/
+  - Stack: TypeScript, React 19, Vite, Cloudflare Workers, Durable Objects, WebSockets, Progressive web app
+  - One Durable Object per game room holds the questions, the clock and the scores, so the server is the referee and nothing can be faked from a child's device.
+  - English, German, French and Italian. Practice for the Swiss Gymnasium entrance exams: 17 skills after 6th class and 18 skills after Sek.
+  - Parents' packs with Stripe checkout and licence codes are built and not yet on sale.
 - [nüchtern](https://janaka.me/products/#nuechtern): Fasting companion that keeps the biology visible: phase timer, hydration, electrolytes. Offline, German and English. Open to acquisition or licensing.
   - Live: https://nuechtern.app/
 - [Daily Momentum](https://janaka.me/products/#daily-momentum): A quiet record of where the day went: one tap says what you are doing, everything else is derived. On-device only. Open to acquisition or licensing.
@@ -99,10 +105,14 @@ Every page linked here is plain HTML that reads without JavaScript. The same fac
   - Live: https://babyloop.janaka.me/
 - [LeftHere](https://janaka.me/products/#lefthere): Take a photo and it remembers where you left the car, keys, bag or a favourite place; the map walks you back. On your device or your own Drive. Open to acquisition or licensing.
   - Live: https://here.janaka.me/
+- [MP3 Alarm Clock](https://janaka.me/lab/#mp3-alarm-clock): A desktop alarm clock that plays an MP3 or your own recorded voice at a scheduled time, keeps the computer awake and wakes it from sleep, with family schedules and a phone remote. One Python file, macOS, Windows and Linux. Free and open source under the MIT licence.
+  - Live: https://github.com/Janaka2/mp3-alarm-clock · Source: https://github.com/Janaka2/mp3-alarm-clock
+  - Stack: Python 3.10+, Tkinter, pygame-ce, sounddevice, yt-dlp
 
 ## Blog
 
 - [Blog](https://janaka.me/blog/): Clear, hands-on articles on Java, Kafka, RAG, agents and evals.
+- [BlitzMath: A Live Classroom Maths Game with One Durable Object per Room](https://janaka.me/blog/posts/blitzmath-realtime-classroom-game.html): How BlitzMath runs live maths games for a whole class on Cloudflare Workers: one Durable Object per room as referee, alarms as the clock, no database or accounts.
 - [From Idea to Production: Building AssetCare with Java 25, Spring Boot, Angular, Kubernetes and AI](https://janaka.me/blog/posts/assetcare-idea-to-production.html): How a Java 25, Spring Boot 4.1 and Angular 22 application went from a prototype to a live Kubernetes deployment on Hetzner with Helm, Keycloak, PostgreSQL and Let's Encrypt, what broke on the way…
 - [Dead-letter topics in Spring Kafka: retries and replay](https://janaka.me/blog/posts/spring-kafka-deadletter.html): How to handle poison pills in Spring Kafka with DefaultErrorHandler, @RetryableTopic, DeadLetterPublishingRecoverer and a governed replay path.
 - [RAG with FAISS: Chunking, MMR and Re-Ranking](https://janaka.me/blog/posts/rag-faiss-patterns.html): Why naive top-k retrieval fails, how to chunk and index with FAISS, and how MMR and cross-encoder re-ranking fix it for a regulated bank.

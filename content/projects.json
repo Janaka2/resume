@@ -1,5 +1,5 @@
 {
-  "$comment": "Canonical list of Janaka's independent products and reference projects. Consumed by scripts/gen-jsonld.py (Person.owns on the hub, ItemList on /products/, SoftwareSourceCode on case-study pages), scripts/gen-public-data.py (api/public/v1/projects*.json, llms.txt) and the WebMCP tools. The visible cards live in partials/side-projects.html and products/index.html; scripts/validate-site.py fails when a project here is missing from those pages or a product link there is missing here. Facts and wording: .claude/skills/brand-voice/SKILL.md.",
+  "$comment": "Canonical list of Janaka's independent products and reference projects. Consumed by scripts/gen-jsonld.py (Person.owns on the hub, ItemList on /products/, SoftwareSourceCode on case-study pages), scripts/gen-public-data.py (api/public/v1/projects*.json, llms.txt) and the WebMCP tools. The visible cards live in partials/side-projects.html and products/index.html; scripts/validate-site.py fails when a project here is missing from those pages or a product link there is missing here. Facts and wording: .claude/skills/brand-voice/SKILL.md. Kinds: product = in the for-sale catalogue on /products/ (ItemList, acquisition or licence); reference-application = AssetCare; app = live and operated by Janaka but not for sale (BlitzMath); open-source-tool = free tool with public source (MP3 Alarm Clock).",
   "projects": [
     {
       "slug": "assetcare",
@@ -24,6 +24,28 @@
         "https://janaka.me/academy/assetcare/",
         "https://janaka.me/academy/production-ready-spring-angular/",
         "https://janaka.me/products/#assetcare"
+      ]
+    },
+    {
+      "slug": "blitzmath",
+      "name": "BlitzMath",
+      "kind": "app",
+      "summary": "Live maths battles for classrooms and families: a teacher or parent hosts, children join with a six-digit code on their own device, and everyone answers the same questions at the same time. No accounts, no ads, no chat.",
+      "url": "https://bm.janaka.me/",
+      "page": "https://janaka.me/products/#blitzmath",
+      "status": "live",
+      "availability": "Free to play. Not part of the for-sale catalogue.",
+      "applicationCategory": "EducationalApplication",
+      "privacy": "No accounts and no id for a device or a person. A child's progress stays on the child's device; a room and its nicknames are deleted when the game is over.",
+      "stack": ["TypeScript", "React 19", "Vite", "Cloudflare Workers", "Durable Objects", "WebSockets", "Progressive web app"],
+      "notes": [
+        "One Durable Object per game room holds the questions, the clock and the scores, so the server is the referee and nothing can be faked from a child's device.",
+        "English, German, French and Italian. Practice for the Swiss Gymnasium entrance exams: 17 skills after 6th class and 18 skills after Sek.",
+        "Parents' packs with Stripe checkout and licence codes are built and not yet on sale."
+      ],
+      "related": [
+        "https://janaka.me/blog/posts/blitzmath-realtime-classroom-game.html",
+        "https://janaka.me/lab/#blitzmath"
       ]
     },
     {
@@ -85,6 +107,22 @@
       "availability": "Open to acquisition or licensing.",
       "applicationCategory": "UtilitiesApplication",
       "privacy": "Records stay on the user's device or in storage the user owns."
+    },
+    {
+      "slug": "mp3-alarm-clock",
+      "name": "MP3 Alarm Clock",
+      "kind": "open-source-tool",
+      "summary": "A desktop alarm clock that plays an MP3 or your own recorded voice at a scheduled time, keeps the computer awake and wakes it from sleep, with family schedules and a phone remote. One Python file, macOS, Windows and Linux.",
+      "url": "https://github.com/Janaka2/mp3-alarm-clock",
+      "page": "https://janaka.me/lab/#mp3-alarm-clock",
+      "source": "https://github.com/Janaka2/mp3-alarm-clock",
+      "license": "https://github.com/Janaka2/mp3-alarm-clock/blob/main/LICENSE",
+      "status": "released",
+      "availability": "Free and open source under the MIT licence.",
+      "applicationCategory": "UtilitiesApplication",
+      "programmingLanguages": ["Python"],
+      "stack": ["Python 3.10+", "Tkinter", "pygame-ce", "sounddevice", "yt-dlp"],
+      "privacy": "Alarms, recordings and logs live in the folder next to the app. The phone remote works on the home Wi-Fi only."
     }
   ]
 }

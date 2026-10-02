@@ -1,0 +1,35 @@
+{
+ "apiVersion": "1",
+ "canonical": "https://janaka.me/products/#blitzmath",
+ "project": {
+  "slug": "blitzmath",
+  "name": "BlitzMath",
+  "kind": "app",
+  "summary": "Live maths battles for classrooms and families: a teacher or parent hosts, children join with a six-digit code on their own device, and everyone answers the same questions at the same time. No accounts, no ads, no chat.",
+  "url": "https://bm.janaka.me/",
+  "page": "https://janaka.me/products/#blitzmath",
+  "status": "live",
+  "availability": "Free to play. Not part of the for-sale catalogue.",
+  "applicationCategory": "EducationalApplication",
+  "privacy": "No accounts and no id for a device or a person. A child's progress stays on the child's device; a room and its nicknames are deleted when the game is over.",
+  "stack": [
+   "TypeScript",
+   "React 19",
+   "Vite",
+   "Cloudflare Workers",
+   "Durable Objects",
+   "WebSockets",
+   "Progressive web app"
+  ],
+  "notes": [
+   "One Durable Object per game room holds the questions, the clock and the scores, so the server is the referee and nothing can be faked from a child's device.",
+   "English, German, French and Italian. Practice for the Swiss Gymnasium entrance exams: 17 skills after 6th class and 18 skills after Sek.",
+   "Parents' packs with Stripe checkout and licence codes are built and not yet on sale."
+  ],
+  "related": [
+   "https://janaka.me/blog/posts/blitzmath-realtime-classroom-game.html",
+   "https://janaka.me/lab/#blitzmath"
+  ],
+  "api": "https://janaka.me/api/public/v1/projects/blitzmath.json"
+ }
+}
