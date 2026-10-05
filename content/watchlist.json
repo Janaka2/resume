@@ -145,7 +145,7 @@
         "https://babyloop.janaka.me/",
         "https://here.janaka.me/"
       ],
-      "checked": "2026-09-25",
+      "checked": "2026-10-05",
       "every_days": 30,
       "authority": "janaka",
       "action": "Check each URL answers. Report any that fail; never change status or copy without Janaka."
