@@ -12,7 +12,7 @@
         "https://developer.chrome.com/origintrials/",
         "https://developer.chrome.com/docs/ai/webmcp"
       ],
-      "checked": "2026-09-25",
+      "checked": "2026-10-24",
       "review_by": "2026-11-01",
       "authority": "agent",
       "action": "Check whether WebMCP ships by default or the trial is extended. Update docs/ai/webmcp.md; propose token renewal or removal to Janaka (tokens come from Janaka's Chrome origin-trials account)."
@@ -145,7 +145,7 @@
         "https://babyloop.janaka.me/",
         "https://here.janaka.me/"
       ],
-      "checked": "2026-09-25",
+      "checked": "2026-10-24",
       "every_days": 30,
       "authority": "janaka",
       "action": "Check each URL answers. Report any that fail; never change status or copy without Janaka."
